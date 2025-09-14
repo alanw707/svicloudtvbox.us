@@ -38,3 +38,10 @@ WordPress + WooCommerce storefront for SVICLOUD TV boxes (10P+ / 10S), hosted on
 
 Status: MVP in progress.
 
+## Deployment
+
+- Theme-only FTP deploy (Hostinger):
+  - Copy `.env.example` to `.env` and fill `FTP_HOST`, `FTP_USER`, `FTP_PASS` (do not commit `.env`).
+  - Ensure WordPress is under `public_html` on Hostinger (default). Adjust `FTP_BASE_DIR` if different.
+  - Run: `bash scripts/deploy-theme.sh` (uses FTPS by default). Set `DRY_RUN=true` to preview.
+
