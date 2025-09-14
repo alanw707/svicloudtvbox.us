@@ -4,16 +4,16 @@
   "settings": {
     "color": {
       "palette": [
-        { "slug": "background", "color": "#0B0F1A", "name": "Background" },
-        { "slug": "surface",    "color": "#111525", "name": "Surface" },
-        { "slug": "primary",    "color": "#0B5FFF", "name": "Primary" },
-        { "slug": "accent",     "color": "#00E5FF", "name": "Accent" },
+        { "slug": "background", "color": "#080D1A", "name": "Background" },
+        { "slug": "surface",    "color": "#0D1224", "name": "Surface" },
+        { "slug": "primary",    "color": "#1E6CFF", "name": "Primary" },
+        { "slug": "accent",     "color": "#00D8FF", "name": "Accent" },
         { "slug": "magenta",    "color": "#FF2D95", "name": "Magenta" },
-        { "slug": "text",       "color": "#EAF2FF", "name": "Text" },
-        { "slug": "muted",      "color": "#9AA7C2", "name": "Muted" }
+        { "slug": "text",       "color": "#E9F1FF", "name": "Text" },
+        { "slug": "muted",      "color": "#94A3C7", "name": "Muted" }
       ],
       "gradients": [
-        { "slug": "primary-accent", "name": "Primary → Accent", "gradient": "linear-gradient(135deg,#0B5FFF 0%,#00E5FF 100%)" },
+        { "slug": "primary-accent", "name": "Primary → Accent", "gradient": "linear-gradient(135deg,#1E6CFF 0%,#00D8FF 100%)" },
         { "slug": "magenta-purple", "name": "Magenta Glow", "gradient": "linear-gradient(135deg,#FF2D95 0%,#7A5CFF 100%)" }
       ]
     },
@@ -62,4 +62,3 @@
     { "name": "footer", "title": "Footer", "area": "footer" }
   ]
 }
-
