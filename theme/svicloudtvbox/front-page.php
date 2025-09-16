@@ -191,58 +191,47 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
   <section class="pricing-section" id="pricing">
     <div class="container">
       <div class="section-header">
-        <h2 class="section-title">Transparent Pricing &amp; Flexible Bundles</h2>
-        <p class="section-subtitle">Own the hardware outright—bundle IPTV service for instant access to premium content.</p>
+        <h2 class="section-title">Choose Your SVICLOUD Device</h2>
+        <p class="section-subtitle">Pick the hardware that fits your home. No IPTV bundles—just authentic SVICLOUD boxes shipping from the USA.</p>
       </div>
       <div class="pricing-grid">
-        <div class="pricing-card">
-          <div class="pricing-name">Device Only</div>
-          <div class="pricing-price">$183.99–$248.99 <span class="pricing-interval">one-time</span></div>
-          <p class="pricing-desc">Perfect for savvy streamers adding SVICLOUD to an existing IPTV plan or secondary TV.</p>
+        <div class="pricing-card featured">
+          <div class="pricing-name">SVICLOUD 10P+</div>
+          <div class="pricing-price">
+            <?php echo $hero_product_10p ? svic_price_html($hero_product_10p) : '$248.99'; ?>
+            <span class="pricing-interval">device</span>
+          </div>
+          <p class="pricing-desc">Flagship 4GB RAM / 64GB storage with Kids &amp; Karaoke apps included.</p>
           <ul class="pricing-features">
-            <li>✔ 4K HDR, AV1 decode hardware</li>
-            <li>✔ Voice remote + Google Play Store</li>
-            <li>✔ Includes HDMI &amp; power accessories</li>
+            <li>✔ 4K HDR + AV1 decode</li>
+            <li>✔ Kids &amp; Karaoke apps included</li>
+            <li>✔ AI voice remote + dual-band Wi-Fi</li>
           </ul>
-          <div class="pricing-cta"><a class="btn btn-outline w-full" href="#shop">Shop Devices</a></div>
+          <div class="pricing-cta"><a class="btn btn-primary w-full" href="<?php echo esc_url( $hero_10p_url ); ?>">View 10P+</a></div>
           <div class="pricing-trust">
             <span class="item">✔ Ships from USA</span>
             <span class="item">✔ 1-Year U.S. Warranty</span>
-            <span class="item">✔ No monthly fees</span>
-          </div>
-        </div>
-
-        <div class="pricing-card featured">
-          <div class="pricing-name">Device + 12‑mo IPTV</div>
-          <div class="pricing-price">$299 <span class="pricing-interval">bundle</span></div>
-          <p class="pricing-desc">Our #1 seller: full SVICLOUD box with 12 months of premium channels, VOD, and karaoke access.</p>
-          <ul class="pricing-features">
-            <li>✔ Unlimited premium channels</li>
-            <li>✔ 4K sports + event replays</li>
-            <li>✔ Priority concierge support</li>
-          </ul>
-          <div class="pricing-cta"><a class="btn btn-primary w-full" href="<?php echo esc_url( $hero_10p_url ); ?>">Get Bundle</a></div>
-          <div class="pricing-trust">
-            <span class="item">✔ IPTV activated</span>
-            <span class="item">✔ Zero hidden fees</span>
-            <span class="item">✔ Cancel anytime</span>
+            <span class="item">✔ English/中文 support</span>
           </div>
         </div>
 
         <div class="pricing-card">
-          <div class="pricing-name">Pro Family Bundle</div>
-          <div class="pricing-price">$349 <span class="pricing-interval">bundle</span></div>
-          <p class="pricing-desc">Ideal for families wanting everything: IPTV + kids channels, karaoke packs, and extended concierge.</p>
+          <div class="pricing-name">SVICLOUD 10S</div>
+          <div class="pricing-price">
+            <?php echo $hero_product_10s ? svic_price_html($hero_product_10s) : '$183.99'; ?>
+            <span class="pricing-interval">device</span>
+          </div>
+          <p class="pricing-desc">Best value with 2GB RAM / 32GB storage—ideal for bedrooms or secondary TVs.</p>
           <ul class="pricing-features">
-            <li>✔ Kids + karaoke premium add-ons</li>
-            <li>✔ Extended technical support</li>
-            <li>✔ VIP invites to product updates</li>
+            <li>✔ 4K HDR + AV1 decode</li>
+            <li>✔ AI voice remote</li>
+            <li>✔ Includes HDMI &amp; power accessories</li>
           </ul>
-          <div class="pricing-cta"><a class="btn btn-accent w-full" href="<?php echo esc_url( $hero_10p_url ); ?>">Choose Pro</a></div>
+          <div class="pricing-cta"><a class="btn btn-secondary w-full" href="<?php echo esc_url( $hero_10s_url ); ?>">View 10S</a></div>
           <div class="pricing-trust">
-            <span class="item">✔ Family-ready</span>
-            <span class="item">✔ Karaoke playlists</span>
-            <span class="item">✔ Best value</span>
+            <span class="item">✔ Ships from USA</span>
+            <span class="item">✔ 1-Year U.S. Warranty</span>
+            <span class="item">✔ No monthly device fees</span>
           </div>
         </div>
       </div>
