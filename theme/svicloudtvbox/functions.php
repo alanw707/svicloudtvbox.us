@@ -13,6 +13,14 @@ add_action('after_setup_theme', function () {
     add_theme_support('post-thumbnails');
     add_theme_support('woocommerce');
     add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption']);
+    // Allow logo management from the WordPress Customizer
+    add_theme_support('custom-logo', [
+        'height'      => 48,
+        'width'       => 180,
+        'flex-height' => true,
+        'flex-width'  => true,
+        'unlink-homepage-logo' => false,
+    ]);
     register_nav_menus([
         'primary' => __('Primary Menu', 'svicloudtvbox'),
         'footer'  => __('Footer Menu', 'svicloudtvbox'),
@@ -155,7 +163,7 @@ if (!function_exists('svic_render_product_card')) {
             }
           ?>
           <div class="pcard-actions">
-            <a class="btn btn-primary w-full" href="<?php echo svic_add_to_cart_url($product); ?>"><?php esc_html_e('Add to Cart', 'svicloudtvbox'); ?></a>
+            <a class="btn btn-primary btn-cta" href="<?php echo svic_add_to_cart_url($product); ?>"><?php esc_html_e('Add to Cart', 'svicloudtvbox'); ?></a>
           </div>
         </article>
         <?php

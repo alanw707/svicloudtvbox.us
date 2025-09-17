@@ -42,7 +42,7 @@ if (class_exists('WooCommerce')) {
           <h3 class="pcard-title"><a href="<?php echo esc_url( home_url('/product/svicloud-10p-plus') ); ?>">SVICLOUD 10P+</a></h3>
           <div class="pcard-meta"><span class="pcard-price">$248.99</span></div>
           <p class="product-blurb">Flagship 4K HDR box with 4GB RAM, karaoke & kids apps, and AI voice remote.</p>
-          <div class="pcard-actions"><a class="btn btn-primary w-full" href="<?php echo esc_url( home_url('/shop') ); ?>">Shop 10P+</a></div>
+          <div class="pcard-actions"><a class="btn btn-primary btn-cta" href="<?php echo esc_url( home_url('/shop') ); ?>">Shop 10P+</a></div>
         </article>
         <article class="product-card">
           <a class="product-image" href="<?php echo esc_url( home_url('/product/svicloud-10s') ); ?>">
@@ -51,7 +51,7 @@ if (class_exists('WooCommerce')) {
           <h3 class="pcard-title"><a href="<?php echo esc_url( home_url('/product/svicloud-10s') ); ?>">SVICLOUD 10S</a></h3>
           <div class="pcard-meta"><span class="pcard-price">$183.99</span></div>
           <p class="product-blurb">Value model with 2GB RAM, 32GB storage, 4K HDR playback, and AI voice remote.</p>
-          <div class="pcard-actions"><a class="btn btn-primary w-full" href="<?php echo esc_url( home_url('/shop') ); ?>">Shop 10S</a></div>
+          <div class="pcard-actions"><a class="btn btn-primary btn-cta" href="<?php echo esc_url( home_url('/shop') ); ?>">Shop 10S</a></div>
         </article>
       <?php endif; ?>
     </div>

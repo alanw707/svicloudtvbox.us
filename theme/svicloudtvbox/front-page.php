@@ -48,7 +48,7 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
           <div class="product-card-body">
             <div class="product-price">$248.99</div>
             <p class="product-copy">Includes remote, global apps, and full-channel unlock. Upgrade-ready firmware.</p>
-            <a class="btn btn-primary w-full" href="<?php echo esc_url( $hero_10p_url ); ?>">Add to Cart</a>
+            <a class="btn btn-primary btn-cta" href="<?php echo esc_url( $hero_10p_url ); ?>">Add to Cart</a>
             <div class="product-meta">
               <span>✓ Priority support</span>
               <span>✓ Kids &amp; Karaoke apps</span>
@@ -139,7 +139,7 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
             <h3 class="pcard-title"><a href="<?php echo esc_url( $hero_10p_url ); ?>">SVICLOUD 10P+</a></h3>
             <div class="pcard-meta"><span class="pcard-price">$248.99</span></div>
             <p class="product-blurb">Premium chipset, Wi-Fi 6, and karaoke-ready audio for dedicated home theaters.</p>
-            <div class="pcard-actions"><a class="btn btn-primary w-full" href="<?php echo esc_url( $hero_10p_url ); ?>">Shop 10P+</a></div>
+            <div class="pcard-actions"><a class="btn btn-primary btn-cta" href="<?php echo esc_url( $hero_10p_url ); ?>">Shop 10P+</a></div>
           </article>
           <article class="product-card">
             <a class="product-image" href="<?php echo esc_url( $hero_10s_url ); ?>">
@@ -148,7 +148,7 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
             <h3 class="pcard-title"><a href="<?php echo esc_url( $hero_10s_url ); ?>">SVICLOUD 10S</a></h3>
             <div class="pcard-meta"><span class="pcard-price">$183.99</span></div>
             <p class="product-blurb">Compact powerhouse for secondary TVs or condos needing reliable IPTV streaming.</p>
-            <div class="pcard-actions"><a class="btn btn-primary w-full" href="<?php echo esc_url( $hero_10s_url ); ?>">Shop 10S</a></div>
+            <div class="pcard-actions"><a class="btn btn-primary btn-cta" href="<?php echo esc_url( $hero_10s_url ); ?>">Shop 10S</a></div>
           </article>
         <?php } ?>
       </div>
@@ -181,7 +181,7 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
             <li><span>🎤</span> Karaoke playlists &amp; mic pairing</li>
             <li><span>👨‍👩‍👧</span> Kid-safe profiles &amp; timers</li>
           </ul>
-          <a class="btn btn-primary w-full" href="<?php echo esc_url( home_url('/contact') ); ?>">Talk to an expert</a>
+          <a class="btn btn-primary btn-cta" href="<?php echo esc_url( home_url('/contact') ); ?>">Talk to an expert</a>
         </div>
       </div>
     </div>
@@ -207,7 +207,7 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
             <li>✔ Kids &amp; Karaoke apps included</li>
             <li>✔ AI voice remote + dual-band Wi-Fi</li>
           </ul>
-          <div class="pricing-cta"><a class="btn btn-primary w-full" href="<?php echo esc_url( $hero_10p_url ); ?>">View 10P+</a></div>
+          <div class="pricing-cta"><a class="btn btn-primary btn-cta" href="<?php echo esc_url( $hero_10p_url ); ?>">View 10P+</a></div>
           <div class="pricing-trust">
             <span class="item">✔ Ships from USA</span>
             <span class="item">✔ 1-Year U.S. Warranty</span>
@@ -227,7 +227,7 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
             <li>✔ AI voice remote</li>
             <li>✔ Includes HDMI &amp; power accessories</li>
           </ul>
-          <div class="pricing-cta"><a class="btn btn-secondary w-full" href="<?php echo esc_url( $hero_10s_url ); ?>">View 10S</a></div>
+          <div class="pricing-cta"><a class="btn btn-secondary btn-cta" href="<?php echo esc_url( $hero_10s_url ); ?>">View 10S</a></div>
           <div class="pricing-trust">
             <span class="item">✔ Ships from USA</span>
             <span class="item">✔ 1-Year U.S. Warranty</span>

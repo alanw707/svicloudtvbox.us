@@ -9,9 +9,15 @@
   <?php wp_body_open(); ?>
   <header class="site-header">
     <div class="container">
-      <a class="site-logo" href="<?php echo esc_url(home_url('/')); ?>">
-        <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/site-logo.png' ); ?>" alt="SVICLOUDTVBOX.US" />
-      </a>
+      <div class="site-logo">
+        <?php if (function_exists('the_custom_logo') && has_custom_logo()) : ?>
+          <?php the_custom_logo(); ?>
+        <?php else : ?>
+          <a class="site-logo-link" href="<?php echo esc_url(home_url('/')); ?>">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/site-logo.png' ); ?>" alt="<?php echo esc_attr( get_bloginfo('name') ); ?>" />
+          </a>
+        <?php endif; ?>
+      </div>
       <nav class="primary-nav" aria-label="Primary">
         <?php
           $menu = wp_nav_menu([
