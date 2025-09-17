@@ -1,0 +1,12 @@
+/* ==========================================
+   FOOTER STYLES
+   ========================================== */
+
+.site-footer { background: var(--secondary); color: var(--base); }
+.site-footer a { color: var(--base); text-decoration: none; transition: color 0.3s ease; }
+.site-footer a:hover { color: var(--accent); }
+
+.contact-buttons { display: flex; gap: 1rem; }
+.contact-btn { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.25); background: rgba(255, 255, 255, 0.06); color: var(--base); transition: all var(--transition-normal); }
+.contact-btn:hover { transform: translateY(-1px); background: rgba(255,255,255,0.12); }
+

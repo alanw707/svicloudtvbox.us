@@ -30,6 +30,7 @@ import socket
 import sys
 from dataclasses import dataclass
 from pathlib import Path
+import subprocess
 
 try:
     # ftplib is in the standard library
@@ -91,6 +92,7 @@ def parse_args() -> DeployConfig:
     p.add_argument("--remote-root", default=env.get("REMOTE_THEME_DIR", DEFAULT_REMOTE_ROOT))
     p.add_argument("--delete-remote", action="store_true", help="Delete remote files not present locally")
     p.add_argument("--dry-run", action="store_true", help="Preview actions without uploading")
+    p.add_argument("--bust-cache", action="store_true", help="Write .deploy-version (epoch) before upload")
     p.add_argument("--verify-tls", action="store_true", help="Verify TLS cert when using FTPS")
 
     a = p.parse_args()
@@ -101,7 +103,7 @@ def parse_args() -> DeployConfig:
     if not local_dir.exists():
         p.error(f"Local theme directory not found: {local_dir}")
 
-    return DeployConfig(
+    cfg = DeployConfig(
         host=a.host,
         user=a.user,
         password=a.password,
@@ -113,6 +115,18 @@ def parse_args() -> DeployConfig:
         dry_run=bool(a.dry_run),
         verify_tls=bool(a.verify_tls),
     )
+
+    # Side-effect: if requested, create/update .deploy-version locally (unless dry run)
+    if a.bust_cache and not cfg.dry_run:
+        try:
+            ver_path = cfg.local_dir / '.deploy-version'
+            epoch = str(int(__import__('time').time()))
+            ver_path.write_text(epoch, encoding='utf-8')
+            print(f"Wrote cache-bust marker: {ver_path} -> {epoch}")
+        except Exception as e:
+            print(f"WARN: failed to write .deploy-version: {e}")
+
+    return cfg
 
 
 def should_exclude(path: Path) -> bool:
@@ -265,6 +279,13 @@ def delete_remote_extraneous(ftp, base_remote: str, local_base: Path, dry_run: b
 
 def main() -> int:
     cfg = parse_args()
+    # Build CSS from partials if present, before uploading
+    try:
+        build_script = Path(__file__).resolve().parent / 'build_css.py'
+        if build_script.exists():
+            subprocess.run([sys.executable, str(build_script)], check=False)
+    except Exception as e:
+        print(f"WARN: CSS build step failed: {e}")
     print("== Theme Deploy ==")
     print(f"Host: {cfg.host}:{cfg.port}  Protocol: {cfg.protocol.upper()}  PASV: yes")
     print(f"Local: {cfg.local_dir}")
@@ -296,4 +317,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

@@ -42,7 +42,7 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
             <span class="product-tag">SVICLOUD 10P+</span>
           </div>
           <div class="product-image-shell">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/svicloud-hero-product.png' ); ?>" alt="SVICLOUD TV Box 10P+" />
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/svicloud-10p-plus.png' ); ?>" alt="SVICLOUD TV Box 10P+" />
             <div class="product-orbit"></div>
           </div>
           <div class="product-card-body">

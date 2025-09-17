@@ -1,33 +1,42 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Commerce smoke', () => {
-  test('guest can browse PDP and reach checkout', async ({ page }) => {
-    await page.goto('/');
+const paths = [
+  '/',
+  '/compare/',
+  '/shop/',
+  '/product/svicloud-10p-plus/',
+  '/product/svicloud-10s/',
+  '/my-account/',
+];
 
-    await expect(page.getByRole('heading', { name: /premium chinese iptv/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: /Shop 10P\+/i })).toBeVisible();
+test.describe('SVICLOUD site smoke', () => {
+  for (const path of paths) {
+    test(`loads ${path} without console errors`, async ({ page, baseURL }) => {
+      const errors: string[] = [];
+      page.on('console', (msg) => {
+        if (msg.type() === 'error') errors.push(msg.text());
+      });
 
-    await page.getByRole('link', { name: /Shop 10P\+/i }).click();
-    await expect(page).toHaveURL(/\/product\/svicloud-10p-plus\/?/);
-    await expect(page.getByRole('heading', { name: /SviCloud TV Box 10P\+/i })).toBeVisible();
+      const url = new URL(path, baseURL).toString();
+      const resp = await page.goto(url, { waitUntil: 'domcontentloaded' });
+      expect(resp?.ok()).toBeTruthy();
 
-    await page.getByRole('button', { name: /Add to cart/i }).click();
-    const message = page.locator('.woocommerce-message');
-    await expect(message).toBeVisible();
+      // Basic header checks
+      await expect(page.locator('header.site-header')).toBeVisible();
+      await expect(page.locator('.site-logo img')).toHaveCount(1, { timeout: 5000 });
 
-    const viewCartLink = message.getByRole('link', { name: /view cart/i });
-    if (await viewCartLink.count()) {
-      await viewCartLink.first().click();
-    } else {
-      await page.goto('/cart/');
-    }
+      // Page specific probes
+      if (path.startsWith('/product/')) {
+        await expect(page.locator('.price')).toBeVisible();
+        await expect(page.getByRole('button', { name: /add to cart/i })).toBeVisible();
+      }
 
-    await expect(page).toHaveURL(/\/cart\//);
-    await expect(page.getByRole('heading', { name: /cart/i })).toBeVisible();
-    await expect(page.getByRole('link', { name: /proceed to checkout/i })).toBeVisible();
+      if (path === '/') {
+        await expect(page.locator('.hero-modern')).toBeVisible();
+      }
 
-    await page.getByRole('link', { name: /proceed to checkout/i }).click();
-    await expect(page).toHaveURL(/\/checkout\//);
-    await expect(page.getByRole('heading', { name: /checkout/i })).toBeVisible();
-  });
+      // No console errors
+      expect(errors, errors.join('\n')).toHaveLength(0);
+    });
+  }
 });

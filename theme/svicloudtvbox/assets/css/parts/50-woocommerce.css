@@ -1,0 +1,32 @@
+/* ==========================================
+   WOOCOMMERCE STYLES
+   ========================================== */
+
+/* Product badges */
+.product-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.badge { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.75rem; border-radius: var(--radius-sm); text-transform: uppercase; letter-spacing: 0.05em; }
+.badge-authorized { background: var(--primary); color: var(--base); }
+.badge-shipping { background: var(--accent); color: var(--secondary); }
+.badge-warranty { background: rgba(0, 168, 255, 0.1); color: var(--primary); border: 1px solid var(--primary); }
+
+/* Add to cart button */
+.single_add_to_cart_button { background: var(--primary) !important; color: var(--base) !important; border: 2px solid var(--primary) !important; border-radius: var(--radius-md) !important; font-weight: 600 !important; transition: all 0.3s ease !important; padding: 1rem 2rem !important; font-size: 1.1rem !important; }
+.single_add_to_cart_button:hover { background: var(--accent) !important; border-color: var(--accent) !important; box-shadow: var(--shadow-glow) !important; transform: translateY(-2px) !important; }
+
+/* Archive/listing add-to-cart buttons and product-card CTAs */
+.woocommerce ul.products li.product a.button,
+.woocommerce ul.products li.product .button,
+.woocommerce a.button.add_to_cart_button,
+.pcard-actions .btn,
+.pcard-actions .btn-cta { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 48px; padding: 0.9rem 1.25rem; border-radius: var(--radius-md); font-weight: 600; line-height: 1.2; }
+
+/* Unify visual style with theme primary button */
+.woocommerce ul.products li.product a.button,
+.woocommerce a.button.add_to_cart_button { background: var(--primary); color: var(--base); border: 2px solid var(--primary); transition: all var(--transition-normal); }
+.woocommerce ul.products li.product a.button:hover,
+.woocommerce a.button.add_to_cart_button:hover { background: var(--accent); border-color: var(--accent); box-shadow: var(--shadow-intense); transform: translateY(-2px); }
+
+/* Cart and checkout */
+.woocommerce-cart .cart_totals,
+.woocommerce-checkout .checkout_coupon { background: var(--base); border: 1px solid rgba(107, 114, 128, 0.2); border-radius: var(--radius-lg); padding: 1.5rem; }
+

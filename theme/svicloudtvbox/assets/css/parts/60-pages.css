@@ -1,0 +1,30 @@
+/* ==========================================
+   PAGES: Titles, Compare, Content
+   ========================================== */
+
+/* Page titles */
+.page-title { font-size: clamp(2.2rem, 3.5vw, 2.8rem); font-weight: 700; }
+.page-subtitle { color: var(--subtle); font-size: 1.05rem; margin: 0 auto; max-width: 60ch; }
+
+/* Compare page */
+.comparison-panel { background: var(--base); border-radius: 24px; border: 1px solid var(--border-soft); box-shadow: var(--shadow-sm); padding: 2rem; display: grid; gap: 2rem; }
+.comparison-table table { width: 100%; border-collapse: collapse; }
+.comparison-table th, .comparison-table td { padding: 0.85rem 1rem; border-bottom: 1px solid rgba(15, 23, 42, 0.08); text-align: left; }
+.comparison-table th { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--subtle); }
+.comparison-table td.highlight { color: var(--primary); font-weight: 700; }
+.comparison-table tbody tr:last-child td { border-bottom: none; }
+.comparison-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+.specs-grid { margin-top: 2.5rem; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.spec-card { background: var(--base); border: 1px solid var(--border-soft); border-radius: 20px; padding: 1.5rem; box-shadow: var(--shadow-sm); }
+.spec-card h3 { font-size: 1.1rem; margin-bottom: 0.75rem; }
+.spec-card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; color: var(--subtle); }
+
+@media (max-width: 768px) {
+  .comparison-panel { padding: 1.5rem; }
+  .comparison-table th, .comparison-table td { padding: 0.75rem; }
+}
+
+/* General page content */
+.page-content .entry-content > * + * { margin-top: 1.25rem; }
+.page-content .entry-content img { max-width: 100%; border-radius: 16px; box-shadow: var(--shadow-sm); }
+

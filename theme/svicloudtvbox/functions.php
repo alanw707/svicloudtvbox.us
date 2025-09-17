@@ -15,8 +15,8 @@ add_action('after_setup_theme', function () {
     add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption']);
     // Allow logo management from the WordPress Customizer
     add_theme_support('custom-logo', [
-        'height'      => 48,
-        'width'       => 180,
+        'height'      => 80,
+        'width'       => 230,
         'flex-height' => true,
         'flex-width'  => true,
         'unlink-homepage-logo' => false,
@@ -31,6 +31,27 @@ add_action('after_setup_theme', function () {
 add_action('wp_enqueue_scripts', function () {
     $theme_version = wp_get_theme()->get('Version');
 
+    // Cache-busting strategy:
+    // - Prefer a numeric version from .deploy-version (written by deploy script)
+    // - Fallback to file modification time
+    // - Finally fallback to theme version string
+    $deploy_ver_file = get_template_directory() . '/.deploy-version';
+    $deploy_version = 0;
+    if (file_exists($deploy_ver_file)) {
+        $raw = trim((string) @file_get_contents($deploy_ver_file));
+        if (ctype_digit($raw)) {
+            $deploy_version = (int) $raw;
+        }
+    }
+
+    $css_file = get_template_directory() . '/assets/css/style.css';
+    $css_mtime = file_exists($css_file) ? (int) filemtime($css_file) : 0;
+    $css_version = $deploy_version ? max($deploy_version, $css_mtime) : ($css_mtime ?: $theme_version);
+
+    $js_file = get_template_directory() . '/assets/js/theme.js';
+    $js_mtime = file_exists($js_file) ? (int) filemtime($js_file) : 0;
+    $js_version = $deploy_version ? max($deploy_version, $js_mtime) : ($js_mtime ?: $theme_version);
+
     // Fonts
     wp_enqueue_style(
         'svicloudtvbox-fonts',
@@ -44,7 +65,7 @@ add_action('wp_enqueue_scripts', function () {
         'svicloudtvbox-style',
         get_template_directory_uri() . '/assets/css/style.css',
         ['svicloudtvbox-fonts'],
-        $theme_version
+        $css_version
     );
 
     // Theme script
@@ -52,7 +73,7 @@ add_action('wp_enqueue_scripts', function () {
         'svicloudtvbox-script',
         get_template_directory_uri() . '/assets/js/theme.js',
         ['jquery'],
-        $theme_version,
+        $js_version,
         true
     );
 
