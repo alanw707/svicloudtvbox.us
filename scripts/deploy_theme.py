@@ -75,7 +75,7 @@ class DeployConfig:
     protocol: str = "ftps"  # "ftps" or "ftp"
     local_dir: Path = DEFAULT_LOCAL_DIR
     remote_root: str = DEFAULT_REMOTE_ROOT
-    delete_remote: bool = False
+    delete_remote: bool = True
     dry_run: bool = False
     verify_tls: bool = False  # Hostinger often uses self-signed; set True if valid cert
 
@@ -90,10 +90,13 @@ def parse_args() -> DeployConfig:
     p.add_argument("--protocol", choices=["ftps", "ftp"], default=env.get("FTP_PROTOCOL", "ftps"))
     p.add_argument("--local-dir", default=env.get("LOCAL_THEME_DIR", str(DEFAULT_LOCAL_DIR)))
     p.add_argument("--remote-root", default=env.get("REMOTE_THEME_DIR", DEFAULT_REMOTE_ROOT))
-    p.add_argument("--delete-remote", action="store_true", help="Delete remote files not present locally")
+    p.add_argument("--delete-remote", dest="delete_remote", action="store_true", help="Delete remote files not present locally")
+    p.add_argument("--no-delete-remote", dest="delete_remote", action="store_false", help="Skip deleting remote files")
     p.add_argument("--dry-run", action="store_true", help="Preview actions without uploading")
     p.add_argument("--bust-cache", action="store_true", help="Write .deploy-version (epoch) before upload")
     p.add_argument("--verify-tls", action="store_true", help="Verify TLS cert when using FTPS")
+
+    p.set_defaults(delete_remote=True)
 
     a = p.parse_args()
     if not a.host or not a.user or not a.password:
@@ -224,37 +227,112 @@ def walk_local_files(base: Path):
             yield p
 
 
-def list_remote_paths(ftp, base_remote: str) -> set[str]:
+def _with_leading_slash(path: str) -> str:
+    stripped = path.strip("/")
+    return f"/{stripped}" if stripped else "/"
+
+
+def list_remote_paths(ftp, base_remote: str) -> set[str] | None:
     """Return set of remote file paths under base_remote.
-    Requires MLSD support; otherwise returns empty set.
+
+    Prefers MLSD; falls back to NLST traversal when MLSD is unavailable.
+    Returns None if the listing fails entirely (e.g., permissions).
     """
-    try:
-        paths: set[str] = set()
-        def _recurse(remote_dir: str):
+
+    def _list_with_mlsd(root: str) -> set[str] | None:
+        try:
+            paths: set[str] = set()
+
+            def _recurse(remote_dir: str) -> None:
+                try:
+                    entries = list(ftp.mlsd(remote_dir))
+                except Exception:
+                    raise
+                for name, facts in entries:
+                    if name in (".", ".."):
+                        continue
+                    rpath = _remote_join(remote_dir, name)
+                    typ = facts.get("type")
+                    if typ == "file":
+                        paths.add(rpath)
+                    elif typ in ("dir", "cdir", "pdir"):
+                        _recurse(rpath)
+
+            _recurse(root)
+            return paths
+        except Exception:
+            return None
+
+    def _list_with_nlst(root: str) -> set[str] | None:
+        start = _with_leading_slash(ftp.pwd())
+        files: set[str] = set()
+        visited: set[str] = set()
+        try:
             try:
-                entries = list(ftp.mlsd(remote_dir))
+                ftp.cwd(_with_leading_slash(root))
             except Exception:
-                return
-            for name, facts in entries:
-                if name in (".", ".."):
+                return None
+            base_dir = _with_leading_slash(ftp.pwd())
+            stack = [base_dir]
+            while stack:
+                current = stack.pop()
+                if current in visited:
                     continue
-                rpath = _remote_join(remote_dir, name)
-                typ = facts.get("type")
-                if typ == "file":
-                    paths.add(rpath)
-                elif typ in ("dir", "cdir", "pdir"):
-                    _recurse(rpath)
-        _recurse(base_remote)
+                visited.add(current)
+                try:
+                    ftp.cwd(current)
+                except Exception:
+                    continue
+                cur_dir = _with_leading_slash(ftp.pwd())
+                try:
+                    entries = ftp.nlst()
+                except error_perm:
+                    entries = []
+                for entry in entries:
+                    name = posixpath.basename(entry.rstrip("/"))
+                    if name in (".", ".."):
+                        continue
+                    prefix = cur_dir.rstrip("/") + "/"
+                    if entry.startswith("/") or entry.startswith(prefix):
+                        remote_entry = _with_leading_slash(entry).rstrip("/")
+                    elif entry.startswith(prefix.lstrip("/")):
+                        remote_entry = _with_leading_slash(entry).rstrip("/")
+                    else:
+                        remote_entry = posixpath.join(cur_dir.rstrip("/"), entry).rstrip("/")
+                    remote_abs = _with_leading_slash(remote_entry)
+                    try:
+                        ftp.cwd(remote_abs)
+                    except error_perm:
+                        files.add(remote_entry.strip("/"))
+                    else:
+                        stack.append(_with_leading_slash(ftp.pwd()))
+                    finally:
+                        ftp.cwd(cur_dir)
+            return files
+        finally:
+            try:
+                ftp.cwd(start)
+            except Exception:
+                pass
+
+    root_clean = base_remote.strip("/")
+    if not root_clean:
+        root_clean = base_remote
+
+    # First attempt MLSD
+    paths = _list_with_mlsd(root_clean)
+    if paths is not None:
         return paths
-    except Exception:
-        return set()
+
+    # Fallback to NLST traversal
+    return _list_with_nlst(root_clean)
 
 
 def delete_remote_extraneous(ftp, base_remote: str, local_base: Path, dry_run: bool = False) -> int:
     """Delete remote files that do not exist locally. Uses MLSD if available."""
     remote_files = list_remote_paths(ftp, base_remote)
-    if not remote_files:
-        print("Remote listing (MLSD) not supported; skipping deletion.")
+    if remote_files is None:
+        print("Remote listing not supported; skipping deletion.")
         return 0
 
     local_files = set()
