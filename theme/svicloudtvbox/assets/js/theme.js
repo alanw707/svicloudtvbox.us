@@ -20,6 +20,7 @@
         initProductImageEnhancements();
         initAnimationOnScroll();
         initPerformanceOptimizations();
+        initProductHeroGallery();
     }
 
     /**
@@ -180,6 +181,32 @@
         });
     }
 
+    function initProductHeroGallery() {
+        const $stageImage = $('.product-hero-image');
+        if (!$stageImage.length) return;
+
+        $(document).on('click', '.product-thumb', function(e) {
+            e.preventDefault();
+            const $button = $(this);
+            const source = $button.data('image');
+            const srcset = $button.data('srcset');
+            if (!source) return;
+
+            $('.product-thumb').removeClass('active').attr('aria-pressed', 'false');
+            $button.addClass('active').attr('aria-pressed', 'true');
+
+            $stageImage.stop(true).fadeTo(150, 0.1, function() {
+                $stageImage.attr('src', source);
+                if (srcset) {
+                    $stageImage.attr('srcset', srcset);
+                } else {
+                    $stageImage.removeAttr('srcset');
+                }
+                $stageImage.fadeTo(200, 1);
+            });
+        });
+    }
+
     /**
      * Product grid layout toggle
      */
@@ -188,9 +215,12 @@
         if (!grid.length) return;
 
         $('.grid-toggle .grid-btn').on('click', function() {
-            const mode = $(this).data('mode');
-            $('.grid-toggle .grid-btn').removeClass('active');
-            $(this).addClass('active');
+            const $button = $(this);
+            const mode = $button.data('mode');
+
+            $('.grid-toggle .grid-btn').removeClass('active').attr('aria-pressed', 'false');
+            $button.addClass('active').attr('aria-pressed', 'true');
+
             if (mode === 'list') grid.removeClass('grid-2 grid-4').addClass('grid-1');
             if (mode === '2col') grid.removeClass('grid-1 grid-4').addClass('grid-2');
             if (mode === '4col') grid.removeClass('grid-1 grid-2').addClass('grid-4');
@@ -242,26 +272,61 @@
      * Enhanced WooCommerce functionality
      */
     function initWooCommerceEnhancements() {
-        // Add loading state to add to cart buttons
-        $('.single_add_to_cart_button').on('click', function() {
-            const button = $(this);
-            const originalText = button.text();
+        if (!(window.svicTheme && svicTheme.isWoo)) return;
 
-            button.addClass('loading').text('Adding...');
+        const $body = $(document.body);
+        const defaultLabel = (svicTheme.i18n && svicTheme.i18n.addingToCart) ? svicTheme.i18n.addingToCart : 'Adding…';
 
-            // Reset after 3 seconds (fallback)
-            setTimeout(function() {
-                button.removeClass('loading').text(originalText);
-            }, 3000);
+        function setButtonLoading($button) {
+            if (!$button || !$button.length || $button.hasClass('is-loading')) return;
+            $button.data('original-html', $button.html());
+            $button.addClass('is-loading').attr('aria-busy', 'true').prop('disabled', true);
+            $button.html('<span class="loading-spinner" aria-hidden="true"></span><span class="loading-text">' + defaultLabel + '</span>');
+            const timeoutId = window.setTimeout(function() {
+                clearButtonLoading($button);
+            }, 3500);
+            $button.data('loading-timeout', timeoutId);
+        }
+
+        function clearButtonLoading($button) {
+            if (!$button || !$button.length) return;
+            const timeoutId = $button.data('loading-timeout');
+            if (timeoutId) {
+                window.clearTimeout(timeoutId);
+            }
+            $button.removeData('loading-timeout');
+
+            const original = $button.data('original-html');
+            if (original === undefined) return;
+            $button.html(original);
+            $button.removeClass('is-loading').attr('aria-busy', 'false').prop('disabled', false);
+            $button.removeData('original-html');
+        }
+
+        $(document).on('click', '.single_add_to_cart_button, .add_to_cart_button', function() {
+            setButtonLoading($(this));
         });
 
-        // Enhance quantity selector
-        $('.quantity input[type="number"]').on('change', function() {
-            const qty = parseInt($(this).val());
-            const price = parseFloat($('.price .amount').text().replace(/[^0-9.]/g, ''));
+        $body.on('added_to_cart wc_cart_button_updated', function(event, arg1) {
+            const $button = arg1 && arg1.jquery ? arg1 : $('.add_to_cart_button.is-loading, .single_add_to_cart_button.is-loading');
+            clearButtonLoading($button);
+        });
 
-            if (!isNaN(qty) && !isNaN(price)) {
-                // Update any total displays
+        $body.on('removed_from_cart', function() {
+            clearButtonLoading($('.add_to_cart_button.is-loading, .single_add_to_cart_button.is-loading'));
+        });
+
+        $(document).on('ajaxError', function(_, jqxhr) {
+            if (jqxhr && jqxhr.responseJSON && jqxhr.responseJSON.error) {
+                clearButtonLoading($('.add_to_cart_button.is-loading, .single_add_to_cart_button.is-loading'));
+            }
+        });
+
+        $('.quantity input[type="number"]').on('change', function() {
+            const qty = parseInt($(this).val(), 10);
+            const price = parseFloat($('.price .amount').first().text().replace(/[^0-9.]/g, ''));
+
+            if (!Number.isNaN(qty) && !Number.isNaN(price)) {
                 $('.calculated-total').text('$' + (qty * price).toFixed(2));
             }
         });

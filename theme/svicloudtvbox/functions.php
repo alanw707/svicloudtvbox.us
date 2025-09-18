@@ -81,6 +81,9 @@ add_action('wp_enqueue_scripts', function () {
         'ajaxUrl' => admin_url('admin-ajax.php'),
         'homeUrl' => home_url('/'),
         'isWoo'   => class_exists('WooCommerce'),
+        'i18n'    => [
+            'addingToCart' => esc_html__('Adding…', 'svicloudtvbox'),
+        ],
     ]);
 });
 
@@ -138,6 +141,24 @@ if (!function_exists('svic_add_to_cart_url')) {
     }
 }
 
+if (!function_exists('svic_bilingual_span')) {
+    /**
+     * Render bilingual spans that toggle via hide-zh/hide-en helpers.
+     */
+    function svic_bilingual_span(string $en, string $zh, string $extra_class = ''): string {
+        $extra_class = trim($extra_class);
+        $suffix = $extra_class !== '' ? ' ' . esc_attr($extra_class) : '';
+        $en_text = esc_html__($en, 'svicloudtvbox');
+        $zh_text = esc_html__($zh, 'svicloudtvbox');
+
+        $en_span = sprintf('<span class="hide-zh%s">%s</span>', $suffix, $en_text);
+        $zh_span = sprintf('<span class="hide-en%s" lang="zh">%s</span>', $suffix, $zh_text);
+
+        return $en_span . $zh_span;
+    }
+}
+
+
 if (!function_exists('svic_render_product_card')) {
     function svic_render_product_card($product) {
         if (!$product) return;
@@ -152,6 +173,26 @@ if (!function_exists('svic_render_product_card')) {
         }
         if (!$slides) {
             $slides[] = get_template_directory_uri() . '/assets/images/svicloud-hero-product.png';
+        }
+
+        $feature_tags = [];
+        if (method_exists($product, 'get_slug')) {
+            $slug = $product->get_slug();
+            if ($slug === 'svicloud-10p-plus') {
+                $feature_tags = ['4K HDR', 'Wi-Fi 6', 'Kids & Karaoke'];
+            } elseif ($slug === 'svicloud-10s') {
+                $feature_tags = ['4K HDR', 'Compact Footprint', 'Dual-Band Wi-Fi'];
+            }
+        }
+
+        if (!$feature_tags) {
+            $term_names = wp_get_post_terms($product->get_id(), 'product_tag', ['fields' => 'names']);
+            if (empty($term_names)) {
+                $term_names = wp_get_post_terms($product->get_id(), 'product_cat', ['fields' => 'names']);
+            }
+            if ($term_names && !is_wp_error($term_names)) {
+                $feature_tags = array_slice($term_names, 0, 3);
+            }
         }
         ?>
         <article class="product-card">
@@ -180,7 +221,16 @@ if (!function_exists('svic_render_product_card')) {
           <?php
             $summary = wp_strip_all_tags($product->get_short_description() ?: $product->get_description());
             if ($summary) {
-              echo '<p class="product-blurb">' . esc_html(wp_trim_words($summary, 22)) . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+              echo '<p class="product-blurb">' . esc_html(wp_trim_words($summary, 18)) . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            }
+
+            $render_tags = array_filter(array_map('trim', (array) $feature_tags));
+            if ($render_tags) {
+              echo '<ul class="pcard-tags" role="list">';
+              foreach ($render_tags as $tag) {
+                echo '<li>' . esc_html($tag) . '</li>';
+              }
+              echo '</ul>';
             }
           ?>
           <div class="pcard-actions">
