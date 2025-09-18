@@ -1,0 +1,229 @@
+/* ==========================================
+   COMPARE PAGE (LUMEN)
+   ========================================== */
+
+.lumen-compare {
+  background: linear-gradient(165deg, rgba(4, 9, 23, 0.96) 0%, rgba(6, 17, 36, 0.88) 50%, rgba(12, 27, 58, 0.78) 100%);
+  color: var(--lumen-text-primary);
+  padding: var(--space-2xl) clamp(24px, 6vw, 64px) var(--space-3xl);
+  display: grid;
+  gap: var(--space-2xl);
+}
+
+.lumen-compare .page-hero {
+  width: min(960px, 100%);
+  margin: 0 auto;
+  text-align: center;
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.lumen-compare .page-hero .badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(12, 27, 58, 0.6);
+  letter-spacing: 0.18em;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  color: var(--lumen-text-secondary);
+}
+
+.lumen-compare .page-title {
+  font-family: var(--font-accent);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  letter-spacing: -0.02em;
+  color: var(--lumen-text-primary);
+}
+
+.lumen-compare .page-subtitle {
+  margin: 0 auto;
+  max-width: 640px;
+  color: var(--lumen-text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.lumen-compare .comparison-panel {
+  display: grid;
+  gap: var(--space-xl);
+  padding: clamp(24px, 5vw, 40px);
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(7, 18, 44, 0.82);
+  backdrop-filter: var(--glass-blur-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+.lumen-compare .comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(4, 15, 36, 0.65);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+.lumen-compare .comparison-table thead {
+  background: rgba(9, 22, 52, 0.86);
+}
+
+.lumen-compare .comparison-table th,
+.lumen-compare .comparison-table td {
+  padding: 18px 20px;
+  text-align: left;
+  color: var(--lumen-text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.95rem;
+}
+
+.lumen-compare .comparison-table th:first-child,
+.lumen-compare .comparison-table td:first-child {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lumen-text-primary);
+}
+
+.lumen-compare .comparison-table tr:last-child th,
+.lumen-compare .comparison-table tr:last-child td {
+  border-bottom: none;
+}
+
+.lumen-compare .comparison-table td.highlight {
+  background: rgba(94, 230, 208, 0.12);
+  color: var(--lumen-text-primary);
+}
+
+.lumen-compare .comparison-cards {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.lumen-compare .comparison-card {
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(6, 17, 36, 0.78);
+  backdrop-filter: var(--glass-blur-soft);
+  padding: 22px;
+  display: grid;
+  gap: 18px;
+}
+
+.lumen-compare .comparison-card-feature {
+  font-size: 1.1rem;
+  color: var(--lumen-text-primary);
+  letter-spacing: -0.01em;
+}
+
+.lumen-compare .comparison-card-list {
+  display: grid;
+  gap: 14px;
+}
+
+.lumen-compare .comparison-card-item {
+  display: grid;
+  gap: 6px;
+}
+
+.lumen-compare .comparison-card-item dt {
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245, 248, 255, 0.65);
+}
+
+.lumen-compare .comparison-card-item dd {
+  margin: 0;
+  color: var(--lumen-text-secondary);
+}
+
+.lumen-compare .comparison-card-item.highlight {
+  border-radius: var(--radius-md);
+  background: rgba(94, 230, 208, 0.12);
+  padding: 12px;
+}
+
+.lumen-compare .comparison-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+.lumen-compare .comparison-cta .lumen-pill {
+  min-width: 220px;
+  justify-content: center;
+}
+
+.lumen-compare .comparison-cta .lumen-pill--outline {
+  border-color: rgba(255, 255, 255, 0.32);
+}
+
+.lumen-compare .comparison-cta .lumen-pill--outline:hover,
+.lumen-compare .comparison-cta .lumen-pill--outline:focus-visible {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.lumen-compare .specs-grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.lumen-compare .spec-card {
+  padding: 24px;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(6, 17, 36, 0.75);
+  backdrop-filter: var(--glass-blur-soft);
+  display: grid;
+  gap: 16px;
+  color: var(--lumen-text-secondary);
+}
+
+.lumen-compare .spec-card h3 {
+  color: var(--lumen-text-primary);
+  font-size: 1.15rem;
+}
+
+.lumen-compare .spec-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.lumen-compare .spec-card li {
+  line-height: 1.5;
+}
+
+.lumen-compare .spec-card strong {
+  display: block;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(245, 248, 255, 0.65);
+  margin-bottom: 4px;
+}
+
+@media (max-width: 720px) {
+  .lumen-compare .comparison-table table {
+    font-size: 0.88rem;
+  }
+
+  .lumen-compare .comparison-cta .lumen-pill,
+  .lumen-compare .comparison-cta .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .lumen-compare {
+    padding: var(--space-xl) clamp(20px, 6vw, 40px) var(--space-2xl);
+  }
+}

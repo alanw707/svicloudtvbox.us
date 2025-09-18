@@ -23,8 +23,8 @@ test.describe('SVICLOUD site smoke', () => {
       expect(resp?.ok()).toBeTruthy();
 
       // Basic header checks
-      await expect(page.locator('header.site-header')).toBeVisible();
-      await expect(page.locator('.site-logo img')).toHaveCount(1, { timeout: 5000 });
+      await expect(page.locator('header.lumen-header')).toBeVisible();
+      await expect(page.locator('.lumen-header__logo-image')).toHaveCount(1, { timeout: 5000 });
 
       // Page specific probes
       if (path.startsWith('/product/')) {
@@ -65,10 +65,10 @@ test.describe('SVICLOUD site smoke', () => {
       }
 
       if (path === '/') {
-        await expect(page.locator('.hero-modern')).toBeVisible();
-        await expect(page.locator('.metric-icon img')).toHaveCount(4);
-        await expect(page.locator('.experience-check img')).toHaveCount(3);
-        await expect(page.locator('.hero-highlight-icon img')).toHaveCount(3);
+        await expect(page.locator('.hero-dashboard')).toBeVisible();
+        await expect(page.locator('.hero-dashboard__card')).toBeVisible();
+        await expect(page.locator('.lumen-metric')).toHaveCount(4);
+        await expect(page.locator('.lumen-feature-card')).toHaveCount(3);
       }
 
       if (path === '/compare/') {

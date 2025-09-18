@@ -1,11 +1,16 @@
 import os, zipfile, sys
 
-src = 'theme/svicloudtvbox'
-dst = 'theme/svicloudtvbox.zip'
-
-if not os.path.isdir(src):
-    print('Theme dir not found:', src, file=sys.stderr)
+src_candidates = ['theme/svicloudtvbox-lumen', 'theme/svicloudtvbox']
+for candidate in src_candidates:
+    if os.path.isdir(candidate):
+        src = candidate
+        break
+else:
+    print('Theme dir not found in candidates:', ', '.join(src_candidates), file=sys.stderr)
     sys.exit(1)
+
+zip_name = os.path.basename(src) + '.zip'
+dst = os.path.join('theme', zip_name)
 
 if os.path.exists(dst):
     os.remove(dst)
@@ -18,6 +23,7 @@ with zipfile.ZipFile(dst, 'w', zipfile.ZIP_DEFLATED) as zf:
             if f in {'.DS_Store', 'Thumbs.db'}:
                 continue
             p = os.path.join(root, f)
-            zf.write(p, os.path.relpath(p, 'theme'))
+            arcname = os.path.relpath(p, 'theme')
+            zf.write(p, arcname)
 
 print('Wrote', dst, os.path.getsize(dst), 'bytes')

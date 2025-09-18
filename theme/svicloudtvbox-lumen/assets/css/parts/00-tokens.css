@@ -1,0 +1,246 @@
+/* ==========================================
+   BASE STYLES & TYPOGRAPHY (LUMEN THEME)
+   Tokens, base elements, typography and utilities
+   ========================================== */
+
+:root {
+  /* Legacy palette (kept for backwards compatibility) */
+  --primary: #0ea5e9;
+  --secondary: #0A0E27;
+  --accent: #22d3ee;
+  --base: #FFFFFF;
+  --contrast: #111827;
+  --subtle: #6B7280;
+  --surface: #F8FAFC;
+  --surface-alt: #EEF2FF;
+  --muted: #64748B;
+  --text-strong: #0f172a;
+  --text-body: #1f2937;
+  --text-muted: rgba(17, 24, 39, 0.7);
+  --primary-strong: #1b5cff;
+  --primary-strong-hover: #1442c5;
+  --cta-outline: rgba(27, 92, 255, 0.18);
+  --border-soft: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.18);
+
+  /* Lumen color system */
+  --lumen-surface-900: #040917;
+  --lumen-surface-800: #060b1f;
+  --lumen-surface-700: rgba(9, 20, 45, 0.82);
+  --lumen-surface-600: rgba(12, 27, 58, 0.65);
+  --lumen-surface-glass: rgba(9, 20, 45, 0.75);
+  --lumen-surface-glass-soft: rgba(12, 23, 50, 0.55);
+  --lumen-surface-card: rgba(15, 28, 58, 0.9);
+
+  --lumen-accent-teal: #5ee6d0;
+  --lumen-accent-amber: #ffb963;
+  --lumen-accent-iris: #8f96ff;
+  --lumen-accent-azure: #42c2ff;
+  --lumen-text-primary: #f5f8ff;
+  --lumen-text-secondary: rgba(245, 248, 255, 0.72);
+  --lumen-text-muted: rgba(223, 229, 255, 0.6);
+  --lumen-border-glass: rgba(255, 255, 255, 0.12);
+  --lumen-border-strong: rgba(80, 120, 180, 0.28);
+
+  /* Page chrome */
+  --lumen-page-background: #061328;
+
+  /* Gradients & glow fields */
+  --gradient-lumen-hero: linear-gradient(135deg, #061328 0%, #0b2244 55%, #122f58 100%);
+  --gradient-lumen-glow: radial-gradient(circle at top right, rgba(94, 230, 208, 0.28), transparent 62%);
+  --gradient-lumen-amber: radial-gradient(circle at 60% 40%, rgba(255, 185, 99, 0.32), transparent 70%);
+  --gradient-lumen-wireframe: linear-gradient(135deg, rgba(94, 230, 208, 0.22), rgba(143, 150, 255, 0.08));
+
+  /* Typography */
+  --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-chinese: 'Noto Sans SC', 'Noto Sans TC', sans-serif;
+  --font-accent: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+
+  /* Spacing scale */
+  --space-2xs: 0.375rem;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+
+  /* Layout widths */
+  --max-width-content: min(1120px, calc(100% - 56px));
+  --max-width-hero: min(1240px, calc(100% - 64px));
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
+  --radius-2xl: 28px;
+  --radius-hero: 36px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 10px 30px rgba(3, 9, 31, 0.4);
+  --shadow-xl: 0 30px 80px rgba(2, 9, 25, 0.55);
+  --shadow-glow: 0 18px 48px rgba(94, 230, 208, 0.35);
+  --shadow-glow-amber: 0 18px 48px rgba(255, 185, 99, 0.4);
+  --shadow-card-elevated: 0 26px 72px rgba(8, 22, 45, 0.45);
+
+  /* Glass + blur */
+  --glass-blur-strong: saturate(200%) blur(32px);
+  --glass-blur-soft: saturate(180%) blur(18px);
+
+  /* Animation timings */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-glow: 220ms cubic-bezier(0.32, 0.08, 0.24, 1);
+
+  /* Motion helpers */
+  --hover-lift: translateY(-2px);
+  --hover-press: translateY(1px);
+  --scale-hover: scale(1.02);
+  --scale-press: scale(0.98);
+  --hero-parallax-distance: 18px;
+}
+
+/* Base sizing */
+html {
+  font-size: 16px;
+  margin: 0;
+  background: var(--lumen-page-background);
+}
+
+
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-body);
+  background: var(--lumen-page-background);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.custom-background,
+body.wp-custom-background {
+  background: var(--lumen-page-background) !important;
+  background-image: none !important;
+}
+
+p,
+li,
+dd {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-body);
+}
+
+ul,
+ol {
+  margin: 0 0 1.25rem 0;
+  padding-left: 1.25rem;
+}
+
+small {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* Headings */
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  font-family: var(--font-primary);
+  color: var(--text-strong);
+}
+
+h1,
+.h1 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+h2,
+.h2 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+h3,
+.h3 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+
+/* Text utilities */
+.text-large {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.text-small {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+/* Spacing utilities */
+.spacing-tight {
+  margin-bottom: 0.5rem;
+}
+
+.spacing-normal {
+  margin-bottom: 1rem;
+}
+
+.spacing-loose {
+  margin-bottom: 1.5rem;
+}
+
+.spacing-extra-loose {
+  margin-bottom: 2rem;
+}
+
+/* Chinese text styling */
+.lang-zh,
+[lang="zh"],
+.chinese-text {
+  font-family: var(--font-chinese);
+}

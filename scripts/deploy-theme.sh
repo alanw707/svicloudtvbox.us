@@ -14,8 +14,8 @@ fi
 
 # Defaults for this repo
 FTP_PROTOCOL="${FTP_PROTOCOL:-ftps}"
-LOCAL_THEME_DIR="${LOCAL_THEME_DIR:-$ROOT_DIR/theme/svicloudtvbox}"
-REMOTE_THEME_DIR="${REMOTE_THEME_DIR:-public_html/wp-content/themes/svicloudtvbox}"
+LOCAL_THEME_DIR="${LOCAL_THEME_DIR:-$ROOT_DIR/theme/svicloudtvbox-lumen}"
+REMOTE_THEME_DIR="${REMOTE_THEME_DIR:-public_html/wp-content/themes/svicloudtvbox-lumen}"
 
 if [[ ! -d "$LOCAL_THEME_DIR" ]]; then
   echo "Local theme directory not found: $LOCAL_THEME_DIR" >&2
