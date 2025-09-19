@@ -37,8 +37,8 @@
   --lumen-accent-iris: #8f96ff;
   --lumen-accent-azure: #42c2ff;
   --lumen-text-primary: #f5f8ff;
-  --lumen-text-secondary: rgba(245, 248, 255, 0.72);
-  --lumen-text-muted: rgba(223, 229, 255, 0.6);
+  --lumen-text-secondary: rgba(245, 248, 255, 0.85);
+  --lumen-text-muted: rgba(223, 229, 255, 0.72);
   --lumen-border-glass: rgba(255, 255, 255, 0.12);
   --lumen-border-strong: rgba(80, 120, 180, 0.28);
 
@@ -67,8 +67,9 @@
   --space-3xl: 6rem;
 
   /* Layout widths */
-  --max-width-content: min(1120px, calc(100% - 56px));
-  --max-width-hero: min(1240px, calc(100% - 64px));
+  --max-width-content: min(1080px, calc(100% - 72px));
+  --max-width-hero: min(1180px, calc(100% - 80px));
+  --max-width-readable: min(62ch, 100%);
 
   /* Border radius */
   --radius-sm: 4px;
@@ -117,7 +118,7 @@ body {
   margin: 0;
   font-family: var(--font-primary);
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--text-body);
   background: var(--lumen-page-background);
   font-weight: 400;
@@ -137,7 +138,7 @@ p,
 li,
 dd {
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.7;
   color: var(--text-body);
 }
 

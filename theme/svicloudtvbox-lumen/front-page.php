@@ -37,28 +37,36 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
         <div class="hero-dashboard__badge"><?php esc_html_e('Live', 'svicloudtvbox-lumen'); ?></div>
         <div class="hero-dashboard__card">
           <div class="hero-dashboard__product">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/svicloud-hero-product.png' ); ?>" alt="<?php esc_attr_e('SVICLOUD streaming device with remote', 'svicloudtvbox-lumen'); ?>" loading="lazy" />
-            <div class="hero-dashboard__product-caption">
-              <span><?php esc_html_e('SVICLOUD 10P Plus', 'svicloudtvbox-lumen'); ?></span>
-              <span><?php esc_html_e('4K · Wi-Fi 6 · Dolby Vision', 'svicloudtvbox-lumen'); ?></span>
-            </div>
+            <img class="hero-dashboard__product-main" src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/svicloud-hero-product.png' ); ?>" alt="<?php esc_attr_e('SVICLOUD streaming device with remote', 'svicloudtvbox-lumen'); ?>" loading="lazy" />
           </div>
           <div class="hero-dashboard__card-header">
-            <span><?php esc_html_e('Neural live dashboard', 'svicloudtvbox-lumen'); ?></span>
-            <span><?php esc_html_e('Updated 00:03 ago', 'svicloudtvbox-lumen'); ?></span>
+            <span><?php esc_html_e('SVICLOUD 10P+ hardware snapshot', 'svicloudtvbox-lumen'); ?></span>
+            <span><?php esc_html_e('Latest U.S. batch · July 2024', 'svicloudtvbox-lumen'); ?></span>
           </div>
           <div class="hero-dashboard__stat">
-            <strong>99.3% <?php esc_html_e('uptime', 'svicloudtvbox-lumen'); ?></strong>
-            <span class="hero-dashboard__chip"><?php esc_html_e('Priority region · North America', 'svicloudtvbox-lumen'); ?></span>
+            <strong><?php esc_html_e('4GB RAM · 64GB storage', 'svicloudtvbox-lumen'); ?></strong>
           </div>
-          <div class="hero-dashboard__grid" aria-hidden="true">
-            <?php for ( $i = 0; $i < 18; $i++ ) : ?>
-              <span></span>
-            <?php endfor; ?>
+          <div class="hero-dashboard__spec-grid" role="list">
+            <div class="hero-dashboard__spec-pill" role="listitem">
+              <span class="hero-dashboard__spec-label"><?php esc_html_e('Processor', 'svicloudtvbox-lumen'); ?></span>
+              <span class="hero-dashboard__spec-value"><?php esc_html_e('Amlogic S928X · Octa-core', 'svicloudtvbox-lumen'); ?></span>
+            </div>
+            <div class="hero-dashboard__spec-pill" role="listitem">
+              <span class="hero-dashboard__spec-label"><?php esc_html_e('Connectivity', 'svicloudtvbox-lumen'); ?></span>
+              <span class="hero-dashboard__spec-value"><?php esc_html_e('Wi-Fi 6 dual-band + Gigabit LAN', 'svicloudtvbox-lumen'); ?></span>
+            </div>
+            <div class="hero-dashboard__spec-pill" role="listitem">
+              <span class="hero-dashboard__spec-label"><?php esc_html_e('High Quality Video Decoding', 'svicloudtvbox-lumen'); ?></span>
+              <span class="hero-dashboard__spec-value"><?php esc_html_e('AV1 decode · Dolby Vision', 'svicloudtvbox-lumen'); ?></span>
+            </div>
+            <div class="hero-dashboard__spec-pill" role="listitem">
+              <span class="hero-dashboard__spec-label"><?php esc_html_e('Remote & extras', 'svicloudtvbox-lumen'); ?></span>
+              <span class="hero-dashboard__spec-value"><?php esc_html_e('Bluetooth voice remote · USB 3.0 expansion', 'svicloudtvbox-lumen'); ?></span>
+            </div>
           </div>
           <div class="hero-dashboard__card-footer">
-            <span><?php esc_html_e('Average latency · 18 ms', 'svicloudtvbox-lumen'); ?></span>
-            <span><?php esc_html_e('Peak viewers · 12,480 households', 'svicloudtvbox-lumen'); ?></span>
+            <span><?php esc_html_e('Ships from USA · 48-hour dispatch', 'svicloudtvbox-lumen'); ?></span>
+            <span><?php esc_html_e('1-Year U.S. warranty · Concierge setup', 'svicloudtvbox-lumen'); ?></span>
           </div>
         </div>
         <span class="hero-dashboard__spark" aria-hidden="true"></span>
