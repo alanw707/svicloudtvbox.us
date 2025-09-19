@@ -1,39 +1,32 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Load .env if present
-if [ -f .env ]; then
-  set -a
-  # shellcheck disable=SC1091
-  source .env
-  set +a
+# Wrapper for scripts/deploy_theme.py that loads .env if present and
+# applies sensible defaults for this repository.
+
+ROOT_DIR="$(cd "$(dirname "$0")"/.. && pwd)"
+
+# Load environment variables from .env if available (gitignored)
+if [[ -f "$ROOT_DIR/.env" ]]; then
+  # shellcheck disable=SC1090
+  set -a; source "$ROOT_DIR/.env"; set +a
 fi
 
-FTP_HOST=${FTP_HOST:-}
-FTP_PORT=${FTP_PORT:-21}
-FTP_USER=${FTP_USER:-}
-FTP_PASS=${FTP_PASS:-}
-FTP_BASE_DIR=${FTP_BASE_DIR:-public_html/wp-content/themes/svicloudtvbox}
-LOCAL_THEME_DIR=${LOCAL_THEME_DIR:-theme/svicloudtvbox}
-FTP_TLS=${FTP_TLS:-true}
-FTP_PASSIVE=${FTP_PASSIVE:-true}
-DRY_RUN=${DRY_RUN:-false}
+# Defaults for this repo
+FTP_PROTOCOL="${FTP_PROTOCOL:-ftps}"
+LOCAL_THEME_DIR="${LOCAL_THEME_DIR:-$ROOT_DIR/theme/svicloudtvbox-lumen}"
+REMOTE_THEME_DIR="${REMOTE_THEME_DIR:-public_html/wp-content/themes/svicloudtvbox-lumen}"
 
-if [ -z "$FTP_HOST" ] || [ -z "$FTP_USER" ] || [ -z "$FTP_PASS" ]; then
-  echo "Missing FTP credentials. Set FTP_HOST, FTP_USER, FTP_PASS (via .env or env)." >&2
-  exit 2
+if [[ ! -d "$LOCAL_THEME_DIR" ]]; then
+  echo "Local theme directory not found: $LOCAL_THEME_DIR" >&2
+  exit 1
 fi
 
-python3 scripts/deploy_theme_ftp.py \
-  --host "$FTP_HOST" \
-  --port "$FTP_PORT" \
-  --user "$FTP_USER" \
-  --password "$FTP_PASS" \
-  --remote-base "$FTP_BASE_DIR" \
+PY="${PYTHON:-python3}"
+
+exec "$PY" "$ROOT_DIR/scripts/deploy_theme.py" \
+  --protocol "$FTP_PROTOCOL" \
   --local-dir "$LOCAL_THEME_DIR" \
-  $( [ "$FTP_TLS" = "true" ] && echo "--tls" || echo "--no-tls" ) \
-  $( [ "$FTP_PASSIVE" = "true" ] && echo "--passive" || echo "--no-passive" ) \
-  $( [ "$DRY_RUN" = "true" ] && echo "--dry-run" )
-
-echo "Done."
+  --remote-root "$REMOTE_THEME_DIR" \
+  "$@"
 

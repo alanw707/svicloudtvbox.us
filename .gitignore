@@ -1,8 +1,36 @@
+# Environment secrets
 .env
+.env.*
+
+# Python artifacts
 *.pyc
 __pycache__/
+
+# macOS metadata
 .DS_Store
+
+# Dependency/vendor directories
 node_modules/
 dist/
 vendor/
 
+# Local tooling state
+.playwright-mcp/
+.playwright/
+playwright-report/
+test-results/
+.serena/
+.venv/
+.venv*/
+
+# Build outputs
+*.log
+theme/svicloudtvbox.zip
+
+# Legacy local script
+deployconfig.py
+
+# Local WordPress runtime
+core/
+sites/
+db/
