@@ -29,3 +29,8 @@ theme/svicloudtvbox.zip
 
 # Legacy local script
 deployconfig.py
+
+# Local WordPress runtime
+core/
+sites/
+db/
