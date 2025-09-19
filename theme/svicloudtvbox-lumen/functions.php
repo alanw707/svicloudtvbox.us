@@ -91,6 +91,7 @@ add_action('wp_enqueue_scripts', function () {
         'ajaxUrl' => admin_url('admin-ajax.php'),
         'homeUrl' => home_url('/'),
         'isWoo'   => class_exists('WooCommerce'),
+        'themeUrl' => get_template_directory_uri(),
         'i18n'    => [
             'addingToCart' => esc_html__('Adding…', 'svicloudtvbox-lumen'),
         ],

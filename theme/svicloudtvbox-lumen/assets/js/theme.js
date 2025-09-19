@@ -143,13 +143,32 @@
      */
     function initPerformanceOptimizations() {
         // Preload critical images
+        const themeBaseUrl = (() => {
+            if (window.svicTheme && window.svicTheme.themeUrl) {
+                return window.svicTheme.themeUrl.replace(/\/$/, '');
+            }
+            const scriptEl = document.getElementById('svicloudtvbox-script-js') || document.currentScript;
+            if (scriptEl && scriptEl.src) {
+                return scriptEl.src.replace(/\/assets\/js\/theme\.js(?:\?.*)?$/, '');
+            }
+            return '';
+        })();
+
+        const assetFromTheme = (relativePath) => {
+            const trimmed = relativePath.replace(/^\/+/, '');
+            if (themeBaseUrl) {
+                return themeBaseUrl + '/' + trimmed;
+            }
+            return '/wp-content/themes/svicloudtvbox/' + trimmed;
+        };
+
         const criticalImages = [
-            '/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-hero-product.png',
-            '/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10p-plus.png',
-            '/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s.png'
+            assetFromTheme('assets/images/svicloud-hero-product.png'),
+            assetFromTheme('assets/images/svicloud-10p-plus.png'),
+            assetFromTheme('assets/images/svicloud-10s.png')
         ];
 
-        criticalImages.forEach(function(src) {
+        criticalImages.forEach((src) => {
             const link = document.createElement('link');
             link.rel = 'preload';
             link.as = 'image';
