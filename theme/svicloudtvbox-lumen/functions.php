@@ -11,9 +11,16 @@ if (!defined('SVIC_THEME_TEXT_DOMAIN')) {
     define('SVIC_THEME_TEXT_DOMAIN', 'svicloudtvbox-lumen');
 }
 
-$svic_shared_helpers = dirname(get_template_directory()) . '/shared/helpers-svic.php';
-if (file_exists($svic_shared_helpers)) {
-    require_once $svic_shared_helpers;
+$svic_helper_paths = [
+    get_template_directory() . '/inc/helpers-svic.php',
+    dirname(get_template_directory()) . '/shared/helpers-svic.php',
+];
+
+foreach ($svic_helper_paths as $helper_path) {
+    if (file_exists($helper_path)) {
+        require_once $helper_path;
+        break;
+    }
 }
 
 // Theme setup
@@ -97,6 +104,75 @@ add_action('wp_enqueue_scripts', function () {
         ],
     ]);
 });
+
+if (!function_exists('svic_theme_favicon_path')) {
+    function svic_theme_favicon_path(): string
+    {
+        return get_template_directory() . '/assets/images/favicon.png';
+    }
+}
+
+if (!function_exists('svic_theme_favicon_url')) {
+    function svic_theme_favicon_url(): string
+    {
+        return get_template_directory_uri() . '/assets/images/favicon.png';
+    }
+}
+
+if (!function_exists('svic_theme_output_favicons')) {
+    function svic_theme_output_favicons(): void
+    {
+        if (function_exists('has_site_icon') && has_site_icon()) {
+            return;
+        }
+
+        $path = svic_theme_favicon_path();
+        if (!file_exists($path)) {
+            return;
+        }
+
+        $url = esc_url(svic_theme_favicon_url());
+        echo "
+    <link rel=\"icon\" href=\"{$url}\" sizes=\"32x32\" />
+    <link rel=\"apple-touch-icon\" href=\"{$url}\" />
+";
+    }
+
+    add_action('wp_head', 'svic_theme_output_favicons', 5);
+    add_action('admin_head', 'svic_theme_output_favicons', 5);
+    add_action('login_head', 'svic_theme_output_favicons', 5);
+}
+
+if (!function_exists('svic_theme_serve_favicon')) {
+    function svic_theme_serve_favicon(): void
+    {
+        if (function_exists('has_site_icon') && has_site_icon()) {
+            return;
+        }
+
+        $path = svic_theme_favicon_path();
+        if (!file_exists($path)) {
+            return;
+        }
+
+        if (!headers_sent()) {
+            header('Content-Type: image/png');
+            header('Content-Length: ' . (string) filesize($path));
+        }
+
+        readfile($path);
+        exit;
+    }
+
+    add_action('do_favicon', 'svic_theme_serve_favicon');
+    add_action('template_redirect', function () {
+        $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+        if ($request_uri === '/favicon.ico' || $request_uri === 'favicon.ico') {
+            svic_theme_serve_favicon();
+        }
+    }, 0);
+}
+
 
 // Basic WooCommerce tweaks (optional minimal)
 add_filter('woocommerce_enqueue_styles', '__return_empty_array');

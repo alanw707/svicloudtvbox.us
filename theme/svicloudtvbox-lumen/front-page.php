@@ -19,9 +19,9 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
         <h1 class="hero-dashboard__title"><?php esc_html_e('Premium Chinese IPTV & Global Entertainment, Ready for Any TV', 'svicloudtvbox-lumen'); ?></h1>
         <p class="hero-dashboard__copy"><?php esc_html_e('SVICLOUD delivers 4K sports, Asian dramas, karaoke, and kids content in one box. Ships fast from the USA with bilingual support.', 'svicloudtvbox-lumen'); ?></p>
         <ul class="hero-dashboard__list" role="list">
-          <li><?php echo wp_kses_post( svic_bilingual_span('Ships from USA', '美國境內發貨') ); ?></li>
-          <li><?php echo wp_kses_post( svic_bilingual_span('1-Year U.S. Warranty', '一年美國保固') ); ?></li>
-          <li><?php echo wp_kses_post( svic_bilingual_span('No Monthly Fees', '免月費') ); ?></li>
+          <li><?php esc_html_e('Ships from USA', 'svicloudtvbox-lumen'); ?></li>
+          <li><?php esc_html_e('1-Year U.S. Warranty', 'svicloudtvbox-lumen'); ?></li>
+          <li><?php esc_html_e('No Monthly Fees', 'svicloudtvbox-lumen'); ?></li>
         </ul>
         <div class="hero-dashboard__cta">
           <a class="hero-dashboard__button hero-dashboard__button--primary" href="<?php echo esc_url( $hero_10p_url ); ?>"><?php esc_html_e('Shop 10P+', 'svicloudtvbox-lumen'); ?></a>

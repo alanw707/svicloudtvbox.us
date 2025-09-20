@@ -50,25 +50,132 @@ $comparison_rows = [
         'highlight' => '',
     ],
 ];
+
+$key_differences = [
+    [
+        'title' => ['en' => 'Premium Performance', 'zh' => '頂級效能'],
+        'model' => '10P+',
+        'description' => ['en' => 'Double the RAM and storage for smoother multitasking and more apps.', 'zh' => '雙倍記憶體與儲存空間，多工處理更順暢，可安裝更多應用程式。'],
+    ],
+    [
+        'title' => ['en' => 'Family Entertainment', 'zh' => '家庭娛樂'],
+        'model' => '10P+',
+        'description' => ['en' => 'Exclusive Kids Mode and Karaoke features for the whole family.', 'zh' => '獨家兒童模式與卡拉 OK 功能，全家同樂。'],
+    ],
+    [
+        'title' => ['en' => 'Smart Value', 'zh' => '聰明首選'],
+        'model' => '10S',
+        'description' => ['en' => 'Same 4K picture quality at a more approachable price.', 'zh' => '維持 4K 畫質，同時擁有更親民的價格。'],
+    ],
+];
+
+$specs_categories = [
+    'performance' => [
+        'title' => ['en' => 'Performance', 'zh' => '效能規格'],
+        'items' => [
+            ['label' => ['en' => 'Processor', 'zh' => '處理器'], 'value' => ['en' => 'ARM Cortex-A73 quad-core', 'zh' => 'ARM Cortex-A73 四核心']],
+            ['label' => ['en' => 'GPU', 'zh' => 'GPU'], 'value' => ['en' => 'ARM Mali-G31 MP2', 'zh' => 'ARM Mali-G31 MP2']],
+            ['label' => ['en' => 'OS', 'zh' => '作業系統'], 'value' => ['en' => 'Android 11.0', 'zh' => 'Android 11.0']],
+            ['label' => ['en' => 'Boot time', 'zh' => '開機時間'], 'value' => ['en' => '~25 seconds', 'zh' => '約 25 秒']],
+        ],
+    ],
+    'connectivity' => [
+        'title' => ['en' => 'Connectivity & Ports', 'zh' => '連線與介面'],
+        'items' => [
+            ['label' => ['en' => 'HDMI', 'zh' => 'HDMI'], 'value' => ['en' => '2.1 (4K@60Hz)', 'zh' => '2.1（4K@60Hz）']],
+            ['label' => ['en' => 'USB', 'zh' => 'USB'], 'value' => ['en' => '2 × USB 3.0', 'zh' => '2 組 USB 3.0']],
+            ['label' => ['en' => 'Wi‑Fi', 'zh' => 'Wi‑Fi'], 'value' => ['en' => '802.11ac dual-band', 'zh' => '802.11ac 雙頻']],
+            ['label' => ['en' => 'Ethernet', 'zh' => '有線網路'], 'value' => ['en' => '10/100 Mbps', 'zh' => '10/100 Mbps']],
+        ],
+    ],
+    'software' => [
+        'title' => ['en' => 'Software & Apps', 'zh' => '軟體與應用'],
+        'items' => [
+            ['label' => ['en' => 'Streaming Apps', 'zh' => '串流應用'], 'value' => ['en' => 'Netflix, YouTube, Prime Video, more', 'zh' => 'Netflix、YouTube、Prime Video 等']],
+            ['label' => ['en' => 'Voice Assistant', 'zh' => '語音助理'], 'value' => ['en' => 'Google Assistant', 'zh' => 'Google 助理']],
+        ],
+    ],
+];
 ?>
 
-<main class="page-shell lumen-compare">
-  <header class="page-hero">
-    <span class="badge badge-muted"><?php echo wp_kses_post(svic_bilingual_span('Compare Models', '機型比較')); ?></span>
-    <h1 class="page-title">
+<main class="compare-page">
+  <section class="compare-hero">
+    <span class="compare-hero__badge"><?php echo wp_kses_post(svic_bilingual_span('Compare Models', '機型比較')); ?></span>
+    <h1 class="compare-hero__title">
       <?php echo wp_kses_post(svic_bilingual_span('SVICLOUD 10P+ vs 10S', 'SVICLOUD 10P+ 與 10S 比較', 'page-title-text')); ?>
     </h1>
-    <p class="page-subtitle">
+    <p class="compare-hero__subtitle">
       <?php echo wp_kses_post(svic_bilingual_span(
         'See the hardware, features, and best-use scenarios side-by-side to pick the perfect SVICLOUD for your home.',
         '逐項比較硬體規格、功能與使用情境，幫你挑到最適合家庭的 SVICLOUD 盒子。',
         'page-subtitle-text'
       )); ?>
     </p>
-  </header>
+  </section>
 
-  <section class="comparison-panel">
-    <div class="comparison-table" role="region" aria-label="<?php echo esc_attr__('SVICLOUD model comparison table', 'svicloudtvbox-lumen'); ?>">
+  <section class="compare-differences" aria-label="<?php echo esc_attr__('Key differences between models', 'svicloudtvbox-lumen'); ?>">
+    <div class="compare-differences__grid">
+      <?php foreach ($key_differences as $difference) : ?>
+        <article class="compare-difference-card compare-difference-card--<?php echo esc_attr(strtolower($difference['model'])); ?>">
+          <span class="compare-difference-card__model"><?php echo esc_html($difference['model']); ?></span>
+          <h3 class="compare-difference-card__title"><?php echo wp_kses_post(svic_bilingual_span($difference['title']['en'], $difference['title']['zh'])); ?></h3>
+          <p class="compare-difference-card__copy"><?php echo wp_kses_post(svic_bilingual_span($difference['description']['en'], $difference['description']['zh'])); ?></p>
+        </article>
+      <?php endforeach; ?>
+    </div>
+  </section>
+
+  <section class="compare-products" aria-label="<?php echo esc_attr__('Product spotlight cards', 'svicloudtvbox-lumen'); ?>">
+    <div class="compare-products__grid">
+      <article class="compare-product-card compare-product-card--highlight">
+        <div class="compare-product-card__header">
+          <h2 class="compare-product-card__title"><?php esc_html_e('SVICLOUD 10P+', 'svicloudtvbox-lumen'); ?></h2>
+          <p class="compare-product-card__price"><?php echo esc_html($price_10p_text); ?></p>
+          <p class="compare-product-card__lead"><?php echo wp_kses_post(svic_bilingual_span('Premium hardware, exclusive family features, and the fastest performance available.', '旗艦硬體、專屬家庭功能與最快速的運算效能。')); ?></p>
+          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo wp_kses_post(svic_bilingual_span('Buy 10P+', '選購 10P+')); ?></a>
+        </div>
+        <ul class="compare-product-card__list">
+          <li><?php echo wp_kses_post(svic_bilingual_span('4GB RAM / 64GB storage with AV1 decode', '4GB 記憶體、64GB 儲存與 AV1 解碼')); ?></li>
+          <li><?php echo wp_kses_post(svic_bilingual_span('Kids Mode and Karaoke apps included', '內建兒童模式與卡拉 OK 應用')); ?></li>
+          <li><?php echo wp_kses_post(svic_bilingual_span('Bluetooth AI voice remote + Wi-Fi 6', '藍牙 AI 語音遙控與 Wi-Fi 6')); ?></li>
+        </ul>
+      </article>
+
+      <article class="compare-product-card">
+        <div class="compare-product-card__header">
+          <h2 class="compare-product-card__title"><?php esc_html_e('SVICLOUD 10S', 'svicloudtvbox-lumen'); ?></h2>
+          <p class="compare-product-card__price"><?php echo esc_html($price_10s_text); ?></p>
+          <p class="compare-product-card__lead"><?php echo wp_kses_post(svic_bilingual_span('Essential 4K streaming with streamlined hardware for value-conscious homes.', '提供 4K 串流的精省配置，適合重視性價比的家庭。')); ?></p>
+          <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>"><?php echo wp_kses_post(svic_bilingual_span('Buy 10S', '選購 10S')); ?></a>
+        </div>
+        <ul class="compare-product-card__list">
+          <li><?php echo wp_kses_post(svic_bilingual_span('2GB RAM / 32GB storage for everyday streaming', '2GB 記憶體、32GB 儲存，滿足日常播放')); ?></li>
+          <li><?php echo wp_kses_post(svic_bilingual_span('4K HDR + AV1 decode with voice remote', '4K HDR + AV1 解碼，搭配語音遙控')); ?></li>
+          <li><?php echo wp_kses_post(svic_bilingual_span('HDMI, USB 3.0, and wired Ethernet included', '內建 HDMI、USB 3.0 與有線網路接口')); ?></li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <div class="compare-sticky" aria-hidden="true">
+    <div class="compare-sticky__inner">
+      <div class="compare-sticky__prices">
+        <span><?php echo wp_kses_post(svic_bilingual_span('SVICLOUD 10P+', 'SVICLOUD 10P+')); ?> · <strong><?php echo esc_html($price_10p_text); ?></strong></span>
+        <span><?php echo wp_kses_post(svic_bilingual_span('SVICLOUD 10S', 'SVICLOUD 10S')); ?> · <strong><?php echo esc_html($price_10s_text); ?></strong></span>
+      </div>
+      <div class="compare-sticky__actions">
+        <a class="compare-sticky__cta lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo wp_kses_post(svic_bilingual_span('Buy 10P+', '選購 10P+')); ?></a>
+        <a class="compare-sticky__cta lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>"><?php echo wp_kses_post(svic_bilingual_span('Buy 10S', '選購 10S')); ?></a>
+      </div>
+    </div>
+  </div>
+
+  <section class="compare-panel" aria-label="<?php echo esc_attr__('Feature comparison table', 'svicloudtvbox-lumen'); ?>">
+    <header class="compare-panel__header">
+      <h2 class="compare-panel__$title"><?php echo wp_kses_post(svic_bilingual_span('Feature Comparison', '功能比較')); ?></h2>
+      <p class="compare-panel__copy"><?php echo wp_kses_post(svic_bilingual_span('Highlighting the upgrades you get with SVICLOUD 10P+ alongside shared essentials.', '一眼看出 SVICLOUD 10P+ 與 10S 共享的核心與 10P+ 帶來的升級。')); ?></p>
+    </header>
+    <div class="comparison-table comparison-table--desktop" role="table">
       <table>
         <thead>
           <tr>
@@ -80,31 +187,28 @@ $comparison_rows = [
         <tbody>
           <?php foreach ($comparison_rows as $row) :
               $highlight = isset($row['highlight']) ? $row['highlight'] : '';
-              $p10p_class = $highlight === 'p10p' ? ' class="highlight"' : '';
-              $p10s_class = $highlight === 'p10s' ? ' class="highlight"' : '';
           ?>
             <tr>
               <th scope="row"><?php echo wp_kses_post(svic_bilingual_span($row['feature']['en'], $row['feature']['zh'])); ?></th>
-              <td<?php echo $p10p_class; ?>><?php echo wp_kses_post(svic_bilingual_span($row['p10p']['en'], $row['p10p']['zh'])); ?></td>
-              <td<?php echo $p10s_class; ?>><?php echo wp_kses_post(svic_bilingual_span($row['p10s']['en'], $row['p10s']['zh'])); ?></td>
+              <td class="<?php echo $highlight === 'p10p' ? 'is-highlight' : ''; ?>"><?php echo wp_kses_post(svic_bilingual_span($row['p10p']['en'], $row['p10p']['zh'])); ?></td>
+              <td class="<?php echo $highlight === 'p10s' ? 'is-highlight' : ''; ?>"><?php echo wp_kses_post(svic_bilingual_span($row['p10s']['en'], $row['p10s']['zh'])); ?></td>
             </tr>
           <?php endforeach; ?>
         </tbody>
       </table>
     </div>
-
-    <div class="comparison-cards" aria-label="<?php echo esc_attr__('SVICLOUD model comparison cards', 'svicloudtvbox-lumen'); ?>">
+    <div class="comparison-cards comparison-cards--mobile" role="list">
       <?php foreach ($comparison_rows as $row) :
           $highlight = isset($row['highlight']) ? $row['highlight'] : '';
       ?>
-        <article class="comparison-card">
-          <h3 class="comparison-card-feature"><?php echo wp_kses_post(svic_bilingual_span($row['feature']['en'], $row['feature']['zh'])); ?></h3>
-          <dl class="comparison-card-list">
-            <div class="comparison-card-item<?php echo $highlight === 'p10p' ? ' highlight' : ''; ?>">
+        <article class="comparison-card" role="listitem">
+          <h3 class="comparison-card__feature"><?php echo wp_kses_post(svic_bilingual_span($row['feature']['en'], $row['feature']['zh'])); ?></h3>
+          <dl class="comparison-card__list">
+            <div class="comparison-card__item <?php echo $highlight === 'p10p' ? 'is-highlight' : ''; ?>">
               <dt><?php esc_html_e('SVICLOUD 10P+', 'svicloudtvbox-lumen'); ?></dt>
               <dd><?php echo wp_kses_post(svic_bilingual_span($row['p10p']['en'], $row['p10p']['zh'])); ?></dd>
             </div>
-            <div class="comparison-card-item<?php echo $highlight === 'p10s' ? ' highlight' : ''; ?>">
+            <div class="comparison-card__item <?php echo $highlight === 'p10s' ? 'is-highlight' : ''; ?>">
               <dt><?php esc_html_e('SVICLOUD 10S', 'svicloudtvbox-lumen'); ?></dt>
               <dd><?php echo wp_kses_post(svic_bilingual_span($row['p10s']['en'], $row['p10s']['zh'])); ?></dd>
             </div>
@@ -112,61 +216,93 @@ $comparison_rows = [
         </article>
       <?php endforeach; ?>
     </div>
-
-    <div class="comparison-cta">
-      <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>">
-        <?php echo wp_kses_post(svic_bilingual_span('Buy 10P+ – ' . $price_10p_text, '選購 10P+ – ' . $price_10p_text)); ?>
-      </a>
-      <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($hero_10s_url); ?>">
-        <?php echo wp_kses_post(svic_bilingual_span('Buy 10S – ' . $price_10s_text, '選購 10S – ' . $price_10s_text)); ?>
-      </a>
+    <div class="compare-panel__cta">
+      <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo wp_kses_post(svic_bilingual_span('Buy 10P+ – ' . $price_10p_text, '選購 10P+ – ' . $price_10p_text)); ?></a>
+      <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>"><?php echo wp_kses_post(svic_bilingual_span('Buy 10S – ' . $price_10s_text, '選購 10S – ' . $price_10s_text)); ?></a>
     </div>
   </section>
 
-  <section class="specs-grid">
-    <article class="spec-card">
-      <h3><?php echo wp_kses_post(svic_bilingual_span('Performance', '效能規格')); ?></h3>
-      <ul>
-        <li>
-          <strong><?php echo wp_kses_post(svic_bilingual_span('Processor', '處理器')); ?>:</strong>
-          <?php echo wp_kses_post(svic_bilingual_span('ARM Cortex-A73 quad-core', 'ARM Cortex-A73 四核心')); ?>
-        </li>
-        <li>
-          <strong><?php echo wp_kses_post(svic_bilingual_span('GPU', 'GPU')); ?>:</strong>
-          <?php echo wp_kses_post(svic_bilingual_span('ARM Mali-G31 MP2', 'ARM Mali-G31 MP2')); ?>
-        </li>
-        <li>
-          <strong><?php echo wp_kses_post(svic_bilingual_span('OS', '作業系統')); ?>:</strong>
-          <?php echo wp_kses_post(svic_bilingual_span('Android 11.0', 'Android 11.0')); ?>
-        </li>
-        <li>
-          <strong><?php echo wp_kses_post(svic_bilingual_span('Boot time', '開機時間')); ?>:</strong>
-          <?php echo wp_kses_post(svic_bilingual_span('~25 seconds', '約 25 秒')); ?>
-        </li>
-      </ul>
-    </article>
-    <article class="spec-card">
-      <h3><?php echo wp_kses_post(svic_bilingual_span('Connectivity & Ports', '連線與介面')); ?></h3>
-      <ul>
-        <li>
-          <strong><?php echo wp_kses_post(svic_bilingual_span('HDMI', 'HDMI')); ?>:</strong>
-          <?php echo wp_kses_post(svic_bilingual_span('2.1 (4K@60Hz)', '2.1（4K@60Hz）')); ?>
-        </li>
-        <li>
-          <strong><?php echo wp_kses_post(svic_bilingual_span('USB', 'USB')); ?>:</strong>
-          <?php echo wp_kses_post(svic_bilingual_span('2 × USB 3.0', '2 組 USB 3.0')); ?>
-        </li>
-        <li>
-          <strong><?php echo wp_kses_post(svic_bilingual_span('Wi‑Fi', 'Wi‑Fi')); ?>:</strong>
-          <?php echo wp_kses_post(svic_bilingual_span('802.11ac dual-band', '802.11ac 雙頻')); ?>
-        </li>
-        <li>
-          <strong><?php echo wp_kses_post(svic_bilingual_span('Ethernet', '有線網路')); ?>:</strong>
-          <?php echo wp_kses_post(svic_bilingual_span('10/100 Mbps', '10/100 Mbps')); ?>
-        </li>
-      </ul>
-    </article>
+  <section class="compare-specs" aria-label="<?php echo esc_attr__('Technical specifications', 'svicloudtvbox-lumen'); ?>">
+    <header class="compare-specs__header">
+      <h2 class="compare-specs__title"><?php echo wp_kses_post(svic_bilingual_span('Technical Specifications', '技術規格')); ?></h2>
+      <div class="compare-specs__tabs" role="tablist">
+        <?php $index = 0; ?>
+        <?php foreach ($specs_categories as $key => $category) :
+            $is_active = $index === 0 ? ' is-active' : '';
+        ?>
+          <button class="compare-specs__tab<?php echo $is_active; ?>" type="button" role="tab" data-target="specs-<?php echo esc_attr($key); ?>">
+            <?php echo wp_kses_post(svic_bilingual_span($category['title']['en'], $category['title']['zh'])); ?>
+          </button>
+          <?php $index++; ?>
+        <?php endforeach; ?>
+      </div>
+    </header>
+    <div class="compare-specs__body">
+      <div class="compare-specs__panes">
+        <?php $index = 0; ?>
+        <?php foreach ($specs_categories as $key => $category) :
+            $is_active = $index === 0 ? ' is-active' : '';
+        ?>
+          <div class="compare-specs__pane<?php echo $is_active; ?>" id="specs-<?php echo esc_attr($key); ?>" role="tabpanel">
+            <ul class="compare-specs__list">
+              <?php foreach ($category['items'] as $item) : ?>
+                <li class="compare-specs__item">
+                  <span class="compare-specs__item-label"><?php echo wp_kses_post(svic_bilingual_span($item['label']['en'], $item['label']['zh'])); ?></span>
+                  <span class="compare-specs__item-value"><?php echo wp_kses_post(svic_bilingual_span($item['value']['en'], $item['value']['zh'])); ?></span>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+          <?php $index++; ?>
+        <?php endforeach; ?>
+      </div>
+      <aside class="compare-specs__media" aria-hidden="true">
+        <img class="compare-specs__image" src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/svicloud-hero-product.png'); ?>" alt="" loading="lazy" />
+      </aside>
+    </div>
+  </section>
+
+  <section class="compare-final-cta" aria-label="<?php echo esc_attr__('Final call to action', 'svicloudtvbox-lumen'); ?>">
+    <div class="compare-final-cta__inner">
+      <span class="compare-final-cta__badge"><?php echo wp_kses_post(svic_bilingual_span('Make Your Choice', '選擇您的機型')); ?></span>
+      <h2 class="compare-final-cta__title"><?php echo wp_kses_post(svic_bilingual_span('Ready to enhance your streaming experience?', '準備好提升您的串流體驗了嗎？')); ?></h2>
+      <p class="compare-final-cta__copy"><?php echo wp_kses_post(svic_bilingual_span('Choose the SVICLOUD model that best fits your needs and budget.', '選擇最符合您需求與預算的 SVICLOUD 機型。')); ?></p>
+      <div class="compare-final-cta__actions">
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo wp_kses_post(svic_bilingual_span('Buy SVICLOUD 10P+', '選購 SVICLOUD 10P+')); ?></a>
+        <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>"><?php echo wp_kses_post(svic_bilingual_span('Buy SVICLOUD 10S', '選購 SVICLOUD 10S')); ?></a>
+      </div>
+    </div>
   </section>
 </main>
+
+<script>
+(function () {
+  const root = document.querySelector('.compare-page');
+  if (!root) {
+    return;
+  }
+
+  const tabButtons = root.querySelectorAll('.compare-specs__tab');
+  const panes = root.querySelectorAll('.compare-specs__pane');
+
+  tabButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-target');
+      if (!targetId) {
+        return;
+      }
+
+      tabButtons.forEach((btn) => btn.classList.remove('is-active'));
+      panes.forEach((pane) => pane.classList.remove('is-active'));
+
+      button.classList.add('is-active');
+      const targetPane = root.querySelector('#' + targetId);
+      if (targetPane) {
+        targetPane.classList.add('is-active');
+      }
+    });
+  });
+})();
+</script>
 
 <?php get_footer(); ?>
