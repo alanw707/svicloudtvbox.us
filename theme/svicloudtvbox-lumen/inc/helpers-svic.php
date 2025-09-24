@@ -9,6 +9,45 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+if (!function_exists('svic_current_locale')) {
+    function svic_current_locale(): string {
+        $locale = apply_filters('svic_current_locale', get_locale());
+        if (!is_string($locale) || $locale === '') {
+            $locale = 'en_US';
+        }
+
+        return SVIC_Translator::normalizeLocaleCode($locale);
+    }
+}
+
+if (!function_exists('svic_translate')) {
+    function svic_translate(string $key, array $replacements = [], ?string $locale = null): string {
+        return SVIC_Translator::instance()->translate($key, $replacements, $locale);
+    }
+}
+
+if (!function_exists('svic_translate_html')) {
+    function svic_translate_html(string $key, array $replacements = [], ?string $locale = null): string {
+        return esc_html(svic_translate($key, $replacements, $locale));
+    }
+}
+
+if (!function_exists('svic_translate_attr')) {
+    function svic_translate_attr(string $key, array $replacements = [], ?string $locale = null): string {
+        return esc_attr(svic_translate($key, $replacements, $locale));
+    }
+}
+
+if (!function_exists('svic_translate_rich')) {
+    function svic_translate_rich(string $key, array $replacements = [], ?string $locale = null): string {
+        $text = svic_translate($key, $replacements, $locale);
+        /**
+         * Allow filters to adjust rich text output (e.g., additional sanitization).
+         */
+        return apply_filters('svic_translate_rich_text', $text, $key, $locale);
+    }
+}
+
 if (!function_exists('svic_text_domain')) {
     function svic_text_domain(): string {
         if (defined('SVIC_THEME_TEXT_DOMAIN')) {

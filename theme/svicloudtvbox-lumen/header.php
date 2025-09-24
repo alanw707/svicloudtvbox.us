@@ -13,9 +13,25 @@
     $logo_alt        = $custom_logo_id ? get_post_meta( $custom_logo_id, '_wp_attachment_image_alt', true ) : '';
     $logo_alt        = $logo_alt ? $logo_alt : get_bloginfo( 'name' );
     $site_name       = get_bloginfo( 'name' );
-    $english_url     = home_url( '/' );
-    $chinese_url     = home_url( '/zh/' );
-    $logo_classes    = ['lumen-header__logo'];
+
+    $request_uri = $_SERVER['REQUEST_URI'] ?? '/';
+    $parsed_uri  = wp_parse_url($request_uri);
+    $path        = isset($parsed_uri['path']) ? $parsed_uri['path'] : '/';
+    $query_args  = [];
+
+    if (!empty($parsed_uri['query'])) {
+        parse_str($parsed_uri['query'], $query_args);
+    }
+
+    unset($query_args['lang']);
+
+    $base_url     = home_url($path);
+    $english_url  = add_query_arg(array_merge($query_args, ['lang' => 'en']), $base_url);
+    $chinese_url  = add_query_arg(array_merge($query_args, ['lang' => 'zh']), $base_url);
+    $current_lang = function_exists('svic_current_locale') ? svic_current_locale() : get_locale();
+    $logo_classes = ['lumen-header__logo'];
+    $english_link_classes = 'lumen-lang-toggle__link' . ($current_lang === 'en_US' ? ' is-active' : '');
+    $chinese_link_classes = 'lumen-lang-toggle__link' . ($current_lang !== 'en_US' ? ' is-active' : '');
 
     if ( $has_custom_logo && $custom_logo_id ) {
         $logo_classes[] = 'lumen-header__logo--image';
@@ -66,8 +82,8 @@
       <div class="lumen-header__actions">
         <div class="lumen-header__pill-group">
           <div class="lumen-lang-toggle" role="group" aria-label="<?php esc_attr_e( 'Language selector', 'svicloudtvbox-lumen' ); ?>">
-            <a class="lumen-lang-toggle__link" href="<?php echo esc_url( $english_url ); ?>">EN</a>
-            <a class="lumen-lang-toggle__link" href="<?php echo esc_url( $chinese_url ); ?>">中文</a>
+            <a class="<?php echo esc_attr($english_link_classes); ?>" href="<?php echo esc_url($english_url); ?>">EN</a>
+            <a class="<?php echo esc_attr($chinese_link_classes); ?>" href="<?php echo esc_url($chinese_url); ?>">中文</a>
           </div>
           <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url( function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart') ); ?>">
             <?php
@@ -110,8 +126,8 @@
 
       <div class="lumen-mobile-nav__actions">
         <div class="lumen-lang-toggle lumen-lang-toggle--mobile" role="group" aria-label="<?php esc_attr_e( 'Language selector', 'svicloudtvbox-lumen' ); ?>">
-          <a class="lumen-lang-toggle__link" href="<?php echo esc_url( $english_url ); ?>">EN</a>
-          <a class="lumen-lang-toggle__link" href="<?php echo esc_url( $chinese_url ); ?>">中文</a>
+          <a class="<?php echo esc_attr($english_link_classes); ?>" href="<?php echo esc_url($english_url); ?>">EN</a>
+          <a class="<?php echo esc_attr($chinese_link_classes); ?>" href="<?php echo esc_url($chinese_url); ?>">中文</a>
         </div>
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url( function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart') ); ?>">
           <?php

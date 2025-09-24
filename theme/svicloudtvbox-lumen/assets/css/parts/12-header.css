@@ -214,6 +214,11 @@
   transition: color var(--transition-fast), background var(--transition-fast);
 }
 
+.lumen-lang-toggle__link.is-active {
+  color: var(--lumen-text-primary);
+  background: rgba(94, 230, 208, 0.24);
+}
+
 .lumen-lang-toggle__link:hover,
 .lumen-lang-toggle__link:focus-visible {
   color: var(--lumen-text-primary);
