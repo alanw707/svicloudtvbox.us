@@ -153,6 +153,10 @@ foreach ($pricing_cards as $slug => $card) {
 <main class="main-content">
   <!-- Hero Section -->
   <section class="hero-dashboard" id="hero">
+    <div class="hero-dashboard__background" aria-hidden="true">
+      <span class="hero-dashboard__globe hero-dashboard__globe--left"></span>
+      <span class="hero-dashboard__globe hero-dashboard__globe--right"></span>
+    </div>
     <div class="hero-dashboard__inner">
       <div class="hero-dashboard__content">
         <span class="hero-dashboard__eyebrow"><?php echo svic_translate_html('frontpage.hero.badge'); ?></span>

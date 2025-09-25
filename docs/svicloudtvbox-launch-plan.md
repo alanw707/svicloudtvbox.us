@@ -1,6 +1,6 @@
 # SVICLOUDTVBOX.US — Lean Launch Plan (WooCommerce on Hostinger)  
 
-**Status:** Authorized U.S. dealer • 1–2 SKUs (10P+ / 10S) • U.S.-focused  
+**Status:** Theme redesign in progress • Compare page refurb scheduled • Footer complete  
 **Primary domain:** `svicloudtvbox.us` (canonical)  
 **Alt domains:** (optional) `.com`, `小雲盒子.com` → 301 to primary  
 **Goal:** Go live fast with a clean, high‑trust storefront; add depth over 4–8 weeks.
@@ -9,11 +9,11 @@
 
 ## 0) TL;DR
 
-- **Stack:** Hostinger + WordPress + WooCommerce (fastest to revenue); Azure remains Phase‑2.  
-- **Positioning:** *Authorized U.S. dealer* • *Ships from USA* • *1‑Year U.S. warranty* • *English/中文 support*.  
-- **SKUs at launch:** **SVICLOUD 10P+** (flagship), **SVICLOUD 10S** (value).  
-- **Pages:** Home, Shop (10P+, 10S), Compare, How It Works, Setup, Warranty/Returns, Support, Contact (EN/中文).  
-- **Day‑1 growth:** Brand/model paid search + setup/troubleshooting content + reviews capture.
+- **Stack:** Hostinger + WordPress + WooCommerce (live).  
+- **Positioning:** Authorized U.S. dealer • Ships from USA • 1‑Year U.S. warranty • English/中文 support (messaging live sitewide).  
+- **Products:** SVICLOUD 10P+ flagship · SVICLOUD 10S value (PDPs launched).  
+- **Pages:** Home, Shop, Compare, How It Works, Setup, Warranty/Returns, Support, Contact completed in EN; footer/local navigation redesigned; compare refresh underway.  
+- **Next growth pushes:** Finalize compare table styles, launch bilingual translation framework, expand support content & paid search creatives.
 
 ---
 
@@ -21,18 +21,18 @@
 
 - [ ] Domain DNS to Hostinger (A/AAAA/CNAME) + **Cloudflare** (optional)  
 - [ ] TLS (HTTPS) issued, **HSTS** on  
-- [ ] WordPress + WooCommerce installed (US locale, USD)  
-- [ ] Theme **Astra** (or Blocksy/Kadence) installed  
-- [ ] Plugins: WooCommerce, **Woo Stripe Gateway** (Apple/Google Pay), **PayPal**, **LiteSpeed Cache**, **TranslatePress**, **Yoast/RankMath**, **WP Mail SMTP**, **reCAPTCHA**  
+- [x] WordPress + WooCommerce installed (US locale, USD)  
+- [x] Custom SVICLOUD Lumen theme activated  
+- [ ] Plugins: WooCommerce, Woo Stripe Gateway (Apple/Google Pay), PayPal, LiteSpeed Cache, Yoast/RankMath, WP Mail SMTP, reCAPTCHA  
 - [ ] Permalinks set to `/shop/%product%`  
-- [ ] Products: 10P+ and 10S created with images, bullets, specs, price, inventory toggle  
-- [ ] **Compare** page table done; cross-links from PDPs  
+- [x] Products: 10P+ and 10S created with images, bilingual bullets, specs, pricing; inventory managed  
+- [ ] **Compare** page card/table styles polished; cross-links from PDPs (styles in QA)  
 - [ ] Policies: Shipping, Warranty/Returns, Privacy, Terms, DMCA  
-- [ ] **Authorized Dealer** badge + footer disclosure (“Not the manufacturer’s official site”)  
+- [x] **Authorized Dealer** badge + footer disclosure (“Authorized SVI CLOUD Dealer…”)  
 - [ ] GA4 + Search Console + Meta + TikTok pixels + conversions  
 - [ ] XML sitemap submitted; robots.txt present  
 - [ ] Email deliverability: **SPF/DKIM/DMARC** + tested order emails  
-- [ ] Performance: LiteSpeed cache on, WebP, lazy-load, minify (tested)  
+- [ ] Performance: LiteSpeed cache on, WebP, lazy-load, minify (to configure pre-launch)  
 - [ ] Security: strong admin creds, 2FA, reCAPTCHA on checkout/login  
 - [ ] Launch ads: Google Search (brand/model), negative keywords set  
 - [ ] Publish 3 content pieces (EN + 中文): *10P+ vs 10S*, *Setup in 3 minutes*, *Wi‑Fi fixes*  
@@ -42,8 +42,8 @@
 
 ## 2) Site Architecture
 
-**Header:** Home · **Shop** (10P+, 10S) · **Compare** · How It Works · Setup · Warranty/Returns · Support · Contact (EN/中文)  
-**Footer:** Authorized Dealer notice · U.S. address/phone · Shipping · Privacy · Terms · DMCA · Sitemap
+**Header:** Home · **Shop** (10P+, 10S) · **Compare** · How It Works · Setup · Warranty/Returns · Support · Contact — bilingual nav live  
+**Footer:** Authorized Dealer notice · U.S. address/phone placeholder · Shipping · Privacy · Terms · DMCA · Sitemap — redesigned gradient footer live
 
 **Homepage (wireframe):**  
 1. **Hero:** “SVICLOUD TV Box — Authorized U.S. Dealer”  
@@ -52,9 +52,9 @@
 2. **Trust bar:** Authorized • USA shipping • No monthly fees • Secure checkout  
 3. **Product tiles** (10P+ vs 10S) + link: **Compare models**  
 4. **Why buy from us:** U.S. fulfillment, Warranty, Returns, English/中文 support  
-5. **Feature strip:** 4K HDR / AV1 • Voice Remote • (Kids & Karaoke on 10P+)  
+5. **Feature strip:** 4K HDR / AV1 • Voice Remote • (Kids & Karaoke on 10P+) — in design backlog  
 6. **FAQ:** top 6 questions (shipping, setup, warranty, language)  
-7. **Support CTA:** Chat / Call / WhatsApp
+7. **Support CTA:** Chat / Call / WhatsApp — pending support ops alignment
 
 **Compare page — key rows:**  
 - RAM/Storage (10P+ **4GB/64GB** vs 10S **2GB/32GB**)  
@@ -72,7 +72,7 @@
 - **Fonts:** Inter (EN) + Noto Sans SC/TC (中文).  
 - **Buttons/CTAs:** high contrast; primary “Add to Cart” always visible on PDP.  
 - **Images:** clean device shots on white; 1 lifestyle hero; a 30–45s unbox/plug‑in clip.  
-- **Bilingual:** **TranslatePress** with `/zh/` path; manual copy (no auto garble).  
+- **Bilingual:** Custom translation framework planned (see `docs/svicloudtvbox-i18n-plan.md`); interim bilingual spans live.  
 - **Speed:** avoid heavy page builders; use block editor and native sections.
 
 ---
@@ -280,7 +280,7 @@ Add a “**Who should buy which**” section under the table with plain‑Englis
 - [ ] Pixels fire (GA4 purchase event, Meta, TikTok)  
 - [ ] Sitemap valid in Search Console  
 - [ ] 404s → 301s; canonical correct  
-- [ ] Chinese `/zh/` pages live with `hreflang`
+- [ ] Chinese `/zh/` pages live with `hreflang` (blocked on custom framework rollout)
 
 ---
 

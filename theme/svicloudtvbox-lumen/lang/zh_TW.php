@@ -43,6 +43,9 @@ return [
         'hero' => [
             'badge'   => '美國授權經銷商',
             'title'   => '中文電視盒天花板，全球娛樂任一電視即插即用',
+            'title_lead' => '中文電視盒天花板',
+            'title_separator' => '，',
+            'title_tail' => '全球娛樂任一電視即插即用',
             'copy'    => 'SVICLOUD 頂規盒子一次打包 4K 體育、亞洲戲劇、卡拉 OK 與兒童內容，美國庫房急速出貨，隨附中英雙語禮賓服務。',
             'bullets' => [
                 'shipping' => '美國本地出貨',
@@ -70,7 +73,7 @@ return [
                     ],
                     'video'        => [
                         'label' => '高畫質解碼',
-                        'value' => 'AV1 解碼 · Dolby Vision',
+                        'value' => 'AV1 解碼 · 4K HDR',
                     ],
                     'extras'       => [
                         'label' => '遙控與配件',
@@ -147,6 +150,7 @@ return [
                         'wifi'   => 'AI 語音遙控 + 雙頻 Wi-Fi',
                     ],
                     'cta'  => '查看 10P+',
+                    'cta_style' => 'primary',
                     'meta' => [
                         'shipping'  => '✔ 美國出貨',
                         'warranty'  => '✔ 一年美國保固',
@@ -163,6 +167,7 @@ return [
                         'bundle' => '附 HDMI 與電源配件',
                     ],
                     'cta'  => '查看 10S',
+                    'cta_style' => 'primary',
                     'meta' => [
                         'shipping' => '✔ 美國出貨',
                         'warranty' => '✔ 一年美國保固',

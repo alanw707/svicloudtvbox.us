@@ -11,6 +11,12 @@ if (!defined('SVIC_THEME_TEXT_DOMAIN')) {
     define('SVIC_THEME_TEXT_DOMAIN', 'svicloudtvbox-lumen');
 }
 
+require_once get_template_directory() . '/inc/class-svic-translator.php';
+
+require_once get_template_directory() . '/inc/class-svic-locale-resolver.php';
+
+SVIC_Locale_Resolver::bootstrap();
+
 $svic_helper_paths = [
     get_template_directory() . '/inc/helpers-svic.php',
     dirname(get_template_directory()) . '/shared/helpers-svic.php',
@@ -22,6 +28,7 @@ foreach ($svic_helper_paths as $helper_path) {
         break;
     }
 }
+
 
 // Theme setup
 add_action('after_setup_theme', function () {
@@ -94,13 +101,17 @@ add_action('wp_enqueue_scripts', function () {
         true
     );
 
+    $currentLocale = svic_current_locale();
+
     wp_localize_script('svicloudtvbox-script', 'svicTheme', [
-        'ajaxUrl' => admin_url('admin-ajax.php'),
-        'homeUrl' => home_url('/'),
-        'isWoo'   => class_exists('WooCommerce'),
+        'ajaxUrl'  => admin_url('admin-ajax.php'),
+        'homeUrl'  => home_url('/'),
+        'isWoo'    => class_exists('WooCommerce'),
         'themeUrl' => get_template_directory_uri(),
-        'i18n'    => [
-            'addingToCart' => esc_html__('Adding…', 'svicloudtvbox-lumen'),
+        'locale'   => $currentLocale,
+        'translations' => SVIC_Translator::instance()->registry($currentLocale),
+        'i18n'     => [
+            'addingToCart' => svic_translate_html('core.cart.adding'),
         ],
     ]);
 });

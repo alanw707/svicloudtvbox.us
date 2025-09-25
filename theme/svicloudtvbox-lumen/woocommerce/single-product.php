@@ -90,10 +90,10 @@ while (have_posts()) :
         $primary_image_html = '<img class="product-hero-image" src="' . esc_url(get_template_directory_uri() . '/assets/images/svicloud-hero-product.png') . '" alt="' . esc_attr(get_the_title()) . '" />';
     }
 
-    $product_highlights = [
-        ['en' => 'Certified U.S. inventory & warranty', 'zh' => '美國現貨與一年保固'],
-        ['en' => 'Bilingual concierge setup support', 'zh' => '英/中文專屬開箱服務'],
-        ['en' => 'No monthly fees or hidden renewals', 'zh' => '無月費與隱藏續費'],
+    $product_highlight_keys = [
+        'product.highlights.inventory',
+        'product.highlights.concierge',
+        'product.highlights.no_fees',
     ];
     ?>
 
@@ -120,25 +120,25 @@ while (have_posts()) :
           </div>
 
           <div class="product-hero-content">
-            <div class="badge-row">
-              <span class="badge">Authorized Dealer</span>
-              <span class="badge">Ships from USA</span>
-              <span class="badge">1-Year US Warranty</span>
+                        <div class="badge-row">
+              <span class="badge"><?php echo svic_translate_html('core.badges.authorized_dealer'); ?></span>
+              <span class="badge"><?php echo svic_translate_html('core.badges.ships_from_usa'); ?></span>
+              <span class="badge"><?php echo svic_translate_html('core.badges.one_year_warranty'); ?></span>
             </div>
             <h1 class="product-hero-title"><?php the_title(); ?></h1>
             <p class="product-hero-subtitle">
-              <?php echo wp_kses_post(svic_bilingual_span('Shipped from the U.S. with concierge onboarding in English & Chinese.', '美國倉庫出貨，提供中英文專人安裝服務。', 'product-hero-subtitle-text')); ?>
+              <?php echo svic_translate_html('product.hero.subtitle'); ?>
             </p>
             <div class="product-hero-price"><?php echo $product->get_price_html(); ?></div>
             <div class="product-hero-cta">
               <?php woocommerce_template_single_add_to_cart(); ?>
             </div>
             <div class="product-hero-detail text-small">
-              <?php echo wp_kses_post(svic_bilingual_span('Secure checkout • Free U.S. shipping • English/中文 support', '安全結帳 • 美國免運 • 英/中文客服')); ?>
+              <?php echo svic_translate_html('product.hero.detail'); ?>
             </div>
             <ul class="product-hero-points">
-              <?php foreach ($product_highlights as $highlight) : ?>
-                <li><?php echo wp_kses_post(svic_bilingual_span($highlight['en'], $highlight['zh'])); ?></li>
+              <?php foreach ($product_highlight_keys as $highlight_key) : ?>
+                <li><?php echo svic_translate_html($highlight_key); ?></li>
               <?php endforeach; ?>
             </ul>
             <div class="product-meta-block">

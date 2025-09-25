@@ -43,6 +43,9 @@ return [
         'hero' => [
             'badge'   => 'Authorized U.S. Dealer',
             'title'   => 'Top-of-the-line Chinese TV box, global entertainment ready for any TV',
+            'title_lead' => 'Top-of-the-line Chinese TV box',
+            'title_separator' => ', ',
+            'title_tail' => 'global entertainment ready for any TV',
             'copy'    => 'SVICLOUD packs premium Chinese and international channels, karaoke, and kids favorites into one flagship box—ships fast from the USA with bilingual concierge support.',
             'bullets' => [
                 'shipping' => 'Ships from USA',
@@ -70,7 +73,7 @@ return [
                     ],
                     'video'        => [
                         'label' => 'High Quality Video Decoding',
-                        'value' => 'AV1 decode · Dolby Vision',
+                        'value' => 'AV1 decode · 4K HDR',
                     ],
                     'extras'       => [
                         'label' => 'Remote & extras',
@@ -163,6 +166,7 @@ return [
                         'bundle' => 'Includes HDMI & power accessories',
                     ],
                     'cta'  => 'View 10S',
+                    'cta_style' => 'primary',
                     'meta' => [
                         'shipping' => '✔ Ships from USA',
                         'warranty' => '✔ 1-Year U.S. Warranty',

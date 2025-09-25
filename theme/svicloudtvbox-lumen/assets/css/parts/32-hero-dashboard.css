@@ -20,6 +20,7 @@
   filter: blur(18px);
   opacity: 0.9;
   pointer-events: none;
+  z-index: 0;
 }
 
 .hero-dashboard::before {
@@ -28,6 +29,7 @@
   top: -140px;
   right: -120px;
   background: var(--gradient-lumen-glow);
+  animation: heroGlowSweepTop 22s ease-in-out infinite;
 }
 
 .hero-dashboard::after {
@@ -36,6 +38,48 @@
   bottom: -120px;
   left: -140px;
   background: var(--gradient-lumen-amber);
+  animation: heroGlowSweepBottom 28s ease-in-out infinite;
+  animation-delay: -8s;
+}
+
+.hero-dashboard__background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-dashboard__globe {
+  position: absolute;
+  width: clamp(220px, 28vw, 340px);
+  height: clamp(220px, 28vw, 340px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 42% 38%, rgba(126, 246, 227, 0.45) 0%, rgba(8, 24, 56, 0.18) 60%, rgba(8, 24, 56, 0) 78%);
+  filter: blur(0px);
+  opacity: 0.58;
+  mix-blend-mode: screen;
+  animation-duration: 24s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.hero-dashboard__globe--left {
+  top: -18%;
+  left: -12%;
+  animation-name: heroGlobeFloatLeft;
+}
+
+.hero-dashboard__globe--right {
+  bottom: -22%;
+  right: -10%;
+  width: clamp(180px, 22vw, 260px);
+  height: clamp(180px, 22vw, 260px);
+  background: radial-gradient(circle at 46% 40%, rgba(66, 194, 255, 0.42) 0%, rgba(8, 24, 56, 0.12) 58%, rgba(8, 24, 56, 0) 80%);
+  opacity: 0.52;
+  animation-name: heroGlobeFloatRight;
+  animation-duration: 27s;
+  animation-delay: -6s;
 }
 
 .hero-dashboard__inner {
@@ -259,10 +303,10 @@
 
 .hero-dashboard__badge {
   position: absolute;
-  top: -28px;
-  left: -28px;
-  width: 120px;
-  height: 120px;
+  top: -34px;
+  left: -34px;
+  width: 128px;
+  height: 128px;
   display: grid;
   place-items: center;
   background: linear-gradient(135deg, var(--lumen-accent-teal), var(--lumen-accent-amber));
@@ -274,6 +318,7 @@
   font-weight: 700;
   box-shadow: var(--shadow-glow-amber);
   transform: rotate(-8deg);
+  animation: heroBadgeFloat 18s ease-in-out infinite;
 }
 
 .hero-dashboard__card {
@@ -442,6 +487,7 @@
   border-radius: 50%;
   background: rgba(94, 230, 208, 0.28);
   filter: blur(4px);
+  animation: heroSparkDrift 14s ease-in-out infinite;
 }
 
 .hero-dashboard__spark::after {
@@ -517,8 +563,144 @@
   .hero-dashboard,
   .hero-dashboard__button,
   .hero-dashboard__badge,
+  .hero-dashboard__background,
+  .hero-dashboard__background *,
+  .hero-dashboard__spark,
   .hero-dashboard__spark::after {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+@keyframes heroGlobeFloatLeft {
+  0% {
+    transform: translate3d(-72px, -40px, 0) scale(0.9) rotate(-8deg);
+    opacity: 0.4;
+  }
+
+  40% {
+    transform: translate3d(46px, 28px, 0) scale(1.08) rotate(5deg);
+    opacity: 0.68;
+  }
+
+  70% {
+    transform: translate3d(34px, 92px, 0) scale(1.0) rotate(-3deg);
+    opacity: 0.58;
+  }
+
+  100% {
+    transform: translate3d(-60px, 44px, 0) scale(0.92) rotate(-6deg);
+    opacity: 0.48;
+  }
+}
+
+@keyframes heroGlobeFloatRight {
+  0% {
+    transform: translate3d(56px, -74px, 0) scale(0.84) rotate(6deg);
+    opacity: 0.34;
+  }
+
+  35% {
+    transform: translate3d(-48px, 82px, 0) scale(1.05) rotate(-4deg);
+    opacity: 0.64;
+  }
+
+  70% {
+    transform: translate3d(-36px, -58px, 0) scale(0.94) rotate(3deg);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate3d(64px, 46px, 0) scale(0.88) rotate(-5deg);
+    opacity: 0.42;
+  }
+}
+
+@keyframes heroGlowSweepTop {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.58;
+  }
+
+  45% {
+    transform: translate3d(-36px, 24px, 0) scale(1.04);
+    opacity: 0.72;
+  }
+
+  70% {
+    transform: translate3d(20px, -16px, 0) scale(0.97);
+    opacity: 0.64;
+  }
+
+  100% {
+    transform: translate3d(-18px, 10px, 0) scale(0.99);
+    opacity: 0.58;
+  }
+}
+
+@keyframes heroGlowSweepBottom {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+  }
+
+  40% {
+    transform: translate3d(30px, -18px, 0) scale(1.05);
+    opacity: 0.66;
+  }
+
+  68% {
+    transform: translate3d(-24px, 20px, 0) scale(0.95);
+    opacity: 0.58;
+  }
+
+  100% {
+    transform: translate3d(16px, -10px, 0) scale(0.98);
+    opacity: 0.55;
+  }
+}
+
+@keyframes heroSparkDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.92);
+    opacity: 0.5;
+  }
+
+  35% {
+    transform: translate3d(-10px, -5px, 0) scale(1.04);
+    opacity: 0.74;
+  }
+
+  70% {
+    transform: translate3d(8px, 6px, 0) scale(0.9);
+    opacity: 0.56;
+  }
+
+  100% {
+    transform: translate3d(-4px, 2px, 0) scale(0.88);
+    opacity: 0.48;
+  }
+}
+
+@keyframes heroBadgeFloat {
+  0% {
+    transform: rotate(-10deg) translate3d(-12px, -9px, 0);
+  }
+
+  50% {
+    transform: rotate(-4deg) translate3d(8px, 6px, 0);
+  }
+
+  100% {
+    transform: rotate(-10deg) translate3d(-12px, -9px, 0);
+  }
+}
+
+  50% {
+    transform: rotate(-5deg) translate3d(5px, 4px, 0);
+  }
+
+  100% {
+    transform: rotate(-8deg) translate3d(-4px, -3px, 0);
   }
 }

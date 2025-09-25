@@ -69,19 +69,40 @@ test.describe('SVICLOUD site smoke', () => {
         await expect(page.locator('.hero-dashboard__card')).toBeVisible();
         await expect(page.locator('.lumen-metric')).toHaveCount(4);
         await expect(page.locator('.lumen-feature-card')).toHaveCount(3);
+
+        await expect(page.locator('.footer-brand__badge')).toHaveCount(3);
+
+        const firstBenefitIcon = page.locator('.footer-benefits__icon').first();
+        await expect(firstBenefitIcon).toBeVisible();
+        const iconStyles = await firstBenefitIcon.evaluate((el) => {
+          const computed = window.getComputedStyle(el);
+          return {
+            backgroundImage: computed.backgroundImage,
+            boxShadow: computed.boxShadow,
+          };
+        });
+        expect(iconStyles.backgroundImage).toContain('gradient');
+        expect(iconStyles.boxShadow).not.toBe('none');
       }
 
       if (path === '/compare/') {
+        const modernCardCount = await page.locator('.compare-product-card').count();
         const tableLocator = page.locator('.comparison-table table');
-        if (await tableLocator.isVisible()) {
+
+        if (modernCardCount > 0) {
+          expect(modernCardCount).toBeGreaterThanOrEqual(2);
+          const differenceCount = await page.locator('.compare-difference-card').count();
+          expect(differenceCount).toBeGreaterThan(0);
+          const comparisonItems = await page.locator('.compare-product-card__comparison-item').count();
+          expect(comparisonItems).toBeGreaterThan(0);
+        } else if (await tableLocator.isVisible()) {
           const rowHeaders = await page.locator('.comparison-table tbody th').count();
           expect(rowHeaders).toBeGreaterThan(0);
         } else {
+          // legacy mobile cards fallback
           const cardCount = await page.locator('.comparison-card').count();
           expect(cardCount).toBeGreaterThan(0);
         }
-        const bilingualCount = await page.locator('.comparison-panel .hide-en').count();
-        expect(bilingualCount).toBeGreaterThan(0);
       }
 
       // No console errors
