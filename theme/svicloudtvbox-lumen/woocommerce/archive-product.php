@@ -7,53 +7,134 @@ defined('ABSPATH') || exit;
 
 get_header('shop');
 
-$products = [];
-if (class_exists('WooCommerce')) {
-    $p10p = svic_get_product_by_slug('svicloud-10p-plus');
-    $p10s = svic_get_product_by_slug('svicloud-10s');
-    if ($p10p) $products['10p'] = $p10p;
-    if ($p10s) $products['10s'] = $p10s;
+$card_data = [
+    '10p' => [
+        'product'         => class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null,
+        'title_key'       => 'shop.cards.10p.title',
+        'lead_key'        => 'shop.cards.10p.lead',
+        'button_key'      => 'shop.cards.10p.button',
+        'feature_keys'    => [
+            'shop.cards.10p.features.ram_storage',
+            'shop.cards.10p.features.apps',
+            'shop.cards.10p.features.remote',
+        ],
+        'badge_key'       => 'shop.cards.10p.badge',
+        'best_for_key'    => 'shop.cards.10p.best_for',
+        'highlight'       => true,
+        'modifier'        => 'shop-product-card--premium',
+        'assurance_keys'  => [
+            'shop.cards.assurance.shipping',
+            'shop.cards.assurance.warranty',
+            'shop.cards.assurance.support',
+        ],
+        'price_note_key'  => 'shop.cards.price_note',
+        'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-10p-plus')),
+        'fallback_price'  => '$248.99',
+    ],
+    '10s' => [
+        'product'         => class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null,
+        'title_key'       => 'shop.cards.10s.title',
+        'lead_key'        => 'shop.cards.10s.lead',
+        'button_key'      => 'shop.cards.10s.button',
+        'feature_keys'    => [
+            'shop.cards.10s.features.ram_storage',
+            'shop.cards.10s.features.remote',
+            'shop.cards.10s.features.ports',
+        ],
+        'badge_key'       => 'shop.cards.10s.badge',
+        'best_for_key'    => 'shop.cards.10s.best_for',
+        'highlight'       => false,
+        'modifier'        => 'shop-product-card--best-value',
+        'assurance_keys'  => [
+            'shop.cards.assurance.shipping',
+            'shop.cards.assurance.warranty',
+            'shop.cards.assurance.support',
+        ],
+        'price_note_key'  => 'shop.cards.price_note',
+        'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-10s')),
+        'fallback_price'  => '$183.99',
+    ],
+];
+
+foreach ($card_data as $key => $card) {
+    if (!isset($card['product']) || !$card['product']) {
+        $card_data[$key]['price_text'] = $card['fallback_price'];
+        $card_data[$key]['url'] = $card['fallback_url'];
+        continue;
+    }
+
+    $product = $card['product'];
+    $price_html = method_exists($product, 'get_price_html') ? $product->get_price_html() : '';
+    $card_data[$key]['price_text'] = $price_html ? wp_strip_all_tags($price_html) : $card['fallback_price'];
+    $card_data[$key]['url'] = svic_url_with_lang(get_permalink($product->get_id()));
 }
 ?>
 
-<main class="page-shell">
-  <header class="page-hero" style="text-align:left;">
-    <span class="badge badge-muted">Shop</span>
-    <h1 class="page-title">SVICLOUD TV Boxes</h1>
-    <p class="page-subtitle">Authorized U.S. dealer with fast domestic shipping, 1-year U.S. warranty, and English/中文 support.</p>
+<main class="page-shell shop-page">
+  <header class="page-hero shop-hero">
+    <span class="compare-hero__badge"><?php echo svic_translate_html('shop.hero.badge'); ?></span>
+    <h1 class="compare-hero__title"><?php echo svic_translate_html('shop.hero.title'); ?></h1>
+    <p class="compare-hero__subtitle"><?php echo svic_translate_html('shop.hero.subtitle'); ?></p>
   </header>
 
-  <section class="product-showcase">
-    <div class="grid-toggle" aria-label="Change product grid layout">
-      <button class="grid-btn active" data-mode="2col" type="button">2 column</button>
-      <button class="grid-btn" data-mode="4col" type="button">4 column</button>
-      <button class="grid-btn" data-mode="list" type="button">List</button>
-    </div>
+  <section class="shop-products">
+    <div class="compare-products__grid shop-products__grid">
+      <?php foreach ($card_data as $key => $card) :
+          $price_text = isset($card['price_text']) ? $card['price_text'] : $card['fallback_price'];
+          $url = isset($card['url']) ? $card['url'] : $card['fallback_url'];
+          $card_classes = 'compare-product-card shop-product-card';
+          if (!empty($card['highlight'])) {
+              $card_classes .= ' compare-product-card--highlight';
+          }
+          if (!empty($card['modifier'])) {
+              $card_classes .= ' ' . sanitize_html_class($card['modifier']);
+          }
+      ?>
+        <article class="<?php echo esc_attr($card_classes); ?>">
+          <div class="compare-product-card__header shop-product-card__header">
+            <?php if (!empty($card['badge_key'])) : ?>
+              <span class="shop-product-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></span>
+            <?php endif; ?>
+            <div class="shop-product-card__price-line">
+              <span class="shop-product-card__price-label"><?php echo svic_translate_html('shop.cards.price_label'); ?></span>
+              <span class="shop-product-card__price-amount"><?php echo esc_html($price_text); ?></span>
+            </div>
+            <?php if (!empty($card['price_note_key'])) : ?>
+              <span class="shop-product-card__price-note"><?php echo svic_translate_html($card['price_note_key']); ?></span>
+            <?php endif; ?>
+            <h2 class="compare-product-card__title shop-product-card__title"><?php echo svic_translate_html($card['title_key']); ?></h2>
+            <p class="compare-product-card__lead shop-product-card__lead"><?php echo svic_translate_html($card['lead_key']); ?></p>
+            <a class="lumen-pill <?php echo !empty($card['highlight']) ? 'lumen-pill--primary' : 'lumen-pill--ghost'; ?> shop-product-card__cta" href="<?php echo esc_url($url); ?>">
+              <?php echo svic_translate_html($card['button_key']); ?>
+            </a>
+          </div>
+          <div class="shop-product-card__divider" aria-hidden="true"></div>
+          <div class="shop-product-card__body">
+            <?php if (!empty($card['feature_keys'])) : ?>
+              <ul class="shop-product-card__features">
+                <?php foreach ($card['feature_keys'] as $feature_key) : ?>
+                  <li><?php echo svic_translate_html($feature_key); ?></li>
+                <?php endforeach; ?>
+              </ul>
+            <?php endif; ?>
 
-    <div class="product-grid grid-2">
-      <?php if (!empty($products)) : ?>
-        <?php if (isset($products['10p'])) svic_render_product_card($products['10p']); ?>
-        <?php if (isset($products['10s'])) svic_render_product_card($products['10s']); ?>
-      <?php else : ?>
-        <article class="product-card">
-          <a class="product-image" href="<?php echo esc_url( home_url('/product/svicloud-10p-plus') ); ?>">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/svicloud-10p-plus.png' ); ?>" alt="SVICLOUD 10P+ TV Box" />
-          </a>
-          <h3 class="pcard-title"><a href="<?php echo esc_url( home_url('/product/svicloud-10p-plus') ); ?>">SVICLOUD 10P+</a></h3>
-          <div class="pcard-meta"><span class="pcard-price">$248.99</span></div>
-          <p class="product-blurb">Flagship 4K HDR box with 4GB RAM, karaoke & kids apps, and AI voice remote.</p>
-          <div class="pcard-actions"><a class="btn btn-primary btn-cta" href="<?php echo esc_url( home_url('/shop') ); ?>">Shop 10P+</a></div>
+            <?php if (!empty($card['best_for_key'])) : ?>
+              <div class="shop-product-card__best-for">
+                <span class="shop-product-card__best-for-label"><?php echo svic_translate_html('shop.cards.best_for_label'); ?></span>
+                <span class="shop-product-card__best-for-value"><?php echo esc_html(svic_translate($card['best_for_key'])); ?></span>
+              </div>
+            <?php endif; ?>
+
+            <?php if (!empty($card['assurance_keys'])) : ?>
+              <ul class="shop-product-card__assurance">
+                <?php foreach ($card['assurance_keys'] as $assurance_key) : ?>
+                  <li><?php echo svic_translate_html($assurance_key); ?></li>
+                <?php endforeach; ?>
+              </ul>
+            <?php endif; ?>
+          </div>
         </article>
-        <article class="product-card">
-          <a class="product-image" href="<?php echo esc_url( home_url('/product/svicloud-10s') ); ?>">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/svicloud-10s.png' ); ?>" alt="SVICLOUD 10S TV Box" />
-          </a>
-          <h3 class="pcard-title"><a href="<?php echo esc_url( home_url('/product/svicloud-10s') ); ?>">SVICLOUD 10S</a></h3>
-          <div class="pcard-meta"><span class="pcard-price">$183.99</span></div>
-          <p class="product-blurb">Value model with 2GB RAM, 32GB storage, 4K HDR playback, and AI voice remote.</p>
-          <div class="pcard-actions"><a class="btn btn-primary btn-cta" href="<?php echo esc_url( home_url('/shop') ); ?>">Shop 10S</a></div>
-        </article>
-      <?php endif; ?>
+      <?php endforeach; ?>
     </div>
   </section>
 </main>

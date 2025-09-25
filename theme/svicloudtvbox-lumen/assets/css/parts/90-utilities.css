@@ -7,17 +7,17 @@
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* Apply fade-in to key elements */
-.trust-badge, .product-card, .feature-card { animation: fadeInUp 0.6s ease-out; }
+.trust-badge, .product-card, .feature-card { animation: fadeInUp 0.4s ease-out; }
 .trust-badge:nth-child(1) { animation-delay: 0.1s; }
 .trust-badge:nth-child(2) { animation-delay: 0.2s; }
 .trust-badge:nth-child(3) { animation-delay: 0.3s; }
 .trust-badge:nth-child(4) { animation-delay: 0.4s; }
 .product-card:nth-child(1) { animation-delay: 0.2s; }
 .product-card:nth-child(2) { animation-delay: 0.4s; }
-body { animation: fadeIn 0.5s ease-out; }
+body { animation: fadeIn 0.35s ease-out; }
 
 /* Loading spinner for buttons */
-.loading-spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top-color: currentColor; animation: spin 1s ease-in-out infinite; margin-right: 0.45rem; vertical-align: middle; }
+.loading-spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top-color: currentColor; animation: spin 0.65s ease-in-out infinite; margin-right: 0.45rem; vertical-align: middle; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* Focus styles */

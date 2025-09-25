@@ -100,6 +100,19 @@ Theme development location: `public/wp-content/themes/svicloudtvbox/`.
 
 Tip: Keep this repo as the theme source of truth, then copy/symlink into the local WP theme folder.
 
+### Syncing the theme into the Docker container
+
+If you are using the dockerized local stack from this repo, run the helper script after making changes:
+
+```
+./scripts/sync_theme_container.sh [optional-container-fragment]
+```
+
+- With no argument the script looks for a running container whose image matches `WORDPRESS_IMAGE` in `.env`; otherwise it grabs the first `wordpress:*` container.
+- Pass part of the container name (for example `./scripts/sync_theme_container.sh svicloud10p`) if you run multiple stacks.
+- The script streams `theme/svicloudtvbox-lumen/` into `/var/www/html/wp-content/themes/svicloudtvbox-lumen`, bumps `.deploy-version`, fixes ownership, and calls `wp cache flush` if WP‑CLI is available.
+- Finish with a hard refresh (⌘⇧R / Ctrl+F5) in your browser so the new CSS/JS load.
+
 ---
 
 ## 5) Syncing Data Between Staging and Local

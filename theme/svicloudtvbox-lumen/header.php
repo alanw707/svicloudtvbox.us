@@ -13,9 +13,25 @@
     $logo_alt        = $custom_logo_id ? get_post_meta( $custom_logo_id, '_wp_attachment_image_alt', true ) : '';
     $logo_alt        = $logo_alt ? $logo_alt : get_bloginfo( 'name' );
     $site_name       = get_bloginfo( 'name' );
-    $english_url     = home_url( '/' );
-    $chinese_url     = home_url( '/zh/' );
-    $logo_classes    = ['lumen-header__logo'];
+
+    $request_uri = $_SERVER['REQUEST_URI'] ?? '/';
+    $parsed_uri  = wp_parse_url($request_uri);
+    $path        = isset($parsed_uri['path']) ? $parsed_uri['path'] : '/';
+    $query_args  = [];
+
+    if (!empty($parsed_uri['query'])) {
+        parse_str($parsed_uri['query'], $query_args);
+    }
+
+    unset($query_args['lang']);
+
+    $base_url     = home_url($path);
+    $english_url  = add_query_arg(array_merge($query_args, ['lang' => 'en']), $base_url);
+    $chinese_url  = add_query_arg(array_merge($query_args, ['lang' => 'zh']), $base_url);
+    $current_lang = function_exists('svic_current_locale') ? svic_current_locale() : get_locale();
+    $logo_classes = ['lumen-header__logo'];
+    $english_link_classes = 'lumen-lang-toggle__link' . ($current_lang === 'en_US' ? ' is-active' : '');
+    $chinese_link_classes = 'lumen-lang-toggle__link' . ($current_lang !== 'en_US' ? ' is-active' : '');
 
     if ( $has_custom_logo && $custom_logo_id ) {
         $logo_classes[] = 'lumen-header__logo--image';
@@ -23,7 +39,7 @@
   ?>
   <header class="lumen-header lumen-header--transparent" data-lumen-header>
     <div class="lumen-header__inner">
-      <a class="lumen-header__brand" href="<?php echo esc_url( home_url('/') ); ?>" aria-label="<?php echo esc_attr( $site_name ); ?>">
+      <a class="lumen-header__brand" href="<?php echo esc_url( svic_url_with_lang( home_url('/') ) ); ?>" aria-label="<?php echo esc_attr( $site_name ); ?>">
         <span class="<?php echo esc_attr( implode( ' ', $logo_classes ) ); ?>">
           <?php if ( $has_custom_logo && $custom_logo_id ) : ?>
             <?php echo wp_get_attachment_image( $custom_logo_id, 'full', false, [
@@ -54,11 +70,11 @@
           } else {
         ?>
           <ul class="lumen-nav__list">
-            <li><a href="<?php echo esc_url( home_url('/') ); ?>"><?php esc_html_e('Home', 'svicloudtvbox-lumen'); ?></a></li>
-            <li><a href="<?php echo esc_url( home_url('/compare') ); ?>"><?php esc_html_e('Compare', 'svicloudtvbox-lumen'); ?></a></li>
-            <li><a href="<?php echo esc_url( home_url('/product/svicloud-10p-plus/') ); ?>"><?php esc_html_e('10P+', 'svicloudtvbox-lumen'); ?></a></li>
-            <li><a href="<?php echo esc_url( home_url('/product/svicloud-10s/') ); ?>"><?php esc_html_e('10S', 'svicloudtvbox-lumen'); ?></a></li>
-            <li><a href="<?php echo esc_url( home_url('/contact') ); ?>"><?php esc_html_e('Concierge', 'svicloudtvbox-lumen'); ?></a></li>
+            <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/') ) ); ?>"><?php esc_html_e('Home', 'svicloudtvbox-lumen'); ?></a></li>
+            <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/compare') ) ); ?>"><?php esc_html_e('Compare', 'svicloudtvbox-lumen'); ?></a></li>
+            <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/product/svicloud-10p-plus/') ) ); ?>"><?php esc_html_e('10P+', 'svicloudtvbox-lumen'); ?></a></li>
+            <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/product/svicloud-10s/') ) ); ?>"><?php esc_html_e('10S', 'svicloudtvbox-lumen'); ?></a></li>
+            <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/contact') ) ); ?>"><?php esc_html_e('Concierge', 'svicloudtvbox-lumen'); ?></a></li>
           </ul>
         <?php } ?>
       </nav>
@@ -66,10 +82,10 @@
       <div class="lumen-header__actions">
         <div class="lumen-header__pill-group">
           <div class="lumen-lang-toggle" role="group" aria-label="<?php esc_attr_e( 'Language selector', 'svicloudtvbox-lumen' ); ?>">
-            <a class="lumen-lang-toggle__link" href="<?php echo esc_url( $english_url ); ?>">EN</a>
-            <a class="lumen-lang-toggle__link" href="<?php echo esc_url( $chinese_url ); ?>">中文</a>
+            <a class="<?php echo esc_attr($english_link_classes); ?>" href="<?php echo esc_url($english_url); ?>">EN</a>
+            <a class="<?php echo esc_attr($chinese_link_classes); ?>" href="<?php echo esc_url($chinese_url); ?>">中文</a>
           </div>
-          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url( function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart') ); ?>">
+          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url( svic_url_with_lang( function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart') ) ); ?>">
             <?php
               /* translators: Header cart CTA label. Non-breaking space keeps text on one line. */
               echo wp_kses_post( __( 'View&nbsp;Cart', 'svicloudtvbox-lumen' ) );
@@ -100,20 +116,20 @@
         } else {
       ?>
         <ul class="lumen-mobile-nav__list">
-          <li><a href="<?php echo esc_url( home_url('/') ); ?>"><?php esc_html_e('Home', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
-          <li><a href="<?php echo esc_url( home_url('/compare') ); ?>"><?php esc_html_e('Compare', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
-          <li><a href="<?php echo esc_url( home_url('/product/svicloud-10p-plus/') ); ?>"><?php esc_html_e('10P+', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
-          <li><a href="<?php echo esc_url( home_url('/product/svicloud-10s/') ); ?>"><?php esc_html_e('10S', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
-          <li><a href="<?php echo esc_url( home_url('/contact') ); ?>"><?php esc_html_e('Concierge', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
+          <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/') ) ); ?>"><?php esc_html_e('Home', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
+          <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/compare') ) ); ?>"><?php esc_html_e('Compare', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
+          <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/product/svicloud-10p-plus/') ) ); ?>"><?php esc_html_e('10P+', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
+          <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/product/svicloud-10s/') ) ); ?>"><?php esc_html_e('10S', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
+          <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/contact') ) ); ?>"><?php esc_html_e('Concierge', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
         </ul>
       <?php } ?>
 
       <div class="lumen-mobile-nav__actions">
         <div class="lumen-lang-toggle lumen-lang-toggle--mobile" role="group" aria-label="<?php esc_attr_e( 'Language selector', 'svicloudtvbox-lumen' ); ?>">
-          <a class="lumen-lang-toggle__link" href="<?php echo esc_url( $english_url ); ?>">EN</a>
-          <a class="lumen-lang-toggle__link" href="<?php echo esc_url( $chinese_url ); ?>">中文</a>
+          <a class="<?php echo esc_attr($english_link_classes); ?>" href="<?php echo esc_url($english_url); ?>">EN</a>
+          <a class="<?php echo esc_attr($chinese_link_classes); ?>" href="<?php echo esc_url($chinese_url); ?>">中文</a>
         </div>
-        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url( function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart') ); ?>">
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url( svic_url_with_lang( function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart') ) ); ?>">
           <?php
             /* translators: Header cart CTA label. Non-breaking space keeps text on one line. */
             echo wp_kses_post( __( 'View&nbsp;Cart', 'svicloudtvbox-lumen' ) );

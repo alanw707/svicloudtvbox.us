@@ -6,67 +6,201 @@ get_header();
 
 $hero_product_10p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
 $hero_product_10s = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null;
-$hero_10p_url = $hero_product_10p ? get_permalink($hero_product_10p->get_id()) : home_url('/product/svicloud-10p-plus');
-$hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) : home_url('/product/svicloud-10s');
-?>
+$hero_10p_url = $hero_product_10p ? svic_url_with_lang(get_permalink($hero_product_10p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10p-plus'));
+$hero_10s_url = $hero_product_10s ? svic_url_with_lang(get_permalink($hero_product_10s->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10s'));
 
+$hero_bullet_keys = [
+    'frontpage.hero.bullets.shipping',
+    'frontpage.hero.bullets.warranty',
+    'frontpage.hero.bullets.fees',
+];
+
+$hero_spec_rows = [
+    [
+        'label_key' => 'frontpage.hero.card.specs.processor.label',
+        'value_key' => 'frontpage.hero.card.specs.processor.value',
+    ],
+    [
+        'label_key' => 'frontpage.hero.card.specs.connectivity.label',
+        'value_key' => 'frontpage.hero.card.specs.connectivity.value',
+    ],
+    [
+        'label_key' => 'frontpage.hero.card.specs.video.label',
+        'value_key' => 'frontpage.hero.card.specs.video.value',
+    ],
+    [
+        'label_key' => 'frontpage.hero.card.specs.extras.label',
+        'value_key' => 'frontpage.hero.card.specs.extras.value',
+    ],
+];
+
+$metrics = [
+    [
+        'icon'      => 'icon-truck.svg',
+        'title_key' => 'frontpage.metrics.shipping.title',
+        'copy_key'  => 'frontpage.metrics.shipping.copy',
+    ],
+    [
+        'icon'      => 'icon-tool.svg',
+        'title_key' => 'frontpage.metrics.concierge.title',
+        'copy_key'  => 'frontpage.metrics.concierge.copy',
+    ],
+    [
+        'icon'      => 'icon-lock.svg',
+        'title_key' => 'frontpage.metrics.security.title',
+        'copy_key'  => 'frontpage.metrics.security.copy',
+    ],
+    [
+        'icon'      => 'icon-star.svg',
+        'title_key' => 'frontpage.metrics.dealer.title',
+        'copy_key'  => 'frontpage.metrics.dealer.copy',
+    ],
+];
+
+$feature_cards = [
+    [
+        'icon'      => 'icon-box.svg',
+        'title_key' => 'frontpage.feature_grid.cards.entertainment.title',
+        'copy_key'  => 'frontpage.feature_grid.cards.entertainment.copy',
+    ],
+    [
+        'icon'      => 'icon-bolt.svg',
+        'title_key' => 'frontpage.feature_grid.cards.hardware.title',
+        'copy_key'  => 'frontpage.feature_grid.cards.hardware.copy',
+    ],
+    [
+        'icon'      => 'icon-handshake.svg',
+        'title_key' => 'frontpage.feature_grid.cards.support.title',
+        'copy_key'  => 'frontpage.feature_grid.cards.support.copy',
+    ],
+];
+
+$experience_services = [
+    [
+        'icon'     => 'icon-satellite.svg',
+        'text_key' => 'frontpage.experience.services.activation',
+    ],
+    [
+        'icon'     => 'icon-wifi.svg',
+        'text_key' => 'frontpage.experience.services.wifi',
+    ],
+    [
+        'icon'     => 'icon-mic.svg',
+        'text_key' => 'frontpage.experience.services.karaoke',
+    ],
+    [
+        'icon'     => 'icon-family.svg',
+        'text_key' => 'frontpage.experience.services.kids',
+    ],
+];
+
+$pricing_cards = [
+    '10p' => [
+        'product'        => $hero_product_10p,
+        'fallback_price' => '$248.99',
+        'fallback_url'   => svic_url_with_lang(home_url('/product/svicloud-10p-plus')),
+        'highlight'      => true,
+        'badge_key'      => 'frontpage.pricing.cards.10p.badge',
+        'title_key'      => 'frontpage.pricing.cards.10p.title',
+        'interval_key'   => 'frontpage.pricing.cards.10p.interval',
+        'copy_key'       => 'frontpage.pricing.cards.10p.copy',
+        'feature_keys'   => [
+            'frontpage.pricing.cards.10p.features.hdr',
+            'frontpage.pricing.cards.10p.features.apps',
+            'frontpage.pricing.cards.10p.features.wifi',
+        ],
+        'cta_key'   => 'frontpage.pricing.cards.10p.cta',
+        'meta_keys' => [
+            'frontpage.pricing.cards.10p.meta.shipping',
+            'frontpage.pricing.cards.10p.meta.warranty',
+            'frontpage.pricing.cards.10p.meta.concierge',
+        ],
+    ],
+    '10s' => [
+        'product'        => $hero_product_10s,
+        'fallback_price' => '$183.99',
+        'fallback_url'   => svic_url_with_lang(home_url('/product/svicloud-10s')),
+        'highlight'      => false,
+        'badge_key'      => null,
+        'title_key'      => 'frontpage.pricing.cards.10s.title',
+        'interval_key'   => 'frontpage.pricing.cards.10s.interval',
+        'copy_key'       => 'frontpage.pricing.cards.10s.copy',
+        'feature_keys'   => [
+            'frontpage.pricing.cards.10s.features.hdr',
+            'frontpage.pricing.cards.10s.features.remote',
+            'frontpage.pricing.cards.10s.features.bundle',
+        ],
+        'cta_key'   => 'frontpage.pricing.cards.10s.cta',
+        'meta_keys' => [
+            'frontpage.pricing.cards.10s.meta.shipping',
+            'frontpage.pricing.cards.10s.meta.warranty',
+            'frontpage.pricing.cards.10s.meta.fees',
+        ],
+    ],
+];
+
+foreach ($pricing_cards as $slug => $card) {
+    if (!empty($card['product'])) {
+        $product = $card['product'];
+        $pricing_cards[$slug]['price_html'] = svic_price_html($product);
+        $pricing_cards[$slug]['cta_url'] = svic_url_with_lang(get_permalink($product->get_id()));
+    } else {
+        $pricing_cards[$slug]['price_html'] = sprintf('<span class="amount">%s</span>', esc_html($card['fallback_price']));
+        $pricing_cards[$slug]['cta_url'] = $card['fallback_url'];
+    }
+}
+?>
 <main class="main-content">
   <!-- Hero Section -->
   <section class="hero-dashboard" id="hero">
+    <div class="hero-dashboard__background" aria-hidden="true">
+      <span class="hero-dashboard__globe hero-dashboard__globe--left"></span>
+      <span class="hero-dashboard__globe hero-dashboard__globe--right"></span>
+    </div>
     <div class="hero-dashboard__inner">
       <div class="hero-dashboard__content">
-        <span class="hero-dashboard__eyebrow"><?php esc_html_e('Authorized U.S. Dealer', 'svicloudtvbox-lumen'); ?></span>
-        <h1 class="hero-dashboard__title"><?php esc_html_e('Premium Chinese IPTV & Global Entertainment, Ready for Any TV', 'svicloudtvbox-lumen'); ?></h1>
-        <p class="hero-dashboard__copy"><?php esc_html_e('SVICLOUD delivers 4K sports, Asian dramas, karaoke, and kids content in one box. Ships fast from the USA with bilingual support.', 'svicloudtvbox-lumen'); ?></p>
+        <span class="hero-dashboard__eyebrow"><?php echo svic_translate_html('frontpage.hero.badge'); ?></span>
+        <h1 class="hero-dashboard__title"><?php echo svic_translate_html('frontpage.hero.title'); ?></h1>
+        <p class="hero-dashboard__copy"><?php echo svic_translate_html('frontpage.hero.copy'); ?></p>
         <ul class="hero-dashboard__list" role="list">
-          <li><?php echo wp_kses_post( svic_bilingual_span('Ships from USA', '美國境內發貨') ); ?></li>
-          <li><?php echo wp_kses_post( svic_bilingual_span('1-Year U.S. Warranty', '一年美國保固') ); ?></li>
-          <li><?php echo wp_kses_post( svic_bilingual_span('No Monthly Fees', '免月費') ); ?></li>
+          <?php foreach ($hero_bullet_keys as $bullet_key) : ?>
+            <li><?php echo svic_translate_html($bullet_key); ?></li>
+          <?php endforeach; ?>
         </ul>
         <div class="hero-dashboard__cta">
-          <a class="hero-dashboard__button hero-dashboard__button--primary" href="<?php echo esc_url( $hero_10p_url ); ?>"><?php esc_html_e('Shop 10P+', 'svicloudtvbox-lumen'); ?></a>
+          <a class="hero-dashboard__button hero-dashboard__button--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.primary'); ?></a>
           <a class="hero-dashboard__button hero-dashboard__button--secondary" href="#pricing">
-            <span><?php esc_html_e('View Bundles', 'svicloudtvbox-lumen'); ?></span>
+            <span><?php echo svic_translate_html('frontpage.hero.cta.bundles'); ?></span>
           </a>
-          <a class="hero-dashboard__button hero-dashboard__button--secondary" href="<?php echo esc_url( home_url('/compare') ); ?>">
-            <span><?php esc_html_e('Compare Models', 'svicloudtvbox-lumen'); ?></span>
+          <a class="hero-dashboard__button hero-dashboard__button--secondary" href="<?php echo esc_url(svic_url_with_lang(home_url('/compare'))); ?>">
+            <span><?php echo svic_translate_html('frontpage.hero.cta.compare'); ?></span>
           </a>
         </div>
       </div>
       <div class="hero-dashboard__visual">
-        <div class="hero-dashboard__badge"><?php esc_html_e('Live', 'svicloudtvbox-lumen'); ?></div>
+        <div class="hero-dashboard__badge"><?php echo svic_translate_html('frontpage.hero.card.badge'); ?></div>
         <div class="hero-dashboard__card">
           <div class="hero-dashboard__product">
-            <img class="hero-dashboard__product-main" src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/svicloud-hero-product.png' ); ?>" alt="<?php esc_attr_e('SVICLOUD streaming device with remote', 'svicloudtvbox-lumen'); ?>" loading="lazy" />
+            <img class="hero-dashboard__product-main" src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/svicloud-hero-product.png'); ?>" alt="<?php esc_attr_e('SVICLOUD streaming device with remote', 'svicloudtvbox-lumen'); ?>" loading="lazy" />
           </div>
           <div class="hero-dashboard__card-header">
-            <span><?php esc_html_e('SVICLOUD 10P+ hardware snapshot', 'svicloudtvbox-lumen'); ?></span>
-            <span><?php esc_html_e('Latest U.S. batch · July 2024', 'svicloudtvbox-lumen'); ?></span>
+            <span><?php echo svic_translate_html('frontpage.hero.card.headline'); ?></span>
+            <span><?php echo svic_translate_html('frontpage.hero.card.timestamp'); ?></span>
           </div>
           <div class="hero-dashboard__stat">
-            <strong><?php esc_html_e('4GB RAM · 64GB storage', 'svicloudtvbox-lumen'); ?></strong>
+            <strong><?php echo svic_translate_html('frontpage.hero.card.stat'); ?></strong>
           </div>
           <div class="hero-dashboard__spec-grid" role="list">
-            <div class="hero-dashboard__spec-pill" role="listitem">
-              <span class="hero-dashboard__spec-label"><?php esc_html_e('Processor', 'svicloudtvbox-lumen'); ?></span>
-              <span class="hero-dashboard__spec-value"><?php esc_html_e('Amlogic S928X · Octa-core', 'svicloudtvbox-lumen'); ?></span>
-            </div>
-            <div class="hero-dashboard__spec-pill" role="listitem">
-              <span class="hero-dashboard__spec-label"><?php esc_html_e('Connectivity', 'svicloudtvbox-lumen'); ?></span>
-              <span class="hero-dashboard__spec-value"><?php esc_html_e('Wi-Fi 6 dual-band + Gigabit LAN', 'svicloudtvbox-lumen'); ?></span>
-            </div>
-            <div class="hero-dashboard__spec-pill" role="listitem">
-              <span class="hero-dashboard__spec-label"><?php esc_html_e('High Quality Video Decoding', 'svicloudtvbox-lumen'); ?></span>
-              <span class="hero-dashboard__spec-value"><?php esc_html_e('AV1 decode · Dolby Vision', 'svicloudtvbox-lumen'); ?></span>
-            </div>
-            <div class="hero-dashboard__spec-pill" role="listitem">
-              <span class="hero-dashboard__spec-label"><?php esc_html_e('Remote & extras', 'svicloudtvbox-lumen'); ?></span>
-              <span class="hero-dashboard__spec-value"><?php esc_html_e('Bluetooth voice remote · USB 3.0 expansion', 'svicloudtvbox-lumen'); ?></span>
-            </div>
+            <?php foreach ($hero_spec_rows as $row) : ?>
+              <div class="hero-dashboard__spec-pill" role="listitem">
+                <span class="hero-dashboard__spec-label"><?php echo svic_translate_html($row['label_key']); ?></span>
+                <span class="hero-dashboard__spec-value"><?php echo svic_translate_html($row['value_key']); ?></span>
+              </div>
+            <?php endforeach; ?>
           </div>
           <div class="hero-dashboard__card-footer">
-            <span><?php esc_html_e('Ships from USA · 48-hour dispatch', 'svicloudtvbox-lumen'); ?></span>
-            <span><?php esc_html_e('1-Year U.S. warranty · Concierge setup', 'svicloudtvbox-lumen'); ?></span>
+            <span><?php echo svic_translate_html('frontpage.hero.card.footer.shipping'); ?></span>
+            <span><?php echo svic_translate_html('frontpage.hero.card.footer.support'); ?></span>
           </div>
         </div>
         <span class="hero-dashboard__spark" aria-hidden="true"></span>
@@ -77,41 +211,16 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
   <!-- Credibility Bar -->
   <section class="lumen-metrics" aria-label="<?php esc_attr_e('Key SVICLOUD advantages', 'svicloudtvbox-lumen'); ?>">
     <div class="lumen-metrics__inner">
-      <?php
-      $metrics = [
-        [
-          'icon' => 'icon-truck.svg',
-          'title' => __('48-hour shipping', 'svicloudtvbox-lumen'),
-          'copy'  => __('Fast fulfillment from U.S. inventory', 'svicloudtvbox-lumen'),
-        ],
-        [
-          'icon' => 'icon-tool.svg',
-          'title' => __('White-glove setup', 'svicloudtvbox-lumen'),
-          'copy'  => __('English & 中文 onboarding assistance', 'svicloudtvbox-lumen'),
-        ],
-        [
-          'icon' => 'icon-lock.svg',
-          'title' => __('Secure checkout', 'svicloudtvbox-lumen'),
-          'copy'  => __('SSL encrypted payment and warranty', 'svicloudtvbox-lumen'),
-        ],
-        [
-          'icon' => 'icon-star.svg',
-          'title' => __('Top-rated dealer', 'svicloudtvbox-lumen'),
-          'copy'  => __('Trusted by U.S. SVICLOUD users since 2019', 'svicloudtvbox-lumen'),
-        ],
-      ];
-
-      foreach ( $metrics as $metric ) :
-        $icon_path = get_template_directory_uri() . '/assets/svg/' . $metric['icon'];
-        ?>
+      <?php foreach ($metrics as $metric) : ?>
+        <?php $icon_path = get_template_directory_uri() . '/assets/svg/' . $metric['icon']; ?>
         <article class="lumen-metric">
           <span class="lumen-metric__glow" aria-hidden="true"></span>
           <span class="lumen-metric__icon">
-            <img src="<?php echo esc_url( $icon_path ); ?>" alt="" loading="lazy" />
+            <img src="<?php echo esc_url($icon_path); ?>" alt="" loading="lazy" />
           </span>
           <div class="lumen-metric__copy">
-            <strong><?php echo esc_html( $metric['title'] ); ?></strong>
-            <span><?php echo esc_html( $metric['copy'] ); ?></span>
+            <strong><?php echo svic_translate_html($metric['title_key']); ?></strong>
+            <span><?php echo svic_translate_html($metric['copy_key']); ?></span>
           </div>
         </article>
       <?php endforeach; ?>
@@ -122,31 +231,19 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
   <section class="lumen-feature-grid" id="experience">
     <div class="lumen-feature-grid__inner">
       <header class="lumen-section-header">
-        <h2 class="lumen-section-header__title"><?php esc_html_e('Why SVICLOUD Beats Generic IPTV Boxes', 'svicloudtvbox-lumen'); ?></h2>
-        <p class="lumen-section-header__subtitle"><?php esc_html_e('Engineered for crystal-clear 4K sports, drama marathons, and karaoke nights without buffering.', 'svicloudtvbox-lumen'); ?></p>
+        <h2 class="lumen-section-header__title"><?php echo svic_translate_html('frontpage.feature_grid.title'); ?></h2>
+        <p class="lumen-section-header__subtitle"><?php echo svic_translate_html('frontpage.feature_grid.subtitle'); ?></p>
       </header>
       <div class="lumen-feature-grid__cards">
-        <article class="lumen-feature-card">
-          <span class="lumen-feature-card__icon">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svg/icon-box.svg' ); ?>" alt="" loading="lazy" />
-          </span>
-          <h3 class="lumen-feature-card__title"><?php esc_html_e('Complete Entertainment', 'svicloudtvbox-lumen'); ?></h3>
-          <p class="lumen-feature-card__copy"><?php esc_html_e('4K live channels across Asia & North America, plus bilingual VOD, karaoke, and kids zones curated for families.', 'svicloudtvbox-lumen'); ?></p>
-        </article>
-        <article class="lumen-feature-card">
-          <span class="lumen-feature-card__icon">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svg/icon-bolt.svg' ); ?>" alt="" loading="lazy" />
-          </span>
-          <h3 class="lumen-feature-card__title"><?php esc_html_e('Next-Gen Hardware', 'svicloudtvbox-lumen'); ?></h3>
-          <p class="lumen-feature-card__copy"><?php esc_html_e('Latest Amlogic chipset, AV1 decode, and Wi-Fi 6 keep streams stable—even on crowded networks.', 'svicloudtvbox-lumen'); ?></p>
-        </article>
-        <article class="lumen-feature-card">
-          <span class="lumen-feature-card__icon">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svg/icon-handshake.svg' ); ?>" alt="" loading="lazy" />
-          </span>
-          <h3 class="lumen-feature-card__title"><?php esc_html_e('Local Expert Support', 'svicloudtvbox-lumen'); ?></h3>
-          <p class="lumen-feature-card__copy"><?php esc_html_e('U.S.-based SVICLOUD pros walk you through setup, updates, and your favorite channel lineup.', 'svicloudtvbox-lumen'); ?></p>
-        </article>
+        <?php foreach ($feature_cards as $card) : ?>
+          <article class="lumen-feature-card">
+            <span class="lumen-feature-card__icon">
+              <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/svg/' . $card['icon']); ?>" alt="" loading="lazy" />
+            </span>
+            <h3 class="lumen-feature-card__title"><?php echo svic_translate_html($card['title_key']); ?></h3>
+            <p class="lumen-feature-card__copy"><?php echo svic_translate_html($card['copy_key']); ?></p>
+          </article>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
@@ -155,36 +252,26 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
   <section class="lumen-experience">
     <div class="lumen-experience__inner">
       <div class="lumen-experience__copy">
-        <span class="lumen-experience__badge"><?php esc_html_e('Real People. Real Support.', 'svicloudtvbox-lumen'); ?></span>
-        <h2 class="lumen-experience__title"><?php esc_html_e('White-Glove Concierge From Setup To Streaming Night', 'svicloudtvbox-lumen'); ?></h2>
-        <p class="lumen-experience__lead"><?php esc_html_e('We configure, troubleshoot, and update your box so you can just enjoy the content. Every bundle includes priority access to our bilingual SVICLOUD specialists.', 'svicloudtvbox-lumen'); ?></p>
+        <span class="lumen-experience__badge"><?php echo svic_translate_html('frontpage.experience.badge'); ?></span>
+        <h2 class="lumen-experience__title"><?php echo svic_translate_html('frontpage.experience.title'); ?></h2>
+        <p class="lumen-experience__lead"><?php echo svic_translate_html('frontpage.experience.lead'); ?></p>
         <ul class="lumen-experience__list">
-          <li><?php echo wp_kses_post( svic_bilingual_span('Personalized channel walkthroughs and favorites setup', '專屬頻道導覽與最愛設定') ); ?></li>
-          <li><?php echo wp_kses_post( svic_bilingual_span('Firmware & app updates pushed remotely', '遠端推送韌體與應用程式更新') ); ?></li>
-          <li><?php echo wp_kses_post( svic_bilingual_span('Access to community events, karaoke playlists, and seasonal sports packages', '社群活動、卡拉 OK 歌單與體育賽事包') ); ?></li>
+          <li><?php echo svic_translate_html('frontpage.concierge.personalized_walkthrough'); ?></li>
+          <li><?php echo svic_translate_html('frontpage.concierge.remote_updates'); ?></li>
+          <li><?php echo svic_translate_html('frontpage.concierge.community_access'); ?></li>
         </ul>
       </div>
       <aside class="lumen-experience__card">
-        <h3 class="lumen-experience__card-title"><?php esc_html_e('What We Handle For You', 'svicloudtvbox-lumen'); ?></h3>
+        <h3 class="lumen-experience__card-title"><?php echo svic_translate_html('frontpage.experience.card_title'); ?></h3>
         <ul class="lumen-experience__card-list">
-          <li>
-            <span class="lumen-experience__icon"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svg/icon-satellite.svg' ); ?>" alt="" loading="lazy" /></span>
-            <?php esc_html_e('IPTV activation & renewals', 'svicloudtvbox-lumen'); ?>
-          </li>
-          <li>
-            <span class="lumen-experience__icon"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svg/icon-wifi.svg' ); ?>" alt="" loading="lazy" /></span>
-            <?php esc_html_e('Wi-Fi optimization tips', 'svicloudtvbox-lumen'); ?>
-          </li>
-          <li>
-            <span class="lumen-experience__icon"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svg/icon-mic.svg' ); ?>" alt="" loading="lazy" /></span>
-            <?php esc_html_e('Karaoke playlists & mic pairing', 'svicloudtvbox-lumen'); ?>
-          </li>
-          <li>
-            <span class="lumen-experience__icon"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svg/icon-family.svg' ); ?>" alt="" loading="lazy" /></span>
-            <?php esc_html_e('Kid-safe profiles & timers', 'svicloudtvbox-lumen'); ?>
-          </li>
+          <?php foreach ($experience_services as $service) : ?>
+            <li>
+              <span class="lumen-experience__icon"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/svg/' . $service['icon']); ?>" alt="" loading="lazy" /></span>
+              <?php echo svic_translate_html($service['text_key']); ?>
+            </li>
+          <?php endforeach; ?>
         </ul>
-        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url( home_url('/contact') ); ?>"><?php esc_html_e('Talk to an expert', 'svicloudtvbox-lumen'); ?></a>
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact'))); ?>"><?php echo svic_translate_html('frontpage.experience.cta'); ?></a>
       </aside>
     </div>
   </section>
@@ -193,50 +280,54 @@ $hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) :
   <section class="lumen-pricing" id="pricing">
     <div class="lumen-pricing__inner">
       <header class="lumen-section-header">
-        <h2 class="lumen-section-header__title"><?php esc_html_e('Choose Your SVICLOUD Device', 'svicloudtvbox-lumen'); ?></h2>
-        <p class="lumen-section-header__subtitle"><?php esc_html_e('Pick the hardware that fits your home. No IPTV bundles—just authentic SVICLOUD boxes shipping from the USA.', 'svicloudtvbox-lumen'); ?></p>
+        <h2 class="lumen-section-header__title"><?php echo svic_translate_html('frontpage.pricing.title'); ?></h2>
+        <p class="lumen-section-header__subtitle"><?php echo svic_translate_html('frontpage.pricing.subtitle'); ?></p>
       </header>
       <div class="lumen-pricing__grid">
-        <article class="lumen-pricing-card lumen-pricing-card--featured">
-          <div class="lumen-pricing-card__badge"><?php esc_html_e('Most Popular', 'svicloudtvbox-lumen'); ?></div>
-          <h3 class="lumen-pricing-card__title"><?php esc_html_e('SVICLOUD 10P+', 'svicloudtvbox-lumen'); ?></h3>
-          <div class="lumen-pricing-card__price">
-            <?php echo $hero_product_10p ? svic_price_html( $hero_product_10p ) : '<span class="amount">$248.99</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-            <span class="lumen-pricing-card__interval"><?php esc_html_e('device', 'svicloudtvbox-lumen'); ?></span>
-          </div>
-          <p class="lumen-pricing-card__copy"><?php esc_html_e('Flagship 4GB RAM / 64GB storage with Kids & Karaoke apps included.', 'svicloudtvbox-lumen'); ?></p>
-          <ul class="lumen-pricing-card__features">
-            <li><?php esc_html_e('4K HDR + AV1 decode', 'svicloudtvbox-lumen'); ?></li>
-            <li><?php esc_html_e('Kids & Karaoke apps included', 'svicloudtvbox-lumen'); ?></li>
-            <li><?php esc_html_e('AI voice remote + dual-band Wi-Fi', 'svicloudtvbox-lumen'); ?></li>
-          </ul>
-          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url( $hero_10p_url ); ?>"><?php esc_html_e('View 10P+', 'svicloudtvbox-lumen'); ?></a>
-          <div class="lumen-pricing-card__meta">
-            <span><?php esc_html_e('✔ Ships from USA', 'svicloudtvbox-lumen'); ?></span>
-            <span><?php esc_html_e('✔ 1-Year U.S. Warranty', 'svicloudtvbox-lumen'); ?></span>
-            <span><?php esc_html_e('✔ English/中文 support', 'svicloudtvbox-lumen'); ?></span>
-          </div>
-        </article>
+        <?php foreach ($pricing_cards as $card) : ?>
+          <?php
+          $card_classes   = 'lumen-pricing-card';
+          $button_classes = 'lumen-pill lumen-pill--outline';
 
-        <article class="lumen-pricing-card">
-          <h3 class="lumen-pricing-card__title"><?php esc_html_e('SVICLOUD 10S', 'svicloudtvbox-lumen'); ?></h3>
-          <div class="lumen-pricing-card__price">
-            <?php echo $hero_product_10s ? svic_price_html( $hero_product_10s ) : '<span class="amount">$183.99</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-            <span class="lumen-pricing-card__interval"><?php esc_html_e('device', 'svicloudtvbox-lumen'); ?></span>
-          </div>
-          <p class="lumen-pricing-card__copy"><?php esc_html_e('Best value with 2GB RAM / 32GB storage—ideal for bedrooms or secondary TVs.', 'svicloudtvbox-lumen'); ?></p>
-          <ul class="lumen-pricing-card__features">
-            <li><?php esc_html_e('4K HDR + AV1 decode', 'svicloudtvbox-lumen'); ?></li>
-            <li><?php esc_html_e('AI voice remote', 'svicloudtvbox-lumen'); ?></li>
-            <li><?php esc_html_e('Includes HDMI & power accessories', 'svicloudtvbox-lumen'); ?></li>
-          </ul>
-          <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url( $hero_10s_url ); ?>"><?php esc_html_e('View 10S', 'svicloudtvbox-lumen'); ?></a>
-          <div class="lumen-pricing-card__meta">
-            <span><?php esc_html_e('✔ Ships from USA', 'svicloudtvbox-lumen'); ?></span>
-            <span><?php esc_html_e('✔ 1-Year U.S. Warranty', 'svicloudtvbox-lumen'); ?></span>
-            <span><?php esc_html_e('✔ No monthly device fees', 'svicloudtvbox-lumen'); ?></span>
-          </div>
-        </article>
+          // Featured cards get primary styling by default.
+          if (!empty($card['highlight'])) {
+              $card_classes   .= ' lumen-pricing-card--featured';
+              $button_classes  = 'lumen-pill lumen-pill--primary';
+          } else {
+              // Allow per-card CTA style override via translations, e.g., frontpage.pricing.cards.10s.cta_style => 'primary'.
+              // Derive the cta_style key from the provided cta key path.
+              $cta_style_key = is_string($card['cta_key']) ? str_replace('.cta', '.cta_style', $card['cta_key']) : '';
+              if ($cta_style_key !== '') {
+                  $cta_style_value = svic_translate($cta_style_key);
+                  if (is_string($cta_style_value) && strtolower($cta_style_value) === 'primary') {
+                      $button_classes = 'lumen-pill lumen-pill--primary';
+                  }
+              }
+          }
+          ?>
+          <article class="<?php echo esc_attr($card_classes); ?>">
+            <?php if (!empty($card['badge_key'])) : ?>
+              <div class="lumen-pricing-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></div>
+            <?php endif; ?>
+            <h3 class="lumen-pricing-card__title"><?php echo svic_translate_html($card['title_key']); ?></h3>
+            <div class="lumen-pricing-card__price">
+              <?php echo $card['price_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+              <span class="lumen-pricing-card__interval"><?php echo svic_translate_html($card['interval_key']); ?></span>
+            </div>
+            <p class="lumen-pricing-card__copy"><?php echo svic_translate_html($card['copy_key']); ?></p>
+            <ul class="lumen-pricing-card__features">
+              <?php foreach ($card['feature_keys'] as $feature_key) : ?>
+                <li><?php echo svic_translate_html($feature_key); ?></li>
+              <?php endforeach; ?>
+            </ul>
+            <a class="<?php echo esc_attr($button_classes); ?>" href="<?php echo esc_url($card['cta_url']); ?>"><?php echo svic_translate_html($card['cta_key']); ?></a>
+            <div class="lumen-pricing-card__meta">
+              <?php foreach ($card['meta_keys'] as $meta_key) : ?>
+                <span><?php echo svic_translate_html($meta_key); ?></span>
+              <?php endforeach; ?>
+            </div>
+          </article>
+        <?php endforeach; ?>
       </div>
     </div>
   </section>
