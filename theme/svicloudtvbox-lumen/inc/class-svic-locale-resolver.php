@@ -13,6 +13,7 @@ final class SVIC_Locale_Resolver
 {
     public const COOKIE_NAME = 'svic_lang';
     private const COOKIE_TTL = 30 * DAY_IN_SECONDS;
+    private const DEFAULT_LOCALE = 'zh_TW';
 
     public static function bootstrap(): void
     {
@@ -59,7 +60,7 @@ final class SVIC_Locale_Resolver
             return $browserLocale;
         }
 
-        return null;
+        return SVIC_Translator::normalizeLocaleCode(self::DEFAULT_LOCALE);
     }
 
     public static function maybe_persist_cookie(): void

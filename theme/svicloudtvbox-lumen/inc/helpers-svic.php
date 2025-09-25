@@ -13,10 +13,70 @@ if (!function_exists('svic_current_locale')) {
     function svic_current_locale(): string {
         $locale = apply_filters('svic_current_locale', get_locale());
         if (!is_string($locale) || $locale === '') {
-            $locale = 'en_US';
+            $locale = 'zh_TW';
         }
 
         return SVIC_Translator::normalizeLocaleCode($locale);
+    }
+}
+
+if (!function_exists('svic_language_query_value')) {
+    function svic_language_query_value(?string $locale = null): string {
+        $normalized = $locale ? SVIC_Translator::normalizeLocaleCode($locale) : svic_current_locale();
+        $normalized = strtolower($normalized);
+
+        if ($normalized === '') {
+            return 'zh';
+        }
+
+        $parts = preg_split('/[-_]/', $normalized);
+        $language = is_array($parts) && isset($parts[0]) ? trim((string) $parts[0]) : $normalized;
+        if ($language === '') {
+            $language = $normalized;
+        }
+
+        $language = strtolower($language);
+
+        return $language === '' ? 'zh' : $language;
+    }
+}
+
+if (!function_exists('svic_url_with_lang')) {
+    function svic_url_with_lang($url, ?string $lang = null): string {
+        if (!is_string($url) || $url === '') {
+            return '';
+        }
+
+        $trimmed = trim($url);
+        if ($trimmed === '') {
+            return '';
+        }
+
+        if ($trimmed[0] === '#') {
+            return $url;
+        }
+
+        if (preg_match('/^(?:mailto|tel|javascript|data):/i', $trimmed)) {
+            return $url;
+        }
+
+        $langValue = $lang !== null ? strtolower(trim($lang)) : svic_language_query_value();
+        if ($langValue === '') {
+            return $url;
+        }
+
+        $siteHost = wp_parse_url(home_url(), PHP_URL_HOST);
+        $urlParts = wp_parse_url($url);
+
+        if (is_array($urlParts)) {
+            if (isset($urlParts['host']) && $urlParts['host'] !== '' && $siteHost && strcasecmp($urlParts['host'], $siteHost) !== 0) {
+                return $url;
+            }
+        }
+
+        $updated = remove_query_arg('lang', $url);
+
+        return add_query_arg('lang', $langValue, $updated);
     }
 }
 
@@ -112,7 +172,7 @@ if (!function_exists('svic_add_to_cart_url')) {
             return '#';
         }
 
-        return esc_url(add_query_arg('add-to-cart', $product->get_id(), wc_get_cart_url()));
+        return esc_url(svic_url_with_lang(add_query_arg('add-to-cart', $product->get_id(), wc_get_cart_url())));
     }
 }
 
@@ -135,7 +195,7 @@ if (!function_exists('svic_render_product_card')) {
             return;
         }
 
-        $permalink   = get_permalink($product->get_id());
+        $permalink   = svic_url_with_lang(get_permalink($product->get_id()));
         $gallery_ids = method_exists($product, 'get_gallery_image_ids') ? (array) $product->get_gallery_image_ids() : [];
         $slides      = [];
         $primary_id  = $product->get_image_id();

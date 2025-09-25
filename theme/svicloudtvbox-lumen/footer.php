@@ -34,7 +34,7 @@
     <div class="container footer-shell">
       <div class="footer-top">
         <div class="footer-brand">
-          <a class="footer-logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php echo esc_attr( $site_name ); ?>">
+          <a class="footer-logo" href="<?php echo esc_url( svic_url_with_lang( home_url( '/' ) ) ); ?>" aria-label="<?php echo esc_attr( $site_name ); ?>">
             <span class="footer-logo__mark">
               <?php if ( $has_custom_logo && $custom_logo_id ) : ?>
                 <?php echo wp_get_attachment_image( $custom_logo_id, 'full', false, [

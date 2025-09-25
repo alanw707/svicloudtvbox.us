@@ -13,8 +13,8 @@
       <h1 class="page-title"><?php esc_html_e('We couldn't find that page.', 'svicloudtvbox'); ?></h1>
       <p class="page-subtitle"><?php esc_html_e('The link might be outdated or the page is still being built. Try browsing the links below.', 'svicloudtvbox'); ?></p>
       <div class="comparison-cta">
-        <a class="btn btn-primary" href="<?php echo esc_url( home_url('/') ); ?>"><?php esc_html_e('Go Home', 'svicloudtvbox'); ?></a>
-        <a class="btn btn-outline" href="<?php echo esc_url( home_url('/shop') ); ?>"><?php esc_html_e('Browse Shop', 'svicloudtvbox'); ?></a>
+        <a class="btn btn-primary" href="<?php echo esc_url( svic_url_with_lang( home_url('/') ) ); ?>"><?php esc_html_e('Go Home', 'svicloudtvbox'); ?></a>
+        <a class="btn btn-outline" href="<?php echo esc_url( svic_url_with_lang( home_url('/shop') ) ); ?>"><?php esc_html_e('Browse Shop', 'svicloudtvbox'); ?></a>
       </div>
     </section>
   <?php endif; ?>

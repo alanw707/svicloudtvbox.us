@@ -6,8 +6,8 @@ get_header();
 
 $hero_product_10p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
 $hero_product_10s = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null;
-$hero_10p_url = $hero_product_10p ? get_permalink($hero_product_10p->get_id()) : home_url('/product/svicloud-10p-plus');
-$hero_10s_url = $hero_product_10s ? get_permalink($hero_product_10s->get_id()) : home_url('/product/svicloud-10s');
+$hero_10p_url = $hero_product_10p ? svic_url_with_lang(get_permalink($hero_product_10p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10p-plus'));
+$hero_10s_url = $hero_product_10s ? svic_url_with_lang(get_permalink($hero_product_10s->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10s'));
 
 $hero_bullet_keys = [
     'frontpage.hero.bullets.shipping',
@@ -98,7 +98,7 @@ $pricing_cards = [
     '10p' => [
         'product'        => $hero_product_10p,
         'fallback_price' => '$248.99',
-        'fallback_url'   => home_url('/product/svicloud-10p-plus'),
+        'fallback_url'   => svic_url_with_lang(home_url('/product/svicloud-10p-plus')),
         'highlight'      => true,
         'badge_key'      => 'frontpage.pricing.cards.10p.badge',
         'title_key'      => 'frontpage.pricing.cards.10p.title',
@@ -119,7 +119,7 @@ $pricing_cards = [
     '10s' => [
         'product'        => $hero_product_10s,
         'fallback_price' => '$183.99',
-        'fallback_url'   => home_url('/product/svicloud-10s'),
+        'fallback_url'   => svic_url_with_lang(home_url('/product/svicloud-10s')),
         'highlight'      => false,
         'badge_key'      => null,
         'title_key'      => 'frontpage.pricing.cards.10s.title',
@@ -143,7 +143,7 @@ foreach ($pricing_cards as $slug => $card) {
     if (!empty($card['product'])) {
         $product = $card['product'];
         $pricing_cards[$slug]['price_html'] = svic_price_html($product);
-        $pricing_cards[$slug]['cta_url'] = get_permalink($product->get_id());
+        $pricing_cards[$slug]['cta_url'] = svic_url_with_lang(get_permalink($product->get_id()));
     } else {
         $pricing_cards[$slug]['price_html'] = sprintf('<span class="amount">%s</span>', esc_html($card['fallback_price']));
         $pricing_cards[$slug]['cta_url'] = $card['fallback_url'];
@@ -172,7 +172,7 @@ foreach ($pricing_cards as $slug => $card) {
           <a class="hero-dashboard__button hero-dashboard__button--secondary" href="#pricing">
             <span><?php echo svic_translate_html('frontpage.hero.cta.bundles'); ?></span>
           </a>
-          <a class="hero-dashboard__button hero-dashboard__button--secondary" href="<?php echo esc_url(home_url('/compare')); ?>">
+          <a class="hero-dashboard__button hero-dashboard__button--secondary" href="<?php echo esc_url(svic_url_with_lang(home_url('/compare'))); ?>">
             <span><?php echo svic_translate_html('frontpage.hero.cta.compare'); ?></span>
           </a>
         </div>
@@ -271,7 +271,7 @@ foreach ($pricing_cards as $slug => $card) {
             </li>
           <?php endforeach; ?>
         </ul>
-        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url(home_url('/contact')); ?>"><?php echo svic_translate_html('frontpage.experience.cta'); ?></a>
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact'))); ?>"><?php echo svic_translate_html('frontpage.experience.cta'); ?></a>
       </aside>
     </div>
   </section>
@@ -286,11 +286,23 @@ foreach ($pricing_cards as $slug => $card) {
       <div class="lumen-pricing__grid">
         <?php foreach ($pricing_cards as $card) : ?>
           <?php
-          $card_classes = 'lumen-pricing-card';
+          $card_classes   = 'lumen-pricing-card';
           $button_classes = 'lumen-pill lumen-pill--outline';
+
+          // Featured cards get primary styling by default.
           if (!empty($card['highlight'])) {
-              $card_classes .= ' lumen-pricing-card--featured';
-              $button_classes = 'lumen-pill lumen-pill--primary';
+              $card_classes   .= ' lumen-pricing-card--featured';
+              $button_classes  = 'lumen-pill lumen-pill--primary';
+          } else {
+              // Allow per-card CTA style override via translations, e.g., frontpage.pricing.cards.10s.cta_style => 'primary'.
+              // Derive the cta_style key from the provided cta key path.
+              $cta_style_key = is_string($card['cta_key']) ? str_replace('.cta', '.cta_style', $card['cta_key']) : '';
+              if ($cta_style_key !== '') {
+                  $cta_style_value = svic_translate($cta_style_key);
+                  if (is_string($cta_style_value) && strtolower($cta_style_value) === 'primary') {
+                      $button_classes = 'lumen-pill lumen-pill--primary';
+                  }
+              }
           }
           ?>
           <article class="<?php echo esc_attr($card_classes); ?>">

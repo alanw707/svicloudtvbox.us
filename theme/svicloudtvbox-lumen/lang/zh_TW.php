@@ -187,12 +187,28 @@ return [
             'badge'     => '選購',
             'title'     => 'SVICLOUD 電視盒',
             'subtitle'  => '美國授權經銷，提供快速出貨、一年保固與英文/中文客服。',
+            'highlights' => [
+                'shipping' => '美國倉庫 2-4 日快速出貨',
+                'warranty' => '含一年美國保固',
+                'support'  => '中英雙語專人客服',
+                'fees'     => '無月費、無隱藏續費',
+            ],
         ],
         'cards' => [
+            'price_label'    => '一次購買',
+            'price_note'     => '價格以美元計價 · 無月費',
+            'best_for_label' => '適合族群',
+            'assurance'      => [
+                'shipping' => '美國加州倉庫出貨',
+                'warranty' => '提供一年美國保固',
+                'support'  => '附中英雙語遠端設定',
+            ],
             '10p' => [
                 'title'   => 'SVICLOUD 10P+',
                 'lead'    => '旗艦硬體配上專屬家庭功能與最快速的運算效能。',
                 'button'  => '查看 10P+',
+                'badge'   => '熱銷旗艦',
+                'best_for' => '家庭客廳・體育迷・K 歌派對',
                 'features' => [
                     'ram_storage' => '4GB 記憶體 / 64GB 儲存與 AV1 解碼',
                     'apps'        => '內建兒童模式與卡拉 OK 應用',
@@ -203,6 +219,8 @@ return [
                 'title'   => 'SVICLOUD 10S',
                 'lead'    => '提供 4K 影音播放的精省配置，適合重視性價比的家庭。',
                 'button'  => '查看 10S',
+                'badge'   => '超值推薦',
+                'best_for' => '臥室・客房・入門影音',
                 'features' => [
                     'ram_storage' => '2GB 記憶體 / 32GB 儲存，滿足日常播放',
                     'remote'      => '4K HDR + AV1 解碼，搭配語音遙控',

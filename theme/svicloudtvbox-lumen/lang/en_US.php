@@ -186,12 +186,28 @@ return [
             'badge'     => 'Shop',
             'title'     => 'SVICLOUD TV Boxes',
             'subtitle'  => 'Authorized U.S. dealer with fast domestic shipping, 1-year warranty, and English/中文 support.',
+            'highlights' => [
+                'shipping' => 'Free 2–4 day U.S. shipping',
+                'warranty' => '1-year U.S. warranty included',
+                'support'  => 'English & 中文 concierge support',
+                'fees'     => 'No monthly device or channel fees',
+            ],
         ],
         'cards' => [
+            'price_label'    => 'One-time purchase',
+            'price_note'     => 'All prices in USD · No monthly device fees',
+            'best_for_label' => 'Best for',
+            'assurance'      => [
+                'shipping' => 'Ships from California warehouse',
+                'warranty' => 'Includes 1-year U.S. warranty',
+                'support'  => 'Bilingual concierge onboarding',
+            ],
             '10p' => [
                 'title'   => 'SVICLOUD 10P+',
                 'lead'    => 'Flagship hardware with exclusive family features and the fastest performance we ship.',
                 'button'  => 'View 10P+',
+                'badge'   => 'Most popular',
+                'best_for' => 'Family rooms, sports fans, karaoke nights',
                 'features' => [
                     'ram_storage' => '4GB RAM / 64GB storage with AV1 decode',
                     'apps'        => 'Kids Mode & Karaoke apps included',
@@ -202,6 +218,8 @@ return [
                 'title'   => 'SVICLOUD 10S',
                 'lead'    => 'Essential 4K streaming with streamlined hardware for value-conscious homes.',
                 'button'  => 'View 10S',
+                'badge'   => 'Best value',
+                'best_for' => 'Bedrooms, guest suites, casual streaming',
                 'features' => [
                     'ram_storage' => '2GB RAM / 32GB storage for everyday streaming',
                     'remote'      => '4K HDR + AV1 decode with voice remote',

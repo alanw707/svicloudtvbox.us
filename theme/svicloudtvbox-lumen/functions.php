@@ -29,6 +29,23 @@ foreach ($svic_helper_paths as $helper_path) {
     }
 }
 
+add_filter('nav_menu_link_attributes', function ($atts, $item, $args, $depth) {
+    if (is_admin()) {
+        return $atts;
+    }
+
+    if (!isset($atts['href']) || !is_string($atts['href']) || $atts['href'] === '') {
+        return $atts;
+    }
+
+    if (stripos($atts['href'], 'lang=') !== false) {
+        return $atts;
+    }
+
+    $atts['href'] = svic_url_with_lang($atts['href']);
+
+    return $atts;
+}, 10, 4);
 
 // Theme setup
 add_action('after_setup_theme', function () {
@@ -105,7 +122,7 @@ add_action('wp_enqueue_scripts', function () {
 
     wp_localize_script('svicloudtvbox-script', 'svicTheme', [
         'ajaxUrl'  => admin_url('admin-ajax.php'),
-        'homeUrl'  => home_url('/'),
+        'homeUrl'  => svic_url_with_lang(home_url('/')),
         'isWoo'    => class_exists('WooCommerce'),
         'themeUrl' => get_template_directory_uri(),
         'locale'   => $currentLocale,

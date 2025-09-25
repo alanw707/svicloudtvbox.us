@@ -18,8 +18,17 @@ $card_data = [
             'shop.cards.10p.features.apps',
             'shop.cards.10p.features.remote',
         ],
+        'badge_key'       => 'shop.cards.10p.badge',
+        'best_for_key'    => 'shop.cards.10p.best_for',
         'highlight'       => true,
-        'fallback_url'    => home_url('/product/svicloud-10p-plus'),
+        'modifier'        => 'shop-product-card--premium',
+        'assurance_keys'  => [
+            'shop.cards.assurance.shipping',
+            'shop.cards.assurance.warranty',
+            'shop.cards.assurance.support',
+        ],
+        'price_note_key'  => 'shop.cards.price_note',
+        'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-10p-plus')),
         'fallback_price'  => '$248.99',
     ],
     '10s' => [
@@ -32,8 +41,17 @@ $card_data = [
             'shop.cards.10s.features.remote',
             'shop.cards.10s.features.ports',
         ],
+        'badge_key'       => 'shop.cards.10s.badge',
+        'best_for_key'    => 'shop.cards.10s.best_for',
         'highlight'       => false,
-        'fallback_url'    => home_url('/product/svicloud-10s'),
+        'modifier'        => 'shop-product-card--best-value',
+        'assurance_keys'  => [
+            'shop.cards.assurance.shipping',
+            'shop.cards.assurance.warranty',
+            'shop.cards.assurance.support',
+        ],
+        'price_note_key'  => 'shop.cards.price_note',
+        'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-10s')),
         'fallback_price'  => '$183.99',
     ],
 ];
@@ -48,7 +66,7 @@ foreach ($card_data as $key => $card) {
     $product = $card['product'];
     $price_html = method_exists($product, 'get_price_html') ? $product->get_price_html() : '';
     $card_data[$key]['price_text'] = $price_html ? wp_strip_all_tags($price_html) : $card['fallback_price'];
-    $card_data[$key]['url'] = get_permalink($product->get_id());
+    $card_data[$key]['url'] = svic_url_with_lang(get_permalink($product->get_id()));
 }
 ?>
 
@@ -60,26 +78,61 @@ foreach ($card_data as $key => $card) {
   </header>
 
   <section class="shop-products">
-    <div class="compare-products__grid">
+    <div class="compare-products__grid shop-products__grid">
       <?php foreach ($card_data as $key => $card) :
           $price_text = isset($card['price_text']) ? $card['price_text'] : $card['fallback_price'];
           $url = isset($card['url']) ? $card['url'] : $card['fallback_url'];
-          $highlight_class = !empty($card['highlight']) ? ' compare-product-card--highlight' : '';
+          $card_classes = 'compare-product-card shop-product-card';
+          if (!empty($card['highlight'])) {
+              $card_classes .= ' compare-product-card--highlight';
+          }
+          if (!empty($card['modifier'])) {
+              $card_classes .= ' ' . sanitize_html_class($card['modifier']);
+          }
       ?>
-        <article class="compare-product-card<?php echo $highlight_class; ?>">
-          <div class="compare-product-card__header">
-            <h2 class="compare-product-card__title"><?php echo svic_translate_html($card['title_key']); ?></h2>
-            <p class="compare-product-card__price"><?php echo esc_html($price_text); ?></p>
-            <p class="compare-product-card__lead"><?php echo svic_translate_html($card['lead_key']); ?></p>
-            <a class="lumen-pill <?php echo !empty($card['highlight']) ? 'lumen-pill--primary' : 'lumen-pill--ghost'; ?>" href="<?php echo esc_url($url); ?>">
+        <article class="<?php echo esc_attr($card_classes); ?>">
+          <div class="compare-product-card__header shop-product-card__header">
+            <?php if (!empty($card['badge_key'])) : ?>
+              <span class="shop-product-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></span>
+            <?php endif; ?>
+            <div class="shop-product-card__price-line">
+              <span class="shop-product-card__price-label"><?php echo svic_translate_html('shop.cards.price_label'); ?></span>
+              <span class="shop-product-card__price-amount"><?php echo esc_html($price_text); ?></span>
+            </div>
+            <?php if (!empty($card['price_note_key'])) : ?>
+              <span class="shop-product-card__price-note"><?php echo svic_translate_html($card['price_note_key']); ?></span>
+            <?php endif; ?>
+            <h2 class="compare-product-card__title shop-product-card__title"><?php echo svic_translate_html($card['title_key']); ?></h2>
+            <p class="compare-product-card__lead shop-product-card__lead"><?php echo svic_translate_html($card['lead_key']); ?></p>
+            <a class="lumen-pill <?php echo !empty($card['highlight']) ? 'lumen-pill--primary' : 'lumen-pill--ghost'; ?> shop-product-card__cta" href="<?php echo esc_url($url); ?>">
               <?php echo svic_translate_html($card['button_key']); ?>
             </a>
           </div>
-          <ul class="compare-product-card__list">
-            <?php foreach ($card['feature_keys'] as $feature_key) : ?>
-              <li><?php echo svic_translate_html($feature_key); ?></li>
-            <?php endforeach; ?>
-          </ul>
+          <div class="shop-product-card__divider" aria-hidden="true"></div>
+          <div class="shop-product-card__body">
+            <?php if (!empty($card['feature_keys'])) : ?>
+              <ul class="shop-product-card__features">
+                <?php foreach ($card['feature_keys'] as $feature_key) : ?>
+                  <li><?php echo svic_translate_html($feature_key); ?></li>
+                <?php endforeach; ?>
+              </ul>
+            <?php endif; ?>
+
+            <?php if (!empty($card['best_for_key'])) : ?>
+              <div class="shop-product-card__best-for">
+                <span class="shop-product-card__best-for-label"><?php echo svic_translate_html('shop.cards.best_for_label'); ?></span>
+                <span class="shop-product-card__best-for-value"><?php echo esc_html(svic_translate($card['best_for_key'])); ?></span>
+              </div>
+            <?php endif; ?>
+
+            <?php if (!empty($card['assurance_keys'])) : ?>
+              <ul class="shop-product-card__assurance">
+                <?php foreach ($card['assurance_keys'] as $assurance_key) : ?>
+                  <li><?php echo svic_translate_html($assurance_key); ?></li>
+                <?php endforeach; ?>
+              </ul>
+            <?php endif; ?>
+          </div>
         </article>
       <?php endforeach; ?>
     </div>
