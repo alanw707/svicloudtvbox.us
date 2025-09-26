@@ -420,12 +420,21 @@
 .lumen-mobile-nav__actions {
   display: grid;
   gap: 12px;
+  justify-items: center;
 }
 
 .lumen-mobile-nav__actions .lumen-pill {
-  width: 100%;
+  width: min(240px, 92%);
   justify-content: center;
+  padding: 12px 18px;
+  border-radius: 16px;
+  min-height: 44px;
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  box-shadow: 0 10px 26px rgba(94, 230, 208, 0.22);
 }
+
 
 /* Responsive */
 
