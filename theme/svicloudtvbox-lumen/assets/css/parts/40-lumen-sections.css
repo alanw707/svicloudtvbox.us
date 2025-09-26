@@ -513,6 +513,26 @@
   }
 }
 
+@media (max-width: 600px) {
+  body.home .lumen-metrics,
+  body.home .lumen-feature-grid,
+  body.home .lumen-experience,
+  body.home .lumen-pricing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  body.home .lumen-metrics__inner,
+  body.home .lumen-feature-grid__inner,
+  body.home .lumen-experience__inner,
+  body.home .lumen-pricing__inner {
+    width: 100%;
+    margin: 0;
+    padding: 0 clamp(18px, 6vw, 24px);
+    box-sizing: border-box;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .lumen-feature-card__icon,
   .lumen-experience__icon {
