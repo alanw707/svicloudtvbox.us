@@ -86,6 +86,28 @@ return [
                 ],
             ],
         ],
+        'certification' => [
+            'badge' => 'Manufacturer Certified',
+            'title' => 'SVI.STUDIO Authorized Dealer Certification',
+            'lead' => 'SVI.STUDIO authorizes 168 Media Group LLC (SVICLOUDTVBOX.US) to distribute SVICLOUD devices across the Americas with full warranty support.',
+            'meta' => [
+                'number' => [
+                    'label' => 'Authorization No.',
+                    'value' => 'US2025092609217',
+                ],
+                'territory' => [
+                    'label' => 'Territory',
+                    'value' => 'Americas',
+                ],
+                'term' => [
+                    'label' => 'Effective dates',
+                    'value' => 'September 26, 2025 - September 26, 2026',
+                ],
+            ],
+            'footnote' => 'Presented exactly as issued by SVI.STUDIO to 168 Media Group LLC / SVICLOUDTVBOX.US.',
+            'cta' => 'Open full certificate',
+            'alt' => 'SVI.STUDIO authorized dealer certificate for 168 Media Group LLC',
+        ],
         'metrics' => [
             'shipping' => [
                 'title' => '48-hour shipping',
@@ -309,6 +331,105 @@ return [
             'copy'    => 'Pick the SVICLOUD model that fits your needs and budget.',
             'cta_10p' => 'Buy SVICLOUD 10P+',
             'cta_10s' => 'Buy SVICLOUD 10S',
+        ],
+    ],
+    'about' => [
+        'hero' => [
+            'badge'         => 'Manufacturer Authorized Dealer',
+            'title'         => 'The U.S. home for official SVI.STUDIO devices',
+            'lead'          => 'We are 168 Media Group LLC, the California-based team that helps SVICLOUD families stream in minutes—with installation support, local inventory, and bilingual experts.',
+            'cta'           => 'Talk to concierge',
+            'secondary_cta' => 'Compare devices',
+        ],
+        'story' => [
+            'title' => 'Our story',
+            'lead'  => 'From living-room demos to the manufacturer’s official U.S. partner.',
+            'body'  => '<p>We began in 2019 by helping friends and neighboring families replace unreliable IPTV boxes with authentic SVICLOUD hardware. Word spread quickly—karaoke nights, sports meetups, and Lunar New Year watch parties all wanted the same thing: a trusted source with real warranty support.</p><p>Investing in local inventory, bilingual onboarding, and responsive concierge service turned us into the go-to SVICLOUD contact on the West Coast. That dedication earned SVI.STUDIO’s formal authorization so every customer gets factory-backed devices delivered fast from California.</p>',
+        ],
+        'stats' => [
+            'orders' => [
+                'value' => '6,500+',
+                'label' => 'Orders fulfilled since 2019',
+            ],
+            'concierge_hours' => [
+                'value' => '9,800+',
+                'label' => 'Concierge support minutes logged',
+            ],
+            'rating' => [
+                'value' => '4.9/5',
+                'label' => 'Customer satisfaction across surveys',
+            ],
+        ],
+        'certification' => [
+            'badge'  => 'Official documentation',
+            'title'  => 'SVI.STUDIO’s dealer approval process',
+            'lead'   => 'Our certification confirms we passed SVI.STUDIO’s vetting across operations, post-sale support, and logistics for the Americas region.',
+            'points' => [
+                'vetting'   => 'Factory audits verified our serial tracking, warranty handling, and customer education practices.',
+                'inventory' => 'We maintain U.S. warehouse inventory that ships domestically within 48 hours.',
+                'support'   => 'Dedicated English & 中文 specialists help customers with activation, renewals, and updates.',
+            ],
+        ],
+        'timeline' => [
+            'badge' => 'Milestones',
+            'title' => 'A quick journey from hobby to official partner',
+            'lead'  => 'Highlights from our path to becoming SVI.STUDIO’s authorized distributor in America.',
+            'items' => [
+                '2019' => [
+                    'year'  => '2019',
+                    'title' => 'Community launch',
+                    'copy'  => 'Hosted living-room SVICLOUD demos for Bay Area families seeking reliable Chinese programming.',
+                ],
+                '2020' => [
+                    'year'  => '2020',
+                    'title' => 'Concierge support begins',
+                    'copy'  => 'Introduced bilingual remote activation, firmware updates, and curated channel tips.',
+                ],
+                '2022' => [
+                    'year'  => '2022',
+                    'title' => 'Streamlined U.S. logistics',
+                    'copy'  => 'Opened California fulfillment, slashing delivery times and improving warranty turnaround.',
+                ],
+                '2024' => [
+                    'year'  => '2024',
+                    'title' => 'Customer community scaling',
+                    'copy'  => 'Expanded to nationwide shipments with recurring karaoke, sport, and festival streaming events.',
+                ],
+                '2025' => [
+                    'year'  => '2025',
+                    'title' => 'Manufacturer authorized',
+                    'copy'  => 'SVI.STUDIO signed our regional certification, granting official dealer status through 2026.',
+                ],
+            ],
+        ],
+        'values' => [
+            'badge' => 'What to expect from us',
+            'title' => 'We lead with authenticity, concierge support, and community',
+            'lead'  => 'Every SVICLOUD customer gets genuine hardware, fast help, and shared experiences that keep the box at the center of family time.',
+            'authentic' => [
+                'title' => 'Genuine hardware only',
+                'copy'  => 'Direct-from-factory inventory, serialized and covered by SVI.STUDIO’s one-year U.S. warranty.',
+            ],
+            'concierge' => [
+                'title' => 'Concierge for every box',
+                'copy'  => 'English & 中文 onboarding, remote troubleshooting, and proactive tips tailored to each household.',
+            ],
+            'community' => [
+                'title' => 'Built for families & friends',
+                'copy'  => 'We host seasonal watch parties, karaoke playlists, and community updates so the fun never stops.',
+            ],
+        ],
+        'concierge' => [
+            'badge'          => 'Concierge program',
+            'title'          => 'Your streaming concierge is a message away',
+            'lead'           => 'Whether you’re unboxing a new SVICLOUD, renewing IPTV access, or prepping a karaoke night, our specialists respond quickly with bilingual support.',
+            'points'         => [
+                'setup'    => 'White-glove setup & personalization over video or chat',
+                'renewals' => 'Hands-on IPTV renewals and firmware updates without the headache',
+                'events'   => 'Seasonal watch party schedules, karaoke playlists, and channel guides',
+            ],
+            'cta_primary'   => 'Schedule a concierge call',
+            'cta_secondary' => 'Browse SVICLOUD devices',
         ],
     ],
     'product' => [
