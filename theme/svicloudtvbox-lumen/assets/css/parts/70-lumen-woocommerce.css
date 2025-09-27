@@ -177,8 +177,24 @@
   box-shadow: 0 22px 54px rgba(94, 230, 208, 0.45);
 }
 
+.lumen-product .product-hero-cta .stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 185, 99, 0.45);
+  background: rgba(255, 185, 99, 0.14);
+  color: var(--lumen-accent-amber);
+  font-family: var(--font-accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 .lumen-product .product-hero-detail {
-  color: var(--lumen-text-muted);
+  color: var(--lumen-text-secondary);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -245,6 +261,46 @@
 
 .lumen-product .product-description .entry-content > * + * {
   margin-top: 1.5rem;
+}
+
+.lumen-product .product-description .entry-content,
+.lumen-product .product-description .entry-content p,
+.lumen-product .product-description .entry-content li,
+.lumen-product .product-description .entry-content dd,
+.lumen-product .product-description .entry-content em {
+  color: var(--lumen-text-secondary);
+}
+
+.lumen-product .product-description .entry-content strong,
+.lumen-product .product-description .entry-content dt,
+.lumen-product .product-description .entry-content h2,
+.lumen-product .product-description .entry-content h3,
+.lumen-product .product-description .entry-content h4,
+.lumen-product .product-description .entry-content h5,
+.lumen-product .product-description .entry-content h6 {
+  color: var(--lumen-text-primary);
+}
+
+.lumen-product .product-description .entry-content small {
+  color: var(--lumen-text-muted);
+}
+
+.lumen-product .product-description .entry-content a {
+  color: var(--lumen-accent-azure);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.lumen-product .product-description .entry-content a:hover,
+.lumen-product .product-description .entry-content a:focus-visible {
+  color: var(--lumen-accent-teal);
+}
+
+.lumen-product .product-description .entry-content blockquote {
+  color: var(--lumen-text-secondary);
+  border-left: 3px solid rgba(94, 230, 208, 0.35);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
 }
 
 .lumen-product .product-description .h3 {
