@@ -208,6 +208,47 @@ foreach ($pricing_cards as $slug => $card) {
     </div>
   </section>
 
+  <?php
+  $certificate_asset_relative = '/assets/images/certification-authorized-dealer.jpg';
+  $certificate_asset_path     = get_template_directory() . $certificate_asset_relative;
+  $certificate_asset_url      = file_exists($certificate_asset_path) ? get_template_directory_uri() . $certificate_asset_relative : '';
+  ?>
+  <!-- Authorized Dealer Certificate -->
+  <section class="lumen-certification" id="authorized-dealer">
+    <div class="lumen-certification__inner">
+      <div class="lumen-certification__copy">
+        <span class="lumen-certification__badge"><?php echo svic_translate_html('frontpage.certification.badge'); ?></span>
+        <h2 class="lumen-certification__title"><?php echo svic_translate_html('frontpage.certification.title'); ?></h2>
+        <p class="lumen-certification__lead"><?php echo svic_translate_html('frontpage.certification.lead'); ?></p>
+        <dl class="lumen-certification__meta">
+          <div class="lumen-certification__meta-row">
+            <dt><?php echo svic_translate_html('frontpage.certification.meta.number.label'); ?></dt>
+            <dd><?php echo svic_translate_html('frontpage.certification.meta.number.value'); ?></dd>
+          </div>
+          <div class="lumen-certification__meta-row">
+            <dt><?php echo svic_translate_html('frontpage.certification.meta.territory.label'); ?></dt>
+            <dd><?php echo svic_translate_html('frontpage.certification.meta.territory.value'); ?></dd>
+          </div>
+          <div class="lumen-certification__meta-row">
+            <dt><?php echo svic_translate_html('frontpage.certification.meta.term.label'); ?></dt>
+            <dd><?php echo svic_translate_html('frontpage.certification.meta.term.value'); ?></dd>
+          </div>
+        </dl>
+        <p class="lumen-certification__footnote"><?php echo svic_translate_html('frontpage.certification.footnote'); ?></p>
+        <?php if (!empty($certificate_asset_url)) : ?>
+          <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($certificate_asset_url); ?>" target="_blank" rel="noopener">
+            <?php echo svic_translate_html('frontpage.certification.cta'); ?>
+          </a>
+        <?php endif; ?>
+      </div>
+      <?php if (!empty($certificate_asset_url)) : ?>
+        <figure class="lumen-certification__media">
+          <img src="<?php echo esc_url($certificate_asset_url); ?>" alt="<?php echo esc_attr(svic_translate('frontpage.certification.alt')); ?>" loading="lazy" width="800" height="594" />
+        </figure>
+      <?php endif; ?>
+    </div>
+  </section>
+
   <!-- Credibility Bar -->
   <section class="lumen-metrics" aria-label="<?php esc_attr_e('Key SVICLOUD advantages', 'svicloudtvbox-lumen'); ?>">
     <div class="lumen-metrics__inner">
