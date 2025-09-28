@@ -176,6 +176,81 @@ if (!function_exists('svic_add_to_cart_url')) {
     }
 }
 
+if (!function_exists('svic_cart_contents_count')) {
+    function svic_cart_contents_count(): int
+    {
+        if (!class_exists('WooCommerce') || !function_exists('WC')) {
+            return 0;
+        }
+
+        $cart = WC()->cart;
+        if (!is_object($cart) || !method_exists($cart, 'get_cart_contents_count')) {
+            return 0;
+        }
+
+        $count = (int) $cart->get_cart_contents_count();
+
+        return $count > 0 ? $count : 0;
+    }
+}
+
+if (!function_exists('svic_header_cart_count_markup')) {
+    function svic_header_cart_count_markup(): string
+    {
+        $count = svic_cart_contents_count();
+        $classes = ['lumen-cart-count'];
+
+        if ($count === 0) {
+            $classes[] = 'is-empty';
+        }
+
+        return sprintf(
+            '<span class="%1$s" data-cart-count data-count="%2$s">%3$s</span>',
+            esc_attr(implode(' ', $classes)),
+            esc_attr((string) $count),
+            esc_html(number_format_i18n($count))
+        );
+    }
+}
+
+if (!function_exists('svic_header_cart_link')) {
+    function svic_header_cart_link(array $args = []): string
+    {
+        $defaults = [
+            'class' => '',
+            /* translators: Header cart CTA label. Non-breaking space keeps text on one line. */
+            'label' => wp_kses_post(__('View&nbsp;Cart', svic_text_domain())),
+        ];
+        $args = wp_parse_args($args, $defaults);
+
+        $count   = svic_cart_contents_count();
+        $classes = trim('lumen-pill lumen-pill--primary ' . $args['class']);
+
+        if ($count > 0) {
+            $classes .= ' has-items';
+        }
+
+        $cart_url = svic_url_with_lang(function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart'));
+
+        $count_display = number_format_i18n($count);
+        if ($count === 1) {
+            $sr_label = svic_translate('core.cart.count_label_single', ['count' => $count_display]);
+        } elseif ($count > 1) {
+            $sr_label = svic_translate('core.cart.count_label_plural', ['count' => $count_display]);
+        } else {
+            $sr_label = svic_translate('core.cart.count_label_empty');
+        }
+
+        $html  = '<a class="' . esc_attr($classes) . '" href="' . esc_url($cart_url) . '" data-cart-link>';
+        $html .= $args['label'];
+        $html .= svic_header_cart_count_markup();
+        $html .= '<span class="screen-reader-text">' . esc_html($sr_label) . '</span>';
+        $html .= '</a>';
+
+        return $html;
+    }
+}
+
 if (!function_exists('svic_bilingual_span')) {
     function svic_bilingual_span(string $en, string $zh, string $extra_class = ''): string {
         $extra_class = trim($extra_class);

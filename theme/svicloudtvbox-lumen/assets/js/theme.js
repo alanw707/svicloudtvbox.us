@@ -343,50 +343,288 @@
 
         const $body = $(document.body);
         const defaultLabel = (svicTheme.i18n && svicTheme.i18n.addingToCart) ? svicTheme.i18n.addingToCart : 'Adding…';
+        const raf = window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : function(callback) {
+            return window.setTimeout(callback, 16);
+        };
+        let cartFeedbackTimer = null;
+        let $cartFeedback = null;
+        let hasShownInitialNotice = false;
+
+        function getLoadingButtons() {
+            return $('.add_to_cart_button.is-loading, .single_add_to_cart_button.is-loading');
+        }
+
+        function markPendingToast($button) {
+            if (!$button || !$button.length || !$button.hasClass('single_add_to_cart_button')) {
+                return;
+            }
+            try {
+                const payload = { ts: Date.now() };
+                sessionStorage.setItem('svicCartToastPending', JSON.stringify(payload));
+            } catch (error) {
+                // Ignore storage errors (private mode, etc.).
+            }
+        }
+
+        function consumePendingToast() {
+            let raw = null;
+            try {
+                raw = sessionStorage.getItem('svicCartToastPending');
+                if (raw) {
+                    sessionStorage.removeItem('svicCartToastPending');
+                }
+            } catch (error) {
+                return null;
+            }
+            if (!raw) {
+                return null;
+            }
+            try {
+                const payload = JSON.parse(raw);
+                if (!payload || !payload.ts) {
+                    return null;
+                }
+                if (Date.now() - payload.ts > 600000) {
+                    return null;
+                }
+                return payload;
+            } catch (error) {
+                return null;
+            }
+        }
 
         function setButtonLoading($button) {
-            if (!$button || !$button.length || $button.hasClass('is-loading')) return;
-            $button.data('original-html', $button.html());
-            $button.addClass('is-loading').attr('aria-busy', 'true').prop('disabled', true);
-            $button.html('<span class="loading-spinner" aria-hidden="true"></span><span class="loading-text">' + defaultLabel + '</span>');
-            const timeoutId = window.setTimeout(function() {
-                clearButtonLoading($button);
-            }, 3500);
-            $button.data('loading-timeout', timeoutId);
+            if (!$button || !$button.length) {
+                return;
+            }
+            $button.each(function() {
+                const $btn = $(this);
+                if ($btn.hasClass('is-loading')) {
+                    return;
+                }
+                $btn.data('original-html', $btn.html());
+                $btn.addClass('is-loading').attr('aria-busy', 'true').prop('disabled', true);
+                $btn.html('<span class="loading-spinner" aria-hidden="true"></span><span class="loading-text">' + defaultLabel + '</span>');
+                const timeoutId = window.setTimeout(function() {
+                    clearButtonLoading($btn);
+                }, 4000);
+                $btn.data('loading-timeout', timeoutId);
+                markPendingToast($btn);
+            });
         }
 
         function clearButtonLoading($button) {
-            if (!$button || !$button.length) return;
-            const timeoutId = $button.data('loading-timeout');
-            if (timeoutId) {
-                window.clearTimeout(timeoutId);
+            const $targets = ($button && $button.length) ? $button : getLoadingButtons();
+            if (!$targets.length) {
+                return;
             }
-            $button.removeData('loading-timeout');
-
-            const original = $button.data('original-html');
-            if (original === undefined) return;
-            $button.html(original);
-            $button.removeClass('is-loading').attr('aria-busy', 'false').prop('disabled', false);
-            $button.removeData('original-html');
+            $targets.each(function() {
+                const $btn = $(this);
+                const timeoutId = $btn.data('loading-timeout');
+                if (timeoutId) {
+                    window.clearTimeout(timeoutId);
+                }
+                $btn.removeData('loading-timeout');
+                const original = $btn.data('original-html');
+                if (typeof original !== 'undefined') {
+                    $btn.html(original);
+                    $btn.removeData('original-html');
+                }
+                $btn.removeClass('is-loading').attr('aria-busy', 'false').prop('disabled', false);
+            });
         }
 
-        $(document).on('click', '.single_add_to_cart_button, .add_to_cart_button', function() {
-            setButtonLoading($(this));
+        function ensureCartFeedback() {
+            if ($cartFeedback && $cartFeedback.length) {
+                return $cartFeedback;
+            }
+            $cartFeedback = $('<div class="svic-cart-feedback" role="status" aria-live="polite"></div>');
+            $('body').append($cartFeedback);
+            return $cartFeedback;
+        }
+
+        function stripMessage(raw) {
+            if (typeof raw !== 'string') {
+                return '';
+            }
+            return $('<div/>').html(raw).text().trim();
+        }
+
+        function resolveAddedMessage(fragments) {
+            if (fragments && typeof fragments === 'object') {
+                const noticeKeys = ['div.woocommerce-notices-wrapper', '.woocommerce-notices-wrapper', '.woocommerce-message'];
+                for (let i = 0; i < noticeKeys.length; i += 1) {
+                    const key = noticeKeys[i];
+                    if (Object.prototype.hasOwnProperty.call(fragments, key)) {
+                        const html = fragments[key];
+                        if (typeof html === 'string' && html.trim()) {
+                            const cleaned = stripMessage(html);
+                            if (cleaned) {
+                                return cleaned;
+                            }
+                        }
+                    }
+                }
+            }
+            if (window.svicTheme && svicTheme.i18n && svicTheme.i18n.addedToCart) {
+                const translated = stripMessage(svicTheme.i18n.addedToCart);
+                if (translated) {
+                    return translated;
+                }
+            }
+            return 'Added to cart';
+        }
+
+        function fallbackErrorMessage() {
+            if (window.svicTheme && svicTheme.i18n && svicTheme.i18n.cartError) {
+                const translated = stripMessage(svicTheme.i18n.cartError);
+                if (translated) {
+                    return translated;
+                }
+            }
+            return 'Unable to add to cart. Please try again.';
+        }
+
+        function displayInitialNotices() {
+            if (hasShownInitialNotice) {
+                return;
+            }
+            const $wrapper = $('.woocommerce-notices-wrapper');
+            const $notice = $wrapper.find('.woocommerce-error, .woocommerce-message, .woocommerce-info').filter(function() {
+                return $(this).text().trim().length > 0;
+            }).first();
+            const pending = consumePendingToast();
+            if (!$notice.length && !pending) {
+                return;
+            }
+            let message = '';
+            let variant = 'success';
+            if ($notice.length) {
+                message = stripMessage($notice.html());
+                variant = $notice.hasClass('woocommerce-error') ? 'error' : 'success';
+            } else if (pending) {
+                message = (svicTheme.i18n && svicTheme.i18n.addedToCart) ? svicTheme.i18n.addedToCart : 'Added to cart!';
+            }
+            if (!message) {
+                return;
+            }
+            hasShownInitialNotice = true;
+            window.setTimeout(function() {
+                showCartFeedback(message, variant);
+            }, 120);
+        }
+
+        function showCartFeedback(message, variant = 'success') {
+            const cleaned = stripMessage(message);
+            if (!cleaned) {
+                return;
+            }
+            const $toast = ensureCartFeedback();
+            $toast.removeClass('is-visible is-error');
+            if (variant === 'error') {
+                $toast.addClass('is-error');
+            }
+            $toast.text(cleaned);
+            window.clearTimeout(cartFeedbackTimer);
+            cartFeedbackTimer = window.setTimeout(function() {
+                $toast.removeClass('is-visible');
+            }, 4200);
+            raf(function() {
+                $toast.addClass('is-visible');
+            });
+        }
+
+        function flashCartCount() {
+            raf(function() {
+                const $count = $('[data-cart-count]').first();
+                if (!$count.length || $count.hasClass('is-empty')) {
+                    return;
+                }
+                const existing = $count.data('svicCartPulse');
+                if (existing) {
+                    window.clearTimeout(existing);
+                }
+                $count.addClass('is-updated');
+                const timeoutId = window.setTimeout(function() {
+                    $count.removeClass('is-updated');
+                    $count.removeData('svicCartPulse');
+                }, 800);
+                $count.data('svicCartPulse', timeoutId);
+            });
+        }
+
+        function isWooAddToCartRequest(settings) {
+            if (!settings || !settings.url) {
+                return false;
+            }
+            if (settings.url.indexOf('wc-ajax=add_to_cart') !== -1) {
+                return true;
+            }
+            if (settings.url.indexOf('admin-ajax.php') !== -1 && typeof settings.data === 'string' && settings.data.indexOf('wc-ajax=add_to_cart') !== -1) {
+                return true;
+            }
+            return false;
+        }
+
+        $(document).on('click', '.add_to_cart_button', function() {
+            const $btn = $(this);
+            const schedule = typeof requestAnimationFrame === 'function' ? requestAnimationFrame : window.setTimeout;
+            schedule(function() {
+                setButtonLoading($btn);
+            });
         });
 
-        $body.on('added_to_cart wc_cart_button_updated', function(event, arg1) {
-            const $button = arg1 && arg1.jquery ? arg1 : $('.add_to_cart_button.is-loading, .single_add_to_cart_button.is-loading');
+        $(document).on('submit', 'form.cart', function() {
+            const $form = $(this);
+            const $btn = $form.find('.single_add_to_cart_button');
+            if (!$btn.length) {
+                return;
+            }
+            window.setTimeout(function() {
+                setButtonLoading($btn);
+            }, 0);
+        });
+
+        $body.on('added_to_cart', function(event, fragments, cart_hash, $button) {
+            const $target = ($button && $button.length) ? $button : getLoadingButtons();
+            clearButtonLoading($target);
+            consumePendingToast();
+            flashCartCount();
+            showCartFeedback(resolveAddedMessage(fragments));
+        });
+
+        $body.on('wc_cart_button_updated', function(event, $button) {
             clearButtonLoading($button);
         });
 
         $body.on('removed_from_cart', function() {
-            clearButtonLoading($('.add_to_cart_button.is-loading, .single_add_to_cart_button.is-loading'));
+            clearButtonLoading();
+            flashCartCount();
         });
 
-        $(document).on('ajaxError', function(_, jqxhr) {
-            if (jqxhr && jqxhr.responseJSON && jqxhr.responseJSON.error) {
-                clearButtonLoading($('.add_to_cart_button.is-loading, .single_add_to_cart_button.is-loading'));
+        $(document).on('ajaxError', function(event, jqxhr, settings) {
+            if (!isWooAddToCartRequest(settings)) {
+                return;
             }
+            clearButtonLoading();
+            consumePendingToast();
+            const response = jqxhr && jqxhr.responseJSON ? jqxhr.responseJSON : null;
+            let message = '';
+            if (response) {
+                if (typeof response.error === 'string') {
+                    message = response.error;
+                } else if (response.data) {
+                    if (typeof response.data === 'string') {
+                        message = response.data;
+                    } else if (Array.isArray(response.data) && response.data.length) {
+                        const notice = response.data[0];
+                        if (notice && typeof notice.notice === 'string') {
+                            message = notice.notice;
+                        }
+                    }
+                }
+            }
+            showCartFeedback(message || fallbackErrorMessage(), 'error');
         });
 
         $('.quantity input[type="number"]').on('change', function() {
@@ -397,11 +635,16 @@
                 $('.calculated-total').text('$' + (qty * price).toFixed(2));
             }
         });
+
+        displayInitialNotices();
+        window.setTimeout(displayInitialNotices, 250);
+
     }
 
     // Initialize WooCommerce enhancements when DOM is ready
     $(document).ready(function() {
-        if ($('body').hasClass('woocommerce')) {
+        const $body = $('body');
+        if ($body.hasClass('woocommerce') || $body.hasClass('woocommerce-page') || $body.hasClass('single-product')) {
             initWooCommerceEnhancements();
         }
     });

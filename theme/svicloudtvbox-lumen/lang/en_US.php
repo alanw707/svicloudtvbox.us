@@ -7,7 +7,12 @@ return [
     'core' => [
         'locale' => 'English (US)',
         'cart'   => [
-            'adding' => 'Adding…',
+            'adding'             => 'Adding…',
+            'added'              => 'Added to cart!',
+            'count_label_single' => '{{count}} item in cart',
+            'count_label_plural' => '{{count}} items in cart',
+            'count_label_empty'  => 'Cart is empty',
+            'error'              => 'Unable to add to cart. Please try again.',
         ],
         'badges' => [
             'authorized_dealer' => 'Authorized Dealer',

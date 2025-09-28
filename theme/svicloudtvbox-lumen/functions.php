@@ -128,7 +128,12 @@ add_action('wp_enqueue_scripts', function () {
         'locale'   => $currentLocale,
         'translations' => SVIC_Translator::instance()->registry($currentLocale),
         'i18n'     => [
-            'addingToCart' => svic_translate_html('core.cart.adding'),
+            'addingToCart'      => svic_translate_html('core.cart.adding'),
+            'addedToCart'       => svic_translate_html('core.cart.added'),
+            'cartError'         => svic_translate_html('core.cart.error'),
+            'cartCountEmpty'    => svic_translate_html('core.cart.count_label_empty'),
+            'cartCountSingle'   => svic_translate_html('core.cart.count_label_single'),
+            'cartCountPlural'   => svic_translate_html('core.cart.count_label_plural'),
         ],
     ]);
 });
@@ -228,5 +233,21 @@ add_filter('body_class', function ($classes) {
     }
 
     return array_values($classes);
+});
+
+
+add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
+    if (!function_exists('svic_header_cart_link') || !function_exists('svic_header_cart_count_markup')) {
+        return $fragments;
+    }
+
+    if (!is_array($fragments)) {
+        $fragments = [];
+    }
+
+    $fragments['a[data-cart-link]'] = svic_header_cart_link();
+    $fragments['span[data-cart-count]'] = svic_header_cart_count_markup();
+
+    return $fragments;
 });
 
