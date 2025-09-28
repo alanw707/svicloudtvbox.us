@@ -282,6 +282,49 @@
   transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
 }
 
+.lumen-pill.has-items {
+  gap: 0.6rem;
+}
+
+.lumen-cart-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.75rem;
+  min-height: 1.75rem;
+  padding: 0.15rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(6, 22, 52, 0.88);
+  border: 1px solid rgba(126, 246, 227, 0.35);
+  color: var(--lumen-accent-teal);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  box-shadow: 0 18px 38px rgba(3, 12, 30, 0.45);
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.lumen-cart-count.is-empty {
+  display: none;
+}
+
+.lumen-cart-count.is-updated {
+  animation: svicCartPulse 0.6s ease;
+}
+
+@keyframes svicCartPulse {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .lumen-pill--primary {
   color: #03111f;
   background: var(--lumen-accent-teal);

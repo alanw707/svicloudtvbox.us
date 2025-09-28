@@ -7,7 +7,12 @@ return [
     'core' => [
         'locale' => '繁體中文',
         'cart'   => [
-            'adding' => '加入中…',
+            'adding'             => '加入中…',
+            'added'              => '已加入購物車！',
+            'count_label_single' => '購物車內有 {{count}} 件商品',
+            'count_label_plural' => '購物車內有 {{count}} 件商品',
+            'count_label_empty'  => '購物車目前為空',
+            'error'              => '加入購物車失敗，請再試一次。',
         ],
         'badges' => [
             'authorized_dealer' => '官方授權經銷商',

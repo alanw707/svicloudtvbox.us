@@ -15,6 +15,9 @@ while (have_posts()) :
         $product = function_exists('wc_get_product') ? wc_get_product(get_the_ID()) : null;
     }
 
+    remove_action('woocommerce_before_single_product', 'woocommerce_output_all_notices', 10);
+    remove_action('woocommerce_before_single_product', 'wc_print_notices', 10);
+
     do_action('woocommerce_before_single_product');
 
     if (post_password_required()) {
@@ -120,7 +123,14 @@ while (have_posts()) :
           </div>
 
           <div class="product-hero-content">
-                        <div class="badge-row">
+            <?php
+            if (function_exists('woocommerce_output_all_notices')) {
+                woocommerce_output_all_notices();
+            } elseif (function_exists('wc_print_notices')) {
+                wc_print_notices();
+            }
+            ?>
+            <div class="badge-row">
               <span class="badge"><?php echo svic_translate_html('core.badges.authorized_dealer'); ?></span>
               <span class="badge"><?php echo svic_translate_html('core.badges.ships_from_usa'); ?></span>
               <span class="badge"><?php echo svic_translate_html('core.badges.one_year_warranty'); ?></span>

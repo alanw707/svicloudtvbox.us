@@ -85,12 +85,7 @@
             <a class="<?php echo esc_attr($english_link_classes); ?>" href="<?php echo esc_url($english_url); ?>">EN</a>
             <a class="<?php echo esc_attr($chinese_link_classes); ?>" href="<?php echo esc_url($chinese_url); ?>">中文</a>
           </div>
-          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url( svic_url_with_lang( function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart') ) ); ?>">
-            <?php
-              /* translators: Header cart CTA label. Non-breaking space keeps text on one line. */
-              echo wp_kses_post( __( 'View&nbsp;Cart', 'svicloudtvbox-lumen' ) );
-            ?>
-          </a>
+          <?php echo svic_header_cart_link(); ?>
         </div>
         <button class="lumen-header__toggle" type="button" aria-expanded="false" aria-controls="lumen-mobile-nav" data-lumen-toggle>
           <span class="screen-reader-text"><?php esc_html_e('Toggle navigation', 'svicloudtvbox-lumen'); ?></span>
@@ -129,12 +124,7 @@
           <a class="<?php echo esc_attr($english_link_classes); ?>" href="<?php echo esc_url($english_url); ?>">EN</a>
           <a class="<?php echo esc_attr($chinese_link_classes); ?>" href="<?php echo esc_url($chinese_url); ?>">中文</a>
         </div>
-        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url( svic_url_with_lang( function_exists('wc_get_cart_url') ? wc_get_cart_url() : home_url('/cart') ) ); ?>">
-          <?php
-            /* translators: Header cart CTA label. Non-breaking space keeps text on one line. */
-            echo wp_kses_post( __( 'View&nbsp;Cart', 'svicloudtvbox-lumen' ) );
-          ?>
-        </a>
+        <?php echo svic_header_cart_link(); ?>
       </div>
     </div>
   </header>
