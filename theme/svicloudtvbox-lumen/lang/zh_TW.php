@@ -20,6 +20,53 @@ return [
             'one_year_warranty' => '一年美國保固',
         ],
     ],
+    'cart_page' => [
+        'title'             => '購物車',
+        'continue_shopping' => '繼續選購',
+        'empty'             => '您的購物車目前是空的。',
+        'empty_cta'         => '前往選購商品',
+        'table'             => [
+            'thumbnail' => '圖片',
+            'product'   => '商品',
+            'price'     => '單價',
+            'quantity'  => '數量',
+            'total'     => '小計',
+        ],
+        'meta'              => [
+            'authorized' => '美國授權經銷商',
+            'shipping'   => '48 小時內出貨',
+            'warranty'   => '一年美國保固',
+        ],
+        'remove'            => '移除商品',
+        'remove_aria'       => '從購物車移除 %s',
+        'update'            => '更新購物車',
+        'coupon'            => [
+            'label'       => '優惠代碼',
+            'placeholder' => '輸入優惠代碼',
+            'apply'       => '套用',
+            'hint'        => '優惠代碼需區分大小寫，留白也能繼續結帳。',
+        ],
+        'summary'           => [
+            'title' => '訂單摘要',
+            'intro'        => '美國加州倉庫快速出貨，提供雙語禮賓服務。',
+            'empty'        => '加入商品後，這裡會顯示出貨方式、保固與結帳金額。',
+            'reassurance'  => '支援 PayPal、Visa、Mastercard 與 American Express 安全結帳。',
+        ],
+        'benefits'          => [
+            'shipping' => [
+                'title' => '快速出貨',
+                'copy'  => '每個工作天 48 小時內從加州倉庫寄出。',
+            ],
+            'warranty' => [
+                'title' => '美國保固',
+                'copy'  => '所有 SVICLOUD 盒子皆享有一年美國保固。',
+            ],
+            'concierge' => [
+                'title' => '雙語禮賓',
+                'copy'  => '中英文專員協助安裝、更新與排解問題。',
+            ],
+        ],
+    ],
     'footer' => [
         'tagline'   => '美國授權經銷 · 加州倉儲配送',
         'summary'   => '加州倉庫快速配送，暢看中美熱門節目並享有原廠保固。',
