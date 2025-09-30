@@ -20,6 +20,53 @@ return [
             'one_year_warranty' => '1-Year US Warranty',
         ],
     ],
+    'cart_page' => [
+        'title'             => 'Your cart',
+        'continue_shopping' => 'Continue shopping',
+        'empty'             => 'Your cart is currently empty.',
+        'empty_cta'         => 'Browse products',
+        'table'             => [
+            'thumbnail' => 'Item',
+            'product'   => 'Product',
+            'price'     => 'Price',
+            'quantity'  => 'Quantity',
+            'total'     => 'Total',
+        ],
+        'meta'              => [
+            'authorized' => 'Authorized U.S. Dealer',
+            'shipping'   => '48-hour U.S. shipping',
+            'warranty'   => '1-Year U.S. warranty',
+        ],
+        'remove'            => 'Remove item',
+        'remove_aria'       => 'Remove %s from cart',
+        'update'            => 'Update cart',
+        'coupon'            => [
+            'label'       => 'Promo code',
+            'placeholder' => 'Enter code',
+            'apply'       => 'Apply',
+            'hint'        => 'Codes are case-sensitive. Leaving this blank won’t affect checkout.',
+        ],
+        'summary'           => [
+            'title' => 'Order summary',
+            'intro'        => 'Ships from our California warehouse with bilingual concierge support.',
+            'empty'        => 'Add a device to see shipping speeds, warranty coverage, and your estimated total.',
+            'reassurance'  => 'Secure checkout with PayPal, Visa, Mastercard, and American Express.',
+        ],
+        'benefits'          => [
+            'shipping' => [
+                'title' => 'Fast fulfillment',
+                'copy'  => 'Orders leave California within 48 hours on business days.',
+            ],
+            'warranty' => [
+                'title' => 'U.S. warranty',
+                'copy'  => 'Every SVICLOUD box includes a 1-year U.S. warranty.',
+            ],
+            'concierge' => [
+                'title' => 'Concierge support',
+                'copy'  => 'Bilingual experts help install, update, and troubleshoot.',
+            ],
+        ],
+    ],
     'footer' => [
         'tagline'   => 'Authorized U.S. distributor · California fulfillment',
         'summary'   => 'Stream top Chinese and global entertainment with California-based fulfillment and warranty support.',

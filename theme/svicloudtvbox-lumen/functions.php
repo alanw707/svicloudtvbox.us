@@ -69,6 +69,10 @@ add_action('after_setup_theme', function () {
 });
 
 // Enqueue assets
+
+add_filter('woocommerce_has_cart_block', '__return_false', 5);
+add_filter('woocommerce_has_checkout_block', '__return_false', 5);
+
 add_action('wp_enqueue_scripts', function () {
     $theme_version = wp_get_theme()->get('Version');
 
