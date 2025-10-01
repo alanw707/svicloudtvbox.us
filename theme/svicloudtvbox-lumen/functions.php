@@ -89,9 +89,23 @@ add_action('wp_enqueue_scripts', function () {
         }
     }
 
-    $css_file = get_template_directory() . '/assets/css/style.css';
-    $css_mtime = file_exists($css_file) ? (int) filemtime($css_file) : 0;
-    $css_version = $deploy_version ? max($deploy_version, $css_mtime) : ($css_mtime ?: $theme_version);
+    $css_files = [
+        'style'       => 'assets/css/style.css',
+        'front-page'  => 'assets/css/front-page.css',
+        'compare'     => 'assets/css/compare.css',
+        'woocommerce' => 'assets/css/woocommerce.css',
+    ];
+
+    $css_versions = [];
+    foreach ($css_files as $key => $relative_path) {
+        $full_path = get_template_directory() . '/' . $relative_path;
+        if (! file_exists($full_path)) {
+            continue;
+        }
+
+        $mtime = (int) filemtime($full_path);
+        $css_versions[$key] = $deploy_version ? max($deploy_version, $mtime) : ($mtime ?: $theme_version);
+    }
 
     $js_file = get_template_directory() . '/assets/js/theme.js';
     $js_mtime = file_exists($js_file) ? (int) filemtime($js_file) : 0;
@@ -105,13 +119,57 @@ add_action('wp_enqueue_scripts', function () {
         null
     );
 
-    // Theme styles
-    wp_enqueue_style(
-        'svicloudtvbox-style',
-        get_template_directory_uri() . '/assets/css/style.css',
-        ['svicloudtvbox-fonts'],
-        $css_version
-    );
+    // Base theme styles
+    if (isset($css_versions['style'])) {
+        wp_enqueue_style(
+            'svicloudtvbox-style',
+            get_template_directory_uri() . '/assets/css/style.css',
+            ['svicloudtvbox-fonts'],
+            $css_versions['style']
+        );
+    }
+
+    // Homepage / marketing bundle
+    $is_front_page = is_front_page() || is_page_template('front-page.php');
+    if ($is_front_page && isset($css_versions['front-page'])) {
+        wp_enqueue_style(
+            'svicloudtvbox-front-page',
+            get_template_directory_uri() . '/assets/css/front-page.css',
+            ['svicloudtvbox-style'],
+            $css_versions['front-page']
+        );
+    }
+
+    // Compare table bundle
+    $is_compare_page = is_page_template('page-compare.php') || is_page('compare');
+    if ($is_compare_page && isset($css_versions['compare'])) {
+        wp_enqueue_style(
+            'svicloudtvbox-compare',
+            get_template_directory_uri() . '/assets/css/compare.css',
+            ['svicloudtvbox-style'],
+            $css_versions['compare']
+        );
+    }
+
+    // WooCommerce bundle
+    $is_woo_request = false;
+    if (class_exists('WooCommerce')) {
+        foreach (['is_woocommerce', 'is_cart', 'is_checkout', 'is_account_page'] as $fn) {
+            if (function_exists($fn) && $fn()) {
+                $is_woo_request = true;
+                break;
+            }
+        }
+    }
+
+    if ($is_woo_request && isset($css_versions['woocommerce'])) {
+        wp_enqueue_style(
+            'svicloudtvbox-woocommerce',
+            get_template_directory_uri() . '/assets/css/woocommerce.css',
+            ['svicloudtvbox-style'],
+            $css_versions['woocommerce']
+        );
+    }
 
     // Theme script
     wp_enqueue_script(

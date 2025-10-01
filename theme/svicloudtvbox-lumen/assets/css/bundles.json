@@ -1,0 +1,41 @@
+{
+  "style": {
+    "label": "Global base styles",
+    "output": "style.css",
+    "parts": [
+      "00-tokens.css",
+      "10-header.css",
+      "12-header.css",
+      "20-navigation.css",
+      "60-pages.css",
+      "80-footer.css",
+      "90-utilities.css"
+    ]
+  },
+  "front-page": {
+    "label": "Homepage and marketing sections",
+    "output": "front-page.css",
+    "parts": [
+      "30-hero.css",
+      "32-hero-dashboard.css",
+      "40-cards.css",
+      "40-lumen-sections.css",
+      "41-frontpage-helpers.css"
+    ]
+  },
+  "compare": {
+    "label": "Compare page",
+    "output": "compare.css",
+    "parts": [
+      "60-lumen-compare.css"
+    ]
+  },
+  "woocommerce": {
+    "label": "WooCommerce views",
+    "output": "woocommerce.css",
+    "parts": [
+      "50-woocommerce.css",
+      "70-lumen-woocommerce.css"
+    ]
+  }
+}

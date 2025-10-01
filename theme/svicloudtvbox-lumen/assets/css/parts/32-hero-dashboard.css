@@ -714,11 +714,3 @@
   }
 }
 
-  50% {
-    transform: rotate(-5deg) translate3d(5px, 4px, 0);
-  }
-
-  100% {
-    transform: rotate(-8deg) translate3d(-4px, -3px, 0);
-  }
-}

@@ -1,0 +1,24 @@
+/* ==========================================
+   HOMEPAGE ANIMATIONS & LAYOUT HELPERS
+   ========================================== */
+
+/* Staggered fade-in for marquee cards */
+.trust-badge, .product-card, .feature-card { animation: fadeInUp 0.4s ease-out; }
+.trust-badge:nth-child(1) { animation-delay: 0.1s; }
+.trust-badge:nth-child(2) { animation-delay: 0.2s; }
+.trust-badge:nth-child(3) { animation-delay: 0.3s; }
+.trust-badge:nth-child(4) { animation-delay: 0.4s; }
+.product-card:nth-child(1) { animation-delay: 0.2s; }
+.product-card:nth-child(2) { animation-delay: 0.4s; }
+
+/* Trust badge grid */
+.trust-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+@media (min-width: 900px) {
+  .trust-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Product card deck */
+.product-cards { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+@media (min-width: 900px) {
+  .product-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

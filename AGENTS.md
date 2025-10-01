@@ -1,22 +1,40 @@
 # Repository Guidelines
 
-## Project Structure & Module Organization
-The WordPress theme lives in `theme/svicloudtvbox/`, with templates in PHP (`front-page.php`, `page-compare.php`, WooCommerce overrides inside `woocommerce/`). Shared layout pieces are `header.php` and `footer.php`; fallback routing depends on `index.php` and `404.php`. Static assets compile from `theme/svicloudtvbox/assets/`, where `css/style.css` stores utility tokens and `js/theme.js` powers interactive widgets. Repo-level `assets/` contains marketing renders, `reference/` archives design inspiration, and `scripts/` houses packaging and deploy utilities.
+## Project Structure & Assets
+- Primary theme lives in `theme/svicloudtvbox-lumen/`; legacy assets remain under `theme/shared/` if needed.
+- PHP entry points: `front-page.php`, `page-compare.php`, `page-about.php`, WooCommerce overrides in `woocommerce/`, and shared layout via `header.php` / `footer.php`.
+- CSS source lives in `theme/svicloudtvbox-lumen/assets/css/parts/`. Partials are grouped by numeric prefixes (e.g., `30-hero.css`, `40-lumen-sections.css`) and bundled via `bundles.json` into multiple outputs:
+  - `style.css` → global/base styles (tokens, header/nav, utilities).
+  - `front-page.css` → homepage + marketing sections.
+  - `compare.css` → compare table experience.
+  - `woocommerce.css` → PDP, catalog, cart/checkout styling.
+- JavaScript for interactive behaviour is in `assets/js/theme.js`; keep it dependency-free and guard against missing DOM nodes.
+- Generated artifacts (`style.css`, `front-page.css`, etc.) should never be edited directly—always adjust the partials, rebuild, then sync.
 
-## Build, Test, and Development Commands
-- `python3 scripts/zip_theme.py` — rebuilds the distributable ZIP before handoff or deployment.
-- `./scripts/deploy-theme.sh --dry-run` — previews FTPS changes; always run before production sync.
-- `./scripts/deploy-theme.sh --delete-remote` — publishes updates and prunes retired files. Both scripts read `.env` for FTPS credentials.
-Spin up a local WordPress instance with the theme active for verification; no automated test harness exists yet.
+## Build & Sync Workflow
+1. Rebuild CSS bundles whenever partials change:
+   - `python3 scripts/build_css.py --theme svicloudtvbox-lumen` (minified default).
+   - Use `--bundle front-page --pretty` while iterating on a specific bundle.
+2. Refresh the distributable before handoff or deployment: `python3 scripts/zip_theme.py`.
+3. **Always** push changes into the local Docker WordPress instance after rebuilding: `./scripts/sync_theme_container.sh`.
+4. Deployment preview/publish (FTPS) remains via:
+   - `./scripts/deploy-theme.sh --dry-run`
+   - `./scripts/deploy-theme.sh --delete-remote`
+   Both scripts read `.env` for credentials.
 
-## Coding Style & Naming Conventions
-Follow WordPress PHP standards: four-space indentation, inline braces, and sanitized output via `esc_html__`, `wp_kses_post`, or `esc_url`. Prefix custom helpers and hooks with `svic_`. Template markup must stay semantic and translation-ready. CSS utilities follow `hero-*`, `bundle-card-*`, and mobile variants; shared variables live in the `:root` block of `assets/css/style.css`. JavaScript in `assets/js/theme.js` remains dependency-free and guards against missing DOM nodes.
+## Coding Standards
+- Follow WordPress PHP standards (4-space indent, inline braces). Sanitize output with `esc_html__`, `esc_url`, `wp_kses_post`, etc. Prefix helper functions/hooks with `svic_`.
+- CSS naming mirrors section context (`hero-*`, `lumen-certification__*`, `bundle-card-*`). Keep shared variables in the `:root` token block. Document new partials in `bundles.json` so they bundle correctly.
+- When introducing route-specific styles, prefer creating a new partial and adding it to an existing bundle (or defining a new bundle) rather than expanding global CSS.
 
-## Testing Guidelines
-Manually smoke-test the homepage hero carousel, pricing grid toggles, concierge accordion, and dark-mode switch across desktop and mobile widths. Load `/product/svicloud-10p-plus/` and `/product/svicloud-10s/` to ensure no fatal PHP errors, then confirm `/compare/` table content, WooCommerce add-to-cart flows, cart redirects, favicon responses, and console cleanliness. Document steps taken and capture before/after screenshots when styles shift.
+## Testing Checklist
+- Homepage: hero carousel, certification section, metrics strip, pricing toggles, concierge accordion, dark-mode switch.
+- Compare flow: `/compare/` table + mobile cards.
+- WooCommerce: `/product/svicloud-10p-plus/`, `/product/svicloud-10s/`, add-to-cart/cart/checkout redirects.
+- General: favicon responses, console cleanliness (desktop + mobile widths).
+- Capture before/after screenshots when UI shifts; note manual QA steps in PRs.
 
-## Commit & Pull Request Guidelines
-Use Conventional Commits (e.g., `feat(theme): improve hero carousel autoplay`). Group related PHP, CSS, and asset changes, squashing incidental fix-ups. PRs must summarize customer impact, reference the Notion or Trello ticket, attach desktop and mobile screenshots, and list manual QA steps (including PDP load + checkout). Request review before running deployment scripts unless you are the release PIC.
-
-## Security & Configuration Tips
-Keep FTPS secrets inside `.env` and `.ftppass`; never hardcode credentials. Inspect ZIP artifacts before deploy to avoid shipping PSDs or cache files. Centralize SEO and preload edits in `header.php` to prevent duplicates and ease future schema expansions.
+## Git & Collaboration
+- Use Conventional Commits (`feat(theme): …`, `fix(css): …`). Group related PHP/CSS/assets in single commits.
+- Keep `main` clean—branch for feature work (e.g., `feat/css-bundles`) and open PRs summarising customer impact, linking to Notion/Trello tickets, attaching desktop/mobile screenshots, and listing manual QA steps.
+- Inspect the ZIP artifact prior to deploy to avoid shipping PSDs/cache files; secrets stay in `.env` / `.ftppass`.
