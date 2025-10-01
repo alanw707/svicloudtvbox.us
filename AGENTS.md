@@ -24,6 +24,7 @@
 
 ## Coding Standards
 - Follow WordPress PHP standards (4-space indent, inline braces). Sanitize output with `esc_html__`, `esc_url`, `wp_kses_post`, etc. Prefix helper functions/hooks with `svic_`.
+- Ensure new styles land in dedicated partials; update `bundles.json` so no one drops large edits directly into generated `style.css`.
 - CSS naming mirrors section context (`hero-*`, `lumen-certification__*`, `bundle-card-*`). Keep shared variables in the `:root` token block. Document new partials in `bundles.json` so they bundle correctly.
 - When introducing route-specific styles, prefer creating a new partial and adding it to an existing bundle (or defining a new bundle) rather than expanding global CSS.
 
