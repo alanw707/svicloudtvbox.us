@@ -1,0 +1,70 @@
+/* ==========================================
+   ABOUT PAGE TIMELINE
+   ========================================== */
+
+.about-timeline {
+  padding: clamp(4rem, 8vw, 6.5rem) 0;
+}
+
+.about-timeline__inner {
+  width: var(--max-width-hero);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(var(--space-lg), 6vw, var(--space-xl));
+}
+
+.about-section-header {
+  display: grid;
+  gap: var(--space-sm);
+  text-align: center;
+}
+
+.about-section-badge {
+  display: inline-flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(126, 246, 227, 0.28);
+  background: rgba(7, 24, 58, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--lumen-text-secondary);
+}
+
+.about-timeline__grid {
+  display: grid;
+  gap: clamp(1.5rem, 5vw, 2.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.about-timeline__item {
+  position: relative;
+  padding: clamp(1.4rem, 4vw, 1.9rem);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(126, 246, 227, 0.14);
+  background: rgba(6, 20, 48, 0.74);
+  box-shadow: 0 20px 44px rgba(4, 12, 32, 0.48);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.about-timeline__year {
+  font-family: var(--font-accent);
+  font-size: 1.6rem;
+  color: var(--lumen-accent-teal);
+}
+
+.about-timeline__headline {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--lumen-text-primary);
+}
+
+.about-timeline__copy {
+  margin: 0;
+  color: var(--lumen-text-secondary);
+  line-height: 1.65;
+}

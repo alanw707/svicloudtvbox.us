@@ -1,0 +1,77 @@
+/* ==========================================
+   ABOUT PAGE CONCIERGE SUPPORT
+   ========================================== */
+
+.about-concierge {
+  padding: clamp(4rem, 8vw, 6rem) 0 clamp(4.5rem, 9vw, 6.5rem);
+  background: linear-gradient(145deg, rgba(9, 28, 62, 0.94), rgba(12, 42, 84, 0.9));
+  position: relative;
+  overflow: hidden;
+}
+
+.about-concierge::before {
+  content: "";
+  position: absolute;
+  inset: -30% -10% auto;
+  height: clamp(320px, 50vw, 420px);
+  background: radial-gradient(circle at center, rgba(94, 230, 208, 0.25), transparent 70%);
+  filter: blur(26px);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.about-concierge__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: clamp(var(--space-lg), 6vw, var(--space-xl));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  align-items: center;
+}
+
+.about-concierge__copy {
+  display: grid;
+  gap: clamp(var(--space-sm), 3vw, var(--space-md));
+}
+
+.about-concierge__title {
+  color: var(--lumen-text-primary);
+}
+
+.about-concierge__lead {
+  color: var(--lumen-text-secondary);
+}
+
+.about-concierge__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+  color: var(--lumen-text-secondary);
+}
+
+.about-concierge__list li {
+  position: relative;
+  padding-left: 1.6rem;
+}
+
+.about-concierge__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.9em;
+  transform: translateY(-50%);
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(94, 230, 208, 0.92), rgba(66, 194, 255, 0.82));
+  box-shadow: 0 0 12px rgba(94, 230, 208, 0.35);
+}
+
+.about-concierge__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  justify-content: flex-start;
+}

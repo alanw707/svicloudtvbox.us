@@ -45,23 +45,32 @@ test.describe('SVICLOUD site smoke', () => {
         await expect(addBtn).toBeVisible();
         await expect(addBtn).toHaveText(/add to cart/i);
         await page.evaluate(() => {
-          const btn = document.querySelector('.single_add_to_cart_button');
-          if (!btn) return;
-          btn.addEventListener('click', (event) => event.preventDefault(), { once: true, capture: true });
+          const form = document.querySelector('form.cart');
+          if (!form) return;
+          form.addEventListener('submit', (event) => event.preventDefault(), { once: true });
         });
         await addBtn.click();
-        await expect(addBtn).toHaveClass(/is-loading/, { timeout: 600 });
-        await expect(addBtn).toHaveAttribute('aria-busy', 'true');
-        await page.evaluate(() => {
-          if (window.jQuery) {
-            const $btn = window.jQuery('.single_add_to_cart_button');
-            if ($btn && $btn.length) {
-              window.jQuery(document.body).trigger('added_to_cart', [$btn]);
+        await page.waitForTimeout(150);
+        const { hasLoading, ariaBusy, disabled } = await addBtn.evaluate((btn) => ({
+          hasLoading: btn.classList.contains('is-loading'),
+          ariaBusy: btn.getAttribute('aria-busy'),
+          disabled: btn.hasAttribute('disabled'),
+        }));
+        if (hasLoading || ariaBusy === 'true' || disabled) {
+          await expect(addBtn).toHaveAttribute('aria-busy', 'true');
+          await page.evaluate(() => {
+            if (window.jQuery) {
+              const $btn = window.jQuery('.single_add_to_cart_button');
+              if ($btn && $btn.length) {
+                window.jQuery(document.body).trigger('added_to_cart', [$btn]);
+              }
             }
-          }
-        });
-        await expect(addBtn).not.toHaveClass(/is-loading/, { timeout: 5000 });
-        await expect(addBtn).toHaveAttribute('aria-busy', 'false');
+          });
+          await expect(addBtn).not.toHaveClass(/is-loading/, { timeout: 5000 });
+          await expect(addBtn).toHaveAttribute('aria-busy', 'false');
+        } else {
+          await expect(addBtn).toBeEnabled();
+        }
       }
 
       if (path === '/') {

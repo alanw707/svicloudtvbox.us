@@ -1,0 +1,50 @@
+/* ==========================================
+   HOMEPAGE SECTION UTILITIES & RESPONSIVE
+   ========================================== */
+
+@media (max-width: 720px) {
+  .lumen-section-header__subtitle {
+    font-size: 0.98rem;
+  }
+
+  .lumen-feature-card,
+  .lumen-pricing-card {
+    padding: 24px;
+  }
+
+  .lumen-metric {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  body.home .lumen-metrics,
+  body.home .lumen-feature-grid,
+  body.home .lumen-experience,
+  body.home .lumen-pricing {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  body.home .lumen-metrics__inner,
+  body.home .lumen-feature-grid__inner,
+  body.home .lumen-experience__inner,
+  body.home .lumen-pricing__inner {
+    width: 100%;
+    margin: 0;
+    padding: 0 clamp(18px, 6vw, 24px);
+    box-sizing: border-box;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lumen-feature-card,
+  .lumen-pricing-card,
+  .lumen-metric,
+  .lumen-feature-card__icon,
+  .lumen-feature-card__icon img,
+  .lumen-experience__icon,
+  .lumen-experience__icon img {
+    transition-duration: 0ms !important;
+  }
+}

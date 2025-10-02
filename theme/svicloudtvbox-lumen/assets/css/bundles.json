@@ -4,8 +4,10 @@
     "output": "style.css",
     "parts": [
       "00-tokens.css",
-      "10-header.css",
-      "12-header.css",
+      "12-header-base.css",
+      "13-header-actions.css",
+      "14-header-mobile.css",
+      "15-header-motion.css",
       "20-navigation.css",
       "60-pages.css",
       "80-footer.css",
@@ -17,9 +19,17 @@
     "output": "front-page.css",
     "parts": [
       "30-hero.css",
-      "32-hero-dashboard.css",
+      "32-hero-dashboard-base.css",
+      "33-hero-dashboard-visuals.css",
+      "34-hero-dashboard-animations.css",
       "40-cards.css",
-      "40-lumen-sections.css",
+      "44-lumen-section-header.css",
+      "45-lumen-section-certification.css",
+      "46-lumen-section-metrics.css",
+      "47-lumen-section-feature-grid.css",
+      "48-lumen-section-experience.css",
+      "49-lumen-section-pricing.css",
+      "50-lumen-section-utilities.css",
       "41-frontpage-helpers.css"
     ]
   },
@@ -27,14 +37,25 @@
     "label": "About page",
     "output": "about.css",
     "parts": [
-      "42-about.css"
+      "52-about-base.css",
+      "53-about-hero.css",
+      "54-about-story.css",
+      "55-about-certification.css",
+      "56-about-timeline.css",
+      "57-about-values.css",
+      "58-about-concierge.css",
+      "59-about-responsive.css"
     ]
   },
   "compare": {
     "label": "Compare page",
     "output": "compare.css",
     "parts": [
-      "60-lumen-compare.css"
+      "60-compare-base.css",
+      "61-compare-hero.css",
+      "62-compare-differences.css",
+      "63-compare-products.css",
+      "64-compare-final-cta.css"
     ]
   },
   "woocommerce": {

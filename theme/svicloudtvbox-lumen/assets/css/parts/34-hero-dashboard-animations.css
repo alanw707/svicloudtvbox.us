@@ -1,0 +1,140 @@
+/* ==========================================
+   HERO — DASHBOARD ANIMATIONS & MOTION
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-dashboard,
+  .hero-dashboard__button,
+  .hero-dashboard__badge,
+  .hero-dashboard__background,
+  .hero-dashboard__background *,
+  .hero-dashboard__spark,
+  .hero-dashboard__spark::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+@keyframes heroGlobeFloatLeft {
+  0% {
+    transform: translate3d(-72px, -40px, 0) scale(0.9) rotate(-8deg);
+    opacity: 0.4;
+  }
+
+  40% {
+    transform: translate3d(46px, 28px, 0) scale(1.08) rotate(5deg);
+    opacity: 0.68;
+  }
+
+  70% {
+    transform: translate3d(34px, 92px, 0) scale(1) rotate(-3deg);
+    opacity: 0.58;
+  }
+
+  100% {
+    transform: translate3d(-60px, 44px, 0) scale(0.92) rotate(-6deg);
+    opacity: 0.48;
+  }
+}
+
+@keyframes heroGlobeFloatRight {
+  0% {
+    transform: translate3d(56px, -74px, 0) scale(0.84) rotate(6deg);
+    opacity: 0.34;
+  }
+
+  35% {
+    transform: translate3d(-48px, 82px, 0) scale(1.05) rotate(-4deg);
+    opacity: 0.64;
+  }
+
+  70% {
+    transform: translate3d(-36px, -58px, 0) scale(0.94) rotate(3deg);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate3d(64px, 46px, 0) scale(0.88) rotate(-5deg);
+    opacity: 0.42;
+  }
+}
+
+@keyframes heroGlowSweepTop {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.58;
+  }
+
+  45% {
+    transform: translate3d(-36px, 24px, 0) scale(1.04);
+    opacity: 0.72;
+  }
+
+  70% {
+    transform: translate3d(20px, -16px, 0) scale(0.97);
+    opacity: 0.64;
+  }
+
+  100% {
+    transform: translate3d(-18px, 10px, 0) scale(0.99);
+    opacity: 0.58;
+  }
+}
+
+@keyframes heroGlowSweepBottom {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.55;
+  }
+
+  40% {
+    transform: translate3d(30px, -18px, 0) scale(1.05);
+    opacity: 0.66;
+  }
+
+  68% {
+    transform: translate3d(-24px, 20px, 0) scale(0.95);
+    opacity: 0.58;
+  }
+
+  100% {
+    transform: translate3d(16px, -10px, 0) scale(0.98);
+    opacity: 0.55;
+  }
+}
+
+@keyframes heroSparkDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.92);
+    opacity: 0.5;
+  }
+
+  35% {
+    transform: translate3d(-10px, -5px, 0) scale(1.04);
+    opacity: 0.74;
+  }
+
+  70% {
+    transform: translate3d(8px, 6px, 0) scale(0.9);
+    opacity: 0.56;
+  }
+
+  100% {
+    transform: translate3d(-4px, 2px, 0) scale(0.88);
+    opacity: 0.48;
+  }
+}
+
+@keyframes heroBadgeFloat {
+  0% {
+    transform: rotate(-10deg) translate3d(-12px, -9px, 0);
+  }
+
+  50% {
+    transform: rotate(-4deg) translate3d(8px, 6px, 0);
+  }
+
+  100% {
+    transform: rotate(-10deg) translate3d(-12px, -9px, 0);
+  }
+}

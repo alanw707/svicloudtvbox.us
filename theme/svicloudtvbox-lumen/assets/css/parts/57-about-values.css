@@ -1,0 +1,59 @@
+/* ==========================================
+   ABOUT PAGE VALUES
+   ========================================== */
+
+.about-values {
+  padding: clamp(4rem, 8vw, 6.5rem) 0;
+  background: linear-gradient(160deg, rgba(6, 18, 40, 0.92), rgba(4, 16, 36, 0.9));
+}
+
+.about-values__inner {
+  width: var(--max-width-hero);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(var(--space-lg), 6vw, var(--space-xl));
+}
+
+.about-values__cards {
+  display: grid;
+  gap: clamp(1.5rem, 5vw, 2.25rem);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.about-value-card {
+  padding: clamp(1.6rem, 4.5vw, 2.2rem);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(126, 246, 227, 0.18);
+  background: rgba(6, 22, 50, 0.7);
+  display: grid;
+  gap: 1rem;
+  text-align: left;
+  box-shadow: 0 24px 48px rgba(3, 12, 30, 0.48);
+}
+
+.about-value-card__icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  background: rgba(94, 230, 208, 0.1);
+  border: 1px solid rgba(94, 230, 208, 0.35);
+}
+
+.about-value-card__icon img {
+  width: 28px;
+  height: 28px;
+}
+
+.about-value-card__title {
+  margin: 0;
+  color: var(--lumen-text-primary);
+  font-size: 1.25rem;
+}
+
+.about-value-card__copy {
+  margin: 0;
+  color: var(--lumen-text-secondary);
+  line-height: 1.65;
+}

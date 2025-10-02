@@ -1,0 +1,25 @@
+/* ==========================================
+   HOMEPAGE SECTION HEADER
+   ========================================== */
+
+.lumen-section-header {
+  text-align: center;
+  display: grid;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.lumen-section-header__title {
+  font-family: var(--font-accent);
+  font-size: clamp(2.1rem, 3.6vw, 3rem);
+  letter-spacing: -0.02em;
+  color: var(--lumen-text-primary);
+}
+
+.lumen-section-header__subtitle {
+  max-width: 640px;
+  margin: 0 auto;
+  color: var(--lumen-text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}

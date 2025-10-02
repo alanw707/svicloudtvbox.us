@@ -1,0 +1,60 @@
+/* ==========================================
+   ABOUT PAGE BASE STYLES
+   ========================================== */
+
+.about-page {
+  background: var(--lumen-page-background);
+  color: var(--lumen-text-secondary);
+}
+
+.about-page p,
+.about-page li,
+.about-page dd {
+  color: var(--lumen-text-secondary);
+}
+
+.about-page p strong,
+.about-page li strong,
+.about-page dd strong {
+  color: var(--lumen-text-primary);
+}
+
+.about-page a {
+  color: var(--lumen-accent-azure);
+}
+
+.about-page a:hover,
+.about-page a:focus-visible {
+  color: var(--lumen-accent-teal);
+}
+
+.about-section-title {
+  margin: 0;
+  font-family: var(--font-accent);
+  font-size: clamp(2.1rem, 3.4vw, 3rem);
+  letter-spacing: -0.018em;
+  color: var(--lumen-text-primary);
+}
+
+.about-section-lead {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--lumen-text-secondary);
+}
+
+.about-section-body {
+  display: grid;
+  gap: 1rem;
+  color: var(--lumen-text-secondary);
+  line-height: 1.7;
+}
+
+.about-section-body p {
+  margin: 0;
+  color: rgba(245, 248, 255, 0.98);
+}
+
+.about-section-body p + p {
+  margin-top: clamp(0.75rem, 2.5vw, 1.15rem);
+}

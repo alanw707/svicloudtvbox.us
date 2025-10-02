@@ -1,0 +1,14 @@
+/* ==========================================
+   HEADER MOTION PREFERENCES
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .lumen-header,
+  .lumen-nav__list a,
+  .lumen-pill,
+  .lumen-header__toggle,
+  .lumen-lang-toggle__link,
+  .lumen-mobile-nav__list a {
+    transition-duration: 0ms !important;
+  }
+}
