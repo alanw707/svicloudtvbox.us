@@ -63,6 +63,7 @@
     "output": "woocommerce.css",
     "parts": [
       "50-woocommerce.css",
+      "65-shop.css",
       "70-lumen-woocommerce.css"
     ]
   }

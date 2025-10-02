@@ -72,26 +72,26 @@ foreach ($card_data as $key => $card) {
 
 <main class="page-shell shop-page">
   <header class="page-hero shop-hero">
-    <span class="compare-hero__badge"><?php echo svic_translate_html('shop.hero.badge'); ?></span>
-    <h1 class="compare-hero__title"><?php echo svic_translate_html('shop.hero.title'); ?></h1>
-    <p class="compare-hero__subtitle"><?php echo svic_translate_html('shop.hero.subtitle'); ?></p>
+    <span class="shop-hero__badge"><?php echo svic_translate_html('shop.hero.badge'); ?></span>
+    <h1 class="shop-hero__title"><?php echo svic_translate_html('shop.hero.title'); ?></h1>
+    <p class="shop-hero__subtitle"><?php echo svic_translate_html('shop.hero.subtitle'); ?></p>
   </header>
 
   <section class="shop-products">
-    <div class="compare-products__grid shop-products__grid">
+    <div class="shop-products__grid">
       <?php foreach ($card_data as $key => $card) :
           $price_text = isset($card['price_text']) ? $card['price_text'] : $card['fallback_price'];
           $url = isset($card['url']) ? $card['url'] : $card['fallback_url'];
-          $card_classes = 'compare-product-card shop-product-card';
+          $card_classes = 'shop-product-card';
           if (!empty($card['highlight'])) {
-              $card_classes .= ' compare-product-card--highlight';
+              $card_classes .= ' shop-product-card--highlight';
           }
           if (!empty($card['modifier'])) {
               $card_classes .= ' ' . sanitize_html_class($card['modifier']);
           }
       ?>
         <article class="<?php echo esc_attr($card_classes); ?>">
-          <div class="compare-product-card__header shop-product-card__header">
+          <div class="shop-product-card__header">
             <?php if (!empty($card['badge_key'])) : ?>
               <span class="shop-product-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></span>
             <?php endif; ?>
@@ -102,8 +102,8 @@ foreach ($card_data as $key => $card) {
             <?php if (!empty($card['price_note_key'])) : ?>
               <span class="shop-product-card__price-note"><?php echo svic_translate_html($card['price_note_key']); ?></span>
             <?php endif; ?>
-            <h2 class="compare-product-card__title shop-product-card__title"><?php echo svic_translate_html($card['title_key']); ?></h2>
-            <p class="compare-product-card__lead shop-product-card__lead"><?php echo svic_translate_html($card['lead_key']); ?></p>
+            <h2 class="shop-product-card__title"><?php echo svic_translate_html($card['title_key']); ?></h2>
+            <p class="shop-product-card__lead"><?php echo svic_translate_html($card['lead_key']); ?></p>
             <a class="lumen-pill <?php echo !empty($card['highlight']) ? 'lumen-pill--primary' : 'lumen-pill--ghost'; ?> shop-product-card__cta" href="<?php echo esc_url($url); ?>">
               <?php echo svic_translate_html($card['button_key']); ?>
             </a>

@@ -10,10 +10,3 @@
   gap: clamp(var(--space-2xl), 7vw, var(--space-3xl));
 }
 
-.shop-page {
-  background: linear-gradient(170deg, rgba(4, 9, 23, 0.95) 0%, rgba(8, 20, 45, 0.9) 55%, rgba(15, 34, 70, 0.75) 100%);
-  color: var(--lumen-text-primary);
-  padding: clamp(40px, 6vw, 72px) clamp(20px, 6vw, 64px) clamp(56px, 8vw, 96px);
-  display: grid;
-  gap: clamp(var(--space-2xl), 7vw, var(--space-3xl));
-}
