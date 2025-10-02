@@ -23,6 +23,13 @@
       "41-frontpage-helpers.css"
     ]
   },
+  "about": {
+    "label": "About page",
+    "output": "about.css",
+    "parts": [
+      "42-about.css"
+    ]
+  },
   "compare": {
     "label": "Compare page",
     "output": "compare.css",

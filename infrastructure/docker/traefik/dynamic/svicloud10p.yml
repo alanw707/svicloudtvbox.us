@@ -1,0 +1,13 @@
+http:
+  routers:
+    svicloud10p-http:
+      rule: "Host(`svicloud10p.svic.local`)"
+      service: svicloud10p
+      entryPoints:
+        - web
+
+  services:
+    svicloud10p:
+      loadBalancer:
+        servers:
+          - url: "http://svicloud10p-wp:80"

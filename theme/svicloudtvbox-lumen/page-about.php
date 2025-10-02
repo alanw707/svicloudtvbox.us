@@ -94,7 +94,7 @@ $certificate_asset_url      = file_exists($certificate_asset_path) ? get_templat
       <div class="about-story__copy">
         <h2 class="about-section-title"><?php echo svic_translate_html('about.story.title'); ?></h2>
         <p class="about-section-lead"><?php echo svic_translate_html('about.story.lead'); ?></p>
-        <div class="about-section-body"><?php echo svic_translate_html('about.story.body'); ?></div>
+        <div class="about-section-body"><?php echo wp_kses_post(svic_translate_rich('about.story.body')); ?></div>
       </div>
       <div class="about-story__stats" role="list">
         <?php foreach ($stats as $stat) : ?>

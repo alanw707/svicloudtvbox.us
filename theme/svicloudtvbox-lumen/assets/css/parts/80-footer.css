@@ -33,13 +33,25 @@
 
 .site-footer__glow {
   position: absolute;
-  inset: -18% -8% auto -12%;
+  top: -18%;
+  left: clamp(6rem, 14vw, 18rem);
   width: 480px;
   height: 480px;
   background: radial-gradient(circle at 30% 30%, rgba(94, 230, 208, 0.28), transparent 68%);
   filter: blur(80px);
   opacity: 0.55;
   pointer-events: none;
+  transform: none;
+}
+
+@media (max-width: 900px) {
+  .site-footer__glow {
+    top: -12%;
+    left: 50%;
+    width: clamp(240px, 65vw, 360px);
+    height: clamp(240px, 65vw, 360px);
+    transform: translateX(-50%);
+  }
 }
 
 .footer-shell {
