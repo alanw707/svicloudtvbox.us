@@ -212,12 +212,64 @@ add_action('wp_enqueue_scripts', function () {
     ]);
 });
 
+// Ensure cart totals are calculated before rendering our custom checkout
+// template (especially when we replace the Checkout block content via
+// render_block below). Some environments defer calculation until late in the
+// request; calculating here guarantees the order review shows correct items
+// and totals on first paint.
+add_action('template_redirect', function () {
+    if (function_exists('is_checkout') && is_checkout() && function_exists('WC')) {
+        $wc = WC();
+        if ($wc && isset($wc->cart) && $wc->cart) {
+            try {
+                $wc->cart->calculate_totals();
+            } catch (Throwable $e) {
+                // Avoid breaking the page if a gateway hooks into totals.
+            }
+        }
+    }
+}, 20);
+
+// Redirect to a stable order summary page after purchase.
+// This ensures users always land on the order-received view, even if a gateway
+// or plugin tries to keep them on checkout (which can be confusing when totals
+// were recalculated).
+add_filter('woocommerce_get_checkout_order_received_url', function ($url, $order) {
+    if (! $order || ! is_object($order)) {
+        return $url;
+    }
+
+    // Prefer the canonical checkout "order-received" endpoint with the key.
+    $base = wc_get_page_permalink('checkout');
+    if ($base) {
+        $canonical = wc_get_endpoint_url('order-received', (string) $order->get_id(), $base);
+        $canonical = add_query_arg('key', $order->get_order_key(), $canonical);
+
+        // Preserve language param for our site locales.
+        if (function_exists('svic_url_with_lang')) {
+            $canonical = svic_url_with_lang($canonical);
+        }
+
+        return $canonical;
+    }
+
+    return $url;
+}, 10, 2);
+
 add_filter('render_block', function ($blockContent, $block) {
     if (is_admin()) {
         return $blockContent;
     }
 
     if (! function_exists('is_checkout') || ! is_checkout()) {
+        return $blockContent;
+    }
+
+    if (function_exists('is_order_received_page') && is_order_received_page()) {
+        return $blockContent;
+    }
+
+    if (function_exists('is_checkout_pay_page') && is_checkout_pay_page()) {
         return $blockContent;
     }
 
@@ -399,4 +451,3 @@ add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
 
     return $fragments;
 });
-
