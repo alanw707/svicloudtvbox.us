@@ -2,7 +2,7 @@
 <main class="page-shell">
   <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     <article id="post-<?php the_ID(); ?>" <?php post_class('page-content'); ?>>
-      <?php if (!(function_exists('is_cart') && is_cart())) : ?>
+      <?php if (!((function_exists('is_cart') && is_cart()) || (function_exists('is_checkout') && is_checkout()))) : ?>
         <header class="page-hero">
           <h1 class="page-title"><?php the_title(); ?></h1>
           <?php if (has_excerpt()) : ?>

@@ -212,6 +212,29 @@ add_action('wp_enqueue_scripts', function () {
     ]);
 });
 
+add_filter('render_block', function ($blockContent, $block) {
+    if (is_admin()) {
+        return $blockContent;
+    }
+
+    if (! function_exists('is_checkout') || ! is_checkout()) {
+        return $blockContent;
+    }
+
+    if (!is_array($block) || ($block['blockName'] ?? '') !== 'woocommerce/checkout') {
+        return $blockContent;
+    }
+
+    $checkout = function_exists('WC') ? WC()->checkout() : null;
+
+    ob_start();
+    wc_get_template('checkout/form-checkout.php', [
+        'checkout' => $checkout,
+    ]);
+
+    return ob_get_clean();
+}, 10, 2);
+
 if (!function_exists('svic_theme_favicon_path')) {
     function svic_theme_favicon_path(): string
     {
@@ -308,6 +331,58 @@ add_filter('body_class', function ($classes) {
 
     return array_values($classes);
 });
+
+
+add_filter('woocommerce_countries_allowed_countries', function ($countries) {
+    if (!is_array($countries)) {
+        return $countries;
+    }
+
+    $label = $countries['US'] ?? null;
+
+    if ($label === null && function_exists('WC')) {
+        $wc = WC();
+        if ($wc && isset($wc->countries, $wc->countries->countries['US'])) {
+            $label = $wc->countries->countries['US'];
+        }
+    }
+
+    if ($label === null) {
+        $label = __('United States (US)', 'woocommerce');
+    }
+
+    return ['US' => $label];
+});
+
+add_filter('woocommerce_countries_shipping_countries', function ($countries) {
+    if (!is_array($countries)) {
+        return $countries;
+    }
+
+    $label = $countries['US'] ?? null;
+
+    if ($label === null && function_exists('WC')) {
+        $wc = WC();
+        if ($wc && isset($wc->countries, $wc->countries->countries['US'])) {
+            $label = $wc->countries->countries['US'];
+        }
+    }
+
+    if ($label === null) {
+        $label = __('United States (US)', 'woocommerce');
+    }
+
+    return ['US' => $label];
+});
+
+add_filter('default_checkout_billing_country', function ($country) {
+    return $country ?: 'US';
+});
+
+add_filter('default_checkout_shipping_country', function ($country) {
+    return $country ?: 'US';
+});
+
 
 
 add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {

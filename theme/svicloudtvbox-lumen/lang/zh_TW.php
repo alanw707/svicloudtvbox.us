@@ -67,6 +67,27 @@ return [
             ],
         ],
     ],
+    'checkout_page' => [
+        'badge'    => '安全結帳',
+        'title'    => '完成您的 SVICLOUD 訂單',
+        'subtitle' => '加州倉庫 48 小時內出貨，附英文與中文禮賓服務。',
+        'summary'  => [
+            'title'         => '訂單摘要',
+            'intro'         => '下單前請確認商品、金額與付款方式。',
+            'reassurance'   => 'PayPal、Visa、Mastercard、American Express SSL 加密安全付款。',
+            'order_heading' => '檢視與付款',
+        ],
+        'benefits' => [
+            'shipping'  => '48 小時美國出貨',
+            'warranty'  => '一年美國保固',
+            'concierge' => '英文與中文禮賓支援',
+        ],
+        'assurance' => [
+            'title' => '需要協助嗎？',
+            'copy'  => '客服會寄送物流資訊、安裝指南與中英雙語即時支援。',
+        ],
+    ],
+
     'footer' => [
         'tagline'   => '美國授權經銷 · 加州倉儲配送',
         'summary'   => '加州倉庫快速配送，暢看中美熱門節目並享有原廠保固。',

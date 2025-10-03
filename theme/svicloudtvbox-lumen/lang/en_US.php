@@ -67,6 +67,27 @@ return [
             ],
         ],
     ],
+    'checkout_page' => [
+        'badge'    => 'Secure checkout',
+        'title'    => 'Complete your SVICLOUD order',
+        'subtitle' => 'Ships from California within 48 hours with bilingual concierge support.',
+        'summary'  => [
+            'title'         => 'Order summary',
+            'intro'         => 'Review your items, totals, and payment method before placing your order.',
+            'reassurance'   => 'SSL encrypted checkout with PayPal, Visa, Mastercard, and American Express.',
+            'order_heading' => 'Review & payment',
+        ],
+        'benefits' => [
+            'shipping'  => '48-hour U.S. shipping',
+            'warranty'  => '1-year U.S. warranty',
+            'concierge' => 'English & 中文 concierge support',
+        ],
+        'assurance' => [
+            'title' => 'Need a hand?',
+            'copy'  => 'Our English & 中文 concierge will email tracking, setup tips, and live support once your order ships.',
+        ],
+    ],
+
     'footer' => [
         'tagline'   => 'Authorized U.S. distributor · California fulfillment',
         'summary'   => 'Stream top Chinese and global entertainment with California-based fulfillment and warranty support.',
