@@ -11,14 +11,14 @@ Status: Ready for execution
 
 - Objective: Production-ready WooCommerce storefront on Hostinger matching PRD and Launch Plan.
 - Scope: U.S.-only store, bilingual EN/中文, 1–2 SKUs (10P+ / 10S), custom lightweight theme, privacy/security/SEO/performance per PRD.
-- Assumptions: Domain on Hostinger DNS (optionally Cloudflare), WordPress created, WooCommerce installed, no legacy data.
+- Assumptions: Domain on Hostinger DNS, WordPress created, WooCommerce installed, no legacy data.
 
 ---
 
 ## 2) Hostinger Environment Setup
 
 - PHP/runtime: PHP 8.2; `memory_limit` 512M; `max_execution_time` 120; timezone US/Pacific.
-- SSL/TLS: Issue Let’s Encrypt; force HTTPS; enable HSTS (6–12 months).
+- SSL/TLS: Hostinger auto-provisions Let’s Encrypt; confirm HTTPS works after DNS cutover (no manual setup required).
 - Staging: Create staging subdomain (e.g., `staging.svicloudtvbox.us`) with copy tool; protect via auth.
 - Object cache: If available on plan, enable Redis + LiteSpeed object cache; otherwise page cache only.
 - Cron: Disable WP-cron (`DISABLE_WP_CRON` true); add real cron every 5 min: `wp cron event run --due-now`.
@@ -30,7 +30,7 @@ Status: Ready for execution
 
 ## 3) WordPress Setup
 
-- General: Site language EN (secondary 中文 via TranslatePress), US locale, timezone, week starts Monday.
+- General: Site language EN (secondary 中文 via custom framework), US locale, timezone, week starts Monday.
 - Permalinks: Post name; WooCommerce product permalinks `/shop/%product%`.
 - Users: Separate owner vs. fulfillment role (Shop Manager); enforce 2FA for Admins/Editors.
 - Media: WebP on upload; consistent PDP filenames under `/wp-content/uploads/products/*`.
@@ -67,7 +67,7 @@ Status: Ready for execution
 - Payments: WooCommerce Stripe Gateway (Apple/Google Pay), WooCommerce PayPal
 - Performance: LiteSpeed Cache (page + object cache if Redis), WebP, lazy-load; test minify/merge
 - SEO: Yoast or RankMath (one only)
-- Translation: TranslatePress (EN ↔ 中文, `/zh/` path, manual copy)
+- Translation: Custom bilingual framework (registry + helpers; `/zh/` routing managed in theme)
 - Analytics: Site Kit (GA4/Search Console) or GTM; Meta/TikTok pixel plugin
 - Email: WP Mail SMTP (API transport)
 - Security: reCAPTCHA for login/checkout (e.g., Advanced noCaptcha & invisible reCaptcha); optional 2FA plugin
@@ -86,12 +86,12 @@ Status: Ready for execution
 
 ---
 
-## 7) Bilingual (TranslatePress)
+## 7) Bilingual Framework
 
-- Paths: `/` EN, `/zh/` 中文; ensure canonical/hreflang pairs (`en-US` and `zh`).
-- Content coverage: Homepage, PDPs, Compare, policies, key posts (3 content pieces).
-- Exclusions: Admin pages; avoid translated slugs for critical commerce URLs.
-- QA: Toggle keeps current page; no layout shift; Chinese typography rules applied.
+- Architecture: Custom translation registry files (`lang/en_US.php`, `lang/zh_TW.php`) + helper functions.
+- Locale handling: `?lang=` parameter + `svic_lang` cookie + hreflang output; ensure `/zh/` paths resolved where needed.
+- Coverage: Homepage, PDPs, Compare, policies, priority posts to be maintained in both locales.
+- QA: Verify no layout shifts, typography rules per locale, and analytics segment by language.
 
 ---
 
@@ -151,7 +151,7 @@ Status: Ready for execution
 
 ## 14) Launch & Post-Launch
 
-- Freeze content; take backup; switch Domain/Cloudflare if applicable; purge caches/CDN.
+- Freeze content; take backup; complete DNS cutover if needed; purge caches/CDN.
 - Enable production ads (brand/model); set negative keywords; monitor KPIs.
 - Post-purchase review flow live (email/SMS); weekly KPI rollup sheet.
 

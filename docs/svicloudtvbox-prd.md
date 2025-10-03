@@ -85,7 +85,7 @@ SVICLOUDTVBOX.US will sell the SVICLOUD 10P+ and 10S TV boxes as an **authorized
 **AC:** Transaction recorded in GA4; email receipt delivered; order visible in admin.
 
 ### 6.2 Language Toggle
-- Toggle EN/中文 (TranslatePress) keeps user on the same page path (adds `/zh/`).
+- Toggle EN/中文 via custom language switch keeps user on the same page path (adds `/zh/`).
 **AC:** `hreflang` present; Chinese text rendered without layout shift.
 
 ### 6.3 Shipping & Tracking
@@ -116,7 +116,7 @@ SVICLOUDTVBOX.US will sell the SVICLOUD 10P+ and 10S TV boxes as an **authorized
 - **Payments:** Stripe, PayPal (Apple/Google Pay via Stripe).  
 - **Shipping/Labels:** Pirate Ship or Shippo (USPS/UPS).  
 - **Email/SMS:** SMTP provider (SendGrid/Mailgun); optional SMS for tracking.  
-- **Translation:** TranslatePress.  
+- **Translation:** Custom bilingual framework (registry + helpers).  
 - **SEO:** Yoast/RankMath.  
 - **Caching:** LiteSpeed Cache.
 

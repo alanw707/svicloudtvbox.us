@@ -19,8 +19,7 @@
 
 ## 1) Project Checklist (print & check)
 
-- [ ] Domain DNS to Hostinger (A/AAAA/CNAME) + **Cloudflare** (optional)  
-- [ ] TLS (HTTPS) issued, **HSTS** on  
+- [ ] Domain DNS managed in Hostinger (A/AAAA/CNAME)  
 - [x] WordPress + WooCommerce installed (US locale, USD)  
 - [x] Custom SVICLOUD Lumen theme activated  
 - [ ] Plugins: WooCommerce, Woo Stripe Gateway (Apple/Google Pay), PayPal, LiteSpeed Cache, Yoast/RankMath, WP Mail SMTP, reCAPTCHA  
@@ -72,7 +71,7 @@
 - **Fonts:** Inter (EN) + Noto Sans SC/TC (中文).  
 - **Buttons/CTAs:** high contrast; primary “Add to Cart” always visible on PDP.  
 - **Images:** clean device shots on white; 1 lifestyle hero; a 30–45s unbox/plug‑in clip.  
-- **Bilingual:** Custom translation framework planned (see `docs/svicloudtvbox-i18n-plan.md`); interim bilingual spans live.  
+- **Bilingual:** Custom translation framework in progress (see `docs/svicloudtvbox-i18n-plan.md`); TranslatePress no longer used.  
 - **Speed:** avoid heavy page builders; use block editor and native sections.
 
 ---

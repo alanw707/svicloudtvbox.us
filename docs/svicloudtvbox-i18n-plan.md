@@ -65,14 +65,16 @@ Building a bespoke layer keeps us in control of copy, styling, and future integr
 |----|----------|------|-------------|------|--------|
 | I18N-01 | Discovery | Inventory all bilingual spans, copy blocks, WooCommerce strings, JS messages | Audit report + string key map draft | 1d | ✅ Completed (2025-04-07) |
 | I18N-02 | Discovery | Define key taxonomy, locale codes, and storage schema | Architecture doc addendum | 0.5d | ✅ Completed (2025-04-07) |
-| I18N-03 | Infrastructure | Implement translation registry loader + helpers (`svic_translate`, `svic_rich_text`) | PHP service class + unit tests | 1.5d | Todo |
+| I18N-03 | Infrastructure | Implement translation registry loader + helpers (`svic_translate`, `svic_rich_text`) | PHP service class + unit tests | 1.5d | ✅ Completed (2025-10-03) |
 | I18N-04 | Infrastructure | Build language state middleware (query, cookie, browser detect) via `determine_locale` hook | Functions hooked into theme bootstrap | 1d | ✅ Completed (2025-04-07) |
 | I18N-05 | Infrastructure | Create admin translations settings page and register language files | Admin UI + options, docs | 1d | Todo |
-| I18N-06 | Templates | Replace `svic_bilingual_span` usage across PHP templates with new helpers | Updated templates + regression checklist | 3d | Todo |
-| I18N-07 | Templates | Adapt WooCommerce overrides and menus to translation helper | Refreshed WooCommerce templates | 1d | Todo |
-| I18N-08 | Templates | Update JS bundles to pull localized strings (via localized script data) | JS modules + smoke tests | 1d | Todo |
+| I18N-06 | Templates | Replace `svic_bilingual_span` usage across PHP templates with new helpers | Updated templates + regression checklist | 3d | ✅ Completed (2025-10-03) |
+| I18N-07 | Templates | Adapt WooCommerce overrides and menus to translation helper | Refreshed WooCommerce templates | 1d | ✅ Completed (2025-10-03) |
+| I18N-08 | Templates | Update JS bundles to pull localized strings (via localized script data) | JS modules + smoke tests | 1d | ✅ Completed (2025-10-03) |
 | I18N-09 | Content Workflow | Add bilingual meta boxes for posts/products + REST exposure | CPT/panel changes + docs | 1.5d | Todo |
 | I18N-10 | Content Workflow | Build migration script to backfill zh meta + registry from existing copy | CLI/one-off script | 0.5d | Todo |
+| I18N-15 | Templates | Localize fallback WP strings (404, nav toggle, menu fallback) via translation registry | Fallback strings translated in both locales | 0.5d | Todo |
+| I18N-16 | Infrastructure | Support `/zh/` path routing and surface hreflang sitemap entries | Rewrite rules + QA evidence | 1d | Todo |
 | I18N-11 | QA | Extend Playwright suite with language toggle coverage | New Playwright tests | 1d | Todo |
 | I18N-12 | QA | Validate SEO artifacts (hreflang, sitemap, meta tags, analytics) | QA report | 0.5d | Todo |
 | I18N-13 | Rollout | Stage deploy + regression checklist + FTPS push | Deployment notes | 1d | Todo |

@@ -7,7 +7,7 @@ Status: Ready for use
 
 ## 0) TL;DR
 
-- Use both: Local WP for theme/CSS/JS work; Hostinger staging for Stripe/Apple Pay, TranslatePress, LiteSpeed cache, and pixels.  
+- Use both: Local WP for theme/CSS/JS work; Hostinger staging for Stripe/Apple Pay, bilingual QA, LiteSpeed cache, and pixels.  
 - Recommended local stack: DDEV (Docker) or LocalWP. Validate payments, caching, and bilingual paths on staging, not purely local.
 
 ---
@@ -20,7 +20,7 @@ Status: Ready for use
   - GA4 in DebugView only; GTM preview enabled
 - Staging (Hostinger):
   - URL: `https://staging.svicloudtvbox.us` with HTTP auth  
-  - Stripe/PayPal in Test mode; Apple Pay domain association; TranslatePress `/zh/` path; LiteSpeed Cache on  
+  - Stripe/PayPal in Test mode; Apple Pay domain association; bilingual `/zh/` routing; LiteSpeed Cache on  
   - GA4 + pixels fire; cache/CDN behavior verified
 - Production:
   - Live payment keys; reCAPTCHA on; 2FA enforced; performance budgets monitored
@@ -139,7 +139,7 @@ If you are using the dockerized local stack from this repo, run the helper scrip
 ## 7) Caching, Bilingual, and Pixels
 
 - LiteSpeed Cache: On staging, enable page/object cache (if Redis), image WebP/lazy-load; test minify/defers.  
-- TranslatePress: Configure `/zh/` language; ensure `hreflang en-US` and `zh` pairs; validate toggle keeps same URL path.  
+- Bilingual framework: Ensure translation registry loads; `svic_lang` cookie set; `hreflang en-US` and `zh` pairs valid; toggle keeps same URL path.  
 - GA4 & Ad Pixels: Use DebugView/preview locally; verify actual purchase events on staging.
 
 ---
@@ -190,7 +190,7 @@ ddev wp search-replace 'https://staging.svicloudtvbox.us' 'https://svicloudtvbox
 ## 11) Acceptance Criteria for Dev Env
 
 - Local site runs with custom theme active; WooCommerce installed.  
-- Staging mirrors local with HTTP auth; TranslatePress `/zh/` present with `hreflang`.  
+- Staging mirrors local with HTTP auth; bilingual `/zh/` paths and hreflang live.  
 - Stripe/PayPal test purchases succeed on staging; emails delivered.  
 - LiteSpeed cache settings verified; mobile LCP < 2.5s on staging.
 
