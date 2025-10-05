@@ -29,6 +29,74 @@ foreach ($svic_helper_paths as $helper_path) {
     }
 }
 
+add_filter('wp_nav_menu_objects', function ($items, $args) {
+    if (!is_array($items) || !$items) {
+        return $items;
+    }
+
+    $location = $args->theme_location ?? null;
+    $supported_locations = apply_filters('svic_translated_menu_locations', ['primary']);
+
+    if (!$location || !in_array($location, (array) $supported_locations, true)) {
+        return $items;
+    }
+
+    $menu_key_map = [
+        'home'        => 'header.nav.home',
+        'compare'     => 'header.nav.compare',
+        'svicloud-10p-plus' => 'header.nav.ten_p',
+        'svicloud-10p'      => 'header.nav.ten_p',
+        'svicloud-10s'      => 'header.nav.ten_s',
+        'contact'     => 'header.nav.concierge',
+        'concierge'   => 'header.nav.concierge',
+        'guides'      => 'header.nav.guides',
+        'guide'       => 'header.nav.guides',
+        'about'       => 'header.nav.about',
+        'account'     => 'header.nav.account',
+        'my-account'  => 'header.nav.account',
+    ];
+
+    foreach ($items as $item) {
+        if (!($item instanceof WP_Post)) {
+            continue;
+        }
+
+        $slug_candidates = [];
+
+        if (!empty($item->post_name)) {
+            $slug_candidates[] = sanitize_title($item->post_name);
+        }
+
+        if (!empty($item->title)) {
+            $slug_candidates[] = sanitize_title($item->title);
+        }
+
+        if (!empty($item->url)) {
+            $path = preg_replace('#/+#', '/', trim((string) parse_url($item->url, PHP_URL_PATH), '/'));
+            if ($path !== '') {
+                $segments = explode('/', $path);
+                $slug_candidates[] = sanitize_title(end($segments));
+            }
+        }
+
+        $slug_candidates = array_filter(array_unique($slug_candidates));
+
+        foreach ($slug_candidates as $slug) {
+            if (!isset($menu_key_map[$slug])) {
+                continue;
+            }
+
+            $translated = svic_translate($menu_key_map[$slug]);
+            if (is_string($translated) && $translated !== '') {
+                $item->title = $translated;
+                break;
+            }
+        }
+    }
+
+    return $items;
+}, 20, 2);
+
 add_filter('nav_menu_link_attributes', function ($atts, $item, $args, $depth) {
     if (is_admin()) {
         return $atts;

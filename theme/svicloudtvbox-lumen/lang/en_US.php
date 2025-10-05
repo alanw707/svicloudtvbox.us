@@ -88,6 +88,21 @@ return [
         ],
     ],
 
+    'header' => [
+        'nav' => [
+            'home'     => 'Home',
+            'compare'  => 'Compare',
+            'ten_p'    => 'SVICLOUD 10P+',
+            'ten_s'    => 'SVICLOUD 10S',
+            'concierge'=> 'Concierge',
+            'guides'   => 'Guides',
+            'about'    => 'About',
+            'account'  => 'Account',
+            'my-account' => 'Account',
+        ],
+    ],
+
+
     'footer' => [
         'tagline'   => 'Authorized U.S. distributor · California fulfillment',
         'summary'   => 'Stream top Chinese and global entertainment with California-based fulfillment and warranty support.',

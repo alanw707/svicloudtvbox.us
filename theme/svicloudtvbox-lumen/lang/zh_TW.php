@@ -88,6 +88,21 @@ return [
         ],
     ],
 
+    'header' => [
+        'nav' => [
+            'home'     => '首頁',
+            'compare'  => '比較機型',
+            'ten_p'    => 'SVICLOUD 10P+ 旗艦款',
+            'ten_s'    => 'SVICLOUD 10S 輕巧款',
+            'concierge'=> '禮賓客服',
+            'guides'   => '使用指南',
+            'about'    => '品牌故事',
+            'account'  => '會員中心',
+            'my-account' => '會員中心',
+        ],
+    ],
+
+
     'footer' => [
         'tagline'   => '美國授權經銷 · 加州倉儲配送',
         'summary'   => '加州倉庫快速配送，暢看中美熱門節目並享有原廠保固。',

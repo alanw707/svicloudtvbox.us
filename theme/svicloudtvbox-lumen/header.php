@@ -36,6 +36,29 @@
     if ( $has_custom_logo && $custom_logo_id ) {
         $logo_classes[] = 'lumen-header__logo--image';
     }
+    $fallback_nav_items = [
+        [
+            'href'      => svic_url_with_lang( home_url( '/' ) ),
+            'label_key' => 'header.nav.home',
+        ],
+        [
+            'href'      => svic_url_with_lang( home_url( '/compare/' ) ),
+            'label_key' => 'header.nav.compare',
+        ],
+        [
+            'href'      => svic_url_with_lang( home_url( '/product/svicloud-10p-plus/' ) ),
+            'label_key' => 'header.nav.ten_p',
+        ],
+        [
+            'href'      => svic_url_with_lang( home_url( '/product/svicloud-10s/' ) ),
+            'label_key' => 'header.nav.ten_s',
+        ],
+        [
+            'href'      => svic_url_with_lang( home_url( '/contact/' ) ),
+            'label_key' => 'header.nav.concierge',
+        ],
+    ];
+
   ?>
   <header class="lumen-header lumen-header--transparent" data-lumen-header>
     <div class="lumen-header__inner">
@@ -70,11 +93,9 @@
           } else {
         ?>
           <ul class="lumen-nav__list">
-            <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/') ) ); ?>"><?php esc_html_e('Home', 'svicloudtvbox-lumen'); ?></a></li>
-            <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/compare') ) ); ?>"><?php esc_html_e('Compare', 'svicloudtvbox-lumen'); ?></a></li>
-            <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/product/svicloud-10p-plus/') ) ); ?>"><?php esc_html_e('10P+', 'svicloudtvbox-lumen'); ?></a></li>
-            <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/product/svicloud-10s/') ) ); ?>"><?php esc_html_e('10S', 'svicloudtvbox-lumen'); ?></a></li>
-            <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/contact') ) ); ?>"><?php esc_html_e('Concierge', 'svicloudtvbox-lumen'); ?></a></li>
+            <?php foreach ($fallback_nav_items as $item) : ?>
+              <li><a href="<?php echo esc_url($item['href']); ?>"><?php echo svic_translate_html($item['label_key']); ?></a></li>
+            <?php endforeach; ?>
           </ul>
         <?php } ?>
       </nav>
@@ -111,11 +132,9 @@
         } else {
       ?>
         <ul class="lumen-mobile-nav__list">
-          <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/') ) ); ?>"><?php esc_html_e('Home', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
-          <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/compare') ) ); ?>"><?php esc_html_e('Compare', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
-          <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/product/svicloud-10p-plus/') ) ); ?>"><?php esc_html_e('10P+', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
-          <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/product/svicloud-10s/') ) ); ?>"><?php esc_html_e('10S', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
-          <li><a href="<?php echo esc_url( svic_url_with_lang( home_url('/contact') ) ); ?>"><?php esc_html_e('Concierge', 'svicloudtvbox-lumen'); ?><span aria-hidden="true">→</span></a></li>
+          <?php foreach ($fallback_nav_items as $item) : ?>
+            <li><a href="<?php echo esc_url($item['href']); ?>"><?php echo svic_translate_html($item['label_key']); ?><span aria-hidden="true">→</span></a></li>
+          <?php endforeach; ?>
         </ul>
       <?php } ?>
 

@@ -6,6 +6,7 @@ const STRIPE_TEST_CARD = process.env.PLAYWRIGHT_STRIPE_TEST_CARD || '42424242424
 const STRIPE_EXPIRY_MMYY = process.env.PLAYWRIGHT_STRIPE_TEST_EXPIRY || '12/34';
 const STRIPE_CVC = process.env.PLAYWRIGHT_STRIPE_TEST_CVC || '123';
 const STRIPE_ZIP = process.env.PLAYWRIGHT_STRIPE_TEST_ZIP || '90001';
+const TEST_CUSTOMER_EMAIL = process.env.PLAYWRIGHT_TEST_EMAIL || process.env.WP_MAIL_SMTP_TEST_EMAIL || 'support@svicloudtvbox.us';
 
 const BASE_WITH_TRAILING = BASE_URL.replace(/\/$/, '') + '/';
 
@@ -26,6 +27,16 @@ async function seedCart(page: import('@playwright/test').Page) {
 }
 
 async function fillBillingDetails(page: import('@playwright/test').Page) {
+  const timestamp = Date.now().toString();
+  let billingEmail = TEST_CUSTOMER_EMAIL;
+  const emailMatch = TEST_CUSTOMER_EMAIL.match(/^[^@]+@[^@]+$/);
+
+  if (emailMatch) {
+    const [local, domain] = TEST_CUSTOMER_EMAIL.split('@');
+    const sanitizedLocal = local.replace(/\+.*/, '');
+    billingEmail = `${sanitizedLocal}+${timestamp}@${domain}`;
+  }
+
   const fieldEntries: Array<[string, string]> = [
     ['#billing_first_name', 'Play'],
     ['#billing_last_name', 'Wright'],
@@ -33,7 +44,7 @@ async function fillBillingDetails(page: import('@playwright/test').Page) {
     ['#billing_city', 'Los Angeles'],
     ['#billing_postcode', '90001'],
     ['#billing_phone', '5551239876'],
-    ['#billing_email', `playwright-${Date.now()}@example.com`],
+    ['#billing_email', billingEmail],
   ];
 
   for (const [selector, value] of fieldEntries) {
