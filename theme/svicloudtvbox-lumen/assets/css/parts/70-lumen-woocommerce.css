@@ -163,9 +163,11 @@
   padding: 8px 16px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(7, 18, 44, 0.6);
-  letter-spacing: 0.16em;
-  font-size: 0.75rem;
+  background: rgba(7, 18, 44, 0.8);
+  color: var(--lumen-text-primary);
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -271,7 +273,7 @@
   gap: clamp(12px, 3vw, 18px);
   margin: clamp(18px, 4vw, 28px) 0 0;
   padding: 0;
-  color: var(--lumen-text-secondary);
+  color: var(--lumen-text-feature);
 }
 
 .lumen-product .product-hero-points li {
@@ -286,6 +288,8 @@
   gap: 16px;
   font-size: 0.98rem;
   letter-spacing: -0.01em;
+  color: var(--lumen-text-feature);
+  text-shadow: 0 18px 42px rgba(6, 16, 35, 0.52);
 }
 
 .lumen-product .product-hero-points li::before {
@@ -311,7 +315,20 @@
 
 .lumen-product .product-meta-block {
   margin-top: var(--space-sm);
-  color: var(--lumen-text-muted);
+  color: var(--lumen-text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.lumen-product .product-meta-block a {
+  color: var(--lumen-text-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.lumen-product .product-meta-block a:hover,
+.lumen-product .product-meta-block a:focus-visible {
+  color: var(--lumen-accent-teal);
 }
 
 .lumen-product .product-description {

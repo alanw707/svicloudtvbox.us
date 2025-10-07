@@ -53,7 +53,7 @@
   padding: 0;
   display: grid;
   gap: 16px;
-  color: rgba(230, 242, 255, 0.9);
+  color: var(--lumen-text-feature);
   text-shadow: 0 16px 40px rgba(5, 14, 32, 0.55);
 }
 
@@ -100,7 +100,7 @@
   padding: 0;
   display: grid;
   gap: 16px;
-  color: rgba(229, 242, 255, 0.9);
+  color: var(--lumen-text-feature);
   text-shadow: 0 16px 38px rgba(6, 16, 35, 0.52);
 }
 

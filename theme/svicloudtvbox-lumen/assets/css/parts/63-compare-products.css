@@ -80,13 +80,13 @@
   padding: clamp(22px, 4vw, 28px);
   display: grid;
   gap: 16px;
-  color: rgba(224, 240, 255, 0.85);
+  color: var(--lumen-text-feature);
 }
 
 .compare-product-card__list li {
   position: relative;
   padding-left: 28px;
-  color: rgba(229, 242, 255, 0.92);
+  color: var(--lumen-text-feature);
   line-height: 1.68;
   font-size: 0.98rem;
   text-shadow: 0 16px 40px rgba(6, 16, 35, 0.52);

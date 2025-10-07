@@ -193,7 +193,7 @@ to{opacity:1;transform:translateY(0)}
 @media(max-width:640px){.svic-cart-feedback{left:16px;right:16px;bottom:18px;padding:12px 16px}
 }
 .lumen-product .badge-row{display:flex;flex-wrap:wrap;gap:10px}
-.lumen-product .badge-row .badge{padding:8px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.18);background:rgba(7,18,44,0.6);letter-spacing:0.16em;font-size:0.75rem;text-transform:uppercase}
+.lumen-product .badge-row .badge{padding:8px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.18);background:rgba(7,18,44,0.8);color:var(--lumen-text-primary);letter-spacing:0.08em;font-size:0.85rem;font-weight:600;text-transform:uppercase}
 .lumen-product .product-hero-title{font-family:var(--font-accent);font-size:clamp(2.2rem,3.8vw,3.2rem);letter-spacing:-0.02em;color:var(--lumen-text-primary)}
 .lumen-product .product-hero-subtitle{margin:0;color:var(--lumen-text-secondary);font-size:1.02rem;line-height:1.75}
 .lumen-product .product-hero-price{font-size:2.4rem;font-weight:600;color:var(--lumen-accent-teal)}
@@ -205,13 +205,15 @@ to{opacity:1;transform:translateY(0)}
 .lumen-product .product-hero-cta .single_add_to_cart_button:hover,.lumen-product .product-hero-cta .single_add_to_cart_button:focus-visible{transform:translateY(-2px);box-shadow:0 22px 54px rgba(94,230,208,0.45)}
 .lumen-product .product-hero-cta .stock{display:inline-flex;align-items:center;gap:0.4rem;padding:0.35rem 0.85rem;border-radius:999px;border:1px solid rgba(255,185,99,0.45);background:rgba(255,185,99,0.14);color:var(--lumen-accent-amber);font-family:var(--font-accent);font-size:0.82rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase}
 .lumen-product .product-hero-detail{color:var(--lumen-text-secondary);letter-spacing:0.08em;text-transform:uppercase}
-.lumen-product .product-hero-points{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(12px,3vw,18px);margin:clamp(18px,4vw,28px) 0 0;padding:0;color:var(--lumen-text-secondary)}
-.lumen-product .product-hero-points li{position:relative;padding:clamp(16px,3vw,20px) clamp(18px,4vw,26px);border-radius:22px;border:1px solid rgba(126,246,227,0.22);background:rgba(10,26,52,0.55);box-shadow:0 18px 42px rgba(6,16,35,0.45);display:flex;align-items:center;gap:16px;font-size:0.98rem;letter-spacing:-0.01em}
+.lumen-product .product-hero-points{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:clamp(12px,3vw,18px);margin:clamp(18px,4vw,28px) 0 0;padding:0;color:var(--lumen-text-feature)}
+.lumen-product .product-hero-points li{position:relative;padding:clamp(16px,3vw,20px) clamp(18px,4vw,26px);border-radius:22px;border:1px solid rgba(126,246,227,0.22);background:rgba(10,26,52,0.55);box-shadow:0 18px 42px rgba(6,16,35,0.45);display:flex;align-items:center;gap:16px;font-size:0.98rem;letter-spacing:-0.01em;color:var(--lumen-text-feature);text-shadow:0 18px 42px rgba(6,16,35,0.52)}
 .lumen-product .product-hero-points li::before{content:'';width:18px;height:18px;border-radius:50%;border:1px solid rgba(126,246,227,0.7);background:linear-gradient(135deg,rgba(126,246,227,0.92),rgba(176,252,255,0.8));box-shadow:0 0 0 5px rgba(94,230,208,0.18);flex-shrink:0}
 @media(max-width:640px){.lumen-product .product-hero-points{grid-template-columns:1fr}
 .lumen-product .product-hero-points li{justify-content:flex-start}
 }
-.lumen-product .product-meta-block{margin-top:var(--space-sm);color:var(--lumen-text-muted)}
+.lumen-product .product-meta-block{margin-top:var(--space-sm);color:var(--lumen-text-secondary);letter-spacing:0.02em}
+.lumen-product .product-meta-block a{color:var(--lumen-text-primary);font-weight:600;text-decoration:underline;text-underline-offset:4px}
+.lumen-product .product-meta-block a:hover,.lumen-product .product-meta-block a:focus-visible{color:var(--lumen-accent-teal)}
 .lumen-product .product-description{margin-top:var(--space-2xl);padding:clamp(24px,5vw,40px);border-radius:var(--radius-2xl);border:1px solid rgba(255,255,255,0.1);background:rgba(6,17,36,0.78);backdrop-filter:var(--glass-blur-soft);color:var(--lumen-text-secondary)}
 .lumen-product .product-description .entry-content>*+*{margin-top:1.5rem}
 .lumen-product .product-description .entry-content,.lumen-product .product-description .entry-content p,.lumen-product .product-description .entry-content li,.lumen-product .product-description .entry-content dd,.lumen-product .product-description .entry-content em{color:var(--lumen-text-secondary)}
