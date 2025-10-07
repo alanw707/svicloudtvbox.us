@@ -28,8 +28,9 @@ test.describe('SVICLOUD site smoke', () => {
 
       // Page specific probes
       if (path.startsWith('/product/')) {
-        await expect(page.locator('.product-hero')).toBeVisible();
-        await expect(page.locator('.product-hero-price')).toBeVisible();
+        const hero = page.locator('.lumen-product .product-hero, .product-hero').first();
+        await expect(hero).toBeVisible();
+        await expect(page.locator('.product-hero-price, .lumen-product .product-hero-price')).toBeVisible();
         const thumbCount = await page.locator('.product-thumb').count();
         if (thumbCount > 1) {
           const thumbLocator = page.locator('.product-thumb').nth(thumbCount - 1);

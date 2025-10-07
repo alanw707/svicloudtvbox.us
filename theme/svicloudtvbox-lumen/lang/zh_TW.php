@@ -552,6 +552,170 @@ return [
             'cta_secondary' => '瀏覽 SVICLOUD 設備',
         ],
     ],
+
+    'guides' => [
+        'hero' => [
+            'badge' => '安裝與支援中心',
+            'title' => '小雲電視盒指南中心',
+            'lead' => '提供中英文安裝清單、必裝 App 與疑難排解，快速完成小雲電視盒開箱。',
+            'primary_label' => '開始安裝',
+            'secondary_label' => '聯繫禮賓客服',
+        ],
+        'highlights' => [
+            'badge' => '為什麼選這份指南',
+            'title' => '10 分鐘完成設定，一次搞定',
+            'items' => [
+                'install' => [
+                    'title' => '10 分鐘搞定',
+                    'copy'  => '依照雙語清單完成接線、連網與 App 安裝，不用猜測。',
+                ],
+                'models' => [
+                    'title' => '支援 10P+ 與 10S',
+                    'copy'  => '涵蓋語音遙控配對、KTV 功能與目前所有小雲型號的最佳做法。',
+                ],
+                'concierge' => [
+                    'title' => '隨時有人協助',
+                    'copy'  => '需要真人支援嗎？英文與中文禮賓客服可在安裝過程中即時接手。',
+                ],
+            ],
+        ],
+        'setup' => [
+            'badge' => '安裝清單',
+            'title' => '7 個步驟完成小雲電視盒設定',
+            'lead'  => '逐步完成以下流程，遙控器請隨手放在旁邊。擁有 10P+ 的用戶別忘了語音配對步驟。',
+            'steps' => [
+                'connect' => [
+                    'title' => '連接硬體',
+                    'copy'  => '接上 HDMI 與電源，確認機身前方指示燈亮起。',
+                ],
+                'language' => [
+                    'title' => '選擇系統語言',
+                    'copy'  => '使用方向鍵選擇語言，按下 OK 後再按 Next 進入下一步。',
+                ],
+                'disclaimer' => [
+                    'title' => '同意免責聲明',
+                    'copy'  => '選擇 Continue 確認並繼續。',
+                ],
+                'remote' => [
+                    'title' => '配對語音遙控器',
+                    'copy'  => '同時按住 <kbd>VOL-</kbd> 與 <kbd>VOL+</kbd> 直到螢幕顯示配對成功（僅 10P+ 需要）。',
+                ],
+                'time' => [
+                    'title' => '設定時區與時間',
+                    'copy'  => '選擇正確時區，電子節目表才會顯示準確播放時間。',
+                ],
+                'network' => [
+                    'title' => '連上 Wi-Fi 或網路線',
+                    'copy'  => '選擇 Set up WiFi 輸入密碼，或插上 Ethernet 取得更穩定的串流品質。',
+                ],
+                'apps' => [
+                    'title' => '安裝小雲專屬 App',
+                    'copy'  => '開啟 Orz 安裝器，輸入 8989c.cc（自動導向 6868c.cc），下載 Yogurt TV、Yogurt Kids、Cherry TV 與 Karaoke KTV。',
+                ],
+            ],
+            'note_title' => '即將加入完整截圖教學',
+            'note_copy'  => '我們正在拍攝 HDMI 接線、語言選擇、遙控器配對、Wi-Fi 設定與 Orz 安裝器畫面，完成後會於此更新。',
+        ],
+        'apps' => [
+            'badge' => '必裝 App',
+            'title' => '安裝後馬上下載這些 App',
+            'lead'  => '在 Orz 安裝器中先安裝這些應用，就能開啟直播、卡拉 OK 與兒童內容。',
+            'items' => [
+                'yogurt' => [
+                    'title' => 'Yogurt TV / LUCA TV',
+                    'copy'  => '全球直播頻道、電影與戲劇，提供快速搜尋與分類。',
+                ],
+                'kids' => [
+                    'title' => 'Yogurt Kids / LUCA Kids',
+                    'copy'  => '精選兒童教育節目、兒歌與互動遊戲，適合闔家使用。',
+                ],
+                'karaoke' => [
+                    'title' => 'We Fun / 閤家歡 Karaoke',
+                    'copy'  => '居家卡拉 OK 歌單，提供字幕與雙人合唱佇列。',
+                ],
+                'regional' => [
+                    'title' => '區域直播 App',
+                    'copy'  => '包含 Malaysia Live、Indonesia Live 等在地頻道，海外觀眾照樣收看。',
+                ],
+                'cherry' => [
+                    'title' => 'Cherry TV（成人專區）',
+                    'copy'  => '需輸入密碼方可開啟，請在需要時才啟用。',
+                ],
+            ],
+        ],
+        'post_setup' => [
+            'badge' => '安裝完成後',
+            'title' => '上線後別錯過這些設定',
+            'items' => [
+                'explore' => [
+                    'title' => '熟悉主畫面',
+                    'copy'  => '找到直播、隨選影音與設定列，打造自己的首頁。',
+                ],
+                'install' => [
+                    'title' => '加裝可信賴的 Android App',
+                    'copy'  => '如 Netflix、Disney+、YouTube 等常用服務，記得選擇可信來源。',
+                ],
+                'tune' => [
+                    'title' => '調整音訊與顯示',
+                    'copy'  => '打開設定調整字幕、顯示模式與網路偏好。',
+                ],
+            ],
+        ],
+        'troubleshooting' => [
+            'badge' => '疑難排解',
+            'title' => '常見問題快速解法',
+            'lead'  => '遇到問題先試試以下步驟，通常能解決開箱第一天的狀況。',
+            'items' => [
+                'remote' => [
+                    'title' => '遙控器無法配對',
+                    'copy'  => '取出電池重新裝回，靠近機身再按 <kbd>VOL-</kbd> + <kbd>VOL+</kbd>，直到看到配對成功提示。',
+                ],
+                'streaming' => [
+                    'title' => '畫面模糊或緩衝',
+                    'copy'  => '重新啟動路由器、靠近 Wi-Fi，或改用網路線提升穩定度。',
+                ],
+                'orz' => [
+                    'title' => 'Orz 安裝器打不開',
+                    'copy'  => '確認輸入 8989c.cc，重開機器並檢查網路連線。',
+                ],
+            ],
+        ],
+        'resources' => [
+            'badge' => '延伸閱讀',
+            'title' => '推薦收藏的指南',
+            'lead'  => '安裝完成後，這些資源可以提供頻道、選購與比較的更多資訊。',
+            'items' => [
+                'why' => [
+                    'title' => '為什麼要買小雲電視盒',
+                    'copy'  => '了解小雲相較其他 Android 電視盒的優勢。',
+                ],
+                'channels' => [
+                    'title' => '小雲電視盒頻道列表',
+                    'copy'  => '瀏覽 Yogurt TV 內的直播與隨選影音內容。',
+                ],
+                'features' => [
+                    'title' => '小雲電視盒 8 大特色',
+                    'copy'  => '探索讓雙語家庭喜愛小雲的功能亮點。',
+                ],
+                'which' => [
+                    'title' => '我應該買哪款小雲電視盒？',
+                    'copy'  => '根據需求在 SviCloud 10P+、10S 與其他機種間做出選擇。',
+                ],
+                'compare' => [
+                    'title' => '小雲 8P vs EVPAD 6P vs Unblock UBox9',
+                    'copy'  => '查看小雲與常見競品的功能比較。',
+                ],
+            ],
+        ],
+        'support' => [
+            'badge' => '需要協助嗎？',
+            'title' => '中英文禮賓客服隨時待命',
+            'copy'  => '提供訂單編號或安裝問題，我們會在一個工作天內以英文或中文回覆您。',
+            'primary_label'   => '聯繫禮賓客服',
+            'secondary_label' => '查看常見問題',
+        ],
+    ],
+
     'product' => [
         'hero' => [
             'subtitle' => '美國倉庫出貨，提供中英文專人安裝服務。',

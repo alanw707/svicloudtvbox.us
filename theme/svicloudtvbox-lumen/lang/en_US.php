@@ -551,7 +551,172 @@ return [
             'cta_secondary' => 'Browse SVICLOUD devices',
         ],
     ],
-    'product' => [
+
+    'guides' => [
+        'hero' => [
+            'badge' => 'Setup & support hub',
+            'title' => 'SviCloud TV Box Guides',
+            'lead' => 'Step-by-step installation checklists, app downloads, and troubleshooting in English & 中文.',
+            'primary_label' => 'Start installation',
+            'secondary_label' => 'Talk to concierge',
+        ],
+        'highlights' => [
+            'badge' => 'Why this guide',
+            'title' => 'Everything you need to get streaming fast',
+            'items' => [
+                'install' => [
+                    'title' => '10-minute setup',
+                    'copy'  => 'Follow the bilingual checklist to connect hardware, join Wi-Fi, and install apps without guesswork.',
+                ],
+                'models' => [
+                    'title' => 'Works with 10P+ & 10S',
+                    'copy'  => 'Covers voice remote pairing, karaoke support, and best practices for every current SviCloud model.',
+                ],
+                'concierge' => [
+                    'title' => 'Concierge-ready',
+                    'copy'  => 'Need a human? Our English & 中文 concierge team can jump in anytime during setup.',
+                ],
+            ],
+        ],
+        'setup' => [
+            'badge' => 'Setup checklist',
+            'title' => '7 steps to install your SviCloud TV Box',
+            'lead'  => 'Walk through each step and keep the remote nearby. Use the voice pairing step if you own a 10P+.',
+            'steps' => [
+                'connect' => [
+                    'title' => 'Connect hardware',
+                    'copy'  => 'Attach HDMI to your TV, plug in power, and confirm the front LED turns on.',
+                ],
+                'language' => [
+                    'title' => 'Pick your language',
+                    'copy'  => 'Use the arrow keys to highlight your preferred language, press OK, then Next.',
+                ],
+                'disclaimer' => [
+                    'title' => 'Accept the disclaimer',
+                    'copy'  => 'Select Continue to proceed. This confirms you understand the on-screen terms.',
+                ],
+                'remote' => [
+                    'title' => 'Pair the voice remote',
+                    'copy'  => 'Hold <kbd>VOL-</kbd> and <kbd>VOL+</kbd> together until the pairing success message appears (10P+ only).',
+                ],
+                'time' => [
+                    'title' => 'Set time & region',
+                    'copy'  => 'Choose the correct time zone so live program guides display accurate schedules.',
+                ],
+                'network' => [
+                    'title' => 'Join Wi-Fi or Ethernet',
+                    'copy'  => 'Pick "Set up WiFi", enter your password, or plug in Ethernet for the most stable stream.',
+                ],
+                'apps' => [
+                    'title' => 'Install SviCloud apps',
+                    'copy'  => 'Open the Orz installer, type 8989c.cc (redirects to 6868c.cc), then download Yogurt TV, Yogurt Kids, Cherry TV, and Karaoke KTV.',
+                ],
+            ],
+            'note_title' => 'Photo walkthrough coming soon',
+            'note_copy'  => 'We are capturing HDMI hookup, language selection, remote pairing, Wi-Fi onboarding, and Orz installer screenshots to embed here.',
+        ],
+        'apps' => [
+            'badge' => 'Essential apps',
+            'title' => 'Must-install SviCloud apps',
+            'lead'  => 'Download these first inside Orz to unlock live TV, karaoke, and kid-friendly content.',
+            'items' => [
+                'yogurt' => [
+                    'title' => 'Yogurt TV / LUCA TV',
+                    'copy'  => 'Global live TV channels, movies, and dramas with fast search and category filters.',
+                ],
+                'kids' => [
+                    'title' => 'Yogurt Kids / LUCA Kids',
+                    'copy'  => 'Curated educational shows, songs, and interactive games for families.',
+                ],
+                'karaoke' => [
+                    'title' => 'We Fun / 閤家歡 Karaoke',
+                    'copy'  => 'In-home karaoke playlists with on-screen lyrics and duet-friendly queues.',
+                ],
+                'regional' => [
+                    'title' => 'Regional live apps',
+                    'copy'  => 'Malaysia Live, Indonesia Live, and other localized channel packs for overseas viewers.',
+                ],
+                'cherry' => [
+                    'title' => 'Cherry TV (Adults)',
+                    'copy'  => 'Password-protected adult content—only enable it if you intend to use it.',
+                ],
+            ],
+        ],
+        'post_setup' => [
+            'badge' => 'After setup',
+            'title' => 'Keep exploring once you are online',
+            'items' => [
+                'explore' => [
+                    'title' => 'Browse the home screen',
+                    'copy'  => 'Find Live TV, VOD, and settings rows to personalize your launcher experience.',
+                ],
+                'install' => [
+                    'title' => 'Add trusted Android apps',
+                    'copy'  => 'Install streaming services like Netflix, Disney+, or YouTube from sources you trust.',
+                ],
+                'tune' => [
+                    'title' => 'Adjust audio & display',
+                    'copy'  => 'Open Settings to fine-tune subtitles, display modes, and network preferences.',
+                ],
+            ],
+        ],
+        'troubleshooting' => [
+            'badge' => 'Troubleshooting',
+            'title' => 'Quick fixes for common roadblocks',
+            'lead'  => 'Try these remedies before contacting concierge. They solve most launch-day hiccups.',
+            'items' => [
+                'remote' => [
+                    'title' => 'Remote not pairing',
+                    'copy'  => 'Remove the batteries, reinsert them, stand close to the box, and press <kbd>VOL-</kbd> + <kbd>VOL+</kbd> again until you see the success banner.',
+                ],
+                'streaming' => [
+                    'title' => 'Stream buffering or blurry',
+                    'copy'  => 'Restart your router, move closer to Wi-Fi, or plug in Ethernet for the most stable connection.',
+                ],
+                'orz' => [
+                    'title' => 'Orz installer not loading',
+                    'copy'  => 'Double-check the URL 8989c.cc, then reboot the box. If it still fails, verify your network connection.',
+                ],
+            ],
+        ],
+        'resources' => [
+            'badge' => 'More resources',
+            'title' => 'Guides worth bookmarking',
+            'lead'  => 'Deep-dive into channel lists, product comparisons, and buying advice after you finish setup.',
+            'items' => [
+                'why' => [
+                    'title' => 'Why buy SviCloud TV Box',
+                    'copy'  => 'Understand how SviCloud compares to other Android streaming boxes.',
+                ],
+                'channels' => [
+                    'title' => 'SviCloud TV Box channels list',
+                    'copy'  => 'Browse live TV and VOD catalogs available inside Yogurt TV.',
+                ],
+                'features' => [
+                    'title' => 'Top 8 SviCloud features',
+                    'copy'  => 'Learn the benefits that make SviCloud a favorite among bilingual households.',
+                ],
+                'which' => [
+                    'title' => 'Which SviCloud model should I buy?',
+                    'copy'  => 'Decide between SviCloud 10P+, 10S, and other models based on your needs.',
+                ],
+                'compare' => [
+                    'title' => 'SviCloud 8P vs EVPAD 6P vs Unblock UBox9',
+                    'copy'  => 'See how SviCloud stacks up against competing streaming boxes.',
+                ],
+            ],
+        ],
+        'support' => [
+            'badge' => 'Need help?',
+            'title' => 'Bilingual concierge is ready',
+            'copy'  => 'Share your order number or installation question and we will reply in English or 中文 within one business day.',
+            'primary_label'   => 'Contact concierge',
+            'secondary_label' => 'Read the FAQ',
+        ],
+    ],
+
+'product' => [
+
         'hero' => [
             'subtitle' => 'Shipped from the U.S. with concierge onboarding in English & Chinese.',
             'detail'   => 'Secure checkout • Free U.S. shipping • English/中文 support',

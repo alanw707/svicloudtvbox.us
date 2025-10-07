@@ -50,7 +50,7 @@
   border-radius: calc(var(--radius-2xl) + 8px);
   border: 1px solid rgba(126, 246, 227, 0.18);
   background: linear-gradient(140deg, rgba(10, 26, 54, 0.95) 0%, rgba(5, 14, 34, 0.94) 100%);
-  box-shadow: 0 44px 120px rgba(6, 18, 46, 0.6), inset 0 1px 0 rgba(126, 246, 227, 0.22);
+  box-shadow: 0 44px 120px rgba(6, 18, 46, 0.6), inset 0 1px 0 var(--lumen-border-accent-soft);
   padding: clamp(36px, 7vw, 64px);
   display: grid;
   gap: clamp(20px, 4vw, 32px);

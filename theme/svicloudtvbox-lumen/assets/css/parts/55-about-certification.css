@@ -77,7 +77,7 @@
   gap: clamp(0.6rem, 2.4vw, 1rem);
   padding: clamp(0.85rem, 3vw, 1.35rem) clamp(1rem, 3.5vw, 1.75rem);
   border-radius: var(--radius-xl);
-  border: 1px solid rgba(126, 246, 227, 0.22);
+  border: 1px solid var(--lumen-border-accent-soft);
   background: rgba(5, 18, 44, 0.7);
   box-shadow: 0 24px 48px rgba(3, 12, 30, 0.5);
 }
@@ -112,7 +112,7 @@
   position: absolute;
   inset: -12% 18% auto;
   height: clamp(200px, 36vw, 280px);
-  background: radial-gradient(circle at center, rgba(126, 246, 227, 0.22), transparent 70%);
+  background: radial-gradient(circle at center, var(--lumen-border-accent-soft), transparent 70%);
   filter: blur(26px);
   opacity: 0.55;
   pointer-events: none;

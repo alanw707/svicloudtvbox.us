@@ -21,7 +21,7 @@
   position: relative;
   padding: 26px;
   border-radius: var(--radius-xl);
-  border: 1px solid rgba(126, 246, 227, 0.22);
+  border: 1px solid var(--lumen-border-accent-soft);
   background: linear-gradient(145deg, rgba(9, 24, 52, 0.9), rgba(16, 42, 80, 0.68));
   backdrop-filter: var(--glass-blur-soft);
   display: grid;

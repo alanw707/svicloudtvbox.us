@@ -49,7 +49,7 @@
 
 
 .lumen-cart-product__badges { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0.2rem 0 0; padding: 0; list-style: none; }
-.lumen-cart-product__badge { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.32rem 0.75rem; border-radius: 999px; background: rgba(8, 26, 54, 0.75); border: 1px solid rgba(126, 246, 227, 0.22); color: rgba(223, 229, 255, 0.88); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.lumen-cart-product__badge { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.32rem 0.75rem; border-radius: 999px; background: rgba(8, 26, 54, 0.75); border: 1px solid var(--lumen-border-accent-soft); color: rgba(223, 229, 255, 0.88); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .lumen-cart-product__badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: rgba(94, 230, 208, 0.8); box-shadow: 0 0 0 2px rgba(94, 230, 208, 0.18); }
 
 /* Remove button column */

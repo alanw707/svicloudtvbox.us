@@ -12,7 +12,7 @@ const config: PlaywrightTestConfig = {
   workers: process.env.CI ? 2 : undefined,
   reporter: [['html', { open: 'never' }], ['list']],
   use: {
-    baseURL: process.env.PLAYWRIGHT_BASE_URL || 'https://svicloudtvbox.us',
+    baseURL: process.env.PLAYWRIGHT_BASE_URL || 'http://svicloud10p.svic.local',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

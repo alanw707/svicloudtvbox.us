@@ -47,6 +47,13 @@
       "59-about-responsive.css"
     ]
   },
+  "guides": {
+    "label": "Guides page",
+    "output": "guides.css",
+    "parts": [
+      "67-guides.css"
+    ]
+  },
   "compare": {
     "label": "Compare page",
     "output": "compare.css",
@@ -67,7 +74,9 @@
       "66-woocommerce-cart.css",
       "70-lumen-woocommerce.css",
       "71-woocommerce-checkout.css",
-      "72-woocommerce-order-tracking.css"
+      "72-woocommerce-order-tracking-base.css",
+      "73-woocommerce-order-tracking-summary.css",
+      "74-woocommerce-order-tracking-responsive.css"
     ]
   }
 }

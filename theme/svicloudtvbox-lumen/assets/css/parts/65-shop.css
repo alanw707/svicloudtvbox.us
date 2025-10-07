@@ -256,7 +256,7 @@
   margin: 0;
   padding: clamp(14px, 2.8vw, 18px) clamp(18px, 4vw, 26px);
   border-radius: 18px;
-  border: 1px solid rgba(126, 246, 227, 0.22);
+  border: 1px solid var(--lumen-border-accent-soft);
   background: rgba(8, 26, 54, 0.6);
   box-shadow: 0 14px 34px rgba(6, 18, 40, 0.42);
 }

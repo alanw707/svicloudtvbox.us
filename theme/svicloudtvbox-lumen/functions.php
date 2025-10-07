@@ -162,6 +162,7 @@ add_action('wp_enqueue_scripts', function () {
         'style'       => 'assets/css/style.css',
         'front-page'  => 'assets/css/front-page.css',
         'about'       => 'assets/css/about.css',
+        'guides'      => 'assets/css/guides.css',
         'compare'     => 'assets/css/compare.css',
         'woocommerce' => 'assets/css/woocommerce.css',
     ];
@@ -218,6 +219,17 @@ add_action('wp_enqueue_scripts', function () {
             get_template_directory_uri() . '/assets/css/about.css',
             ['svicloudtvbox-style'],
             $css_versions['about']
+        );
+    }
+
+    // Guides page bundle
+    $is_guides_page = is_page_template('page-guides.php') || is_page('guides');
+    if ($is_guides_page && isset($css_versions['guides'])) {
+        wp_enqueue_style(
+            'svicloudtvbox-guides',
+            get_template_directory_uri() . '/assets/css/guides.css',
+            ['svicloudtvbox-style'],
+            $css_versions['guides']
         );
     }
 

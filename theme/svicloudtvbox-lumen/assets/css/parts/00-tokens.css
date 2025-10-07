@@ -42,6 +42,12 @@
   --lumen-text-feature: rgba(244, 250, 255, 0.98);
   --lumen-border-glass: rgba(255, 255, 255, 0.12);
   --lumen-border-strong: rgba(80, 120, 180, 0.28);
+  --lumen-border-accent-soft: rgba(126, 246, 227, 0.22);
+  --lumen-bullet-border: rgba(126, 246, 227, 0.7);
+  --lumen-bullet-gradient: linear-gradient(135deg, rgba(126, 246, 227, 0.92), rgba(176, 252, 255, 0.82));
+  --lumen-bullet-gradient-strong: linear-gradient(135deg, rgba(126, 246, 227, 0.97), rgba(186, 255, 255, 0.9));
+  --lumen-bullet-shadow: 0 0 0 5px rgba(94, 230, 208, 0.18);
+  --lumen-bullet-shadow-strong: 0 0 0 6px rgba(126, 246, 227, 0.2);
 
   /* Page chrome */
   --lumen-page-background: #061328;
