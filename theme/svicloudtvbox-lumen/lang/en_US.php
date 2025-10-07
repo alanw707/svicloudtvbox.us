@@ -130,6 +130,8 @@ return [
             'order_tracking' => 'Order Tracking',
             'account'  => 'Account',
             'my-account' => 'Account',
+            'submenu_expand'   => 'Expand submenu',
+            'submenu_collapse' => 'Collapse submenu',
         ],
     ],
 
@@ -554,10 +556,18 @@ return [
 
     'guides' => [
         'hero' => [
-            'badge' => 'Setup & support hub',
-            'title' => 'SviCloud TV Box Guides',
-            'lead' => 'Step-by-step installation checklists, app downloads, and troubleshooting in English & 中文.',
-            'primary_label' => 'Start installation',
+            'badge'            => 'Setup & support hub',
+            'title'            => 'SVICLOUD TV Box Guides',
+            'lead'             => 'Step-by-step installation checklists, app downloads, and troubleshooting in English & 中文.',
+            'callouts_headline' => 'Inside this hub',
+            'pill_headline'    => 'Step-by-step help for every SVICLOUD',
+            'pill_copy'        => 'Follow the checklist, install the must-have apps, and troubleshoot in English & 中文 whenever you need it.',
+            'callouts'         => [
+                'remote'  => 'Pair the Bluetooth voice remote',
+                'network' => 'Optimize Wi-Fi or Ethernet for streaming',
+                'apps'    => 'Install Yogurt TV, Kids, Karaoke, and more',
+            ],
+            'primary_label'   => 'Start installation',
             'secondary_label' => 'Talk to concierge',
         ],
         'highlights' => [
@@ -570,13 +580,36 @@ return [
                 ],
                 'models' => [
                     'title' => 'Works with 10P+ & 10S',
-                    'copy'  => 'Covers voice remote pairing, karaoke support, and best practices for every current SviCloud model.',
+                    'copy'  => 'Covers voice remote pairing, karaoke support, and best practices for every current SVICLOUD model.',
                 ],
                 'concierge' => [
                     'title' => 'Concierge-ready',
                     'copy'  => 'Need a human? Our English & 中文 concierge team can jump in anytime during setup.',
                 ],
             ],
+        ],
+        'meta' => [
+            'anchor_nav_badge'        => 'Guide directory',
+            'anchor_nav_title'        => 'Pick where you need help',
+            'anchor_nav_description'  => 'Jump straight to setup steps, app installs, troubleshooting, and concierge support.',
+        ],
+        'nav' => [
+            'overview'        => 'Highlights',
+            'setup'           => 'Setup guide',
+            'apps'            => 'Apps & downloads',
+            'post_setup'      => 'After setup',
+            'troubleshooting' => 'Troubleshooting',
+            'resources'       => 'Resources',
+            'support'         => 'Need support',
+        ],
+        'nav_summaries' => [
+            'overview'        => 'See the concierge overview and why these guides matter.',
+            'setup'           => 'Connect hardware, choose language, and pair the voice remote.',
+            'apps'            => 'Install Yogurt TV, Kids Mode, Karaoke, and other essentials.',
+            'post_setup'      => 'Personalize settings and keep your SVICLOUD running smoothly.',
+            'troubleshooting' => 'Fix remote pairing, buffering, and Orz installer hiccups.',
+            'resources'       => 'Bookmark channel lists, buying advice, and comparisons.',
+            'support'         => 'Reach concierge support or review the FAQ options.',
         ],
         'setup' => [
             'badge' => 'Setup checklist',
@@ -705,6 +738,11 @@ return [
                     'copy'  => 'See how SviCloud stacks up against competing streaming boxes.',
                 ],
             ],
+        ],
+        'detail' => [
+            'back_to_hub'  => 'Back to Guides Hub',
+            'more_guides'  => 'Explore other guides',
+            'open_section' => 'Open guide',
         ],
         'support' => [
             'badge' => 'Need help?',

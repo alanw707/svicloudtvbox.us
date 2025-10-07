@@ -14,6 +14,7 @@ if (!defined('SVIC_THEME_TEXT_DOMAIN')) {
 require_once get_template_directory() . '/inc/class-svic-translator.php';
 
 require_once get_template_directory() . '/inc/class-svic-locale-resolver.php';
+require_once get_template_directory() . '/inc/guides-data.php';
 
 SVIC_Locale_Resolver::bootstrap();
 

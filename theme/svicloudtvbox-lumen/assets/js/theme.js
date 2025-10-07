@@ -24,6 +24,15 @@
         initProductHeroGallery();
     }
 
+    function getStickyScrollOffset() {
+        let offset = 0;
+        const header = document.querySelector('[data-lumen-header]');
+        if (header) {
+            offset += header.getBoundingClientRect().height || header.offsetHeight || 0;
+        }
+        return offset + 24;
+    }
+
     /**
      * Language switcher functionality
      */
@@ -71,19 +80,22 @@
     /**
      * Smooth scrolling for anchor links
      */
+
     function initSmoothScrolling() {
         $('a[href*="#"]:not([href="#"])').on('click', function(e) {
             const target = $(this.hash);
 
             if (target.length) {
                 e.preventDefault();
+                const offset = getStickyScrollOffset();
 
                 $('html, body').animate({
-                    scrollTop: target.offset().top - 100
-                }, 800, 'easeInOutCubic');
+                    scrollTop: target.offset().top - offset
+                }, 600, 'easeInOutCubic');
             }
         });
     }
+
 
     /**
      * Product image enhancements
@@ -237,13 +249,72 @@
         }
 
         const bodyClass = 'lumen-nav-open';
+        const submenuExpandLabel = $mobileNav.data('submenu-expand') || 'Expand submenu';
+        const submenuCollapseLabel = $mobileNav.data('submenu-collapse') || 'Collapse submenu';
+
+        const updateSubmenuToggle = ($toggle, expanded) => {
+            $toggle.attr('aria-expanded', expanded ? 'true' : 'false');
+            const $srText = $toggle.find('.screen-reader-text');
+            const label = expanded ? submenuCollapseLabel : submenuExpandLabel;
+            if ($srText.length) {
+                $srText.text(label);
+            } else {
+                $toggle.attr('aria-label', label);
+            }
+        };
+
+        const closeAllSubmenus = () => {
+            $mobileNav.find('.menu-item-has-children').removeClass('is-open');
+            $mobileNav.find('.lumen-mobile-nav__submenu').attr('hidden', 'hidden');
+            $mobileNav.find('.lumen-mobile-nav__submenu-toggle').each(function() {
+                updateSubmenuToggle($(this), false);
+            });
+        };
+
+        const enhanceMobileSubmenus = () => {
+            $mobileNav.find('.menu-item-has-children').each(function() {
+                const $item = $(this);
+                if ($item.data('submenuEnhanced')) {
+                    return;
+                }
+
+                const $submenu = $item.children('.sub-menu');
+                if (!$submenu.length) {
+                    return;
+                }
+
+                $item.data('submenuEnhanced', true);
+                $submenu.addClass('lumen-mobile-nav__submenu').attr('hidden', 'hidden');
+
+                const $toggle = $('<button type="button" class="lumen-mobile-nav__submenu-toggle" aria-expanded="false"><span class="screen-reader-text"></span></button>');
+                updateSubmenuToggle($toggle, false);
+                $item.children('a').after($toggle);
+
+                $toggle.on('click', function(event) {
+                    event.preventDefault();
+                    const isOpen = $item.hasClass('is-open');
+                    if (isOpen) {
+                        $item.removeClass('is-open');
+                        $submenu.attr('hidden', 'hidden');
+                    } else {
+                        $item.addClass('is-open');
+                        $submenu.removeAttr('hidden');
+                    }
+                    updateSubmenuToggle($toggle, !isOpen);
+                });
+            });
+        };
+
+        enhanceMobileSubmenus();
 
         function setNavState(open) {
             $toggle.attr('aria-expanded', open ? 'true' : 'false');
             if (open) {
                 $mobileNav.addClass('is-open').removeAttr('hidden');
+                enhanceMobileSubmenus();
             } else {
                 $mobileNav.removeClass('is-open').attr('hidden', 'hidden');
+                closeAllSubmenus();
             }
             $('body').toggleClass(bodyClass, open);
         }

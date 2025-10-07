@@ -85,7 +85,7 @@
             'menu_class'     => 'lumen-nav__list',
             'fallback_cb'    => false,
             'echo'           => false,
-            'depth'          => 1,
+            'depth'          => 2,
           ]);
 
           if ($primary_menu) {
@@ -115,7 +115,13 @@
       </div>
     </div>
 
-    <div class="lumen-mobile-nav" id="lumen-mobile-nav" hidden>
+    <div
+      class="lumen-mobile-nav"
+      id="lumen-mobile-nav"
+      hidden
+      data-submenu-expand="<?php echo svic_translate_attr('header.nav.submenu_expand'); ?>"
+      data-submenu-collapse="<?php echo svic_translate_attr('header.nav.submenu_collapse'); ?>"
+    >
       <?php
         $mobile_menu = wp_nav_menu([
           'theme_location' => 'primary',
@@ -123,7 +129,7 @@
           'menu_class'     => 'lumen-mobile-nav__list',
           'fallback_cb'    => false,
           'echo'           => false,
-          'depth'          => 1,
+          'depth'          => 2,
           'items_wrap'     => '<ul class="lumen-mobile-nav__list">%3$s</ul>',
         ]);
 

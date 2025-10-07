@@ -130,6 +130,8 @@ return [
             'order_tracking' => '訂單查詢',
             'account'  => '會員中心',
             'my-account' => '會員中心',
+            'submenu_expand'   => '展開次選單',
+            'submenu_collapse' => '收合次選單',
         ],
     ],
 
@@ -555,10 +557,18 @@ return [
 
     'guides' => [
         'hero' => [
-            'badge' => '安裝與支援中心',
-            'title' => '小雲電視盒指南中心',
-            'lead' => '提供中英文安裝清單、必裝 App 與疑難排解，快速完成小雲電視盒開箱。',
-            'primary_label' => '開始安裝',
+            'badge'            => '安裝與支援中心',
+            'title'            => '小雲電視盒指南中心',
+            'lead'             => '提供中英文安裝清單、必裝 App 與疑難排解，快速完成小雲電視盒開箱。',
+            'callouts_headline' => '指南重點',
+            'pill_headline'    => '分步教學，10P+ / 10S 全涵蓋',
+            'pill_copy'        => '依照清單完成安裝、下載核心 App，遇到問題也有中英雙語支援。',
+            'callouts'         => [
+                'remote'  => '配對藍牙語音遙控',
+                'network' => '最佳化 Wi-Fi 或網路線連線',
+                'apps'    => '安裝 Yogurt TV、兒童與卡拉 OK 應用',
+            ],
+            'primary_label'   => '開始安裝',
             'secondary_label' => '聯繫禮賓客服',
         ],
         'highlights' => [
@@ -578,6 +588,29 @@ return [
                     'copy'  => '需要真人支援嗎？英文與中文禮賓客服可在安裝過程中即時接手。',
                 ],
             ],
+        ],
+        'meta' => [
+            'anchor_nav_badge'       => '指南索引',
+            'anchor_nav_title'       => '選擇你需要的協助',
+            'anchor_nav_description' => '直接跳到安裝步驟、App 下載、疑難排解或客服支援。',
+        ],
+        'nav' => [
+            'overview'        => '指南亮點',
+            'setup'           => '安裝流程',
+            'apps'            => 'App 下載',
+            'post_setup'      => '安裝後設定',
+            'troubleshooting' => '疑難排解',
+            'resources'       => '延伸資源',
+            'support'         => '尋求支援',
+        ],
+        'nav_summaries' => [
+            'overview'        => '快速了解重點與禮賓支援。',
+            'setup'           => '完成接線、語言選擇與語音遙控配對。',
+            'apps'            => '下載 Yogurt TV、兒童模式、卡拉 OK 等必備 App。',
+            'post_setup'      => '個人化設定，讓小雲長期穩定運作。',
+            'troubleshooting' => '修復遙控、緩衝與 Orz 安裝器問題。',
+            'resources'       => '收藏頻道列表、選購建議與比較。',
+            'support'         => '聯絡禮賓客服或查看常見問題。',
         ],
         'setup' => [
             'badge' => '安裝清單',
@@ -699,13 +732,18 @@ return [
                 ],
                 'which' => [
                     'title' => '我應該買哪款小雲電視盒？',
-                    'copy'  => '根據需求在 SviCloud 10P+、10S 與其他機種間做出選擇。',
+                    'copy'  => '根據需求在 SVICLOUD 10P+、10S 與其他機種間做出選擇。',
                 ],
                 'compare' => [
                     'title' => '小雲 8P vs EVPAD 6P vs Unblock UBox9',
                     'copy'  => '查看小雲與常見競品的功能比較。',
                 ],
             ],
+        ],
+        'detail' => [
+            'back_to_hub'  => '返回指南首頁',
+            'more_guides'  => '瀏覽其他指南',
+            'open_section' => '開啟指南',
         ],
         'support' => [
             'badge' => '需要協助嗎？',
