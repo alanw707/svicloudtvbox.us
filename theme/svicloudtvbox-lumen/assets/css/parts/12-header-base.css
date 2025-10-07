@@ -137,10 +137,11 @@
 .lumen-nav__list .current_page_item > a,
 .lumen-nav__list .current_page_parent > a,
 .lumen-nav__list .current-menu-ancestor > a {
-  color: var(--lumen-text-primary);
-  background: rgba(94, 230, 208, 0.24);
+  color: #031125;
+  background: linear-gradient(135deg, rgba(94, 230, 208, 0.96) 0%, rgba(66, 194, 255, 0.94) 85%);
   transform: translateY(-1px);
-  box-shadow: 0 12px 28px rgba(94, 230, 208, 0.28);
+  font-weight: 600;
+  box-shadow: 0 20px 36px rgba(6, 20, 46, 0.45);
 }
 
 .lumen-nav__list .current-menu-item > a::after,
@@ -151,10 +152,10 @@
   position: absolute;
   left: clamp(12px, 1.8vw, 18px);
   right: clamp(12px, 1.8vw, 18px);
-  bottom: -6px;
-  height: 2px;
+  bottom: -8px;
+  height: 3px;
   border-radius: 999px;
-  background: rgba(94, 230, 208, 0.8);
-  box-shadow: 0 4px 12px rgba(94, 230, 208, 0.35);
+  background: rgba(6, 36, 84, 0.42);
+  box-shadow: 0 6px 18px rgba(6, 24, 60, 0.4);
   pointer-events: none;
 }

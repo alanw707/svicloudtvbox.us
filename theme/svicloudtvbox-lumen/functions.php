@@ -52,6 +52,7 @@ add_filter('wp_nav_menu_objects', function ($items, $args) {
         'guides'      => 'header.nav.guides',
         'guide'       => 'header.nav.guides',
         'about'       => 'header.nav.about',
+        'order-tracking' => 'header.nav.order_tracking',
         'account'     => 'header.nav.account',
         'my-account'  => 'header.nav.account',
     ];
@@ -233,6 +234,7 @@ add_action('wp_enqueue_scripts', function () {
 
     // WooCommerce bundle
     $is_woo_request = false;
+    $is_order_tracking_page = false;
     if (class_exists('WooCommerce')) {
         foreach (['is_woocommerce', 'is_cart', 'is_checkout', 'is_account_page'] as $fn) {
             if (function_exists($fn) && $fn()) {
@@ -242,7 +244,24 @@ add_action('wp_enqueue_scripts', function () {
         }
     }
 
-    if ($is_woo_request && isset($css_versions['woocommerce'])) {
+    if (! $is_woo_request) {
+        if (function_exists('is_wc_endpoint_url') && is_wc_endpoint_url('order-tracking')) {
+            $is_order_tracking_page = true;
+        } elseif (is_page('order-tracking')) {
+            $is_order_tracking_page = true;
+        } elseif (is_singular('page')) {
+            $order_tracking_post = get_post();
+            if ($order_tracking_post instanceof WP_Post) {
+                if (function_exists('has_shortcode') && has_shortcode($order_tracking_post->post_content, 'woocommerce_order_tracking')) {
+                    $is_order_tracking_page = true;
+                } elseif (function_exists('has_block') && has_block('woocommerce/order-tracking', $order_tracking_post)) {
+                    $is_order_tracking_page = true;
+                }
+            }
+        }
+    }
+
+    if (($is_woo_request || $is_order_tracking_page) && isset($css_versions['woocommerce'])) {
         wp_enqueue_style(
             'svicloudtvbox-woocommerce',
             get_template_directory_uri() . '/assets/css/woocommerce.css',
@@ -519,3 +538,34 @@ add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
 
     return $fragments;
 });
+
+// Remove default WooCommerce notices from order tracking pages
+// Our custom template handles notice display with better positioning
+add_action('template_redirect', function () {
+    if (!function_exists('is_wc_endpoint_url')) {
+        return;
+    }
+
+    $is_order_tracking = false;
+
+    if (is_wc_endpoint_url('order-tracking')) {
+        $is_order_tracking = true;
+    } elseif (is_page('order-tracking')) {
+        $is_order_tracking = true;
+    } elseif (is_singular('page')) {
+        $order_tracking_post = get_post();
+        if ($order_tracking_post instanceof WP_Post) {
+            if (function_exists('has_shortcode') && has_shortcode($order_tracking_post->post_content, 'woocommerce_order_tracking')) {
+                $is_order_tracking = true;
+            } elseif (function_exists('has_block') && has_block('woocommerce/order-tracking', $order_tracking_post)) {
+                $is_order_tracking = true;
+            }
+        }
+    }
+
+    if ($is_order_tracking) {
+        // Remove the default WooCommerce notice output
+        remove_action('woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
+        remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
+    }
+}, 10);
