@@ -22,6 +22,9 @@ final class SVIC_Translator
      *
      * @var array<string,array>
      */
+    /**
+     * @var array<string,array{version:int,data:array}>
+     */
     private array $registryCache = [];
 
     private function __construct() {}
@@ -151,19 +154,35 @@ final class SVIC_Translator
 
     private function loadLocale(string $locale): array
     {
-        if (isset($this->registryCache[$locale])) {
-            return $this->registryCache[$locale];
+        $file = $this->findLocaleFile($locale);
+        $data = [];
+
+        $version = 0;
+        if ($file && file_exists($file)) {
+            $version = (int) filemtime($file);
         }
 
         $cacheKey = 'registry_' . $locale;
-        $cached   = wp_cache_get($cacheKey, self::CACHE_GROUP);
+        if ($version > 0) {
+            $cacheKey .= '_' . $version;
+        }
+
+        if (isset($this->registryCache[$locale]) && is_array($this->registryCache[$locale])) {
+            $entry = $this->registryCache[$locale];
+            if (($entry['version'] ?? null) === $version && isset($entry['data']) && is_array($entry['data'])) {
+                return $entry['data'];
+            }
+        }
+
+        $cached = wp_cache_get($cacheKey, self::CACHE_GROUP);
         if (is_array($cached)) {
-            $this->registryCache[$locale] = $cached;
+            $this->registryCache[$locale] = [
+                'version' => $version,
+                'data'    => $cached,
+            ];
             return $cached;
         }
 
-        $file = $this->findLocaleFile($locale);
-        $data = [];
         if ($file && file_exists($file)) {
             $loaded = include $file;
             if (is_array($loaded)) {
@@ -171,13 +190,16 @@ final class SVIC_Translator
             }
         }
 
-        /**
+        /** 
          * Allow plugins or child themes to mutate the registry for a locale.
          */
         $data = apply_filters('svic_locale_registry', $data, $locale);
 
         wp_cache_set($cacheKey, $data, self::CACHE_GROUP);
-        $this->registryCache[$locale] = $data;
+        $this->registryCache[$locale] = [
+            'version' => $version,
+            'data'    => $data,
+        ];
 
         return $data;
     }
