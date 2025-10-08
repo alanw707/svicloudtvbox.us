@@ -173,7 +173,10 @@
   display: inline-block;
   width: 8px;
   height: 8px;
-  margin-left: clamp(6px, 1.4vw, 10px);
+  margin-inline-start: clamp(10px, 1.8vw, 14px);
+  margin-inline-end: clamp(6px, 1.4vw, 10px);
+  margin-left: clamp(10px, 1.8vw, 14px);
+  margin-right: clamp(6px, 1.4vw, 10px);
   border-right: 2px solid currentColor;
   border-bottom: 2px solid currentColor;
   transform: rotate(45deg);
@@ -231,12 +234,15 @@
 
 .lumen-nav__list .sub-menu li {
   list-style: none;
+  padding-inline: clamp(6px, 1.4vw, 12px);
 }
 
 .lumen-nav__list .sub-menu a {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  column-gap: clamp(6px, 1vw, 12px);
+  box-sizing: border-box;
   width: 100%;
   padding: 0.55rem 0.75rem;
   border-radius: 12px;
@@ -253,7 +259,7 @@
 .lumen-nav__list .sub-menu a:focus-visible {
   background: rgba(126, 246, 227, 0.18);
   color: #ffffff;
-  transform: translateX(2px);
+  transform: translateY(-1px);
 }
 
 .lumen-nav__list .sub-menu a:focus-visible {

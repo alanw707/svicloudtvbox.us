@@ -251,8 +251,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Build CSS bundle for a theme.")
     parser.add_argument(
         "--theme",
-        default="svicloudtvbox",
-        help="Theme directory name under theme/. Defaults to svicloudtvbox.",
+        default="svicloudtvbox-lumen",
+        help="Theme directory name under theme/. Defaults to svicloudtvbox-lumen.",
     )
     parser.add_argument(
         "--all",
