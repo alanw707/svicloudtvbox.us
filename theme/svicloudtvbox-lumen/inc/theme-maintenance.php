@@ -153,3 +153,108 @@ if (!function_exists('svic_theme_filter_theme_lists')) {
 
 add_action('admin_init', 'svic_theme_cleanup_duplicate_installs', 5);
 add_filter('wp_prepare_themes_for_js', 'svic_theme_filter_theme_lists', 10);
+
+if (!function_exists('svic_theme_ensure_guides_pages')) {
+    /**
+     * Ensures the shared Guides hub and detail pages exist with the correct templates.
+     */
+    function svic_theme_ensure_guides_pages() {
+        if (!is_admin() || !current_user_can('publish_pages')) {
+            return;
+        }
+
+        $required_pages = [
+            [
+                'slug'     => 'guides',
+                'title'    => __('Guides Hub', 'svicloudtvbox-lumen'),
+                'template' => 'page-guides.php',
+            ],
+            [
+                'slug'     => 'guides-setup',
+                'title'    => __('Setup Guide', 'svicloudtvbox-lumen'),
+                'template' => 'page-guides-setup.php',
+            ],
+            [
+                'slug'     => 'guides-apps',
+                'title'    => __('Apps & Channels Guide', 'svicloudtvbox-lumen'),
+                'template' => 'page-guides-apps.php',
+            ],
+            [
+                'slug'     => 'guides-after-setup',
+                'title'    => __('After Setup Guide', 'svicloudtvbox-lumen'),
+                'template' => 'page-guides-after-setup.php',
+            ],
+            [
+                'slug'     => 'guides-troubleshooting',
+                'title'    => __('Troubleshooting Guide', 'svicloudtvbox-lumen'),
+                'template' => 'page-guides-troubleshooting.php',
+            ],
+            [
+                'slug'     => 'guides-resources',
+                'title'    => __('Resource Library', 'svicloudtvbox-lumen'),
+                'template' => 'page-guides-resources.php',
+            ],
+            [
+                'slug'     => 'guides-support',
+                'title'    => __('Concierge Support', 'svicloudtvbox-lumen'),
+                'template' => 'page-guides-support.php',
+            ],
+        ];
+
+        foreach ($required_pages as $page_args) {
+            $slug     = $page_args['slug'];
+            $template = $page_args['template'];
+
+            $existing = get_page_by_path($slug, OBJECT, 'page');
+
+            if (!$existing instanceof WP_Post) {
+                $candidates = get_posts([
+                    'post_type'      => 'page',
+                    'name'           => $slug,
+                    'post_status'    => 'any',
+                    'posts_per_page' => 1,
+                    'fields'         => 'all',
+                ]);
+
+                if (!empty($candidates)) {
+                    $existing = $candidates[0];
+                }
+            }
+
+            if ($existing instanceof WP_Post) {
+                if ('trash' === $existing->post_status) {
+                    wp_untrash_post($existing->ID);
+                }
+
+                if ('publish' !== $existing->post_status) {
+                    wp_update_post([
+                        'ID'          => $existing->ID,
+                        'post_status' => 'publish',
+                    ]);
+                }
+
+                if (get_page_template_slug($existing->ID) !== $template) {
+                    update_post_meta($existing->ID, '_wp_page_template', $template);
+                }
+
+                continue;
+            }
+
+            $new_page_id = wp_insert_post([
+                'post_type'   => 'page',
+                'post_name'   => $slug,
+                'post_title'  => $page_args['title'],
+                'post_status' => 'publish',
+                'post_content'=> '',
+            ], true);
+
+            if (is_wp_error($new_page_id) || !$new_page_id) {
+                continue;
+            }
+
+            update_post_meta($new_page_id, '_wp_page_template', $template);
+        }
+    }
+}
+
+add_action('admin_init', 'svic_theme_ensure_guides_pages', 9);
