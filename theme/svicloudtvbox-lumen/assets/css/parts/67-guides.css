@@ -15,8 +15,8 @@
 .guides-hero__secondary { color: var(--lumen-text-primary); border-color: rgba(255, 255, 255, 0.45); }
 .guides-hero__secondary:hover,
 .guides-hero__secondary:focus-visible { color: var(--lumen-text-primary); border-color: rgba(255, 255, 255, 0.7); box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.16); }
-.guides-hero__media { position: relative; display: grid; place-items: center; padding: clamp(2rem, 5vw, 3rem); border-radius: var(--radius-hero); min-height: clamp(260px, 36vw, 340px); }
-.guides-hero__blur { position: absolute; inset: -20% -30% -10% -10%; background: radial-gradient(circle at 30% 20%, rgba(126, 246, 227, 0.38), transparent 62%), radial-gradient(circle at 70% 70%, rgba(27, 92, 255, 0.32), transparent 65%); filter: blur(0); opacity: 0.9; }
+.guides-hero__media { position: relative; display: grid; place-items: center; padding: clamp(2rem, 5vw, 3rem); border-radius: var(--radius-hero); min-height: clamp(260px, 36vw, 340px); overflow: hidden; pointer-events: none; }
+.guides-hero__blur { position: absolute; inset: -20% -30% -10% -10%; background: radial-gradient(circle at 30% 20%, rgba(126, 246, 227, 0.38), transparent 62%), radial-gradient(circle at 70% 70%, rgba(27, 92, 255, 0.32), transparent 65%); filter: blur(0); opacity: 0.9; pointer-events: none; }
 .guides-hero__device, .guides-hero__remote { position: relative; display: inline-flex; filter: drop-shadow(0 28px 60px rgba(6, 12, 28, 0.55)); }
 .guides-hero__device img { width: clamp(220px, 32vw, 320px); height: auto; }
 .guides-hero__remote { position: absolute; right: clamp(5%, 8vw, 16%); bottom: clamp(6%, 8vw, 12%); transform: rotate(-8deg); }

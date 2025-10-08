@@ -224,8 +224,21 @@ add_action('wp_enqueue_scripts', function () {
         );
     }
 
-    // Guides page bundle
+    // Guides page bundle (overview + detailed sections)
     $is_guides_page = is_page_template('page-guides.php') || is_page('guides');
+
+    if (! $is_guides_page) {
+        $guide_section_slugs = array_map(static function ($item) {
+            return isset($item['slug']) ? sanitize_title($item['slug']) : null;
+        }, (array) svic_guides_get_anchor_items());
+
+        $guide_section_slugs = array_values(array_filter(array_unique($guide_section_slugs)));
+
+        if ($guide_section_slugs) {
+            $is_guides_page = is_page($guide_section_slugs) || is_page_template('page-guide-section.php');
+        }
+    }
+
     if ($is_guides_page && isset($css_versions['guides'])) {
         wp_enqueue_style(
             'svicloudtvbox-guides',
