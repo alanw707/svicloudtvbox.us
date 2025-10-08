@@ -111,14 +111,16 @@ $anchor_items    = svic_guides_get_anchor_items();
             $step_number = sprintf('%02d', $index + 1);
         ?>
           <article class="guides-directory__card guides-directory__card--<?php echo esc_attr($section_key); ?>">
-            <span class="guides-directory__step"><?php echo esc_html($step_number); ?></span>
-            <h3 class="guides-directory__title"><?php echo svic_translate_html($label_key); ?></h3>
-            <?php if (!empty($summary_key)) : ?>
-              <p class="guides-directory__summary"><?php echo svic_translate_html($summary_key); ?></p>
-            <?php endif; ?>
-            <a class="guides-directory__cta" href="<?php echo esc_url($detail_link); ?>">
-              <span class="guides-directory__cta-label"><?php echo svic_translate_html('guides.detail.open_section'); ?></span>
-              <span class="guides-directory__cta-icon" aria-hidden="true"></span>
+            <a class="guides-directory__card-link" href="<?php echo esc_url($detail_link); ?>">
+              <span class="guides-directory__step"><?php echo esc_html($step_number); ?></span>
+              <h3 class="guides-directory__title"><?php echo svic_translate_html($label_key); ?></h3>
+              <?php if (!empty($summary_key)) : ?>
+                <p class="guides-directory__summary"><?php echo svic_translate_html($summary_key); ?></p>
+              <?php endif; ?>
+              <span class="guides-directory__cta">
+                <span class="guides-directory__cta-label"><?php echo svic_translate_html('guides.detail.open_section'); ?></span>
+                <span class="guides-directory__cta-icon" aria-hidden="true"></span>
+              </span>
             </a>
           </article>
         <?php endforeach; ?>
