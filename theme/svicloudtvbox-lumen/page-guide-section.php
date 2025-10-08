@@ -88,7 +88,7 @@ $other_sections = array_filter(
 );
 
 ?>
-<main class="guides-detail guides-detail--<?php echo esc_attr($section_key); ?>">
+<main class="guides-detail guides-detail--<?php echo esc_attr($section_key); ?> surface--dark">
   <header class="guides-detail__hero">
     <div class="guides-detail__hero-inner">
       <a class="guides-detail__back" href="<?php echo esc_url($guides_url); ?>">
@@ -108,7 +108,7 @@ $other_sections = array_filter(
   <div class="guides-detail__layout">
     <article class="guides-detail__content">
       <?php if ($section_key === 'setup') : ?>
-        <ol class="guides-steps guides-detail__steps">
+        <ol class="guides-steps guides-detail__steps surface--light">
           <?php foreach ($content_items as $step) :
             $title_key = $step['title_key'] ?? '';
             $copy_key  = $step['copy_key'] ?? '';
@@ -126,7 +126,7 @@ $other_sections = array_filter(
           $setup_note_copy  = $translate_html('guides.setup.note_copy');
           if ($setup_note_title || $setup_note_copy) :
         ?>
-          <aside class="guides-note guides-detail__note">
+          <aside class="guides-note guides-detail__note surface--light">
             <?php if ($setup_note_title) : ?>
               <h2 class="guides-note__title"><?php echo $setup_note_title; ?></h2>
             <?php endif; ?>
@@ -136,7 +136,7 @@ $other_sections = array_filter(
           </aside>
         <?php endif; ?>
       <?php elseif ($section_key === 'apps' || $section_key === 'post_setup') : ?>
-        <div class="guides-grid guides-grid--detail">
+        <div class="guides-grid guides-grid--detail surface--light">
           <?php foreach ($content_items as $card) :
             $title_key = $card['title_key'] ?? '';
             $copy_key  = $card['copy_key'] ?? '';
@@ -148,7 +148,7 @@ $other_sections = array_filter(
           <?php endforeach; ?>
         </div>
       <?php elseif ($section_key === 'troubleshooting') : ?>
-        <div class="guides-grid guides-grid--troubleshooting">
+        <div class="guides-grid guides-grid--troubleshooting surface--light">
           <?php foreach ($content_items as $card) :
             $title_key = $card['title_key'] ?? '';
             $copy_key  = $card['copy_key'] ?? '';
@@ -160,7 +160,7 @@ $other_sections = array_filter(
           <?php endforeach; ?>
         </div>
       <?php elseif ($section_key === 'resources') : ?>
-        <ul class="guides-resource-list">
+        <ul class="guides-resource-list surface--light">
           <?php foreach ($content_items as $resource) :
             $title_key = $resource['title_key'] ?? '';
             $copy_key  = $resource['copy_key'] ?? '';
@@ -189,7 +189,7 @@ $other_sections = array_filter(
           </div>
         </section>
       <?php else : ?>
-        <div class="guides-grid guides-grid--detail">
+        <div class="guides-grid guides-grid--detail surface--light">
           <?php foreach ($content_items as $card) :
             $title_key = $card['title_key'] ?? '';
             $copy_key  = $card['copy_key'] ?? '';

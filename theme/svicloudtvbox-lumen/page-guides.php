@@ -23,7 +23,7 @@ $hero_callouts   = svic_guides_get_content_item('hero_callouts');
 $highlight_cards = svic_guides_get_content_item('highlight_cards');
 $anchor_items    = svic_guides_get_anchor_items();
 ?>
-<main class="guides-page">
+<main class="guides-page surface--dark">
   <section class="guides-hero" id="guides-hero">
     <div class="guides-hero__inner">
       <div class="guides-hero__copy">
@@ -71,9 +71,9 @@ $anchor_items    = svic_guides_get_anchor_items();
       </header>
       <div class="guides-grid guides-grid--highlights">
         <?php foreach ($highlight_cards as $card) : ?>
-          <article class="guides-card guides-card--highlight">
-            <h3 class="guides-card__title"><?php echo svic_translate_html($card['title_key']); ?></h3>
-            <p class="guides-card__copy"><?php echo svic_translate_html($card['copy_key']); ?></p>
+          <article class="lumen-feature-card">
+            <h3 class="lumen-feature-card__title"><?php echo svic_translate_html($card['title_key']); ?></h3>
+            <p class="lumen-feature-card__copy"><?php echo svic_translate_html($card['copy_key']); ?></p>
           </article>
         <?php endforeach; ?>
       </div>

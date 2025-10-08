@@ -51,6 +51,7 @@
     "label": "Guides page",
     "output": "guides.css",
     "parts": [
+      "47-lumen-section-feature-grid.css",
       "67-guides.css"
     ]
   },
