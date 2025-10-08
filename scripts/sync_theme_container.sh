@@ -59,6 +59,21 @@ echo "[sync-theme] Syncing theme into container: ${CONTAINER_NAME}" >&2
 
 docker exec "${CONTAINER_NAME}" bash -c "mkdir -p '${CONTAINER_THEME_DIR}'"
 
+# Clean up any duplicate theme directories that WordPress may have created
+# when uploading a zip (e.g. svicloudtvbox-lumen-1).
+docker exec "${CONTAINER_NAME}" bash -c "
+  shopt -s nullglob;
+  for dir in /var/www/html/wp-content/themes/${THEME_SLUG}-*; do
+    if [[ \"\$dir\" != '${CONTAINER_THEME_DIR}' ]]; then
+      rm -rf \"\$dir\";
+    fi
+  done
+" >/dev/null 2>&1 || true
+
+# Remove legacy helper mounts so wp-admin stops flagging them as broken themes.
+docker exec "${CONTAINER_NAME}" bash -c "rm -rf '/var/www/html/wp-content/themes/shared'" >/dev/null 2>&1 || true
+docker exec "${CONTAINER_NAME}" bash -c "rm -rf '/var/www/html/wp-content/themes/svicloudtvbox'" >/dev/null 2>&1 || true
+
 # Stream the theme contents into the container, replacing the existing files.
 tar -C "${LOCAL_THEME_DIR}" -cf - . | \
   docker exec -i "${CONTAINER_NAME}" bash -c "rm -rf '${CONTAINER_THEME_DIR}'/* && tar -C '${CONTAINER_THEME_DIR}' -xf -"

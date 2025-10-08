@@ -3,8 +3,8 @@
 Deploy the custom WordPress theme to Hostinger over FTP/FTPS.
 
 Defaults target the theme folder:
-  local:  theme/svicloudtvbox
-  remote: public_html/wp-content/themes/svicloudtvbox
+  local:  theme/svicloudtvbox-lumen
+  remote: public_html/wp-content/themes/svicloudtvbox-lumen
 
 Usage examples:
   # Using env vars (recommended)
@@ -14,7 +14,7 @@ Usage examples:
   # Or with flags
   python3 scripts/deploy_theme.py \
     --host 147.79.122.118 --user uXXXX --password 'secret' \
-    --protocol ftps --remote-root public_html/wp-content/themes/svicloudtvbox
+    --protocol ftps --remote-root public_html/wp-content/themes/svicloudtvbox-lumen
 
 Security note: Prefer passing secrets via environment variables or a local .env
 file that is gitignored. Do not commit credentials.
@@ -41,8 +41,8 @@ except Exception as e:  # pragma: no cover - environment issue
 
 
 # Defaults
-DEFAULT_LOCAL_DIR = Path("theme/svicloudtvbox").resolve()
-DEFAULT_REMOTE_ROOT = "public_html/wp-content/themes/svicloudtvbox"
+DEFAULT_LOCAL_DIR = Path("theme/svicloudtvbox-lumen").resolve()
+DEFAULT_REMOTE_ROOT = "public_html/wp-content/themes/svicloudtvbox-lumen"
 
 # Exclusion patterns (dirs/files)
 EXCLUDE_DIRS = {

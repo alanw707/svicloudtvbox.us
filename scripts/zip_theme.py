@@ -1,16 +1,15 @@
-import os, zipfile, sys
+import os
+import sys
+import zipfile
+from pathlib import Path
 
-src_candidates = ['theme/svicloudtvbox-lumen', 'theme/svicloudtvbox']
-for candidate in src_candidates:
-    if os.path.isdir(candidate):
-        src = candidate
-        break
-else:
-    print('Theme dir not found in candidates:', ', '.join(src_candidates), file=sys.stderr)
+src = Path('theme/svicloudtvbox-lumen')
+if not src.is_dir():
+    print('Theme dir not found at expected location:', src, file=sys.stderr)
     sys.exit(1)
 
-zip_name = os.path.basename(src) + '.zip'
-dst = os.path.join('theme', zip_name)
+zip_name = src.name + '.zip'
+dst = src.with_name(zip_name)
 
 if os.path.exists(dst):
     os.remove(dst)
