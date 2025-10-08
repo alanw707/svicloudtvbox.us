@@ -46,7 +46,19 @@ $has_translation = static function ($key) {
         return false;
     }
 
-    return svic_translate($key) !== $key;
+    $translated = svic_translate($key);
+    if ($translated === $key) {
+        return false;
+    }
+
+    $last_segment = '';
+    if (strpos($key, '.') !== false) {
+        $parts = explode('.', $key);
+        $last_segment = end($parts) ?: '';
+    }
+
+    // Translator falls back to the last segment when a string is missing; treat that as untranslated.
+    return $last_segment === '' || $translated !== $last_segment;
 };
 
 $translate_html = static function ($key) use ($has_translation) {

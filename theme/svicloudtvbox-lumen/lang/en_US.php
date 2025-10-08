@@ -678,6 +678,7 @@ return [
         'post_setup' => [
             'badge' => 'After setup',
             'title' => 'Keep exploring once you are online',
+            'lead'  => 'Install your favorite apps, fine-tune video and audio, and make SVICLOUD feel like home.',
             'items' => [
                 'explore' => [
                     'title' => 'Browse the home screen',
