@@ -34,3 +34,4 @@ deployconfig.py
 core/
 sites/
 db/
+public/

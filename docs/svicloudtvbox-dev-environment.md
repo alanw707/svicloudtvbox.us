@@ -31,6 +31,19 @@ Status: Ready for use
 
 Prereqs: Docker Desktop + DDEV installed.
 
+### One-command bootstrap (repo included)
+
+```
+# From this repository root
+./scripts/setup-local-ddev.sh
+```
+
+The helper script provisions WordPress into `public/`, installs WooCommerce and essential plugins, and symlinks `theme/svicloudtvbox` into `public/wp-content/themes/svicloudtvbox/`. Re-run it anytime; it is idempotent.
+
+Default credentials: `admin` / `admin` at `https://svicloudtvbox.ddev.site/wp-admin`.
+
+### Manual bootstrap (alternate flow)
+
 ```
 # From your chosen project directory
 mkdir svicloudtvbox-wp && cd svicloudtvbox-wp
@@ -197,4 +210,3 @@ ddev wp search-replace 'https://staging.svicloudtvbox.us' 'https://svicloudtvbox
 ---
 
 End of Dev Environment Guide v1.0
-
