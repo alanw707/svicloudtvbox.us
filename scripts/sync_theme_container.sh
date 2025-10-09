@@ -50,6 +50,18 @@ resolve_container() {
 
 resolve_container "${REQUESTED_FILTER}"
 
+remove_container_path() {
+  local target="$1"
+  docker exec "${CONTAINER_NAME}" bash -s -- "${target}" <<'EOF' || true
+target="$1"
+if command -v mountpoint >/dev/null 2>&1 && mountpoint -q "$target"; then
+  echo "[sync-theme] Skipping removal of bind-mounted directory: $target" >&2
+elif [[ -e "$target" ]]; then
+  rm -rf "$target"
+fi
+EOF
+}
+
 if [[ -z "${CONTAINER_NAME}" ]]; then
   echo "[sync-theme] Unable to find a running WordPress container. Pass a container fragment, e.g. ./scripts/sync_theme_container.sh svicloud10p" >&2
   exit 1
@@ -71,8 +83,8 @@ docker exec "${CONTAINER_NAME}" bash -c "
 " >/dev/null 2>&1 || true
 
 # Remove legacy helper mounts so wp-admin stops flagging them as broken themes.
-docker exec "${CONTAINER_NAME}" bash -c "rm -rf '/var/www/html/wp-content/themes/shared'" >/dev/null 2>&1 || true
-docker exec "${CONTAINER_NAME}" bash -c "rm -rf '/var/www/html/wp-content/themes/svicloudtvbox'" >/dev/null 2>&1 || true
+remove_container_path "/var/www/html/wp-content/themes/shared"
+remove_container_path "/var/www/html/wp-content/themes/svicloudtvbox"
 
 # Stream the theme contents into the container, replacing the existing files.
 tar -C "${LOCAL_THEME_DIR}" -cf - . | \

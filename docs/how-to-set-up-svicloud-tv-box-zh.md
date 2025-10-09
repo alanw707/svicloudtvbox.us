@@ -7,6 +7,14 @@ keywords:
   - 小雲 10P+ 語音遙控
   - Android 串流電視盒
   - Orz 安裝器
+  - SviCloud 安裝指南
+  - 小雲 10P+ 語音遙控設定
+  - 小雲 10S 比較
+review:
+  last_reviewed: 2025-02-14
+  reviewer: Codex (automated)
+  notes:
+    - 關鍵字已更新；仍需補齊螢幕截圖後再發佈。
 ---
 
 # 小雲（SviCloud）電視盒安裝指南

@@ -7,6 +7,14 @@ keywords:
   - 小雲 10P+ 10S 差異
   - 小雲電視盒安裝教學
   - Orz 安裝器
+  - SviCloud 客服
+  - 小雲客服中心
+  - SviCloud 支援
+review:
+  last_reviewed: 2025-02-14
+  reviewer: Codex (automated)
+  notes:
+    - 已更新關鍵字與比較連結；仍等待補齊圖片資源。
 ---
 
 # 小雲（SviCloud）電視盒常見問題
@@ -16,7 +24,7 @@ keywords:
 ## 裝置與型號
 
 **問：要買哪一款小雲電視盒？**  
-答：若需要語音搜尋與卡拉 OK，建議選擇 SviCloud 10P+。SviCloud 10S 擁有相同的串流內容，但不支援 Karaoke KTV 與麥克風遙控器。安裝時可參考[小雲電視盒安裝指南](how-to-set-up-svicloud-tv-box-zh.md)。
+答：若需要語音搜尋與卡拉 OK，建議選擇 SviCloud 10P+。SviCloud 10S 擁有相同的串流內容，但不支援 Karaoke KTV 與麥克風遙控器。安裝時可參考[小雲電視盒安裝指南](how-to-set-up-svicloud-tv-box-zh.md)，並瀏覽[10P+ 與 10S 比較頁](https://svicloudtvbox.us/compare/)確認功能差異。
 
 **問：小雲電視盒在海外可以用嗎？**  
 答：可以。只要有穩定的寬頻或 Wi-Fi 網路，就能在世界各地使用。

@@ -7,6 +7,13 @@ keywords:
   - SviCloud 10P+ voice remote setup
   - Android streaming box
   - Orz installer
+  - SviCloud TV Box installation
+  - SviCloud installation steps
+review:
+  last_reviewed: 2025-02-14
+  reviewer: Codex (automated)
+  notes:
+    - SEO keywords refreshed; screenshot assets still pending before publishing.
 ---
 
 # How to Set Up Your SviCloud TV Box
@@ -32,7 +39,7 @@ Welcome to the official step-by-step SviCloud TV Box installation guide for SviC
 
 > **Heads up:** Apps are not pre-installed. You will add them during setup via the Orz installer.
 
-## Quick SviCloud TV Box Setup Checklist
+## SviCloud TV Box Installation Checklist
 
 1. **Connect hardware**  
    Attach the HDMI cable to your TV and plug the power adapter into a wall outlet. The device powers on automatically (front LED lights up).

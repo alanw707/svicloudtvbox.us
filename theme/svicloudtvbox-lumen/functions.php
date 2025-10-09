@@ -16,20 +16,85 @@ require_once get_template_directory() . '/inc/class-svic-translator.php';
 require_once get_template_directory() . '/inc/class-svic-locale-resolver.php';
 require_once get_template_directory() . '/inc/guides-data.php';
 require_once get_template_directory() . '/inc/theme-maintenance.php';
+require_once get_template_directory() . '/inc/helpers-svic.php';
 
 SVIC_Locale_Resolver::bootstrap();
 
-$svic_helper_paths = [
-    get_template_directory() . '/inc/helpers-svic.php',
-    dirname(get_template_directory()) . '/shared/helpers-svic.php',
-];
-
-foreach ($svic_helper_paths as $helper_path) {
-    if (file_exists($helper_path)) {
-        require_once $helper_path;
-        break;
+/**
+ * Hide legacy bind-mounted theme directories from the admin theme list.
+ */
+function svic_filter_theme_roots($value) {
+    if (!is_array($value) || !$value) {
+        return $value;
     }
+
+    $blocked_slugs = ['shared', 'svicloudtvbox'];
+
+    foreach ($blocked_slugs as $slug) {
+        if (isset($value[$slug])) {
+            unset($value[$slug]);
+        }
+    }
+
+    return $value;
 }
+
+add_filter('pre_set_site_transient_theme_roots', 'svic_filter_theme_roots');
+add_filter('pre_site_transient_theme_roots', 'svic_filter_theme_roots');
+add_filter('site_transient_theme_roots', 'svic_filter_theme_roots');
+
+add_filter('wp_prepare_themes_for_js', function ($themes) {
+    if (!is_array($themes) || !$themes) {
+        return $themes;
+    }
+
+    $blocked_slugs = ['shared', 'svicloudtvbox'];
+
+    foreach ($themes as $index => $data) {
+        $slug = $data['id'] ?? ($data['stylesheet'] ?? null);
+        if ($slug && in_array($slug, $blocked_slugs, true)) {
+            unset($themes[$index]);
+        }
+    }
+
+    return $themes;
+}, 20);
+
+add_action('admin_footer-themes.php', function () {
+    $blocked_slugs = wp_json_encode(['shared', 'svicloudtvbox']);
+    ?>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const slugs = <?php echo $blocked_slugs; ?>;
+        const themeCards = document.querySelectorAll('.theme');
+        themeCards.forEach(function (card) {
+            const slug = card.getAttribute('data-slug');
+            if (slug && slugs.includes(slug)) {
+                card.remove();
+            }
+        });
+
+        const brokenSection = document.querySelector('.broken-themes table');
+        if (brokenSection) {
+            slugs.forEach(function (slug) {
+                brokenSection.querySelectorAll('tr').forEach(function (row) {
+                    const cell = row.querySelector('td');
+                    if (!cell) { return; }
+                    if (cell.textContent.trim() === slug) {
+                        row.remove();
+                    }
+                });
+            });
+
+            const rows = brokenSection.querySelectorAll('tr');
+            if (rows.length <= 1) {
+                brokenSection.closest('.broken-themes')?.remove();
+            }
+        }
+    });
+    </script>
+    <?php
+});
 
 add_filter('wp_nav_menu_objects', function ($items, $args) {
     if (!is_array($items) || !$items) {
