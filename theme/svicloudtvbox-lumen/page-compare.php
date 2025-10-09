@@ -67,17 +67,63 @@ $compare_product_bullets = [
     ],
 ];
 
+$hero_metric_keys = [
+    'ram_storage',
+    'video_quality',
+    'best_for',
+];
+
 ?>
 
 <main class="compare-page">
   <section class="compare-hero">
-    <span class="compare-hero__badge"><?php echo svic_translate_html('compare.hero.badge'); ?></span>
-    <h1 class="compare-hero__title">
-      <span class="page-title-text"><?php echo svic_translate_html('compare.hero.title'); ?></span>
-    </h1>
-    <p class="compare-hero__subtitle">
-      <span class="page-subtitle-text"><?php echo svic_translate_html('compare.hero.subtitle'); ?></span>
-    </p>
+    <div class="compare-hero__background" aria-hidden="true">
+      <div class="compare-hero__photo compare-hero__photo--primary"></div>
+      <div class="compare-hero__photo compare-hero__photo--secondary"></div>
+      <div class="compare-hero__gradient compare-hero__gradient--teal"></div>
+      <div class="compare-hero__gradient compare-hero__gradient--iris"></div>
+      <div class="compare-hero__gradient compare-hero__gradient--amber"></div>
+      <div class="compare-hero__mesh"></div>
+    </div>
+
+    <div class="compare-hero__inner">
+      <span class="compare-hero__badge"><?php echo svic_translate_html('compare.hero.badge'); ?></span>
+      <h1 class="compare-hero__title" id="compare-hero-title">
+        <span class="page-title-text"><?php echo svic_translate_html('compare.hero.title'); ?></span>
+      </h1>
+      <p class="compare-hero__subtitle">
+        <span class="page-subtitle-text"><?php echo svic_translate_html('compare.hero.subtitle'); ?></span>
+      </p>
+
+      <div class="compare-hero__actions" role="group" aria-label="<?php echo esc_attr__('Primary product actions', 'svicloudtvbox-lumen'); ?>">
+        <a class="lumen-pill lumen-pill--primary compare-hero__action" href="<?php echo esc_url($hero_10p_url); ?>">
+          <?php echo svic_translate_html('compare.products.10p.cta'); ?>
+        </a>
+        <a class="lumen-pill lumen-pill--ghost compare-hero__action" href="<?php echo esc_url($hero_10s_url); ?>">
+          <?php echo svic_translate_html('compare.products.10s.cta'); ?>
+        </a>
+      </div>
+
+      <dl class="compare-hero__metrics" aria-labelledby="compare-hero-title">
+        <?php foreach ($hero_metric_keys as $metric_key) :
+            $base_key = 'compare.comparison.rows.' . $metric_key;
+        ?>
+          <div class="compare-hero__metric">
+            <dt class="compare-hero__metric-label"><?php echo svic_translate_html($base_key . '.label'); ?></dt>
+            <dd class="compare-hero__metric-values">
+              <span class="compare-hero__metric-value">
+                <span class="compare-hero__metric-chip compare-hero__metric-chip--highlight"><?php echo esc_html__('10P+', 'svicloudtvbox-lumen'); ?></span>
+                <?php echo svic_translate_html($base_key . '.p10p'); ?>
+              </span>
+              <span class="compare-hero__metric-value">
+                <span class="compare-hero__metric-chip"><?php echo esc_html__('10S', 'svicloudtvbox-lumen'); ?></span>
+                <?php echo svic_translate_html($base_key . '.p10s'); ?>
+              </span>
+            </dd>
+          </div>
+        <?php endforeach; ?>
+      </dl>
+    </div>
   </section>
 
   <section class="compare-differences" aria-label="<?php echo esc_attr__('Key differences between models', 'svicloudtvbox-lumen'); ?>">

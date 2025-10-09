@@ -608,7 +608,7 @@ return [
             'apps'            => 'Install Yogurt TV, Kids Mode, Karaoke, and other essentials.',
             'post_setup'      => 'Personalize settings and keep your SVICLOUD running smoothly.',
             'troubleshooting' => 'Fix remote pairing, buffering, and Orz installer hiccups.',
-            'resources'       => 'Bookmark channel lists, buying advice, and comparisons.',
+            'resources'       => 'Bookmark channel guides, buying advice, and the latest 10-series highlights.',
             'support'         => 'Reach concierge support or review the FAQ options.',
         ],
         'setup' => [
@@ -716,27 +716,225 @@ return [
         'resources' => [
             'badge' => 'More resources',
             'title' => 'Guides worth bookmarking',
-            'lead'  => 'Deep-dive into channel lists, product comparisons, and buying advice after you finish setup.',
+            'lead'  => 'Explore channel coverage, model recommendations, and 10-series feature breakdowns after you finish setup.',
             'items' => [
                 'why' => [
-                    'title' => 'Why buy SviCloud TV Box',
-                    'copy'  => 'Understand how SviCloud compares to other Android streaming boxes.',
+                    'title' => 'Why buy from SVICLOUDTVBOX.US',
+                    'copy'  => 'See why the U.S. concierge store is the fastest, safest way to get SVICLOUD 10-series hardware.',
                 ],
                 'channels' => [
-                    'title' => 'SviCloud TV Box channels list',
-                    'copy'  => 'Browse live TV and VOD catalogs available inside Yogurt TV.',
+                    'title' => 'Live channels & apps guide',
+                    'copy'  => 'Preview Yogurt TV categories, on-demand libraries, and the must-install apps for every household.',
                 ],
                 'features' => [
-                    'title' => 'Top 8 SviCloud features',
-                    'copy'  => 'Learn the benefits that make SviCloud a favorite among bilingual households.',
+                    'title' => 'Top SVICLOUD 10-series features',
+                    'copy'  => 'Look under the hood of the 10P+ and 10S hardware, codecs, and family entertainment extras.',
                 ],
                 'which' => [
-                    'title' => 'Which SviCloud model should I buy?',
-                    'copy'  => 'Decide between SviCloud 10P+, 10S, and other models based on your needs.',
+                    'title' => 'Which SVICLOUD model fits me?',
+                    'copy'  => 'Compare 10P+ and 10S use cases so you can pick the right box the first time.',
                 ],
-                'compare' => [
-                    'title' => 'SviCloud 8P vs EVPAD 6P vs Unblock UBox9',
-                    'copy'  => 'See how SviCloud stacks up against competing streaming boxes.',
+            ],
+            'articles' => [
+                'shared' => [
+                    'badge'             => 'Resource guide',
+                    'back_label'        => 'Back to resources',
+                    'more_guides_title' => 'More resource guides',
+                ],
+                'why' => [
+                    'title'   => 'Why buy from SVICLOUDTVBOX.US',
+                    'lead'    => 'Order direct from our California warehouse to guarantee genuine SVICLOUD 10-series hardware, concierge setup, and a 1-year U.S. warranty.',
+                    'updated' => 'Updated January 15, 2025',
+                    'sections' => [
+                        'fulfillment' => [
+                            'heading' => 'Certified U.S. inventory with 48-hour shipping',
+                            'body'    => '<p>All SVICLOUD 10P+ and 10S boxes leave our California warehouse with tamper-evident packaging, verified serial numbers, and the latest firmware. Orders placed before 12pm PT ship within two business days.</p>
+<ul>
+  <li>Signature-required UPS and USPS options keep deliveries secure.</li>
+  <li>Domestic inventory eliminates customs delays and grey-market surprises.</li>
+  <li>Every unit includes fresh accessories, the Bluetooth voice remote, and a U.S.-ready power adapter.</li>
+</ul>',
+                        ],
+                        'warranty' => [
+                            'heading' => '1-year U.S. warranty and hassle-free returns',
+                            'body'    => '<p>Your purchase includes a 1-year U.S. warranty handled by our concierge team. If anything fails under normal use, we coordinate diagnostics, replacements, or parts from California—no overseas shipping required.</p>
+<ul>
+  <li>30-day satisfaction window for returns or exchanges on unopened units.</li>
+  <li>Hardware repairs or replacements processed domestically for faster turnaround.</li>
+  <li>Firmware updates and troubleshooting support provided throughout the warranty period.</li>
+</ul>',
+                        ],
+                        'concierge' => [
+                            'heading' => 'Bilingual concierge for setup and lifetime support',
+                            'body'    => '<p>Need help installing apps or pairing the voice remote? Our bilingual concierge team responds in English or 中文 within one business day. Share your order number and questions via <a href="{{contact_url}}">the concierge form</a>.</p>
+<ul>
+  <li>Live guidance for unboxing, network setup, and Orz installer downloads.</li>
+  <li>Screen recordings and step-by-step instructions tailored to your home.</li>
+  <li>Ongoing help for channel refreshes, app updates, and troubleshooting.</li>
+</ul>',
+                        ],
+                        'billing' => [
+                            'heading' => 'Secure checkout with transparent pricing',
+                            'body'    => '<p>Checkout is protected by SSL and supports Visa, Mastercard, American Express, and PayPal. Sales tax is calculated at checkout for states where we are required to collect it.</p>
+<ul>
+  <li>Free U.S. shipping on every SVICLOUD box—no surprise handling fees.</li>
+  <li>No monthly subscription or hidden renewal charges—hardware is a one-time purchase.</li>
+  <li>Receipts and tracking numbers are emailed the moment your order leaves the warehouse.</li>
+</ul>',
+                        ],
+                        'next_steps' => [
+                            'heading' => 'What happens after you order',
+                            'body'    => '<p>After checkout you will receive a confirmation email, a shipping notification with tracking, and concierge tips for first-time setup. Start with our <a href="{{setup_url}}">10-minute setup guide</a>, then reach out via <a href="{{contact_url}}">the concierge form</a> anytime you need a hand.</p>',
+                        ],
+                    ],
+                ],
+                'channels' => [
+                    'title'   => 'Live channels & apps guide',
+                    'lead'    => 'Preview Yogurt TV, LUCA Kids, and Karaoke coverage so you know exactly what streams are available before you plug in.',
+                    'updated' => 'Updated January 15, 2025',
+                    'sections' => [
+                        'live' => [
+                            'heading' => '2000+ live channels across regions',
+                            'body'    => '<p>Yogurt TV streams 2,000+ live channels spanning Hong Kong, Taiwan, Mainland China, Southeast Asia, Japan, Korea, North America, and Europe. Each region includes news, variety, sports, and premium movie feeds in high-definition.</p>
+<ul>
+  <li>Quick filters jump between Cantonese, Mandarin, and English channel groups.</li>
+  <li>Dedicated sports hubs cover NBA, MLB, soccer, combat sports, and seasonal events.</li>
+  <li>24/7 Cantonese, Mandarin, and bilingual lifestyle channels keep every household entertained.</li>
+</ul>',
+                        ],
+                        'vod' => [
+                            'heading' => 'On-demand dramas, variety shows, and replay',
+                            'body'    => '<p>The VOD library refreshes daily with new dramas, variety programs, kids animation, films, documentaries, and replay content. Recent episodes are tagged with catch-up windows so you never miss prime-time releases.</p>
+<ul>
+  <li>Binge entire drama seasons with multiple audio tracks and subtitle options.</li>
+  <li>Replay variety shows and news segments within hours of airing.</li>
+  <li>Dedicated kids, education, and documentary shelves simplify discovery.</li>
+</ul>',
+                        ],
+                        'apps' => [
+                            'heading' => 'Must-install apps for every household',
+                            'body'    => '<p>Install the essentials first: Yogurt TV / LUCA TV for live content, Yogurt Kids for family-safe programming, WeFun Karaoke for lyrics-on-screen singing, and regional packs like Malaysia Live. Follow the steps inside the <a href="{{apps_url}}">Apps & downloads guide</a> to grab each one from Orz.</p>',
+                        ],
+                        'updates' => [
+                            'heading' => 'Request the full channel spreadsheet',
+                            'body'    => '<p>Need the complete list of channels with logos and language tags? Request the latest spreadsheet from concierge via <a href="{{contact_url}}">our support form</a>. We refresh the document whenever new channels are added.</p>',
+                        ],
+                        'network' => [
+                            'heading' => 'Streaming tips for smooth playback',
+                            'body'    => '<p>For the smoothest streams, connect via Ethernet or Wi-Fi 6. If you encounter buffering, review the tips in our <a href="{{troubleshooting_url}}">troubleshooting guide</a>, reboot your router, or switch to wired networking.</p>',
+                        ],
+                    ],
+                ],
+                'features' => [
+                    'title'   => 'Top SVICLOUD 10-series features',
+                    'lead'    => 'See what makes the SVICLOUD 10P+ and 10S stand out—from flagship chipsets to bilingual entertainment experiences.',
+                    'updated' => 'Updated January 15, 2025',
+                    'sections' => [
+                        'hardware' => [
+                            'heading' => 'Flagship hardware ready for 4K HDR',
+                            'body'    => '<p>SVICLOUD 10P+ uses the Amlogic S928X octa-core processor with 4GB RAM and 64GB storage, while the 10S pairs a smooth quad-core CPU with 4GB RAM and 32GB storage. Both deliver 4K HDR output, HDMI 2.1, dual-band Wi-Fi 6, and Gigabit Ethernet.</p>
+<ul>
+  <li>USB 3.0 and USB 2.0 ports support external drives, cameras, and accessories.</li>
+  <li>Optical/SPDIF and HDMI eARC provide flexible audio for home theaters.</li>
+  <li>Quiet chassis and smart cooling keep playback stable during long marathons.</li>
+</ul>',
+                        ],
+                        'streaming' => [
+                            'heading' => 'AV1 decoding and adaptive streaming',
+                            'body'    => '<p>Both models decode AV1, HEVC, and VP9 for sharper streams at lower bitrates. Adaptive buffering keeps live sports and drama replays fluid, even on busy household networks.</p>
+<ul>
+  <li>Automatic frame-rate matching reduces judder on 24p dramas and 60fps sports.</li>
+  <li>Cloud CDN acceleration prioritizes North American routes for overseas content.</li>
+  <li>Frequent firmware updates add new codecs, UI polish, and performance tuning.</li>
+</ul>',
+                        ],
+                        'remote' => [
+                            'heading' => 'Voice remote built for quick navigation',
+                            'body'    => '<p>The Bluetooth voice remote features far-field microphones, number pad shortcuts, and dedicated media keys. Pair it in seconds using the volume buttons, then launch apps or search channels with voice commands.</p>
+<ul>
+  <li>Programmable power and volume keys integrate with most TVs and soundbars.</li>
+  <li>Backlit buttons and an ergonomic grip make nighttime navigation easy.</li>
+  <li>OTA remote firmware updates keep responsiveness snappy.</li>
+</ul>',
+                        ],
+                        'family' => [
+                            'heading' => 'Entertainment for every generation',
+                            'body'    => '<p>SVICLOUD bundles more than live TV. Yogurt Kids locks into age-appropriate zones, WeFun Karaoke provides lyrics with scoring, and Cherry TV stays PIN-protected for adults.</p>
+<ul>
+  <li>Create kid profiles so the launcher only shows curated education and animation.</li>
+  <li>Queue songs, duet modes, and weekly new releases for karaoke gatherings.</li>
+  <li>Regional add-on apps expand Cantonese, Mandarin, Malay, and English programming.</li>
+</ul>',
+                        ],
+                        'service' => [
+                            'heading' => 'Lifetime concierge service included',
+                            'body'    => '<p>Every SVICLOUD device includes lifetime concierge help from our U.S.-based team. Contact us via <a href="{{contact_url}}">the concierge form</a> for setup help, firmware announcements, and personalized recommendations.</p>',
+                        ],
+                    ],
+                ],
+                'models' => [
+                    'title'   => 'Which SVICLOUD model fits me?',
+                    'lead'    => 'Use this guide to decide between SVICLOUD 10P+ and 10S based on performance, ports, and the way your family watches.',
+                    'updated' => 'Updated January 15, 2025',
+                    'sections' => [
+                        'summary' => [
+                            'heading' => 'Quick comparison at a glance',
+                            'body'    => '<table class="guides-article__table">
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>SVICLOUD 10P+</th>
+      <th>SVICLOUD 10S</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Processor &amp; memory</td>
+      <td>Amlogic S928X · 4GB RAM · 64GB storage</td>
+      <td>Quad-core CPU · 4GB RAM · 32GB storage</td>
+    </tr>
+    <tr>
+      <td>Connectivity</td>
+      <td>Wi-Fi 6 dual-band · Gigabit LAN · USB 3.0 + USB 2.0</td>
+      <td>Wi-Fi 6 dual-band · Gigabit LAN · dual USB 2.0</td>
+    </tr>
+    <tr>
+      <td>Audio outputs</td>
+      <td>HDMI 2.1 · Optical SPDIF</td>
+      <td>HDMI 2.1 · 3.5mm AUX</td>
+    </tr>
+    <tr>
+      <td>Best for</td>
+      <td>Home theaters, heavy app installs, karaoke setups</td>
+      <td>Everyday streaming, compact spaces, secondary TVs</td>
+    </tr>
+  </tbody>
+</table>
+<p>Both models stream the same Yogurt TV apps and receive identical firmware updates. Choose based on storage, ports, and how many accessories you plug in.</p>',
+                        ],
+                        'ten_p' => [
+                            'heading' => 'Choose SVICLOUD 10P+ if you need…',
+                            'body'    => '<p>Pick the flagship 10P+ when you want maximum performance and expandability.</p>
+<ul>
+  <li>You run a home theater with receivers, soundbars, or optical audio gear.</li>
+  <li>You install lots of third-party APKs or store local files on external drives.</li>
+  <li>You host karaoke nights and prefer the fastest processor for lyric rendering.</li>
+</ul>',
+                        ],
+                        'ten_s' => [
+                            'heading' => 'Choose SVICLOUD 10S if you prefer…',
+                            'body'    => '<p>The 10S keeps the same channel lineup in a smaller, lower-priced package.</p>
+<ul>
+  <li>Secondary TVs, bedrooms, dorms, or apartments where space is limited.</li>
+  <li>Families who primarily watch live TV and VOD with a few extra apps.</li>
+  <li>Anyone who wants concierge setup help without paying for extra ports.</li>
+</ul>',
+                        ],
+                        'next_steps' => [
+                            'heading' => 'Next steps once you pick a model',
+                            'body'    => '<p>Whichever box you choose, follow the <a href="{{setup_url}}">setup guide</a>, install essentials from the <a href="{{apps_url}}">apps guide</a>, and save <a href="{{contact_url}}">the concierge link</a> for future questions.</p>',
+                        ],
+                    ],
                 ],
             ],
         ],

@@ -176,10 +176,16 @@ $other_sections = array_filter(
           <?php foreach ($content_items as $resource) :
             $title_key = $resource['title_key'] ?? '';
             $copy_key  = $resource['copy_key'] ?? '';
-            $url       = $resource['url'] ?? '';
+            $link      = svic_guides_get_resource_link($resource);
+            if (!$link) {
+                continue;
+            }
+            $is_external = !empty($resource['external']) && !empty($resource['url']);
+            $link_rel    = $is_external ? ' rel="noopener"' : '';
+            $link_target = $is_external ? ' target="_blank"' : '';
           ?>
             <li class="guides-resource-item">
-              <a class="guides-resource" href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener">
+              <a class="guides-resource" href="<?php echo esc_url($link); ?>"<?php echo $link_target; ?><?php echo $link_rel; ?>>
                 <span class="guides-resource__title"><?php echo $translate_html($title_key); ?></span>
                 <span class="guides-resource__copy"><?php echo $translate_html($copy_key); ?></span>
               </a>

@@ -107,33 +107,8 @@ if (!function_exists('svic_guides_get_content')) {
                     'copy_key'  => 'guides.troubleshooting.items.orz.copy',
                 ],
             ],
-            'resource_links' => [
-                [
-                    'title_key' => 'guides.resources.items.why.title',
-                    'copy_key'  => 'guides.resources.items.why.copy',
-                    'url'       => 'https://www.svicloudtvbox.com/why-buy-svicloud-tv-box-from-us-a0061.html',
-                ],
-                [
-                    'title_key' => 'guides.resources.items.channels.title',
-                    'copy_key'  => 'guides.resources.items.channels.copy',
-                    'url'       => 'https://www.svicloudtvbox.com/svicloud-tv-box-channels-list-a0063.html',
-                ],
-                [
-                    'title_key' => 'guides.resources.items.features.title',
-                    'copy_key'  => 'guides.resources.items.features.copy',
-                    'url'       => 'https://www.svicloudtvbox.com/blog/top-8-advantages-and-features-of-svicloud-tv-box-b0187.html',
-                ],
-                [
-                    'title_key' => 'guides.resources.items.which.title',
-                    'copy_key'  => 'guides.resources.items.which.copy',
-                    'url'       => 'https://www.svicloudtvbox.com/blog/which-svicloud-tv-box-should-i-buy-b0216.html',
-                ],
-                [
-                    'title_key' => 'guides.resources.items.compare.title',
-                    'copy_key'  => 'guides.resources.items.compare.copy',
-                    'url'       => 'https://www.svicloudtvbox.com/blog/svicloud-8p-vs-evpad-6p-vs-unblock-ubox9-b0212.html',
-                ],
-            ],
+            'resource_articles' => [],
+            'resource_links'    => [],
             'anchor_items' => [
                 [
                     'key'              => 'overview',
@@ -201,6 +176,243 @@ if (!function_exists('svic_guides_get_content')) {
             ],
         ];
 
+        $resource_articles = [
+            'why-buy' => [
+                'slug'        => 'why-buy',
+                'title_key'   => 'guides.resources.articles.why.title',
+                'summary_key' => 'guides.resources.items.why.copy',
+                'hero'        => [
+                    'badge_key'  => 'guides.resources.articles.shared.badge',
+                    'title_key'  => 'guides.resources.articles.why.title',
+                    'lead_key'   => 'guides.resources.articles.why.lead',
+                    'updated_key'=> 'guides.resources.articles.why.updated',
+                ],
+                'sections'    => [
+                    [
+                        'id'          => 'fulfillment',
+                        'heading_key' => 'guides.resources.articles.why.sections.fulfillment.heading',
+                        'body'        => [
+                            ['key' => 'guides.resources.articles.why.sections.fulfillment.body'],
+                        ],
+                    ],
+                    [
+                        'id'          => 'warranty',
+                        'heading_key' => 'guides.resources.articles.why.sections.warranty.heading',
+                        'body'        => [
+                            ['key' => 'guides.resources.articles.why.sections.warranty.body'],
+                        ],
+                    ],
+                    [
+                        'id'          => 'concierge',
+                        'heading_key' => 'guides.resources.articles.why.sections.concierge.heading',
+                        'body'        => [
+                            [
+                                'key'    => 'guides.resources.articles.why.sections.concierge.body',
+                                'tokens' => [
+                                    'contact_url' => 'contact',
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'id'          => 'billing',
+                        'heading_key' => 'guides.resources.articles.why.sections.billing.heading',
+                        'body'        => [
+                            ['key' => 'guides.resources.articles.why.sections.billing.body'],
+                        ],
+                    ],
+                    [
+                        'id'          => 'next-steps',
+                        'heading_key' => 'guides.resources.articles.why.sections.next_steps.heading',
+                        'body'        => [
+                            [
+                                'key'    => 'guides.resources.articles.why.sections.next_steps.body',
+                                'tokens' => [
+                                    'setup_url' => 'guides-setup',
+                                    'contact_url' => 'contact',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'channel-guide' => [
+                'slug'        => 'channel-guide',
+                'title_key'   => 'guides.resources.articles.channels.title',
+                'summary_key' => 'guides.resources.items.channels.copy',
+                'hero'        => [
+                    'badge_key'  => 'guides.resources.articles.shared.badge',
+                    'title_key'  => 'guides.resources.articles.channels.title',
+                    'lead_key'   => 'guides.resources.articles.channels.lead',
+                    'updated_key'=> 'guides.resources.articles.channels.updated',
+                ],
+                'sections'    => [
+                    [
+                        'id'          => 'live-tv',
+                        'heading_key' => 'guides.resources.articles.channels.sections.live.heading',
+                        'body'        => [
+                            ['key' => 'guides.resources.articles.channels.sections.live.body'],
+                        ],
+                    ],
+                    [
+                        'id'          => 'on-demand',
+                        'heading_key' => 'guides.resources.articles.channels.sections.vod.heading',
+                        'body'        => [
+                            ['key' => 'guides.resources.articles.channels.sections.vod.body'],
+                        ],
+                    ],
+                    [
+                        'id'          => 'apps',
+                        'heading_key' => 'guides.resources.articles.channels.sections.apps.heading',
+                        'body'        => [
+                            [
+                                'key'    => 'guides.resources.articles.channels.sections.apps.body',
+                                'tokens' => [
+                                    'apps_url' => 'guides-apps',
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'id'          => 'updates',
+                        'heading_key' => 'guides.resources.articles.channels.sections.updates.heading',
+                        'body'        => [
+                            [
+                                'key'    => 'guides.resources.articles.channels.sections.updates.body',
+                                'tokens' => [
+                                    'contact_url' => 'contact',
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'id'          => 'network',
+                        'heading_key' => 'guides.resources.articles.channels.sections.network.heading',
+                        'body'        => [
+                            [
+                                'key'    => 'guides.resources.articles.channels.sections.network.body',
+                                'tokens' => [
+                                    'troubleshooting_url' => 'guides-troubleshooting',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'top-features' => [
+                'slug'        => 'top-features',
+                'title_key'   => 'guides.resources.articles.features.title',
+                'summary_key' => 'guides.resources.items.features.copy',
+                'hero'        => [
+                    'badge_key'  => 'guides.resources.articles.shared.badge',
+                    'title_key'  => 'guides.resources.articles.features.title',
+                    'lead_key'   => 'guides.resources.articles.features.lead',
+                    'updated_key'=> 'guides.resources.articles.features.updated',
+                ],
+                'sections'    => [
+                    [
+                        'id'          => 'hardware',
+                        'heading_key' => 'guides.resources.articles.features.sections.hardware.heading',
+                        'body'        => [
+                            ['key' => 'guides.resources.articles.features.sections.hardware.body'],
+                        ],
+                    ],
+                    [
+                        'id'          => 'streaming',
+                        'heading_key' => 'guides.resources.articles.features.sections.streaming.heading',
+                        'body'        => [
+                            ['key' => 'guides.resources.articles.features.sections.streaming.body'],
+                        ],
+                    ],
+                    [
+                        'id'          => 'remote',
+                        'heading_key' => 'guides.resources.articles.features.sections.remote.heading',
+                        'body'        => [
+                            ['key' => 'guides.resources.articles.features.sections.remote.body'],
+                        ],
+                    ],
+                    [
+                        'id'          => 'family',
+                        'heading_key' => 'guides.resources.articles.features.sections.family.heading',
+                        'body'        => [
+                            ['key' => 'guides.resources.articles.features.sections.family.body'],
+                        ],
+                    ],
+                    [
+                        'id'          => 'service',
+                        'heading_key' => 'guides.resources.articles.features.sections.service.heading',
+                        'body'        => [
+                            [
+                                'key'    => 'guides.resources.articles.features.sections.service.body',
+                                'tokens' => [
+                                    'contact_url' => 'contact',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'model-selector' => [
+                'slug'        => 'model-selector',
+                'title_key'   => 'guides.resources.articles.models.title',
+                'summary_key' => 'guides.resources.items.which.copy',
+                'hero'        => [
+                    'badge_key'  => 'guides.resources.articles.shared.badge',
+                    'title_key'  => 'guides.resources.articles.models.title',
+                    'lead_key'   => 'guides.resources.articles.models.lead',
+                    'updated_key'=> 'guides.resources.articles.models.updated',
+                ],
+                'sections'    => [
+                    [
+                        'id'          => 'summary',
+                        'heading_key' => 'guides.resources.articles.models.sections.summary.heading',
+                        'body'        => [
+                            ['key' => 'guides.resources.articles.models.sections.summary.body'],
+                        ],
+                    ],
+                    [
+                        'id'          => 'ten-p-plus',
+                        'heading_key' => 'guides.resources.articles.models.sections.ten_p.heading',
+                        'body'        => [
+                            ['key' => 'guides.resources.articles.models.sections.ten_p.body'],
+                        ],
+                    ],
+                    [
+                        'id'          => 'ten-s',
+                        'heading_key' => 'guides.resources.articles.models.sections.ten_s.heading',
+                        'body'        => [
+                            ['key' => 'guides.resources.articles.models.sections.ten_s.body'],
+                        ],
+                    ],
+                    [
+                        'id'          => 'next-steps',
+                        'heading_key' => 'guides.resources.articles.models.sections.next_steps.heading',
+                        'body'        => [
+                            [
+                                'key'    => 'guides.resources.articles.models.sections.next_steps.body',
+                                'tokens' => [
+                                    'setup_url' => 'guides-setup',
+                                    'apps_url'  => 'guides-apps',
+                                    'contact_url' => 'contact',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ];
+
+        $content['resource_articles'] = $resource_articles;
+        $content['resource_links'] = [];
+
+        foreach ($resource_articles as $article) {
+            $content['resource_links'][] = [
+                'title_key' => $article['title_key'],
+                'copy_key'  => $article['summary_key'] ?? '',
+                'slug'      => $article['slug'],
+            ];
+        }
+
         return $content;
     }
 }
@@ -214,6 +426,34 @@ if (!function_exists('svic_guides_get_content_item')) {
         }
 
         return $default;
+    }
+}
+
+if (!function_exists('svic_guides_get_resource_articles')) {
+    function svic_guides_get_resource_articles() {
+        $articles = svic_guides_get_content_item('resource_articles', []);
+
+        return is_array($articles) ? $articles : [];
+    }
+}
+
+if (!function_exists('svic_guides_get_resource_article')) {
+    function svic_guides_get_resource_article($slug) {
+        if (!is_string($slug) || $slug === '') {
+            return null;
+        }
+
+        $normalized = sanitize_title($slug);
+        if ($normalized === '') {
+            return null;
+        }
+
+        $articles = svic_guides_get_resource_articles();
+        if (isset($articles[$normalized])) {
+            return $articles[$normalized];
+        }
+
+        return null;
     }
 }
 
@@ -332,5 +572,28 @@ if (!function_exists('svic_guides_get_section_link')) {
         }
 
         return null;
+    }
+}
+
+if (!function_exists('svic_guides_get_resource_link')) {
+    function svic_guides_get_resource_link(array $resource, ?string $locale = null): string {
+        $link = '';
+
+        if (!empty($resource['external']) && !empty($resource['url'])) {
+            $link = (string) $resource['url'];
+        } elseif (!empty($resource['slug'])) {
+            $base = svic_guides_get_section_link('resources');
+            if ($base) {
+                $link = add_query_arg('topic', sanitize_title($resource['slug']), $base);
+            }
+        } elseif (!empty($resource['url'])) {
+            $link = (string) $resource['url'];
+        }
+
+        if ($link === '') {
+            return '';
+        }
+
+        return svic_url_with_lang($link, $locale);
     }
 }

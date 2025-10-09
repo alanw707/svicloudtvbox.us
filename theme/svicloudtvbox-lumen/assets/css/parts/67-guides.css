@@ -230,3 +230,57 @@
   .guides-detail__lead { font-size: 1rem; }
   .guides-detail__sidebar { gap: 0.6rem; }
 }
+
+/* ==========================================
+   GUIDES RESOURCE ARTICLES
+   ========================================== */
+
+.guides-article { display: grid; gap: clamp(2.4rem, 6vw, 3.6rem); padding-bottom: clamp(2.8rem, 7vw, 4.4rem); background: var(--lumen-page-background); color: var(--surface-text); }
+.guides-article__hero { position: relative; padding: clamp(2.6rem, 6vw, 4rem) 0; background: radial-gradient(circle at 8% 18%, rgba(126, 246, 227, 0.2), transparent 60%), radial-gradient(circle at 85% 20%, rgba(66, 194, 255, 0.22), transparent 65%), linear-gradient(135deg, rgba(7, 22, 48, 0.92), rgba(3, 12, 28, 0.94)); color: #f6f9ff; box-shadow: inset 0 -1px 0 rgba(126, 246, 227, 0.18); }
+.guides-article__hero-inner { width: min(980px, calc(100% - 72px)); margin: 0 auto; display: grid; gap: clamp(1rem, 3vw, 1.6rem); }
+.guides-article__badge { margin-top: 0.4rem; }
+.guides-article__title { margin: 0; font-size: clamp(2.2rem, 4.2vw, 3rem); font-weight: 700; letter-spacing: -0.02em; }
+.guides-article__lead { margin: 0; max-width: min(70ch, 100%); font-size: clamp(1rem, 1.1rem + 0.3vw, 1.2rem); color: rgba(235, 242, 255, 0.9); }
+.guides-article__meta { margin: 0; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(220, 236, 255, 0.7); }
+
+.guides-article__layout { width: min(1100px, calc(100% - 80px)); margin: 0 auto; display: grid; gap: clamp(1.8rem, 4vw, 2.6rem); grid-template-columns: minmax(0, 1fr); align-items: start; }
+.guides-article__content { display: grid; gap: clamp(1.6rem, 3vw, 2.2rem); padding: clamp(1.6rem, 4vw, 2.6rem); border-radius: 26px; background: rgba(248, 250, 255, 0.96); box-shadow: 0 22px 48px rgba(8, 16, 32, 0.24); }
+.guides-article__section { display: grid; gap: 0.85rem; }
+.guides-article__section-heading { margin: 0; font-size: clamp(1.35rem, 1.1rem + 0.6vw, 1.65rem); font-weight: 600; color: var(--surface-strong, #041226); letter-spacing: -0.01em; }
+.guides-article__section-body { display: grid; gap: 0.8rem; font-size: 1rem; color: rgba(15, 25, 45, 0.92); line-height: 1.66; }
+.guides-article__paragraph { display: grid; gap: 0.6rem; }
+.guides-article__paragraph p { margin: 0; }
+.guides-article__paragraph ul,
+.guides-article__paragraph ol { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.35rem; }
+.guides-article__paragraph li { margin: 0; }
+.guides-article__paragraph a { color: var(--link-lumen, #2cb4ff); text-decoration: underline; text-decoration-thickness: 2px; text-decoration-color: rgba(44, 180, 255, 0.4); }
+.guides-article__paragraph a:hover,
+.guides-article__paragraph a:focus-visible { color: #0480ff; text-decoration-color: rgba(4, 128, 255, 0.6); }
+.guides-article__section-body table { width: 100%; border-collapse: collapse; border-radius: 18px; overflow: hidden; background: rgba(255, 255, 255, 0.98); box-shadow: 0 12px 28px rgba(9, 18, 36, 0.14); margin: 0; }
+.guides-article__section-body thead { background: linear-gradient(135deg, rgba(126, 246, 227, 0.85), rgba(66, 194, 255, 0.82)); color: #041226; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.78rem; }
+.guides-article__section-body th,
+.guides-article__section-body td { padding: 0.85rem 1rem; text-align: left; font-size: 0.95rem; border-bottom: 1px solid rgba(12, 28, 54, 0.12); }
+.guides-article__section-body tbody tr:nth-child(even) { background: rgba(245, 249, 255, 0.75); }
+.guides-article__section-body tbody tr:last-child td { border-bottom: none; }
+.guides-article__section-body table p { margin: 0.75rem 1rem 1rem; font-size: 0.92rem; color: rgba(9, 20, 40, 0.82); }
+.guides-article__section-body table + p { margin-top: 1rem; }
+
+.guides-article__support { margin: clamp(1.8rem, 4vw, 2.4rem) 0 0; }
+.guides-article__sidebar { position: sticky; top: clamp(1.6rem, 5vw, 2.8rem); }
+
+@media (min-width: 1024px) {
+  .guides-article__layout { grid-template-columns: minmax(0, 1fr) minmax(0, 280px); }
+}
+
+@media (max-width: 720px) {
+  .guides-article__hero-inner { width: min(100%, calc(100% - 40px)); }
+  .guides-article__layout { width: min(100%, calc(100% - 40px)); }
+  .guides-article__content { padding: clamp(1.25rem, 5vw, 1.75rem); }
+  .guides-article__sidebar { position: static; }
+}
+
+@media (max-width: 540px) {
+  .guides-article__title { font-size: clamp(1.9rem, 6vw, 2.2rem); }
+  .guides-article__lead { font-size: 1rem; }
+  .guides-article__section-heading { font-size: 1.25rem; }
+}

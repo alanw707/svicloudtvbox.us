@@ -609,7 +609,7 @@ return [
             'apps'            => '下載 Yogurt TV、兒童模式、卡拉 OK 等必備 App。',
             'post_setup'      => '個人化設定，讓小雲長期穩定運作。',
             'troubleshooting' => '修復遙控、緩衝與 Orz 安裝器問題。',
-            'resources'       => '收藏頻道列表、選購建議與比較。',
+            'resources'       => '收藏頻道指南、選購建議與最新 10 系列亮點。',
             'support'         => '聯絡禮賓客服或查看常見問題。',
         ],
         'setup' => [
@@ -717,27 +717,225 @@ return [
         'resources' => [
             'badge' => '延伸閱讀',
             'title' => '推薦收藏的指南',
-            'lead'  => '安裝完成後，這些資源可以提供頻道、選購與比較的更多資訊。',
+            'lead'  => '安裝完成後，這些資源提供頻道覆蓋、選購建議與 10 系列特色的完整說明。',
             'items' => [
                 'why' => [
-                    'title' => '為什麼要買小雲電視盒',
-                    'copy'  => '了解小雲相較其他 Android 電視盒的優勢。',
+                    'title' => '為什麼要在 SVICLOUDTVBOX.US 購買',
+                    'copy'  => '了解加州倉庫與禮賓服務如何讓你最快拿到正版 10 系列機種。',
                 ],
                 'channels' => [
-                    'title' => '小雲電視盒頻道列表',
-                    'copy'  => '瀏覽 Yogurt TV 內的直播與隨選影音內容。',
+                    'title' => '直播頻道與 App 指南',
+                    'copy'  => '預覽 Yogurt TV 分類、隨選內容與每個家庭必裝的應用程式。',
                 ],
                 'features' => [
-                    'title' => '小雲電視盒 8 大特色',
-                    'copy'  => '探索讓雙語家庭喜愛小雲的功能亮點。',
+                    'title' => 'SVICLOUD 10 系列核心特色',
+                    'copy'  => '深入了解 10P+ 與 10S 的硬體規格、編碼能力與家庭娛樂體驗。',
                 ],
                 'which' => [
-                    'title' => '我應該買哪款小雲電視盒？',
-                    'copy'  => '根據需求在 SVICLOUD 10P+、10S 與其他機種間做出選擇。',
+                    'title' => '我適合哪款 SVICLOUD？',
+                    'copy'  => '比較 10P+ 與 10S 的使用情境，第一次就選對機種。',
                 ],
-                'compare' => [
-                    'title' => '小雲 8P vs EVPAD 6P vs Unblock UBox9',
-                    'copy'  => '查看小雲與常見競品的功能比較。',
+            ],
+            'articles' => [
+                'shared' => [
+                    'badge'             => '延伸指南',
+                    'back_label'        => '返回延伸資源',
+                    'more_guides_title' => '更多延伸指南',
+                ],
+                'why' => [
+                    'title'   => '為什麼要在 SVICLOUDTVBOX.US 購買',
+                    'lead'    => '從加州倉庫直接出貨，保證正版 SVICLOUD 10 系列機種、禮賓安裝與一年美國保固。',
+                    'updated' => '更新：2025 年 1 月 15 日',
+                    'sections' => [
+                        'fulfillment' => [
+                            'heading' => '加州現貨，48 小時內啟運',
+                            'body'    => '<p>所有 SVICLOUD 10P+ 與 10S 皆由加州倉庫出貨，檢查序號、封條與最新韌體後才寄出；中午 12 點前的訂單通常可在兩個工作天內出貨。</p>
+<ul>
+  <li>提供 UPS／USPS 需簽收的配送選項，包裹更安全。</li>
+  <li>美國現貨免去海關延誤與水貨或翻新機的風險。</li>
+  <li>包裝內含原廠語音遙控器、美規電源供應器與完整配件。</li>
+</ul>',
+                        ],
+                        'warranty' => [
+                            'heading' => '一年美國保固與簡單退換貨',
+                            'body'    => '<p>每台機器皆附一年美國保固，由禮賓團隊協助檢測與維修；正常使用下若發生問題，會在美國本地安排零件或換機。</p>
+<ul>
+  <li>購買後 30 天內保留未拆封，可申請退換貨。</li>
+  <li>維修或更換全程在美國處理，不需跨國寄件等待。</li>
+  <li>韌體更新、功能諮詢與故障排除都由禮賓客服跟進。</li>
+</ul>',
+                        ],
+                        'concierge' => [
+                            'heading' => '中英文禮賓客服全程陪伴',
+                            'body'    => '<p>安裝 App、配對語音遙控器或排除疑難，都可透過 <a href="{{contact_url}}">禮賓客服表單</a> 留言，我們會在一個工作天內以中英文回覆。</p>
+<ul>
+  <li>提供視訊截圖與逐步指引，協助完成開箱與連線。</li>
+  <li>依照家庭需求推薦 App、兒童模式與 Karaoke 設定。</li>
+  <li>安裝完成後也會持續通知頻道或韌體的最新調整。</li>
+</ul>',
+                        ],
+                        'billing' => [
+                            'heading' => '安全結帳，價格透明',
+                            'body'    => '<p>網站採用 SSL 安全結帳，支援信用卡與 PayPal，依法開立銷售稅。價格透明，結帳畫面即會顯示運費與稅額。</p>
+<ul>
+  <li>全美免運，沒有額外的處理費或盒裝加價。</li>
+  <li>一次購買終身使用，沒有月費或自動續約。</li>
+  <li>出貨後立即寄送收據與追蹤碼，方便掌握物流。</li>
+</ul>',
+                        ],
+                        'next_steps' => [
+                            'heading' => '下單後的下一步',
+                            'body'    => '<p>下單後會先收到訂單確認，再寄出物流追蹤與開箱技巧。建議先閱讀 <a href="{{setup_url}}">10 分鐘安裝指南</a>，若需要協助隨時透過 <a href="{{contact_url}}">禮賓客服表單</a> 聯繫我們。</p>',
+                        ],
+                    ],
+                ],
+                'channels' => [
+                    'title'   => '直播頻道與 App 指南',
+                    'lead'    => '先了解 Yogurt TV、LUCA Kids 與 Karaoke 的內容範圍，開箱前就能掌握節目來源。',
+                    'updated' => '更新：2025 年 1 月 15 日',
+                    'sections' => [
+                        'live' => [
+                            'heading' => '2000+ 直播頻道隨選收看',
+                            'body'    => '<p>Yogurt TV 提供超過 2,000 個直播頻道，涵蓋香港、台灣、中國大陸、東南亞、日本、韓國、北美與歐洲。每個區域都有新聞、綜藝、體育與電影頻道，畫質維持 HD 或以上。</p>
+<ul>
+  <li>快速篩選可依語言、地區或主題切換，鎖定粵語、華語或英文節目。</li>
+  <li>體育專區涵蓋 NBA、MLB、足球、格鬥與各大賽事。</li>
+  <li>24 小時新聞、旅遊與生活頻道滿足全家人的收視習慣。</li>
+</ul>',
+                        ],
+                        'vod' => [
+                            'heading' => '隨選影音天天更新',
+                            'body'    => '<p>隨選影音每天更新戲劇、綜藝、兒童、電影與紀錄片，熱門節目的追劇時段會清楚標示，錯過直播也能立即補看。</p>
+<ul>
+  <li>整季戲劇可一次看完，並提供多語音軌與字幕選擇。</li>
+  <li>綜藝與新聞在播出後數小時內即上架回放。</li>
+  <li>兒童、教育與紀錄片專區分類清楚，方便家長挑選。</li>
+</ul>',
+                        ],
+                        'apps' => [
+                            'heading' => '安裝必備 App',
+                            'body'    => '<p>建議先安裝 Yogurt TV／LUCA TV、Yogurt Kids、WeFun Karaoke 以及各地直播套件。按照 <a href="{{apps_url}}">App 下載指南</a> 的步驟，在 Orz 安裝器中輸入代碼即可取得最新版本。</p>',
+                        ],
+                        'updates' => [
+                            'heading' => '索取完整頻道清單',
+                            'body'    => '<p>若需要完整的頻道清單含台標與語言標註，可透過 <a href="{{contact_url}}">禮賓客服表單</a> 索取最新試算表，我們每次更新頻道都會同步整理。</p>',
+                        ],
+                        'network' => [
+                            'heading' => '維持穩定串流的秘訣',
+                            'body'    => '<p>建議使用 Wi-Fi 6 或網路線確保穩定串流。若遇到緩衝或畫面模糊，可先參考 <a href="{{troubleshooting_url}}">疑難排解指南</a>，重新啟動路由器、調整訊號或改用有線連線。</p>',
+                        ],
+                    ],
+                ],
+                'features' => [
+                    'title'   => 'SVICLOUD 10 系列核心特色',
+                    'lead'    => '一次掌握 SVICLOUD 10P+ 與 10S 的硬體規格、串流技術與家庭娛樂優勢。',
+                    'updated' => '更新：2025 年 1 月 15 日',
+                    'sections' => [
+                        'hardware' => [
+                            'heading' => '旗艦硬體，4K HDR 無痛播放',
+                            'body'    => '<p>10P+ 採用 Amlogic S928X 八核心處理器，搭配 4GB RAM 與 64GB 儲存；10S 則配置四核心處理器、4GB RAM 與 32GB 儲存。兩款皆支援 4K HDR、HDMI 2.1、雙頻 Wi-Fi 6 與 Gigabit 有線網路。</p>
+<ul>
+  <li>USB 3.0／USB 2.0 可外接硬碟、麥克風或周邊配件。</li>
+  <li>HDMI eARC 與光纖輸出提供家庭劇院等級的音訊選擇。</li>
+  <li>低噪音散熱設計，長時間追劇也能維持穩定。</li>
+</ul>',
+                        ],
+                        'streaming' => [
+                            'heading' => 'AV1 編碼與智慧緩衝',
+                            'body'    => '<p>兩款機型皆支援 AV1、HEVC、VP9 等高效率編碼，讓畫質更清晰、網路用量更低；自動緩衝與幀率匹配，確保體育與戲劇播放流暢。</p>
+<ul>
+  <li>根據節目自動切換 24p／30p／60p，減少抖動。</li>
+  <li>全球 CDN 加速路徑優化北美連線，海外內容一樣順暢。</li>
+  <li>定期韌體更新加入新功能與效能調校。</li>
+</ul>',
+                        ],
+                        'remote' => [
+                            'heading' => '語音遙控，一鍵找到節目',
+                            'body'    => '<p>藍牙語音遙控支援語音搜尋、數字快捷鍵與媒體控制，只要長按音量鍵即可重新配對，搜尋頻道或 App 更快速。</p>
+<ul>
+  <li>可學習電視與音響的電源、音量，一支遙控搞定。</li>
+  <li>按鍵具背光設計，晚上追劇也看得清楚。</li>
+  <li>遙控器韌體可 OTA 更新，維持靈敏度。</li>
+</ul>',
+                        ],
+                        'family' => [
+                            'heading' => '全家娛樂一次滿足',
+                            'body'    => '<p>SVICLOUD 不只有直播，Yogurt Kids 提供分齡內容、WeFun Karaoke 支援歌單與評分，Cherry TV 以密碼鎖定成人專區。</p>
+<ul>
+  <li>建立兒童模式，僅顯示教育與卡通內容。</li>
+  <li>Karaoke 可排歌、合唱並每週更新新曲。</li>
+  <li>依需求加裝各地直播 App，擴充粵語、華語、馬來語與英文節目。</li>
+</ul>',
+                        ],
+                        'service' => [
+                            'heading' => '終身禮賓服務',
+                            'body'    => '<p>每台機器都享有終身禮賓服務。需要安裝教學、韌體公告或節目推薦，可隨時透過 <a href="{{contact_url}}">禮賓客服表單</a> 聯絡我們。</p>',
+                        ],
+                    ],
+                ],
+                'models' => [
+                    'title'   => '我適合哪款 SVICLOUD？',
+                    'lead'    => '依照收視習慣、周邊需求與預算，挑選最適合的 SVICLOUD 10P+ 或 10S。',
+                    'updated' => '更新：2025 年 1 月 15 日',
+                    'sections' => [
+                        'summary' => [
+                            'heading' => '差異一目了然',
+                            'body'    => '<table class="guides-article__table">
+  <thead>
+    <tr>
+      <th>項目</th>
+      <th>SVICLOUD 10P+</th>
+      <th>SVICLOUD 10S</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>處理器與記憶體</td>
+      <td>Amlogic S928X · 4GB RAM · 64GB 儲存</td>
+      <td>四核心 CPU · 4GB RAM · 32GB 儲存</td>
+    </tr>
+    <tr>
+      <td>連線能力</td>
+      <td>Wi-Fi 6 雙頻 · Gigabit LAN · USB 3.0 + USB 2.0</td>
+      <td>Wi-Fi 6 雙頻 · Gigabit LAN · 雙 USB 2.0</td>
+    </tr>
+    <tr>
+      <td>音訊輸出</td>
+      <td>HDMI 2.1 · 光纖 SPDIF</td>
+      <td>HDMI 2.1 · 3.5mm AUX</td>
+    </tr>
+    <tr>
+      <td>最佳使用情境</td>
+      <td>家庭劇院、多 App 安裝、KTV 加強</td>
+      <td>日常串流、小空間、副電視</td>
+    </tr>
+  </tbody>
+</table>
+<p>兩款機型都能使用同一套 Yogurt TV App 並獲得相同韌體更新，差別在於儲存空間、連接介面與周邊擴充性。</p>',
+                        ],
+                        'ten_p' => [
+                            'heading' => '適合選擇 10P+ 的情境',
+                            'body'    => '<p>以下情境建議選擇 10P+：</p>
+<ul>
+  <li>需要連接擴大機、Soundbar 或光纖音響的家庭劇院。</li>
+  <li>會安裝大量第三方 APK 或需要外接大容量儲存裝置。</li>
+  <li>常使用 Karaoke、Party 模式，想要最強的處理效能。</li>
+</ul>',
+                        ],
+                        'ten_s' => [
+                            'heading' => '適合選擇 10S 的情境',
+                            'body'    => '<p>以下情境適合 10S：</p>
+<ul>
+  <li>臥室、租屋或小坪數空間，需要精巧機身。</li>
+  <li>以直播與隨選內容為主，只需安裝少量額外 App。</li>
+  <li>想要禮賓服務與最新韌體，但預算更精簡。</li>
+</ul>',
+                        ],
+                        'next_steps' => [
+                            'heading' => '選好機型後別忘了',
+                            'body'    => '<p>確定機型後，記得先完成 <a href="{{setup_url}}">安裝指南</a>，再依 <a href="{{apps_url}}">App 指南</a> 安裝必備應用，並收藏 <a href="{{contact_url}}">禮賓客服表單</a> 以便日後提問。</p>',
+                        ],
+                    ],
                 ],
             ],
         ],
