@@ -101,13 +101,15 @@
       </nav>
 
       <div class="lumen-header__actions">
-        <div class="lumen-header__pill-group">
-          <div class="lumen-lang-toggle" role="group" aria-label="<?php esc_attr_e( 'Language selector', 'svicloudtvbox-lumen' ); ?>">
-            <a class="<?php echo esc_attr($english_link_classes); ?>" href="<?php echo esc_url($english_url); ?>">EN</a>
-            <a class="<?php echo esc_attr($chinese_link_classes); ?>" href="<?php echo esc_url($chinese_url); ?>">中文</a>
-          </div>
-          <?php echo svic_header_cart_link(); ?>
+        <div class="lumen-lang-toggle" role="group" aria-label="<?php esc_attr_e( 'Language selector', 'svicloudtvbox-lumen' ); ?>">
+          <a class="<?php echo esc_attr($english_link_classes); ?>" href="<?php echo esc_url($english_url); ?>">EN</a>
+          <a class="<?php echo esc_attr($chinese_link_classes); ?>" href="<?php echo esc_url($chinese_url); ?>">中文</a>
         </div>
+        <?php
+          echo svic_header_cart_link([
+            'class' => 'lumen-cart-link--desktop',
+          ]);
+        ?>
         <button class="lumen-header__toggle" type="button" aria-expanded="false" aria-controls="lumen-mobile-nav" data-lumen-toggle>
           <span class="screen-reader-text"><?php esc_html_e('Toggle navigation', 'svicloudtvbox-lumen'); ?></span>
           <span class="lumen-header__toggle-line" aria-hidden="true"></span>
@@ -149,7 +151,11 @@
           <a class="<?php echo esc_attr($english_link_classes); ?>" href="<?php echo esc_url($english_url); ?>">EN</a>
           <a class="<?php echo esc_attr($chinese_link_classes); ?>" href="<?php echo esc_url($chinese_url); ?>">中文</a>
         </div>
-        <?php echo svic_header_cart_link(); ?>
+        <?php
+          echo svic_header_cart_link([
+            'class' => 'lumen-cart-link--mobile',
+          ]);
+        ?>
       </div>
     </div>
   </header>

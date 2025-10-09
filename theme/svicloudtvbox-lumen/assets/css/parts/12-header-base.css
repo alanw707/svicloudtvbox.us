@@ -26,13 +26,14 @@
 }
 
 .lumen-header__inner {
-  width: min(1120px, 100%);
+  width: var(--max-width-hero);
+  max-width: 100%;
   margin: 0 auto;
-  padding: 22px clamp(16px, 3vw, 32px);
+  padding: 22px clamp(20px, 4vw, 40px);
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: center;
-  column-gap: clamp(20px, 4.4vw, 52px);
+  column-gap: clamp(24px, 4.5vw, 64px);
   row-gap: 12px;
   box-sizing: border-box;
 }
@@ -91,15 +92,15 @@
   align-items: center;
   justify-content: center;
   justify-self: center;
-  padding: 0 12px;
-  max-width: min(100%, calc(100% - 360px));
+  padding: 0 6px;
+  max-width: min(100%, calc(100% - 300px));
   width: fit-content;
 }
 
 .lumen-nav__list {
   display: inline-flex;
   align-items: center;
-  gap: clamp(12px, 3vw, 22px);
+  gap: clamp(8px, 2.3vw, 20px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -109,7 +110,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 9px clamp(14px, 2.1vw, 19px);
+  padding: 8px clamp(11px, 1.8vw, 16px);
   border-radius: 999px;
   text-decoration: none;
   font-family: var(--font-primary), var(--font-chinese);

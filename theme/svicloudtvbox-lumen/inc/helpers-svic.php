@@ -224,7 +224,18 @@ if (!function_exists('svic_header_cart_link')) {
         $args = wp_parse_args($args, $defaults);
 
         $count   = svic_cart_contents_count();
-        $classes = trim('lumen-pill lumen-pill--primary ' . $args['class']);
+        $base_classes = [
+            'lumen-pill',
+            'lumen-pill--primary',
+            'lumen-cart-link',
+        ];
+
+        $extra_classes = trim((string) $args['class']);
+        if ($extra_classes !== '') {
+            $base_classes[] = $extra_classes;
+        }
+
+        $classes = trim(implode(' ', $base_classes));
 
         if ($count > 0) {
             $classes .= ' has-items';
@@ -241,8 +252,10 @@ if (!function_exists('svic_header_cart_link')) {
             $sr_label = svic_translate('core.cart.count_label_empty');
         }
 
-        $html  = '<a class="' . esc_attr($classes) . '" href="' . esc_url($cart_url) . '" data-cart-link>';
-        $html .= $args['label'];
+        $link_aria_label = wp_strip_all_tags($args['label']);
+        $html  = '<a class="' . esc_attr($classes) . '" href="' . esc_url($cart_url) . '" data-cart-link aria-label="' . esc_attr($link_aria_label) . '">';
+        $html .= '<span class="lumen-cart-link__icon" aria-hidden="true"></span>';
+        $html .= '<span class="lumen-cart-link__label">' . $args['label'] . '</span>';
         $html .= svic_header_cart_count_markup();
         $html .= '<span class="screen-reader-text">' . esc_html($sr_label) . '</span>';
         $html .= '</a>';
