@@ -99,20 +99,125 @@ $other_sections = array_filter(
     }
 );
 
+$hero_callouts = svic_guides_get_content_item('hero_callouts', []);
+$hero_callouts = is_array($hero_callouts) ? array_values(array_filter($hero_callouts)) : [];
+
+$hero_callouts_headline = $translate_html('guides.hero.callouts_headline');
+$hero_pill_headline     = $translate_html('guides.hero.pill_headline');
+$hero_pill_copy         = $translate_html('guides.hero.pill_copy');
+$hero_primary_label     = $translate_html('guides.support.primary_label');
+$hero_secondary_label   = $translate_html('guides.support.secondary_label');
+
+$hero_nav_links = [];
+foreach ($other_sections as $item) {
+    if (count($hero_nav_links) >= 3) {
+        break;
+    }
+
+    $key       = $item['key'] ?? '';
+    $label_key = $item['label_key'] ?? '';
+
+    if (!$key || !$label_key) {
+        continue;
+    }
+
+    $label = $translate_html($label_key);
+    if (!$label) {
+        continue;
+    }
+
+    $slug_hint     = $item['slug'] ?? '';
+    $slug_candidate = $slug_hint ?: ('guides-' . str_replace('_', '-', $key));
+    $detail_link   = get_page_by_path($slug_candidate);
+    $href          = $detail_link instanceof WP_Post ? get_permalink($detail_link) : $guides_url;
+
+    $hero_nav_links[] = [
+        'label' => $label,
+        'href'  => svic_url_with_lang($href),
+    ];
+}
+
 ?>
 <main class="guides-detail guides-detail--<?php echo esc_attr($section_key); ?> surface--dark">
   <header class="guides-detail__hero">
     <div class="guides-detail__hero-inner">
-      <a class="guides-detail__back" href="<?php echo esc_url($guides_url); ?>">
-        <span class="guides-detail__back-icon" aria-hidden="true"></span>
-        <span><?php echo $translate_html('guides.detail.back_to_hub'); ?></span>
-      </a>
-      <?php if ($badge) : ?>
-        <span class="guides-badge guides-badge--on-dark guides-detail__badge"><?php echo $badge; ?></span>
-      <?php endif; ?>
-      <h1 class="guides-detail__title"><?php echo $title; ?></h1>
-      <?php if ($lead) : ?>
-        <p class="guides-detail__lead"><?php echo $lead; ?></p>
+      <div class="guides-detail__hero-copy">
+        <div class="guides-detail__hero-top">
+          <a class="guides-detail__back" href="<?php echo esc_url($guides_url); ?>">
+            <span class="guides-detail__back-icon" aria-hidden="true"></span>
+            <span><?php echo $translate_html('guides.detail.back_to_hub'); ?></span>
+          </a>
+          <?php if ($badge) : ?>
+            <span class="guides-badge guides-badge--on-dark guides-detail__badge"><?php echo $badge; ?></span>
+          <?php endif; ?>
+        </div>
+
+        <div class="guides-detail__hero-heading">
+          <h1 class="guides-detail__title"><?php echo $title; ?></h1>
+          <?php if ($lead) : ?>
+            <p class="guides-detail__lead"><?php echo $lead; ?></p>
+          <?php endif; ?>
+        </div>
+
+        <?php if ($hero_pill_headline || $hero_pill_copy) : ?>
+          <div class="guides-detail__hero-pill">
+            <?php if ($hero_callouts_headline) : ?>
+              <span class="guides-detail__hero-pill-badge"><?php echo $hero_callouts_headline; ?></span>
+            <?php endif; ?>
+            <span class="guides-detail__hero-pill-text">
+              <?php if ($hero_pill_headline) : ?>
+                <span class="guides-detail__hero-pill-headline"><?php echo $hero_pill_headline; ?></span>
+              <?php endif; ?>
+              <?php if ($hero_pill_copy) : ?>
+                <span class="guides-detail__hero-pill-copy"><?php echo $hero_pill_copy; ?></span>
+              <?php endif; ?>
+            </span>
+          </div>
+        <?php endif; ?>
+
+        <?php if ($hero_callouts) : ?>
+          <div class="guides-detail__hero-callouts">
+            <?php if ($hero_callouts_headline && !$hero_pill_headline && !$hero_pill_copy) : ?>
+              <span class="guides-detail__hero-callouts-label"><?php echo $hero_callouts_headline; ?></span>
+            <?php endif; ?>
+            <ul class="guides-detail__callouts-list">
+              <?php foreach ($hero_callouts as $callout_key) : ?>
+                <li><?php echo svic_translate_html($callout_key); ?></li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        <?php endif; ?>
+
+        <?php if ($hero_primary_label || $hero_secondary_label) : ?>
+          <div class="guides-detail__hero-actions">
+            <?php if ($hero_primary_label) : ?>
+              <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($contact_url); ?>">
+                <?php echo $hero_primary_label; ?>
+              </a>
+            <?php endif; ?>
+            <?php if ($hero_secondary_label) : ?>
+              <a class="lumen-pill lumen-pill--outline guides-detail__hero-action-secondary" href="<?php echo esc_url($faq_url); ?>">
+                <?php echo $hero_secondary_label; ?>
+              </a>
+            <?php endif; ?>
+          </div>
+        <?php endif; ?>
+      </div>
+
+      <?php if ($hero_nav_links) : ?>
+        <div class="guides-detail__hero-nav">
+          <span class="guides-detail__hero-nav-label"><?php echo $translate_html('guides.detail.more_guides'); ?></span>
+          <ul class="guides-detail__hero-nav-list">
+            <?php foreach ($hero_nav_links as $nav_item) : ?>
+              <li>
+                <a class="guides-detail__hero-nav-link" href="<?php echo esc_url($nav_item['href']); ?>">
+                  <span class="guides-detail__hero-nav-text"><?php echo $nav_item['label']; ?></span>
+                  <span class="guides-detail__hero-nav-icon" aria-hidden="true"></span>
+                </a>
+              </li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
       <?php endif; ?>
     </div>
   </header>
