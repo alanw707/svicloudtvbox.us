@@ -286,6 +286,14 @@ body.admin-bar .lumen-checkout__summary{top:calc(clamp(1rem,3vw,2.25rem)+48px)}
 #payment ul.payment_methods>li .woocommerce-info{display:grid;gap:0.45rem;margin:calc(-1.05rem) calc(-1.2rem);padding:1.15rem 1.25rem;border-radius:var(--radius-lg);background:linear-gradient(150deg,rgba(26,58,104,0.82),rgba(8,24,54,0.88));border:1px solid rgba(126,246,227,0.38);box-shadow:0 26px 62px rgba(3,12,32,0.52);color:rgba(236,248,255,0.9);font-size:0.95rem;text-align:center}
 #payment ul.payment_methods>li .woocommerce-info::before{color:rgba(126,246,227,0.92)}
 #payment ul.payment_methods>li .woocommerce-info strong{color:rgba(255,255,255,0.95)}
+#payment .woocommerce-SavedPaymentMethods-saveNew,#payment .wc-saved-payment-methods{margin:0.25rem 0 0.5rem;padding:0;list-style:none;display:grid;gap:0.5rem}
+#payment .wc-saved-payment-methods li,#payment .woocommerce-SavedPaymentMethods-saveNew li{display:flex;align-items:center;gap:0.55rem}
+#payment input[type="radio"]{accent-color:var(--lumen-accent-teal);transform:translateY(1px)}
+#payment .payment_box select,#payment .payment_box .input-text,#payment .payment_box .StripeElement,#payment .payment_box .wc-stripe-elements-field{width:100%;min-height:40px;padding:0.55rem 0.8rem;border-radius:var(--radius-md);border:1px solid rgba(164,237,232,0.3);background:rgba(12,27,58,0.75);color:rgba(246,250,255,0.96);font-weight:600;box-shadow:inset 0 0 0 1px rgba(94,230,208,0.08)}
+#payment .payment_box .StripeElement--focus,#payment .payment_box .wc-stripe-elements-field:focus,#payment .payment_box select:focus{border-color:rgba(164,237,232,0.8);box-shadow:0 0 0 3px rgba(94,230,208,0.28);background:rgba(18,36,72,0.82)}
+#payment .wc-stripe-gateway-container input[type="radio"]+label.wc-stripe-label-payment-type,#payment input[type="radio"]+label.wc-stripe-label-payment-type,#payment label.wc-stripe-label-payment-type{color:rgba(248,252,255,0.96) !important;font-weight:700;letter-spacing:0.02em}
+#payment .wc-stripe-gateway-container input[type="radio"]+label.wc-stripe-label-payment-type:hover,#payment input[type="radio"]+label.wc-stripe-label-payment-type:hover{color:rgba(255,255,255,1) !important}
+#payment .payment_box .form-row,#payment .payment_box p{margin-bottom:0.65rem}
 .woocommerce-checkout-payment .woocommerce-terms-and-conditions-wrapper{border-top:1px solid rgba(164,237,232,0.22);padding:1.3rem 1.35rem;color:rgba(252,255,255,0.94);font-size:0.92rem;line-height:1.7;text-shadow:0 12px 28px rgba(2,10,26,0.55)}
 .woocommerce-checkout-payment .woocommerce-terms-and-conditions-wrapper .woocommerce-privacy-policy-text{margin:0;padding:0;color:rgba(255,255,255,0.96);font-weight:500}
 .woocommerce-checkout-payment .woocommerce-terms-and-conditions-wrapper .woocommerce-privacy-policy-text p{margin:0;color:rgba(255,255,255,0.96)}
@@ -485,4 +493,14 @@ to{opacity:1;transform:translateY(0)}
 .lumen-order-tracking__intro{font-size:0.95rem}
 .lumen-order-tracking__fields{gap:0.85rem}
 .lumen-order-tracking__help{text-align:center}
+}
+.lumen-order-thankyou .lumen-order-status__title{margin:0;font-size:clamp(1.8rem,2.6vw,2.2rem);color:rgba(255,255,255,0.98)}
+.lumen-order-thankyou .lumen-order-status__customer{margin:0.5rem 0 0;color:rgba(222,232,255,0.84)}
+.lumen-order-thankyou__actions{margin-top:0.35rem;display:flex;gap:0.6rem;flex-wrap:wrap}
+.lumen-order-thankyou__btn{display:inline-flex;align-items:center;justify-content:center;gap:0.45rem;padding:0.6rem 1.2rem;border-radius:999px;font-weight:600;text-decoration:none;color:rgba(236,244,255,0.96);background:rgba(94,128,255,0.16);border:1px solid rgba(118,156,255,0.55);box-shadow:0 10px 24px rgba(10,22,58,0.32);transition:transform 150ms ease,box-shadow 150ms ease,background 150ms ease}
+.lumen-order-thankyou__btn:hover,.lumen-order-thankyou__btn:focus-visible{transform:translateY(-1px);box-shadow:0 16px 32px rgba(8,18,46,0.42);background:rgba(94,128,255,0.22)}
+.lumen-order-thankyou__btn--primary{background:linear-gradient(135deg,rgba(94,230,208,0.92) 0%,rgba(66,194,255,0.88) 100%);color:#031125;border-color:rgba(94,230,208,0.55)}
+.lumen-order-thankyou__btn--primary:hover,.lumen-order-thankyou__btn--primary:focus-visible{background:linear-gradient(135deg,rgba(94,230,208,0.98) 0%,rgba(66,194,255,0.96) 100%);box-shadow:0 22px 40px rgba(4,18,44,0.5)}
+@media(max-width:520px){.lumen-order-thankyou__actions{gap:0.5rem}
+.lumen-order-thankyou__btn{flex:1 1 auto}
 }

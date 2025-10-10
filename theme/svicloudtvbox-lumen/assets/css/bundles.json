@@ -98,7 +98,8 @@
       "71-woocommerce-checkout.css",
       "72-woocommerce-order-tracking-base.css",
       "73-woocommerce-order-tracking-summary.css",
-      "74-woocommerce-order-tracking-responsive.css"
+      "74-woocommerce-order-tracking-responsive.css",
+      "75-woocommerce-order-received.css"
     ]
   }
 }

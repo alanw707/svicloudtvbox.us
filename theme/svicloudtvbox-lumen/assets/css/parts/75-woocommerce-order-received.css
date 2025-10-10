@@ -1,0 +1,66 @@
+/* ==========================================
+   WOOCOMMERCE – ORDER RECEIVED (THANK YOU)
+   ========================================== */
+
+.lumen-order-thankyou .lumen-order-status__title {
+  margin: 0;
+  font-size: clamp(1.8rem, 2.6vw, 2.2rem);
+  color: rgba(255, 255, 255, 0.98);
+}
+
+.lumen-order-thankyou .lumen-order-status__customer {
+  margin: 0.5rem 0 0;
+  color: rgba(222, 232, 255, 0.84);
+}
+
+.lumen-order-thankyou__actions {
+  margin-top: 0.35rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.lumen-order-thankyou__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  color: rgba(236, 244, 255, 0.96);
+  background: rgba(94, 128, 255, 0.16);
+  border: 1px solid rgba(118, 156, 255, 0.55);
+  box-shadow: 0 10px 24px rgba(10, 22, 58, 0.32);
+  transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease;
+}
+
+.lumen-order-thankyou__btn:hover,
+.lumen-order-thankyou__btn:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 32px rgba(8, 18, 46, 0.42);
+  background: rgba(94, 128, 255, 0.22);
+}
+
+.lumen-order-thankyou__btn--primary {
+  background: linear-gradient(135deg, rgba(94, 230, 208, 0.92) 0%, rgba(66, 194, 255, 0.88) 100%);
+  color: #031125;
+  border-color: rgba(94, 230, 208, 0.55);
+}
+
+.lumen-order-thankyou__btn--primary:hover,
+.lumen-order-thankyou__btn--primary:focus-visible {
+  background: linear-gradient(135deg, rgba(94, 230, 208, 0.98) 0%, rgba(66, 194, 255, 0.96) 100%);
+  box-shadow: 0 22px 40px rgba(4, 18, 44, 0.5);
+}
+
+@media (max-width: 520px) {
+  .lumen-order-thankyou__actions {
+    gap: 0.5rem;
+  }
+  .lumen-order-thankyou__btn {
+    flex: 1 1 auto;
+  }
+}
+

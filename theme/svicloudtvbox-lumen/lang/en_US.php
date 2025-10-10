@@ -39,12 +39,12 @@ return [
             'items' => [
                 'phone' => [
                     'label' => 'SMS / Phone',
-                    'value' => '+1 (626) 790-0000',
+                    'value' => '702-398-3416',
                     'cta'   => 'Text or call now',
                 ],
                 'whatsapp' => [
                     'label' => 'WhatsApp',
-                    'value' => '+1 (626) 790-0000',
+                    'value' => '702-398-3416',
                     'cta'   => 'Open WhatsApp',
                 ],
                 'email' => [
@@ -148,13 +148,12 @@ return [
         'support_hours'      => 'Concierge hours: 9am–6pm PT · Mon–Sat',
         'summary' => [
             'order_label'    => 'Order details',
-            'status_label'   => 'Current status',
             'shipping_label' => 'Shipping status',
             'shipping_note'  => "We'll email you as soon as tracking updates.",
             'details_heading' => 'Items in this order',
             'details_note'    => 'Here’s a breakdown of everything in your shipment, including totals and billing details.',
             'placed'         => 'Placed on {{order_date}}',
-            'total'          => 'Total {{order_total}} · {{payment_method}}',
+            'total'          => 'Total {{order_total}}{{dot}}{{payment_method}}',
         ],
         'status_heading'     => "Order status",
         'status'             => 'Order {{order_number}} was placed on {{order_date}} and is currently {{order_status}}.',
@@ -162,6 +161,30 @@ return [
         'updates_heading'    => "Latest updates",
         'no_updates'         => "No updates yet. We'll email you as soon as there's news.",
       ],
+
+    'order_thankyou' => [
+        'title'        => 'Thank you — your order is confirmed',
+        'email_intro'  => 'We emailed your receipt and updates to {{name}} {{dot}} {{email}}',
+        'summary' => [
+            'order_label'    => 'Order details',
+            'next_label'     => 'Next steps',
+            'placed_on'      => 'Placed on {{order_date}}',
+            'total'          => 'Total {{order_total}} · {{payment_method}}',
+            'tracking_note'  => "We’ll email tracking details as soon as your package ships.",
+            'details_heading'=> 'Items in this order',
+            'details_note'   => 'Here’s a breakdown of everything in your shipment, including totals and billing details.',
+        ],
+        'cta' => [
+            'track'    => 'Track order',
+            'continue' => 'Continue shopping',
+        ],
+        'failed' => [
+            'title'      => 'Order failed',
+            'copy'       => 'Unfortunately your order cannot be processed as the originating bank/merchant has declined your transaction. Please attempt your purchase again.',
+            'pay_now'    => 'Pay now',
+            'my_account' => 'My account',
+        ],
+    ],
 
     'faq' => [
         'hero' => [
@@ -285,7 +308,7 @@ return [
                 ],
                 'phone' => [
                     'label'       => 'Phone / WhatsApp',
-                    'placeholder' => '+1 (626) 790-0000',
+                    'placeholder' => '702-398-3416',
                 ],
                 'order' => [
                     'label'       => 'Order number',

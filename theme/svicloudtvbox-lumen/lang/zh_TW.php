@@ -42,7 +42,7 @@ return [
                 ],
                 'phone' => [
                     'label'       => '電話／WhatsApp',
-                    'placeholder' => '+1 (626) 790-0000',
+                    'placeholder' => '702-398-3416',
                 ],
                 'order' => [
                     'label'       => '訂單編號',
@@ -112,12 +112,12 @@ return [
             'items' => [
                 'phone' => [
                     'label' => '電話／簡訊',
-                    'value' => '+1 (626) 790-0000',
+                    'value' => '702-398-3416',
                     'cta'   => '撥打或傳送簡訊',
                 ],
                 'whatsapp' => [
                     'label' => 'WhatsApp',
-                    'value' => '+1 (626) 790-0000',
+                    'value' => '702-398-3416',
                     'cta'   => '開啟 WhatsApp',
                 ],
                 'email' => [
@@ -221,7 +221,6 @@ return [
         'support_hours'      => '服務時間：太平洋時間 09:00-18:00（週一至週六）',
         'summary' => [
             'order_label'    => '訂單資訊',
-            'status_label'   => '目前狀態',
             'shipping_label' => '物流狀態',
             'shipping_note'  => '追蹤更新後我們會立即以 email 通知您。',
             'details_heading' => '訂單明細',
@@ -235,6 +234,30 @@ return [
         'updates_heading'    => '最新進度',
         'no_updates'         => '目前沒有最新進度，一有更新將以 email 通知您。',
       ],
+
+    'order_thankyou' => [
+        'title'       => '感謝您的訂購 — 已完成確認',
+        'email_intro' => '我們已將收據與訂單更新寄送至 {{name}}{{dot}}{{email}}',
+        'summary' => [
+            'order_label'     => '訂單資訊',
+            'next_label'      => '後續步驟',
+            'placed_on'       => '建立日期：{{order_date}}',
+            'total'           => '金額 {{order_total}}{{dot}}{{payment_method}}',
+            'tracking_note'   => '商品出貨後，我們會立即寄送物流追蹤資訊。',
+            'details_heading' => '訂單明細',
+            'details_note'    => '以下列出出貨商品、金額與帳單資訊供您確認。',
+        ],
+        'cta' => [
+            'track'    => '查詢訂單',
+            'continue' => '繼續選購',
+        ],
+        'failed' => [
+            'title'      => '訂單失敗',
+            'copy'       => '銀行或金流拒絕了此次交易，請重新嘗試付款。',
+            'pay_now'    => '立即付款',
+            'my_account' => '我的帳號',
+        ],
+    ],
 
     'faq' => [
         'hero' => [

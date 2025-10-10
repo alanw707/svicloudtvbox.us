@@ -397,6 +397,76 @@ body.admin-bar .lumen-checkout__summary {
 
 #payment ul.payment_methods > li .woocommerce-info strong { color: rgba(255, 255, 255, 0.95); }
 
+/* ==============================
+   Card entry + saved card UX
+   ============================== */
+/* Improve radio/labels layout for "New card" vs "Saved cards" */
+#payment .woocommerce-SavedPaymentMethods-saveNew,
+#payment .wc-saved-payment-methods {
+  margin: 0.25rem 0 0.5rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+#payment .wc-saved-payment-methods li,
+#payment .woocommerce-SavedPaymentMethods-saveNew li {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+/* Increase contrast/size of radios and use our accent */
+#payment input[type="radio"] {
+  accent-color: var(--lumen-accent-teal);
+  transform: translateY(1px);
+}
+
+/* Saved-card select and Stripe Elements fields */
+#payment .payment_box select,
+#payment .payment_box .input-text,
+#payment .payment_box .StripeElement,
+#payment .payment_box .wc-stripe-elements-field {
+  width: 100%;
+  min-height: 40px;
+  padding: 0.55rem 0.8rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(164, 237, 232, 0.3);
+  background: rgba(12, 27, 58, 0.75);
+  color: rgba(246, 250, 255, 0.96);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px rgba(94, 230, 208, 0.08);
+}
+
+#payment .payment_box .StripeElement--focus,
+#payment .payment_box .wc-stripe-elements-field:focus,
+#payment .payment_box select:focus {
+  border-color: rgba(164, 237, 232, 0.8);
+  box-shadow: 0 0 0 3px rgba(94, 230, 208, 0.28);
+  background: rgba(18, 36, 72, 0.82);
+}
+
+/* Stripe toggles: "New card" and "Saved cards" */
+#payment .wc-stripe-gateway-container input[type="radio"] + label.wc-stripe-label-payment-type,
+#payment input[type="radio"] + label.wc-stripe-label-payment-type,
+#payment label.wc-stripe-label-payment-type {
+  color: rgba(248, 252, 255, 0.96) !important;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+#payment .wc-stripe-gateway-container input[type="radio"] + label.wc-stripe-label-payment-type:hover,
+#payment input[type="radio"] + label.wc-stripe-label-payment-type:hover {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+/* Spacing between the toggle radios and the next control */
+#payment .payment_box .form-row,
+#payment .payment_box p {
+  margin-bottom: 0.65rem;
+}
+
 .woocommerce-checkout-payment .woocommerce-terms-and-conditions-wrapper {
   border-top: 1px solid rgba(164, 237, 232, 0.22);
   padding: 1.3rem 1.35rem;
