@@ -9,3 +9,10 @@
   display: grid;
   gap: clamp(var(--space-2xl), 7vw, var(--space-3xl));
 }
+
+@media (max-width: 600px) {
+  .compare-page {
+    padding-left: clamp(16px, 5vw, 22px);
+    padding-right: clamp(16px, 5vw, 22px);
+  }
+}

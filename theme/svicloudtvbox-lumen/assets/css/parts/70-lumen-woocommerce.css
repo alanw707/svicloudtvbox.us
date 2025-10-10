@@ -88,6 +88,21 @@
   gap: var(--space-sm);
 }
 
+@media (max-width: 720px) {
+  .lumen-product .product-hero-inner {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .lumen-product .product-hero-content {
+    width: min(100%, 520px);
+  }
+
+  .lumen-product .product-hero-cta .cart {
+    justify-content: center;
+  }
+}
+
 .lumen-product .woocommerce-notices-wrapper {
   margin-bottom: var(--space-md);
 }

@@ -12,6 +12,16 @@
   overflow: hidden;
 }
 
+@media (max-width: 600px) {
+  .compare-hero {
+    width: auto;
+    margin-left: calc(-1 * clamp(16px, 5vw, 22px));
+    margin-right: calc(-1 * clamp(16px, 5vw, 22px));
+    padding-left: clamp(18px, 5vw, 24px);
+    padding-right: clamp(18px, 5vw, 24px);
+  }
+}
+
 .compare-hero::before {
   content: "";
   position: absolute;
@@ -27,6 +37,18 @@
   z-index: 2;
   width: min(1020px, calc(100% - clamp(32px, 6vw, 96px)));
   margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .compare-hero__inner {
+    width: min(520px, 100%);
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .compare-hero__surface {
+    padding: clamp(22px, 7vw, 30px) clamp(18px, 5vw, 24px);
+  }
 }
 
 .compare-hero__surface {
@@ -214,6 +236,14 @@
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .compare-hero__background {
+    left: 0;
+    width: 100%;
+    transform: none;
+  }
 }
 
 .compare-hero__photo {
