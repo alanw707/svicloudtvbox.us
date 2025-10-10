@@ -24,12 +24,12 @@
 .about-story__stats {
   display: grid;
   gap: clamp(1.35rem, 3vw, 1.9rem);
-  justify-items: stretch;
+  justify-items: center;
   align-content: start;
   grid-auto-rows: 1fr;
   grid-template-columns: minmax(0, 1fr);
-  max-width: clamp(22rem, 38vw, 30rem);
   width: 100%;
+  max-width: clamp(16rem, 70vw, 24rem);
   margin-inline: auto;
 }
 
@@ -43,7 +43,7 @@
   gap: clamp(0.5rem, 1.6vw, 0.8rem);
   align-content: flex-start;
   min-height: clamp(7.8rem, 18vw, 9.4rem);
-  width: 100%;
+  width: min(100%, 18rem);
   text-align: left;
 }
 
@@ -69,6 +69,7 @@
 
 @media (min-width: 640px) {
   .about-story__stats {
+    width: 100%;
     max-width: clamp(26rem, 48vw, 36rem);
   }
 }

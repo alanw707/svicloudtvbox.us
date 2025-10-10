@@ -62,6 +62,13 @@
   --gradient-lumen-glow: radial-gradient(circle at top right, rgba(94, 230, 208, 0.28), transparent 62%);
   --gradient-lumen-amber: radial-gradient(circle at 60% 40%, rgba(255, 185, 99, 0.32), transparent 70%);
   --gradient-lumen-wireframe: linear-gradient(135deg, rgba(94, 230, 208, 0.22), rgba(143, 150, 255, 0.08));
+  /* Shared CTA surfaces */
+  --glass-pill-base: #4fd8ed;
+  --glass-pill-border: rgba(126, 246, 227, 0.48);
+  --glass-pill-text: rgba(4, 18, 38, 0.9);
+  --glass-pill-text-hover: rgba(2, 18, 36, 0.96);
+  --glass-pill-shadow: 0 16px 38px rgba(4, 12, 30, 0.32);
+  --glass-pill-shadow-hover: 0 22px 48px rgba(4, 12, 30, 0.38);
 
   /* Typography */
   --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
