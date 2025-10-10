@@ -20,6 +20,172 @@ require_once get_template_directory() . '/inc/helpers-svic.php';
 
 SVIC_Locale_Resolver::bootstrap();
 
+if (!function_exists('svic_output_hreflang_links')) {
+    function svic_output_hreflang_links(): void
+    {
+        if (is_admin()) {
+            return;
+        }
+
+        $supportedLocales = SVIC_Translator::supportedLocales();
+        if (!is_array($supportedLocales) || count($supportedLocales) < 2) {
+            return;
+        }
+
+        if (!function_exists('svic_current_base_url') || !function_exists('svic_url_with_lang')) {
+            return;
+        }
+
+        $baseUrl = svic_current_base_url();
+        if (!is_string($baseUrl) || $baseUrl === '') {
+            return;
+        }
+
+        $links = [];
+        foreach ($supportedLocales as $locale) {
+            if (!is_string($locale) || $locale === '') {
+                continue;
+            }
+
+            $hreflang = svic_locale_to_hreflang($locale);
+            if ($hreflang === '') {
+                continue;
+            }
+
+            $langValue = svic_language_query_value($locale);
+            $href      = svic_url_with_lang($baseUrl, $langValue);
+
+            if (!$href || isset($links[$hreflang])) {
+                continue;
+            }
+
+            $links[$hreflang] = $href;
+        }
+
+        if (count($links) < 2) {
+            return;
+        }
+
+        $defaultLocale = SVIC_Translator::normalizeLocaleCode(null);
+        $defaultHref   = svic_url_with_lang($baseUrl, svic_language_query_value($defaultLocale));
+
+        foreach ($links as $hreflang => $href) {
+            echo '<link rel="alternate" hreflang="' . esc_attr($hreflang) . '" href="' . esc_url($href) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+
+        if ($defaultHref) {
+            echo '<link rel="alternate" hreflang="x-default" href="' . esc_url($defaultHref) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+    }
+}
+
+add_action('wp_head', 'svic_output_hreflang_links', 5);
+
+add_filter('body_class', function ($classes) {
+    if (!is_array($classes)) {
+        $classes = [];
+    }
+
+    if (function_exists('svic_current_locale')) {
+        $locale = svic_current_locale();
+        if (is_string($locale) && stripos($locale, 'zh') === 0) {
+            if (!in_array('lang-zh', $classes, true)) {
+                $classes[] = 'lang-zh';
+            }
+        }
+    }
+
+    return $classes;
+});
+
+function svic_support_form_recipient(): string
+{
+    return apply_filters('svic_support_form_recipient', 'support@svicloudtvbox.us');
+}
+
+function svic_handle_support_form(): void
+{
+    $locale      = isset($_POST['svic_locale']) ? sanitize_text_field(wp_unslash($_POST['svic_locale'])) : '';
+    $lang_query  = svic_language_query_value($locale ?: null);
+    $redirect    = svic_url_with_lang(home_url('/support/'), $lang_query);
+
+    if (!isset($_POST['svic_support_nonce']) || !wp_verify_nonce(wp_unslash($_POST['svic_support_nonce']), 'svic_support_form')) {
+        wp_safe_redirect(add_query_arg('support_status', 'error', $redirect));
+        exit;
+    }
+
+    $name    = isset($_POST['support_name']) ? sanitize_text_field(wp_unslash($_POST['support_name'])) : '';
+    $email   = isset($_POST['support_email']) ? sanitize_email(wp_unslash($_POST['support_email'])) : '';
+    $phone   = isset($_POST['support_phone']) ? sanitize_text_field(wp_unslash($_POST['support_phone'])) : '';
+    $order   = isset($_POST['support_order']) ? sanitize_text_field(wp_unslash($_POST['support_order'])) : '';
+    $device  = isset($_POST['support_device']) ? sanitize_text_field(wp_unslash($_POST['support_device'])) : '';
+    $issue   = isset($_POST['support_issue']) ? sanitize_text_field(wp_unslash($_POST['support_issue'])) : '';
+    $message = isset($_POST['support_message']) ? trim(wp_kses_post(wp_unslash($_POST['support_message']))) : '';
+
+    if ($name === '' || $email === '' || $message === '' || !is_email($email)) {
+        wp_safe_redirect(add_query_arg('support_status', 'error', $redirect));
+        exit;
+    }
+
+    $translator         = SVIC_Translator::instance();
+    $registry           = $translator->registry('en_US');
+    $device_options_en  = $registry['support']['form']['device_options'] ?? [];
+    $issue_options_en   = $registry['support']['form']['issue_options'] ?? [];
+
+    $device_label = $device !== '' && isset($device_options_en[$device]) ? $device_options_en[$device] : ($device ?: 'n/a');
+    $issue_label  = $issue !== '' && isset($issue_options_en[$issue]) ? $issue_options_en[$issue] : ($issue ?: 'n/a');
+
+    $subject = sprintf('[SVICLOUD Support] %s', $issue_label);
+    $body_lines = [
+        'Support request submitted via svicloudtvbox.us',
+        '--------------------------------------------------',
+        'Name: ' . $name,
+        'Email: ' . $email,
+        'Phone / WhatsApp: ' . ($phone !== '' ? $phone : 'n/a'),
+        'Order number: ' . ($order !== '' ? $order : 'n/a'),
+        'Device: ' . $device_label,
+        'Issue category: ' . $issue_label,
+        'Locale: ' . ($locale !== '' ? $locale : 'n/a'),
+        '--------------------------------------------------',
+        'Message:',
+        $message,
+    ];
+
+    $headers = [
+        'Content-Type: text/plain; charset=UTF-8',
+        'From: SVICLOUD Concierge <' . svic_support_form_recipient() . '>',
+        'Reply-To: ' . $name . ' <' . $email . '>',
+    ];
+
+    $sent = wp_mail(svic_support_form_recipient(), $subject, implode("\n", $body_lines), $headers);
+
+    if (defined('WP_DEBUG') && WP_DEBUG) {
+        error_log('[SVIC Support] Mail send result: ' . ($sent ? 'success' : 'error'));
+    }
+
+    $status = $sent ? 'success' : 'error';
+    wp_safe_redirect(add_query_arg('support_status', $status, $redirect));
+    exit;
+}
+
+add_action('admin_post_svic_support_form', 'svic_handle_support_form');
+add_action('admin_post_nopriv_svic_support_form', 'svic_handle_support_form');
+
+if (!function_exists('svic_log_wp_mail_failure')) {
+    function svic_log_wp_mail_failure($wp_error)
+    {
+        if (!defined('WP_DEBUG') || !WP_DEBUG) {
+            return;
+        }
+
+        if ($wp_error instanceof WP_Error) {
+            error_log('[SVIC Support] wp_mail failed: ' . $wp_error->get_error_message());
+        }
+    }
+}
+
+add_action('wp_mail_failed', 'svic_log_wp_mail_failure');
+
 /**
  * Hide legacy bind-mounted theme directories from the admin theme list.
  */
@@ -111,6 +277,7 @@ add_filter('wp_nav_menu_objects', function ($items, $args) {
     $menu_key_map = [
         'home'                 => 'header.nav.home',
         'compare'              => 'header.nav.compare',
+        'faq'                  => 'header.nav.faq',
         'svicloud-10p-plus'    => 'header.nav.ten_p',
         'svicloud-10p'         => 'header.nav.ten_p',
         'svicloud-10s'         => 'header.nav.ten_s',
@@ -242,6 +409,9 @@ add_action('wp_enqueue_scripts', function () {
         'front-page'  => 'assets/css/front-page.css',
         'about'       => 'assets/css/about.css',
         'guides'      => 'assets/css/guides.css',
+        'contact'     => 'assets/css/contact.css',
+        'faq'         => 'assets/css/faq.css',
+        'support'     => 'assets/css/support.css',
         'compare'     => 'assets/css/compare.css',
         'woocommerce' => 'assets/css/woocommerce.css',
     ];
@@ -322,6 +492,39 @@ add_action('wp_enqueue_scripts', function () {
             get_template_directory_uri() . '/assets/css/guides.css',
             ['svicloudtvbox-style'],
             $css_versions['guides']
+        );
+    }
+
+    // Contact page bundle
+    $is_contact_page = is_page_template('page-contact.php') || is_page('contact');
+    if ($is_contact_page && isset($css_versions['contact'])) {
+        wp_enqueue_style(
+            'svicloudtvbox-contact',
+            get_template_directory_uri() . '/assets/css/contact.css',
+            ['svicloudtvbox-style'],
+            $css_versions['contact']
+        );
+    }
+
+    // Support form bundle
+    $is_support_page = is_page_template('page-support.php') || is_page('support');
+    if ($is_support_page && isset($css_versions['support'])) {
+        wp_enqueue_style(
+            'svicloudtvbox-support',
+            get_template_directory_uri() . '/assets/css/support.css',
+            ['svicloudtvbox-style'],
+            $css_versions['support']
+        );
+    }
+
+    // FAQ page bundle
+    $is_faq_page = is_page_template('page-faq.php') || is_page('faq');
+    if ($is_faq_page && isset($css_versions['faq'])) {
+        wp_enqueue_style(
+            'svicloudtvbox-faq',
+            get_template_directory_uri() . '/assets/css/faq.css',
+            ['svicloudtvbox-style'],
+            $css_versions['faq']
         );
     }
 

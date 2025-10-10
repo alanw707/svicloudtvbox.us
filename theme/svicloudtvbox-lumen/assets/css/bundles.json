@@ -55,6 +55,27 @@
       "67-guides.css"
     ]
   },
+  "faq": {
+    "label": "FAQ page",
+    "output": "faq.css",
+    "parts": [
+      "68-faq.css"
+    ]
+  },
+  "contact": {
+    "label": "Contact page",
+    "output": "contact.css",
+    "parts": [
+      "69-contact.css"
+    ]
+  },
+  "support": {
+    "label": "Support form page",
+    "output": "support.css",
+    "parts": [
+      "70-support-form.css"
+    ]
+  },
   "compare": {
     "label": "Compare page",
     "output": "compare.css",

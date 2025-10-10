@@ -62,21 +62,161 @@ if (!function_exists('svic_url_with_lang')) {
 
         $langValue = $lang !== null ? strtolower(trim($lang)) : svic_language_query_value();
         if ($langValue === '') {
+            return remove_query_arg('lang', $url);
+        }
+
+        $homeParts = wp_parse_url(home_url('/'));
+        $homeHost  = isset($homeParts['host']) ? strtolower((string) $homeParts['host']) : '';
+        $homePath  = isset($homeParts['path']) ? rtrim((string) $homeParts['path'], '/') : '';
+
+        $urlParts = wp_parse_url($url);
+        if ($urlParts === false) {
             return $url;
         }
 
-        $siteHost = wp_parse_url(home_url(), PHP_URL_HOST);
-        $urlParts = wp_parse_url($url);
+        $isRelative = !isset($urlParts['host']);
+        $isInternal = $isRelative;
+        if (!$isInternal) {
+            $targetHost = strtolower((string) ($urlParts['host'] ?? ''));
+            $isInternal = ($homeHost !== '') && $targetHost === $homeHost;
 
-        if (is_array($urlParts)) {
-            if (isset($urlParts['host']) && $urlParts['host'] !== '' && $siteHost && strcasecmp($urlParts['host'], $siteHost) !== 0) {
-                return $url;
+            if (!$isInternal) {
+                return remove_query_arg('lang', $url);
             }
         }
 
-        $updated = remove_query_arg('lang', $url);
+        $path = (string) ($urlParts['path'] ?? '');
+        if ($path === '' && $isRelative) {
+            $path = '/';
+        }
 
-        return add_query_arg('lang', $langValue, $updated);
+        if ($path === '' || $path[0] !== '/') {
+            $path = '/' . ltrim($path, '/');
+        }
+
+        if (!$isRelative && $homePath !== '' && $homePath !== '/') {
+            if ($path === $homePath) {
+                $path = '/';
+            } elseif (strpos($path, $homePath . '/') === 0) {
+                $path = substr($path, strlen($homePath));
+                if ($path === false || $path === '') {
+                    $path = '/';
+                } elseif ($path[0] !== '/') {
+                    $path = '/' . $path;
+                }
+            }
+        }
+
+        if ($path === '') {
+            $path = '/';
+        }
+
+        $hadTrailingSlash = $path !== '/' && substr($path, -1) === '/';
+        $trimmedPath = ltrim($path, '/');
+
+        if ($langValue === 'zh') {
+            if ($trimmedPath === '' || $trimmedPath === 'zh') {
+                $trimmedPath = 'zh';
+                $hadTrailingSlash = true;
+            } elseif (strpos($trimmedPath, 'zh/') !== 0) {
+                $trimmedPath = 'zh/' . $trimmedPath;
+            }
+        } else {
+            if ($trimmedPath === 'zh') {
+                $trimmedPath = '';
+                $hadTrailingSlash = true;
+            } elseif (strpos($trimmedPath, 'zh/') === 0) {
+                $trimmedPath = substr($trimmedPath, 3);
+            }
+        }
+
+        if ($trimmedPath === '') {
+            $localizedPath = $langValue === 'zh' ? '/zh/' : '/';
+        } else {
+            $localizedPath = '/' . $trimmedPath;
+            if ($hadTrailingSlash && substr($localizedPath, -1) !== '/') {
+                $localizedPath .= '/';
+            } elseif (!$hadTrailingSlash && substr($localizedPath, -1) === '/' && $localizedPath !== '/') {
+                $localizedPath = rtrim($localizedPath, '/');
+            }
+        }
+
+        $localizedPath = preg_replace('#/+#', '/', $localizedPath);
+        $queryParams = [];
+        if (isset($urlParts['query']) && $urlParts['query'] !== '') {
+            parse_str($urlParts['query'], $queryParams);
+            unset($queryParams['lang']);
+        }
+
+        $fragment = $urlParts['fragment'] ?? '';
+
+        $localizedUrl = home_url($localizedPath);
+        if (!empty($queryParams)) {
+            $localizedUrl = add_query_arg($queryParams, $localizedUrl);
+        }
+
+        if ($fragment !== '') {
+            $localizedUrl .= '#' . $fragment;
+        }
+
+        return $localizedUrl;
+    }
+}
+
+if (!function_exists('svic_current_base_url')) {
+    function svic_current_base_url(): string {
+        $path = SVIC_Locale_Resolver::currentRequestPath();
+        $url  = home_url($path);
+
+        $requestUri = $_SERVER['REQUEST_URI'] ?? '';
+        if (is_string($requestUri) && $requestUri !== '') {
+            $parsed = wp_parse_url($requestUri);
+            if (is_array($parsed)) {
+                if (isset($parsed['query']) && $parsed['query'] !== '') {
+                    $query = [];
+                    parse_str($parsed['query'], $query);
+                    if (!empty($query)) {
+                        unset($query['lang']);
+                        if (!empty($query)) {
+                            $url = add_query_arg($query, $url);
+                        }
+                    }
+                }
+
+                if (isset($parsed['fragment']) && $parsed['fragment'] !== '') {
+                    $url .= '#' . $parsed['fragment'];
+                }
+            }
+        }
+
+        return $url;
+    }
+}
+
+if (!function_exists('svic_locale_to_hreflang')) {
+    function svic_locale_to_hreflang(string $locale): string {
+        $locale = trim($locale);
+        if ($locale === '') {
+            return '';
+        }
+
+        $segments = preg_split('/[_-]/', $locale);
+        if (!is_array($segments) || !$segments) {
+            return strtolower($locale);
+        }
+
+        $language = strtolower($segments[0]);
+        $variants = array_slice($segments, 1);
+
+        if (!$variants) {
+            return $language;
+        }
+
+        $variants = array_map(static function ($value) {
+            return strtoupper((string) $value);
+        }, $variants);
+
+        return $language . '-' . implode('-', $variants);
     }
 }
 

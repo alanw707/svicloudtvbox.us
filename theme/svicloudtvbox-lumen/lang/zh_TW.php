@@ -18,6 +18,124 @@ return [
             'authorized_dealer' => '官方授權經銷商',
             'ships_from_usa'    => '美國本地出貨',
             'one_year_warranty' => '一年美國保固',
+    ],
+    ],
+
+    'support' => [
+        'hero' => [
+            'badge'    => '支援表單',
+            'title'    => '提交禮賓客服支援請求',
+            'subtitle' => '留下裝置資訊與遇到的狀況，中英雙語客服最快一個工作天內回覆。',
+        ],
+        'form' => [
+            'title'        => '告訴我們目前的情況',
+            'description'  => '請填寫以下欄位，我們會為您安排最合適的客服專員協助。',
+            'required_note'=> '＊ 必填欄位',
+            'fields' => [
+                'name' => [
+                    'label'       => '聯絡人姓名＊',
+                    'placeholder' => '範例：林小雲',
+                ],
+                'email' => [
+                    'label'       => 'Email＊',
+                    'placeholder' => 'you@example.com',
+                ],
+                'phone' => [
+                    'label'       => '電話／WhatsApp',
+                    'placeholder' => '+1 (626) 790-0000',
+                ],
+                'order' => [
+                    'label'       => '訂單編號',
+                    'placeholder' => '例如 WC-1234',
+                ],
+                'device' => [
+                    'label'       => '使用的機型',
+                    'placeholder' => '選擇裝置',
+                ],
+                'issue' => [
+                    'label'       => '問題類型＊',
+                    'placeholder' => '選擇目前的狀況',
+                ],
+                'message' => [
+                    'label'       => '需要協助的內容＊',
+                    'placeholder' => '請描述遇到的問題、顯示的訊息或希望我們協助的步驟…',
+                ],
+            ],
+            'device_options' => [
+                '10p'   => 'SVICLOUD 10P+',
+                '10s'   => 'SVICLOUD 10S',
+                'other' => '其他／不確定',
+            ],
+            'issue_options' => [
+                'setup'     => '安裝與啟用',
+                'streaming' => '播放或緩衝問題',
+                'billing'   => '訂單或付款',
+                'apps'      => 'App／帳號／遙控器',
+                'other'     => '其他問題',
+            ],
+            'submit' => '送出訊息',
+        ],
+        'success' => [
+            'title' => '訊息已送出',
+            'body'  => '感謝您！禮賓客服將於一個工作天內，從 support@svicloudtvbox.us 寄出回覆。如果沒有收到，請檢查垃圾郵件或促銷匣。',
+        ],
+        'error'   => '訊息寄送失敗，請稍後再試或直接來信 support@svicloudtvbox.us。',
+        'help' => [
+            'contact' => [
+                'title' => '想立即與真人聯絡？',
+                'copy'  => '透過電話、簡訊、WhatsApp 或 Email 與我們的雙語客服即時聯繫。',
+                'cta'   => '前往聯絡客服頁面',
+            ],
+            'faq' => [
+                'title' => '先查看常見問題',
+                'copy'  => 'FAQ 蒐集安裝、Orz App、遙控器配對與快速排解技巧，可先自行檢查。',
+                'cta'   => '開啟 FAQ',
+            ],
+        ],
+    ],
+
+    'contact' => [
+        'hero' => [
+            'badge'        => '禮賓客服',
+            'title'        => '聯繫小雲禮賓客服團隊',
+            'subtitle'     => '中英文專員協助訂單、安裝、Wi-Fi 優化與 App 更新。真人客服最快一個工作天內回覆。',
+            'primary_cta'  => '立即聯絡客服',
+            'secondary_cta'=> '填寫支援表單',
+        ],
+        'hours' => [
+            'title' => '禮賓客服時間',
+            'copy'  => '真人客服：週一至週六 · 太平洋時間 09:00–18:00',
+            'note'  => '非客服時段來信，將於下一個工作日上午回覆。',
+        ],
+        'channels' => [
+            'title' => '聯絡方式',
+            'items' => [
+                'phone' => [
+                    'label' => '電話／簡訊',
+                    'value' => '+1 (626) 790-0000',
+                    'cta'   => '撥打或傳送簡訊',
+                ],
+                'whatsapp' => [
+                    'label' => 'WhatsApp',
+                    'value' => '+1 (626) 790-0000',
+                    'cta'   => '開啟 WhatsApp',
+                ],
+                'email' => [
+                    'label' => 'Email',
+                    'value' => 'support@svicloudtvbox.us',
+                    'cta'   => '寄送 Email',
+                ],
+            ],
+        ],
+        'form' => [
+            'title' => '需要更深入的協助？',
+            'copy'  => '請提供訂單編號、使用的機型與遇到的問題，禮賓客服將於一個工作天內回覆。',
+            'cta'   => '開啟客服表單',
+        ],
+        'faq' => [
+            'title' => '快速自助',
+            'copy'  => '想先自行查詢？常見問題整理了選購、安裝與疑難排解重點。',
+            'cta'   => '前往 FAQ',
         ],
     ],
     'cart_page' => [
@@ -118,10 +236,112 @@ return [
         'no_updates'         => '目前沒有最新進度，一有更新將以 email 通知您。',
       ],
 
+    'faq' => [
+        'hero' => [
+            'badge'        => '客服中心',
+            'title'        => '小雲（SviCloud）電視盒常見問題',
+            'subtitle'     => '快速了解選購、安裝與使用小雲電視盒的常見問題與解答。',
+            'cta_primary'  => '查看安裝指南',
+            'cta_secondary'=> '比較 10P+ 與 10S',
+        ],
+        'sections' => [
+            'device_models' => [
+                'title' => '裝置與型號',
+                'items' => [
+                    'model_choice' => [
+                        'question' => '要買哪一款小雲電視盒？',
+                        'answer'   => '若需要語音搜尋或卡拉 OK，建議選擇 SviCloud 10P+。SviCloud 10S 擁有相同串流內容，但沒有 Karaoke KTV 與麥克風遙控。決定後可先閱讀 <a href="{{setup_guide_url}}">安裝教學</a>，並在 <a href="{{compare_url}}">10P+ 與 10S 比較頁</a>確認規格差異。',
+                    ],
+                    'international_use' => [
+                        'question' => '小雲電視盒在海外可以用嗎？',
+                        'answer'   => '可以。只要有穩定的寬頻或 Wi-Fi 網路，就能在世界各地使用。',
+                    ],
+                    'box_contents' => [
+                        'question' => '盒內附帶哪些配件？',
+                        'answer'   => '標準配件包含主機、語音遙控器、HDMI 線、電源變壓器與快速入門說明。',
+                    ],
+                ],
+            ],
+            'setup_activation' => [
+                'title' => '安裝與啟動',
+                'items' => [
+                    'power_on' => [
+                        'question' => '如何啟動小雲電視盒？',
+                        'answer'   => '接上 HDMI 與電源後，裝置會自動開機，前方指示燈亮起即可確認。想看操作畫面可參考 <a href="{{setup_guide_url}}">安裝圖解教學</a>。',
+                    ],
+                    'change_language' => [
+                        'question' => '如何切換系統語言？',
+                        'answer'   => '首次開機時，用遙控器選擇語言並按 <code>OK</code>、<code>Next</code>。日後可在系統設定中隨時調整。',
+                    ],
+                    'remote_pairing' => [
+                        'question' => '遙控器沒有反應怎麼辦？',
+                        'answer'   => '換上新電池後，同時按住 <code>VOL-</code> 與 <code>VOL+</code> 重新配對，配對時請靠近機身。多數遙控問題都能透過此動作解決。',
+                    ],
+                ],
+            ],
+            'apps_content' => [
+                'title' => 'App 與內容',
+                'items' => [
+                    'preinstalled' => [
+                        'question' => '小雲專屬 App 會預先安裝嗎？',
+                        'answer'   => '沒有，請開啟 <code>Orz</code> 安裝器，輸入 <code>8989c.cc</code> 下載 Yogurt TV、Yogurt Kids、Cherry TV、Karaoke KTV 等必備 App。',
+                    ],
+                    'third_party' => [
+                        'question' => '可以安裝 Netflix 或其他第三方 App 嗎？',
+                        'answer'   => '可以。小雲採用 Android 系統，可安裝常見串流服務。請留意來源是否可信並支援 Android TV。',
+                    ],
+                    'family_content' => [
+                        'question' => '有適合小朋友的內容嗎？',
+                        'answer'   => 'Yogurt Kids（或標示為 LUCA Kids）提供教育節目、卡通與互動遊戲，We Fun / 閤家歡則能全家一起唱卡拉 OK。',
+                    ],
+                    'adult_content' => [
+                        'question' => '有成人內容嗎？',
+                        'answer'   => 'Cherry TV 為成人專區，需要輸入密碼才能觀看，且每次開啟都需再次驗證。',
+                    ],
+                ],
+            ],
+            'features_limitations' => [
+                'title' => '功能與限制',
+                'items' => [
+                    'karaoke_support' => [
+                        'question' => '所有小雲機種都支援卡拉 OK 嗎？',
+                        'answer'   => '僅 SviCloud 10P+ 支援 Karaoke KTV。若卡拉 OK 是必備功能，請選擇 10P+。',
+                    ],
+                    'voice_control' => [
+                        'question' => '語音操作怎麼用？',
+                        'answer'   => '先按 <code>VOL-</code> + <code>VOL+</code> 配對遙控器，再按麥克風鍵說出影片名稱。SviCloud 10S 不支援語音功能。',
+                    ],
+                    'subtitle_speed' => [
+                        'question' => '字幕速度可以調整嗎？',
+                        'answer'   => '可以，在播放設定中可調整字幕速度與語言。',
+                    ],
+                ],
+            ],
+            'troubleshooting_support' => [
+                'title' => '疑難排解與客服',
+                'items' => [
+                    'buffering' => [
+                        'question' => '畫面模糊或不斷緩衝怎麼辦？',
+                        'answer'   => '請重啟路由器、將盒子靠近 Wi-Fi，或改用網路線。如果家中裝置很多，可以升級網速。<a href="{{setup_guide_url}}">安裝指南</a>也整理了更多疑難排解步驟。',
+                    ],
+                    'orz_installer' => [
+                        'question' => 'Orz 安裝器網址打不開？',
+                        'answer'   => '請確認輸入 <code>8989c.cc</code>（會自動導向 <code>6868c.cc</code>）。如仍無法開啟，請重啟機器並檢查網路是否連線。',
+                    ],
+                    'contact_support' => [
+                        'question' => '如何聯繫客服？',
+                        'answer'   => '可透過 <a href="{{support_url}}">svicloudtvbox.us 客服聯絡頁</a>，或使用訂單確認信中的 email 與我們聯繫。我們提供英文與繁體中文客服支援。',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
     'header' => [
         'nav' => [
             'home'     => '首頁',
             'compare'  => '比較機型',
+            'faq'      => '常見問題',
             'ten_p'    => 'SVICLOUD 10P+ 旗艦款',
             'ten_s'    => 'SVICLOUD 10S 輕巧款',
             'concierge'=> '禮賓客服',

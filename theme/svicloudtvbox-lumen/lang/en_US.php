@@ -20,6 +20,51 @@ return [
             'one_year_warranty' => '1-Year US Warranty',
         ],
     ],
+
+    'contact' => [
+        'hero' => [
+            'badge'      => 'Concierge support',
+            'title'      => 'Talk to the SviCloud concierge team',
+            'subtitle'   => 'English & 中文 experts help with orders, setup, Wi-Fi fixes, and app updates. Real humans reply within one business day.',
+            'primary_cta'=> 'Chat with concierge',
+            'secondary_cta' => 'Submit a support form',
+        ],
+        'hours' => [
+            'title' => 'Concierge hours',
+            'copy'  => 'Live support: Monday–Saturday · 9am–6pm Pacific',
+            'note'  => 'Messages received after hours are replied to the next morning.',
+        ],
+        'channels' => [
+            'title' => 'Contact methods',
+            'items' => [
+                'phone' => [
+                    'label' => 'SMS / Phone',
+                    'value' => '+1 (626) 790-0000',
+                    'cta'   => 'Text or call now',
+                ],
+                'whatsapp' => [
+                    'label' => 'WhatsApp',
+                    'value' => '+1 (626) 790-0000',
+                    'cta'   => 'Open WhatsApp',
+                ],
+                'email' => [
+                    'label' => 'Email',
+                    'value' => 'support@svicloudtvbox.us',
+                    'cta'   => 'Email concierge',
+                ],
+            ],
+        ],
+        'form' => [
+            'title' => 'Need hands-on help?',
+            'copy'  => 'Send the concierge team your order number, device, and issue—we reply within one business day.',
+            'cta'   => 'Open support form',
+        ],
+        'faq' => [
+            'title' => 'Quick answers',
+            'copy'  => 'Need to self-serve first? The FAQ covers model, setup, and troubleshooting questions.',
+            'cta'   => 'Visit FAQ',
+        ],
+    ],
     'cart_page' => [
         'title'             => 'Your cart',
         'continue_shopping' => 'Continue shopping',
@@ -118,10 +163,185 @@ return [
         'no_updates'         => "No updates yet. We'll email you as soon as there's news.",
       ],
 
+    'faq' => [
+        'hero' => [
+            'badge'      => 'Support center',
+            'title'      => 'SviCloud TV Box FAQ',
+            'subtitle'   => 'Quick answers for choosing, installing, and enjoying your SviCloud TV box.',
+            'cta_primary'=> 'Read setup guide',
+            'cta_secondary' => 'Compare models',
+        ],
+        'sections' => [
+            'device_models' => [
+                'title' => 'Device & models',
+                'items' => [
+                    'model_choice' => [
+                        'question' => 'Which SviCloud model should I buy?',
+                        'answer'   => 'Pick SviCloud 10P+ if you want voice search and karaoke. SviCloud 10S streams the same catalog but lacks Karaoke KTV and the mic-ready remote. Review the <a href="{{setup_guide_url}}">setup guide</a> after you choose, and compare specs on the <a href="{{compare_url}}">10P+ vs 10S page</a>.',
+                    ],
+                    'international_use' => [
+                        'question' => 'Does the TV box work outside of Asia?',
+                        'answer'   => 'Yes. SviCloud is built for international use—connect through any broadband or stable Wi-Fi network.',
+                    ],
+                    'box_contents' => [
+                        'question' => 'What comes in the box?',
+                        'answer'   => 'Every unit includes the TV box, voice remote, HDMI cable, power adapter, and a quick-start leaflet.',
+                    ],
+                ],
+            ],
+            'setup_activation' => [
+                'title' => 'Setup & activation',
+                'items' => [
+                    'power_on' => [
+                        'question' => 'How do I turn on my SviCloud TV box?',
+                        'answer'   => 'Plug in the HDMI and power cables. The device boots automatically when it receives power, and the front LED confirms it is on. Follow the <a href="{{setup_guide_url}}">step-by-step setup guide</a> for screenshots.',
+                    ],
+                    'change_language' => [
+                        'question' => 'How do I change the system language?',
+                        'answer'   => 'On first boot, use the remote arrows to highlight your preferred language, press <code>OK</code>, then choose <code>Next</code>. You can revisit language settings anytime under system preferences.',
+                    ],
+                    'remote_pairing' => [
+                        'question' => 'My remote is not responding. What should I do?',
+                        'answer'   => 'Swap in fresh batteries, then hold <code>VOL-</code> and <code>VOL+</code> together to re-pair. Stay within a few feet of the box during pairing—this resolves most remote issues.',
+                    ],
+                ],
+            ],
+            'apps_content' => [
+                'title' => 'Apps & content',
+                'items' => [
+                    'preinstalled' => [
+                        'question' => 'Are SviCloud apps pre-installed?',
+                        'answer'   => 'No. Launch the <code>Orz</code> installer, visit <code>8989c.cc</code>, and download Yogurt TV, Yogurt Kids, Cherry TV, Karaoke KTV, and other essentials.',
+                    ],
+                    'third_party' => [
+                        'question' => 'Can I install Netflix or other third-party apps?',
+                        'answer'   => 'Yes. SviCloud runs Android, so you can sideload popular streaming apps. Always download from trusted sources and confirm Android TV compatibility.',
+                    ],
+                    'family_content' => [
+                        'question' => 'What content is available for families?',
+                        'answer'   => 'Yogurt Kids (also labeled LUCA Kids) offers educational shows, interactive games, and safe cartoons. We Fun / 閤家歡 karaoke adds family-friendly singalongs.',
+                    ],
+                    'adult_content' => [
+                        'question' => 'Is there adult content?',
+                        'answer'   => 'Cherry TV contains mature programming and is protected by a password. You must opt in and enter the credential each time.',
+                    ],
+                ],
+            ],
+            'features_limitations' => [
+                'title' => 'Features & limitations',
+                'items' => [
+                    'karaoke_support' => [
+                        'question' => 'Does every SviCloud unit support karaoke?',
+                        'answer'   => 'Only SviCloud 10P+. If karaoke is essential, select 10P+ instead of 10S.',
+                    ],
+                    'voice_control' => [
+                        'question' => 'How does voice control work?',
+                        'answer'   => 'After pairing the remote (hold <code>VOL-</code> + <code>VOL+</code>), press the mic button and say the show or movie name. Voice control is unavailable on SviCloud 10S.',
+                    ],
+                    'subtitle_speed' => [
+                        'question' => 'Can I adjust subtitle speed?',
+                        'answer'   => 'Yes. Subtitle pace and multi-language options live in the playback settings menu.',
+                    ],
+                ],
+            ],
+            'troubleshooting_support' => [
+                'title' => 'Troubleshooting & support',
+                'items' => [
+                    'buffering' => [
+                        'question' => 'Streaming looks fuzzy or keeps buffering. What should I try?',
+                        'answer'   => 'Restart your router, move the box closer to Wi-Fi, or connect via Ethernet. Heavy household traffic may require a faster broadband plan. The <a href="{{setup_guide_url}}">setup guide</a> covers additional troubleshooting steps.',
+                    ],
+                    'orz_installer' => [
+                        'question' => 'The Orz installer site will not load. What now?',
+                        'answer'   => 'Double-check the URL (<code>8989c.cc</code>, which redirects to <code>6868c.cc</code>). If it still fails, reboot the box and confirm you have internet access.',
+                    ],
+                    'contact_support' => [
+                        'question' => 'How do I reach support?',
+                        'answer'   => 'Contact our concierge team through the <a href="{{support_url}}">svicloudtvbox.us support portal</a> or the email listed in your order confirmation. English and Traditional Chinese assistance is available.',
+                    ],
+                ],
+            ],
+    ],
+    ],
+
+    'support' => [
+        'hero' => [
+            'badge'    => 'Support form',
+            'title'    => 'Submit a concierge support request',
+            'subtitle' => 'Share your device details and issue below. Our bilingual team replies within one business day.',
+        ],
+        'form' => [
+            'title'        => 'Tell us what’s happening',
+            'description'  => 'Fill out the form and we’ll route your request to the right specialist.',
+            'required_note'=> '* Required fields',
+            'fields' => [
+                'name' => [
+                    'label'       => 'Full name *',
+                    'placeholder' => 'e.g. Angela Lin',
+                ],
+                'email' => [
+                    'label'       => 'Email address *',
+                    'placeholder' => 'you@example.com',
+                ],
+                'phone' => [
+                    'label'       => 'Phone / WhatsApp',
+                    'placeholder' => '+1 (626) 790-0000',
+                ],
+                'order' => [
+                    'label'       => 'Order number',
+                    'placeholder' => 'e.g. WC-1234',
+                ],
+                'device' => [
+                    'label'       => 'Device',
+                    'placeholder' => 'Select device',
+                ],
+                'issue' => [
+                    'label'       => 'Issue type *',
+                    'placeholder' => 'Choose an issue category',
+                ],
+                'message' => [
+                    'label'       => 'How can we help? *',
+                    'placeholder' => 'Share the steps to reproduce the issue or the help you need…',
+                ],
+            ],
+            'device_options' => [
+                '10p'   => 'SVICLOUD 10P+',
+                '10s'   => 'SVICLOUD 10S',
+                'other' => 'Other / Not sure',
+            ],
+            'issue_options' => [
+                'setup'     => 'Setup & activation',
+                'streaming' => 'Streaming or buffering',
+                'billing'   => 'Billing or order',
+                'apps'      => 'Apps, account, or remote',
+                'other'     => 'Something else',
+            ],
+            'submit' => 'Send message',
+        ],
+        'success' => [
+            'title' => 'Message sent',
+            'body'  => 'Thanks! A concierge specialist will reply from support@svicloudtvbox.us within one business day. If you do not see our email, remember to check your spam or promotions folder.',
+        ],
+        'error'   => 'We could not send your message. Please try again or email support@svicloudtvbox.us.',
+        'help' => [
+            'contact' => [
+                'title' => 'Need live concierge?',
+                'copy'  => 'Call, text, WhatsApp, or email our bilingual team for real-time assistance.',
+                'cta'   => 'Go to contact page',
+            ],
+            'faq' => [
+                'title' => 'Browse quick answers',
+                'copy'  => 'Our FAQ covers installation, Orz apps, remote pairing, and streaming tips.',
+                'cta'   => 'Open FAQ',
+            ],
+        ],
+    ],
+
     'header' => [
         'nav' => [
             'home'     => 'Home',
             'compare'  => 'Compare',
+            'faq'      => 'FAQ',
             'ten_p'    => 'SVICLOUD 10P+',
             'ten_s'    => 'SVICLOUD 10S',
             'concierge'=> 'Concierge',

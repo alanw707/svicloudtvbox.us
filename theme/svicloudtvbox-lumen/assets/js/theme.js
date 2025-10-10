@@ -37,42 +37,25 @@
      * Language switcher functionality
      */
     function initLanguageSwitcher() {
-        $('.language-toggle .lang-link').on('click', function(e) {
-            e.preventDefault();
+        const $body = $('body');
+        const htmlLang = (document.documentElement.getAttribute('lang') || '').toLowerCase();
+        if (htmlLang.indexOf('zh') === 0) {
+            $body.addClass('lang-zh');
+        } else {
+            $body.removeClass('lang-zh');
+        }
 
-            const lang = $(this).data('lang');
-            const currentUrl = window.location.href;
+        const $links = $('.lumen-lang-toggle__link');
+        if (!$links.length) {
+            return;
+        }
 
-            // Remove active class from all links
-            $('.lang-link').removeClass('active');
-
-            // Add active class to clicked link
-            $(this).addClass('active');
-
-            // Handle language switching logic
-            if (lang === 'zh') {
-                // Add Chinese language support
-                $('body').addClass('lang-zh');
-
-                // If TranslatePress is available, trigger it
-                if (typeof window.trp_translate_uri !== 'undefined') {
-                    window.location.href = window.trp_translate_uri(currentUrl, 'zh');
-                    return;
-                }
-
-                // Fallback: redirect to /zh/ path
-                if (!currentUrl.includes('/zh/')) {
-                    const newUrl = currentUrl.replace(window.location.origin, window.location.origin + '/zh');
-                    window.location.href = newUrl;
-                }
+        $links.on('click', function() {
+            const locale = ($(this).data('locale') || '').toString().toLowerCase();
+            if (locale.indexOf('zh') === 0) {
+                $body.addClass('lang-zh');
             } else {
-                // Switch to English
-                $('body').removeClass('lang-zh');
-
-                if (currentUrl.includes('/zh/')) {
-                    const newUrl = currentUrl.replace('/zh/', '/');
-                    window.location.href = newUrl;
-                }
+                $body.removeClass('lang-zh');
             }
         });
     }
