@@ -470,7 +470,12 @@ add_filter('robots_txt', function ($output, $public) {
         return $output;
     }
 
-    $sitemapUrl = home_url('/wp-sitemap.xml');
+    // Prefer plugin sitemaps when available to avoid redirects.
+    if (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION')) {
+        $sitemapUrl = home_url('/sitemap_index.xml');
+    } else {
+        $sitemapUrl = home_url('/wp-sitemap.xml');
+    }
     $line = 'Sitemap: ' . esc_url_raw($sitemapUrl);
 
     // Avoid duplicate lines if a plugin already added it
