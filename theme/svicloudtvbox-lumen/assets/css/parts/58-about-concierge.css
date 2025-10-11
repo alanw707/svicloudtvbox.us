@@ -3,7 +3,7 @@
    ========================================== */
 
 .about-concierge {
-  padding: clamp(4rem, 8vw, 6rem) 0 clamp(4.5rem, 9vw, 6.5rem);
+  padding: clamp(4rem, 8vw, 6rem) clamp(1.5rem, 6vw, 4rem) clamp(4.5rem, 9vw, 6.5rem);
   background: linear-gradient(145deg, rgba(9, 28, 62, 0.94), rgba(12, 42, 84, 0.9));
   position: relative;
   overflow: hidden;
@@ -73,5 +73,67 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.85rem;
-  justify-content: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+
+.about-concierge__support .lumen-pill--primary {
+  color: #022c4f;
+}
+
+.about-concierge__support .lumen-pill--primary:hover,
+.about-concierge__support .lumen-pill--primary:focus-visible {
+  color: #022c4f;
+}
+
+.about-concierge__support .lumen-pill--outline {
+  color: rgba(226, 242, 255, 0.96);
+}
+
+.about-concierge__support {
+  position: relative;
+  display: grid;
+  gap: clamp(var(--space-md), 4vw, var(--space-lg));
+  border-radius: clamp(1.5rem, 4vw, 2.75rem);
+  padding: clamp(1.75rem, 5vw, 2.75rem);
+  background: linear-gradient(160deg, rgba(18, 61, 121, 0.58), rgba(16, 88, 165, 0.82));
+  border: 1px solid rgba(76, 210, 238, 0.24);
+  box-shadow: 0 30px 60px rgba(5, 14, 30, 0.45);
+  justify-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.about-concierge__support::before {
+  content: "";
+  position: absolute;
+  inset: auto -35% -45%;
+  height: 60%;
+  background: radial-gradient(circle at center, rgba(115, 247, 233, 0.4), transparent 65%);
+  filter: blur(18px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.about-concierge__visual {
+  width: min(360px, 100%);
+  margin: 0;
+  position: relative;
+}
+
+.about-concierge__visual::after {
+  content: "";
+  position: absolute;
+  inset: auto 18% -8%;
+  height: clamp(18px, 4vw, 28px);
+  background: radial-gradient(70% 70% at center, rgba(0, 0, 0, 0.45) 0%, transparent 70%);
+  opacity: 0.65;
+}
+
+.about-concierge__visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
 }

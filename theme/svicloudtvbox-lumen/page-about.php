@@ -71,6 +71,10 @@ $stats = [
 $certificate_asset_relative = '/assets/images/certification-authorized-dealer.jpg';
 $certificate_asset_path     = get_template_directory() . $certificate_asset_relative;
 $certificate_asset_url      = file_exists($certificate_asset_path) ? get_template_directory_uri() . $certificate_asset_relative : '';
+
+$concierge_car_asset_relative = '/assets/svg/illustration-concierge-car.svg';
+$concierge_car_asset_path     = get_template_directory() . $concierge_car_asset_relative;
+$concierge_car_asset_url      = file_exists($concierge_car_asset_path) ? get_template_directory_uri() . $concierge_car_asset_relative : '';
 ?>
 <main class="about-page">
   <section class="about-hero">
@@ -197,13 +201,20 @@ $certificate_asset_url      = file_exists($certificate_asset_path) ? get_templat
           <li><?php echo svic_translate_html('about.concierge.points.events'); ?></li>
         </ul>
       </div>
-      <div class="about-concierge__cta">
-        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact'))); ?>">
-          <?php echo svic_translate_html('about.concierge.cta_primary'); ?>
-        </a>
-        <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/shop'))); ?>">
-          <?php echo svic_translate_html('about.concierge.cta_secondary'); ?>
-        </a>
+      <div class="about-concierge__support">
+        <?php if (!empty($concierge_car_asset_url)) : ?>
+          <figure class="about-concierge__visual">
+            <img src="<?php echo esc_url($concierge_car_asset_url); ?>" alt="" role="presentation" loading="lazy" width="360" height="220" />
+          </figure>
+        <?php endif; ?>
+        <div class="about-concierge__cta">
+          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact'))); ?>">
+            <?php echo svic_translate_html('about.concierge.cta_primary'); ?>
+          </a>
+          <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/shop'))); ?>">
+            <?php echo svic_translate_html('about.concierge.cta_secondary'); ?>
+          </a>
+        </div>
       </div>
     </div>
   </section>

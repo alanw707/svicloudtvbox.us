@@ -1,0 +1,31 @@
+<svg width="360" height="220" viewBox="0 0 360 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="car_body" x1="56" y1="48" x2="312" y2="166" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4CE0FF"/>
+      <stop offset="0.5" stop-color="#36A7FF"/>
+      <stop offset="1" stop-color="#2454FF"/>
+    </linearGradient>
+    <linearGradient id="car_cabin" x1="128" y1="32" x2="252" y2="134" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9FF8FF"/>
+      <stop offset="1" stop-color="#5AB9FF"/>
+    </linearGradient>
+    <linearGradient id="wheel_inner" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#E9F4FF"/>
+      <stop offset="1" stop-color="#7CB9FF"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="180" cy="192" rx="128" ry="20" fill="url(#wheel_inner)" fill-opacity="0.2"/>
+  <path d="M68 144C68 118.386 88.386 98 114 98H250C268.225 98 284.117 110.091 288.071 127.875L296 164H76L68 144Z" fill="url(#car_body)"/>
+  <path d="M126 62C126 53.1634 133.163 46 142 46H220C227.732 46 234 52.268 234 60V92H126V62Z" fill="url(#car_cabin)"/>
+  <path d="M126 92H234C249.673 92 264 102.672 268 118H94C98.7605 102.523 111.955 92 126 92Z" fill="#0F2B5E" fill-opacity="0.65"/>
+  <circle cx="124" cy="164" r="28" fill="#0D1F45"/>
+  <circle cx="124" cy="164" r="16" fill="#182F63"/>
+  <circle cx="124" cy="164" r="8" fill="url(#wheel_inner)"/>
+  <circle cx="248" cy="164" r="28" fill="#0D1F45"/>
+  <circle cx="248" cy="164" r="16" fill="#182F63"/>
+  <circle cx="248" cy="164" r="8" fill="url(#wheel_inner)"/>
+  <path d="M90 124H108C117.389 124 125 131.611 125 141V144H96C93.7909 144 92 142.209 92 140V128C92 125.791 93.7909 124 96 124Z" fill="#64E9FF" fill-opacity="0.85"/>
+  <path d="M248 124H272C279.732 124 286 130.268 286 138V144H248V124Z" fill="#64E9FF" fill-opacity="0.65"/>
+  <path d="M198 70H220V88H198C194.686 88 192 85.3137 192 82C192 78.6863 194.686 76 198 76V70Z" fill="#0F2B5E" fill-opacity="0.4"/>
+  <path d="M154 70H176V88H154C150.686 88 148 85.3137 148 82C148 78.6863 150.686 76 154 76V70Z" fill="#0F2B5E" fill-opacity="0.4"/>
+</svg>

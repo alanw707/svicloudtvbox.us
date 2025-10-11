@@ -32,4 +32,8 @@
   .about-stat {
     text-align: left;
   }
+
+  .about-concierge__support {
+    padding: clamp(1.5rem, 6vw, 2.25rem);
+  }
 }
