@@ -14,11 +14,12 @@
 
 @media (max-width: 600px) {
   .compare-hero {
-    width: auto;
-    margin-left: calc(-1 * clamp(16px, 5vw, 22px));
-    margin-right: calc(-1 * clamp(16px, 5vw, 22px));
-    padding-left: clamp(18px, 5vw, 24px);
-    padding-right: clamp(18px, 5vw, 24px);
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: calc(clamp(26px, 10vw, 48px) + env(safe-area-inset-top, 0px));
+    padding-left: calc(clamp(16px, 5vw, 22px) + env(safe-area-inset-left, 0px));
+    padding-right: calc(clamp(16px, 5vw, 22px) + env(safe-area-inset-right, 0px));
   }
 }
 
@@ -60,6 +61,7 @@
   background: linear-gradient(160deg, rgba(8, 22, 48, 0.86), rgba(6, 18, 40, 0.92));
   box-shadow: 0 28px 64px rgba(4, 12, 30, 0.58);
   backdrop-filter: var(--glass-blur-soft);
+  overflow: hidden; /* Prevent rotated media overflow on small screens */
 }
 
 .compare-hero__body {
@@ -267,17 +269,6 @@
   transform: translateY(-2px) rotate(3deg) scale(1.02);
 }
 
-@media (max-width: 599px) {
-  .compare-hero__devices {
-    gap: 10px;
-  }
-
-  .compare-hero__device {
-    width: clamp(180px, 56vw, 280px);
-  }
-}
-
-
 .compare-hero__background {
   position: absolute;
   top: 0;
@@ -309,14 +300,25 @@
   opacity: 0.42;
 }
 
+
 .compare-hero__photo--primary {
   background-image:
     linear-gradient(160deg, rgba(5, 15, 34, 0.58), rgba(5, 15, 34, 0.82)),
     url('../images/svicloud-10p-plus-lifestyle-2.png');
+  background-image:
+    linear-gradient(160deg, rgba(5, 15, 34, 0.58), rgba(5, 15, 34, 0.82)),
+    image-set(
+      url('../images/svicloud-10p-plus-lifestyle-2.webp') type('image/webp'),
+      url('../images/svicloud-10p-plus-lifestyle-2.png') type('image/png')
+    );
 }
 
 .compare-hero__photo--secondary {
   background-image: url('../images/svicloud-10s-lifestyle-1.png');
+  background-image: image-set(
+    url('../images/svicloud-10s-lifestyle-1.webp') type('image/webp'),
+    url('../images/svicloud-10s-lifestyle-1.png') type('image/png')
+  );
   mix-blend-mode: screen;
   opacity: 0.2;
   transform: scale(1.08) translate(4%, -4%);
@@ -406,7 +408,7 @@
 
 @media (max-width: 599px) {
   .compare-hero {
-    padding: clamp(26px, 10vw, 48px) clamp(var(--space-sm), 7vw, var(--space-lg));
+    padding-bottom: calc(clamp(26px, 10vw, 48px) + env(safe-area-inset-bottom, 0px));
   }
 
   .compare-hero__metrics {
@@ -420,5 +422,29 @@
   .compare-hero__photo {
     inset: -22% -28% -18%;
     opacity: 0.34;
+  }
+
+  /* Stack devices vertically and fit within viewport */
+  .compare-hero__devices {
+    grid-auto-flow: row;
+    justify-content: center;
+    justify-items: center;
+    gap: 6px;
+  }
+
+  .compare-hero__device--10p,
+  .compare-hero__device--10s {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  .compare-hero__device {
+    width: clamp(160px, 88vw, 320px);
+  }
+
+  /* Safer wrapping for headline on small screens */
+  .compare-hero__title {
+    font-size: clamp(1.9rem, 7vw, 2.3rem);
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 }

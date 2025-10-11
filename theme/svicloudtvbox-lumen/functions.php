@@ -81,6 +81,107 @@ if (!function_exists('svic_output_hreflang_links')) {
 
 add_action('wp_head', 'svic_output_hreflang_links', 5);
 
+// Output a language-aware canonical URL for each page.
+// This ensures the Chinese (/zh) pages self-canonicalize instead of pointing
+// to the English variant, preventing cross-language canonical conflicts.
+if (!function_exists('svic_output_canonical_link')) {
+    function svic_output_canonical_link(): void
+    {
+        if (is_admin()) {
+            return;
+        }
+
+        // If an SEO plugin is active (Yoast or RankMath), defer canonical
+        // rendering to the plugin to avoid duplicate tags.
+        if (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION')) {
+            return;
+        }
+
+        if (!function_exists('svic_current_base_url') || !function_exists('svic_url_with_lang')) {
+            return;
+        }
+
+        $base = svic_current_base_url();
+        if (!is_string($base) || $base === '') {
+            return;
+        }
+
+        // Localize to current language; strip query/fragment for canonical.
+        $localized = svic_url_with_lang($base);
+        $parts     = wp_parse_url($localized);
+        if (!is_array($parts)) {
+            return;
+        }
+
+        $path = isset($parts['path']) && is_string($parts['path']) ? $parts['path'] : '/';
+        $canonical = home_url($path);
+
+        // Normalize trailing slash to match WordPress behavior.
+        if ($canonical !== home_url('/') && substr($canonical, -1) !== '/') {
+            $canonical .= '/';
+        }
+
+        echo '<link rel="canonical" href="' . esc_url($canonical) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+}
+
+// Remove WordPress' default rel_canonical to avoid conflicts with our
+// language-aware canonical.
+remove_action('wp_head', 'rel_canonical');
+add_action('wp_head', 'svic_output_canonical_link', 6);
+
+// Adjust canonical via popular SEO plugins if active so zh pages canonicalize
+// to their /zh/... variants instead of the English version.
+// Yoast SEO
+add_filter('wpseo_canonical', function ($url) {
+    if (is_admin()) {
+        return $url;
+    }
+    if (!function_exists('svic_current_base_url') || !function_exists('svic_url_with_lang')) {
+        return $url;
+    }
+    $base = svic_current_base_url();
+    if (!is_string($base) || $base === '') {
+        return $url;
+    }
+    $localized = svic_url_with_lang($base);
+    $parts     = wp_parse_url($localized);
+    if (!is_array($parts)) {
+        return $url;
+    }
+    $path = isset($parts['path']) && is_string($parts['path']) ? $parts['path'] : '/';
+    $canonical = home_url($path);
+    if ($canonical !== home_url('/') && substr($canonical, -1) !== '/') {
+        $canonical .= '/';
+    }
+    return $canonical;
+});
+
+// RankMath SEO
+add_filter('rank_math/frontend/canonical', function ($url) {
+    if (is_admin()) {
+        return $url;
+    }
+    if (!function_exists('svic_current_base_url') || !function_exists('svic_url_with_lang')) {
+        return $url;
+    }
+    $base = svic_current_base_url();
+    if (!is_string($base) || $base === '') {
+        return $url;
+    }
+    $localized = svic_url_with_lang($base);
+    $parts     = wp_parse_url($localized);
+    if (!is_array($parts)) {
+        return $url;
+    }
+    $path = isset($parts['path']) && is_string($parts['path']) ? $parts['path'] : '/';
+    $canonical = home_url($path);
+    if ($canonical !== home_url('/') && substr($canonical, -1) !== '/') {
+        $canonical .= '/';
+    }
+    return $canonical;
+}, 10, 1);
+
 add_filter('body_class', function ($classes) {
     if (!is_array($classes)) {
         $classes = [];
@@ -361,6 +462,24 @@ add_filter('nav_menu_link_attributes', function ($atts, $item, $args, $depth) {
 
     return $atts;
 }, 10, 4);
+
+// Ensure robots.txt advertises the WordPress sitemap
+add_filter('robots_txt', function ($output, $public) {
+    // Respect site visibility setting; only append when public
+    if ((int) get_option('blog_public', 1) !== 1) {
+        return $output;
+    }
+
+    $sitemapUrl = home_url('/wp-sitemap.xml');
+    $line = 'Sitemap: ' . esc_url_raw($sitemapUrl);
+
+    // Avoid duplicate lines if a plugin already added it
+    if (stripos($output, 'Sitemap:') === false) {
+        $output = rtrim((string) $output) . "\n" . $line . "\n";
+    }
+
+    return $output;
+}, 10, 2);
 
 // Theme setup
 add_action('after_setup_theme', function () {

@@ -31,10 +31,13 @@ test.describe('Compare hero experience (zh)', () => {
       .evaluate((el) => getComputedStyle(el).color);
     expect(primaryCtaColor).toBe('rgb(4, 19, 39)');
 
+    const viewport = page.viewportSize();
     const wordBreak = await page
       .locator('.compare-hero__title')
       .evaluate((el) => getComputedStyle(el).wordBreak);
-    expect(wordBreak).toBe('keep-all');
+    if (viewport && viewport.width >= 960) {
+      expect(wordBreak).toBe('keep-all');
+    }
   });
 
   test('mobile hero maintains coverage and tap targets', async ({ page }) => {
@@ -58,5 +61,13 @@ test.describe('Compare hero experience (zh)', () => {
       .first()
       .evaluate((el) => el.getBoundingClientRect().width);
     expect(buttonWidth).toBeGreaterThan(140);
+
+    // Ensure no horizontal overflow
+    const overflow = await page.evaluate(() => {
+      const vw = window.innerWidth;
+      const sw = document.documentElement.scrollWidth;
+      return { vw, sw };
+    });
+    expect(overflow.sw).toBeLessThanOrEqual(overflow.vw + 1);
   });
 });
