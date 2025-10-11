@@ -160,7 +160,7 @@
         const criticalImages = [
             assetFromTheme('assets/images/svicloud-hero-product.png'),
             assetFromTheme('assets/images/svicloud-10p-plus.png'),
-            assetFromTheme('assets/images/svicloud-10s.png')
+            assetFromTheme('assets/images/svicloud-tvbox-10s.jpg')
         ];
 
         criticalImages.forEach((src) => {

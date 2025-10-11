@@ -109,6 +109,27 @@ $hero_metric_keys = [
           </div>
         </div>
 
+        <div class="compare-hero__devices" aria-hidden="true">
+          <img
+            class="compare-hero__device compare-hero__device--10p"
+            src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/svicloud-10p-plus.png'); ?>"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            width="800"
+            height="600"
+          />
+          <img
+            class="compare-hero__device compare-hero__device--10s"
+            src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/svicloud-tvbox-10s.jpg'); ?>"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            width="800"
+            height="600"
+          />
+        </div>
+
         <?php if (!empty($hero_highlights)) : ?>
           <ul class="compare-hero__highlights" aria-label="<?php echo esc_attr__('Why customers choose SVICLOUD', 'svicloudtvbox-lumen'); ?>">
             <?php foreach ($hero_highlights as $highlight) : ?>
@@ -138,6 +159,17 @@ $hero_metric_keys = [
   <section class="compare-products" aria-label="<?php echo esc_attr__('Product spotlight cards', 'svicloudtvbox-lumen'); ?>">
     <div class="compare-products__grid">
       <article class="compare-product-card compare-product-card--highlight">
+        <figure class="compare-product-card__media">
+          <?php
+          // Prefer WooCommerce primary image; fallback to theme product asset
+          $img_10p = svic_product_primary_image($hero_product_10p, 'large');
+          if ($img_10p) {
+              echo $img_10p; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+          } else {
+              echo '<img src="' . esc_url(get_template_directory_uri() . '/assets/images/svicloud-10p-plus.png') . '" alt="' . esc_attr__('SVICLOUD 10P+', 'svicloudtvbox-lumen') . '" loading="lazy" decoding="async" />';
+          }
+          ?>
+        </figure>
         <div class="compare-product-card__header">
           <h2 class="compare-product-card__title"><?php echo svic_translate_html('shop.cards.10p.title'); ?></h2>
           <p class="compare-product-card__price"><?php echo esc_html($price_10p_text); ?></p>
@@ -167,6 +199,9 @@ $hero_metric_keys = [
       </article>
 
       <article class="compare-product-card">
+        <figure class="compare-product-card__media">
+          <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/svicloud-tvbox-10s.jpg'); ?>" alt="<?php echo esc_attr__('SVICLOUD 10S', 'svicloudtvbox-lumen'); ?>" loading="lazy" decoding="async" />
+        </figure>
         <div class="compare-product-card__header">
           <h2 class="compare-product-card__title"><?php echo svic_translate_html('shop.cards.10s.title'); ?></h2>
           <p class="compare-product-card__price"><?php echo esc_html($price_10s_text); ?></p>
