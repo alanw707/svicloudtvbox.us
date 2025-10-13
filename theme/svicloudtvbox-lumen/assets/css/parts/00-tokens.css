@@ -130,6 +130,8 @@ html {
   font-size: 16px;
   margin: 0;
   background: var(--lumen-page-background);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 

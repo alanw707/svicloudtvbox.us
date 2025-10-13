@@ -64,9 +64,11 @@
 }
 
 .lumen-order-tracking {
-  width: min(calc(100% - clamp(2.2rem, 8vw, 3.25rem)), 700px);
-  margin: clamp(3.25rem, 6vw, 4.75rem) auto clamp(3.25rem, 5vw, 4.5rem);
-  padding: clamp(2.45rem, 4.5vw, 3.35rem) clamp(1.85rem, 5vw, 3.35rem);
+  max-width: 700px;
+  margin-block: clamp(3.25rem, 6vw, 4.75rem) clamp(3.25rem, 5vw, 4.5rem);
+  margin-inline: clamp(1rem, 6vw, 2.4rem);
+  padding-block: clamp(2.45rem, 4.5vw, 3.35rem);
+  padding-inline: clamp(1.35rem, 6vw, 2.9rem);
   background: linear-gradient(135deg, rgba(34, 67, 255, 0.16) 0%, rgba(13, 22, 48, 0.7) 100%);
   border-radius: 24px;
   color: var(--lumen-text-secondary);
@@ -74,6 +76,23 @@
   display: grid;
   gap: clamp(2rem, 3.5vw, 2.85rem);
   box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .lumen-order-tracking {
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .lumen-order-tracking__heading {
+    text-align: center;
+    justify-items: center;
+  }
+
+  .lumen-order-tracking__badge {
+    margin-inline: auto;
+  }
 }
 
 
@@ -164,8 +183,8 @@
 .lumen-order-tracking__control {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  padding: 0.9rem 1.2rem;
+  gap: clamp(0.6rem, 3vw, 0.85rem);
+  padding: clamp(0.82rem, 3vw, 1rem) clamp(1.1rem, 4vw, 1.6rem);
   border-radius: 16px;
   border: 1.5px solid rgba(94, 128, 255, 0.35);
   background: rgba(11, 24, 56, 0.78);
@@ -202,8 +221,8 @@
 }
 
 .lumen-order-tracking__icon {
-  width: 2.35rem;
-  height: 2.35rem;
+  width: clamp(2rem, 6vw, 2.35rem);
+  height: clamp(2rem, 6vw, 2.35rem);
   display: grid;
   place-items: center;
   border-radius: 12px;
@@ -217,6 +236,8 @@
   content: '';
   width: 1.1rem;
   height: 1.1rem;
+  display: block;
+  margin: auto;
   background: currentColor;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -245,6 +266,8 @@
   font-size: 1rem;
   line-height: 1.4;
   padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .lumen-order-tracking__input::placeholder {
@@ -424,7 +447,7 @@
   box-shadow: 0 16px 32px rgba(6, 18, 44, 0.45);
   padding: 0.65rem 1.6rem;
   border-radius: 999px;
-  min-width: clamp(200px, 42%, 280px);
+  min-width: clamp(190px, 58%, 260px);
   text-align: center;
 }
 
