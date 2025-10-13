@@ -22,6 +22,7 @@
         initPerformanceOptimizations();
         initLumenNavigation();
         initProductHeroGallery();
+        initStripeSavedCardPills();
     }
 
     function getStickyScrollOffset() {
@@ -328,6 +329,101 @@
         }
     }
 
+    function initStripeSavedCardPills() {
+        const $select = $('#stripe_cc_saved_method_key');
+        if (!$select.length) {
+            return;
+        }
+
+        const $container = $select.closest('.wc-stripe-saved-methods-container');
+        if (!$container.length) {
+            return;
+        }
+
+        const options = $select.find('option');
+        if (!options.length) {
+            $container.removeClass('wcs-hidden').removeAttr('aria-hidden');
+            $container.next('.wcs-saved-card-list').remove();
+            return;
+        }
+
+        if (typeof $select.select2 === 'function' && $select.hasClass('select2-hidden-accessible')) {
+            try {
+                $select.select2('destroy');
+            } catch (err) {
+                // Ignore if select2 not initialised yet
+            }
+        }
+
+        const $existingList = $container.next('.wcs-saved-card-list');
+        if ($existingList.length) {
+            $existingList.remove();
+        }
+
+        const $list = $('<div class="wcs-saved-card-list" role="group" aria-label="Saved cards"></div>');
+
+        options.each(function() {
+            const $option = $(this);
+            const value = ($option.val() || '').trim();
+            const text = ($option.text() || '').trim();
+
+            if (!text || !value || value === 'add_new' || value === 'new') {
+                return;
+            }
+
+            const brandClass = ($option.attr('class') || '').split(/\s+/).find(cls => cls && cls !== 'wc-stripe-saved-method') || '';
+            const [brandWord, ...restWords] = text.split(' ');
+            const labelText = restWords.join(' ') || '';
+            const $pill = $('<button type="button" class="wcs-saved-card-pill"></button>');
+            $pill.attr({
+                'data-method-value': value,
+                'aria-pressed': $option.is(':selected') ? 'true' : 'false'
+            });
+            $pill.data('method-value', value);
+            if ($option.is(':selected')) {
+                $pill.addClass('is-selected');
+            }
+
+            const $brand = $('<span class="wcs-saved-card-pill__brand"></span>').text(brandWord || 'Card');
+            if (brandClass) {
+                $brand.addClass(`brand-${brandClass}`);
+            }
+
+            const $label = $('<span class="wcs-saved-card-pill__label"></span>').text(labelText);
+            $pill.append($brand).append($label);
+
+            $pill.on('click', function(event) {
+                event.preventDefault();
+                if ($pill.hasClass('is-selected')) {
+                    return;
+                }
+                $select.val(value).trigger('change');
+                $list.find('.wcs-saved-card-pill').removeClass('is-selected').attr('aria-pressed', 'false');
+                $pill.addClass('is-selected').attr('aria-pressed', 'true');
+            });
+
+            $list.append($pill);
+        });
+
+        if (!$list.children().length) {
+            $container.removeClass('wcs-hidden').removeAttr('aria-hidden');
+            return;
+        }
+
+        $container.addClass('wcs-hidden').attr('aria-hidden', 'true').after($list);
+
+        $select.off('change.wcsSavedCardSync').on('change.wcsSavedCardSync', function() {
+            const value = String($(this).val() || '');
+            $list.find('.wcs-saved-card-pill').each(function() {
+                const $pill = $(this);
+                const isActive = $pill.data('method-value') === value;
+                $pill.toggleClass('is-selected', isActive).attr('aria-pressed', isActive ? 'true' : 'false');
+            });
+        });
+    }
+
+    window.svicInitSavedCardPills = initStripeSavedCardPills;
+
     /**
      * Product grid layout toggle
      */
@@ -396,13 +492,23 @@
         if (!(window.svicTheme && svicTheme.isWoo)) return;
 
         const $body = $(document.body);
-        const defaultLabel = (svicTheme.i18n && svicTheme.i18n.addingToCart) ? svicTheme.i18n.addingToCart : 'Adding…';
         const raf = window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : function(callback) {
             return window.setTimeout(callback, 16);
         };
+        const defaultLabel = (svicTheme.i18n && svicTheme.i18n.addingToCart) ? svicTheme.i18n.addingToCart : 'Adding…';
         let cartFeedbackTimer = null;
         let $cartFeedback = null;
         let hasShownInitialNotice = false;
+
+        const scheduleSavedCardRefresh = () => {
+            raf(function() {
+                initStripeSavedCardPills();
+            });
+        };
+
+        scheduleSavedCardRefresh();
+
+        $body.on('updated_checkout wc-stripe-checkout-order-pay-init wc-stripe-display-tokenized-methods payment_method_selected', scheduleSavedCardRefresh);
 
         function getLoadingButtons() {
             return $('.add_to_cart_button.is-loading, .single_add_to_cart_button.is-loading');

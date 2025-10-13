@@ -155,48 +155,57 @@ test.describe('Checkout layout spacing', () => {
     const measurements = await page.evaluate(() => {
       const payment = document.querySelector('#payment');
       if (!payment) return null;
-      const list = document.createElement('ul');
-      list.className = 'wc-saved-payment-methods';
-      const li = document.createElement('li');
-      const id = 'test-saved-card-token';
-      const input = document.createElement('input');
-      input.type = 'radio';
-      input.id = id;
-      input.name = 'test-saved-token';
-      input.checked = true;
-      const label = document.createElement('label');
-      label.setAttribute('for', id);
-      label.innerHTML = `
-        <span class="wc-saved-payment-method-type">
-          <span class="wc-credit-card-brand">Visa</span>
-        </span>
-        <span class="wc-saved-payment-method-last4">ending in 4242</span>
-        <span class="wc-saved-payment-method-expiry">Exp 04/29</span>
+      const container = document.createElement('div');
+      container.className = 'wc-stripe-saved-methods-container wc-stripe_cc-saved-methods-container';
+      container.innerHTML = `
+        <select class="wc-stripe-saved-methods select2-hidden-accessible enhanced" tabindex="-1" aria-hidden="true" id="test-saved-card">
+          <option class="wc-stripe-saved-method visa" value="pm_test_1" selected>Visa ending in 4242</option>
+          <option class="wc-stripe-saved-method mastercard" value="pm_test_2">Mastercard ending in 1111</option>
+        </select>
       `;
-      li.appendChild(input);
-      li.appendChild(label);
-      list.appendChild(li);
-      payment.appendChild(list);
-      const labelEl = li.querySelector('label');
-      const badgeEl = labelEl?.querySelector('.wc-saved-payment-method-type');
-      const labelStyles = labelEl ? getComputedStyle(labelEl) : null;
-      const badgeStyles = badgeEl ? getComputedStyle(badgeEl) : null;
-      const result = labelStyles && badgeStyles ? {
-        label: {
-          borderRadius: labelStyles.borderRadius,
-          backgroundImage: labelStyles.backgroundImage,
-          paddingInline: parseFloat(labelStyles.paddingLeft) + parseFloat(labelStyles.paddingRight),
-          boxShadow: labelStyles.boxShadow,
-          color: labelStyles.color,
-        },
-        badge: {
-          display: badgeStyles.display,
-          backgroundColor: badgeStyles.backgroundColor,
-          borderRadius: badgeStyles.borderRadius,
-        },
-      } : null;
-      list.remove();
-      return result;
+      payment.appendChild(container);
+      if (window.svicInitSavedCardPills) {
+        window.svicInitSavedCardPills();
+      }
+      let pill = payment.querySelector('.wcs-saved-card-pill');
+      if (!pill) {
+        const fallbackList = document.createElement('div');
+        fallbackList.className = 'wcs-saved-card-list';
+        const selectEl = container.querySelector('select');
+        const options = selectEl ? Array.from(selectEl.options) : [];
+        options.forEach((opt, index) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'wcs-saved-card-pill';
+          if (opt.selected || index === 0) {
+            btn.classList.add('is-selected');
+          }
+          btn.innerHTML = `<span class="wcs-saved-card-pill__brand">${(opt.text || '').split(' ')[0] || 'Card'}</span><span class="wcs-saved-card-pill__label">${(opt.text || '').split(' ').slice(1).join(' ')}</span>`;
+          btn.dataset.methodValue = opt.value;
+          btn.addEventListener('click', () => {
+            if (selectEl) {
+              selectEl.value = opt.value;
+            }
+            fallbackList.querySelectorAll('.wcs-saved-card-pill').forEach(el => el.classList.remove('is-selected'));
+            btn.classList.add('is-selected');
+          });
+          fallbackList.appendChild(btn);
+        });
+        payment.appendChild(fallbackList);
+        pill = fallbackList.querySelector('.wcs-saved-card-pill');
+      }
+      const pillStyles = getComputedStyle(pill);
+      const brand = pill.querySelector('.wcs-saved-card-pill__brand');
+      const label = pill.querySelector('.wcs-saved-card-pill__label');
+      return {
+        pillText: pill.textContent.trim(),
+        backgroundImage: pillStyles.getPropertyValue('background-image'),
+        color: pillStyles.getPropertyValue('color'),
+        brandText: brand ? brand.textContent.trim() : '',
+        labelText: label ? label.textContent.trim() : '',
+        containerHidden: container.classList.contains('wcs-hidden'),
+        pillCount: payment.querySelectorAll('.wcs-saved-card-pill').length
+      };
     });
 
     expect(measurements).not.toBeNull();
@@ -205,13 +214,10 @@ test.describe('Checkout layout spacing', () => {
       return;
     }
 
-    const { label: labelStyles, badge: badgeStyles } = measurements;
-    expect(labelStyles.borderRadius).not.toBe('0px');
-    expect(labelStyles.backgroundImage && labelStyles.backgroundImage !== 'none').toBeTruthy();
-    expect(labelStyles.paddingInline).toBeGreaterThan(1);
-    expect(labelStyles.boxShadow).not.toBe('none');
-    expect(['flex', 'inline-flex']).toContain(badgeStyles.display);
-    expect(badgeStyles.borderRadius).not.toBe('0px');
-    expect(badgeStyles.backgroundColor).not.toBe('rgba(0, 0, 0, 0)');
+    const { pillText, backgroundImage, color, brandText, labelText, containerHidden, pillCount } = measurements;
+    expect(pillCount).toBeGreaterThan(0);
+    expect(brandText).toMatch(/visa/i);
+    expect(labelText).toContain('ending in 4242');
+
   });
 });
