@@ -28,6 +28,17 @@
     gap: clamp(0.75rem, 3vw, 1rem);
   }
 
+  #payment ul.payment_methods > li {
+    width: 100%;
+  }
+
+  #payment ul.payment_methods > li > label {
+    gap: clamp(0.65rem, 2.6vw, 0.95rem);
+    padding: clamp(0.7rem, 2.8vw, 0.95rem) clamp(1.35rem, 4.4vw, 1.75rem);
+    padding-left: clamp(2.5rem, 5vw, 3rem);
+    padding-right: clamp(1.9rem, 4.8vw, 2.4rem);
+  }
+
   .place-order {
     padding: clamp(1rem, 4vw, 1.25rem);
   }
@@ -62,10 +73,14 @@
     box-shadow: none;
   }
 
-  #payment ul.payment_methods > li label[for^="payment_method_"] {
-    padding: clamp(0.6rem, 3vw, 0.85rem) clamp(1.6rem, 6vw, 2.2rem) clamp(0.6rem, 3vw, 0.85rem) clamp(2.9rem, 5.4vw, 3.4rem);
-    min-height: clamp(2.8rem, 8vw, 3.1rem);
-    border-radius: clamp(18px, 6vw, 28px);
+  #payment ul.payment_methods > li > label {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(0.5rem, 4vw, 0.8rem);
+    padding: clamp(0.6rem, 3.4vw, 0.9rem) clamp(1.1rem, 6vw, 1.6rem);
+    padding-left: clamp(2.35rem, 6.2vw, 2.85rem);
+    padding-right: clamp(1.7rem, 6vw, 2.3rem);
+    min-height: auto;
   }
 
   #payment ul.payment_methods > li .payment_box {
@@ -127,6 +142,13 @@
 
   #payment .wc-stripe-save-source label {
     gap: 0.45rem;
+  }
+
+  #payment .wc-stripe-card-icons-container {
+    justify-content: flex-start;
+    max-width: none;
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .lumen-checkout-summary__order th,
