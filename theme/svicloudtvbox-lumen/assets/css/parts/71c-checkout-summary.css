@@ -1,0 +1,183 @@
+/* ==========================================
+   CHECKOUT ORDER SUMMARY
+   ========================================== */
+
+.lumen-checkout__summary {
+  position: sticky;
+  top: clamp(1rem, 3vw, 2.25rem);
+}
+
+body.admin-bar .lumen-checkout__summary {
+  top: calc(clamp(1rem, 3vw, 2.25rem) + 48px);
+}
+
+@media (max-width: 782px) {
+  body.admin-bar .lumen-checkout__summary {
+    top: calc(clamp(1rem, 3vw, 2.25rem) + 72px);
+  }
+}
+
+.lumen-checkout-summary__card {
+  border-radius: var(--radius-2xl);
+  border: 1px solid rgba(164, 237, 232, 0.34);
+  background: linear-gradient(150deg, rgba(24, 54, 102, 0.75), rgba(8, 22, 48, 0.82));
+  box-shadow: 0 30px 74px rgba(4, 14, 36, 0.58);
+  padding: clamp(1.7rem, 3.4vw, 2.4rem);
+  display: grid;
+  gap: 1.45rem;
+}
+
+.lumen-checkout-summary__title {
+  margin: 0;
+  font-size: 1.28rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(244, 250, 255, 0.92);
+}
+
+.lumen-checkout-summary__intro {
+  margin: 0;
+  font-size: 1.02rem;
+  color: rgba(235, 244, 255, 0.87);
+  line-height: 1.65;
+}
+
+.lumen-checkout-summary__benefits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.lumen-checkout-summary__benefit {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.92rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(244, 252, 255, 0.82);
+}
+
+.lumen-checkout-summary__benefit::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(94, 230, 208, 0.9);
+  box-shadow: 0 0 16px rgba(94, 230, 208, 0.65);
+}
+
+.lumen-checkout-summary__reassurance {
+  margin: 0;
+  font-size: 0.98rem;
+  color: rgba(236, 246, 255, 0.84);
+  line-height: 1.65;
+}
+
+.lumen-checkout-summary__heading {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(244, 250, 255, 0.9);
+}
+
+.lumen-checkout-summary__order {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.lumen-checkout-summary__order .place-order {
+  position: sticky;
+  bottom: clamp(1rem, 5vw, 1.65rem);
+  margin-top: 1rem;
+  padding: clamp(1rem, 2.8vw, 1.4rem);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(150deg, rgba(10, 30, 62, 0.92), rgba(4, 14, 32, 0.94));
+  box-shadow: 0 28px 64px rgba(2, 10, 30, 0.55);
+  display: grid;
+  gap: 0.9rem;
+  z-index: 1;
+}
+
+.lumen-checkout-summary__order .place-order .woocommerce-terms-and-conditions-wrapper {
+  order: 2;
+}
+
+.lumen-checkout-summary__order .place-order .button {
+  width: 100%;
+  min-height: 60px;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  border: 1px solid rgba(126, 246, 227, 0.45);
+  background: linear-gradient(135deg, rgba(130, 246, 226, 0.95), rgba(72, 206, 255, 0.94));
+  color: #021629;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 28px 62px rgba(94, 230, 208, 0.32);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.lumen-checkout-summary__order .place-order .button:hover,
+.lumen-checkout-summary__order .place-order .button:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(164, 248, 236, 0.65);
+  box-shadow: 0 32px 70px rgba(94, 230, 208, 0.4);
+}
+
+.lumen-checkout-summary__order .place-order .button:focus-visible {
+  outline: 3px solid rgba(126, 246, 227, 0.7);
+  outline-offset: 3px;
+}
+
+.lumen-checkout-summary__order table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(24, 48, 88, 0.68);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(164, 237, 232, 0.2);
+}
+
+.lumen-checkout-summary__order thead tr {
+  background: rgba(10, 30, 62, 0.85);
+}
+
+.lumen-checkout-summary__order th,
+.lumen-checkout-summary__order td {
+  padding: 0.95rem 1.1rem;
+  border-bottom: 1px solid rgba(164, 237, 232, 0.2);
+  color: rgba(244, 250, 255, 0.92);
+  font-size: 0.96rem;
+}
+
+.lumen-checkout-summary__order tbody td {
+  font-weight: 600;
+  color: rgba(226, 240, 255, 0.9);
+}
+
+.lumen-checkout-summary__order tfoot th {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  color: rgba(199, 224, 250, 0.65);
+}
+
+.lumen-checkout-summary__order tfoot td {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: rgba(126, 246, 227, 0.95);
+}
+
+.lumen-checkout-summary__order tr:last-child th,
+.lumen-checkout-summary__order tr:last-child td {
+  border-bottom: none;
+}
+
+.lumen-checkout-summary__order .woocommerce-shipping-totals td,
+.lumen-checkout-summary__order .woocommerce-shipping-totals th {
+  vertical-align: top;
+}

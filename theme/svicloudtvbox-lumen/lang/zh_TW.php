@@ -193,7 +193,7 @@ return [
             'title'         => '訂單摘要',
             'intro'         => '下單前請確認商品、金額與付款方式。',
             'reassurance'   => 'PayPal、Visa、Mastercard、American Express SSL 加密安全付款。',
-            'order_heading' => '檢視與付款',
+            'order_heading' => '檢視訂單',
         ],
         'benefits' => [
             'shipping'  => '48 小時美國出貨',
@@ -203,6 +203,23 @@ return [
         'assurance' => [
             'title' => '需要協助嗎？',
             'copy'  => '客服會寄送物流資訊、安裝指南與中英雙語即時支援。',
+        ],
+        'payment' => [
+            'title' => '付款與確認',
+            'intro' => '選擇已儲存的信用卡或新增付款方式，然後提交訂單完成安全結帳。',
+            'cards_label' => '支援的信用卡：Visa、Mastercard、American Express、Discover。',
+        ],
+        'coupon' => [
+            'toggle_lead' => '有折扣碼嗎？',
+            'toggle_cta'  => '點此輸入',
+            'toggle_aria' => '輸入折扣碼',
+            'intro'       => '輸入折扣碼即可於結帳前套用優惠。',
+            'label'       => '折扣碼',
+            'placeholder' => '輸入折扣碼',
+            'apply'       => '套用',
+            'hint'        => '折扣碼需區分大小寫，沒有折扣碼也能完成結帳。',
+            'applied_label' => '已套用折扣碼',
+            'remove'        => '移除',
         ],
     ],
 

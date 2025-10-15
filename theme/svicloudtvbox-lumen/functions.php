@@ -730,6 +730,41 @@ add_action('wp_enqueue_scripts', function () {
     ]);
 });
 
+// Provide accessible text for checkout payment method icons.
+add_filter('woocommerce_gateway_icon', function ($icon_html, $gateway_id) {
+    if (strpos($icon_html, 'wc-stripe-card-icons-container') === false) {
+        return $icon_html;
+    }
+
+    if (! preg_match_all('/alt="([^"]+)"/i', $icon_html, $matches)) {
+        return $icon_html;
+    }
+
+    $labels = array_unique(array_filter(array_map(static function ($label) {
+        $decoded = html_entity_decode($label, ENT_QUOTES, 'UTF-8');
+        $clean = wp_strip_all_tags($decoded);
+        return $clean !== '' ? $clean : null;
+    }, $matches[1])));
+
+    if (! $labels) {
+        return $icon_html;
+    }
+
+    $icon_html = preg_replace(
+        '/<img([^>]*?)alt="([^"]*)"([^>]*?)>/i',
+        '<img$1alt="$2"$3 aria-hidden="true" />',
+        $icon_html
+    );
+
+    $sr_text = sprintf(
+        /* translators: %s: comma-separated list of accepted payment card brands. */
+        __('Accepted cards: %s', 'svicloudtvbox-lumen'),
+        implode(', ', $labels)
+    );
+
+    return $icon_html . '<span class="screen-reader-text">' . esc_html($sr_text) . '</span>';
+}, 10, 2);
+
 // Ensure cart totals are calculated before rendering our custom checkout
 // template (especially when we replace the Checkout block content via
 // render_block below). Some environments defer calculation until late in the

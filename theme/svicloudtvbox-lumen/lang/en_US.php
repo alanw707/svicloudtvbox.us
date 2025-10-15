@@ -120,7 +120,7 @@ return [
             'title'         => 'Order summary',
             'intro'         => 'Review your items, totals, and payment method before placing your order.',
             'reassurance'   => 'SSL encrypted checkout with PayPal, Visa, Mastercard, and American Express.',
-            'order_heading' => 'Review & payment',
+            'order_heading' => 'Review your order',
         ],
         'benefits' => [
             'shipping'  => '48-hour U.S. shipping',
@@ -130,6 +130,23 @@ return [
         'assurance' => [
             'title' => 'Need a hand?',
             'copy'  => 'Our English & 中文 concierge will email tracking, setup tips, and live support once your order ships.',
+        ],
+        'payment' => [
+            'title' => 'Payment & confirmation',
+            'intro' => 'Choose a saved card or enter a new payment method, then place your order with secure checkout.',
+            'cards_label' => 'Accepted cards: Visa, Mastercard, American Express, and Discover.',
+        ],
+        'coupon' => [
+            'toggle_lead' => 'Have a promo code?',
+            'toggle_cta'  => 'Click to enter it',
+            'toggle_aria' => 'Enter your promo code',
+            'intro'       => 'Add your code to apply eligible savings before placing your order.',
+            'label'       => 'Promo code',
+            'placeholder' => 'Enter code',
+            'apply'       => 'Apply',
+            'hint'        => 'Codes are case-sensitive. You can still place your order without a code.',
+            'applied_label' => 'Applied code',
+            'remove'        => 'Remove',
         ],
     ],
 

@@ -15,6 +15,17 @@ test.describe('Checkout layout spacing', () => {
     await expect(firstName).toBeVisible();
 
     const panel = page.locator('.lumen-checkout__panel-inner').first();
+    await page.waitForFunction(() => {
+      const input = document.querySelector<HTMLInputElement>('#billing_first_name');
+      const panelEl = document.querySelector<HTMLElement>('.lumen-checkout__panel-inner');
+      if (!input || !panelEl) {
+        return false;
+      }
+      const inputRect = input.getBoundingClientRect();
+      const panelRect = panelEl.getBoundingClientRect();
+      return inputRect.height > 0 && inputRect.width > 0 && panelRect.width > 0;
+    });
+
     const inputBox = await firstName.boundingBox();
     const panelBox = await panel.boundingBox();
     expect(inputBox).toBeTruthy();
@@ -36,29 +47,81 @@ test.describe('Checkout layout spacing', () => {
 
     // Validate coupon form sizing
     const couponToggle = page.locator('.woocommerce-form-coupon-toggle a').first();
-    if (await couponToggle.count()) {
-      if (await couponToggle.isVisible()) {
-        await couponToggle.click();
-      } else {
-        await couponToggle.click({ force: true });
-      }
-      const couponInput = page.locator('form.checkout_coupon input[name="coupon_code"]');
-      await expect(couponInput).toBeVisible();
-      const couponPanel = page.locator('form.checkout_coupon');
-      const couponInputBox = await couponInput.boundingBox();
-      const couponPanelBox = await couponPanel.boundingBox();
-      if (!couponInputBox || !couponPanelBox) {
-        test.fail(true, 'Could not compute coupon form bounds.');
-        return;
-      }
-      const couponLeftInset = couponInputBox.x - couponPanelBox.x;
-      const couponRightInset = couponPanelBox.x + couponPanelBox.width - (couponInputBox.x + couponInputBox.width);
-      expect(couponInputBox.height).toBeLessThan(64);
-      expect(couponLeftInset).toBeGreaterThan(18);
-      expect(couponRightInset).toBeGreaterThan(14);
-    } else {
+    if (!(await couponToggle.count())) {
       test.skip(true, 'Coupon toggle not present on checkout page.');
+      return;
     }
+
+    if (await couponToggle.isVisible()) {
+      await couponToggle.click();
+    } else {
+      await couponToggle.click({ force: true });
+    }
+
+    const couponPanel = page.locator('form.checkout_coupon');
+    await expect(couponPanel).toBeVisible();
+
+    await page.waitForFunction(() => {
+      const form = document.querySelector<HTMLFormElement>('form.checkout_coupon');
+      if (!form) return false;
+      const rect = form.getBoundingClientRect();
+      const styles = getComputedStyle(form);
+      return rect.height > 40 && parseFloat(styles.paddingLeft) > 0;
+    });
+
+    await expect(page.locator('.lumen-checkout-coupon__intro')).toContainText(/Add your code/i);
+    await expect(page.locator('.lumen-checkout-coupon__hint')).toContainText(/Codes are case-sensitive/i);
+
+    const panelStyles = await couponPanel.evaluate((el) => {
+      const styles = getComputedStyle(el);
+      return {
+        display: styles.display,
+        paddingLeft: parseFloat(styles.paddingLeft),
+        paddingRight: parseFloat(styles.paddingRight),
+        rowGap: parseFloat(styles.rowGap || styles.gap || '0'),
+        borderRadius: styles.borderRadius,
+      };
+    });
+
+    expect(panelStyles.display).toBe('grid');
+    expect(panelStyles.paddingLeft).toBeGreaterThan(18);
+    expect(panelStyles.paddingRight).toBeGreaterThan(18);
+    expect(panelStyles.rowGap).toBeGreaterThan(0);
+    expect(panelStyles.borderRadius).not.toBe('0px');
+
+    const couponInput = page.locator('form.checkout_coupon input[name="coupon_code"]');
+    await expect(couponInput).toBeVisible();
+
+    const insetData = await couponInput.evaluate((el) => {
+      const inputRect = el.getBoundingClientRect();
+      const form = el.closest('form');
+      if (!form) {
+        return null;
+      }
+      const formRect = form.getBoundingClientRect();
+      const styles = getComputedStyle(el);
+      return {
+        height: inputRect.height,
+        leftInset: inputRect.left - formRect.left,
+        rightInset: formRect.right - inputRect.right,
+        borderRadius: styles.borderRadius,
+        background: styles.backgroundColor,
+      };
+    });
+
+    if (!insetData) {
+      test.fail(true, 'Unable to compute coupon input spacing.');
+      return;
+    }
+
+    const viewportWidth = page.viewportSize()?.width ?? 1280;
+    const expectedInset = viewportWidth <= 540 ? 12 : 18;
+
+    expect(insetData.height).toBeLessThan(64);
+    expect(insetData.leftInset).toBeGreaterThan(expectedInset);
+    expect(insetData.rightInset).toBeGreaterThan(expectedInset);
+    expect(insetData.borderRadius).not.toBe('0px');
+    expect(insetData.background).not.toBe('');
   });
 
   test('stripe payment widget fits mobile container styling', async ({ page }) => {
@@ -177,17 +240,48 @@ test.describe('Checkout layout spacing', () => {
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'wcs-saved-card-pill';
+          btn.setAttribute('role', 'radio');
+          const text = (opt.text || '').trim();
+          const [brandWord, ...restWords] = text.split(' ');
+          const remainder = restWords.join(' ');
+          const endingMatch = remainder.match(/ending in\s+(\d{2,4})/i);
+          const numberText = endingMatch ? `\u2022\u2022\u2022\u2022 ${endingMatch[1]}` : (remainder || text || 'Card');
+          let descriptor = remainder.replace(/ending in\s+\d{2,4}/i, '').trim();
+          if (!descriptor && !endingMatch) {
+            descriptor = '';
+          }
+          const metaText = descriptor && descriptor.toLowerCase() !== (brandWord || '').toLowerCase() ? descriptor : '';
+
+          btn.dataset.methodValue = opt.value;
           if (opt.selected || index === 0) {
             btn.classList.add('is-selected');
+            btn.setAttribute('aria-checked', 'true');
+            btn.tabIndex = 0;
+          } else {
+            btn.setAttribute('aria-checked', 'false');
+            btn.tabIndex = -1;
           }
-          btn.innerHTML = `<span class="wcs-saved-card-pill__brand">${(opt.text || '').split(' ')[0] || 'Card'}</span><span class="wcs-saved-card-pill__label">${(opt.text || '').split(' ').slice(1).join(' ')}</span>`;
-          btn.dataset.methodValue = opt.value;
+
+          btn.innerHTML = `
+            <span class="wcs-saved-card-pill__brand">${brandWord || 'Card'}</span>
+            <span class="wcs-saved-card-pill__label">
+              <span class="wcs-saved-card-pill__number">${numberText}</span>
+              ${metaText ? `<span class="wcs-saved-card-pill__meta">${metaText}</span>` : ''}
+            </span>
+          `;
+
           btn.addEventListener('click', () => {
             if (selectEl) {
               selectEl.value = opt.value;
             }
-            fallbackList.querySelectorAll('.wcs-saved-card-pill').forEach(el => el.classList.remove('is-selected'));
+            fallbackList.querySelectorAll('.wcs-saved-card-pill').forEach(el => {
+              el.classList.remove('is-selected');
+              el.setAttribute('aria-checked', 'false');
+              el.tabIndex = -1;
+            });
             btn.classList.add('is-selected');
+            btn.setAttribute('aria-checked', 'true');
+            btn.tabIndex = 0;
           });
           fallbackList.appendChild(btn);
         });
@@ -196,13 +290,13 @@ test.describe('Checkout layout spacing', () => {
       }
       const pillStyles = getComputedStyle(pill);
       const brand = pill.querySelector('.wcs-saved-card-pill__brand');
-      const label = pill.querySelector('.wcs-saved-card-pill__label');
+      const number = pill.querySelector('.wcs-saved-card-pill__number');
       return {
         pillText: pill.textContent.trim(),
         backgroundImage: pillStyles.getPropertyValue('background-image'),
         color: pillStyles.getPropertyValue('color'),
         brandText: brand ? brand.textContent.trim() : '',
-        labelText: label ? label.textContent.trim() : '',
+        numberText: number ? number.textContent.trim() : '',
         containerHidden: container.classList.contains('wcs-hidden'),
         pillCount: payment.querySelectorAll('.wcs-saved-card-pill').length
       };
@@ -214,10 +308,13 @@ test.describe('Checkout layout spacing', () => {
       return;
     }
 
-    const { pillText, backgroundImage, color, brandText, labelText, containerHidden, pillCount } = measurements;
+    const { pillText, backgroundImage, color, brandText, numberText, containerHidden, pillCount } = measurements;
     expect(pillCount).toBeGreaterThan(0);
     expect(brandText).toMatch(/visa/i);
-    expect(labelText).toContain('ending in 4242');
+    expect(numberText).toContain('4242');
+    expect(containerHidden).toBe(true);
+    expect(backgroundImage).not.toBe('none');
+    expect(color.length).toBeGreaterThan(0);
 
   });
 });

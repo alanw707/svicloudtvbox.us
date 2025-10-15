@@ -61,6 +61,24 @@ if ($has_translator) {
                     <?php do_action('woocommerce_checkout_after_customer_details'); ?>
                 <?php endif; ?>
 
+                <div class="lumen-checkout__panel lumen-checkout__panel--payment">
+                    <div class="lumen-checkout__panel-inner">
+                        <?php if ($has_translator) : ?>
+                            <h2 class="lumen-checkout__panel-title"><?php echo svic_translate_html('checkout_page.payment.title'); ?></h2>
+                            <p class="lumen-checkout__panel-subtitle"><?php echo svic_translate_html('checkout_page.payment.intro'); ?></p>
+                            <p class="screen-reader-text" id="lumen-checkout-accepted-cards"><?php echo svic_translate_html('checkout_page.payment.cards_label'); ?></p>
+                        <?php else : ?>
+                            <h2 class="lumen-checkout__panel-title"><?php esc_html_e('Payment', 'woocommerce'); ?></h2>
+                            <p class="lumen-checkout__panel-subtitle"><?php esc_html_e('Choose a saved card or enter a new payment method, then place your order with secure checkout.', 'woocommerce'); ?></p>
+                            <p class="screen-reader-text" id="lumen-checkout-accepted-cards"><?php esc_html_e('Accepted cards: Visa, Mastercard, American Express, and Discover.', 'svicloudtvbox-lumen'); ?></p>
+                        <?php endif; ?>
+
+                        <div class="lumen-checkout__payment-group" aria-describedby="lumen-checkout-accepted-cards">
+                            <?php woocommerce_checkout_payment(); ?>
+                        </div>
+                    </div>
+                </div>
+
                 <?php if ($has_translator) : ?>
                     <div class="lumen-checkout__assurance" aria-live="polite">
                         <h2 class="lumen-checkout__assurance-title"><?php echo svic_translate_html('checkout_page.assurance.title'); ?></h2>
@@ -97,7 +115,7 @@ if ($has_translator) {
                     <?php do_action('woocommerce_checkout_before_order_review'); ?>
 
                     <div id="order_review" class="woocommerce-checkout-review-order lumen-checkout-summary__order">
-                        <?php do_action('woocommerce_checkout_order_review'); ?>
+                        <?php woocommerce_order_review(); ?>
                     </div>
 
                     <?php do_action('woocommerce_checkout_after_order_review'); ?>

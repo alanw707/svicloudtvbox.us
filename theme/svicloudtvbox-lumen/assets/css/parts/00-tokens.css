@@ -31,19 +31,19 @@
   /* Lumen color system */
   --lumen-surface-900: #040917;
   --lumen-surface-800: #060b1f;
-  --lumen-surface-700: rgba(9, 20, 45, 0.82);
+  --lumen-surface-700: rgba(9, 20, 45, 0.88);
   --lumen-surface-600: rgba(12, 27, 58, 0.65);
-  --lumen-surface-glass: rgba(9, 20, 45, 0.75);
-  --lumen-surface-glass-soft: rgba(12, 23, 50, 0.55);
-  --lumen-surface-card: rgba(15, 28, 58, 0.9);
+  --lumen-surface-glass: rgba(9, 20, 45, 0.82);
+  --lumen-surface-glass-soft: rgba(12, 23, 50, 0.62);
+  --lumen-surface-card: rgba(10, 22, 48, 0.96);
 
   --lumen-accent-teal: #5ee6d0;
   --lumen-accent-amber: #ffb963;
   --lumen-accent-iris: #8f96ff;
   --lumen-accent-azure: #42c2ff;
   --lumen-text-primary: #f5f8ff;
-  --lumen-text-secondary: rgba(245, 248, 255, 0.92);
-  --lumen-text-muted: rgba(223, 229, 255, 0.78);
+  --lumen-text-secondary: rgba(246, 250, 255, 0.97);
+  --lumen-text-muted: rgba(226, 235, 255, 0.86);
   --lumen-text-feature: rgba(244, 250, 255, 0.98);
   --lumen-border-glass: rgba(255, 255, 255, 0.12);
   --lumen-border-strong: rgba(80, 120, 180, 0.28);

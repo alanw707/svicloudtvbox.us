@@ -1,0 +1,228 @@
+/* ==========================================
+   CHECKOUT NOTICES & COUPON
+   ========================================== */
+
+/* Coupon area */
+body.woocommerce-checkout .lumen-checkout-coupon {
+  display: grid;
+  gap: clamp(0.85rem, 3vw, 1.35rem);
+  margin-bottom: clamp(1.4rem, 3.4vw, 2rem);
+}
+
+body.woocommerce-checkout .lumen-checkout__summary .lumen-checkout-coupon {
+  margin-bottom: clamp(1.6rem, 3vw, 2.1rem);
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__form {
+  max-width: 780px !important;
+  margin: 0 auto;
+  padding: clamp(1.4rem, 3.6vw, 1.9rem) clamp(1.6rem, 4vw, 2.2rem) !important;
+  border-radius: var(--radius-2xl) !important;
+  border: 1px solid rgba(164, 237, 232, 0.26) !important;
+  background: rgba(14, 34, 72, 0.72) !important;
+  display: grid !important;
+  gap: clamp(0.9rem, 2.6vw, 1.3rem);
+  text-align: center;
+  box-shadow: 0 22px 48px rgba(3, 12, 32, 0.45);
+  box-sizing: border-box;
+}
+
+body.woocommerce-checkout .lumen-checkout__summary .lumen-checkout-coupon__form {
+  max-width: 100% !important;
+  justify-items: center;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__form .lumen-checkout-coupon__intro {
+  margin: 0;
+  font-size: 0.95rem;
+  color: rgba(226, 244, 255, 0.85);
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__form .lumen-checkout-coupon__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+body.woocommerce-checkout .lumen-checkout__summary .lumen-checkout-coupon__form .lumen-checkout-coupon__controls {
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__form .form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  flex: 1 1 240px;
+  width: 100%;
+  align-items: stretch;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__form .form-row-last {
+  flex: 0 0 auto;
+}
+body.woocommerce-checkout .lumen-checkout-coupon__form .form-row,
+body.woocommerce-checkout .lumen-checkout-coupon__form .form-row-first,
+body.woocommerce-checkout .lumen-checkout-coupon__form .form-row-last {
+  float: none !important;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__form .input-text {
+  width: 100% !important;
+  margin: 0 !important;
+  min-height: 46px !important;
+  line-height: 1.2;
+  padding: 0.45rem 0.85rem !important;
+  border-radius: var(--radius-md) !important;
+  border: 1px solid rgba(164, 237, 232, 0.32) !important;
+  background: linear-gradient(160deg, rgba(16, 38, 78, 0.92), rgba(8, 20, 46, 0.85)) !important;
+  color: rgba(248, 252, 255, 0.96) !important;
+  font-weight: 600 !important;
+  box-shadow: inset 0 0 0 1px rgba(94, 230, 208, 0.06), 0 20px 38px rgba(4, 12, 30, 0.38);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+body.woocommerce-checkout .lumen-checkout-coupon__form .input-text::placeholder {
+  color: rgba(216, 232, 255, 0.78);
+  font-weight: 500;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__form .input-text:hover {
+  border-color: rgba(164, 237, 232, 0.5) !important;
+  box-shadow: inset 0 0 0 1px rgba(94, 230, 208, 0.08), 0 24px 44px rgba(4, 12, 30, 0.42);
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__form .input-text:focus,
+body.woocommerce-checkout .lumen-checkout-coupon__form .input-text:focus-visible {
+  border-color: rgba(182, 247, 236, 0.82) !important;
+  background: linear-gradient(165deg, rgba(20, 48, 96, 0.94), rgba(10, 26, 58, 0.9)) !important;
+  box-shadow: 0 0 0 3px rgba(94, 230, 208, 0.28), 0 26px 52px rgba(4, 12, 30, 0.48);
+  outline: none;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__form .form-row-last button.button {
+  width: 100%;
+}
+
+body.woocommerce-checkout .lumen-checkout__summary .lumen-checkout-coupon__form .form-row-first,
+body.woocommerce-checkout .lumen-checkout__summary .lumen-checkout-coupon__form .form-row-last {
+  width: 100%;
+}
+
+body.woocommerce-checkout .lumen-checkout__summary .lumen-checkout-coupon__form .form-row {
+  flex: 0 0 auto;
+  width: min(100%, 280px);
+  margin-inline: auto;
+  align-items: center;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__form button.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, rgba(130, 246, 226, 0.95), rgba(72, 206, 255, 0.92));
+  color: #01121f;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 24px 56px rgba(94, 230, 208, 0.36);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+body.woocommerce-checkout .lumen-checkout__summary .lumen-checkout-coupon__form button.button {
+  width: min(100%, 260px);
+  margin: 0 auto;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__form button.button:hover,
+body.woocommerce-checkout .lumen-checkout-coupon__form button.button:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 26px 58px rgba(94, 230, 208, 0.42);
+  outline: none;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__form .lumen-checkout-coupon__hint {
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(212, 232, 255, 0.72);
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__applied {
+  display: grid;
+  gap: 0.6rem;
+  justify-items: center;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__applied-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(204, 238, 255, 0.82);
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon[hidden] {
+  display: none !important;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__applied-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(164, 237, 232, 0.4);
+  background: rgba(16, 40, 80, 0.78);
+  color: rgba(220, 244, 255, 0.92);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__chip-code {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__chip-remove {
+  color: rgba(190, 255, 247, 0.96);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+body.woocommerce-checkout .lumen-checkout-coupon__chip-remove:hover,
+body.woocommerce-checkout .lumen-checkout-coupon__chip-remove:focus-visible {
+  color: var(--lumen-accent-azure);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+body.woocommerce-checkout .woocommerce-error,
+body.woocommerce-checkout .woocommerce-info,
+body.woocommerce-checkout .woocommerce-message {
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(164, 237, 232, 0.32);
+  background: rgba(18, 42, 90, 0.66);
+  color: rgba(236, 246, 255, 0.9);
+  box-shadow: 0 20px 50px rgba(3, 12, 32, 0.5);
+}
+
+body.woocommerce-checkout .woocommerce-error::before { color: rgba(255, 147, 168, 0.8); }
+body.woocommerce-checkout .woocommerce-info::before { color: rgba(126, 246, 227, 0.85); }

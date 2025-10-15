@@ -23,6 +23,8 @@
         initLumenNavigation();
         initProductHeroGallery();
         initStripeSavedCardPills();
+        relocateCheckoutCoupon();
+        $(document.body).on('updated_checkout applied_coupon_in_checkout removed_coupon_in_checkout', relocateCheckoutCoupon);
     }
 
     function getStickyScrollOffset() {
@@ -330,77 +332,148 @@
     }
 
     function initStripeSavedCardPills() {
-        const $select = $('#stripe_cc_saved_method_key');
-        if (!$select.length) {
+        const $containers = $('.wc-stripe-saved-methods-container');
+        if (!$containers.length) {
             return;
         }
 
-        const $container = $select.closest('.wc-stripe-saved-methods-container');
-        if (!$container.length) {
-            return;
-        }
-
-        const options = $select.find('option');
-        if (!options.length) {
-            $container.removeClass('wcs-hidden').removeAttr('aria-hidden');
-            $container.next('.wcs-saved-card-list').remove();
-            return;
-        }
-
-        if (typeof $select.select2 === 'function' && $select.hasClass('select2-hidden-accessible')) {
-            try {
-                $select.select2('destroy');
-            } catch (err) {
-                // Ignore if select2 not initialised yet
-            }
-        }
-
-        const $existingList = $container.next('.wcs-saved-card-list');
-        if ($existingList.length) {
-            $existingList.remove();
-        }
-
-        const $list = $('<div class="wcs-saved-card-list" role="group" aria-label="Saved cards"></div>');
-
-        options.each(function() {
-            const $option = $(this);
-            const value = ($option.val() || '').trim();
-            const text = ($option.text() || '').trim();
-
-            if (!text || !value || value === 'add_new' || value === 'new') {
+        $containers.each(function(index) {
+            const $container = $(this);
+            const $select = $container.find('select').first();
+            if (!$select.length) {
                 return;
             }
 
-            const brandClass = ($option.attr('class') || '').split(/\s+/).find(cls => cls && cls !== 'wc-stripe-saved-method') || '';
-            const [brandWord, ...restWords] = text.split(' ');
-            const labelText = restWords.join(' ') || '';
-            const $pill = $('<button type="button" class="wcs-saved-card-pill"></button>');
-            $pill.attr({
-                'data-method-value': value,
-                'aria-pressed': $option.is(':selected') ? 'true' : 'false'
-            });
-            $pill.data('method-value', value);
-            if ($option.is(':selected')) {
-                $pill.addClass('is-selected');
+            const options = $select.find('option');
+            if (!options.length) {
+                $container.removeClass('wcs-hidden').removeAttr('aria-hidden');
+                $container.next('.wcs-saved-card-list').remove();
+                return;
             }
 
-            const $brand = $('<span class="wcs-saved-card-pill__brand"></span>').text(brandWord || 'Card');
-            if (brandClass) {
-                $brand.addClass(`brand-${brandClass}`);
+            if (typeof $select.select2 === 'function' && ($select.data('select2') || $select.hasClass('select2-hidden-accessible'))) {
+                try {
+                    $select.select2('destroy');
+                } catch (err) {
+                    // Ignore if select2 not initialised yet
+                }
             }
 
-            const $label = $('<span class="wcs-saved-card-pill__label"></span>').text(labelText);
-            $pill.append($brand).append($label);
+            const $existingList = $container.next('.wcs-saved-card-list');
+            if ($existingList.length) {
+                $existingList.remove();
+            }
 
-            $pill.on('click', function(event) {
-                event.preventDefault();
-                if ($pill.hasClass('is-selected')) {
+            const $list = $('<div class="wcs-saved-card-list" role="radiogroup" aria-label="Saved cards"></div>');
+
+            options.each(function() {
+                const $option = $(this);
+                const value = ($option.val() || '').trim();
+                const text = ($option.text() || '').trim();
+
+                if (!text || !value || value === 'add_new' || value === 'new') {
                     return;
                 }
-                $select.val(value).trigger('change');
-                $list.find('.wcs-saved-card-pill').removeClass('is-selected').attr('aria-pressed', 'false');
-                $pill.addClass('is-selected').attr('aria-pressed', 'true');
-            });
+                const brandClass = ($option.attr('class') || '').split(/\s+/).find(cls => cls && cls !== 'wc-stripe-saved-method') || '';
+                const [brandWord, ...restWords] = text.split(' ');
+                const labelText = restWords.join(' ') || '';
+                const normalizedLabel = (labelText || text).replace(/\s+/g, ' ').trim();
+                const endingMatch = normalizedLabel.match(/ending in\s+(\d{2,4})/i);
+                const expiryMatch = normalizedLabel.match(/\(([^)]+)\)/);
+                let descriptorText = normalizedLabel.replace(/\(([^)]+)\)/, '').trim();
+                if (endingMatch) {
+                    descriptorText = descriptorText.replace(/ending in\s+\d{2,4}/i, '').trim();
+                }
+                const expiryText = expiryMatch ? expiryMatch[1].replace(/expires?\s*/i, '').trim() : '';
+
+                const brandLabel = brandClass ? brandClass.replace(/[-_]/g, ' ') : brandWord;
+                const brandDisplay = (brandLabel || brandWord || 'Card').replace(/\b\w/g, char => char.toUpperCase());
+
+                const $pill = $('<button type="button" class="wcs-saved-card-pill"></button>');
+                $pill.attr({
+                    'data-method-value': value,
+                    'role': 'radio',
+                    'aria-checked': $option.is(':selected') ? 'true' : 'false',
+                    'tabindex': $option.is(':selected') ? '0' : '-1'
+                });
+                $pill.data('method-value', value);
+                if ($option.is(':selected')) {
+                    $pill.addClass('is-selected');
+                }
+
+                const $brand = $('<span class="wcs-saved-card-pill__brand"></span>').text(brandDisplay || 'Card');
+                if (brandClass) {
+                    $brand.addClass(`brand-${brandClass}`);
+                }
+
+                const $label = $('<span class="wcs-saved-card-pill__label"></span>');
+                const numberText = endingMatch ? `\u2022\u2022\u2022\u2022 ${endingMatch[1]}` : (descriptorText || normalizedLabel || 'Card');
+                const $number = $('<span class="wcs-saved-card-pill__number"></span>').text(numberText);
+                $label.append($number);
+
+                const metaParts = [];
+                if (descriptorText && (!endingMatch || descriptorText.toLowerCase() !== (brandWord || '').toLowerCase())) {
+                    metaParts.push(descriptorText);
+                }
+                if (expiryText) {
+                    metaParts.push(/^exp/i.test(expiryText) ? expiryText : `Exp. ${expiryText}`);
+                }
+
+                if (metaParts.length) {
+                    $label.append($('<span class="wcs-saved-card-pill__meta"></span>').text(metaParts.join(' · ')));
+                }
+
+                const ariaParts = [
+                    brandDisplay || 'Card',
+                    endingMatch ? `ending in ${endingMatch[1]}` : ''
+                ].filter(Boolean);
+                if (expiryText) {
+                    ariaParts.push(`expires ${expiryText}`);
+                }
+
+                if (ariaParts.length) {
+                    $pill.attr('aria-label', ariaParts.join(' · '));
+                }
+
+                $pill.append($brand).append($label);
+
+                $pill.on('click', function(event) {
+                    event.preventDefault();
+                    if ($pill.hasClass('is-selected')) {
+                        return;
+                    }
+                    $select.val(value).trigger('change');
+                    $list.find('.wcs-saved-card-pill')
+                        .removeClass('is-selected')
+                        .attr({'aria-checked': 'false', 'tabindex': '-1'});
+                    $pill.addClass('is-selected').attr({'aria-checked': 'true', 'tabindex': '0'}).focus();
+                });
+
+                $pill.on('keydown', function(event) {
+                    const keys = ['ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'Home', 'End'];
+                    if (!keys.includes(event.key)) {
+                        return;
+                    }
+                    event.preventDefault();
+                    const $pills = $list.find('.wcs-saved-card-pill');
+                    const currentIndex = $pills.index($pill);
+                    let targetIndex = currentIndex;
+
+                    if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+                        targetIndex = currentIndex > 0 ? currentIndex - 1 : $pills.length - 1;
+                    } else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+                        targetIndex = currentIndex < $pills.length - 1 ? currentIndex + 1 : 0;
+                    } else if (event.key === 'Home') {
+                        targetIndex = 0;
+                    } else if (event.key === 'End') {
+                        targetIndex = $pills.length - 1;
+                    }
+
+                    const $target = $pills.eq(targetIndex);
+                    if ($target.length) {
+                        $target.trigger('click');
+                    }
+                });
 
             $list.append($pill);
         });
@@ -416,8 +489,96 @@
             const value = String($(this).val() || '');
             $list.find('.wcs-saved-card-pill').each(function() {
                 const $pill = $(this);
-                const isActive = $pill.data('method-value') === value;
-                $pill.toggleClass('is-selected', isActive).attr('aria-pressed', isActive ? 'true' : 'false');
+                    const isActive = $pill.data('method-value') === value;
+                    $pill
+                        .toggleClass('is-selected', isActive)
+                        .attr({
+                            'aria-checked': isActive ? 'true' : 'false',
+                            'tabindex': isActive ? '0' : '-1'
+                        });
+                    if (isActive) {
+                        $pill.focus();
+                    }
+                });
+            });
+        });
+
+        document.querySelectorAll('.wcs-saved-card-list').forEach(list => {
+            const previous = list.previousElementSibling;
+            if (previous && previous.classList && previous.classList.contains('wc-stripe-saved-methods-container')) {
+                previous.classList.add('wcs-hidden');
+                previous.setAttribute('aria-hidden', 'true');
+            }
+        });
+    }
+
+    function relocateCheckoutCoupon() {
+        if (!document.body || !document.body.classList.contains('woocommerce-checkout')) {
+            return;
+        }
+
+        const originalBlock = document.querySelector('.lumen-checkout-coupon[data-lumen-coupon-original="true"]');
+        const summaryCard = document.querySelector('.lumen-checkout-summary__card');
+        if (!originalBlock || !summaryCard) {
+            return;
+        }
+
+        const target = summaryCard.querySelector('#order_review_heading') || summaryCard.querySelector('.woocommerce-checkout-review-order');
+        if (!target) {
+            return;
+        }
+
+        let displayBlock = summaryCard.querySelector('.lumen-checkout-coupon-display');
+        if (displayBlock) {
+            displayBlock.remove();
+        }
+
+        displayBlock = originalBlock.cloneNode(true);
+        displayBlock.classList.add('lumen-checkout-coupon-display');
+        displayBlock.removeAttribute('data-lumen-coupon-original');
+        displayBlock.removeAttribute('hidden');
+        summaryCard.insertBefore(displayBlock, target);
+
+        originalBlock.setAttribute('hidden', 'hidden');
+
+        const hiddenForm = originalBlock.querySelector('form');
+        const summaryForm = displayBlock.querySelector('form');
+        let summaryFormWrapper = summaryForm;
+
+        if (summaryForm) {
+            const wrapper = document.createElement('div');
+            wrapper.className = summaryForm.className + ' lumen-checkout-coupon__form-display';
+            wrapper.innerHTML = summaryForm.innerHTML;
+            summaryForm.replaceWith(wrapper);
+            summaryFormWrapper = wrapper;
+        }
+
+        if (summaryFormWrapper && hiddenForm) {
+            const summaryInput = summaryFormWrapper.querySelector('input[name="coupon_code"]');
+            const summaryButton = summaryFormWrapper.querySelector('button[name="apply_coupon"]');
+            if (summaryButton) {
+                summaryButton.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const hiddenInput = hiddenForm.querySelector('input[name="coupon_code"]');
+                    if (hiddenInput) {
+                        hiddenInput.value = summaryInput ? summaryInput.value : '';
+                        $(hiddenForm).trigger('submit');
+                    }
+                });
+            }
+        }
+
+        displayBlock.querySelectorAll('.lumen-checkout-coupon__chip-remove').forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const couponCode = link.getAttribute('data-coupon');
+                if (!couponCode) {
+                    return;
+                }
+                const hiddenLink = originalBlock.querySelector(`.lumen-checkout-coupon__chip-remove[data-coupon="${couponCode}"]`);
+                if (hiddenLink) {
+                    hiddenLink.dispatchEvent(new Event('click', { bubbles: true, cancelable: true }));
+                }
             });
         });
     }
