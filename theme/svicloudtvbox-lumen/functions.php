@@ -508,6 +508,32 @@ add_filter('robots_txt', function ($output, $public) {
     return $output;
 }, 10, 2);
 
+// Exclude sensitive or utility pages from the core sitemap
+add_filter('wp_sitemaps_posts_query_args', function ($args, $postType) {
+    if ($postType !== 'page') {
+        return $args;
+    }
+
+    $slugsToExclude = ['my-account'];
+    $idsToExclude   = [];
+
+    foreach ($slugsToExclude as $slug) {
+        $page = get_page_by_path($slug, OBJECT, 'page');
+        if ($page instanceof WP_Post) {
+            $idsToExclude[] = (int) $page->ID;
+        }
+    }
+
+    if ($idsToExclude === []) {
+        return $args;
+    }
+
+    $notIn                 = isset($args['post__not_in']) ? (array) $args['post__not_in'] : [];
+    $args['post__not_in']  = array_unique(array_merge($notIn, $idsToExclude));
+
+    return $args;
+}, 10, 2);
+
 // Theme setup
 add_action('after_setup_theme', function () {
     load_theme_textdomain('svicloudtvbox-lumen', get_template_directory() . '/languages');
