@@ -20,6 +20,67 @@ require_once get_template_directory() . '/inc/helpers-svic.php';
 
 SVIC_Locale_Resolver::bootstrap();
 
+if (!function_exists('svic_get_localized_canonical_url')) {
+    function svic_get_localized_canonical_url(): ?string
+    {
+        if (!function_exists('svic_current_base_url') || !function_exists('svic_url_with_lang')) {
+            return null;
+        }
+
+        $base = svic_current_base_url();
+        if (!is_string($base) || $base === '') {
+            return null;
+        }
+
+        $localized = svic_url_with_lang($base);
+        $parts     = wp_parse_url($localized);
+        if (!is_array($parts)) {
+            return null;
+        }
+
+        $path = isset($parts['path']) && is_string($parts['path']) ? $parts['path'] : '/';
+        $canonical = home_url($path);
+
+        if ($canonical !== home_url('/') && substr($canonical, -1) !== '/') {
+            $canonical .= '/';
+        }
+
+        return $canonical;
+    }
+}
+
+if (!function_exists('svic_is_order_tracking_request')) {
+    function svic_is_order_tracking_request(): bool
+    {
+        if (function_exists('is_wc_endpoint_url') && is_wc_endpoint_url('order-tracking')) {
+            return true;
+        }
+
+        if (function_exists('is_page') && is_page('order-tracking')) {
+            return true;
+        }
+
+        if (!function_exists('is_singular') || !is_singular('page')) {
+            return false;
+        }
+
+        $order_tracking_post = get_post();
+        if (!($order_tracking_post instanceof WP_Post)) {
+            return false;
+        }
+
+        if (function_exists('has_shortcode') && has_shortcode($order_tracking_post->post_content, 'woocommerce_order_tracking')) {
+            return true;
+        }
+
+        if (function_exists('has_block') && has_block('woocommerce/order-tracking', $order_tracking_post)) {
+            return true;
+        }
+
+        return false;
+    }
+}
+
 if (!function_exists('svic_output_hreflang_links')) {
     function svic_output_hreflang_links(): void
     {
@@ -97,28 +158,9 @@ if (!function_exists('svic_output_canonical_link')) {
             return;
         }
 
-        if (!function_exists('svic_current_base_url') || !function_exists('svic_url_with_lang')) {
+        $canonical = svic_get_localized_canonical_url();
+        if (!is_string($canonical) || $canonical === '') {
             return;
-        }
-
-        $base = svic_current_base_url();
-        if (!is_string($base) || $base === '') {
-            return;
-        }
-
-        // Localize to current language; strip query/fragment for canonical.
-        $localized = svic_url_with_lang($base);
-        $parts     = wp_parse_url($localized);
-        if (!is_array($parts)) {
-            return;
-        }
-
-        $path = isset($parts['path']) && is_string($parts['path']) ? $parts['path'] : '/';
-        $canonical = home_url($path);
-
-        // Normalize trailing slash to match WordPress behavior.
-        if ($canonical !== home_url('/') && substr($canonical, -1) !== '/') {
-            $canonical .= '/';
         }
 
         echo '<link rel="canonical" href="' . esc_url($canonical) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -137,24 +179,8 @@ add_filter('wpseo_canonical', function ($url) {
     if (is_admin()) {
         return $url;
     }
-    if (!function_exists('svic_current_base_url') || !function_exists('svic_url_with_lang')) {
-        return $url;
-    }
-    $base = svic_current_base_url();
-    if (!is_string($base) || $base === '') {
-        return $url;
-    }
-    $localized = svic_url_with_lang($base);
-    $parts     = wp_parse_url($localized);
-    if (!is_array($parts)) {
-        return $url;
-    }
-    $path = isset($parts['path']) && is_string($parts['path']) ? $parts['path'] : '/';
-    $canonical = home_url($path);
-    if ($canonical !== home_url('/') && substr($canonical, -1) !== '/') {
-        $canonical .= '/';
-    }
-    return $canonical;
+    $canonical = svic_get_localized_canonical_url();
+    return $canonical ?: $url;
 });
 
 // RankMath SEO
@@ -162,42 +188,34 @@ add_filter('rank_math/frontend/canonical', function ($url) {
     if (is_admin()) {
         return $url;
     }
-    if (!function_exists('svic_current_base_url') || !function_exists('svic_url_with_lang')) {
-        return $url;
-    }
-    $base = svic_current_base_url();
-    if (!is_string($base) || $base === '') {
-        return $url;
-    }
-    $localized = svic_url_with_lang($base);
-    $parts     = wp_parse_url($localized);
-    if (!is_array($parts)) {
-        return $url;
-    }
-    $path = isset($parts['path']) && is_string($parts['path']) ? $parts['path'] : '/';
-    $canonical = home_url($path);
-    if ($canonical !== home_url('/') && substr($canonical, -1) !== '/') {
-        $canonical .= '/';
-    }
-    return $canonical;
+    $canonical = svic_get_localized_canonical_url();
+    return $canonical ?: $url;
 }, 10, 1);
 
-add_filter('body_class', function ($classes) {
-    if (!is_array($classes)) {
-        $classes = [];
-    }
+if (!function_exists('svic_filter_body_class')) {
+    function svic_filter_body_class($classes)
+    {
+        if (!is_array($classes)) {
+            $classes = [];
+        }
 
-    if (function_exists('svic_current_locale')) {
-        $locale = svic_current_locale();
-        if (is_string($locale) && stripos($locale, 'zh') === 0) {
-            if (!in_array('lang-zh', $classes, true)) {
+        if (function_exists('svic_current_locale')) {
+            $locale = svic_current_locale();
+            if (is_string($locale) && stripos($locale, 'zh') === 0 && !in_array('lang-zh', $classes, true)) {
                 $classes[] = 'lang-zh';
             }
         }
-    }
 
-    return $classes;
-});
+        $disallowed = ['theme-svicloudtvbox', 'theme-svicloudtvbox-lumen'];
+        $classes = array_values(array_filter($classes, static function ($class) use ($disallowed) {
+            return !in_array($class, $disallowed, true);
+        }));
+
+        return $classes;
+    }
+}
+
+add_filter('body_class', 'svic_filter_body_class');
 
 function svic_support_form_recipient(): string
 {
@@ -563,41 +581,10 @@ add_action('wp_enqueue_scripts', function () {
         null
     );
 
-    // Base theme styles
-    if (isset($css_versions['style'])) {
-        wp_enqueue_style(
-            'svicloudtvbox-style',
-            get_template_directory_uri() . '/assets/css/style.css',
-            ['svicloudtvbox-fonts'],
-            $css_versions['style']
-        );
-    }
-
-    // Homepage / marketing bundle
+    // Determine which contextual bundles should load for this request.
     $is_front_page = is_front_page() || is_page_template('front-page.php');
-    if ($is_front_page && isset($css_versions['front-page'])) {
-        wp_enqueue_style(
-            'svicloudtvbox-front-page',
-            get_template_directory_uri() . '/assets/css/front-page.css',
-            ['svicloudtvbox-style'],
-            $css_versions['front-page']
-        );
-    }
-
-    // About page bundle
     $is_about_page = is_page_template('page-about.php') || is_page('about');
-    if ($is_about_page && isset($css_versions['about'])) {
-        wp_enqueue_style(
-            'svicloudtvbox-about',
-            get_template_directory_uri() . '/assets/css/about.css',
-            ['svicloudtvbox-style'],
-            $css_versions['about']
-        );
-    }
-
-    // Guides page bundle (overview + detailed sections)
     $is_guides_page = is_page_template('page-guides.php') || is_page('guides');
-
     if (! $is_guides_page) {
         $guide_section_slugs = array_map(static function ($item) {
             return isset($item['slug']) ? sanitize_title($item['slug']) : null;
@@ -609,63 +596,13 @@ add_action('wp_enqueue_scripts', function () {
             $is_guides_page = is_page($guide_section_slugs) || is_page_template('page-guide-section.php');
         }
     }
-
-    if ($is_guides_page && isset($css_versions['guides'])) {
-        wp_enqueue_style(
-            'svicloudtvbox-guides',
-            get_template_directory_uri() . '/assets/css/guides.css',
-            ['svicloudtvbox-style'],
-            $css_versions['guides']
-        );
-    }
-
-    // Contact page bundle
     $is_contact_page = is_page_template('page-contact.php') || is_page('contact');
-    if ($is_contact_page && isset($css_versions['contact'])) {
-        wp_enqueue_style(
-            'svicloudtvbox-contact',
-            get_template_directory_uri() . '/assets/css/contact.css',
-            ['svicloudtvbox-style'],
-            $css_versions['contact']
-        );
-    }
-
-    // Support form bundle
     $is_support_page = is_page_template('page-support.php') || is_page('support');
-    if ($is_support_page && isset($css_versions['support'])) {
-        wp_enqueue_style(
-            'svicloudtvbox-support',
-            get_template_directory_uri() . '/assets/css/support.css',
-            ['svicloudtvbox-style'],
-            $css_versions['support']
-        );
-    }
-
-    // FAQ page bundle
     $is_faq_page = is_page_template('page-faq.php') || is_page('faq');
-    if ($is_faq_page && isset($css_versions['faq'])) {
-        wp_enqueue_style(
-            'svicloudtvbox-faq',
-            get_template_directory_uri() . '/assets/css/faq.css',
-            ['svicloudtvbox-style'],
-            $css_versions['faq']
-        );
-    }
-
-    // Compare table bundle
     $is_compare_page = is_page_template('page-compare.php') || is_page('compare');
-    if ($is_compare_page && isset($css_versions['compare'])) {
-        wp_enqueue_style(
-            'svicloudtvbox-compare',
-            get_template_directory_uri() . '/assets/css/compare.css',
-            ['svicloudtvbox-style'],
-            $css_versions['compare']
-        );
-    }
 
     // WooCommerce bundle
     $is_woo_request = false;
-    $is_order_tracking_page = false;
     if (class_exists('WooCommerce')) {
         foreach (['is_woocommerce', 'is_cart', 'is_checkout', 'is_account_page'] as $fn) {
             if (function_exists($fn) && $fn()) {
@@ -675,29 +612,65 @@ add_action('wp_enqueue_scripts', function () {
         }
     }
 
-    if (! $is_woo_request) {
-        if (function_exists('is_wc_endpoint_url') && is_wc_endpoint_url('order-tracking')) {
-            $is_order_tracking_page = true;
-        } elseif (is_page('order-tracking')) {
-            $is_order_tracking_page = true;
-        } elseif (is_singular('page')) {
-            $order_tracking_post = get_post();
-            if ($order_tracking_post instanceof WP_Post) {
-                if (function_exists('has_shortcode') && has_shortcode($order_tracking_post->post_content, 'woocommerce_order_tracking')) {
-                    $is_order_tracking_page = true;
-                } elseif (function_exists('has_block') && has_block('woocommerce/order-tracking', $order_tracking_post)) {
-                    $is_order_tracking_page = true;
-                }
-            }
-        }
-    }
+    $style_conditions = [
+        'svicloudtvbox-style' => [
+            'key'       => 'style',
+            'condition' => true,
+            'deps'      => ['svicloudtvbox-fonts'],
+        ],
+        'svicloudtvbox-front-page' => [
+            'key'       => 'front-page',
+            'condition' => $is_front_page,
+            'deps'      => ['svicloudtvbox-style'],
+        ],
+        'svicloudtvbox-about' => [
+            'key'       => 'about',
+            'condition' => $is_about_page,
+            'deps'      => ['svicloudtvbox-style'],
+        ],
+        'svicloudtvbox-guides' => [
+            'key'       => 'guides',
+            'condition' => $is_guides_page,
+            'deps'      => ['svicloudtvbox-style'],
+        ],
+        'svicloudtvbox-contact' => [
+            'key'       => 'contact',
+            'condition' => $is_contact_page,
+            'deps'      => ['svicloudtvbox-style'],
+        ],
+        'svicloudtvbox-support' => [
+            'key'       => 'support',
+            'condition' => $is_support_page,
+            'deps'      => ['svicloudtvbox-style'],
+        ],
+        'svicloudtvbox-faq' => [
+            'key'       => 'faq',
+            'condition' => $is_faq_page,
+            'deps'      => ['svicloudtvbox-style'],
+        ],
+        'svicloudtvbox-compare' => [
+            'key'       => 'compare',
+            'condition' => $is_compare_page,
+            'deps'      => ['svicloudtvbox-style'],
+        ],
+        'svicloudtvbox-woocommerce' => [
+            'key'       => 'woocommerce',
+            'condition' => $is_woo_request || svic_is_order_tracking_request(),
+            'deps'      => ['svicloudtvbox-style'],
+        ],
+    ];
 
-    if (($is_woo_request || $is_order_tracking_page) && isset($css_versions['woocommerce'])) {
+    foreach ($style_conditions as $handle => $config) {
+        $key = $config['key'];
+        if (!$config['condition'] || !isset($css_versions[$key]) || !isset($css_files[$key])) {
+            continue;
+        }
+
         wp_enqueue_style(
-            'svicloudtvbox-woocommerce',
-            get_template_directory_uri() . '/assets/css/woocommerce.css',
-            ['svicloudtvbox-style'],
-            $css_versions['woocommerce']
+            $handle,
+            get_template_directory_uri() . '/' . $css_files[$key],
+            $config['deps'],
+            $css_versions[$key]
         );
     }
 
@@ -924,20 +897,6 @@ add_action('init', function () {
     remove_action('admin_print_styles', 'print_emoji_styles');
 });
 
-// Remove legacy theme body class to prevent confusion with classic skin
-add_filter('body_class', function ($classes) {
-    $disallowed = ['theme-svicloudtvbox', 'theme-svicloudtvbox-lumen'];
-    foreach ($disallowed as $class) {
-        $index = array_search($class, $classes, true);
-        if ($index !== false) {
-            unset($classes[$index]);
-        }
-    }
-
-    return array_values($classes);
-});
-
-
 add_filter('woocommerce_countries_allowed_countries', function ($countries) {
     if (!is_array($countries)) {
         return $countries;
@@ -1008,30 +967,11 @@ add_filter('woocommerce_add_to_cart_fragments', function ($fragments) {
 // Remove default WooCommerce notices from order tracking pages
 // Our custom template handles notice display with better positioning
 add_action('template_redirect', function () {
-    if (!function_exists('is_wc_endpoint_url')) {
+    if (!svic_is_order_tracking_request()) {
         return;
     }
 
-    $is_order_tracking = false;
-
-    if (is_wc_endpoint_url('order-tracking')) {
-        $is_order_tracking = true;
-    } elseif (is_page('order-tracking')) {
-        $is_order_tracking = true;
-    } elseif (is_singular('page')) {
-        $order_tracking_post = get_post();
-        if ($order_tracking_post instanceof WP_Post) {
-            if (function_exists('has_shortcode') && has_shortcode($order_tracking_post->post_content, 'woocommerce_order_tracking')) {
-                $is_order_tracking = true;
-            } elseif (function_exists('has_block') && has_block('woocommerce/order-tracking', $order_tracking_post)) {
-                $is_order_tracking = true;
-            }
-        }
-    }
-
-    if ($is_order_tracking) {
-        // Remove the default WooCommerce notice output
-        remove_action('woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
-        remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
-    }
+    // Remove the default WooCommerce notice output
+    remove_action('woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
+    remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
 }, 10);
