@@ -267,7 +267,6 @@
   outline: 2px solid rgba(126, 246, 227, 0.45);
   outline-offset: 3px;
 }
-}
 
 .lumen-nav__list .sub-menu .current-menu-item > a,
 .lumen-nav__list .sub-menu .current_page_item > a {

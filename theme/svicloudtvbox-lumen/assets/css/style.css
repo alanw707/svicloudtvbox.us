@@ -55,7 +55,6 @@ h4,.h4,h5,.h5,h6,.h6{font-weight:500;letter-spacing:-0.01em;line-height:1.4}
 .lumen-nav__list .sub-menu a{display:flex;align-items:center;justify-content:flex-start;column-gap:clamp(6px,1vw,12px);box-sizing:border-box;width:100%;padding:0.55rem 0.75rem;border-radius:12px;background:transparent;color:rgba(235,242,255,0.86);font-size:0.85rem;font-weight:500;letter-spacing:0.01em;white-space:nowrap;transition:background var(--transition-fast),color var(--transition-fast),transform var(--transition-fast)}
 .lumen-nav__list .sub-menu a:hover,.lumen-nav__list .sub-menu a:focus-visible{background:rgba(126,246,227,0.18);color:#ffffff;transform:translateY(-1px)}
 .lumen-nav__list .sub-menu a:focus-visible{outline:2px solid rgba(126,246,227,0.45);outline-offset:3px}
-}
 .lumen-nav__list .sub-menu .current-menu-item>a,.lumen-nav__list .sub-menu .current_page_item>a{background:rgba(126,246,227,0.26);color:#061328;font-weight:600}
 .lumen-header__actions{display:inline-flex;align-items:center;justify-self:end;gap:clamp(8px,1.5vw,18px);flex-wrap:nowrap}
 .lumen-lang-toggle{display:inline-flex;align-items:center;gap:2px;padding:2px;border-radius:999px;border:1px solid rgba(126,246,227,0.22);background:rgba(9,24,53,0.55);box-shadow:0 10px 28px rgba(5,18,44,0.22);backdrop-filter:blur(12px)}
