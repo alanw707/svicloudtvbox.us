@@ -56,7 +56,17 @@ if ( function_exists( 'WC' ) ) {
 					<?php foreach ( $applied_coupons as $code ) : ?>
 						<?php
 						$formatted_code = wc_format_coupon_code( $code );
-						$remove_url     = esc_url( wc_get_cart_remove_coupon_url( $code ) );
+						if ( function_exists( 'wc_get_cart_remove_coupon_url' ) ) {
+							$remove_url = wc_get_cart_remove_coupon_url( $code );
+						} else {
+							$remove_url = add_query_arg(
+								[
+									'remove_coupon' => rawurlencode( $code ),
+								],
+								function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : home_url( '/' )
+							);
+						}
+						$remove_url = esc_url( $remove_url );
 						?>
 						<span class="lumen-checkout-coupon__chip" data-coupon-code="<?php echo esc_attr( $formatted_code ); ?>">
 							<span class="lumen-checkout-coupon__chip-code"><?php echo esc_html( $formatted_code ); ?></span>
