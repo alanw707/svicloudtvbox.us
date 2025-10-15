@@ -34,12 +34,6 @@ if (is_object($cart)) {
 <section class="lumen-cart <?php echo !$has_items ? 'lumen-cart--empty' : ''; ?>" data-cart-page>
     <header class="lumen-cart__header">
         <h1 class="lumen-cart__title"><?php echo svic_translate_html('cart_page.title'); ?></h1>
-        <?php if ($has_items): ?>
-            <a class="lumen-cart__back" href="<?php echo esc_url($shop_url); ?>">
-                <span class="lumen-cart__back-icon" aria-hidden="true">&#8592;</span>
-                <span><?php echo svic_translate_html('cart_page.continue_shopping'); ?></span>
-            </a>
-        <?php endif; ?>
     </header>
 
     <form class="woocommerce-cart-form" action="<?php echo esc_url(wc_get_cart_url()); ?>" method="post">
@@ -116,25 +110,37 @@ if (is_object($cart)) {
                                     </td>
                                     <td class="product-quantity" data-title="<?php echo esc_attr(svic_translate('cart_page.table.quantity')); ?>">
                                         <div class="lumen-cart-qty">
-                                            <?php
-                                            if ($product->is_sold_individually()) {
-                                                echo apply_filters('woocommerce_cart_item_quantity', '<span class="lumen-cart-qty__single">1</span>', $cart_item_key, $cart_item);
-                                            } else {
-                                                echo apply_filters(
-                                                    'woocommerce_cart_item_quantity',
-                                                    woocommerce_quantity_input([
-                                                        'input_name'   => "cart[{$cart_item_key}][qty]",
-                                                        'input_value'  => (int) $cart_item['quantity'],
-                                                        'max_value'    => $product->get_max_purchase_quantity(),
-                                                        'min_value'    => '0',
-                                                        'product_name' => $product->get_name(),
-                                                        'classes'      => ['input-text', 'qty', 'text', 'lumen-cart-qty__input'],
-                                                    ], $product, false),
-                                                    $cart_item_key,
-                                                    $cart_item
-                                                );
-                                            }
-                                            ?>
+                                            <?php if ($product->is_sold_individually()): ?>
+                                                <?php echo apply_filters('woocommerce_cart_item_quantity', '<span class="lumen-cart-qty__single">1</span>', $cart_item_key, $cart_item); ?>
+                                            <?php else: ?>
+                                                <div class="lumen-cart-qty__inner" data-qty>
+                                                    <button type="button" class="lumen-cart-qty__button lumen-cart-qty__button--decrease" data-qty-control="decrease">
+                                                        <span class="screen-reader-text"><?php echo esc_html__('Decrease quantity', svic_text_domain()); ?></span>
+                                                    </button>
+                                                    <div class="lumen-cart-qty__input">
+                                                        <?php
+                                                        echo apply_filters(
+                                                            'woocommerce_cart_item_quantity',
+                                                            woocommerce_quantity_input([
+                                                                'input_name'   => "cart[{$cart_item_key}][qty]",
+                                                                'input_value'  => (int) $cart_item['quantity'],
+                                                                'max_value'    => $product->get_max_purchase_quantity(),
+                                                                'min_value'    => '0',
+                                                                'product_name' => $product->get_name(),
+                                                                'classes'      => ['input-text', 'qty', 'text', 'lumen-cart-qty__field'],
+                                                                'inputmode'    => 'numeric',
+                                                                'pattern'      => '[0-9]*',
+                                                            ], $product, false),
+                                                            $cart_item_key,
+                                                            $cart_item
+                                                        );
+                                                        ?>
+                                                    </div>
+                                                    <button type="button" class="lumen-cart-qty__button lumen-cart-qty__button--increase" data-qty-control="increase">
+                                                        <span class="screen-reader-text"><?php echo esc_html__('Increase quantity', svic_text_domain()); ?></span>
+                                                    </button>
+                                                </div>
+                                            <?php endif; ?>
                                         </div>
                                     </td>
                                     <td class="product-subtotal" data-title="<?php echo esc_attr(svic_translate('cart_page.table.total')); ?>">
@@ -142,14 +148,19 @@ if (is_object($cart)) {
                                     </td>
                                     <td class="product-remove" data-title="<?php echo esc_attr(svic_translate('cart_page.remove')); ?>">
                                         <?php
+                                        $remove_label = sprintf(svic_translate('cart_page.remove_aria'), $product->get_name());
                                         echo apply_filters(
                                             'woocommerce_cart_item_remove_link',
                                             sprintf(
-                                                '<a href="%s" class="lumen-cart-remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">&times;</a>',
+                                                '<a href="%s" class="lumen-cart-remove" aria-label="%s" data-product_id="%s" data-product_sku="%s">
+                                                    <span class="lumen-cart-remove__icon" aria-hidden="true"></span>
+                                                    <span class="screen-reader-text">%s</span>
+                                                </a>',
                                                 esc_url(wc_get_cart_remove_url($cart_item_key)),
-                                                esc_attr(sprintf(svic_translate('cart_page.remove_aria'), $product->get_name())),
+                                                esc_attr($remove_label),
                                                 esc_attr((string) $product_id),
-                                                esc_attr($product->get_sku())
+                                                esc_attr($product->get_sku()),
+                                                esc_html($remove_label)
                                             ),
                                             $cart_item_key
                                         );
@@ -176,10 +187,16 @@ if (is_object($cart)) {
 
                 <?php if ($has_items): ?>
                     <div class="lumen-cart__actions">
-                        <button type="submit" class="button lumen-cart-update" name="update_cart" value="<?php echo esc_attr(svic_translate('cart_page.update')); ?>">
-                            <?php echo svic_translate_html('cart_page.update'); ?>
-                        </button>
-                        <?php do_action('woocommerce_cart_actions'); ?>
+                        <a class="lumen-cart-actions__continue" href="<?php echo esc_url($shop_url); ?>">
+                            <span class="lumen-cart-actions__continue-icon" aria-hidden="true">&#8592;</span>
+                            <span><?php echo svic_translate_html('cart_page.continue_shopping'); ?></span>
+                        </a>
+                        <div class="lumen-cart-actions__buttons">
+                            <button type="submit" class="button lumen-cart-update" name="update_cart" value="<?php echo esc_attr(svic_translate('cart_page.update')); ?>">
+                                <?php echo svic_translate_html('cart_page.update'); ?>
+                            </button>
+                            <?php do_action('woocommerce_cart_actions'); ?>
+                        </div>
                         <?php wp_nonce_field('woocommerce-cart', 'woocommerce-cart-nonce'); ?>
                     </div>
                 <?php endif; ?>
@@ -242,10 +259,17 @@ if (is_object($cart)) {
         <?php do_action('woocommerce_after_cart_table'); ?>
 
         <?php if ($has_items): ?>
-            <div class="lumen-cart__cross-sells">
-                <?php do_action('woocommerce_before_cart_collaterals'); ?>
-                <?php woocommerce_cross_sell_display(); ?>
-            </div>
+            <?php do_action('woocommerce_before_cart_collaterals'); ?>
+            <?php
+            ob_start();
+            woocommerce_cross_sell_display();
+            $cross_sell_markup = trim((string) ob_get_clean());
+            ?>
+            <?php if ($cross_sell_markup !== ''): ?>
+                <div class="lumen-cart__cross-sells">
+                    <?php echo $cross_sell_markup; ?>
+                </div>
+            <?php endif; ?>
         <?php endif; ?>
     </form>
 </section>

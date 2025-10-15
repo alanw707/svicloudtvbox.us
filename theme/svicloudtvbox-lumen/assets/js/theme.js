@@ -23,6 +23,8 @@
         initLumenNavigation();
         initProductHeroGallery();
         initStripeSavedCardPills();
+        initCartQuantityControls();
+        $(document.body).on('updated_wc_div cart_page_refreshed updated_cart_totals', initCartQuantityControls);
         relocateCheckoutCoupon();
         $(document.body).on('updated_checkout applied_coupon_in_checkout removed_coupon_in_checkout', relocateCheckoutCoupon);
     }
@@ -194,6 +196,111 @@
                 requestAnimationFrame(updateScrollElements);
                 ticking = true;
             }
+        });
+    }
+
+    /**
+     * Cart quantity steppers
+     */
+    function initCartQuantityControls() {
+        const $cart = $('[data-cart-page]');
+        if (!$cart.length) {
+            return;
+        }
+
+        const $updateButton = $cart.find('button[name="update_cart"]');
+        const markCartDirty = () => {
+            if (!$updateButton.length) return;
+            if ($updateButton.prop('disabled') !== false) {
+                $updateButton.prop('disabled', false);
+            }
+            $updateButton.attr('aria-disabled', 'false');
+            $updateButton.addClass('is-dirty');
+        };
+
+        $cart.find('.lumen-cart-qty__inner[data-qty]').each(function() {
+            const $wrapper = $(this);
+            if ($wrapper.data('qtyBound')) {
+                return;
+            }
+
+            const $input = $wrapper.find('.lumen-cart-qty__field');
+            if (!$input.length) {
+                return;
+            }
+
+            const $decrease = $wrapper.find('[data-qty-control="decrease"]');
+            const $increase = $wrapper.find('[data-qty-control="increase"]');
+
+            const stepAttr = parseFloat($input.attr('step'));
+            const step = Number.isFinite(stepAttr) && stepAttr > 0 ? stepAttr : 1;
+            const precision = (step.toString().split('.')[1] || '').length;
+            const minAttr = parseFloat($input.attr('min'));
+            const min = Number.isFinite(minAttr) ? minAttr : 0;
+            const maxAttr = $input.attr('max');
+            const parsedMax = typeof maxAttr === 'string' && maxAttr.length ? parseFloat(maxAttr) : Infinity;
+            const max = Number.isFinite(parsedMax) ? parsedMax : Infinity;
+
+            const clampToBounds = (value) => {
+                let next = Number.isFinite(value) ? value : min;
+                next = Math.max(min, Math.min(max, next));
+                if (precision > 0) {
+                    next = parseFloat(next.toFixed(precision));
+                } else {
+                    next = Math.round(next);
+                }
+                return next;
+            };
+
+            const updateValue = (delta) => {
+                const current = parseFloat($input.val());
+                const normalized = Number.isFinite(current) ? current : min;
+                const next = clampToBounds(normalized + delta * step);
+                if (next === normalized) {
+                    return;
+                }
+                $input.val(next);
+                $input.trigger('input');
+                $input.trigger('change');
+                markCartDirty();
+            };
+
+            if ($decrease.length) {
+                $decrease.on('click', function(event) {
+                    event.preventDefault();
+                    updateValue(-1);
+                });
+            }
+
+            if ($increase.length) {
+                $increase.on('click', function(event) {
+                    event.preventDefault();
+                    updateValue(1);
+                });
+            }
+
+            $input.on('blur', function() {
+                const current = parseFloat($input.val());
+                const next = clampToBounds(current);
+                if (!Number.isFinite(current) || next !== current) {
+                    $input.val(next);
+                    $input.trigger('input');
+                    $input.trigger('change');
+                    markCartDirty();
+                }
+            });
+
+            $input.on('input', function() {
+                const raw = $input.val();
+                const sanitized = raw.replace(/[^0-9.]/g, '');
+                if (raw !== sanitized) {
+                    $input.val(sanitized);
+                }
+            });
+
+            $input.on('change', markCartDirty);
+
+            $wrapper.data('qtyBound', true);
         });
     }
 

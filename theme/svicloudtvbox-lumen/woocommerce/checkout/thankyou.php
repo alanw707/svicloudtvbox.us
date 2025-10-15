@@ -107,6 +107,8 @@ if ($order instanceof WC_Order && $order->has_status('failed')) : ?>
     </section>
   </section>
 
+  <?php svic_render_google_customer_reviews_optin($order); ?>
+
 <?php else : ?>
   <section class="lumen-order-status lumen-order-thankyou">
     <div class="lumen-order-status__headline">

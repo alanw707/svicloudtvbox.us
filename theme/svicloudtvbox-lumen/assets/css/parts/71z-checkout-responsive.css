@@ -135,11 +135,11 @@
 
   #payment [data-testid="link-account-element"] .p-ReturnAutofillPrompt,
   #payment #wc-stripe-link-account-element .p-ReturnAutofillPrompt {
-    padding: 0.9rem;
+    padding: 0.85rem;
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(126, 246, 227, 0.18);
-    background: rgba(8, 24, 52, 0.86);
-    box-shadow: 0 16px 32px rgba(2, 10, 26, 0.48);
+    border: none;
+    background: rgba(10, 28, 60, 0.88);
+    box-shadow: 0 16px 32px rgba(2, 10, 26, 0.44);
   }
 
   #payment [data-testid="link-account-element"] .p-ReturnAutofillPrompt-header,
@@ -151,8 +151,8 @@
 
   #payment [data-testid="link-account-element"] .p-ReturnAutofillPrompt .p-PickerItem,
   #payment #wc-stripe-link-account-element .p-ReturnAutofillPrompt .p-PickerItem {
-    border: 1px solid rgba(164, 237, 232, 0.22);
-    background: rgba(255, 255, 255, 0.06);
+    border: none;
+    background: rgba(28, 60, 110, 0.32);
     min-width: 0;
   }
 

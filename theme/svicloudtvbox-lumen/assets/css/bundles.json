@@ -69,6 +69,13 @@
       "69-contact.css"
     ]
   },
+  "return-policy": {
+    "label": "Return policy page",
+    "output": "return-policy.css",
+    "parts": [
+      "69-return-policy.css"
+    ]
+  },
   "support": {
     "label": "Support form page",
     "output": "support.css",

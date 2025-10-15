@@ -16,7 +16,9 @@ if ( isset( $_POST['coupon_code'] ) ) { // phpcs:ignore WordPress.Security.Nonce
 	$coupon_code = wc_format_coupon_code( wp_unslash( (string) $_POST['coupon_code'] ) );
 }
 
-$theme_button_class = wc_wp_theme_get_element_class_name( 'button' );
+$theme_button_class = function_exists( 'wc_wp_theme_get_element_class_name' )
+	? wc_wp_theme_get_element_class_name( 'button' )
+	: '';
 $button_class_attr  = $theme_button_class ? ' ' . $theme_button_class : '';
 
 $applied_coupons = [];

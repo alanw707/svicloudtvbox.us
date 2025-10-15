@@ -11,6 +11,10 @@ if (!defined('SVIC_THEME_TEXT_DOMAIN')) {
     define('SVIC_THEME_TEXT_DOMAIN', 'svicloudtvbox-lumen');
 }
 
+if (!defined('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID')) {
+    define('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID', 5317978135);
+}
+
 require_once get_template_directory() . '/inc/class-svic-translator.php';
 
 require_once get_template_directory() . '/inc/class-svic-locale-resolver.php';
@@ -552,6 +556,7 @@ add_action('wp_enqueue_scripts', function () {
         'about'       => 'assets/css/about.css',
         'guides'      => 'assets/css/guides.css',
         'contact'     => 'assets/css/contact.css',
+        'return-policy' => 'assets/css/return-policy.css',
         'faq'         => 'assets/css/faq.css',
         'support'     => 'assets/css/support.css',
         'compare'     => 'assets/css/compare.css',
@@ -597,6 +602,7 @@ add_action('wp_enqueue_scripts', function () {
         }
     }
     $is_contact_page = is_page_template('page-contact.php') || is_page('contact');
+    $is_return_policy_page = is_page_template('page-return-policy.php') || is_page('return-policy') || is_page('returns');
     $is_support_page = is_page_template('page-support.php') || is_page('support');
     $is_faq_page = is_page_template('page-faq.php') || is_page('faq');
     $is_compare_page = is_page_template('page-compare.php') || is_page('compare');
@@ -636,6 +642,11 @@ add_action('wp_enqueue_scripts', function () {
         'svicloudtvbox-contact' => [
             'key'       => 'contact',
             'condition' => $is_contact_page,
+            'deps'      => ['svicloudtvbox-style'],
+        ],
+        'svicloudtvbox-return-policy' => [
+            'key'       => 'return-policy',
+            'condition' => $is_return_policy_page,
             'deps'      => ['svicloudtvbox-style'],
         ],
         'svicloudtvbox-support' => [

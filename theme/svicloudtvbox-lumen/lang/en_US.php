@@ -65,6 +65,63 @@ return [
             'cta'   => 'Visit FAQ',
         ],
     ],
+    'return_policy' => [
+        'hero' => [
+            'badge'    => 'Returns & exchanges',
+            'title'    => 'Return & Refund Policy',
+            'subtitle' => 'We want you to love your SVICLOUD device. If something is not right, follow these steps to request a return or exchange within 30 days of delivery.',
+        ],
+        'timeline' => [
+            'title' => 'Return timeline at a glance',
+            'items' => [
+                'request'  => 'Submit your return request within 30 days of the delivery date.',
+                'approval' => 'We confirm eligibility within 1-2 business days.',
+                'ship'     => 'Ship devices back within 7 days of receiving approval.',
+                'refund'   => 'Refunds issue 3-5 business days after inspection.',
+            ],
+        ],
+        'sections' => [
+            'eligibility' => [
+                'title' => 'Check eligibility before you start',
+                'items' => [
+                    'window'    => 'Return requests must be submitted within 30 days of the delivery date.',
+                    'condition' => 'Devices must be in like-new condition with original packaging, remote, and cables.',
+                    'activation'=> 'Streaming subscriptions and renewals are non-refundable once activated.',
+                    'proof'     => 'Damage or defect claims should include photos or video so we can fast-track support.',
+                ],
+            ],
+            'start' => [
+                'title' => 'How to start a return',
+                'steps' => [
+                    'contact' => 'Contact the concierge team with your order number and describe the issue.',
+                    'label'   => 'We email shipping instructions and, when applicable, a prepaid return label.',
+                    'pack'    => 'Pack the device securely and include the RMA form we send back to you.',
+                ],
+            ],
+            'shipping' => [
+                'title' => 'Return shipping & restocking',
+                'items' => [
+                    'responsibility' => 'Customers are responsible for return shipping unless the device arrived damaged or defective.',
+                    'restock'        => 'Returned items missing accessories may incur a restocking fee up to 15% of the device price.',
+                    'tracking'       => 'Keep the carrier tracking number until your refund is confirmed.',
+                ],
+            ],
+            'refunds' => [
+                'title' => 'Refunds & exchanges',
+                'items' => [
+                    'inspection' => 'We inspect returned devices within two business days of arrival.',
+                    'method'     => 'Approved refunds are issued to the original payment method; shipping fees are non-refundable.',
+                    'exchange'   => 'Need a replacement instead? Let us know and we can ship a replacement once the return is scanned in.',
+                ],
+            ],
+        ],
+        'support' => [
+            'title' => 'Need help with a return?',
+            'copy'  => 'Our bilingual concierge team can walk you through troubleshooting, exchanges, or warranty questions before you ship anything back.',
+            'hours' => 'Open Monday-Saturday · 9am-6pm Pacific',
+            'cta'   => 'Chat with concierge',
+        ],
+    ],
     'cart_page' => [
         'title'             => 'Your cart',
         'continue_shopping' => 'Continue shopping',

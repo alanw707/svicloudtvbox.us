@@ -509,3 +509,202 @@ if (!function_exists('svic_render_product_card')) {
         <?php
     }
 }
+
+if (!function_exists('svic_get_google_customer_reviews_optin_payload')) {
+    /**
+     * Prepare the payload for Google Customer Reviews opt-in.
+     *
+     * @param \WC_Order|null $order
+     *
+     * @return array|null
+     */
+    function svic_get_google_customer_reviews_optin_payload($order): ?array
+    {
+        if (!($order instanceof \WC_Order)) {
+            return null;
+        }
+
+        $enabled = apply_filters('svic_google_customer_reviews_enabled', true, $order);
+        if (!$enabled) {
+            return null;
+        }
+
+        $merchant_id = (int) apply_filters(
+            'svic_google_customer_reviews_merchant_id',
+            defined('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID') ? SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID : 0,
+            $order
+        );
+
+        if ($merchant_id <= 0) {
+            return null;
+        }
+
+        $order_number = $order->get_order_number();
+        $order_id = preg_replace('/[^A-Za-z0-9\-]/', '', (string) $order_number);
+        if ($order_id === '') {
+            $order_id = (string) $order->get_id();
+        }
+
+        $email = sanitize_email((string) $order->get_billing_email());
+        if ($email === '') {
+            return null;
+        }
+
+        $country = $order->get_shipping_country();
+        if (!$country) {
+            $country = $order->get_billing_country();
+        }
+        $country = strtoupper(preg_replace('/[^A-Z]/', '', (string) $country));
+        if ($country === '') {
+            $country = 'US';
+        }
+
+        $created_timestamp = $order->get_date_created() ? $order->get_date_created()->getTimestamp() : current_time('timestamp', true);
+        $transit_days = (int) apply_filters('svic_google_customer_reviews_estimated_transit_days', 5, $order);
+        if ($transit_days < 0) {
+            $transit_days = 0;
+        }
+        $estimated_timestamp = $created_timestamp + ($transit_days * DAY_IN_SECONDS);
+        $estimated_date = gmdate('Y-m-d', $estimated_timestamp);
+
+        $meta_keys = (array) apply_filters('svic_google_customer_reviews_gtin_meta_keys', ['_wc_gcr_gtin', '_gtin', 'gtin', 'svic_gtin'], $order);
+        $products = [];
+
+        foreach ($order->get_items() as $item) {
+            if (!($item instanceof \WC_Order_Item_Product)) {
+                continue;
+            }
+
+            $product = $item->get_product();
+            if (!($product instanceof \WC_Product)) {
+                continue;
+            }
+
+            $gtin_value = '';
+            foreach ($meta_keys as $meta_key) {
+                if (!is_string($meta_key) || $meta_key === '') {
+                    continue;
+                }
+                $raw = $product->get_meta($meta_key, true);
+                if (is_string($raw) && $raw !== '') {
+                    $gtin_value = preg_replace('/[^0-9A-Za-z]/', '', $raw);
+                }
+
+                if ($gtin_value !== '') {
+                    break;
+                }
+            }
+
+            if ($gtin_value === '') {
+                continue;
+            }
+
+            $products[] = ['gtin' => $gtin_value];
+        }
+
+        $payload = [
+            'merchant_id'             => $merchant_id,
+            'order_id'                => $order_id,
+            'email'                   => $email,
+            'delivery_country'        => $country,
+            'estimated_delivery_date' => $estimated_date,
+        ];
+
+        if ($products) {
+            $payload['products'] = $products;
+        }
+
+        $payload = apply_filters('svic_google_customer_reviews_optin_payload', $payload, $order);
+
+        if (!is_array($payload)) {
+            return null;
+        }
+
+        foreach (['merchant_id', 'order_id', 'email', 'delivery_country', 'estimated_delivery_date'] as $required_key) {
+            if (!isset($payload[$required_key]) || $payload[$required_key] === '') {
+                return null;
+            }
+        }
+
+        $payload['merchant_id'] = (int) $payload['merchant_id'];
+        $payload['order_id'] = (string) $payload['order_id'];
+        $payload['email'] = sanitize_email((string) $payload['email']);
+        $payload['delivery_country'] = strtoupper(preg_replace('/[^A-Z]/', '', (string) $payload['delivery_country']));
+        $payload['estimated_delivery_date'] = preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) $payload['estimated_delivery_date']) ? (string) $payload['estimated_delivery_date'] : $estimated_date;
+
+        if ($payload['merchant_id'] <= 0 || $payload['email'] === '' || $payload['delivery_country'] === '') {
+            return null;
+        }
+
+        if (isset($payload['products']) && is_array($payload['products'])) {
+            $filtered_products = [];
+            foreach ($payload['products'] as $product_entry) {
+                if (!is_array($product_entry) || !isset($product_entry['gtin'])) {
+                    continue;
+                }
+                $gtin_clean = preg_replace('/[^0-9A-Za-z]/', '', (string) $product_entry['gtin']);
+                if ($gtin_clean === '') {
+                    continue;
+                }
+                $filtered_products[] = ['gtin' => $gtin_clean];
+            }
+
+            if ($filtered_products) {
+                $payload['products'] = $filtered_products;
+            } else {
+                unset($payload['products']);
+            }
+        }
+
+        return $payload;
+    }
+}
+
+if (!function_exists('svic_render_google_customer_reviews_optin')) {
+    /**
+     * Output the Google Customer Reviews opt-in script block.
+     *
+     * @param \WC_Order|null $order
+     *
+     * @return void
+     */
+    function svic_render_google_customer_reviews_optin($order): void
+    {
+        static $rendered = false;
+
+        if ($rendered) {
+            return;
+        }
+
+        $payload = svic_get_google_customer_reviews_optin_payload($order);
+        if (!$payload) {
+            return;
+        }
+
+        $json_payload = wp_json_encode($payload, JSON_UNESCAPED_SLASHES);
+        if (!is_string($json_payload) || $json_payload === '') {
+            return;
+        }
+
+        $rendered = true;
+
+        ?>
+        <script src="https://apis.google.com/js/platform.js?onload=svicRenderGoogleCustomerReviews" async defer></script>
+        <script>
+          window.svicGoogleCustomerReviewsConfig = <?php echo $json_payload; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>;
+          window.svicRenderGoogleCustomerReviews = function() {
+            var config = window.svicGoogleCustomerReviewsConfig || null;
+            if (!config || !window.gapi || !window.gapi.load) {
+              return;
+            }
+            window.gapi.load('surveyoptin', function() {
+              if (!window.gapi || !window.gapi.surveyoptin || !window.gapi.surveyoptin.render) {
+                return;
+              }
+              window.gapi.surveyoptin.render(config);
+            });
+          };
+        </script>
+        <?php
+    }
+}

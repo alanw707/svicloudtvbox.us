@@ -530,12 +530,12 @@
   gap: clamp(0.7rem, 2.8vw, 1.1rem);
   padding: clamp(0.85rem, 2.4vw, 1.1rem) clamp(1.1rem, 3vw, 1.45rem);
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(104, 203, 215, 0.32);
-  background: linear-gradient(172deg, rgba(15, 38, 74, 0.95), rgba(8, 22, 48, 0.9));
+  border: none;
+  background: linear-gradient(172deg, rgba(18, 46, 86, 0.95), rgba(10, 26, 54, 0.9));
   color: rgba(235, 245, 255, 0.94);
   font-weight: 500;
   letter-spacing: 0.015em;
-  box-shadow: 0 20px 46px rgba(5, 14, 32, 0.46);
+  box-shadow: 0 16px 40px rgba(5, 14, 32, 0.42);
   text-align: left;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), background var(--transition-fast);
   cursor: pointer;
@@ -545,16 +545,14 @@
 #payment .wcs-saved-card-pill::after { display: none; }
 
 #payment .wcs-saved-card-pill.is-selected {
-  border-color: rgba(126, 246, 227, 0.6);
-  background: linear-gradient(178deg, rgba(24, 66, 118, 0.97), rgba(12, 30, 66, 0.93));
-  box-shadow: 0 24px 54px rgba(7, 20, 46, 0.5);
+  background: linear-gradient(178deg, rgba(28, 70, 122, 0.96), rgba(14, 34, 70, 0.92));
+  box-shadow: 0 22px 48px rgba(7, 20, 46, 0.48);
   transform: translateY(-1px);
 }
 
 #payment .wcs-saved-card-pill:focus-visible,
 #payment .wcs-saved-card-pill:hover {
-  border-color: rgba(126, 246, 227, 0.48);
-  box-shadow: 0 24px 52px rgba(6, 18, 40, 0.52);
+  box-shadow: 0 24px 52px rgba(6, 18, 40, 0.5);
   transform: translateY(-1px);
 }
 
@@ -749,11 +747,11 @@
 
 #payment [data-testid="link-account-element"],
 #payment #wc-stripe-link-account-element {
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(164, 237, 232, 0.24);
-  background: linear-gradient(155deg, rgba(10, 26, 58, 0.92), rgba(6, 18, 44, 0.94));
-  box-shadow: inset 0 0 0 1px rgba(94, 230, 208, 0.1), 0 16px 34px rgba(3, 12, 32, 0.42);
-  padding: clamp(0.65rem, 2vw, 0.9rem);
+  border-radius: calc(var(--radius-lg) - 2px);
+  border: none;
+  background: linear-gradient(174deg, rgba(14, 38, 78, 0.94), rgba(8, 22, 48, 0.9));
+  box-shadow: 0 18px 42px rgba(4, 12, 32, 0.44);
+  padding: clamp(0.5rem, 1.6vw, 0.8rem);
   overflow: visible;
   position: relative;
   display: flex;
@@ -765,10 +763,10 @@
 #payment #wc-stripe-link-account-element .p-ReturnAutofillPrompt {
   width: 100%;
   position: relative;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(164, 237, 232, 0.22);
-  background: rgba(6, 18, 44, 0.85);
-  box-shadow: inset 0 0 0 1px rgba(94, 230, 208, 0.06);
+  border-radius: calc(var(--radius-lg) - 6px);
+  border: none;
+  background: rgba(10, 28, 60, 0.9);
+  box-shadow: 0 16px 34px rgba(4, 10, 26, 0.44);
   color: rgba(244, 250, 255, 0.94);
   overflow: visible;
 }
