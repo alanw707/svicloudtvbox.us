@@ -2,16 +2,16 @@
 
 Last updated: 2025-02-14  
 Owner: Growth/Marketing  
-Scope: EN (US/CA/UK/AU/SEA diaspora), ZH-TW (global)
+Scope: US market — EN (primary), ZH-TW (for US-based audiences)
 
 ## 0) Executive Summary
 
 SviCloud competes in the Android TV box category with a differentiated angle: voice-enabled premium hardware (10P+), family-friendly features (Kids content), and unique in-home entertainment (Karaoke). Our plan leans into these moats—"Family streaming and karaoke in one box"—while addressing common frictions (setup clarity, trust, payment ease) and policy-compliant messaging.
 
 Primary growth levers:
-- Organic search with bilingual content clusters (EN + ZH-TW), leveraging Guides we’ve authored and Compare pages.
+- Organic search with bilingual content clusters (EN + ZH-TW) tailored to US audiences, leveraging Guides we’ve authored and Compare pages.
 - Performance media across Search (high-intent), YouTube/Meta/TikTok (demand creation + retargeting), and Shopping where policy permits.
-- Influencer/UGC engine in diaspora + home-entertainment niches (YouTube tech reviewers, family/kids, karaoke).
+- Influencer/UGC engine in US home-entertainment niches (YouTube tech reviewers, family/kids, karaoke).
 - Community/partnership distribution (KTV shops, Asian grocery/supermarkets, karaoke communities, WhatsApp/WeChat groups with compliant messaging).
 - Conversion and trust upgrades (Apple Pay/Google Pay via Stripe, reviews/UGC, compare tooling, demos, and setup visuals).
 
@@ -21,7 +21,7 @@ Primary growth levers:
 
 ## 1) Market Snapshot (Android TV Box)
 
-- Demand drivers: cord-cutting, international and diaspora audiences seeking regional live TV, and living-room karaoke resurgence post-2020. 
+- Demand drivers: cord-cutting among US audiences, multilingual households seeking familiar-language content experiences, and living-room karaoke resurgence post-2020. 
 - Competitive set: 
   - Mainstream: Amazon Fire TV, Google Chromecast (w/ Google TV), Apple TV, Roku, NVIDIA Shield, Xiaomi Mi Box.
   - Niche/alternatives: Unblock UBox, EVPAD, SuperBox, Formuler, MECOOL, Dynalink.
@@ -48,7 +48,7 @@ Implications: Our moat is the “family entertainment + karaoke + multilingual e
 
 ## 3) ICPs (Ideal Customer Profiles)
 
-- ICP A: Family households (US/CA/UK/AU + SEA diaspora) seeking kid-safe content and weekend karaoke; prioritizes simplicity and reliability.
+- ICP A: Family households in the US seeking kid-safe content and weekend karaoke; prioritizes simplicity and reliability.
 - ICP B: Multilingual households wanting regional live content + easy voice search; values subtitle options and language flexibility.
 - ICP C: Tech-forward streamers who want an open Android streaming box; appreciates Ethernet stability and peripherals.
 - ICP D: Gifting buyers (birthdays/holidays) looking for a home-entertainment upgrade that feels premium and inclusive.
@@ -72,7 +72,7 @@ Implications: Our moat is the “family entertainment + karaoke + multilingual e
 - Setup/How-to: Guides (done), troubleshooting, ADB advanced tips (compliant), remote pairing, Wi‑Fi optimization, Ethernet.
 - Compare/Alternatives: SviCloud 10P+ vs 10S; SviCloud vs NVIDIA Shield / Chromecast / Fire TV / Apple TV; feature-by-feature tables (performance, voice, karaoke, kids mode, Ethernet).
 - Family/kids: "Best Android TV box for families", "kid-friendly streaming box", "karaoke at home setup".
-- Regional/language: "watch [language] content overseas" framed as language experience and device setup tips (avoid copyrighted claims).
+- Regional/language: "watch [language] content in the US" framed as language experience and device setup tips (avoid copyrighted claims).
 - Purchase intent: "SviCloud TV Box setup", "SviCloud 10P+ voice remote", "Android streaming box with karaoke".
 
 ### 5.2 On-page & tech SEO
@@ -108,10 +108,10 @@ KPIs: Organic clicks, non-brand share, assisted conversions, time on page.
 - Top-funnel creatives: 15–30s demos—voice search, kids mode, karaoke moment; subtitles ON.
 - Mid-funnel: Testimonials/UGC, unboxings, setup speed.
 - Retargeting: Product highlights + incentive (free ship, extended returns) when allowed.
-- Audiences: Diaspora interests, family entertainment, karaoke, Android TV; LALs from purchasers.
+- Audiences: US multicultural/multilingual households, family entertainment, karaoke, Android TV; LALs from purchasers.
 
 ### 6.4 YouTube Influencers
-- Seed 20–30 review units across: tech TV box reviewers, family vloggers, karaoke creators, diaspora channels.
+- Seed 20–30 review units across: tech TV box reviewers, family vloggers, karaoke creators.
 - Creative beats: setup in 7 steps; voice search demo; karaoke fun; kids mode.
 
 KPIs: ROAS, CAC, view-through conversions, assisted revenue.
@@ -121,7 +121,7 @@ KPIs: ROAS, CAC, view-through conversions, assisted revenue.
 ## 7) Partnerships & Community
 
 - Retail/Pop-ups: Asian supermarkets, KTV/karaoke shops, electronics boutiques—sell box or run demo kiosks.
-- Communities: Facebook diaspora groups, karaoke clubs, parent groups (policy-safe messaging).
+- Communities: US-based Facebook groups (Chinese community), karaoke clubs, parent groups (policy-safe messaging).
 - Affiliate program: 10–15% rev share, 30-day cookie; assets kit in EN/ZH.
 - Events: Family karaoke night sponsorship; bundle giveaways with mic partners.
 
@@ -196,7 +196,7 @@ Weeks 9–12
 ## 13) Risks & Compliance
 
 - Platform policies around streaming content claims: avoid implying unauthorized access. Frame as Android streaming device + karaoke features.
-- Regional regulatory differences: ensure claims and returns/policies are clear.
+- Ensure claims and returns/policies are clear and compliant for the US market.
 - Influencer guidance: provide talking points; require policy-safe language; pre-review thumbnails.
 
 ---

@@ -66,7 +66,7 @@ ZH-TW mirrors (policy-safe phrasing):
 - FAQ → /faq/
 
 ### 1.6 Targeting, Bids, Budgets
-- Geos: US/CA/UK/AU + SEA diaspora concentrations (refine via performance).  
+- Geos: US (refine via performance).  
 - Languages: EN; separate ZH-TW campaign if landing exists.  
 - Bidding: Start Maximize Conversions (no tCPA) for learning; add tCPA after 30–50 conversions.  
 - Daily budget: Brand $50–$150; Features/Problem $150–$400 combined; Compare $100–$250.
@@ -89,7 +89,7 @@ ZH-TW mirrors (policy-safe phrasing):
 ### 2.2 Structure
 - Campaign 1 – Prospecting (Sales/Conversions)  
   - Ad Set A: Broad (18–65+, ENG)  
-  - Ad Set B: Interests (family entertainment, karaoke, Android TV, smart home; diaspora cultural interests)  
+  - Ad Set B: Interests (family entertainment, karaoke, Android TV, smart home)  
   - Ad Set C: ZH-TW (if running Chinese ads + landings)  
 - Campaign 2 – Retargeting (30‑day site engagers; video viewers 50%+)
 
@@ -109,7 +109,7 @@ ZH-TW mirrors (policy-safe phrasing):
 
 ### 2.4 Targeting & Budgets
 - Start ABO: $50–$150/ad set/day; expand to CBO post‑signal.  
-- Geos: US/CA/UK/AU; exclude low‑intent placements as needed; keep Advantage Placements on initially.  
+- Geos: US; exclude low‑intent placements as needed; keep Advantage Placements on initially.  
 - Brand safety: no risky content claims.
 
 ### 2.5 Measurement
@@ -152,7 +152,7 @@ ZH-TW mirrors (policy-safe phrasing):
 ## 5) UTM & Naming Conventions
 - Search: `utm_source=google&utm_medium=paid_search&utm_campaign={{campaign}}&utm_content={{adgroup}}&utm_term={keyword}`  
 - Meta: `utm_source=facebook&utm_medium=paid_social&utm_campaign={{campaign}}&utm_content={{adset}}&utm_creative={{ad.id}}`
-- Name schemas: `SEA|EN|Search|Features|Exact` / `US|EN|FB|Prospecting|Broad` etc.
+- Name schemas: `US|EN|Search|Features|Exact` / `US|EN|FB|Prospecting|Broad` etc.
 
 ---
 

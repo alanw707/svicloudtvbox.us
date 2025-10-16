@@ -14,7 +14,7 @@ Scope: Facebook Page, Shop/Catalog, Organic + Paid Ads, Measurement
 - Build trust with educational content and social proof
 - Drive revenue via Advantage+ Shopping and remarketing
 - Measure ROAS with Pixel + Conversions API and UTMs
-- Localize experience for Traditional Chinese audiences in Taiwan and Hong Kong
+- Localize experience for US-based Traditional Chinese audiences
 
 ---
 
@@ -45,7 +45,7 @@ Suggested Page bio/About snippet（繁體）：
 3) Choose “Checkout on your website”.
 4) Map product fields (title, price, availability, GTIN/MPN if available). Upload images ≥1024 px.
 5) Ensure policy compliance: no IP infringement; avoid implying unauthorized content access.
-6) Approve Shop in Commerce Manager; set shipping/returns to match site，補充台灣／香港運費、配送時間與退貨條件。
+6) Approve Shop in Commerce Manager; set shipping/returns to match site，補充美國運費、配送時間與退貨條件。
 7) Create product sets: “SVICLOUD 10P Plus”, “SVICLOUD 10S”, “Accessories/Bundles”.
 
 ---
@@ -92,7 +92,7 @@ Tone
 
 ## 30‑Day Posting Cadence (Example)
 
-- 3 posts/week + 3–5 stories/week（建議依 GMT+8 排程）
+- 3 posts/week + 3–5 stories/week（建議依美國時區（ET／PT）排程）
 - Weekly template
   - Mon: Demo/feature video (focus: 10P Plus)
   - Wed: Education carousel (setup tips, compatibility)
@@ -205,7 +205,7 @@ Weeks 5–8
 - 帖子4（機型比較）：圖文對比 10P Plus 與 10S，強調適用族群，配文：「10P Plus 適合追求旗艦性能，10S 更適合日常串流需求。你會選哪一台？」CTA：「比較詳情：https://svicloudtvbox.us/product-category/devices/」
 - 帖子5（真實評價）：引用客戶繁體好評，附授權照片或評分截圖，配文：「用戶 Alice 回饋：『系統很順，客服回覆超快。』感謝支持！」CTA：「歡迎留言分享你的體驗。」
 - 帖子6（限時優惠）：海報放大折扣與截止日期，配文：「本週限時：購買 SVICLOUD 10S 即送語音遙控器，數量有限。」CTA：「立即下單：https://svicloudtvbox.us/product/svicloud-10s/」
-- 帖子7（物流與售後 FAQ）：圖文列出運送時間、保固政策、退換流程，配文：「台灣／香港訂單安心配送，30 天內提供無憂退換。」CTA：「查看政策：https://svicloudtvbox.us/policies/」
+- 帖子7（物流與售後 FAQ）：圖文列出運送時間、保固政策、退換流程，配文：「美國訂單安心配送，30 天內提供無憂退換。」CTA：「查看政策：https://svicloudtvbox.us/policies/」
 - 帖子8（直播預告）：靜態圖呈現直播時間與主題，配文：「週五晚間 8 點直播教學：如何在 SVICLOUD 上自訂常用頻道。歡迎預先留言提問。」CTA：「點擊設定提醒。」
 - 帖子9（售後支援）：短片介紹客服團隊，配文：「有問題嗎？Messenger 與 WhatsApp 均可聯繫，我們提供繁體中文一對一支援。」CTA：「立即私訊獲得協助。」
 - 帖子10（剪線小祕訣）：長條圖分享節省有線電視費用的三個步驟，配文：「想降低每月帳單？從網速檢測到內容訂閱，這三步幫你輕鬆轉向 SVICLOUD。」CTA：「更多攻略請見官方部落格。」
@@ -241,7 +241,6 @@ Weeks 5–8
 - Creator Ads: Seed devices to micro-creators; run “Use existing post” ads under your account
 - YouTube: 2–4 min setup/tutorials; link back to site; embed in product pages
 - Email/SMS: Capture on site; send post-purchase review ask + tips; sync audiences back to Meta
-- LINE 官方帳號：建立 LINE OA 提供繁體客服與推播活動，導回 Facebook 貼文或官網
 - Google Ads: Brand + Shopping for high-intent searches; align with Meta retargeting
 - SEO: Comparison guides (“SVICLOUD 10P Plus vs 10S”), troubleshooting pages
 - Support ops: Add Facebook Chat Plugin to site; saved replies; response SLA <24h

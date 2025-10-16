@@ -208,6 +208,12 @@ if (!function_exists('svic_locale_to_hreflang')) {
         $language = strtolower($segments[0]);
         $variants = array_slice($segments, 1);
 
+        // Target Traditional Chinese content to US audiences
+        // via hreflang zh-Hant-US regardless of internal zh_TW locale.
+        if ($language === 'zh') {
+            return 'zh-Hant-US';
+        }
+
         if (!$variants) {
             return $language;
         }

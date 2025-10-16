@@ -21,6 +21,7 @@ require_once get_template_directory() . '/inc/class-svic-locale-resolver.php';
 require_once get_template_directory() . '/inc/guides-data.php';
 require_once get_template_directory() . '/inc/theme-maintenance.php';
 require_once get_template_directory() . '/inc/helpers-svic.php';
+require_once get_template_directory() . '/inc/class-svic-zh-sitemap.php';
 
 SVIC_Locale_Resolver::bootstrap();
 
@@ -932,7 +933,7 @@ add_action('init', function () {
     remove_action('wp_print_styles', 'print_emoji_styles');
     remove_action('admin_print_scripts', 'print_emoji_detection_script');
     remove_action('admin_print_styles', 'print_emoji_styles');
-});
+}, 30);
 
 add_filter('woocommerce_countries_allowed_countries', function ($countries) {
     if (!is_array($countries)) {
