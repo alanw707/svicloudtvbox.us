@@ -62,8 +62,8 @@ return [
                 ],
             ],
             'device_options' => [
-                '10p'   => 'SVICLOUD 10P+',
-                '10s'   => 'SVICLOUD 10S',
+                '10p'   => '小雲電視盒 10P+',
+                '10s'   => '小雲電視盒 10S',
                 'other' => '其他／不確定',
             ],
             'issue_options' => [
@@ -142,7 +142,7 @@ return [
         'hero' => [
             'badge'    => '退換貨服務',
             'title'    => '退換貨與退款政策',
-            'subtitle' => '我們希望您喜愛 SVICLOUD 裝置。如需退換貨，請在交貨後 30 天內依照以下步驟申請。',
+            'subtitle' => '我們希望您喜愛小雲電視盒。如需退換貨，請在交貨後 30 天內依照以下步驟申請。',
         ],
         'timeline' => [
             'title' => '退貨流程時間表',
@@ -234,7 +234,7 @@ return [
             ],
             'warranty' => [
                 'title' => '美國保固',
-                'copy'  => '所有 SVICLOUD 盒子皆享有一年美國保固。',
+                'copy'  => '所有小雲電視盒皆享有一年美國保固。',
             ],
             'concierge' => [
                 'title' => '雙語禮賓',
@@ -244,7 +244,7 @@ return [
     ],
     'checkout_page' => [
         'badge'    => '安全結帳',
-        'title'    => '完成您的 SVICLOUD 訂單',
+        'title'    => '完成您的小雲電視盒訂單',
         'subtitle' => '加州倉庫 48 小時內出貨，附英文與中文禮賓服務。',
         'summary'  => [
             'title'         => '訂單摘要',
@@ -439,8 +439,8 @@ return [
             'home'     => '首頁',
             'compare'  => '比較機型',
             'faq'      => '常見問題',
-            'ten_p'    => 'SVICLOUD 10P+ 旗艦款',
-            'ten_s'    => 'SVICLOUD 10S 輕巧款',
+            'ten_p'    => '小雲電視盒 10P+ 旗艦款',
+            'ten_s'    => '小雲電視盒 10S 輕巧款',
             'concierge'=> '禮賓客服',
             'guides'   => '使用指南',
             'about'    => '品牌故事',
@@ -485,7 +485,7 @@ return [
             'title_lead' => '中文電視盒天花板',
             'title_separator' => '，',
             'title_tail' => '全球娛樂任一電視即插即用',
-            'copy'    => 'SVICLOUD 頂規盒子一次打包 4K 體育、亞洲戲劇、卡拉 OK 與兒童內容，美國庫房急速出貨，隨附中英雙語禮賓服務。',
+            'copy'    => '小雲電視盒一次打包 4K 體育、亞洲戲劇、卡拉 OK 與兒童內容，美國庫房急速出貨，隨附中英雙語禮賓服務。',
             'bullets' => [
                 'shipping' => '美國本地出貨',
                 'warranty' => '一年美國保固',
@@ -498,7 +498,7 @@ return [
             ],
             'card' => [
                 'badge'     => '直播',
-                'headline'  => 'SVICLOUD 10P+ 硬體一覽',
+                'headline'  => '小雲電視盒 10P+ 硬體一覽',
                 'timestamp' => '美國最新批次 · 2024 年 7 月',
                 'stat'      => '4GB 記憶體 · 64GB 儲存',
                 'specs'     => [
@@ -562,11 +562,11 @@ return [
             ],
             'dealer' => [
                 'title' => '頂級評價經銷商',
-                'copy'  => '自 2019 年起深受美國 SVICLOUD 用戶信賴',
+                'copy'  => '自 2019 年起深受美國小雲電視盒用戶信賴',
             ],
         ],
         'feature_grid' => [
-            'title'    => '為什麼 SVICLOUD 勝過一般 IPTV 盒',
+            'title'    => '為什麼小雲電視盒勝過一般 IPTV 盒',
             'subtitle' => '專為超高清 4K 體育、追劇馬拉松與卡拉 OK 夜晚打造，不卡頓。',
             'cards'    => [
                 'entertainment' => [
@@ -579,14 +579,14 @@ return [
                 ],
                 'support' => [
                     'title' => '在地專家支援',
-                    'copy'  => '美國在地 SVICLOUD 專家協助安裝、更新與挑選喜愛頻道。',
+                    'copy'  => '美國在地小雲電視盒專家協助安裝、更新與挑選喜愛頻道。',
                 ],
             ],
         ],
         'experience' => [
             'badge'      => '真人客服，立即支援。',
             'title'      => '從安裝到觀影夜晚的全程禮賓服務',
-            'lead'       => '我們替您設定、排除故障並更新設備，讓您專心享受內容。所有方案皆包含 SVICLOUD 中英雙語專屬客服。',
+            'lead'       => '我們替您設定、排除故障並更新設備，讓您專心享受內容。所有方案皆包含小雲電視盒中英雙語專屬客服。',
             'card_title' => '我們替您處理',
             'services'   => [
                 'activation' => 'IPTV 開通與續約',
@@ -597,12 +597,12 @@ return [
             'cta' => '聯絡專家',
         ],
         'pricing' => [
-            'title'    => '選擇適合您的 SVICLOUD 設備',
-            'subtitle' => '挑選最適合家庭的硬體。無需 IPTV 綁約，純正 SVICLOUD 設備由美國直送。',
+            'title'    => '選擇適合您的小雲電視盒設備',
+            'subtitle' => '挑選最適合家庭的硬體。無需 IPTV 綁約，純正小雲電視盒設備由美國直送。',
             'cards'    => [
                 '10p' => [
                     'badge'    => '最受歡迎',
-                    'title'    => 'SVICLOUD 10P+',
+                    'title'    => '小雲電視盒 10P+',
                     'interval' => '台',
                     'copy'     => '旗艦 4GB 記憶體 / 64GB 儲存，內建兒童與卡拉 OK 應用。',
                     'features' => [
@@ -619,7 +619,7 @@ return [
                     ],
                 ],
                 '10s' => [
-                    'title'    => 'SVICLOUD 10S',
+                    'title'    => '小雲電視盒 10S',
                     'interval' => '台',
                     'copy'     => '超值 2GB 記憶體 / 32GB 儲存，適合臥室或第二台電視。',
                     'features' => [
@@ -646,7 +646,7 @@ return [
     'shop' => [
         'hero' => [
             'badge'     => '選購',
-            'title'     => 'SVICLOUD 電視盒',
+            'title'     => '小雲電視盒',
             'subtitle'  => '美國授權經銷，提供快速出貨、一年保固與英文/中文客服。',
             'highlights' => [
                 'shipping' => '美國倉庫 2-4 日快速出貨',
@@ -665,7 +665,7 @@ return [
                 'support'  => '附中英雙語遠端設定',
             ],
             '10p' => [
-                'title'   => 'SVICLOUD 10P+',
+                'title'   => '小雲電視盒 10P+',
                 'lead'    => '旗艦硬體配上專屬家庭功能與最快速的運算效能。',
                 'button'  => '查看 10P+',
                 'badge'   => '熱銷旗艦',
@@ -677,7 +677,7 @@ return [
                 ],
             ],
             '10s' => [
-                'title'   => 'SVICLOUD 10S',
+                'title'   => '小雲電視盒 10S',
                 'lead'    => '提供 4K 影音播放的精省配置，適合重視性價比的家庭。',
                 'button'  => '查看 10S',
                 'badge'   => '超值推薦',
@@ -693,8 +693,8 @@ return [
     'compare' => [
         'hero' => [
             'badge'    => '機型比較',
-            'title'    => 'SVICLOUD 10P+ 與 10S 比較',
-            'subtitle' => '逐項比較硬體規格、功能與使用情境，幫你挑到最適合家庭的 SVICLOUD 盒子。',
+            'title'    => '小雲電視盒 10P+ 與 10S 比較',
+            'subtitle' => '逐項比較硬體規格、功能與使用情境，幫你挑到最適合家庭的小雲電視盒。',
         ],
         'differences' => [
             'premium_performance' => [
@@ -768,9 +768,9 @@ return [
         'final_cta' => [
             'badge'   => '選擇您的機型',
             'title'   => '準備好升級家的觀影體驗了嗎？',
-            'copy'    => '選擇最符合您家庭需求與預算的 SVICLOUD 機型。',
-            'cta_10p' => '選購 SVICLOUD 10P+',
-            'cta_10s' => '選購 SVICLOUD 10S',
+            'copy'    => '選擇最符合您家庭需求與預算的小雲電視盒機型。',
+            'cta_10p' => '選購小雲電視盒 10P+',
+            'cta_10s' => '選購小雲電視盒 10S',
         ],
     ],
     'about' => [
@@ -784,7 +784,7 @@ return [
         'story' => [
             'title' => '品牌起源',
             'lead'  => '從客廳小聚，到成為原廠認證的美洲夥伴。',
-            'body'  => '<p>2019 年，我們從幫親友汰換不穩定的 IPTV 盒子開始，介紹真正原廠 SVICLOUD 設備。口碑很快擴散：卡拉 OK 派對、體育迷聚會、農曆新年直播都需要同一件事——可信賴、附保固的正版來源。</p><p>我們投入美國在地庫存、中英雙語遠端協助與快速售後，逐步成為西岸 SVICLOUD 使用者最熟悉的聯絡窗口。也因為這份投入，通過 SVI.STUDIO 原廠審核，取得美洲地區官方授權資格。</p>',
+            'body'  => '<p>2019 年，我們從幫親友汰換不穩定的 IPTV 盒子開始，介紹真正原廠的小雲電視盒。口碑很快擴散：卡拉 OK 派對、體育迷聚會、農曆新年直播都需要同一件事——可信賴、附保固的正版來源。</p><p>我們投入美國在地庫存、中英雙語遠端協助與快速售後，逐步成為西岸小雲電視盒使用者最熟悉的聯絡窗口。也因為這份投入，通過 SVI.STUDIO 原廠審核，取得美洲地區官方授權資格。</p>',
         ],
         'stats' => [
             'orders' => [
@@ -818,7 +818,7 @@ return [
                 '2019' => [
                     'year'  => '2019',
                     'title' => '社群試用起步',
-                    'copy'  => '在灣區客廳舉辦 SVICLOUD 體驗，服務對中文節目有需求的家庭。',
+                    'copy'  => '在灣區客廳舉辦小雲電視盒體驗，服務對中文節目有需求的家庭。',
                 ],
                 '2020' => [
                     'year'  => '2020',
@@ -845,7 +845,7 @@ return [
         'values' => [
             'badge' => '我們的承諾',
             'title' => '真品、禮賓、社群三大核心',
-            'lead'  => '每位 SVICLOUD 用戶都能獲得原廠硬體、即時協助，以及讓全家共享的娛樂體驗。',
+            'lead'  => '每位小雲電視盒用戶都能獲得原廠硬體、即時協助，以及讓全家共享的娛樂體驗。',
             'authentic' => [
                 'title' => '保證真品',
                 'copy'  => '庫存直接來自原廠，序號可追蹤，享有一年美國保固。',
@@ -869,7 +869,7 @@ return [
                 'events'   => '提供節慶直播、卡拉 OK 歌單與頻道攻略',
             ],
             'cta_primary'   => '聯絡禮賓客服',
-            'cta_secondary' => '瀏覽 SVICLOUD 設備',
+        'cta_secondary' => '瀏覽小雲電視盒設備',
         ],
     ],
 
@@ -1046,11 +1046,11 @@ return [
                     'copy'  => '預覽 Yogurt TV 分類、隨選內容與每個家庭必裝的應用程式。',
                 ],
                 'features' => [
-                    'title' => 'SVICLOUD 10 系列核心特色',
+                    'title' => '小雲電視盒 10 系列核心特色',
                     'copy'  => '深入了解 10P+ 與 10S 的硬體規格、編碼能力與家庭娛樂體驗。',
                 ],
                 'which' => [
-                    'title' => '我適合哪款 SVICLOUD？',
+                    'title' => '我適合哪款小雲電視盒？',
                     'copy'  => '比較 10P+ 與 10S 的使用情境，第一次就選對機種。',
                 ],
             ],
@@ -1062,12 +1062,12 @@ return [
                 ],
                 'why' => [
                     'title'   => '為什麼要在 SVICLOUDTVBOX.US 購買',
-                    'lead'    => '從加州倉庫直接出貨，保證正版 SVICLOUD 10 系列機種、禮賓安裝與一年美國保固。',
+                    'lead'    => '從加州倉庫直接出貨，保證正版小雲電視盒 10 系列機種、禮賓安裝與一年美國保固。',
                     'updated' => '更新：2025 年 1 月 15 日',
                     'sections' => [
                         'fulfillment' => [
                             'heading' => '加州現貨，48 小時內啟運',
-                            'body'    => '<p>所有 SVICLOUD 10P+ 與 10S 皆由加州倉庫出貨，檢查序號、封條與最新韌體後才寄出；中午 12 點前的訂單通常可在兩個工作天內出貨。</p>
+                            'body'    => '<p>所有小雲電視盒 10P+ 與 10S 皆由加州倉庫出貨，檢查序號、封條與最新韌體後才寄出；中午 12 點前的訂單通常可在兩個工作天內出貨。</p>
 <ul>
   <li>提供 UPS／USPS 需簽收的配送選項，包裹更安全。</li>
   <li>美國現貨免去海關延誤與水貨或翻新機的風險。</li>
@@ -1145,8 +1145,8 @@ return [
                     ],
                 ],
                 'features' => [
-                    'title'   => 'SVICLOUD 10 系列核心特色',
-                    'lead'    => '一次掌握 SVICLOUD 10P+ 與 10S 的硬體規格、串流技術與家庭娛樂優勢。',
+                    'title'   => '小雲電視盒 10 系列核心特色',
+                    'lead'    => '一次掌握小雲電視盒 10P+ 與 10S 的硬體規格、串流技術與家庭娛樂優勢。',
                     'updated' => '更新：2025 年 1 月 15 日',
                     'sections' => [
                         'hardware' => [
@@ -1178,7 +1178,7 @@ return [
                         ],
                         'family' => [
                             'heading' => '全家娛樂一次滿足',
-                            'body'    => '<p>SVICLOUD 不只有直播，Yogurt Kids 提供分齡內容、WeFun Karaoke 支援歌單與評分，Cherry TV 以密碼鎖定成人專區。</p>
+                            'body'    => '<p>小雲電視盒不只有直播，Yogurt Kids 提供分齡內容、WeFun Karaoke 支援歌單與評分，Cherry TV 以密碼鎖定成人專區。</p>
 <ul>
   <li>建立兒童模式，僅顯示教育與卡通內容。</li>
   <li>Karaoke 可排歌、合唱並每週更新新曲。</li>
@@ -1192,8 +1192,8 @@ return [
                     ],
                 ],
                 'models' => [
-                    'title'   => '我適合哪款 SVICLOUD？',
-                    'lead'    => '依照收視習慣、周邊需求與預算，挑選最適合的 SVICLOUD 10P+ 或 10S。',
+                    'title'   => '我適合哪款小雲電視盒？',
+                    'lead'    => '依照收視習慣、周邊需求與預算，挑選最適合的小雲電視盒 10P+ 或 10S。',
                     'updated' => '更新：2025 年 1 月 15 日',
                     'sections' => [
                         'summary' => [
@@ -1202,8 +1202,8 @@ return [
   <thead>
     <tr>
       <th>項目</th>
-      <th>SVICLOUD 10P+</th>
-      <th>SVICLOUD 10S</th>
+      <th>小雲電視盒 10P+</th>
+      <th>小雲電視盒 10S</th>
     </tr>
   </thead>
   <tbody>

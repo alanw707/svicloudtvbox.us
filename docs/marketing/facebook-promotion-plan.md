@@ -20,7 +20,7 @@ Scope: Facebook Page, Shop/Catalog, Organic + Paid Ads, Measurement
 
 ## Create The Page (New Pages Experience)
 
-- Page name: “SVICLOUD 電視盒美國授權經銷店”
+- Page name: “小雲電視盒（SVICLOUD）美國授權經銷店”
 - Username: “@svicloudtvboxus” (簡潔易記；沿用英文便於搜尋)
 - Category: “Shopping & retail” or “Electronics”
 - Profile: square high‑res logo (≥1024×1024, 1:1)
@@ -34,7 +34,7 @@ Scope: Facebook Page, Shop/Catalog, Organic + Paid Ads, Measurement
 
 Suggested Page bio/About snippet（繁體）：
 
-> SVICLOUD 電視盒美國授權經銷店｜5 分鐘完成安裝，介面流暢、客服即時支援。提供 SVICLOUD 10P Plus 與 10S，原廠授權保固、繁體中文服務與安心退換貨。需要協助？歡迎隨時聯絡我們。
+> 小雲電視盒（SVICLOUD）美國授權經銷店｜5 分鐘完成安裝，介面流暢、客服即時支援。提供小雲電視盒 10P Plus 與 10S，原廠授權保固、繁體中文服務與安心退換貨。需要協助？歡迎隨時聯絡我們。
 
 ---
 
@@ -105,7 +105,7 @@ Tone
 ## Community & Support
 
 - Enable “Click to Message” on posts periodically; use quick replies (配送、保固、安裝)
-- Create a private “SVICLOUD Owners 繁體社群” Group linked to Page for support/UGC
+- Create a private “小雲電視盒 Owners 繁體社群” Group linked to Page for support/UGC
 - Comment moderation: respond within 24h, hide spam, escalate issues to DM
 - Review generation: after purchase, email/SMS ask to leave a Page Recommendation
 
@@ -197,26 +197,39 @@ Weeks 5–8
 
 ---
 
+## Product Descriptions（繁體草稿）
+
+- **小雲電視盒 10P Plus｜旗艦款**  
+  八核心處理器、4GB 記憶體與 64GB 儲存結合 Wi-Fi 6 與藍牙語音遙控，內建兒童模式與卡拉 OK 應用，提供客廳家庭劇院、球賽直播與 K 歌夜最快速的操作體驗。加州倉庫 48 小時內出貨，含一年美國保固與中英雙語禮賓客服。  
+  - 建議亮點：4K HDR / AV1 解碼｜Kids Mode + Karaoke 應用｜Wi-Fi 6 + 藍牙語音遙控｜附 HDMI、USB 3.0｜美國授權經銷商保固
+- **小雲電視盒 10S｜超值款**  
+  2GB 記憶體與 32GB 儲存支援 4K HDR 與 AV1 解碼，保留語音遙控與常用 App，專為臥室、客房與首次入手中文電視盒的家庭打造。加州倉庫快速寄送，享一年美國保固與遠端開機支援。  
+  - 建議亮點：4K HDR / AV1 解碼｜語音遙控｜HDMI + 有線網路 + USB 3.0 端口｜無月費｜美國客服即時支援
+
+> 將上述文案同步到 WooCommerce 商品描述、Facebook Catalog description 欄位，確保繁體體驗一致。
+
+---
+
 ## Sample Organic Posts（繁體示例）
 
-- 帖子1（品牌介紹）：搭配 1 分鐘直式影片，開場呈現 SVICLOUD 10P Plus 外觀與家庭使用場景，口白文案：「歡迎來到 SVICLOUD TV Box US 官方頁面，輕鬆用繁體中文打造流暢的觀影體驗。」CTA：「立即選購：https://svicloudtvbox.us/」
-- 帖子2（產品亮點－10P Plus）：三頁輪播圖，分別展示處理器、雙頻 Wi‑Fi、語音遙控，配文：「為什麼選擇 SVICLOUD 10P Plus？效能強、連線穩、操作直覺。」CTA：「了解更多：https://svicloudtvbox.us/product/svicloud-10p-plus/」
+- 帖子1（品牌介紹）：搭配 1 分鐘直式影片，開場呈現小雲電視盒 10P Plus 外觀與家庭使用場景，口白文案：「歡迎來到小雲電視盒（SVICLOUD TV Box US）官方頁面，輕鬆用繁體中文打造流暢的觀影體驗。」CTA：「立即選購：https://svicloudtvbox.us/」
+- 帖子2（產品亮點－10P Plus）：三頁輪播圖，分別展示處理器、雙頻 Wi‑Fi、語音遙控，配文：「為什麼選擇小雲電視盒 10P Plus？效能強、連線穩、操作直覺。」CTA：「了解更多：https://svicloudtvbox.us/product/svicloud-10p-plus/」
 - 帖子3（快速安裝指南）：15 秒短片示範插電、連網、登入三步驟，字幕：「三步完成安裝，5 分鐘開機就緒。」CTA：「查看詳細教學：https://svicloudtvbox.us/support/」
 - 帖子4（機型比較）：圖文對比 10P Plus 與 10S，強調適用族群，配文：「10P Plus 適合追求旗艦性能，10S 更適合日常串流需求。你會選哪一台？」CTA：「比較詳情：https://svicloudtvbox.us/product-category/devices/」
 - 帖子5（真實評價）：引用客戶繁體好評，附授權照片或評分截圖，配文：「用戶 Alice 回饋：『系統很順，客服回覆超快。』感謝支持！」CTA：「歡迎留言分享你的體驗。」
-- 帖子6（限時優惠）：海報放大折扣與截止日期，配文：「本週限時：購買 SVICLOUD 10S 即送語音遙控器，數量有限。」CTA：「立即下單：https://svicloudtvbox.us/product/svicloud-10s/」
+- 帖子6（限時優惠）：海報放大折扣與截止日期，配文：「本週限時：購買小雲電視盒 10S 即送語音遙控器，數量有限。」CTA：「立即下單：https://svicloudtvbox.us/product/svicloud-10s/」
 - 帖子7（物流與售後 FAQ）：圖文列出運送時間、保固政策、退換流程，配文：「美國訂單安心配送，30 天內提供無憂退換。」CTA：「查看政策：https://svicloudtvbox.us/policies/」
-- 帖子8（直播預告）：靜態圖呈現直播時間與主題，配文：「週五晚間 8 點直播教學：如何在 SVICLOUD 上自訂常用頻道。歡迎預先留言提問。」CTA：「點擊設定提醒。」
+- 帖子8（直播預告）：靜態圖呈現直播時間與主題，配文：「週五晚間 8 點直播教學：如何在小雲電視盒上自訂常用頻道。歡迎預先留言提問。」CTA：「點擊設定提醒。」
 - 帖子9（售後支援）：短片介紹客服團隊，配文：「有問題嗎？Messenger 與 WhatsApp 均可聯繫，我們提供繁體中文一對一支援。」CTA：「立即私訊獲得協助。」
-- 帖子10（剪線小祕訣）：長條圖分享節省有線電視費用的三個步驟，配文：「想降低每月帳單？從網速檢測到內容訂閱，這三步幫你輕鬆轉向 SVICLOUD。」CTA：「更多攻略請見官方部落格。」
+- 帖子10（剪線小祕訣）：長條圖分享節省有線電視費用的三個步驟，配文：「想降低每月帳單？從網速檢測到內容訂閱，這三步幫你輕鬆轉向小雲電視盒。」CTA：「更多攻略請見官方部落格。」
 
 ---
 
 ## Sample Ad Copy（繁體）
 
-- 拓客廣告（影片）： 「用 SVICLOUD 10P Plus 升級你的觀影體驗——安裝快速、介面流暢、客服即時回應。立即於官方商城下單。」
+- 拓客廣告（影片）： 「用小雲電視盒 10P Plus 升級你的觀影體驗——安裝快速、介面流暢、客服即時回應。立即於官方商城下單。」
 - 重定向廣告（輪播）： 「還在比較嗎？立刻查看真實用戶評價、逐頁了解功能亮點，享受安心退換。」
-- 限時優惠廣告： 「限時組合：SVICLOUD 10S + 配件禮包，本週下單享免運。」
+- 限時優惠廣告： 「限時組合：小雲電視盒 10S + 配件禮包，本週下單享免運。」
 
 ---
 
@@ -226,7 +239,7 @@ Weeks 5–8
 - 第 2 篇（10P Plus 核心賣點）：橫式三圖輪播，展示效能、Wi‑Fi、語音遙控，凸顯旗艦定位。
 - 第 3 篇（10S 入門首選）：對比價格與適用情境，強調日常娛樂、長輩也能輕鬆操作。
 - 第 4 篇（安裝教學影片）：45 秒教學，字幕語音皆為繁體中文，附使用手冊下載連結。
-- 第 5 篇（客戶故事）：圖文分享用戶從有線電視轉向 SVICLOUD 的過程，突出節費與客服支援。
+- 第 5 篇（客戶故事）：圖文分享用戶從有線電視轉向小雲電視盒的過程，突出節費與客服支援。
 - 第 6 篇（售後政策 FAQ）：圖表列出保固期、退換流程、客服管道，附 Messenger 一鍵聯絡按鈕。
 - 第 7 篇（直播互動預告）：公告下週直播主題「如何自訂常用頻道」，鼓勵留言提問並設定提醒。
 - 第 8 篇（限時促銷）：倒數海報說明折扣碼與截止日，提醒庫存有限。
