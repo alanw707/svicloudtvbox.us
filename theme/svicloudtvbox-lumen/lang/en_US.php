@@ -444,6 +444,7 @@ return [
             'concierge'=> 'Concierge',
             'guides'   => 'Guides',
             'about'    => 'About',
+            'return_policy' => 'Return Policy',
             'order_tracking' => 'Order Tracking',
             'account'  => 'Account',
             'my-account' => 'Account',

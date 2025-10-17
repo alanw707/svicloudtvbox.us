@@ -143,7 +143,6 @@
     gap: 12px;
   }
 
-  .lumen-header__actions > .lumen-lang-toggle,
   .lumen-header__actions > .lumen-cart-link {
     display: none;
   }

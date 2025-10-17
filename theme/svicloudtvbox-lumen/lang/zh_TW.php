@@ -444,6 +444,7 @@ return [
             'concierge'=> '禮賓客服',
             'guides'   => '使用指南',
             'about'    => '品牌故事',
+            'return_policy' => '退換貨政策',
             'order_tracking' => '訂單查詢',
             'account'  => '會員中心',
             'my-account' => '會員中心',

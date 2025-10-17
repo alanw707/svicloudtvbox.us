@@ -422,6 +422,8 @@ add_filter('wp_nav_menu_objects', function ($items, $args) {
         'troubleshooting'      => 'guides.nav.troubleshooting',
         'guides-troubleshooting' => 'guides.nav.troubleshooting',
         'about'                => 'header.nav.about',
+        'return-policy'        => 'header.nav.return_policy',
+        'returns'              => 'header.nav.return_policy',
         'order-tracking'       => 'header.nav.order_tracking',
         'account'              => 'header.nav.account',
         'my-account'           => 'header.nav.account',
