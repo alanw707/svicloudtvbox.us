@@ -1,0 +1,101 @@
+.policy-timeline {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  margin: 0 auto;
+  max-width: 960px;
+  z-index: 1;
+}
+
+.policy-timeline__item {
+  background: rgba(8, 16, 34, 0.68);
+  border: 1px solid rgba(117, 165, 255, 0.32);
+  border-radius: 20px;
+  padding: 1.3rem 1.4rem;
+  box-shadow: 0 22px 48px rgba(6, 14, 36, 0.4);
+  text-align: left;
+  backdrop-filter: blur(14px);
+}
+
+.policy-timeline__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: rgba(18, 32, 58, 0.9);
+  background: linear-gradient(135deg, rgba(94, 230, 208, 0.9), rgba(62, 145, 255, 0.9));
+}
+
+.policy-timeline__copy {
+  margin: 0;
+  color: rgba(226, 233, 255, 0.88);
+  line-height: 1.55;
+}
+
+.policy-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  counter-reset: policy-step;
+}
+
+.policy-step {
+  color: rgba(214, 224, 255, 0.88);
+  line-height: 1.68;
+  background: rgba(21, 33, 64, 0.38);
+  border: 1px solid rgba(104, 149, 255, 0.18);
+  border-radius: 18px;
+  padding: 1rem 1.5rem;
+  position: relative;
+  padding-left: 3.4rem;
+  counter-increment: policy-step;
+}
+
+.policy-step::before {
+  content: counter(policy-step, decimal);
+  position: absolute;
+  left: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #04132d;
+  background: linear-gradient(135deg, rgba(94, 230, 208, 0.95), rgba(66, 158, 255, 0.95));
+  box-shadow: 0 10px 20px rgba(6, 16, 40, 0.35);
+  line-height: 1;
+}
+
+@media (max-width: 720px) {
+  .policy-timeline {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    text-align: left;
+  }
+
+  .policy-timeline__item {
+    padding: 1.1rem 1.2rem;
+  }
+
+  .policy-step {
+    padding: 0.95rem 1.35rem;
+    padding-left: 3rem;
+  }
+
+  .policy-step::before {
+    left: 0.85rem;
+    width: 2.05rem;
+    height: 2.05rem;
+    font-size: 0.95rem;
+  }
+}

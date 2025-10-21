@@ -117,7 +117,7 @@ return [
                 ],
                 'whatsapp' => [
                     'label' => 'WhatsApp',
-                    'value' => '702-398-3416',
+                    'value' => '+85363403380',
                     'cta'   => '開啟 WhatsApp',
                 ],
                 'email' => [

@@ -1,0 +1,101 @@
+.policy-hero {
+  padding: clamp(4rem, 7vw, 6.5rem) 1.5rem clamp(3rem, 6vw, 4.5rem);
+  position: relative;
+  overflow: hidden;
+}
+
+.policy-hero::before,
+.policy-hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 60%;
+  opacity: 0.38;
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+.policy-hero::before {
+  width: 480px;
+  height: 480px;
+  top: -140px;
+  left: -200px;
+  background: linear-gradient(140deg, rgba(72, 121, 255, 0.8), rgba(28, 208, 243, 0.55));
+}
+
+.policy-hero::after {
+  width: 420px;
+  height: 420px;
+  bottom: -160px;
+  right: -180px;
+  background: linear-gradient(140deg, rgba(255, 173, 99, 0.45), rgba(255, 88, 166, 0.55));
+}
+
+.policy-hero__inner {
+  position: relative;
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 1;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.policy-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(238, 244, 255, 0.88);
+}
+
+.policy-hero__title {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.policy-hero__subtitle {
+  font-size: clamp(1.08rem, 1.8vw, 1.25rem);
+  color: rgba(220, 229, 255, 0.82);
+  margin: 0 auto;
+  max-width: 70ch;
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .policy-hero {
+    padding: 3.2rem 1.25rem 2.5rem;
+  }
+
+  .policy-hero::before {
+    width: 320px;
+    height: 320px;
+    top: -160px;
+    left: -120px;
+  }
+
+  .policy-hero::after {
+    width: 260px;
+    height: 260px;
+    bottom: -140px;
+    right: -110px;
+  }
+
+  .policy-hero__inner {
+    gap: 1.1rem;
+  }
+
+  .policy-hero__title {
+    font-size: clamp(1.9rem, 7vw, 2.35rem);
+  }
+
+  .policy-hero__subtitle {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+}

@@ -70,10 +70,12 @@
     ]
   },
   "return-policy": {
-    "label": "Return policy page",
+    "label": "Policy pages",
     "output": "return-policy.css",
     "parts": [
-      "69-return-policy.css"
+      "69a-policy-layout.css",
+      "69b-policy-hero.css",
+      "70a-return-policy.css"
     ]
   },
   "support": {

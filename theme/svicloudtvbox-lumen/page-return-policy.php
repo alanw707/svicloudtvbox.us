@@ -15,6 +15,7 @@ $timeline_items = [
 $policy_sections = [
     [
         'title' => svic_translate_html('return_policy.sections.eligibility.title'),
+        'anchor' => 'eligibility',
         'type'  => 'list',
         'items' => [
             svic_translate_html('return_policy.sections.eligibility.items.window'),
@@ -25,6 +26,7 @@ $policy_sections = [
     ],
     [
         'title' => svic_translate_html('return_policy.sections.start.title'),
+        'anchor' => 'start',
         'type'  => 'steps',
         'items' => [
             svic_translate_html('return_policy.sections.start.steps.contact'),
@@ -34,6 +36,7 @@ $policy_sections = [
     ],
     [
         'title' => svic_translate_html('return_policy.sections.shipping.title'),
+        'anchor' => 'shipping',
         'type'  => 'list',
         'items' => [
             svic_translate_html('return_policy.sections.shipping.items.responsibility'),
@@ -43,6 +46,7 @@ $policy_sections = [
     ],
     [
         'title' => svic_translate_html('return_policy.sections.refunds.title'),
+        'anchor' => 'refunds',
         'type'  => 'list',
         'items' => [
             svic_translate_html('return_policy.sections.refunds.items.inspection'),
@@ -69,38 +73,38 @@ $contact_page_url = function_exists('svic_url_with_lang')
     ? svic_url_with_lang(home_url('/contact/'))
     : home_url('/contact/');
 ?>
-<main class="return-policy-page">
-  <section class="return-policy-hero">
-    <div class="return-policy-hero__inner">
-      <span class="return-policy-hero__badge"><?php echo svic_translate_html('return_policy.hero.badge'); ?></span>
-      <h1 class="return-policy-hero__title"><?php echo svic_translate_html('return_policy.hero.title'); ?></h1>
-      <p class="return-policy-hero__subtitle"><?php echo svic_translate_html('return_policy.hero.subtitle'); ?></p>
-      <div class="return-policy-timeline" aria-label="<?php echo esc_attr(svic_translate_html('return_policy.timeline.title')); ?>">
+<main class="policy-page policy-page--returns">
+  <section class="policy-hero">
+    <div class="policy-hero__inner">
+      <span class="policy-hero__badge"><?php echo svic_translate_html('return_policy.hero.badge'); ?></span>
+      <h1 class="policy-hero__title"><?php echo svic_translate_html('return_policy.hero.title'); ?></h1>
+      <p class="policy-hero__subtitle"><?php echo svic_translate_html('return_policy.hero.subtitle'); ?></p>
+      <div class="policy-timeline" aria-label="<?php echo esc_attr(svic_translate_html('return_policy.timeline.title')); ?>">
         <?php foreach ($timeline_items as $index => $item) : ?>
-          <div class="return-policy-timeline__item">
-            <span class="return-policy-timeline__label"><?php echo esc_html($index + 1); ?></span>
-            <p class="return-policy-timeline__copy"><?php echo $item; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+          <div class="policy-timeline__item">
+            <span class="policy-timeline__label"><?php echo esc_html($index + 1); ?></span>
+            <p class="policy-timeline__copy"><?php echo $item; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
           </div>
         <?php endforeach; ?>
       </div>
     </div>
   </section>
 
-  <section class="return-policy-sections">
-    <div class="return-policy-sections__inner">
+  <section class="policy-sections">
+    <div class="policy-sections__inner">
       <?php foreach ($policy_sections as $section) : ?>
-        <article class="return-policy-card">
-          <h2 class="return-policy-card__title"><?php echo $section['title']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
+        <article id="<?php echo esc_attr('policy-section-' . $section['anchor']); ?>" class="policy-card">
+          <h2 class="policy-card__title"><?php echo $section['title']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
           <?php if ($section['type'] === 'steps') : ?>
-            <ol class="return-policy-steps">
+            <ol class="policy-steps">
               <?php foreach ($section['items'] as $item) : ?>
-                <li class="return-policy-step">
+                <li class="policy-step">
                   <?php echo $item; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 </li>
               <?php endforeach; ?>
             </ol>
           <?php else : ?>
-            <ul class="return-policy-list">
+            <ul class="policy-list">
               <?php foreach ($section['items'] as $item) : ?>
                 <li>
                   <?php echo $item; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -111,11 +115,11 @@ $contact_page_url = function_exists('svic_url_with_lang')
         </article>
       <?php endforeach; ?>
 
-      <aside class="return-policy-card return-policy-support">
-        <div class="return-policy-support__copy">
-          <h2 class="return-policy-support__title"><?php echo $support_title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
-          <p class="return-policy-support__body"><?php echo $support_copy; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-          <div class="return-policy-support__meta">
+      <aside id="policy-section-support" class="policy-card policy-support">
+        <div class="policy-support__copy">
+          <h2 class="policy-support__title"><?php echo $support_title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
+          <p class="policy-support__body"><?php echo $support_copy; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+          <div class="policy-support__meta">
             <?php if ($contact_phone_label && $contact_phone_value && $contact_phone_href) : ?>
               <span>
                 <strong><?php echo $contact_phone_label; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></strong>
@@ -131,12 +135,12 @@ $contact_page_url = function_exists('svic_url_with_lang')
               </span>
             <?php endif; ?>
             <?php if ($support_hours) : ?>
-              <span class="return-policy-support__note"><?php echo $support_hours; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+              <span class="policy-support__note"><?php echo $support_hours; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
             <?php endif; ?>
           </div>
         </div>
-        <div class="return-policy-support__actions">
-          <a class="return-policy-support__cta" href="<?php echo esc_url($contact_page_url); ?>">
+        <div class="policy-support__actions">
+          <a class="policy-support__cta" href="<?php echo esc_url($contact_page_url); ?>">
             <?php echo $support_cta; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
           </a>
         </div>

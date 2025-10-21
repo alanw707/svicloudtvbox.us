@@ -1,0 +1,196 @@
+.policy-page {
+  background: radial-gradient(circle at top, rgba(53, 94, 241, 0.12), transparent 50%), #050914;
+  color: rgba(241, 244, 255, 0.96);
+}
+
+.policy-sections {
+  padding: clamp(3rem, 6vw, 5rem) 1.5rem clamp(5rem, 9vw, 7.5rem);
+}
+
+.policy-sections__inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  justify-items: center;
+}
+
+.policy-card {
+  background: rgba(8, 15, 30, 0.8);
+  border: 1px solid rgba(94, 142, 255, 0.24);
+  border-radius: 24px;
+  padding: clamp(1.6rem, 3vw, 2.2rem);
+  box-shadow: 0 28px 46px rgba(5, 14, 38, 0.38);
+  backdrop-filter: blur(16px);
+  display: grid;
+  gap: clamp(1.25rem, 2.4vw, 1.8rem);
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  scroll-margin-top: 96px;
+  box-sizing: border-box;
+}
+
+.policy-card__title {
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: rgba(240, 245, 255, 0.95);
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid rgba(91, 138, 228, 0.24);
+}
+
+.policy-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.policy-list li {
+  color: rgba(214, 224, 255, 0.88);
+  line-height: 1.68;
+  background: rgba(21, 33, 64, 0.38);
+  border: 1px solid rgba(104, 149, 255, 0.18);
+  border-radius: 18px;
+  padding: 1rem 1.25rem;
+}
+
+.policy-support {
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.policy-support__copy {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.policy-support__title {
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 600;
+  color: rgba(240, 245, 255, 0.95);
+}
+
+.policy-support__body {
+  margin: 0;
+  color: rgba(210, 220, 255, 0.86);
+  line-height: 1.6;
+}
+
+.policy-support__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.4rem;
+  font-size: 0.95rem;
+  color: rgba(180, 198, 240, 0.82);
+}
+
+.policy-support__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.policy-support__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #041127;
+  background: linear-gradient(135deg, rgba(94, 230, 208, 0.92), rgba(66, 194, 255, 0.9));
+  text-decoration: none;
+  box-shadow: 0 18px 38px rgba(8, 20, 44, 0.45);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  align-self: center;
+  width: min(100%, 190px);
+  min-height: 40px;
+}
+
+.policy-support__cta:hover,
+.policy-support__cta:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 24px 44px rgba(3, 16, 40, 0.5);
+}
+
+.policy-support__note {
+  font-size: 0.9rem;
+  color: rgba(180, 198, 240, 0.82);
+}
+
+.policy-page--legal .policy-hero__inner {
+  justify-items: center;
+  max-width: 820px;
+  text-align: center;
+}
+
+.policy-page--legal .policy-sections__inner {
+  max-width: 860px;
+  justify-items: center;
+  justify-content: center;
+}
+
+.policy-page--legal .policy-card {
+  text-align: center;
+}
+
+.policy-page--legal .policy-card__title {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.policy-page--legal .policy-card__copy {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 60ch;
+}
+
+.policy-page--legal .policy-list {
+  justify-items: center;
+}
+
+.policy-page--legal .policy-list li {
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.policy-page--legal .policy-support {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .policy-support {
+    width: 100%;
+    padding: clamp(1.3rem, 4.75vw, 1.7rem);
+  }
+
+  .policy-support__cta {
+    justify-content: center;
+    width: min(100%, 200px);
+  }
+
+  .policy-card {
+    width: 100%;
+    padding: clamp(1.3rem, 5vw, 1.75rem);
+    border-radius: 20px;
+    scroll-margin-top: 96px;
+  }
+
+  .policy-page--legal .policy-card {
+    width: 100%;
+    padding: clamp(1.2rem, 4.5vw, 1.6rem);
+  }
+}
