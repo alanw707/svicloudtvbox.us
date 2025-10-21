@@ -229,6 +229,7 @@ if (!function_exists('svic_guides_get_content')) {
                                 'key'    => 'guides.resources.articles.why.sections.next_steps.body',
                                 'tokens' => [
                                     'setup_url' => 'guides-setup',
+                                    'legal_url' => 'legal-disclaimer',
                                     'contact_url' => 'contact',
                                 ],
                             ],
@@ -248,41 +249,31 @@ if (!function_exists('svic_guides_get_content')) {
                 ],
                 'sections'    => [
                     [
-                        'id'          => 'live-tv',
-                        'heading_key' => 'guides.resources.articles.channels.sections.live.heading',
+                        'id'          => 'rights',
+                        'heading_key' => 'guides.resources.articles.channels.sections.rights.heading',
                         'body'        => [
-                            ['key' => 'guides.resources.articles.channels.sections.live.body'],
+                            ['key' => 'guides.resources.articles.channels.sections.rights.body'],
                         ],
                     ],
                     [
-                        'id'          => 'on-demand',
-                        'heading_key' => 'guides.resources.articles.channels.sections.vod.heading',
+                        'id'          => 'regional',
+                        'heading_key' => 'guides.resources.articles.channels.sections.regional.heading',
                         'body'        => [
-                            ['key' => 'guides.resources.articles.channels.sections.vod.body'],
+                            ['key' => 'guides.resources.articles.channels.sections.regional.body'],
                         ],
                     ],
                     [
-                        'id'          => 'apps',
-                        'heading_key' => 'guides.resources.articles.channels.sections.apps.heading',
+                        'id'          => 'security',
+                        'heading_key' => 'guides.resources.articles.channels.sections.security.heading',
                         'body'        => [
-                            [
-                                'key'    => 'guides.resources.articles.channels.sections.apps.body',
-                                'tokens' => [
-                                    'apps_url' => 'guides-apps',
-                                ],
-                            ],
+                            ['key' => 'guides.resources.articles.channels.sections.security.body'],
                         ],
                     ],
                     [
-                        'id'          => 'updates',
-                        'heading_key' => 'guides.resources.articles.channels.sections.updates.heading',
+                        'id'          => 'documentation',
+                        'heading_key' => 'guides.resources.articles.channels.sections.documentation.heading',
                         'body'        => [
-                            [
-                                'key'    => 'guides.resources.articles.channels.sections.updates.body',
-                                'tokens' => [
-                                    'contact_url' => 'contact',
-                                ],
-                            ],
+                            ['key' => 'guides.resources.articles.channels.sections.documentation.body'],
                         ],
                     ],
                     [
@@ -392,7 +383,7 @@ if (!function_exists('svic_guides_get_content')) {
                                 'key'    => 'guides.resources.articles.models.sections.next_steps.body',
                                 'tokens' => [
                                     'setup_url' => 'guides-setup',
-                                    'apps_url'  => 'guides-apps',
+                                    'legal_url' => 'legal-disclaimer',
                                     'contact_url' => 'contact',
                                 ],
                             ],

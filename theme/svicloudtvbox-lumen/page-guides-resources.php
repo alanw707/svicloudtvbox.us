@@ -25,6 +25,7 @@ if ($article) {
         'faq'                     => svic_url_with_lang(home_url('/faq/')),
         'guides'                  => svic_url_with_lang(home_url('/guides/')),
         'guides-resources'        => $resources_base,
+        'legal-disclaimer'        => svic_url_with_lang(home_url('/legal-disclaimer/')),
     ];
 
     $section_identifiers = [

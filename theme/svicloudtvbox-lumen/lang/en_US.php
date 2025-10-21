@@ -122,6 +122,65 @@ return [
             'cta'   => 'Chat with concierge',
         ],
     ],
+
+    'legal_disclaimer' => [
+        'hero' => [
+            'badge'    => 'Legal notice',
+            'title'    => 'Legal & compliance disclaimer',
+            'subtitle' => 'SVICLOUDTVBOX.US supplies hardware only. Please review the statements below before adding any software or content to your device.',
+        ],
+        'sections' => [
+            'hardware' => [
+                'title' => 'Hardware-only marketplace',
+                'copy'  => 'We sell sealed SVICLOUD hardware, original accessories, and concierge services. We do not preload, sideload, or promote streaming software or media catalogs.',
+                'items' => [
+                    'line1' => 'Devices ship with the stock launcher and system firmware provided by the manufacturer.',
+                    'line2' => 'No third-party streaming apps, playlists, or media files are installed before delivery.',
+                    'line3' => 'Customers are responsible for choosing the software and services they add after setup.',
+                ],
+            ],
+            'responsibilities' => [
+                'title' => 'Customer responsibilities',
+                'copy'  => 'You must install only those applications and services that you are legally licensed to use.',
+                'items' => [
+                    'line1' => 'Confirm that each provider grants you rights to view its content in your country or region.',
+                    'line2' => 'Comply with all applicable copyright, communications, and import/export laws.',
+                    'line3' => 'Retain proof of purchase, subscription receipts, and licensing statements for your records.',
+                ],
+            ],
+            'prohibited' => [
+                'title' => 'Prohibited uses',
+                'copy'  => 'Using SVICLOUD hardware for unlicensed streaming, commercial redistribution, or other unlawful activities is strictly forbidden.',
+                'items' => [
+                    'line1' => 'Do not install software obtained from suspicious links, cracked marketplaces, or piracy forums.',
+                    'line2' => 'Do not use the device to rebroadcast, restream, or resell copyrighted works without permission.',
+                    'line3' => 'Do not tamper with serial numbers, firmware security, or DRM systems.',
+                ],
+            ],
+            'support' => [
+                'title' => 'Support limitations',
+                'copy'  => 'Our concierge team assists with hardware setup, networking, and general troubleshooting. We cannot help install, configure, or reactivate unlicensed services.',
+                'items' => [
+                    'line1' => 'Requests involving unofficial installers, codes, or playlists will be declined.',
+                    'line2' => 'For legitimate services, please contact that provider’s customer support directly.',
+                    'line3' => 'If we suspect misuse, we may suspend concierge access or decline future orders.',
+                ],
+            ],
+            'updates' => [
+                'title' => 'Policy changes',
+                'copy'  => 'Regulatory guidance for streaming devices evolves regularly. We may update this disclaimer without prior notice to reflect new laws or enforcement priorities.',
+                'items' => [
+                    'line1' => 'Visit this page periodically to stay informed about compliance expectations.',
+                    'line2' => 'If we notify you about revised requirements, continued use of our products implies acceptance.',
+                ],
+            ],
+        ],
+        'contact' => [
+            'title' => 'Need help staying compliant?',
+            'copy'  => 'Our concierge team can answer questions about hardware setup and share resources on sourcing licensed content. We are not a legal advisor but are happy to point you in the right direction.',
+            'cta'   => 'Contact concierge support',
+        ],
+    ],
     'cart_page' => [
         'title'             => 'Your cart',
         'continue_shopping' => 'Continue shopping',
@@ -308,19 +367,19 @@ return [
                 'items' => [
                     'preinstalled' => [
                         'question' => 'Are SviCloud apps pre-installed?',
-                        'answer'   => 'No. Launch the <code>Orz</code> installer, visit <code>8989c.cc</code>, and download Yogurt TV, Yogurt Kids, Cherry TV, Karaoke KTV, and other essentials.',
+                        'answer'   => 'No. Devices ship with the base launcher only. Install streaming services you are licensed to use through their official stores or websites.',
                     ],
                     'third_party' => [
                         'question' => 'Can I install Netflix or other third-party apps?',
-                        'answer'   => 'Yes. SviCloud runs Android, so you can sideload popular streaming apps. Always download from trusted sources and confirm Android TV compatibility.',
+                        'answer'   => 'Yes. SviCloud runs Android, so you can install compatible streaming apps. Always obtain software from legitimate sources and confirm your use complies with each provider’s terms.',
                     ],
                     'family_content' => [
                         'question' => 'What content is available for families?',
-                        'answer'   => 'Yogurt Kids (also labeled LUCA Kids) offers educational shows, interactive games, and safe cartoons. We Fun / 閤家歡 karaoke adds family-friendly singalongs.',
+                        'answer'   => 'Choose age-appropriate services that you are authorized to access. Look for providers that publish kid-friendly libraries and parental controls.',
                     ],
                     'adult_content' => [
                         'question' => 'Is there adult content?',
-                        'answer'   => 'Cherry TV contains mature programming and is protected by a password. You must opt in and enter the credential each time.',
+                        'answer'   => 'Adult content is not bundled with the device. Access is governed by the policies of any licensed services you add and by the laws in your region.',
                     ],
                 ],
             ],
@@ -349,8 +408,8 @@ return [
                         'answer'   => 'Restart your router, move the box closer to Wi-Fi, or connect via Ethernet. Heavy household traffic may require a faster broadband plan. The <a href="{{setup_guide_url}}">setup guide</a> covers additional troubleshooting steps.',
                     ],
                     'orz_installer' => [
-                        'question' => 'The Orz installer site will not load. What now?',
-                        'answer'   => 'Double-check the URL (<code>8989c.cc</code>, which redirects to <code>6868c.cc</code>). If it still fails, reboot the box and confirm you have internet access.',
+                        'question' => 'A streaming app or installer will not load. What now?',
+                        'answer'   => 'Verify the service is legitimate, check your internet connection, and contact the provider directly for assistance. We cannot troubleshoot or endorse unofficial download links.',
                     ],
                     'contact_support' => [
                         'question' => 'How do I reach support?',
@@ -428,7 +487,7 @@ return [
             ],
             'faq' => [
                 'title' => 'Browse quick answers',
-                'copy'  => 'Our FAQ covers installation, Orz apps, remote pairing, and streaming tips.',
+                'copy'  => 'Our FAQ covers installation basics, remote pairing, and streaming tips.',
                 'cta'   => 'Open FAQ',
             ],
         ],
@@ -438,10 +497,12 @@ return [
         'nav' => [
             'home'     => 'Home',
             'compare'  => 'Compare',
+            'shop'     => 'Shop',
             'faq'      => 'FAQ',
             'ten_p'    => 'SVICLOUD 10P+',
             'ten_s'    => 'SVICLOUD 10S',
             'concierge'=> 'Concierge',
+            'legal'    => 'Legal Disclaimer',
             'guides'   => 'Guides',
             'about'    => 'About',
             'return_policy' => 'Return Policy',
@@ -481,8 +542,8 @@ return [
     'frontpage' => [
         'hero' => [
             'badge'   => 'Authorized U.S. Dealer',
-            'title'   => 'Top-of-the-line Chinese TV box, global entertainment ready for any TV',
-            'title_lead' => 'Top-of-the-line Chinese TV box',
+            'title'   => 'Best Android TV box, global entertainment ready for any TV',
+            'title_lead' => 'Best Android TV Box',
             'title_separator' => ', ',
             'title_tail' => 'global entertainment ready for any TV',
             'copy'    => 'SVICLOUD packs premium Chinese and international channels, karaoke, and kids favorites into one flagship box—ships fast from the USA with bilingual concierge support.',
@@ -566,7 +627,7 @@ return [
             ],
         ],
         'feature_grid' => [
-            'title'    => 'Why SVICLOUD Beats Generic IPTV Boxes',
+            'title'    => 'Why SVICLOUD Beats Generic Streaming Boxes',
             'subtitle' => 'Engineered for crystal-clear 4K sports, drama marathons, and karaoke nights without buffering.',
             'cards'    => [
                 'entertainment' => [
@@ -589,7 +650,7 @@ return [
             'lead'       => 'We configure, troubleshoot, and update your box so you can just enjoy the content. Every bundle includes priority access to our bilingual SVICLOUD specialists.',
             'card_title' => 'What We Handle For You',
             'services'   => [
-                'activation' => 'IPTV activation & renewals',
+                'activation' => 'Device setup & firmware checks',
                 'wifi'       => 'Wi-Fi optimization tips',
                 'karaoke'    => 'Karaoke playlists & mic pairing',
                 'kids'       => 'Kid-safe profiles & timers',
@@ -598,7 +659,7 @@ return [
         ],
         'pricing' => [
             'title'    => 'Choose Your SVICLOUD Device',
-            'subtitle' => 'Pick the hardware that fits your home. No IPTV bundles—just authentic SVICLOUD boxes shipping from the USA.',
+            'subtitle' => 'Pick the hardware that fits your home. No mandatory bundles—just authentic SVICLOUD boxes shipping from the USA.',
             'cards'    => [
                 '10p' => [
                     'badge'    => 'Most Popular',
@@ -783,7 +844,7 @@ return [
         'story' => [
             'title' => 'Our story',
             'lead'  => 'From living-room demos to the manufacturer’s official U.S. partner.',
-            'body'  => '<p>We began in 2019 by helping friends and neighboring families replace unreliable IPTV boxes with authentic SVICLOUD hardware. Word spread quickly—karaoke nights, sports meetups, and Lunar New Year watch parties all wanted the same thing: a trusted source with real warranty support.</p><p>Investing in local inventory, bilingual onboarding, and responsive concierge service turned us into the go-to SVICLOUD contact on the West Coast. That dedication earned SVI.STUDIO’s formal authorization so every customer gets factory-backed devices delivered fast from California.</p>',
+            'body'  => '<p>We began in 2019 by helping friends and neighboring families replace unreliable streaming boxes with authentic SVICLOUD hardware. Word spread quickly—karaoke nights, sports meetups, and Lunar New Year watch parties all wanted the same thing: a trusted source with real warranty support.</p><p>Investing in local inventory, bilingual onboarding, and responsive concierge service turned us into the go-to SVICLOUD contact on the West Coast. That dedication earned SVI.STUDIO’s formal authorization so every customer gets factory-backed devices delivered fast from California.</p>',
         ],
         'stats' => [
             'orders' => [
@@ -806,7 +867,7 @@ return [
             'points' => [
                 'vetting'   => 'Factory audits verified our serial tracking, warranty handling, and customer education practices.',
                 'inventory' => 'We maintain U.S. warehouse inventory that ships domestically within 48 hours.',
-                'support'   => 'Dedicated English & 中文 specialists help customers with activation, renewals, and updates.',
+                'support'   => 'Dedicated English & 中文 specialists help customers with setup guidance, updates, and personalized channel tips.',
             ],
         ],
         'timeline' => [
@@ -861,10 +922,10 @@ return [
         'concierge' => [
             'badge'          => 'Concierge program',
             'title'          => 'Your streaming concierge is a message away',
-            'lead'           => 'Whether you’re unboxing a new SVICLOUD, renewing IPTV access, or prepping a karaoke night, our specialists respond quickly with bilingual support.',
+            'lead'           => 'Whether you’re unboxing a new SVICLOUD, optimizing your apps, or prepping a karaoke night, our specialists respond quickly with bilingual support.',
             'points'         => [
                 'setup'    => 'White-glove setup & personalization over video or chat',
-                'renewals' => 'Hands-on IPTV renewals and firmware updates without the headache',
+                'renewals' => 'Hands-on firmware updates and app refreshes without the headache',
                 'events'   => 'Seasonal watch party schedules, karaoke playlists, and channel guides',
             ],
             'cta_primary'   => 'Schedule a concierge call',
@@ -876,14 +937,14 @@ return [
         'hero' => [
             'badge'            => 'Setup & support hub',
             'title'            => 'SVICLOUD TV Box Guides',
-            'lead'             => 'Step-by-step installation checklists, app downloads, and troubleshooting in English & 中文.',
+            'lead'             => 'Step-by-step installation checklists and troubleshooting in English & 中文.',
             'callouts_headline' => 'Inside this hub',
             'pill_headline'    => 'Step-by-step help for every SVICLOUD',
-            'pill_copy'        => 'Follow the checklist, install the must-have apps, and troubleshoot in English & 中文 whenever you need it.',
+            'pill_copy'        => 'Follow the checklist, configure key settings, and troubleshoot in English & 中文 whenever you need it.',
             'callouts'         => [
                 'remote'  => 'Pair the Bluetooth voice remote',
                 'network' => 'Optimize Wi-Fi or Ethernet for streaming',
-                'apps'    => 'Install Yogurt TV, Kids, Karaoke, and more',
+                'apps'    => 'Review content compliance guidelines',
             ],
             'primary_label'   => 'Start installation',
             'secondary_label' => 'Talk to concierge',
@@ -914,7 +975,7 @@ return [
         'nav' => [
             'overview'        => 'Highlights',
             'setup'           => 'Setup guide',
-            'apps'            => 'Apps & downloads',
+            'apps'            => 'Content & compliance',
             'post_setup'      => 'After setup',
             'troubleshooting' => 'Troubleshooting',
             'resources'       => 'Resources',
@@ -923,9 +984,9 @@ return [
         'nav_summaries' => [
             'overview'        => 'See the concierge overview and why these guides matter.',
             'setup'           => 'Connect hardware, choose language, and pair the voice remote.',
-            'apps'            => 'Install Yogurt TV, Kids Mode, Karaoke, and other essentials.',
+            'apps'            => 'Understand how to choose licensed streaming services responsibly.',
             'post_setup'      => 'Personalize settings and keep your SVICLOUD running smoothly.',
-            'troubleshooting' => 'Fix remote pairing, buffering, and Orz installer hiccups.',
+            'troubleshooting' => 'Fix remote pairing, buffering, and network hiccups.',
             'resources'       => 'Bookmark channel guides, buying advice, and the latest 10-series highlights.',
             'support'         => 'Reach concierge support or review the FAQ options.',
         ],
@@ -959,37 +1020,37 @@ return [
                     'copy'  => 'Pick "Set up WiFi", enter your password, or plug in Ethernet for the most stable stream.',
                 ],
                 'apps' => [
-                    'title' => 'Install SviCloud apps',
-                    'copy'  => 'Open the Orz installer, type 8989c.cc (redirects to 6868c.cc), then download Yogurt TV, Yogurt Kids, Cherry TV, and Karaoke KTV.',
+                    'title' => 'Review content guidelines',
+                    'copy'  => 'Install only licensed services from their official stores or websites. Using unauthorized sources can violate local law and void support.',
                 ],
             ],
             'note_title' => 'Photo walkthrough coming soon',
-            'note_copy'  => 'We are capturing HDMI hookup, language selection, remote pairing, Wi-Fi onboarding, and Orz installer screenshots to embed here.',
+            'note_copy'  => 'We are capturing HDMI hookup, language selection, remote pairing, and Wi-Fi onboarding screenshots to embed here.',
         ],
         'apps' => [
-            'badge' => 'Essential apps',
-            'title' => 'Must-install SviCloud apps',
-            'lead'  => 'Download these first inside Orz to unlock live TV, karaoke, and kid-friendly content.',
+            'badge' => 'Content compliance',
+            'title' => 'Choosing streaming services responsibly',
+            'lead'  => 'Only add services that you are authorized to access. The examples below explain how to evaluate common categories.',
             'items' => [
-                'yogurt' => [
-                    'title' => 'Yogurt TV / LUCA TV',
-                    'copy'  => 'Global live TV channels, movies, and dramas with fast search and category filters.',
+                'live' => [
+                    'title' => 'Live TV providers',
+                    'copy'  => 'Subscribe to reputable live TV or IPTV services that clearly publish their licensing status and terms of use.',
                 ],
                 'kids' => [
-                    'title' => 'Yogurt Kids / LUCA Kids',
-                    'copy'  => 'Curated educational shows, songs, and interactive games for families.',
+                    'title' => 'Family-friendly libraries',
+                    'copy'  => 'Select kid-safe apps that include parental controls, verified ratings, and documented rights to distribute programming.',
                 ],
                 'karaoke' => [
-                    'title' => 'We Fun / 閤家歡 Karaoke',
-                    'copy'  => 'In-home karaoke playlists with on-screen lyrics and duet-friendly queues.',
+                    'title' => 'Music & karaoke',
+                    'copy'  => 'Use karaoke services that license their catalogs and respect performance rights in your country.',
                 ],
                 'regional' => [
-                    'title' => 'Regional live apps',
-                    'copy'  => 'Malaysia Live, Indonesia Live, and other localized channel packs for overseas viewers.',
+                    'title' => 'Regional content',
+                    'copy'  => 'When exploring regional packs, verify that the provider has permission to stream the listed channels internationally.',
                 ],
                 'cherry' => [
-                    'title' => 'Cherry TV (Adults)',
-                    'copy'  => 'Password-protected adult content—only enable it if you intend to use it.',
+                    'title' => 'Adult-only services',
+                    'copy'  => 'Adult programming is subject to local law. Enable such services only if they are legal where you live and you meet all age requirements.',
                 ],
             ],
         ],
@@ -1004,7 +1065,7 @@ return [
                 ],
                 'install' => [
                     'title' => 'Add trusted Android apps',
-                    'copy'  => 'Install streaming services like Netflix, Disney+, or YouTube from sources you trust.',
+                    'copy'  => 'Install streaming services such as Netflix, Disney+, or YouTube only from their authorized app stores or publishers.',
                 ],
                 'tune' => [
                     'title' => 'Adjust audio & display',
@@ -1025,9 +1086,9 @@ return [
                     'title' => 'Stream buffering or blurry',
                     'copy'  => 'Restart your router, move closer to Wi-Fi, or plug in Ethernet for the most stable connection.',
                 ],
-                'orz' => [
-                    'title' => 'Orz installer not loading',
-                    'copy'  => 'Double-check the URL 8989c.cc, then reboot the box. If it still fails, verify your network connection.',
+                'apps_access' => [
+                    'title' => 'Cannot access a streaming app',
+                    'copy'  => 'Confirm the service is legitimate, then reach out to that provider’s support team. Unauthorized installers are outside our scope.',
                 ],
             ],
         ],
@@ -1041,8 +1102,8 @@ return [
                     'copy'  => 'See why the U.S. concierge store is the fastest, safest way to get SVICLOUD 10-series hardware.',
                 ],
                 'channels' => [
-                    'title' => 'Live channels & apps guide',
-                    'copy'  => 'Preview Yogurt TV categories, on-demand libraries, and the must-install apps for every household.',
+                    'title' => 'Licensed content checklist',
+                    'copy'  => 'Review how to evaluate streaming services for proper licensing and regional availability before you install them.',
                 ],
                 'features' => [
                     'title' => 'Top SVICLOUD 10-series features',
@@ -1084,11 +1145,11 @@ return [
                         ],
                         'concierge' => [
                             'heading' => 'Bilingual concierge for setup and lifetime support',
-                            'body'    => '<p>Need help installing apps or pairing the voice remote? Our bilingual concierge team responds in English or 中文 within one business day. Share your order number and questions via <a href="{{contact_url}}">the concierge form</a>.</p>
+                            'body'    => '<p>Need help pairing the voice remote or optimizing your network? Our bilingual concierge team responds in English or 中文 within one business day. Share your order number and questions via <a href="{{contact_url}}">the concierge form</a>.</p>
 <ul>
-  <li>Live guidance for unboxing, network setup, and Orz installer downloads.</li>
+  <li>Live guidance for unboxing, network setup, and remote pairing.</li>
   <li>Screen recordings and step-by-step instructions tailored to your home.</li>
-  <li>Ongoing help for channel refreshes, app updates, and troubleshooting.</li>
+  <li>Compliance reminders for installing only licensed streaming services.</li>
 </ul>',
                         ],
                         'billing' => [
@@ -1107,38 +1168,48 @@ return [
                     ],
                 ],
                 'channels' => [
-                    'title'   => 'Live channels & apps guide',
-                    'lead'    => 'Preview Yogurt TV, LUCA Kids, and Karaoke coverage so you know exactly what streams are available before you plug in.',
+                    'title'   => 'Licensed content checklist',
+                    'lead'    => 'Use this checklist to vet any streaming service before you add it to your SVICLOUD box.',
                     'updated' => 'Updated January 15, 2025',
                     'sections' => [
-                        'live' => [
-                            'heading' => '2000+ live channels across regions',
-                            'body'    => '<p>Yogurt TV streams 2,000+ live channels spanning Hong Kong, Taiwan, Mainland China, Southeast Asia, Japan, Korea, North America, and Europe. Each region includes news, variety, sports, and premium movie feeds in high-definition.</p>
+                        'rights' => [
+                            'heading' => 'Confirm distribution rights',
+                            'body'    => '<p>Only install services that clearly disclose their licensing agreements. If a provider cannot demonstrate permission to stream specific channels or titles, do not install it.</p>
 <ul>
-  <li>Quick filters jump between Cantonese, Mandarin, and English channel groups.</li>
-  <li>Dedicated sports hubs cover NBA, MLB, soccer, combat sports, and seasonal events.</li>
-  <li>24/7 Cantonese, Mandarin, and bilingual lifestyle channels keep every household entertained.</li>
+  <li>Look for published terms of service, privacy policies, and intellectual property notices.</li>
+  <li>Check that the provider operates with verifiable business contact details.</li>
+  <li>Retain screenshots or receipts documenting your subscription or purchase.</li>
 </ul>',
                         ],
-                        'vod' => [
-                            'heading' => 'On-demand dramas, variety shows, and replay',
-                            'body'    => '<p>The VOD library refreshes daily with new dramas, variety programs, kids animation, films, documentaries, and replay content. Recent episodes are tagged with catch-up windows so you never miss prime-time releases.</p>
+                        'regional' => [
+                            'heading' => 'Check regional availability',
+                            'body'    => '<p>Many services limit viewing to certain countries. Confirm that your subscription covers your location and complies with import/export rules.</p>
 <ul>
-  <li>Binge entire drama seasons with multiple audio tracks and subtitle options.</li>
-  <li>Replay variety shows and news segments within hours of airing.</li>
-  <li>Dedicated kids, education, and documentary shelves simplify discovery.</li>
+  <li>Review geoblocking policies and any required VPN restrictions.</li>
+  <li>Ensure you meet age or residency requirements before signing up.</li>
+  <li>Keep documentation handy if customs or ISPs request proof of legitimacy.</li>
 </ul>',
                         ],
-                        'apps' => [
-                            'heading' => 'Must-install apps for every household',
-                            'body'    => '<p>Install the essentials first: Yogurt TV / LUCA TV for live content, Yogurt Kids for family-safe programming, WeFun Karaoke for lyrics-on-screen singing, and regional packs like Malaysia Live. Follow the steps inside the <a href="{{apps_url}}">Apps & downloads guide</a> to grab each one from Orz.</p>',
+                        'security' => [
+                            'heading' => 'Protect your network and data',
+                            'body'    => '<p>Install software only from providers that use secure download methods and regular security audits. Avoid sideloading unknown APK files or clicking unsolicited download links.</p>
+<ul>
+  <li>Scan installers with reputable antivirus tools before launching them.</li>
+  <li>Use strong passwords and two-factor authentication where available.</li>
+  <li>Update apps promptly to patch vulnerabilities released by the publisher.</li>
+</ul>',
                         ],
-                        'updates' => [
-                            'heading' => 'Request the full channel spreadsheet',
-                            'body'    => '<p>Need the complete list of channels with logos and language tags? Request the latest spreadsheet from concierge via <a href="{{contact_url}}">our support form</a>. We refresh the document whenever new channels are added.</p>',
+                        'documentation' => [
+                            'heading' => 'Document your due diligence',
+                            'body'    => '<p>Store invoices, confirmation emails, and licensing statements so you can demonstrate compliance if questions arise.</p>
+<ul>
+  <li>Archive subscription renewal receipts and screenshots of license terms.</li>
+  <li>Keep copies of support correspondence in case you need to escalate issues.</li>
+  <li>Share relevant records with our concierge team when requesting assistance.</li>
+</ul>',
                         ],
                         'network' => [
-                            'heading' => 'Streaming tips for smooth playback',
+                            'heading' => 'Optimize playback responsibly',
                             'body'    => '<p>For the smoothest streams, connect via Ethernet or Wi-Fi 6. If you encounter buffering, review the tips in our <a href="{{troubleshooting_url}}">troubleshooting guide</a>, reboot your router, or switch to wired networking.</p>',
                         ],
                     ],
@@ -1177,7 +1248,7 @@ return [
                         ],
                         'family' => [
                             'heading' => 'Entertainment for every generation',
-                            'body'    => '<p>SVICLOUD bundles more than live TV. Yogurt Kids locks into age-appropriate zones, WeFun Karaoke provides lyrics with scoring, and Cherry TV stays PIN-protected for adults.</p>
+                            'body'    => '<p>SVICLOUD bundles more than live TV. Dedicated kid zones keep content age-appropriate, built-in karaoke features support lyrics-on-screen singalongs, and optional adult areas remain PIN-protected.</p>
 <ul>
   <li>Create kid profiles so the launcher only shows curated education and animation.</li>
   <li>Queue songs, duet modes, and weekly new releases for karaoke gatherings.</li>
@@ -1228,14 +1299,14 @@ return [
     </tr>
   </tbody>
 </table>
-<p>Both models stream the same Yogurt TV apps and receive identical firmware updates. Choose based on storage, ports, and how many accessories you plug in.</p>',
+<p>Both models support the same firmware features. Choose based on storage, ports, and how many accessories you plug in.</p>',
                         ],
                         'ten_p' => [
                             'heading' => 'Choose SVICLOUD 10P+ if you need…',
                             'body'    => '<p>Pick the flagship 10P+ when you want maximum performance and expandability.</p>
 <ul>
   <li>You run a home theater with receivers, soundbars, or optical audio gear.</li>
-  <li>You install lots of third-party APKs or store local files on external drives.</li>
+  <li>You need extra storage for local media libraries or enterprise applications.</li>
   <li>You host karaoke nights and prefer the fastest processor for lyric rendering.</li>
 </ul>',
                         ],
@@ -1250,7 +1321,7 @@ return [
                         ],
                         'next_steps' => [
                             'heading' => 'Next steps once you pick a model',
-                            'body'    => '<p>Whichever box you choose, follow the <a href="{{setup_url}}">setup guide</a>, install essentials from the <a href="{{apps_url}}">apps guide</a>, and save <a href="{{contact_url}}">the concierge link</a> for future questions.</p>',
+                            'body'    => '<p>Whichever box you choose, follow the <a href="{{setup_url}}">setup guide</a>, review the <a href="{{legal_url}}">legal disclaimer</a>, and save <a href="{{contact_url}}">the concierge link</a> for future questions.</p>',
                         ],
                     ],
                 ],

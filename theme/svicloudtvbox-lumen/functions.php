@@ -401,6 +401,8 @@ add_filter('wp_nav_menu_objects', function ($items, $args) {
     $menu_key_map = [
         'home'                 => 'header.nav.home',
         'compare'              => 'header.nav.compare',
+        'shop'                 => 'header.nav.shop',
+        'store'                => 'header.nav.shop',
         'faq'                  => 'header.nav.faq',
         'svicloud-10p-plus'    => 'header.nav.ten_p',
         'svicloud-10p'         => 'header.nav.ten_p',
@@ -424,6 +426,7 @@ add_filter('wp_nav_menu_objects', function ($items, $args) {
         'about'                => 'header.nav.about',
         'return-policy'        => 'header.nav.return_policy',
         'returns'              => 'header.nav.return_policy',
+        'legal-disclaimer'     => 'header.nav.legal',
         'order-tracking'       => 'header.nav.order_tracking',
         'account'              => 'header.nav.account',
         'my-account'           => 'header.nav.account',
@@ -631,7 +634,11 @@ add_action('wp_enqueue_scripts', function () {
         }
     }
     $is_contact_page = is_page_template('page-contact.php') || is_page('contact');
-    $is_return_policy_page = is_page_template('page-return-policy.php') || is_page('return-policy') || is_page('returns');
+    $is_return_policy_page = is_page_template('page-return-policy.php')
+        || is_page_template('page-legal-disclaimer.php')
+        || is_page('return-policy')
+        || is_page('returns')
+        || is_page('legal-disclaimer');
     $is_support_page = is_page_template('page-support.php') || is_page('support');
     $is_faq_page = is_page_template('page-faq.php') || is_page('faq');
     $is_compare_page = is_page_template('page-compare.php') || is_page('compare');

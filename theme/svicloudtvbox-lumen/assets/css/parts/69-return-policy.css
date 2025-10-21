@@ -253,6 +253,53 @@
   color: rgba(180, 198, 240, 0.82);
 }
 
+.return-policy-page--legal .return-policy-hero__inner {
+  justify-items: center;
+  max-width: 820px;
+  text-align: center;
+}
+
+.return-policy-page--legal .return-policy-sections__inner {
+  max-width: 860px;
+  justify-items: center;
+}
+
+.return-policy-page--legal .return-policy-card {
+  text-align: center;
+  width: 100%;
+  max-width: 720px;
+}
+
+.return-policy-page--legal .return-policy-card__copy {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 60ch;
+}
+
+.return-policy-page--legal .return-policy-list {
+  justify-items: center;
+}
+
+.return-policy-page--legal .return-policy-list li {
+  text-align: center;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.return-policy-page--legal .return-policy-support {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.return-policy-page--legal .return-policy-support__actions {
+  justify-content: center;
+}
+
 @media (max-width: 720px) {
   .return-policy-hero {
     padding: 3.2rem 1.25rem 2.5rem;

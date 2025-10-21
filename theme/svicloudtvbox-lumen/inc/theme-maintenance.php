@@ -199,6 +199,11 @@ if (!function_exists('svic_theme_ensure_guides_pages')) {
                 'title'    => __('Concierge Support', 'svicloudtvbox-lumen'),
                 'template' => 'page-guides-support.php',
             ],
+            [
+                'slug'     => 'legal-disclaimer',
+                'title'    => __('Legal Disclaimer', 'svicloudtvbox-lumen'),
+                'template' => 'page-legal-disclaimer.php',
+            ],
         ];
 
         foreach ($required_pages as $page_args) {

@@ -50,6 +50,10 @@
             'href'      => svic_url_with_lang( home_url( '/contact/' ) ),
             'label_key' => 'header.nav.concierge',
         ],
+        [
+            'href'      => svic_url_with_lang( home_url( '/legal-disclaimer/' ) ),
+            'label_key' => 'header.nav.legal',
+        ],
     ];
 
   ?>
