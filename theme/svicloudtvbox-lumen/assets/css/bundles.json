@@ -85,6 +85,13 @@
       "70-support-form.css"
     ]
   },
+  "blog": {
+    "label": "Blog posts",
+    "output": "blog.css",
+    "parts": [
+      "70-blog.css"
+    ]
+  },
   "compare": {
     "label": "Compare page",
     "output": "compare.css",

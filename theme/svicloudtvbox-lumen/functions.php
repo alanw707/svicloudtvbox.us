@@ -16,6 +16,7 @@ if (!defined('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID')) {
 }
 
 require_once get_template_directory() . '/inc/class-svic-translator.php';
+require_once get_template_directory() . '/inc/class-svic-markdown.php';
 
 require_once get_template_directory() . '/inc/class-svic-locale-resolver.php';
 require_once get_template_directory() . '/inc/guides-data.php';
@@ -348,7 +349,7 @@ add_filter('wp_prepare_themes_for_js', function ($themes) {
     }
 
     return $themes;
-}, 20);
+}, 5);
 
 add_action('admin_footer-themes.php', function () {
     $blocked_slugs = wp_json_encode(['shared', 'svicloudtvbox']);
@@ -592,6 +593,7 @@ add_action('wp_enqueue_scripts', function () {
         'faq'              => 'assets/css/faq.css',
         'support'          => 'assets/css/support.css',
         'compare'          => 'assets/css/compare.css',
+        'blog'             => 'assets/css/blog.css',
         'woocommerce'      => 'assets/css/woocommerce.css',
     ];
 
@@ -643,6 +645,7 @@ add_action('wp_enqueue_scripts', function () {
     $is_support_page = is_page_template('page-support.php') || is_page('support');
     $is_faq_page = is_page_template('page-faq.php') || is_page('faq');
     $is_compare_page = is_page_template('page-compare.php') || is_page('compare');
+    $is_blog_post = is_singular('post');
 
     // WooCommerce bundle
     $is_woo_request = false;
@@ -689,6 +692,11 @@ add_action('wp_enqueue_scripts', function () {
         'svicloudtvbox-support' => [
             'key'       => 'support',
             'condition' => $is_support_page,
+            'deps'      => ['svicloudtvbox-style'],
+        ],
+        'svicloudtvbox-blog' => [
+            'key'       => 'blog',
+            'condition' => $is_blog_post,
             'deps'      => ['svicloudtvbox-style'],
         ],
         'svicloudtvbox-faq' => [
@@ -1023,3 +1031,179 @@ add_action('template_redirect', function () {
     remove_action('woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
     remove_action('woocommerce_before_main_content', 'woocommerce_breadcrumb', 20);
 }, 10);
+
+add_action('init', function () {
+    $meta_keys = [
+        '_svic_content_zh_tw',
+        '_svic_title_zh_tw',
+        '_svic_description_zh_tw',
+        '_svic_keywords_zh_tw',
+        '_svic_keywords_en_us',
+    ];
+
+    foreach ($meta_keys as $meta_key) {
+        register_post_meta('post', $meta_key, [
+            'type'           => 'string',
+            'single'         => true,
+            'show_in_rest'   => true,
+            'auth_callback'  => '__return_true',
+        ]);
+    }
+});
+
+add_filter('the_content', function ($content) {
+    if (!is_singular('post')) {
+        return $content;
+    }
+
+    if (!function_exists('svic_current_locale')) {
+        return $content;
+    }
+
+    $locale = strtolower(svic_current_locale());
+    if (strpos($locale, 'zh') !== 0) {
+        return $content;
+    }
+
+    $translated = get_post_meta(get_the_ID(), '_svic_content_zh_tw', true);
+    if (!is_string($translated) || $translated === '') {
+        return $content;
+    }
+
+    if (class_exists('SVIC_Markdown') && !SVIC_Markdown::looks_like_html($translated)) {
+        $translated = SVIC_Markdown::to_html($translated);
+    }
+
+    $translated = svic_replace_inline_code_placeholders($translated, get_the_ID());
+
+    $safe_html = wp_kses_post($translated);
+    return $safe_html !== '' ? $safe_html : $content;
+}, 20);
+
+add_filter('the_title', function ($title, $post_id) {
+    if (!is_singular('post') || get_the_ID() !== $post_id) {
+        return $title;
+    }
+
+    if (!function_exists('svic_current_locale')) {
+        return $title;
+    }
+
+    $locale = strtolower(svic_current_locale());
+    if (strpos($locale, 'zh') !== 0) {
+        return $title;
+    }
+
+    $translated = get_post_meta($post_id, '_svic_title_zh_tw', true);
+    return is_string($translated) && $translated !== '' ? $translated : $title;
+}, 10, 2);
+
+add_filter('get_the_excerpt', function ($excerpt, $post) {
+    if (!($post instanceof WP_Post) || $post->post_type !== 'post') {
+        return $excerpt;
+    }
+
+    if (!function_exists('svic_current_locale')) {
+        return $excerpt;
+    }
+
+    $locale = strtolower(svic_current_locale());
+    if (strpos($locale, 'zh') !== 0) {
+        return $excerpt;
+    }
+
+    $translated = get_post_meta($post->ID, '_svic_description_zh_tw', true);
+    return is_string($translated) && $translated !== '' ? $translated : $excerpt;
+}, 10, 2);
+
+add_filter('the_content', function ($content) {
+    if (!is_singular('post')) {
+        return $content;
+    }
+
+    if (!function_exists('svic_url_with_lang')) {
+        return $content;
+    }
+
+    $install_url = esc_url(svic_url_with_lang(home_url('/guides-setup/')));
+    $compare_url = esc_url(svic_url_with_lang(home_url('/svicloud-10p-plus-vs-unblocktech-ubox-12/')));
+
+    $search = [
+        '../how-to-set-up-svicloud-tv-box.md',
+        'http://../how-to-set-up-svicloud-tv-box-zh.md',
+        '../svicloud-10p-plus-vs-unblocktech-ubox-12.md',
+        '$219–$239 USD (official U.S. store)',
+        '$219–$239 美元（官方美國網站）',
+    ];
+
+    $replace = [
+        $install_url,
+        $install_url,
+        $compare_url,
+        '$249–$359 USD (official U.S. store)',
+        '$249–$359 美元（官方美國網站）',
+    ];
+
+    return str_replace($search, $replace, $content);
+}, 30);
+
+add_filter('wp_nav_menu_objects', function ($items) {
+    if (!function_exists('svic_current_locale')) {
+        return $items;
+    }
+
+    $locale = strtolower(svic_current_locale());
+    if (strpos($locale, 'zh') !== 0) {
+        return $items;
+    }
+
+    $overrides = [
+        665 => '小雲電視盒 10P+ vs 安博電視盒 12 代',
+        664 => '小雲電視盒 10P+ vs EVPAD 10 系列',
+    ];
+
+    foreach ($items as $item) {
+        $id = isset($item->object_id) ? (int) $item->object_id : 0;
+        if ($id && isset($overrides[$id])) {
+            $item->title = esc_html($overrides[$id]);
+        }
+    }
+
+    return $items;
+}, 20);
+
+function svic_replace_inline_code_placeholders(string $html, int $post_id): string
+{
+    if (strpos($html, '{{SVIC') === false) {
+        return $html;
+    }
+
+    $source_content = get_post_field('post_content', $post_id);
+    $code_texts     = [];
+    if (is_string($source_content) && $source_content !== '') {
+        if (preg_match_all('/<code>(.*?)<\/code>/s', $source_content, $code_matches)) {
+            foreach ($code_matches[1] as $code) {
+                $code_texts[] = html_entity_decode(wp_strip_all_tags($code), ENT_QUOTES, get_bloginfo('charset') ?: 'UTF-8');
+            }
+        }
+    }
+
+    $normalized = preg_replace_callback('/\{\{([^}]*)\}\}/', function ($match) {
+        $inner = strip_tags($match[1]);
+        $inner = preg_replace('/\s+/', '', $inner);
+        return '{{' . $inner . '}}';
+    }, $html);
+
+    $cursor = 0;
+    $html = preg_replace_callback('/\{\{SVICCODE(\d+)\}\}/i', function ($match) use (&$cursor, $code_texts) {
+        $explicit_index = (int) $match[1];
+        $value = $code_texts[$cursor] ?? ($code_texts[$explicit_index] ?? '');
+        if ($value === '') {
+            $value = trim($match[0], '{}');
+        }
+        $cursor++;
+        return '<code>' . esc_html($value) . '</code>';
+    }, $normalized);
+
+    return $html;
+}
