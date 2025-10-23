@@ -144,7 +144,7 @@ review:
     </div>
   </div>
   <p class="blog-tip">
-    想再複習安裝步驟？可參考 <a href="https://svicloudtvbox.us/zh/how-to-set-up-svicloud-tv-box/">小雲電視盒安裝指南</a>，也可以分享給家人或長輩。
+    想再複習安裝步驟？可參考 <a href="https://svicloudtvbox.us/zh/how-to-set-up-svicloud-tv-box-zh/">小雲電視盒安裝指南</a>，也可以分享給家人或長輩。
   </p>
 </section>
 

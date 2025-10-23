@@ -285,8 +285,42 @@ if (!function_exists('svic_price_html')) {
         if (!$product) {
             return '';
         }
+        $regular_price = $product->get_regular_price();
+        $current_price = $product->get_price();
+        $sale_price    = $product->get_sale_price();
 
-        return wp_kses_post($product->get_price_html());
+        if ($current_price === '' && $regular_price !== '') {
+            $current_price = $regular_price;
+        }
+
+        $regular_html = $regular_price !== '' ? wc_price($regular_price) : '';
+        $current_html = $current_price !== '' ? wc_price($current_price) : '';
+
+        if ($product->is_on_sale() && $sale_price !== '' && $regular_html && $current_html && $current_html !== $regular_html) {
+            $sr_template = svic_translate('pricing.sr_sale_announcement');
+            if (!is_string($sr_template) || $sr_template === '') {
+                $sr_template = __('Sale price %2$s, original price %1$s', svic_text_domain());
+            }
+
+            $sr_text = sprintf(
+                $sr_template,
+                wp_strip_all_tags($regular_html),
+                wp_strip_all_tags($current_html)
+            );
+
+            return sprintf(
+                '<span class="lumen-price lumen-price--sale"><span class="lumen-price__current">%1$s</span><span class="lumen-price__original">%2$s</span><span class="screen-reader-text">%3$s</span></span>',
+                $current_html,
+                $regular_html,
+                esc_html($sr_text)
+            );
+        }
+
+        if ($current_html) {
+            return sprintf('<span class="lumen-price"><span class="lumen-price__current">%s</span></span>', $current_html);
+        }
+
+        return '';
     }
 }
 
@@ -297,6 +331,13 @@ if (!function_exists('svic_product_primary_image')) {
         }
 
         $image_id = $product->get_image_id();
+        if (!$image_id && method_exists($product, 'get_gallery_image_ids')) {
+            $gallery_ids = $product->get_gallery_image_ids();
+            if (is_array($gallery_ids) && !empty($gallery_ids)) {
+                $image_id = (int) reset($gallery_ids);
+            }
+        }
+
         if ($image_id) {
             return wp_get_attachment_image(
                 $image_id,
@@ -304,11 +345,13 @@ if (!function_exists('svic_product_primary_image')) {
                 false,
                 [
                     'alt' => esc_attr($product->get_name()),
+                    'loading' => 'lazy',
+                    'decoding' => 'async',
                 ]
             );
         }
 
-        return '<img src="' . esc_url(get_template_directory_uri() . '/assets/images/svicloud-hero-product.png') . '" alt="' . esc_attr($product->get_name()) . '" />';
+        return '<img src="' . esc_url(get_template_directory_uri() . '/assets/images/svicloud-hero-product.png') . '" alt="' . esc_attr($product->get_name()) . '" loading="lazy" decoding="async" />';
     }
 }
 

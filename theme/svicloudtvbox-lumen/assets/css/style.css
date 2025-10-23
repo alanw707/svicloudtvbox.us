@@ -310,3 +310,4 @@ button:focus:not(:focus-visible),.wp-block-button__link:focus:not(:focus-visible
 .glow-accent{box-shadow:var(--shadow-glow)}
 .stack-gap-sm{display:grid;gap:var(--space-sm)}
 .stack-gap-md{display:grid;gap:var(--space-md)}
+.screen-reader-text{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}

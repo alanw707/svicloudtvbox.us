@@ -161,7 +161,17 @@ while (have_posts()) :
       <section class="product-description">
         <h2 class="h3 spacing-normal"><?php echo esc_html__('Description', 'svicloudtvbox-lumen'); ?></h2>
         <div class="entry-content">
-          <?php the_content(); ?>
+          <?php
+          $description_html = apply_filters('the_content', get_post_field('post_content', get_the_ID()));
+          $description_key = 'products.' . $slug . '.description';
+          $translated_description = svic_translate_rich($description_key);
+
+          if (is_string($translated_description) && $translated_description !== '' && $translated_description !== 'description') {
+              $description_html = $translated_description;
+          }
+
+          echo wp_kses_post($description_html);
+          ?>
         </div>
       </section>
     </main>

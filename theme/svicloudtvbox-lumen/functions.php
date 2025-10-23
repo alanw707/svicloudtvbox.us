@@ -1118,6 +1118,31 @@ add_filter('get_the_excerpt', function ($excerpt, $post) {
     return is_string($translated) && $translated !== '' ? $translated : $excerpt;
 }, 10, 2);
 
+add_filter('woocommerce_short_description', function ($excerpt) {
+    if (!function_exists('svic_current_locale')) {
+        return $excerpt;
+    }
+
+    global $product;
+    if (!$product instanceof WC_Product) {
+        $product = function_exists('wc_get_product') ? wc_get_product(get_the_ID()) : null;
+    }
+
+    if (!$product instanceof WC_Product) {
+        return $excerpt;
+    }
+
+    $slug = $product->get_slug();
+    $translation_key = 'products.' . $slug . '.short_description';
+    $translated = svic_translate_rich($translation_key);
+
+    if (!is_string($translated) || $translated === '' || $translated === 'short_description') {
+        return $excerpt;
+    }
+
+    return wp_kses_post($translated);
+}, 10);
+
 add_filter('the_content', function ($content) {
     if (!is_singular('post')) {
         return $content;

@@ -30,6 +30,7 @@ $card_data = [
         'price_note_key'  => 'shop.cards.price_note',
         'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-10p-plus')),
         'fallback_price'  => '$248.99',
+        'image_fallback'  => get_template_directory_uri() . '/assets/images/svicloud-10p-plus-lifestyle-2.png',
     ],
     '10s' => [
         'product'         => class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null,
@@ -53,20 +54,56 @@ $card_data = [
         'price_note_key'  => 'shop.cards.price_note',
         'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-10s')),
         'fallback_price'  => '$183.99',
+        'image_fallback'  => get_template_directory_uri() . '/assets/images/svicloud-10s-lifestyle-2.png',
     ],
 ];
 
 foreach ($card_data as $key => $card) {
-    if (!isset($card['product']) || !$card['product']) {
-        $card_data[$key]['price_text'] = $card['fallback_price'];
-        $card_data[$key]['url'] = $card['fallback_url'];
-        continue;
+    $product = isset($card['product']) && $card['product'] ? $card['product'] : null;
+
+    $url = isset($card['fallback_url']) ? $card['fallback_url'] : '#';
+    $price_markup = '';
+    $image_html = '';
+
+    if ($product) {
+        $price_markup = svic_price_html($product);
+        if ($price_markup === '') {
+            $price_markup = sprintf(
+                '<span class="lumen-price"><span class="lumen-price__current">%s</span></span>',
+                esc_html($card['fallback_price'])
+            );
+        }
+
+        $url = svic_url_with_lang(get_permalink($product->get_id()));
+        $image_html = svic_product_primary_image($product, 'large');
+    } else {
+        $price_markup = sprintf(
+            '<span class="lumen-price"><span class="lumen-price__current">%s</span></span>',
+            esc_html($card['fallback_price'])
+        );
     }
 
-    $product = $card['product'];
-    $price_html = method_exists($product, 'get_price_html') ? $product->get_price_html() : '';
-    $card_data[$key]['price_text'] = $price_html ? wp_strip_all_tags($price_html) : $card['fallback_price'];
-    $card_data[$key]['url'] = svic_url_with_lang(get_permalink($product->get_id()));
+    if ($image_html === '') {
+        $fallback_src = isset($card['image_fallback']) ? $card['image_fallback'] : '';
+        if ($fallback_src === '') {
+            $fallback_src = get_template_directory_uri() . '/assets/images/svicloud-10p-plus.png';
+        }
+
+        $alt_text = svic_translate($card['title_key']);
+        if (!is_string($alt_text) || $alt_text === '') {
+            $alt_text = __('SVICLOUD device', 'svicloudtvbox-lumen');
+        }
+
+        $image_html = sprintf(
+            '<img src="%s" alt="%s" loading="lazy" decoding="async" />',
+            esc_url($fallback_src),
+            esc_attr($alt_text)
+        );
+    }
+
+    $card_data[$key]['price_markup'] = $price_markup;
+    $card_data[$key]['url'] = $url;
+    $card_data[$key]['image_html'] = $image_html;
 }
 ?>
 
@@ -80,7 +117,11 @@ foreach ($card_data as $key => $card) {
   <section class="shop-products">
     <div class="shop-products__grid">
       <?php foreach ($card_data as $key => $card) :
-          $price_text = isset($card['price_text']) ? $card['price_text'] : $card['fallback_price'];
+          $price_markup = isset($card['price_markup']) ? $card['price_markup'] : sprintf(
+              '<span class="lumen-price"><span class="lumen-price__current">%s</span></span>',
+              esc_html($card['fallback_price'])
+          );
+          $image_html = isset($card['image_html']) ? $card['image_html'] : '';
           $url = isset($card['url']) ? $card['url'] : $card['fallback_url'];
           $card_classes = 'shop-product-card';
           if (!empty($card['highlight'])) {
@@ -95,9 +136,12 @@ foreach ($card_data as $key => $card) {
             <?php if (!empty($card['badge_key'])) : ?>
               <span class="shop-product-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></span>
             <?php endif; ?>
+            <?php if ($image_html) : ?>
+              <figure class="shop-product-card__media"><?php echo $image_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
+            <?php endif; ?>
             <div class="shop-product-card__price-line">
               <span class="shop-product-card__price-label"><?php echo svic_translate_html('shop.cards.price_label'); ?></span>
-              <span class="shop-product-card__price-amount"><?php echo esc_html($price_text); ?></span>
+              <span class="shop-product-card__price-amount"><?php echo $price_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
             </div>
             <?php if (!empty($card['price_note_key'])) : ?>
               <span class="shop-product-card__price-note"><?php echo svic_translate_html($card['price_note_key']); ?></span>
