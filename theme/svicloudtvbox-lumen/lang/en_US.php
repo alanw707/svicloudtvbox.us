@@ -497,6 +497,8 @@ return [
         'nav' => [
             'home'     => 'Home',
             'compare'  => 'Compare',
+            'compare_evpad'  => 'SVICLOUD 10P+ vs EVPAD 10 Pro',
+            'compare_ubox12' => 'SVICLOUD 10P+ vs UBOX 12',
             'shop'     => 'Shop',
             'faq'      => 'FAQ',
             'ten_p'    => 'SVICLOUD 10P+',

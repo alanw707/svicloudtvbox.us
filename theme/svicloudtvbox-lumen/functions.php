@@ -408,6 +408,8 @@ add_filter('wp_nav_menu_objects', function ($items, $args) {
         'svicloud-10p-plus'    => 'header.nav.ten_p',
         'svicloud-10p'         => 'header.nav.ten_p',
         'svicloud-10s'         => 'header.nav.ten_s',
+        'svicloud-10p-plus-vs-evpad-10-pro'      => 'header.nav.compare_evpad',
+        'svicloud-10p-plus-vs-unblocktech-ubox-12' => 'header.nav.compare_ubox12',
         'contact'              => 'header.nav.concierge',
         'concierge'            => 'header.nav.concierge',
         'guides'               => 'header.nav.guides',

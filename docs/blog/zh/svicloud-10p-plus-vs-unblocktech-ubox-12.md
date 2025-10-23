@@ -92,6 +92,5 @@ review:
 
 - 想比較小雲內部兩款型號？前往[官方 10P+ vs 10S 比較頁](https://svicloudtvbox.us/compare/)。
 - 考慮購買？查看[小雲 10P+ 商品頁](https://svicloudtvbox.us/product/svicloud-10p-plus/)或透過[客服中心](https://svicloudtvbox.us/support/)諮詢。
-- 若需要英文版內容，可參考同步更新的[English comparison post](https://svicloudtvbox.us/svicloud-10p-plus-vs-unblocktech-ubox-12/)。
 
 > _提醒：本文資訊以 2025 年 10 月公開資料為準，下單前請再向原廠或授權賣家確認。_

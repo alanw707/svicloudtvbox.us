@@ -10,7 +10,7 @@
   <?php endwhile; else: ?>
     <section class="page-hero">
       <span class="badge badge-muted"><?php esc_html_e('Oops!', 'svicloudtvbox'); ?></span>
-      <h1 class="page-title"><?php esc_html_e('We couldn\'t find that page.', 'svicloudtvbox'); ?></h1>
+      <h1 class="page-title"><?php esc_html_e("We couldn't find that page.", 'svicloudtvbox'); ?></h1>
       <p class="page-subtitle"><?php esc_html_e('The link might be outdated or the page is still being built. Try browsing the links below.', 'svicloudtvbox'); ?></p>
       <div class="comparison-cta">
         <a class="btn btn-primary" href="<?php echo esc_url( svic_url_with_lang( home_url('/') ) ); ?>"><?php esc_html_e('Go Home', 'svicloudtvbox'); ?></a>

@@ -90,6 +90,6 @@ SVICLOUD 10P+ offers U.S. chat/phone/email support in English and Traditional Ch
 
 - Compare SVICLOUD models on the [official comparison page](https://svicloudtvbox.us/compare/).
 - Ready to order? Visit the [SVICLOUD 10P+ product page](https://svicloudtvbox.us/product/svicloud-10p-plus/).
-- Prefer Traditional Chinese? The [繁中版比稿](zh/svicloud-10p-plus-vs-unblocktech-ubox-12.md) will publish alongside this article.
+- Prefer Traditional Chinese? Read the [繁中版比稿](https://svicloudtvbox.us/zh/svicloud-10p-plus-vs-unblocktech-ubox-12/).
 
 > _Disclaimer: Specs and pricing are based on publicly available information from October 2025. Always confirm with the manufacturer or authorized reseller before buying._

@@ -24,9 +24,15 @@ fi
 
 PY="${PYTHON:-python3}"
 
+# Quick PHP syntax check before deploying to catch issues like unescaped quotes.
+if command -v php >/dev/null 2>&1; then
+  while IFS= read -r -d '' file; do
+    php -l "$file" >/dev/null
+  done < <(find "$LOCAL_THEME_DIR" -type f -name '*.php' -print0)
+fi
+
 exec "$PY" "$ROOT_DIR/scripts/deploy_theme.py" \
   --protocol "$FTP_PROTOCOL" \
   --local-dir "$LOCAL_THEME_DIR" \
   --remote-root "$REMOTE_THEME_DIR" \
   "$@"
-
