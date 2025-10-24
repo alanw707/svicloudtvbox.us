@@ -497,7 +497,7 @@ return [
         'nav' => [
             'home'     => '首頁',
             'compare'  => '比較機型',
-            'compare_evpad'  => '小雲電視盒 10P+ vs EVPAD 10／Pro',
+            'compare_evpad'  => '小雲電視盒 10P+ vs EVPAD 10 Pro',
             'compare_ubox12' => '小雲電視盒 10P+ vs 安博電視盒 12 代',
             'shop'     => '選購',
             'faq'      => '常見問題',

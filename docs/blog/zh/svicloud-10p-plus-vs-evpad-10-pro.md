@@ -1,6 +1,6 @@
 ---
-title: 小雲 SVICLOUD 10P+ vs EVPAD 10/Pro：2025 年最適合家庭的安卓電視盒？
-description: 從硬體、語音操控、卡拉 OK、售後保固與安裝流程深入比較小雲 SVICLOUD 10P+ 與 EVPAD 10/Pro，協助美國用戶做出安心選擇。
+title: 小雲 SVICLOUD 10P+ vs EVPAD 10 Pro：2025 年最適合家庭的安卓電視盒？
+description: 從硬體、語音操控、卡拉 OK、售後保固與安裝流程深入比較小雲 SVICLOUD 10P+ 與 EVPAD 10 Pro，協助美國用戶做出安心選擇。
 slug: svicloud-10p-plus-vs-evpad-10-pro
 locale: zh-TW
 keywords:
@@ -19,7 +19,7 @@ review:
 <section class="blog-section blog-section--hero">
   <div class="blog-hero__summary">
     <h2 class="blog-eyebrow">快速結論</h2>
-    <h1 class="blog-title">小雲 SVICLOUD 10P+ vs EVPAD 10/Pro：美國用戶該如何選擇？</h1>
+    <h1 class="blog-title">小雲 SVICLOUD 10P+ vs EVPAD 10 Pro：美國用戶該如何選擇？</h1>
     <p class="blog-lead">
       想在美國打造中文串流與客廳卡拉 OK 體驗？這份比較整理安裝流程、語音操作、家庭功能與售後保固，幫你快速判斷哪一台才是最適合的家庭娛樂機。
     </p>
@@ -37,7 +37,7 @@ review:
     </div>
     <div class="blog-highlight blog-highlight--secondary">
       <span class="blog-highlight__label">EVPAD 仍具吸引力的情境</span>
-      <strong class="blog-highlight__title">EVPAD 10/Pro</strong>
+      <strong class="blog-highlight__title">EVPAD 10 Pro</strong>
       <ul>
         <li>海外代購價格通常更低</li>
         <li>老 EVPAD 用戶升級，介面無痛銜接</li>
@@ -79,7 +79,7 @@ review:
         <tr>
           <th>項目</th>
           <th>小雲 SVICLOUD 10P+</th>
-          <th>EVPAD 10/Pro</th>
+          <th>EVPAD 10 Pro</th>
         </tr>
       </thead>
       <tbody>
@@ -134,7 +134,7 @@ review:
       </ul>
     </div>
     <div class="blog-compare-columns__col">
-      <h3>EVPAD 10/Pro</h3>
+      <h3>EVPAD 10 Pro</h3>
       <ul class="blog-checklist">
         <li>初次設定介面以中文為主，英文選項依韌體版本而定</li>
         <li>標配 IR 遙控器，語音功能需另購套件</li>
@@ -144,7 +144,7 @@ review:
     </div>
   </div>
   <p class="blog-tip">
-    想再複習安裝步驟？可參考 <a href="https://svicloudtvbox.us/zh/how-to-set-up-svicloud-tv-box-zh/">小雲電視盒安裝指南</a>，也可以分享給家人或長輩。
+    想再複習安裝步驟？可參考 <a href="/zh/how-to-set-up-svicloud-tv-box-zh/">小雲電視盒安裝指南</a>，也可以分享給家人或長輩。
   </p>
 </section>
 
@@ -171,7 +171,7 @@ review:
 </section>
 
 <section class="blog-section">
-  <h2 class="blog-section__title">EVPAD 10/Pro 仍適合的族群</h2>
+  <h2 class="blog-section__title">EVPAD 10 Pro 仍適合的族群</h2>
   <div class="blog-callout blog-callout--neutral">
     <ul>
       <li><strong>價格導向：</strong> 能接受海外代購與寄送，追求更低入手價。</li>
@@ -195,7 +195,7 @@ review:
       </ul>
     </div>
     <div>
-      <h3>適合 EVPAD 10/Pro 的情境</h3>
+      <h3>適合 EVPAD 10 Pro 的情境</h3>
       <ul>
         <li>長期 EVPAD 用戶，操作介面最熟悉</li>
         <li>預算有限，願意自行處理卡拉 OK 與售後</li>
@@ -209,7 +209,7 @@ review:
   <h2 class="blog-section__title">常見問答</h2>
   <div class="blog-faq">
     <article>
-      <h3>EVPAD 10/Pro 能像小雲 10P+ 一樣唱卡拉 OK 嗎？</h3>
+      <h3>EVPAD 10 Pro 能像小雲 10P+ 一樣唱卡拉 OK 嗎？</h3>
       <p>EVPAD 沒有內建卡拉 OK，需自行安裝第三方 App 並設定麥克風；小雲 10P+ 則內建 WeFun/閤家歡 Karaoke，可立即使用。</p>
     </article>
     <article>
