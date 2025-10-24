@@ -1099,7 +1099,7 @@ return [
                     'title' => 'Stream buffering or blurry',
                     'copy'  => 'Restart your router, move closer to Wi-Fi, or plug in Ethernet for the most stable connection.',
                 ],
-                'apps_access' => [
+                'orz' => [
                     'title' => 'Cannot access a streaming app',
                     'copy'  => 'Confirm the service is legitimate, then reach out to that provider’s support team. Unauthorized installers are outside our scope.',
                 ],

@@ -96,9 +96,17 @@ body.woocommerce-cart .woocommerce-notices-wrapper .button {
 }
 
 body.woocommerce-cart .woocommerce-notices-wrapper a {
-  color: var(--lumen-accent-teal);
+  color: var(--link-primary);
   font-weight: 600;
   text-decoration: underline;
+  text-decoration-color: var(--link-primary-underline);
+  transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
+}
+
+body.woocommerce-cart .woocommerce-notices-wrapper a:hover,
+body.woocommerce-cart .woocommerce-notices-wrapper a:focus-visible {
+  color: var(--link-primary-hover);
+  text-decoration-color: var(--link-primary-underline-hover);
 }
 
 @keyframes svic-cart-toast-in {

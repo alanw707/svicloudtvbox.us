@@ -7,8 +7,8 @@
 .about-page{background:var(--lumen-page-background);color:var(--lumen-text-secondary)}
 .about-page p,.about-page li,.about-page dd{color:var(--lumen-text-secondary)}
 .about-page p strong,.about-page li strong,.about-page dd strong{color:var(--lumen-text-primary)}
-.about-page a{color:var(--lumen-accent-azure)}
-.about-page a:hover,.about-page a:focus-visible{color:var(--lumen-accent-teal)}
+.about-page a{color:var(--link-primary);text-decoration-color:var(--link-primary-underline);transition:color var(--transition-normal),text-decoration-color var(--transition-normal)}
+.about-page a:hover,.about-page a:focus-visible{color:var(--link-primary-hover);text-decoration-color:var(--link-primary-underline-hover)}
 .about-section-title{margin:0;font-family:var(--font-accent);font-size:clamp(2.1rem,3.4vw,3rem);letter-spacing:-0.018em;color:var(--lumen-text-primary)}
 .about-section-lead{margin:0;font-size:1.05rem;line-height:1.75;color:var(--lumen-text-secondary)}
 .about-section-body{display:grid;gap:1rem;color:var(--lumen-text-secondary);line-height:1.7}

@@ -20,12 +20,15 @@
 }
 
 .about-page a {
-  color: var(--lumen-accent-azure);
+  color: var(--link-primary);
+  text-decoration-color: var(--link-primary-underline);
+  transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
 }
 
 .about-page a:hover,
 .about-page a:focus-visible {
-  color: var(--lumen-accent-teal);
+  color: var(--link-primary-hover);
+  text-decoration-color: var(--link-primary-underline-hover);
 }
 
 .about-section-title {

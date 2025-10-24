@@ -199,17 +199,21 @@
 }
 
 .contact-card__cta {
-  color: #8ab8ff;
+  color: var(--link-primary);
   font-weight: 600;
   text-decoration: none;
+  text-decoration-color: var(--link-primary-underline);
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
 }
 
 .contact-card__cta:hover,
-.contact-card__cta:focus {
+.contact-card__cta:focus-visible {
+  color: var(--link-primary-hover);
   text-decoration: underline;
+  text-decoration-color: var(--link-primary-underline-hover);
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }

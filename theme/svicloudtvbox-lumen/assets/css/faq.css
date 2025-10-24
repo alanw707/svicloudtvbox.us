@@ -28,7 +28,8 @@
 .faq-item__question::after{content:'+';margin-left:auto;font-size:1.2rem;transition:transform 0.2s ease;color:rgba(160,182,220,0.85)}
 .faq-item[open] .faq-item__question::after{transform:rotate(45deg)}
 .faq-item__answer{margin-top:0.75rem;font-size:0.95rem;line-height:1.65;color:rgba(225,232,255,0.82)}
-.faq-item__answer a{color:#8ab8ff;text-decoration:underline;text-decoration-color:rgba(138,184,255,0.4);text-decoration-thickness:2px;text-underline-offset:4px}
+.faq-item__answer a{color:var(--link-primary);text-decoration:underline;text-decoration-color:var(--link-primary-underline);text-decoration-thickness:2px;text-underline-offset:4px;transition:color var(--transition-normal),text-decoration-color var(--transition-normal)}
+.faq-item__answer a:hover,.faq-item__answer a:focus-visible{color:var(--link-primary-hover);text-decoration-color:var(--link-primary-underline-hover)}
 .faq-item__answer code{background:rgba(255,255,255,0.08);border-radius:6px;padding:0.1rem 0.4rem;font-size:0.85rem}
 @media(max-width:720px){.faq-section{padding:1rem 1.1rem}
 .faq-item{padding:0.65rem 0.85rem}

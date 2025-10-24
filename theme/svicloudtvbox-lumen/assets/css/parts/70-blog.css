@@ -346,10 +346,18 @@ html[lang*="zh"] .blog-article__content strong {
 }
 
 .blog-article__content a {
-  color: var(--color-brand-primary);
+  color: var(--link-primary);
   text-decoration: underline;
+  text-decoration-color: var(--link-primary-underline);
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
+  transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
+}
+
+.blog-article__content a:hover,
+.blog-article__content a:focus-visible {
+  color: var(--link-primary-hover);
+  text-decoration-color: var(--link-primary-underline-hover);
 }
 
 .blog-article__content strong {

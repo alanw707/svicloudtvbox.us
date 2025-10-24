@@ -892,16 +892,18 @@
 }
 
 .woocommerce-checkout-payment .woocommerce-terms-and-conditions-wrapper a {
-  color: rgba(190, 255, 247, 0.98);
+  color: var(--link-primary);
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 4px;
-  transition: color var(--transition-fast);
+  text-decoration-color: var(--link-primary-underline);
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
 }
 
 .woocommerce-checkout-payment .woocommerce-terms-and-conditions-wrapper a:hover,
 .woocommerce-checkout-payment .woocommerce-terms-and-conditions-wrapper a:focus-visible {
-  color: var(--lumen-accent-azure);
+  color: var(--link-primary-hover);
+  text-decoration-color: var(--link-primary-underline-hover);
 }
 
 .place-order {
@@ -938,7 +940,9 @@
 }
 
 .lumen-checkout__panel--payment .place-order a {
-  color: rgba(130, 246, 226, 0.95);
+  color: var(--link-primary);
+  text-decoration-color: var(--link-primary-underline);
+  transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
 }
 
 #place_order {

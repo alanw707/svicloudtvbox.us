@@ -34,8 +34,8 @@
 .contact-card__icon--mail span::before{content:'✉'}
 .contact-card__label{color:rgba(189,204,240,0.8);font-size:0.9rem;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:0.35rem}
 .contact-card__value{display:block;font-size:1.3rem;font-weight:600;color:rgba(242,247,255,0.95);margin-bottom:0.25rem}
-.contact-card__cta{color:#8ab8ff;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:0.35rem}
-.contact-card__cta:hover,.contact-card__cta:focus{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.contact-card__cta{color:var(--link-primary);font-weight:600;text-decoration:none;text-decoration-color:var(--link-primary-underline);display:inline-flex;align-items:center;gap:0.35rem;transition:color var(--transition-normal),text-decoration-color var(--transition-normal)}
+.contact-card__cta:hover,.contact-card__cta:focus-visible{color:var(--link-primary-hover);text-decoration:underline;text-decoration-color:var(--link-primary-underline-hover);text-decoration-thickness:2px;text-underline-offset:4px}
 .contact-card--help,.contact-card--faq{background:linear-gradient(145deg,rgba(12,19,34,0.85),rgba(8,12,22,0.9))}
 .contact-card--faq .lumen-pill--ghost{align-self:flex-start;margin-top:0.6rem;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);color:rgba(236,240,255,0.88)}
 .contact-card--faq .lumen-pill--ghost:hover,.contact-card--faq .lumen-pill--ghost:focus{background:rgba(255,255,255,0.16);color:#fff;border-color:rgba(255,255,255,0.28)}

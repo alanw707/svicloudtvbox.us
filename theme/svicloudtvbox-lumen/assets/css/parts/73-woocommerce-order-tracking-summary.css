@@ -158,12 +158,16 @@
 }
 
 .lumen-order-summary__details .woocommerce-table--order-details a {
-  color: rgba(94, 213, 255, 0.95);
+  color: var(--link-primary);
   text-decoration: none;
+  transition: color var(--transition-normal);
 }
 
-.lumen-order-summary__details .woocommerce-table--order-details a:hover {
+.lumen-order-summary__details .woocommerce-table--order-details a:hover,
+.lumen-order-summary__details .woocommerce-table--order-details a:focus-visible {
+  color: var(--link-primary-hover);
   text-decoration: underline;
+  text-decoration-color: var(--link-primary-underline-hover);
 }
 
 .lumen-order-summary__details .woocommerce-table--order-details .product-quantity {
@@ -245,15 +249,20 @@
 .lumen-order-summary__details .woocommerce-customer-details address a,
 .lumen-order-summary__details .woocommerce-customer-details address .email,
 .lumen-order-summary__details .woocommerce-customer-details address .woocommerce-customer-details--email {
-  color: rgba(120, 206, 255, 0.92);
+  color: var(--link-primary);
 }
 
 .lumen-order-summary__details .woocommerce-customer-details address a {
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: var(--link-primary-underline);
+  text-underline-offset: 4px;
+  transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
 }
 
-.lumen-order-summary__details .woocommerce-customer-details address a:hover {
-  text-decoration: underline;
+.lumen-order-summary__details .woocommerce-customer-details address a:hover,
+.lumen-order-summary__details .woocommerce-customer-details address a:focus-visible {
+  color: var(--link-primary-hover);
+  text-decoration-color: var(--link-primary-underline-hover);
 }
 
 .lumen-order-summary__details .woocommerce-order-details__section address {

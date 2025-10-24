@@ -24,6 +24,10 @@
   --surface-muted: var(--text-muted);
   --primary-strong: #1b5cff;
   --primary-strong-hover: #1442c5;
+  --link-primary: #69d0ff;
+  --link-primary-hover: #97e2ff;
+  --link-primary-underline: rgba(105, 208, 255, 0.45);
+  --link-primary-underline-hover: rgba(151, 226, 255, 0.6);
   --cta-outline: rgba(27, 92, 255, 0.18);
   --border-soft: rgba(15, 23, 42, 0.08);
   --border-strong: rgba(15, 23, 42, 0.18);
@@ -180,6 +184,18 @@ body.wp-theme-svicloudtvbox-lumen {
   --surface-heading: var(--lumen-text-primary);
   --surface-muted: var(--lumen-text-muted);
   color: var(--surface-text);
+}
+
+a {
+  color: var(--link-primary);
+  text-decoration-color: var(--link-primary-underline);
+  transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--link-primary-hover);
+  text-decoration-color: var(--link-primary-underline-hover);
 }
 
 .surface--dark {

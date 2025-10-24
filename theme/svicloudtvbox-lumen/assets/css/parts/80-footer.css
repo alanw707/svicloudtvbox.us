@@ -312,14 +312,16 @@
 }
 
 .footer-bottom__nav .footer-menu a {
-  color: rgba(214, 232, 255, 0.82);
+  color: var(--link-primary);
   font-weight: 600;
   text-decoration: none;
-  transition: color 180ms ease;
+  transition: color var(--transition-normal), text-decoration-color var(--transition-normal);
 }
 
-.footer-bottom__nav .footer-menu a:hover {
-  color: #7ef6e3;
+.footer-bottom__nav .footer-menu a:hover,
+.footer-bottom__nav .footer-menu a:focus-visible {
+  color: var(--link-primary-hover);
+  text-decoration-color: var(--link-primary-underline-hover);
 }
 
 .footer-copy {
