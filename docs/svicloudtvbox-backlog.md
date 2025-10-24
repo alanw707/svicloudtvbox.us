@@ -99,6 +99,8 @@ Note: Aligns with PRD and Launch Plan. Use this as the working checklist.
   - AC: Titles per samples; sitemap submitted; robots sane.
 - [ ] JSON-LD (Organization + Product)
   - AC: Rich Results Test passes; no schema errors.
+- [ ] Rank Math or Yoast (Woo module) configured for Product schema
+  - AC: Product pages output valid `Product` JSON-LD; `aggregateRating` only appears on PDPs with real, visible reviews; Organization schema has no ratings.
 - [ ] GA4 (enhanced ecommerce) + Meta/TikTok pixels
   - AC: `purchase` events fire with value/currency; audiences collecting.
 - [ ] Search Console verification and coverage
@@ -157,6 +159,8 @@ Note: Aligns with PRD and Launch Plan. Use this as the working checklist.
 
 - [ ] Review capture flow (email/SMS)
   - AC: Trigger after delivery; UGC policy set.
+- [ ] Google Customer Reviews (GCR) integration
+  - AC: GCR opt-in enabled on thank-you page; Merchant Center linked; begin collecting seller ratings toward eligibility; Seller Ratings eligible once country threshold met.
 - [ ] KPI dashboard (weekly)
   - AC: CR, AOV, ROAS, refunds tracked; sheet auto-updates.
 - [ ] Ads (Google brand/model) with negatives
@@ -183,4 +187,3 @@ Note: Aligns with PRD and Launch Plan. Use this as the working checklist.
 ---
 
 End of Backlog v1.0
-

@@ -46,6 +46,7 @@ Structured Data (JSON-LD)
 - Products: `Product` with `brand`, `sku`, `mpn` (if available), `offers` (price, currency, availability), `aggregateRating` and `review` (when you have real reviews), `gtin` if applicable.
 - Categories: `ItemList` (list of products) with item position and URL.
 - Content/FAQ: `FAQPage` on relevant landing pages (shipping, warranty, setup, compare).
+ - Reference: See `docs/marketing/google-review-stars-playbook.md` for how to earn organic review snippets, GBP stars, and Ads Seller Ratings safely/compliantly.
 
 Internationalization
 - For each EN page, ensure a zh counterpart where relevant, with unique content (not machine-only). Add hreflang: `en-US` ↔ `zh-TW` and `x-default` pointing to EN home.
@@ -181,4 +182,3 @@ Ongoing (Owner: SEO)
 - Performance: Field CWV pass on key templates.
 - Visibility: Growing impressions and CTR for non-brand queries.
 - Revenue: Measurable lift from organic traffic with improved CVR on product pages.
-
