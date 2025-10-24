@@ -126,7 +126,8 @@ html[lang*="zh"] .blog-article__content strong {
 .blog-highlight-grid {
   display: grid;
   gap: var(--size-400);
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  align-items: stretch;
 }
 
 .blog-highlight {
@@ -135,7 +136,8 @@ html[lang*="zh"] .blog-article__content strong {
   padding: var(--size-500);
   background: rgba(9, 20, 45, 0.82);
   box-shadow: var(--shadow-sm);
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--size-300);
 }
 
@@ -157,10 +159,11 @@ html[lang*="zh"] .blog-article__content strong {
 
 .blog-highlight ul {
   margin: 0;
-  padding-left: 1.1rem;
+  padding-left: 1.25rem;
   display: grid;
   gap: var(--size-200);
   color: var(--color-text-secondary);
+  flex: 1 0 auto;
 }
 
 .blog-fast-facts {
