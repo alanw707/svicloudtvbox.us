@@ -144,7 +144,7 @@ review:
     </div>
   </div>
   <p class="blog-tip">
-    想再複習安裝步驟？可參考 <a href="/zh/how-to-set-up-svicloud-tv-box-zh/">小雲電視盒安裝指南</a>，也可以分享給家人或長輩。
+    想再複習安裝步驟？可參考 <a href="/zh/guides-setup/">小雲電視盒安裝指南</a>，也可以分享給家人或長輩。
   </p>
 </section>
 
@@ -229,7 +229,7 @@ review:
     <ul>
       <li>比較小雲兩款機型：<a href="https://svicloudtvbox.us/compare/">官方 10P+ vs 10S 比較頁</a></li>
       <li>查看最新庫存與優惠：<a href="https://svicloudtvbox.us/product/svicloud-10p-plus/">小雲 10P+ 商品頁</a></li>
-      <li>需要英文版內容？前往 <a href="../svicloud-10p-plus-vs-evpad-10-pro.md">English comparison post</a></li>
+      <li>需要英文版內容？前往 <a href="/svicloud-10p-plus-vs-evpad-10-pro/">English comparison post</a></li>
     </ul>
     <p class="blog-cta-panel__disclaimer">
       本文資訊以 2025 年 10 月為準，購買前請再向原廠或授權經銷商確認售價與保固條款。

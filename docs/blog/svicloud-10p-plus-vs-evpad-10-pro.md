@@ -145,7 +145,7 @@ review:
     </div>
   </div>
   <p class="blog-tip">
-    Need a refresher on SVICLOUD setup? Follow the <a href="/how-to-set-up-svicloud-tv-box/">7-step install guide</a> and keep it bookmarked for roommates or parents.
+    Need a refresher on SVICLOUD setup? Follow the <a href="/guides-setup/">7-step install guide</a> and keep it bookmarked for roommates or parents.
   </p>
 </section>
 
@@ -232,7 +232,7 @@ review:
     <ul>
       <li>Compare SVICLOUD models on the <a href="https://svicloudtvbox.us/compare/">official 10P+ vs 10S page</a>.</li>
       <li>See live inventory and bundle offers on the <a href="https://svicloudtvbox.us/product/svicloud-10p-plus/">SVICLOUD 10P+ product page</a>.</li>
-      <li>Prefer Traditional Chinese? View the <a href="zh/svicloud-10p-plus-vs-evpad-10-pro.md">繁中版比較文章</a>.</li>
+      <li>Prefer Traditional Chinese? View the <a href="/zh/svicloud-10p-plus-vs-evpad-10-pro/">繁中版比較文章</a>.</li>
     </ul>
     <p class="blog-cta-panel__disclaimer">
       Pricing and hardware information are accurate as of October 2025. Confirm stock and warranty terms with the manufacturer or authorized dealer before purchasing.
