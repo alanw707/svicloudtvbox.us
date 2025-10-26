@@ -183,4 +183,65 @@ foreach ($card_data as $key => $card) {
   </section>
 </main>
 
+<?php
+$shop_schema_products = [];
+$shop_item_list       = [];
+$shop_position        = 1;
+
+foreach ($card_data as $card) {
+    if (empty($card['product']) || !$card['product'] instanceof WC_Product) {
+        continue;
+    }
+
+    $product_node = svic_build_product_schema_from_wc_product($card['product']);
+    if (empty($product_node)) {
+        continue;
+    }
+
+    $shop_schema_products[] = $product_node;
+    $shop_item_list[]       = [
+        '@type'    => 'ListItem',
+        'position' => $shop_position++,
+        'item'     => [
+            '@id'  => $product_node['@id'],
+            'name' => $product_node['name'],
+        ],
+    ];
+}
+
+if (!empty($shop_schema_products)) {
+    $shop_page_url = get_post_type_archive_link('product');
+    if (!$shop_page_url && function_exists('wc_get_page_permalink')) {
+        $shop_page_url = wc_get_page_permalink('shop');
+    }
+    if (!$shop_page_url) {
+        $shop_page_url = home_url('/shop/');
+    }
+    if (function_exists('svic_url_with_lang')) {
+        $shop_page_url = svic_url_with_lang($shop_page_url);
+    }
+    $shop_page_url = esc_url_raw($shop_page_url);
+
+    $graph_nodes = [];
+    if ($shop_page_url !== '' && !empty($shop_item_list)) {
+        $graph_nodes[] = [
+            '@type'           => 'ItemList',
+            '@id'             => untrailingslashit($shop_page_url) . '#shop-itemlist',
+            'name'            => esc_html__('SVICLOUD streaming devices catalog', 'svicloudtvbox-lumen'),
+            'url'             => $shop_page_url,
+            'numberOfItems'   => count($shop_item_list),
+            'itemListOrder'   => 'https://schema.org/ItemListOrderAscending',
+            'itemListElement' => $shop_item_list,
+        ];
+    }
+
+    $graph_nodes = array_merge($graph_nodes, $shop_schema_products);
+
+    echo '<script type="application/ld+json">' . wp_json_encode([
+        '@context' => 'https://schema.org',
+        '@graph'   => $graph_nodes,
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+}
+?>
+
 <?php get_footer('shop'); ?>

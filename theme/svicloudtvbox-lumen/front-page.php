@@ -123,11 +123,23 @@ $faq_groups = [
     ],
 ];
 
+$pricing_card_images = [
+    '10p' => array_merge(
+        ['alt' => esc_html__('SVICLOUD 10P+ flagship streaming device and remote', 'svicloudtvbox-lumen')],
+        svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.png')
+    ),
+    '10s' => array_merge(
+        ['alt' => esc_html__('SVICLOUD 10S compact streaming device with HDMI and power accessories', 'svicloudtvbox-lumen')],
+        svic_get_theme_image_meta('/assets/images/svicloud-tvbox-10s.jpg')
+    ),
+];
+
 $pricing_cards = [
     '10p' => [
         'product'        => $hero_product_10p,
         'fallback_price' => '$248.99',
         'fallback_url'   => svic_url_with_lang(home_url('/product/svicloud-10p-plus')),
+        'image'          => $pricing_card_images['10p'],
         'highlight'      => true,
         'badge_key'      => 'frontpage.pricing.cards.10p.badge',
         'title_key'      => 'frontpage.pricing.cards.10p.title',
@@ -149,6 +161,7 @@ $pricing_cards = [
         'product'        => $hero_product_10s,
         'fallback_price' => '$183.99',
         'fallback_url'   => svic_url_with_lang(home_url('/product/svicloud-10s')),
+        'image'          => $pricing_card_images['10s'],
         'highlight'      => false,
         'badge_key'      => null,
         'title_key'      => 'frontpage.pricing.cards.10s.title',
@@ -168,15 +181,153 @@ $pricing_cards = [
     ],
 ];
 
+$product_schema_nodes = [];
+$item_list_elements   = [];
+$list_position        = 1;
+$organization_id      = trailingslashit(home_url('/')) . '#organization';
+$pricing_canonical    = function_exists('svic_get_localized_canonical_url') ? svic_get_localized_canonical_url() : home_url('/');
+$pricing_section_url  = untrailingslashit($pricing_canonical) . '/#pricing';
+
 foreach ($pricing_cards as $slug => $card) {
-    if (!empty($card['product'])) {
-        $product = $card['product'];
+    $product = $card['product'] ?? null;
+    $has_wc_product = false;
+    if ($product && class_exists('WC_Product')) {
+        $has_wc_product = $product instanceof WC_Product;
+    }
+
+    if ($has_wc_product) {
         $pricing_cards[$slug]['price_html'] = svic_price_html($product);
         $pricing_cards[$slug]['cta_url'] = svic_url_with_lang(get_permalink($product->get_id()));
     } else {
         $pricing_cards[$slug]['price_html'] = sprintf('<span class="amount">%s</span>', esc_html($card['fallback_price']));
         $pricing_cards[$slug]['cta_url'] = $card['fallback_url'];
     }
+
+    $product_url = esc_url_raw($pricing_cards[$slug]['cta_url']);
+    $product_name_source = '';
+    if ($has_wc_product) {
+        $product_name_source = $product->get_name();
+    } else {
+        $product_name_source = svic_translate($card['title_key']);
+    }
+    $product_name = trim(wp_strip_all_tags((string) $product_name_source));
+
+    $description_source = '';
+    if ($has_wc_product) {
+        $description_source = $product->get_short_description();
+        if ($description_source === '') {
+            $description_source = $product->get_description();
+        }
+    }
+    if ($description_source === '' && isset($card['copy_key'])) {
+        $description_source = svic_translate($card['copy_key']);
+    }
+    $product_description = trim(wp_strip_all_tags((string) $description_source));
+
+    $image_object = [];
+    if (!empty($card['image']['url'])) {
+        $image_object = [
+            '@type' => 'ImageObject',
+            'url'   => esc_url_raw($card['image']['url']),
+        ];
+        if (!empty($card['image']['width'])) {
+            $image_object['width'] = (int) $card['image']['width'];
+        }
+        if (!empty($card['image']['height'])) {
+            $image_object['height'] = (int) $card['image']['height'];
+        }
+        if (!empty($card['image']['alt'])) {
+            $image_object['caption'] = $card['image']['alt'];
+        }
+    }
+
+    $price_value = null;
+    if ($has_wc_product) {
+        $price_string = $product->get_price();
+        if ($price_string === '') {
+            $price_string = $product->get_regular_price();
+        }
+        if ($price_string !== '') {
+            $price_value = number_format((float) $price_string, 2, '.', '');
+        }
+    } elseif (!empty($card['fallback_price'])) {
+        $numeric = preg_replace('/[^\d.]/', '', (string) $card['fallback_price']);
+        if ($numeric !== '') {
+            $price_value = number_format((float) $numeric, 2, '.', '');
+        }
+    }
+
+    $availability = 'https://schema.org/InStock';
+    if ($has_wc_product && !$product->is_in_stock()) {
+        $availability = 'https://schema.org/OutOfStock';
+    }
+
+    $sku = '';
+    if ($has_wc_product) {
+        $sku = (string) $product->get_sku();
+        if ($sku === '' && method_exists($product, 'get_slug')) {
+            $sku = strtoupper(str_replace('-', '', (string) $product->get_slug()));
+        }
+    } else {
+        $fallback_slug = '';
+        if (!empty($card['fallback_url'])) {
+            $path = parse_url($card['fallback_url'], PHP_URL_PATH);
+            $fallback_slug = is_string($path) ? basename($path) : '';
+        }
+        $sku = strtoupper(str_replace('-', '', $fallback_slug ?: $slug));
+    }
+
+    if ($product_name === '' || $product_url === '') {
+        continue;
+    }
+
+    $product_node = [
+        '@type'        => 'Product',
+        '@id'          => untrailingslashit($product_url) . '#product',
+        'url'          => $product_url,
+        'name'         => $product_name,
+        'itemCondition'=> 'https://schema.org/NewCondition',
+        'brand'        => [
+            '@type' => 'Brand',
+            'name'  => 'SVICLOUD',
+        ],
+        'category'     => 'Electronics > Streaming Players',
+    ];
+
+    if ($product_description !== '') {
+        $product_node['description'] = $product_description;
+    }
+
+    if ($sku !== '') {
+        $product_node['sku'] = $sku;
+    }
+
+    if (!empty($image_object)) {
+        $product_node['image'] = $image_object;
+    }
+
+    if ($price_value !== null) {
+        $product_node['offers'] = [
+            '@type'         => 'Offer',
+            'priceCurrency' => 'USD',
+            'price'         => $price_value,
+            'availability'  => $availability,
+            'url'           => $product_url,
+            'seller'        => [
+                '@id' => $organization_id,
+            ],
+        ];
+    }
+
+    $product_schema_nodes[] = $product_node;
+    $item_list_elements[] = [
+        '@type'    => 'ListItem',
+        'position' => $list_position++,
+        'item'     => [
+            '@id'   => $product_node['@id'],
+            'name'  => $product_node['name'],
+        ],
+    ];
 }
 ?>
 <main class="main-content">
@@ -210,7 +361,7 @@ foreach ($pricing_cards as $slug => $card) {
         <div class="hero-dashboard__badge"><?php echo svic_translate_html('frontpage.hero.card.badge'); ?></div>
         <div class="hero-dashboard__card">
           <div class="hero-dashboard__product">
-            <img class="hero-dashboard__product-main" src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/svicloud-hero-product.png'); ?>" alt="<?php esc_attr_e('SVICLOUD streaming device with remote', 'svicloudtvbox-lumen'); ?>" loading="lazy" />
+            <img class="hero-dashboard__product-main" src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-voice-assistant.png'); ?>" alt="<?php esc_attr_e('SVICLOUD voice assistant interface with Google Play, movies, and YouTube apps', 'svicloudtvbox-lumen'); ?>" loading="lazy" width="1601" height="898" />
           </div>
           <div class="hero-dashboard__card-header">
             <span><?php echo svic_translate_html('frontpage.hero.card.headline'); ?></span>
@@ -441,6 +592,18 @@ foreach ($pricing_cards as $slug => $card) {
             <?php if (!empty($card['badge_key'])) : ?>
               <div class="lumen-pricing-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></div>
             <?php endif; ?>
+            <?php if (!empty($card['image']['url'])) : ?>
+              <figure class="lumen-pricing-card__figure">
+                <img
+                  src="<?php echo esc_url($card['image']['url']); ?>"
+                  alt="<?php echo esc_attr($card['image']['alt'] ?? ''); ?>"
+                  loading="lazy"
+                  decoding="async"
+                  width="<?php echo esc_attr((string) ($card['image']['width'] ?? 800)); ?>"
+                  height="<?php echo esc_attr((string) ($card['image']['height'] ?? 600)); ?>"
+                />
+              </figure>
+            <?php endif; ?>
             <h3 class="lumen-pricing-card__title"><?php echo svic_translate_html($card['title_key']); ?></h3>
             <div class="lumen-pricing-card__price">
               <?php echo $card['price_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -463,6 +626,33 @@ foreach ($pricing_cards as $slug => $card) {
       </div>
     </div>
   </section>
+
+  <?php
+  if (!empty($product_schema_nodes)) {
+      $graph_nodes = [];
+
+      if (!empty($item_list_elements)) {
+          $graph_nodes[] = [
+              '@type'            => 'ItemList',
+              '@id'              => untrailingslashit($pricing_canonical) . '/#pricing-itemlist',
+              'name'             => esc_html__('SVICLOUD streaming devices available in North America', 'svicloudtvbox-lumen'),
+              'url'              => esc_url_raw($pricing_section_url),
+              'numberOfItems'    => count($item_list_elements),
+              'itemListOrder'    => 'https://schema.org/ItemListOrderAscending',
+              'itemListElement'  => $item_list_elements,
+          ];
+      }
+
+      $graph_nodes = array_merge($graph_nodes, $product_schema_nodes);
+
+      if (!empty($graph_nodes)) {
+          echo '<script type="application/ld+json">' . wp_json_encode([
+              '@context' => 'https://schema.org',
+              '@graph'   => $graph_nodes,
+          ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+      }
+  }
+  ?>
 </main>
 
 <?php get_footer(); ?>

@@ -59,8 +59,8 @@ if (!function_exists('svic_guides_get_content')) {
             ],
             'app_cards' => [
                 [
-                    'title_key' => 'guides.apps.items.yogurt.title',
-                    'copy_key'  => 'guides.apps.items.yogurt.copy',
+                    'title_key' => 'guides.apps.items.live.title',
+                    'copy_key'  => 'guides.apps.items.live.copy',
                 ],
                 [
                     'title_key' => 'guides.apps.items.kids.title',

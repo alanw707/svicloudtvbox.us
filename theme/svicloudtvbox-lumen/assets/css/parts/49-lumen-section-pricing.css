@@ -3,7 +3,7 @@
    ========================================== */
 
 .lumen-pricing {
-  padding: var(--space-2xl) clamp(24px, 6vw, 64px) var(--space-3xl);
+  padding: var(--space-2xl) clamp(24px, 6vw, 64px) var(--space-4xl);
   background: linear-gradient(160deg, rgba(6, 15, 36, 0.96) 0%, rgba(12, 24, 52, 0.88) 45%, rgba(18, 47, 88, 0.6) 100%);
 }
 
@@ -27,8 +27,22 @@
   backdrop-filter: var(--glass-blur-strong);
   color: var(--lumen-text-secondary);
   display: grid;
-  gap: 18px;
+  gap: clamp(18px, 3vw, 28px);
   box-shadow: var(--shadow-lg);
+}
+
+.lumen-pricing-card__figure {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.lumen-pricing-card__figure img {
+  max-width: min(520px, 100%);
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.35));
 }
 
 .lumen-pricing-card--featured {

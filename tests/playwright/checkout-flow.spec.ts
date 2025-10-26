@@ -5,7 +5,7 @@ const TEST_PRODUCT_PATH = process.env.PLAYWRIGHT_TEST_PRODUCT_PATH || '/product/
 const STRIPE_TEST_CARD = process.env.PLAYWRIGHT_STRIPE_TEST_CARD || '4242424242424242';
 const STRIPE_EXPIRY_MMYY = process.env.PLAYWRIGHT_STRIPE_TEST_EXPIRY || '12/34';
 const STRIPE_CVC = process.env.PLAYWRIGHT_STRIPE_TEST_CVC || '123';
-const STRIPE_ZIP = process.env.PLAYWRIGHT_STRIPE_TEST_ZIP || '90001';
+const STRIPE_ZIP = process.env.PLAYWRIGHT_STRIPE_TEST_ZIP || '89101';
 const TEST_CUSTOMER_EMAIL = process.env.PLAYWRIGHT_TEST_EMAIL || process.env.WP_MAIL_SMTP_TEST_EMAIL || 'support@svicloudtvbox.us';
 
 const BASE_WITH_TRAILING = BASE_URL.replace(/\/$/, '') + '/';
@@ -41,8 +41,8 @@ async function fillBillingDetails(page: import('@playwright/test').Page) {
     ['#billing_first_name', 'Play'],
     ['#billing_last_name', 'Wright'],
     ['#billing_address_1', '123 Checkout Lane'],
-    ['#billing_city', 'Los Angeles'],
-    ['#billing_postcode', '90001'],
+    ['#billing_city', 'Las Vegas'],
+    ['#billing_postcode', '89101'],
     ['#billing_phone', '5551239876'],
     ['#billing_email', billingEmail],
   ];
@@ -55,13 +55,13 @@ async function fillBillingDetails(page: import('@playwright/test').Page) {
 
   const stateSelect = page.locator('#billing_state');
   if (await stateSelect.count()) {
-    await stateSelect.selectOption('CA');
+    await stateSelect.selectOption('NV');
   } else {
     const select2Input = page.locator('#select2-billing_state-container');
     if (await select2Input.count()) {
       await select2Input.click();
       const searchField = page.locator('.select2-search__field');
-      await searchField.fill('California');
+      await searchField.fill('Nevada');
       await searchField.press('Enter');
     }
   }

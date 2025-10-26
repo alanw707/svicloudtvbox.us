@@ -156,3 +156,4 @@
       </div>
     </div>
   </header>
+  <?php svic_render_breadcrumbs(); ?>

@@ -247,4 +247,66 @@ $hero_metric_keys = [
   </section>
 </main>
 
+<?php
+$compare_schema_products = [];
+$compare_item_list       = [];
+$compare_position        = 1;
+
+$compare_page_id  = get_queried_object_id();
+$compare_page_url = $compare_page_id ? get_permalink($compare_page_id) : get_permalink();
+if (function_exists('svic_url_with_lang')) {
+    $compare_page_url = svic_url_with_lang($compare_page_url);
+}
+$compare_page_url = esc_url_raw($compare_page_url);
+
+$schema_products = [
+    $hero_product_10p,
+    $hero_product_10s,
+];
+
+foreach ($schema_products as $schema_product) {
+    if (!$schema_product instanceof WC_Product) {
+        continue;
+    }
+
+    $product_node = svic_build_product_schema_from_wc_product($schema_product);
+    if (empty($product_node)) {
+        continue;
+    }
+
+    $compare_schema_products[] = $product_node;
+    $compare_item_list[]       = [
+        '@type'    => 'ListItem',
+        'position' => $compare_position++,
+        'item'     => [
+            '@id'  => $product_node['@id'],
+            'name' => $product_node['name'],
+        ],
+    ];
+}
+
+if (!empty($compare_schema_products)) {
+    $graph_nodes = [];
+
+    if (!empty($compare_item_list) && $compare_page_url !== '') {
+        $graph_nodes[] = [
+            '@type'           => 'ItemList',
+            '@id'             => untrailingslashit($compare_page_url) . '#compare-itemlist',
+            'name'            => esc_html__('SVICLOUD comparison lineup', 'svicloudtvbox-lumen'),
+            'url'             => $compare_page_url,
+            'numberOfItems'   => count($compare_item_list),
+            'itemListOrder'   => 'https://schema.org/ItemListOrderAscending',
+            'itemListElement' => $compare_item_list,
+        ];
+    }
+
+    $graph_nodes = array_merge($graph_nodes, $compare_schema_products);
+
+    echo '<script type="application/ld+json">' . wp_json_encode([
+        '@context' => 'https://schema.org',
+        '@graph'   => $graph_nodes,
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+}
+?>
+
 <?php get_footer(); ?>

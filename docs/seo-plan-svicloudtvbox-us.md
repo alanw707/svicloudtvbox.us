@@ -176,6 +176,20 @@ Weeks 4–12 (Owner: Marketing/PR)
 Ongoing (Owner: SEO)
 - Monitor, iterate, and grow the content hub; monthly reporting.
 
+### Current Action Items (Oct 26, 2025)
+
+1. **Structured data hardening**
+   - ✅ Deploy enhanced Organization + ItemList schema on homepage (Rank Math hook + theme JSON-LD).
+   - ✅ Extend Product/ItemList JSON-LD to PDPs, shop archive, and /compare so every shopping page passes Rich Results (Oct 26 deploy).
+   - ➡ Prepare `aggregateRating` / `review` fields (placeholder structure ready; populate once authentic data is available) to clear remaining warnings.
+   - ✅ Oct 27 2025 — Ran Rich Results “Test live URL” for home, /zh/, 10P+, 10S, /shop, and /compare after deploy + LiteSpeed purge; keep weekly cadence going.
+2. **Thumbnail & social preview parity**
+   - ➡ Mirror the homepage’s `max-image-preview:large`, Open Graph, and Twitter image tags on PDPs and top blog posts so SERP thumbnails appear consistently.
+3. **Keyword execution**
+   - ➡ Ship next blog briefs targeting “小雲電視盒 美國” and “小雲電視盒 10P+ USA”, including zh-Hant sections and internal links from homepage/compare.
+4. **Monitoring & documentation**
+   - ➡ Capture deploy + Rich Results outcomes in this plan (date, issue resolved) and keep LiteSpeed purge noted for future schema releases.
+
 ## Success Criteria
 
 - Indexed: All key URLs visible in GSC Coverage and appearing on “site:” searches.

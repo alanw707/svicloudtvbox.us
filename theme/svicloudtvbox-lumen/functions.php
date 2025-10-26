@@ -207,17 +207,17 @@ if (!function_exists('svic_homepage_meta_definitions')) {
         $definitions = [
             'zh_tw' => [
                 'title'       => '小雲電視盒 美國｜SVICLOUD 10P Plus / 10S 授權經銷店',
-                'description' => '美國授權小雲電視盒經銷，10P Plus 與 10S 現貨 48 小時內從加州出貨。繁體中文介面、無月費裝置、美國保固與中英雙語客服。',
+                'description' => '美國授權小雲電視盒經銷，10P Plus 與 10S 現貨 48 小時內從內華達出貨。繁體中文介面、無月費裝置、美國保固與中英雙語客服。',
                 'image_alt'   => '小雲電視盒與語音遙控器',
             ],
             'zh_cn' => [
                 'title'       => '小云电视盒 美国｜SVICLOUD 10P Plus / 10S 授权经销店',
-                'description' => '美国授权小云电视盒经销，10P Plus 与 10S 现货 48 小时内从加州发货。繁体/简体界面，无月费设备，美国保固与双语客服。',
+                'description' => '美国授权小云电视盒经销，10P Plus 与 10S 现货 48 小时内从内华达发货。繁体/简体界面，无月费设备，美国保固与双语客服。',
                 'image_alt'   => '小云电视盒与语音遥控器',
             ],
             'en_us' => [
                 'title'       => 'SVICLOUD TV Box US – Chinese TV Box with U.S. Warranty',
-                'description' => 'Authorized U.S. dealer for SVICLOUD 10P Plus & 10S. Ships from California within 48 hours, bilingual support, no monthly device fees.',
+                'description' => 'Authorized U.S. dealer for SVICLOUD 10P Plus & 10S. Ships from Nevada within 48 hours, bilingual support, no monthly device fees.',
                 'image_alt'   => 'SVICLOUD streaming device with voice remote',
             ],
         ];
@@ -230,10 +230,10 @@ if (!function_exists('svic_homepage_meta_definitions')) {
     }
 }
 
-if (!function_exists('svic_get_homepage_hero_image_meta')) {
-    function svic_get_homepage_hero_image_meta(): array
+if (!function_exists('svic_get_theme_image_meta')) {
+    function svic_get_theme_image_meta(string $relative_path): array
     {
-        $relative_path = '/assets/images/svicloud-hero-product.png';
+        $relative_path = '/' . ltrim($relative_path, '/');
         $file_path     = get_template_directory() . $relative_path;
         $url           = get_template_directory_uri() . $relative_path;
         $width         = null;
@@ -253,6 +253,396 @@ if (!function_exists('svic_get_homepage_hero_image_meta')) {
             'height' => $height,
         ];
     }
+}
+
+if (!function_exists('svic_get_homepage_hero_image_meta')) {
+    function svic_get_homepage_hero_image_meta(): array
+    {
+        return svic_get_theme_image_meta('/assets/images/hero-voice-assistant.png');
+    }
+}
+
+if (!function_exists('svic_get_store_postal_address_schema')) {
+    /**
+     * Build a PostalAddress node using the WooCommerce store address fields.
+     *
+     * Falls back to the Nevada fulfillment center if store options are blank
+     * so Google still receives a location signal.
+     */
+    function svic_get_store_postal_address_schema(): ?array
+    {
+        $street1   = trim((string) get_option('woocommerce_store_address', ''));
+        $street2   = trim((string) get_option('woocommerce_store_address_2', ''));
+        $city      = trim((string) get_option('woocommerce_store_city', ''));
+        $postcode  = trim((string) get_option('woocommerce_store_postcode', ''));
+
+        $country   = '';
+        $region    = '';
+        if (function_exists('wc_get_base_location')) {
+            $location  = wc_get_base_location();
+            if (is_array($location)) {
+                $country = isset($location['country']) ? strtoupper((string) $location['country']) : '';
+                $region  = isset($location['state']) ? strtoupper((string) $location['state']) : '';
+            }
+        }
+
+        $address = [
+            '@type' => 'PostalAddress',
+        ];
+
+        $street = trim($street1 . ($street2 !== '' ? ' ' . $street2 : ''));
+        if ($street !== '') {
+            $address['streetAddress'] = $street;
+        }
+        if ($city !== '') {
+            $address['addressLocality'] = $city;
+        }
+        if ($region !== '') {
+            $address['addressRegion'] = $region;
+        }
+        if ($postcode !== '') {
+            $address['postalCode'] = $postcode;
+        }
+        if ($country !== '') {
+            $address['addressCountry'] = $country;
+        }
+
+        if (count($address) === 1) {
+            // Provide a sensible fallback tied to the Nevada warehouse.
+            $address['addressLocality'] = 'Las Vegas';
+            $address['addressRegion']   = 'NV';
+            $address['addressCountry']  = 'US';
+        }
+
+        return $address;
+    }
+}
+
+if (!function_exists('svic_get_primary_contact_phone_number')) {
+    /**
+     * Returns the concierge phone number formatted for schema (E.164).
+     */
+    function svic_get_primary_contact_phone_number(): ?string
+    {
+        $raw = svic_translate('contact.channels.items.phone.value');
+        if (!is_string($raw) || $raw === '') {
+            return null;
+        }
+
+        $digits = preg_replace('/[^0-9+]/', '', $raw);
+        if ($digits === '') {
+            return null;
+        }
+
+        if ($digits[0] !== '+') {
+            // Assume United States country code when a leading + is missing.
+            $digits = '+1' . ltrim($digits, '+');
+        }
+
+        return $digits;
+    }
+}
+
+if (!function_exists('svic_get_price_range_label')) {
+    function svic_get_price_range_label(): string
+    {
+        /**
+         * Pricing currently spans $180–$360 USD across the 10-series lineup.
+         * Use a readable string for the Organization schema.
+         */
+        return 'USD $180-$360';
+    }
+}
+
+if (!function_exists('svic_get_organization_schema_id')) {
+    function svic_get_organization_schema_id(): string
+    {
+        $site_url = trailingslashit(home_url());
+        return untrailingslashit($site_url) . '#organization';
+    }
+}
+
+if (!function_exists('svic_generate_product_image_object')) {
+    /**
+     * Returns an ImageObject array for the given product (or fallback URL).
+     *
+     * @param WC_Product|null $product
+     */
+    function svic_generate_product_image_object($product, ?string $fallback_url = null): ?array
+    {
+        $image_id = null;
+        $caption  = '';
+
+        if ($product instanceof WC_Product) {
+            $caption  = $product->get_name();
+            $image_id = $product->get_image_id();
+
+            if (!$image_id && method_exists($product, 'get_gallery_image_ids')) {
+                $gallery_ids = $product->get_gallery_image_ids();
+                if (is_array($gallery_ids) && !empty($gallery_ids)) {
+                    $image_id = (int) reset($gallery_ids);
+                }
+            }
+        }
+
+        if ($image_id) {
+            $image_src = wp_get_attachment_image_src($image_id, 'full');
+            if (is_array($image_src) && isset($image_src[0])) {
+                $image_object = [
+                    '@type'  => 'ImageObject',
+                    'url'    => esc_url_raw($image_src[0]),
+                ];
+                if (isset($image_src[1])) {
+                    $image_object['width'] = (int) $image_src[1];
+                }
+                if (isset($image_src[2])) {
+                    $image_object['height'] = (int) $image_src[2];
+                }
+                if ($caption !== '') {
+                    $image_object['caption'] = $caption;
+                }
+                return $image_object;
+            }
+        }
+
+        if ($fallback_url) {
+            $fallback = [
+                '@type' => 'ImageObject',
+                'url'   => esc_url_raw($fallback_url),
+            ];
+            if ($caption !== '') {
+                $fallback['caption'] = $caption;
+            }
+            return $fallback;
+        }
+
+        return null;
+    }
+}
+
+if (!function_exists('svic_build_product_schema_from_wc_product')) {
+    /**
+     * Builds a Product schema node from a WC_Product plus optional overrides.
+     *
+     * @param WC_Product $product
+     * @param array<string,mixed> $overrides
+     */
+    function svic_build_product_schema_from_wc_product($product, array $overrides = []): ?array
+    {
+        if (!$product instanceof WC_Product) {
+            return null;
+        }
+
+        $product_id = $product->get_id();
+        $permalink  = $overrides['url'] ?? get_permalink($product_id);
+        if (!is_string($permalink) || $permalink === '') {
+            return null;
+        }
+
+        $localized_url = function_exists('svic_url_with_lang') ? svic_url_with_lang($permalink) : $permalink;
+        if (!is_string($localized_url) || $localized_url === '') {
+            return null;
+        }
+
+        $product_url = esc_url_raw($localized_url);
+        $slug        = $product->get_slug();
+
+        $name = $overrides['name'] ?? $product->get_name();
+        if (!is_string($name) || $name === '') {
+            $name = get_the_title($product_id);
+        }
+
+        if (!is_string($name) || $name === '') {
+            return null;
+        }
+
+        $description = $overrides['description'] ?? '';
+        if ($description === '') {
+            $translation_key = 'products.' . $slug . '.description';
+            $translated      = svic_translate_rich($translation_key);
+            if (is_string($translated) && $translated !== '' && $translated !== 'description') {
+                $description = wp_strip_all_tags($translated);
+            }
+        }
+        if ($description === '') {
+            $description = wp_strip_all_tags($product->get_description());
+        }
+        if ($description === '') {
+            $description = wp_strip_all_tags($product->get_short_description());
+        }
+
+        $image_object = $overrides['image'] ?? svic_generate_product_image_object($product);
+        if (!is_array($image_object) || empty($image_object['url'])) {
+            $image_object = null;
+        }
+
+        $raw_price = $overrides['price'] ?? $product->get_price();
+        if ($raw_price === '' || $raw_price === null) {
+            $raw_price = $product->get_regular_price();
+        }
+        $price_value = null;
+        if ($raw_price !== '' && $raw_price !== null) {
+            $price_value = number_format((float) $raw_price, 2, '.', '');
+        }
+
+        $availability = $product->is_in_stock() ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock';
+
+        $sku = $product->get_sku();
+        if (!is_string($sku) || $sku === '') {
+            $sku = strtoupper(str_replace('-', '', $slug));
+        }
+
+        $product_node = [
+            '@type'         => 'Product',
+            '@id'           => untrailingslashit($product_url) . '#product',
+            'url'           => $product_url,
+            'name'          => $name,
+            'itemCondition' => 'https://schema.org/NewCondition',
+            'brand'         => [
+                '@type' => 'Brand',
+                'name'  => 'SVICLOUD',
+            ],
+            'category'      => 'Electronics > Streaming Players',
+        ];
+
+        if ($description !== '') {
+            $product_node['description'] = $description;
+        }
+
+        if ($sku !== '') {
+            $product_node['sku'] = $sku;
+        }
+
+        if ($image_object) {
+            $product_node['image'] = $image_object;
+        }
+
+        if ($price_value !== null) {
+            $product_node['offers'] = [
+                '@type'         => 'Offer',
+                'priceCurrency' => strtoupper(get_option('woocommerce_currency', 'USD')),
+                'price'         => $price_value,
+                'availability'  => $availability,
+                'url'           => $product_url,
+                'seller'        => [
+                    '@id' => svic_get_organization_schema_id(),
+                ],
+            ];
+        }
+
+        return $product_node;
+    }
+}
+
+if (!function_exists('svic_get_organization_schema_enhancements')) {
+    /**
+     * Shared Organization fields reused between our custom schema and Rank Math's output.
+     */
+    function svic_get_organization_schema_enhancements(): array
+    {
+        $enhancements = [];
+
+        $contact_email = svic_support_form_recipient();
+        if (is_string($contact_email) && $contact_email !== '') {
+            $enhancements['contactPoint'] = [
+                [
+                    '@type'             => 'ContactPoint',
+                    'contactType'       => 'customer support',
+                    'email'             => $contact_email,
+                    'areaServed'        => ['US', 'CA'],
+                    'availableLanguage' => ['English', 'Chinese'],
+                ],
+            ];
+        }
+
+        $postal_address = svic_get_store_postal_address_schema();
+        if (is_array($postal_address) && $postal_address) {
+            $enhancements['address'] = $postal_address;
+        }
+
+        $primary_phone = svic_get_primary_contact_phone_number();
+        if (is_string($primary_phone) && $primary_phone !== '') {
+            $enhancements['telephone'] = $primary_phone;
+        }
+
+        $price_range = svic_get_price_range_label();
+        if ($price_range !== '') {
+            $enhancements['priceRange'] = $price_range;
+        }
+
+        return $enhancements;
+    }
+}
+
+if (!function_exists('svic_apply_organization_schema_enhancements')) {
+    function svic_apply_organization_schema_enhancements(array $schema): array
+    {
+        $enhancements = svic_get_organization_schema_enhancements();
+        if (empty($enhancements)) {
+            return $schema;
+        }
+
+        foreach ($enhancements as $key => $value) {
+            if ($key === 'contactPoint') {
+                $existing = [];
+                if (isset($schema['contactPoint']) && is_array($schema['contactPoint'])) {
+                    $existing = array_values(array_filter($schema['contactPoint'], 'is_array'));
+                }
+                $schema['contactPoint'] = array_values(array_merge($existing, $value));
+                continue;
+            }
+
+            if (!isset($schema[$key]) || $schema[$key] === '' || $schema[$key] === null) {
+                $schema[$key] = $value;
+            }
+        }
+
+        return $schema;
+    }
+}
+
+if (!function_exists('svic_filter_rank_math_schema_graph')) {
+    /**
+     * Inject address/phone/priceRange details into Rank Math's Organization node so Google
+     * no longer flags missing required fields when the plugin outputs the schema.
+     *
+     * @param array<mixed> $schema_graph Rank Math schema data.
+     * @return array<mixed>
+     */
+    function svic_filter_rank_math_schema_graph($schema_graph, $jsonld = null)
+    {
+        if (is_admin() || empty($schema_graph) || !is_array($schema_graph)) {
+            return $schema_graph;
+        }
+
+        foreach ($schema_graph as $key => $node) {
+            if (!is_array($node) || empty($node['@type'])) {
+                continue;
+            }
+
+            $types = is_array($node['@type']) ? $node['@type'] : [$node['@type']];
+            $is_organization = false;
+
+            foreach ($types as $type) {
+                if (!is_string($type)) {
+                    continue;
+                }
+
+                if (stripos($type, 'Organization') !== false) {
+                    $is_organization = true;
+                    break;
+                }
+            }
+
+            if ($is_organization) {
+                $schema_graph[$key] = svic_apply_organization_schema_enhancements($node);
+            }
+        }
+
+        return $schema_graph;
+    }
+
+    add_filter('rank_math/json_ld', 'svic_filter_rank_math_schema_graph', 80, 2);
 }
 
 if (!function_exists('svic_output_max_image_preview_meta')) {
@@ -380,6 +770,317 @@ if (!function_exists('svic_output_homepage_webpage_schema')) {
 }
 
 add_action('wp_head', 'svic_output_homepage_webpage_schema', 8);
+
+if (!function_exists('svic_output_global_site_schema')) {
+    function svic_output_global_site_schema(): void
+    {
+        if (is_admin() || defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION')) {
+            return;
+        }
+
+        $site_url    = home_url('/');
+        $site_name   = get_bloginfo('name') ?: 'SVICLOUD TV BOX US';
+        $organization_id = trailingslashit($site_url) . '#organization';
+
+        $logo_meta = svic_get_theme_image_meta('/assets/images/site-logo.png');
+        if (empty($logo_meta['url'])) {
+            $site_icon = get_site_icon_url();
+            if ($site_icon) {
+                $logo_meta = ['url' => esc_url_raw($site_icon)];
+            }
+        }
+
+        $schemas    = [];
+        $organization = [
+            '@context' => 'https://schema.org',
+            '@type'    => 'Organization',
+            '@id'      => $organization_id,
+            'name'     => $site_name,
+            'url'      => $site_url,
+        ];
+
+        if (!empty($logo_meta['url'])) {
+            $logo_object = [
+                '@type' => 'ImageObject',
+                'url'   => $logo_meta['url'],
+            ];
+
+            if (!empty($logo_meta['width'])) {
+                $logo_object['width'] = $logo_meta['width'];
+            }
+
+            if (!empty($logo_meta['height'])) {
+                $logo_object['height'] = $logo_meta['height'];
+            }
+
+            $organization['logo'] = $logo_object;
+        }
+
+        $schemas[] = svic_apply_organization_schema_enhancements($organization);
+
+        $website = [
+            '@context'        => 'https://schema.org',
+            '@type'           => 'WebSite',
+            '@id'             => trailingslashit($site_url) . '#website',
+            'url'             => $site_url,
+            'name'            => $site_name,
+            'publisher'       => ['@id' => $organization_id],
+            'potentialAction' => [
+                '@type'       => 'SearchAction',
+                'target'      => home_url('/?s={search_term_string}'),
+                'query-input' => 'required name=search_term_string',
+            ],
+        ];
+
+        $schemas[] = $website;
+
+        echo '<script type="application/ld+json">' . wp_json_encode($schemas, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+}
+
+add_action('wp_head', 'svic_output_global_site_schema', 6);
+
+if (!function_exists('svic_output_single_product_schema')) {
+    function svic_output_single_product_schema(): void
+    {
+        if (is_admin() || !function_exists('is_product') || !is_product() || !class_exists('WooCommerce')) {
+            return;
+        }
+
+        global $product;
+        if (!$product instanceof WC_Product) {
+            $product = function_exists('wc_get_product') ? wc_get_product(get_the_ID()) : null;
+        }
+
+        if (!$product instanceof WC_Product) {
+            return;
+        }
+
+        $product_node = svic_build_product_schema_from_wc_product($product);
+        if (empty($product_node)) {
+            return;
+        }
+
+        echo '<script type="application/ld+json">' . wp_json_encode($product_node, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+}
+
+add_action('wp_head', 'svic_output_single_product_schema', 8);
+
+if (!function_exists('svic_should_render_breadcrumbs')) {
+    function svic_should_render_breadcrumbs(): bool
+    {
+        if (is_admin() || is_front_page() || is_404()) {
+            return false;
+        }
+
+        if (function_exists('is_cart') && is_cart()) {
+            return false;
+        }
+
+        if (function_exists('is_checkout') && is_checkout()) {
+            return false;
+        }
+
+        return true;
+    }
+}
+
+if (!function_exists('svic_get_breadcrumb_items')) {
+    function svic_get_breadcrumb_items(): array
+    {
+        $filter_label = static function ($label, $slug = '', $context = '') {
+            if (!function_exists('svic_translate_html')) {
+                return $label;
+            }
+
+            if ($context === 'home') {
+                $translated = svic_translate_html('header.nav.home');
+                if ($translated) {
+                    return wp_strip_all_tags($translated);
+                }
+            }
+
+            $normalized_slug = $slug ? sanitize_title($slug) : '';
+            if ($normalized_slug === 'shop') {
+                $nav_label = svic_translate_html('header.nav.shop');
+                if ($nav_label) {
+                    return wp_strip_all_tags($nav_label);
+                }
+            }
+            if ($normalized_slug && function_exists('svic_guides_resolve_section_key') && function_exists('svic_guides_get_section_by_key')) {
+                $section_key = svic_guides_resolve_section_key($normalized_slug);
+                if ($section_key) {
+                    $section = svic_guides_get_section_by_key($section_key);
+                    $label_key = is_array($section) ? ($section['label_key'] ?? '') : '';
+                    if ($label_key) {
+                        $section_label = svic_translate_html($label_key);
+                        if ($section_label) {
+                            return wp_strip_all_tags($section_label);
+                        }
+                    }
+                }
+            }
+
+            return $label;
+        };
+
+        $items = [];
+        $home_url = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/')) : home_url('/');
+        $items[] = [
+            'label' => $filter_label(esc_html__('Home', 'svicloudtvbox-lumen'), '', 'home'),
+            'url'   => $home_url,
+        ];
+
+        if (function_exists('is_shop') && is_shop()) {
+            $shop_id = function_exists('wc_get_page_id') ? wc_get_page_id('shop') : 0;
+            $shop_label = $shop_id && $shop_id > 0 ? get_the_title($shop_id) : esc_html__('Shop', 'svicloudtvbox-lumen');
+            $shop_slug  = $shop_id ? get_post_field('post_name', $shop_id) : 'shop';
+
+            $items[] = [
+                'label' => $filter_label($shop_label, $shop_slug, 'shop'),
+                'url'   => null,
+            ];
+
+            return $items;
+        }
+
+        if (is_home() && !is_front_page()) {
+            $blog_id = (int) get_option('page_for_posts');
+            $items[] = [
+                'label' => $blog_id ? get_the_title($blog_id) : esc_html__('Blog', 'svicloudtvbox-lumen'),
+                'url'   => null,
+            ];
+
+            return $items;
+        }
+
+        if (is_page()) {
+            $ancestors = array_reverse(get_post_ancestors(get_queried_object_id()));
+            foreach ($ancestors as $ancestor_id) {
+                $ancestor_slug = get_post_field('post_name', $ancestor_id);
+                $items[] = [
+                    'label' => $filter_label(get_the_title($ancestor_id), $ancestor_slug, 'page'),
+                    'url'   => function_exists('svic_url_with_lang') ? svic_url_with_lang(get_permalink($ancestor_id)) : get_permalink($ancestor_id),
+                ];
+            }
+
+            $current_slug = get_post_field('post_name', get_the_ID());
+            $items[] = [
+                'label' => $filter_label(get_the_title(), $current_slug, 'page'),
+                'url'   => null,
+            ];
+
+            return $items;
+        }
+
+        if (function_exists('is_product') && is_product()) {
+            if (function_exists('wc_get_page_id')) {
+                $shop_id = wc_get_page_id('shop');
+                if ($shop_id && $shop_id > 0) {
+                    $items[] = [
+                        'label' => get_the_title($shop_id),
+                        'url'   => function_exists('svic_url_with_lang') ? svic_url_with_lang(get_permalink($shop_id)) : get_permalink($shop_id),
+                    ];
+                }
+            }
+
+            $category_ids = wp_get_post_terms(get_the_ID(), 'product_cat', ['fields' => 'ids']);
+            if (is_array($category_ids) && $category_ids !== []) {
+                $primary_cat_id = (int) $category_ids[0];
+                $term = get_term($primary_cat_id, 'product_cat');
+                if ($term && !is_wp_error($term)) {
+                    $items[] = [
+                        'label' => $term->name,
+                        'url'   => function_exists('svic_url_with_lang') ? svic_url_with_lang(get_term_link($term)) : get_term_link($term),
+                    ];
+                }
+            }
+
+            $items[] = [
+                'label' => get_the_title(),
+                'url'   => null,
+            ];
+
+            return $items;
+        }
+
+        if (is_singular('post')) {
+            $blog_id = (int) get_option('page_for_posts');
+            if ($blog_id) {
+                $items[] = [
+                    'label' => get_the_title($blog_id),
+                    'url'   => function_exists('svic_url_with_lang') ? svic_url_with_lang(get_permalink($blog_id)) : get_permalink($blog_id),
+                ];
+            }
+            $items[] = [
+                'label' => get_the_title(),
+                'url'   => null,
+            ];
+
+            return $items;
+        }
+
+        if (is_search()) {
+            $items[] = [
+                'label' => sprintf(esc_html__('Search results for “%s”', 'svicloudtvbox-lumen'), get_search_query()),
+                'url'   => null,
+            ];
+
+            return $items;
+        }
+
+        if (is_archive()) {
+            $items[] = [
+                'label' => get_the_archive_title(),
+                'url'   => null,
+            ];
+
+            return $items;
+        }
+
+        $items[] = [
+            'label' => get_the_title(),
+            'url'   => null,
+        ];
+
+        return $items;
+    }
+}
+
+if (!function_exists('svic_render_breadcrumbs')) {
+    function svic_render_breadcrumbs(): void
+    {
+        if (!svic_should_render_breadcrumbs()) {
+            return;
+        }
+
+        $items = svic_get_breadcrumb_items();
+        if (count($items) < 2) {
+            return;
+        }
+
+        echo '<nav class="svic-breadcrumbs" aria-label="' . esc_attr__('Breadcrumb', 'svicloudtvbox-lumen') . '">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo '<ol class="svic-breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+        foreach ($items as $index => $item) {
+            $position = $index + 1;
+            $label    = isset($item['label']) ? $item['label'] : '';
+            $url      = isset($item['url']) ? $item['url'] : null;
+
+            echo '<li class="svic-breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            if ($url) {
+                echo '<a class="svic-breadcrumbs__link" href="' . esc_url($url) . '" itemprop="item"><span itemprop="name">' . esc_html($label) . '</span></a>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            } else {
+                echo '<span class="svic-breadcrumbs__current" itemprop="name" aria-current="page">' . esc_html($label) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            }
+            echo '<meta itemprop="position" content="' . esc_attr((string) $position) . '" />'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '</li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+
+        echo '</ol></nav>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+}
 
 if (!function_exists('svic_filter_body_class')) {
     function svic_filter_body_class($classes)

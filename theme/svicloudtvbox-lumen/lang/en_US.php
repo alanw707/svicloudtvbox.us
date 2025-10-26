@@ -209,14 +209,14 @@ return [
         ],
         'summary'           => [
             'title' => 'Order summary',
-            'intro'        => 'Ships from our California warehouse with bilingual concierge support.',
+            'intro'        => 'Ships from our Nevada warehouse with bilingual concierge support.',
             'empty'        => 'Add a device to see shipping speeds, warranty coverage, and your estimated total.',
             'reassurance'  => 'Secure checkout with PayPal, Visa, Mastercard, and American Express.',
         ],
         'benefits'          => [
             'shipping' => [
                 'title' => 'Fast fulfillment',
-                'copy'  => 'Orders leave California within 48 hours on business days.',
+                'copy'  => 'Orders leave Nevada within 48 hours on business days.',
             ],
             'warranty' => [
                 'title' => 'U.S. warranty',
@@ -231,7 +231,7 @@ return [
     'checkout_page' => [
         'badge'    => 'Secure checkout',
         'title'    => 'Complete your SVICLOUD order',
-        'subtitle' => 'Ships from California within 48 hours with bilingual concierge support.',
+        'subtitle' => 'Ships from Nevada within 48 hours with bilingual concierge support.',
         'summary'  => [
             'title'         => 'Order summary',
             'intro'         => 'Review your items, totals, and payment method before placing your order.',
@@ -518,8 +518,8 @@ return [
 
 
     'footer' => [
-        'tagline'   => 'Authorized U.S. distributor · California fulfillment',
-        'summary'   => 'Stream top Chinese and global entertainment with California-based fulfillment and warranty support.',
+        'tagline'   => 'Authorized U.S. distributor · Nevada fulfillment',
+        'summary'   => 'Stream top Chinese and global entertainment with Nevada-based fulfillment and warranty support.',
         'badges'    => [
             'ships'     => 'Ships from the USA',
             'warranty'  => '1-Year U.S. Warranty',
@@ -528,7 +528,7 @@ return [
         'benefits'  => [
             'shipping'  => [
                 'label'       => '48-Hour U.S. Shipping',
-                'description' => 'Most orders leave our California warehouse within two business days.',
+                'description' => 'Most orders leave our Nevada warehouse within two business days.',
             ],
             'dealer'    => [
                 'label'       => 'Authorized Dealer',
@@ -662,7 +662,7 @@ return [
         'faq' => [
             'badge' => 'FAQ',
             'title' => 'Top questions from U.S. & Canada buyers',
-            'lead'  => 'Shipping from California, warranty coverage, and bilingual setup support—here are the answers before you checkout.',
+            'lead'  => 'Shipping from Nevada, warranty coverage, and bilingual setup support—here are the answers before you checkout.',
             'cta'   => 'Visit support & FAQ',
             'groups' => [
                 'orders' => [
@@ -670,7 +670,7 @@ return [
                     'items' => [
                         'fulfillment' => [
                             'question' => 'How fast do you ship in the U.S. and Canada?',
-                            'answer'   => 'Orders placed before 2 p.m. Pacific leave our California warehouse within 48 hours via USPS, UPS, or FedEx. Tracking is emailed automatically, and Canada deliveries typically arrive within 5–7 business days including customs clearance.',
+                            'answer'   => 'Orders placed before 2 p.m. Pacific leave our Nevada warehouse within 48 hours via USPS, UPS, or FedEx. Tracking is emailed automatically, and Canada deliveries typically arrive within 5–7 business days including customs clearance.',
                         ],
                         'warranty' => [
                             'question' => 'Do SVICLOUD boxes include a U.S. warranty and returns?',
@@ -757,7 +757,7 @@ return [
             'price_note'     => 'All prices in USD · No monthly device fees',
             'best_for_label' => 'Best for',
             'assurance'      => [
-                'shipping' => 'Ships from California warehouse',
+                'shipping' => 'Ships from Nevada warehouse',
                 'warranty' => 'Includes 1-year U.S. warranty',
                 'support'  => 'Bilingual concierge onboarding',
             ],
@@ -790,7 +790,7 @@ return [
     'products' => [
         'svicloud-10p-plus' => [
             'short_description' => 'Flagship 4K streaming box with 4GB RAM / 64GB storage, karaoke apps, and bilingual concierge support.',
-            'description' => '<p>SVICLOUD 10P+ is our flagship streaming box for families who want voice control, karaoke nights, and the fastest hardware we ship.</p><ul><li>4GB RAM and 64GB storage with AV1 decode keep 4K live sports and dramas smooth.</li><li>Kids Mode and Karaoke apps come preinstalled with English / 中文 concierge walkthroughs.</li><li>Wi-Fi 6, Gigabit Ethernet, Bluetooth voice remote, USB 3.0, and expandable storage cover every installation.</li><li>Ships from California with a 1-year U.S. warranty, free returns within 30 days, and live concierge setup help.</li></ul><p>The box includes HDMI cable, power adapter, voice remote, and supports dual wireless microphones for karaoke.</p>',
+            'description' => '<p>SVICLOUD 10P+ is our flagship streaming box for families who want voice control, karaoke nights, and the fastest hardware we ship.</p><ul><li>4GB RAM and 64GB storage with AV1 decode keep 4K live sports and dramas smooth.</li><li>Kids Mode and Karaoke apps come preinstalled with English / 中文 concierge walkthroughs.</li><li>Wi-Fi 6, Gigabit Ethernet, Bluetooth voice remote, USB 3.0, and expandable storage cover every installation.</li><li>Ships from Nevada with a 1-year U.S. warranty, free returns within 30 days, and live concierge setup help.</li></ul><p>The box includes HDMI cable, power adapter, voice remote, and supports dual wireless microphones for karaoke.</p>',
         ],
         'svicloud-10s' => [
             'short_description' => 'Essential 4K streamer with 2GB RAM / 32GB storage, voice remote, and plug-and-play setup for bedrooms or guest TVs.',
@@ -884,14 +884,14 @@ return [
         'hero' => [
             'badge'         => 'Manufacturer Authorized Dealer',
             'title'         => 'The U.S. home for official SVI.STUDIO devices',
-            'lead'          => 'We are 168 Media Group LLC, the California-based team that helps SVICLOUD families stream in minutes—with installation support, local inventory, and bilingual experts.',
+            'lead'          => 'We are 168 Media Group LLC, the Nevada-based team that helps SVICLOUD families stream in minutes—with installation support, local inventory, and bilingual experts.',
             'cta'           => 'Talk to concierge',
             'secondary_cta' => 'Compare devices',
         ],
         'story' => [
             'title' => 'Our story',
             'lead'  => 'From living-room demos to the manufacturer’s official U.S. partner.',
-            'body'  => '<p>We began in 2019 by helping friends and neighboring families replace unreliable streaming boxes with authentic SVICLOUD hardware. Word spread quickly—karaoke nights, sports meetups, and Lunar New Year watch parties all wanted the same thing: a trusted source with real warranty support.</p><p>Investing in local inventory, bilingual onboarding, and responsive concierge service turned us into the go-to SVICLOUD contact on the West Coast. That dedication earned SVI.STUDIO’s formal authorization so every customer gets factory-backed devices delivered fast from California.</p>',
+            'body'  => '<p>We began in 2019 by helping friends and neighboring families replace unreliable streaming boxes with authentic SVICLOUD hardware. Word spread quickly—karaoke nights, sports meetups, and Lunar New Year watch parties all wanted the same thing: a trusted source with real warranty support.</p><p>Investing in local inventory, bilingual onboarding, and responsive concierge service turned us into the go-to SVICLOUD contact on the West Coast. That dedication earned SVI.STUDIO’s formal authorization so every customer gets factory-backed devices delivered fast from Nevada.</p>',
         ],
         'stats' => [
             'orders' => [
@@ -935,7 +935,7 @@ return [
                 '2022' => [
                     'year'  => '2022',
                     'title' => 'Streamlined U.S. logistics',
-                    'copy'  => 'Opened California fulfillment, slashing delivery times and improving warranty turnaround.',
+                    'copy'  => 'Opened Nevada fulfillment, slashing delivery times and improving warranty turnaround.',
                 ],
                 '2024' => [
                     'year'  => '2024',
@@ -1169,12 +1169,12 @@ return [
                 ],
                 'why' => [
                     'title'   => 'Why buy from SVICLOUDTVBOX.US',
-                    'lead'    => 'Order direct from our California warehouse to guarantee genuine SVICLOUD 10-series hardware, concierge setup, and a 1-year U.S. warranty.',
+                    'lead'    => 'Order direct from our Nevada warehouse to guarantee genuine SVICLOUD 10-series hardware, concierge setup, and a 1-year U.S. warranty.',
                     'updated' => 'Updated January 15, 2025',
                     'sections' => [
                         'fulfillment' => [
                             'heading' => 'Certified U.S. inventory with 48-hour shipping',
-                            'body'    => '<p>All SVICLOUD 10P+ and 10S boxes leave our California warehouse with tamper-evident packaging, verified serial numbers, and the latest firmware. Orders placed before 12pm PT ship within two business days.</p>
+                            'body'    => '<p>All SVICLOUD 10P+ and 10S boxes leave our Nevada warehouse with tamper-evident packaging, verified serial numbers, and the latest firmware. Orders placed before 12pm PT ship within two business days.</p>
 <ul>
   <li>Signature-required UPS and USPS options keep deliveries secure.</li>
   <li>Domestic inventory eliminates customs delays and grey-market surprises.</li>
@@ -1183,7 +1183,7 @@ return [
                         ],
                         'warranty' => [
                             'heading' => '1-year U.S. warranty and hassle-free returns',
-                            'body'    => '<p>Your purchase includes a 1-year U.S. warranty handled by our concierge team. If anything fails under normal use, we coordinate diagnostics, replacements, or parts from California—no overseas shipping required.</p>
+                            'body'    => '<p>Your purchase includes a 1-year U.S. warranty handled by our concierge team. If anything fails under normal use, we coordinate diagnostics, replacements, or parts from Nevada—no overseas shipping required.</p>
 <ul>
   <li>30-day satisfaction window for returns or exchanges on unopened units.</li>
   <li>Hardware repairs or replacements processed domestically for faster turnaround.</li>

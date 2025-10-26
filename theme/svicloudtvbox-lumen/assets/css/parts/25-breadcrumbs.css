@@ -1,0 +1,59 @@
+/* ==========================================
+   Breadcrumb navigation
+   ========================================== */
+
+.svic-breadcrumbs {
+  background: rgba(6, 19, 40, 0.82);
+  border-bottom: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+  padding: 0.75rem clamp(1rem, 3vw, 2.5rem);
+}
+
+.svic-breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--lumen-text-muted, rgba(226, 235, 255, 0.86));
+}
+
+.svic-breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.svic-breadcrumbs__item + .svic-breadcrumbs__item::before {
+  content: '\203A';
+  font-size: 0.9em;
+  color: inherit;
+  opacity: 0.7;
+}
+
+.svic-breadcrumbs__link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.svic-breadcrumbs__link:hover,
+.svic-breadcrumbs__link:focus-visible {
+  color: var(--lumen-text-primary, #f5f8ff);
+  text-decoration: underline;
+}
+
+.svic-breadcrumbs__current {
+  color: var(--lumen-text-primary, #f5f8ff);
+}
+
+@media (max-width: 600px) {
+  .svic-breadcrumbs {
+    padding-inline: 1rem;
+  }
+
+  .svic-breadcrumbs__list {
+    font-size: 0.8rem;
+  }
+}
