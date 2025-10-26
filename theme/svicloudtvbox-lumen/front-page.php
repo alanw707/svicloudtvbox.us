@@ -94,6 +94,35 @@ $experience_services = [
     ],
 ];
 
+$faq_groups = [
+    [
+        'title_key' => 'frontpage.faq.groups.orders.title',
+        'items'     => [
+            [
+                'question_key' => 'frontpage.faq.groups.orders.items.fulfillment.question',
+                'answer_key'   => 'frontpage.faq.groups.orders.items.fulfillment.answer',
+            ],
+            [
+                'question_key' => 'frontpage.faq.groups.orders.items.warranty.question',
+                'answer_key'   => 'frontpage.faq.groups.orders.items.warranty.answer',
+            ],
+        ],
+    ],
+    [
+        'title_key' => 'frontpage.faq.groups.setup.title',
+        'items'     => [
+            [
+                'question_key' => 'frontpage.faq.groups.setup.items.compatibility.question',
+                'answer_key'   => 'frontpage.faq.groups.setup.items.compatibility.answer',
+            ],
+            [
+                'question_key' => 'frontpage.faq.groups.setup.items.concierge.question',
+                'answer_key'   => 'frontpage.faq.groups.setup.items.concierge.answer',
+            ],
+        ],
+    ],
+];
+
 $pricing_cards = [
     '10p' => [
         'product'        => $hero_product_10p,
@@ -316,6 +345,68 @@ foreach ($pricing_cards as $slug => $card) {
       </aside>
     </div>
   </section>
+
+  <!-- FAQ Section -->
+  <section class="lumen-faq" id="faq">
+    <div class="lumen-faq__inner">
+      <header class="lumen-section-header">
+        <span class="lumen-faq__badge"><?php echo svic_translate_html('frontpage.faq.badge'); ?></span>
+        <h2 class="lumen-section-header__title"><?php echo svic_translate_html('frontpage.faq.title'); ?></h2>
+        <p class="lumen-section-header__subtitle"><?php echo svic_translate_html('frontpage.faq.lead'); ?></p>
+      </header>
+      <div class="lumen-faq__grid">
+        <?php foreach ($faq_groups as $group) : ?>
+          <div class="lumen-faq-card">
+            <h3 class="lumen-faq-card__title"><?php echo svic_translate_html($group['title_key']); ?></h3>
+            <div class="lumen-faq-card__items">
+              <?php foreach ($group['items'] as $index => $item) : ?>
+                <details class="lumen-faq-item"<?php echo $index === 0 ? ' open' : ''; ?>>
+                  <summary class="lumen-faq-item__question"><?php echo svic_translate_html($item['question_key']); ?></summary>
+                  <div class="lumen-faq-item__answer"><?php echo wp_kses_post(svic_translate($item['answer_key'])); ?></div>
+                </details>
+              <?php endforeach; ?>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+      <div class="lumen-faq__cta">
+        <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/support'))); ?>"><?php echo svic_translate_html('frontpage.faq.cta'); ?></a>
+      </div>
+    </div>
+  </section>
+
+  <?php
+  $faq_entities = [];
+  foreach ($faq_groups as $group) {
+      foreach ($group['items'] as $item) {
+          $question_text = trim(wp_strip_all_tags(svic_translate($item['question_key'])));
+          $answer_text   = trim(wp_strip_all_tags(svic_translate($item['answer_key'])));
+
+          if ($question_text === '' || $answer_text === '') {
+              continue;
+          }
+
+          $faq_entities[] = [
+              '@type' => 'Question',
+              'name'  => $question_text,
+              'acceptedAnswer' => [
+                  '@type' => 'Answer',
+                  'text'  => $answer_text,
+              ],
+          ];
+      }
+  }
+
+  if (!empty($faq_entities)) {
+      $faq_schema = [
+          '@context'    => 'https://schema.org',
+          '@type'       => 'FAQPage',
+          'mainEntity'  => $faq_entities,
+      ];
+
+      echo '<script type="application/ld+json">' . wp_json_encode($faq_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+  }
+  ?>
 
   <!-- Pricing Section -->
   <section class="lumen-pricing" id="pricing">

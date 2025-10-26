@@ -659,6 +659,40 @@ return [
             ],
             'cta' => 'Talk to an expert',
         ],
+        'faq' => [
+            'badge' => 'FAQ',
+            'title' => 'Top questions from U.S. & Canada buyers',
+            'lead'  => 'Shipping from California, warranty coverage, and bilingual setup support—here are the answers before you checkout.',
+            'cta'   => 'Visit support & FAQ',
+            'groups' => [
+                'orders' => [
+                    'title' => 'Orders & shipping',
+                    'items' => [
+                        'fulfillment' => [
+                            'question' => 'How fast do you ship in the U.S. and Canada?',
+                            'answer'   => 'Orders placed before 2 p.m. Pacific leave our California warehouse within 48 hours via USPS, UPS, or FedEx. Tracking is emailed automatically, and Canada deliveries typically arrive within 5–7 business days including customs clearance.',
+                        ],
+                        'warranty' => [
+                            'question' => 'Do SVICLOUD boxes include a U.S. warranty and returns?',
+                            'answer'   => 'Every device sold on SVICLOUDTVBOX.US includes a 1-year U.S. hardware warranty plus a 30-day return window. Contact the concierge team with your order number and we will arrange troubleshooting, exchanges, or returns.',
+                        ],
+                    ],
+                ],
+                'setup' => [
+                    'title' => 'Device & setup',
+                    'items' => [
+                        'compatibility' => [
+                            'question' => 'Will SVICLOUD work with my TV and home internet?',
+                            'answer'   => 'Yes—any TV with an HDMI port is supported, and you can connect via dual-band Wi-Fi or the included Gigabit Ethernet port. The box ships with the voice remote, HDMI cable, and U.S. power adapter inside the box.',
+                        ],
+                        'concierge' => [
+                            'question' => 'Can you help me set it up in Traditional Chinese?',
+                            'answer'   => 'Absolutely. Our bilingual concierge can schedule a remote session, walk you through the interface entirely in 繁體中文, and answer questions about Kids Mode, karaoke, or app updates.',
+                        ],
+                    ],
+                ],
+            ],
+        ],
         'pricing' => [
             'title'    => 'Choose Your SVICLOUD Device',
             'subtitle' => 'Pick the hardware that fits your home. No mandatory bundles—just authentic SVICLOUD boxes shipping from the USA.',
