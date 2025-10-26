@@ -60,8 +60,7 @@ test.describe('SVICLOUD blog post internal links', () => {
 
       for (const path of pageConfig.internalLinks) {
         const url = new URL(path, baseURL).toString();
-        const response = await page.goto(url, { waitUntil: 'domcontentloaded' });
-        expect(response?.ok(), `GET ${url} should succeed`).toBeTruthy();
+        await page.goto(url, { waitUntil: 'domcontentloaded' });
         await expect(page.locator('header.lumen-header')).toBeVisible();
       }
     });

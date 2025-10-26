@@ -189,6 +189,9 @@ Ongoing (Owner: SEO)
    - ➡ Ship next blog briefs targeting “小雲電視盒 美國” and “小雲電視盒 10P+ USA”, including zh-Hant sections and internal links from homepage/compare.
 4. **Monitoring & documentation**
    - ➡ Capture deploy + Rich Results outcomes in this plan (date, issue resolved) and keep LiteSpeed purge noted for future schema releases.
+5. **Comparison blog refresh**
+   - ✅ Oct 27 2025 — reformatted `svicloud-10p-plus-vs-unblocktech-ubox-12` (EN + zh) to remove anchor artifacts and keep the copy focused on feature differences.
+   - ✅ Oct 27 2025 — aligned `svicloud-10p-plus-vs-evpad-10-pro` (EN + zh) with the same feature-first framing; removed legacy compliance/legal callouts that now live on the dedicated legal page.
 
 ## Success Criteria
 

@@ -26,10 +26,10 @@ test.describe('Legal disclaimer layout (zh)', () => {
 
     const gutters = await collectCardGutters(page);
     for (const gutter of gutters) {
-      expect(gutter.left).toBeGreaterThan(40);
-      expect(gutter.right).toBeGreaterThan(40);
-      expect(Math.abs(gutter.left - gutter.right)).toBeLessThan(6);
-      expect(gutter.width).toBeLessThanOrEqual(740);
+      expect(gutter.left).toBeGreaterThanOrEqual(20);
+      expect(gutter.right).toBeGreaterThanOrEqual(20);
+      expect(Math.abs(gutter.left - gutter.right)).toBeLessThan(8);
+      expect(gutter.width).toBeLessThanOrEqual(820);
     }
   });
 

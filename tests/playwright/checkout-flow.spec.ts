@@ -72,52 +72,64 @@ async function fillBillingDetails(page: import('@playwright/test').Page) {
   }
 }
 
+async function waitForStripeLocator(
+  page: import('@playwright/test').Page,
+  selector: string,
+  timeout = 20000,
+): Promise<import('@playwright/test').Locator | null> {
+  const deadline = Date.now() + timeout;
+  while (Date.now() < deadline) {
+    for (const frame of page.frames()) {
+      if (!frame.url().includes('stripe.com')) {
+        continue;
+      }
+      const locator = frame.locator(selector);
+      if (await locator.count()) {
+        return locator.first();
+      }
+    }
+    await page.waitForTimeout(150);
+  }
+  return null;
+}
+
 async function fillStripeCard(page: import('@playwright/test').Page) {
-  const iframeLocator = page.locator('iframe[name^="__privateStripeFrame"]');
-  await expect(iframeLocator.first()).toBeVisible({ timeout: 20000 });
+  const cardNumberField = await waitForStripeLocator(
+    page,
+    'input[data-elements-stable-field-name="cardNumber"], input[name="cardnumber"], input[name="number"], input[placeholder*="1234"]',
+  );
+  expect(cardNumberField, 'Stripe card number field not found').not.toBeNull();
+  await cardNumberField!.fill('');
+  await cardNumberField!.type(STRIPE_TEST_CARD, { delay: 10 });
 
-  const frameCount = await iframeLocator.count();
-  let cardFrameUsed = false;
-  let zipFilled = false;
-
-  for (let i = 0; i < frameCount; i += 1) {
-    const frameLocator = page.frameLocator('iframe[name^="__privateStripeFrame"]').nth(i);
-
-    if (!cardFrameUsed) {
-      const numberInput = frameLocator.locator('input[data-elements-stable-field-name="cardNumber"], input[name="cardnumber"], input[name="number"], input[placeholder*="1234"]');
-      const expInput = frameLocator.locator('input[data-elements-stable-field-name="cardExpiry"], input[name="exp-date"], input[name="exp"], input[placeholder*="MM / YY"]');
-      const cvcInput = frameLocator.locator('input[data-elements-stable-field-name="cardCvc"], input[name="cvc"], input[placeholder*="CVC" i]');
-
-      if (await numberInput.count()) {
-        await numberInput.fill('');
-        await numberInput.type(STRIPE_TEST_CARD, { delay: 10 });
-      }
-
-      if (await expInput.count()) {
-        await expInput.fill('');
-        await expInput.type(STRIPE_EXPIRY_MMYY, { delay: 30 });
-      }
-
-      if (await cvcInput.count()) {
-        await cvcInput.fill('');
-        await cvcInput.type(STRIPE_CVC, { delay: 20 });
-      }
-
-      if ((await numberInput.count()) || (await expInput.count()) || (await cvcInput.count())) {
-        cardFrameUsed = true;
-      }
-    }
-
-    if (!zipFilled) {
-      const zipInput = frameLocator.locator('input[data-elements-stable-field-name="billingPostalCode"], input[name="postal"], input[name="zip"], input[placeholder*="ZIP" i]');
-      if (await zipInput.count()) {
-        await zipInput.fill(STRIPE_ZIP);
-        zipFilled = true;
-      }
-    }
+  const expiryField = await waitForStripeLocator(
+    page,
+    'input[data-elements-stable-field-name="cardExpiry"], input[name="exp-date"], input[name="exp"], input[placeholder*="MM / YY"]',
+    8000,
+  );
+  if (expiryField) {
+    await expiryField.fill('');
+    await expiryField.type(STRIPE_EXPIRY_MMYY, { delay: 30 });
   }
 
-  expect(cardFrameUsed, 'Failed to populate Stripe card fields').toBeTruthy();
+  const cvcField = await waitForStripeLocator(
+    page,
+    'input[data-elements-stable-field-name="cardCvc"], input[name="cvc"], input[placeholder*="CVC" i]',
+    8000,
+  );
+  if (cvcField) {
+    await cvcField.fill('');
+    await cvcField.type(STRIPE_CVC, { delay: 20 });
+  }
+
+  const zipField = await waitForStripeLocator(
+    page,
+    'input[data-elements-stable-field-name="billingPostalCode"], input[name="postal"], input[name="zip"], input[placeholder*="ZIP" i]',
+    8000,
+  );
+  if (zipField) {
+    await zipField.fill(STRIPE_ZIP);
+  }
 }
 
 async function acceptTerms(page: import('@playwright/test').Page) {
@@ -186,7 +198,7 @@ test.describe('Checkout purchase flow', () => {
     }
 
     const bodyClass = await page.evaluate(() => document.body.className);
-    const orderSummary = page.locator('.woocommerce-order-overview, .woocommerce-thankyou-order-details');
+    const orderSummary = page.locator('.lumen-order-summary, .woocommerce-order-overview, .woocommerce-thankyou-order-details');
 
     // eslint-disable-next-line no-console
     console.log('console logs during checkout', consoleLogs);

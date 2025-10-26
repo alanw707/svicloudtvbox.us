@@ -49,16 +49,16 @@ $reading_label  = sprintf(
 
       <footer class="blog-article__footer">
         <div class="blog-article__cta">
-          <h2 class="blog-article__cta-title"><?php esc_html_e('Compare Your Options', 'svicloudtvbox-lumen'); ?></h2>
+          <h2 class="blog-article__cta-title"><?php echo svic_translate_html('blog.cta.title'); ?></h2>
           <p class="blog-article__cta-copy">
-            <?php esc_html_e('Ready to pick the right SVICLOUD model? Explore our side-by-side comparison or chat with our concierge team for personalized advice.', 'svicloudtvbox-lumen'); ?>
+            <?php echo svic_translate_html('blog.cta.copy'); ?>
           </p>
           <div class="blog-article__cta-actions">
             <a class="btn btn-primary" href="<?php echo esc_url(svic_url_with_lang(home_url('/compare/'))); ?>">
-              <?php esc_html_e('Compare 10P+ vs 10S', 'svicloudtvbox-lumen'); ?>
+              <?php echo svic_translate_html('blog.cta.primary_label'); ?>
             </a>
             <a class="btn btn-outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/support/'))); ?>">
-              <?php esc_html_e('Talk to Concierge', 'svicloudtvbox-lumen'); ?>
+              <?php echo svic_translate_html('blog.cta.secondary_label'); ?>
             </a>
           </div>
         </div>

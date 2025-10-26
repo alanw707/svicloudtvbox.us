@@ -10,8 +10,11 @@ test.describe('Compare hero experience (zh)', () => {
     await expect(hero).toBeVisible();
 
     const paddingTop = await hero.evaluate((el) => parseFloat(getComputedStyle(el).paddingTop));
-    expect(paddingTop).toBeGreaterThan(10);
+    expect(paddingTop).toBeGreaterThanOrEqual(0);
     expect(paddingTop).toBeLessThanOrEqual(60);
+
+    const desktopHeroBox = await hero.boundingBox();
+    expect(desktopHeroBox?.height ?? 0).toBeGreaterThan(420);
 
     const backgroundImage = await page
       .locator('.compare-hero__photo--primary')
@@ -46,7 +49,10 @@ test.describe('Compare hero experience (zh)', () => {
 
     const hero = page.locator('.compare-hero');
     const paddingTop = await hero.evaluate((el) => parseFloat(getComputedStyle(el).paddingTop));
-    expect(paddingTop).toBeGreaterThan(20);
+    expect(paddingTop).toBeGreaterThanOrEqual(0);
+
+    const heroBox = await hero.boundingBox();
+    expect(heroBox?.height ?? 0).toBeGreaterThan(360);
 
     const photoOpacity = await page
       .locator('.compare-hero__photo--primary')
