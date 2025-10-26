@@ -198,6 +198,189 @@ add_filter('rank_math/frontend/canonical', function ($url) {
     return $canonical ?: $url;
 }, 10, 1);
 
+if (!function_exists('svic_homepage_meta_definitions')) {
+    function svic_homepage_meta_definitions(): array
+    {
+        $locale = function_exists('svic_current_locale') ? svic_current_locale() : get_locale();
+        $locale = is_string($locale) ? strtolower($locale) : 'en_us';
+
+        $definitions = [
+            'zh_tw' => [
+                'title'       => '小雲電視盒 美國｜SVICLOUD 10P Plus / 10S 授權經銷店',
+                'description' => '美國授權小雲電視盒經銷，10P Plus 與 10S 現貨 48 小時內從加州出貨。繁體中文介面、無月費裝置、美國保固與中英雙語客服。',
+                'image_alt'   => '小雲電視盒與語音遙控器',
+            ],
+            'zh_cn' => [
+                'title'       => '小云电视盒 美国｜SVICLOUD 10P Plus / 10S 授权经销店',
+                'description' => '美国授权小云电视盒经销，10P Plus 与 10S 现货 48 小时内从加州发货。繁体/简体界面，无月费设备，美国保固与双语客服。',
+                'image_alt'   => '小云电视盒与语音遥控器',
+            ],
+            'en_us' => [
+                'title'       => 'SVICLOUD TV Box US – Chinese TV Box with U.S. Warranty',
+                'description' => 'Authorized U.S. dealer for SVICLOUD 10P Plus & 10S. Ships from California within 48 hours, bilingual support, no monthly device fees.',
+                'image_alt'   => 'SVICLOUD streaming device with voice remote',
+            ],
+        ];
+
+        if (strpos($locale, 'zh') === 0) {
+            return $definitions['zh_tw'];
+        }
+
+        return $definitions[$locale] ?? $definitions['en_us'];
+    }
+}
+
+if (!function_exists('svic_get_homepage_hero_image_meta')) {
+    function svic_get_homepage_hero_image_meta(): array
+    {
+        $relative_path = '/assets/images/svicloud-hero-product.png';
+        $file_path     = get_template_directory() . $relative_path;
+        $url           = get_template_directory_uri() . $relative_path;
+        $width         = null;
+        $height        = null;
+
+        if (file_exists($file_path)) {
+            $dimensions = @getimagesize($file_path);
+            if (is_array($dimensions) && isset($dimensions[0], $dimensions[1])) {
+                $width  = (int) $dimensions[0];
+                $height = (int) $dimensions[1];
+            }
+        }
+
+        return [
+            'url'    => esc_url_raw($url),
+            'width'  => $width,
+            'height' => $height,
+        ];
+    }
+}
+
+if (!function_exists('svic_output_max_image_preview_meta')) {
+    function svic_output_max_image_preview_meta(): void
+    {
+        if (is_admin() || (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION'))) {
+            return;
+        }
+
+        echo "<meta name=\"robots\" content=\"max-image-preview:large\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+}
+
+add_action('wp_head', 'svic_output_max_image_preview_meta', 3);
+
+if (!function_exists('svic_output_homepage_social_meta')) {
+    function svic_output_homepage_social_meta(): void
+    {
+        if (is_admin() || !is_front_page() || (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION'))) {
+            return;
+        }
+
+        $meta     = svic_homepage_meta_definitions();
+        $image    = svic_get_homepage_hero_image_meta();
+        $siteName = get_bloginfo('name');
+        $url      = svic_get_localized_canonical_url() ?: home_url('/');
+
+        $tags = [
+            ['property' => 'og:type', 'content' => 'website'],
+            ['property' => 'og:site_name', 'content' => $siteName],
+            ['property' => 'og:title', 'content' => $meta['title']],
+            ['property' => 'og:description', 'content' => $meta['description']],
+            ['property' => 'og:url', 'content' => $url],
+        ];
+
+        if (!empty($image['url'])) {
+            $tags[] = ['property' => 'og:image', 'content' => $image['url']];
+            if (!empty($meta['image_alt'])) {
+                $tags[] = ['property' => 'og:image:alt', 'content' => $meta['image_alt']];
+            }
+            if (!empty($image['width'])) {
+                $tags[] = ['property' => 'og:image:width', 'content' => (string) $image['width']];
+            }
+            if (!empty($image['height'])) {
+                $tags[] = ['property' => 'og:image:height', 'content' => (string) $image['height']];
+            }
+        }
+
+        $twitter_tags = [
+            ['name' => 'twitter:card', 'content' => 'summary_large_image'],
+            ['name' => 'twitter:title', 'content' => $meta['title']],
+            ['name' => 'twitter:description', 'content' => $meta['description']],
+        ];
+
+        if (!empty($image['url'])) {
+            $twitter_tags[] = ['name' => 'twitter:image', 'content' => $image['url']];
+        }
+
+        foreach ($tags as $tag) {
+            echo '<meta property="' . esc_attr($tag['property']) . '" content="' . esc_attr($tag['content']) . '" />' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+
+        foreach ($twitter_tags as $tag) {
+            echo '<meta name="' . esc_attr($tag['name']) . '" content="' . esc_attr($tag['content']) . '" />' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+    }
+}
+
+add_action('wp_head', 'svic_output_homepage_social_meta', 7);
+
+if (!function_exists('svic_output_homepage_webpage_schema')) {
+    function svic_output_homepage_webpage_schema(): void
+    {
+        if (is_admin() || !is_front_page() || (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION'))) {
+            return;
+        }
+
+        $meta        = svic_homepage_meta_definitions();
+        $image       = svic_get_homepage_hero_image_meta();
+        $canonical   = svic_get_localized_canonical_url() ?: home_url('/');
+        $site_name   = get_bloginfo('name');
+        $site_url    = home_url('/');
+        $language    = function_exists('svic_locale_to_hreflang') ? svic_locale_to_hreflang(svic_current_locale()) : get_locale();
+        $language    = $language ? strtolower(str_replace('_', '-', $language)) : 'en-us';
+
+        $webpage_schema = [
+            '@context'   => 'https://schema.org',
+            '@type'      => 'WebPage',
+            '@id'        => trailingslashit($canonical) . '#webpage',
+            'url'        => $canonical,
+            'name'       => $meta['title'],
+            'description'=> $meta['description'],
+            'inLanguage' => $language,
+            'isPartOf'   => [
+                '@type' => 'WebSite',
+                '@id'   => trailingslashit($site_url) . '#website',
+                'name'  => $site_name,
+                'url'   => $site_url,
+            ],
+        ];
+
+        if (!empty($image['url'])) {
+            $image_object = [
+                '@type'  => 'ImageObject',
+                'url'    => $image['url'],
+            ];
+
+            if (!empty($image['width'])) {
+                $image_object['width'] = $image['width'];
+            }
+
+            if (!empty($image['height'])) {
+                $image_object['height'] = $image['height'];
+            }
+
+            if (!empty($meta['image_alt'])) {
+                $image_object['caption'] = $meta['image_alt'];
+            }
+
+            $webpage_schema['primaryImageOfPage'] = $image_object;
+        }
+
+        echo '<script type="application/ld+json">' . wp_json_encode($webpage_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+}
+
+add_action('wp_head', 'svic_output_homepage_webpage_schema', 8);
+
 if (!function_exists('svic_filter_body_class')) {
     function svic_filter_body_class($classes)
     {

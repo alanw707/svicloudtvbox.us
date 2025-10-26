@@ -6,7 +6,7 @@ This plan is tailored to your WordPress + WooCommerce site hosted on LiteSpeed (
 
 - Organic traffic: +60–100% non-brand organic sessions in 90–120 days.
 - Indexation: 100% of key pages (home, products, categories, compare, about) indexed within 30 days.
-- Rankings: Top 10 for target terms like “SVICLOUD 10P+”, “Chinese TV box US”, “Chinese TV box with warranty”, “SVICLOUD US dealer”.
+- Rankings: Top 10 for target terms like “SVICLOUD 10P+”, “Chinese TV box US”, “Chinese TV box with warranty”, “SVICLOUD US dealer”, plus zh-Hant variants such as “小雲電視盒 美國” and “小雲電視盒 10P+ USA”.
 - Conversions: +30–50% organic revenue; +20% organic CVR.
 - Core Web Vitals (field): LCP ≤ 2.5s, CLS ≤ 0.10, INP ≤ 200ms.
 
