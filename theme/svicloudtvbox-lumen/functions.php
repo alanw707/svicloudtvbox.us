@@ -713,6 +713,123 @@ if (!function_exists('svic_output_homepage_social_meta')) {
 
 add_action('wp_head', 'svic_output_homepage_social_meta', 7);
 
+if (!function_exists('svic_get_featured_image_meta')) {
+    function svic_get_featured_image_meta(int $post_id): ?array
+    {
+        $thumbnail_id = get_post_thumbnail_id($post_id);
+        if (!$thumbnail_id) {
+            return null;
+        }
+
+        $image_data = wp_get_attachment_image_src($thumbnail_id, 'full');
+        if (!is_array($image_data) || empty($image_data[0])) {
+            return null;
+        }
+
+        return [
+            'url'    => esc_url_raw($image_data[0]),
+            'width'  => isset($image_data[1]) ? (int) $image_data[1] : null,
+            'height' => isset($image_data[2]) ? (int) $image_data[2] : null,
+        ];
+    }
+}
+
+if (!function_exists('svic_output_singular_social_meta')) {
+    function svic_output_singular_social_meta(): void
+    {
+        if (is_admin() || is_front_page()) {
+            return;
+        }
+
+        if (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION')) {
+            return;
+        }
+
+        $post_id = get_queried_object_id();
+        if (!$post_id) {
+            return;
+        }
+
+        $is_product = function_exists('is_singular') && is_singular('product');
+        $is_post    = function_exists('is_single') && is_single();
+
+        if (!$is_product && !$is_post) {
+            return;
+        }
+
+        $title = wp_strip_all_tags(get_the_title($post_id));
+        $description = '';
+
+        if ($is_product && function_exists('wc_get_product')) {
+            $product = wc_get_product($post_id);
+            if ($product instanceof WC_Product) {
+                $description = wp_strip_all_tags($product->get_short_description() ?: $product->get_description());
+            }
+        } else {
+            $description = wp_strip_all_tags(get_the_excerpt($post_id));
+        }
+
+        if ($description === '') {
+            $description = wp_trim_words(strip_shortcodes(wp_strip_all_tags(get_post_field('post_content', $post_id))), 40, '…');
+        }
+
+        $image_meta = svic_get_featured_image_meta($post_id);
+        if (!$image_meta) {
+            if ($is_product) {
+                $slug = get_post_field('post_name', $post_id);
+                if ($slug === 'svicloud-10p-plus') {
+                    $image_meta = svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.png');
+                } elseif ($slug === 'svicloud-10s') {
+                    $image_meta = svic_get_theme_image_meta('/assets/images/svicloud-tvbox-10s.jpg');
+                }
+            }
+            if (!$image_meta) {
+                $image_meta = svic_get_theme_image_meta('/assets/images/hero-voice-assistant.png');
+            }
+        }
+
+        $canonical = svic_get_localized_canonical_url() ?: get_permalink($post_id);
+
+        $meta_tags = [
+            ['property' => 'og:type', 'content' => $is_product ? 'product' : 'article'],
+            ['property' => 'og:site_name', 'content' => get_bloginfo('name')],
+            ['property' => 'og:title', 'content' => $title],
+            ['property' => 'og:description', 'content' => $description],
+            ['property' => 'og:url', 'content' => $canonical],
+        ];
+
+        if (!empty($image_meta['url'])) {
+            $meta_tags[] = ['property' => 'og:image', 'content' => $image_meta['url']];
+            if (!empty($image_meta['width'])) {
+                $meta_tags[] = ['property' => 'og:image:width', 'content' => (string) $image_meta['width']];
+            }
+            if (!empty($image_meta['height'])) {
+                $meta_tags[] = ['property' => 'og:image:height', 'content' => (string) $image_meta['height']];
+            }
+        }
+
+        $twitter_tags = [
+            ['name' => 'twitter:card', 'content' => 'summary_large_image'],
+            ['name' => 'twitter:title', 'content' => $title],
+            ['name' => 'twitter:description', 'content' => $description],
+        ];
+
+        if (!empty($image_meta['url'])) {
+            $twitter_tags[] = ['name' => 'twitter:image', 'content' => $image_meta['url']];
+        }
+
+        foreach ($meta_tags as $tag) {
+            echo '<meta property="' . esc_attr($tag['property']) . '" content="' . esc_attr($tag['content']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+
+        foreach ($twitter_tags as $tag) {
+            echo '<meta name="' . esc_attr($tag['name']) . '" content="' . esc_attr($tag['content']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+    }
+}
+
+add_action('wp_head', 'svic_output_singular_social_meta', 8);
+
 if (!function_exists('svic_output_homepage_webpage_schema')) {
     function svic_output_homepage_webpage_schema(): void
     {

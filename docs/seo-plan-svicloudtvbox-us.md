@@ -184,9 +184,9 @@ Ongoing (Owner: SEO)
    - ➡ Prepare `aggregateRating` / `review` fields (placeholder structure ready; populate once authentic data is available) to clear remaining warnings.
    - ✅ Oct 27 2025 — Ran Rich Results “Test live URL” for home, /zh/, 10P+, 10S, /shop, and /compare after deploy + LiteSpeed purge; keep weekly cadence going.
 2. **Thumbnail & social preview parity**
-   - ➡ Mirror the homepage’s `max-image-preview:large`, Open Graph, and Twitter image tags on PDPs and top blog posts so SERP thumbnails appear consistently.
+   - ✅ Oct 27 2025 — Added fallback Open Graph + Twitter meta (and `max-image-preview:large` coverage) for PDPs and blog posts so they mirror the homepage implementation when an SEO plugin is not outputting those tags.
 3. **Keyword execution**
-   - ➡ Ship next blog briefs targeting “小雲電視盒 美國” and “小雲電視盒 10P+ USA”, including zh-Hant sections and internal links from homepage/compare.
+   - ✅ Oct 27 2025 — Published bilingual long-form posts `svicloud-tv-box-us-guide` (EN + zh) and `svicloud-10p-plus-usa-launch` to cover “小雲電視盒 美國” & “小雲電視盒 10P+ USA”; linked each to compare, PDP, support, and guides pages.
 4. **Monitoring & documentation**
    - ➡ Capture deploy + Rich Results outcomes in this plan (date, issue resolved) and keep LiteSpeed purge noted for future schema releases.
 5. **Comparison blog refresh**
