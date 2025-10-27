@@ -31,6 +31,28 @@ const pages = [
       '/svicloud-10p-plus-vs-evpad-10-pro/',
     ],
   },
+  {
+    path: '/svicloud-tv-box-us-guide/',
+    sections: ['svicloud-tv-box-us-guide'],
+    internalLinks: [
+      '/product/svicloud-10p-plus/',
+      '/product/svicloud-10s/',
+      '/compare/',
+      '/order-tracking/',
+      '/support/',
+      '/svicloud-10p-plus-usa-launch/',
+    ],
+  },
+  {
+    path: '/svicloud-10p-plus-usa-launch/',
+    sections: ['svicloud-10p-plus-usa-launch'],
+    internalLinks: [
+      '/product/svicloud-10p-plus/',
+      '/compare/',
+      '/support/',
+      '/svicloud-tv-box-us-guide/',
+    ],
+  },
 ];
 
 test.describe('SVICLOUD blog post internal links', () => {
@@ -41,11 +63,9 @@ test.describe('SVICLOUD blog post internal links', () => {
 
       if (!pageConfig.sections.length) test.skip();
 
-      for (const id of pageConfig.sections) {
-        await page.evaluate((targetId) => {
-          location.hash = targetId;
-        }, id);
-        await page.waitForTimeout(300);
+    for (const id of pageConfig.sections) {
+      await page.locator(`#${id}`).scrollIntoViewIfNeeded();
+      await page.waitForTimeout(250);
 
         const anchor = page.locator(`#${id}`);
         await expect(anchor).toBeVisible();
