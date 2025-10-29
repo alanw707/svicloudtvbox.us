@@ -806,6 +806,11 @@ return [
         ],
     ],
     'compare' => [
+        'meta' => [
+            'title'       => 'SVICLOUD 10P+ vs 10S – Compare Chinese TV Boxes for U.S. homes',
+            'description' => 'Compare SVICLOUD 10P+ and 10S streaming boxes side-by-side—hardware, storage, Wi-Fi, karaoke apps, and pricing—to choose the best Chinese TV box for your home.',
+            'image_alt'   => 'SVICLOUD 10P+ and 10S streaming boxes with the voice remote',
+        ],
         'hero' => [
             'badge'    => 'Compare Models',
             'title'    => 'SVICLOUD 10P+ vs 10S',

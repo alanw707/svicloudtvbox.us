@@ -39,3 +39,70 @@
 - Use Conventional Commits (`feat(theme): …`, `fix(css): …`). Group related PHP/CSS/assets in single commits.
 - Keep `main` clean—branch for feature work (e.g., `feat/css-bundles`) and open PRs summarising customer impact, linking to Notion/Trello tickets, attaching desktop/mobile screenshots, and listing manual QA steps.
 - Inspect the ZIP artifact prior to deploy to avoid shipping PSDs/cache files; secrets stay in `.env` / `.ftppass`.
+## Custom AI Instructions
+This section contains the instructions that should be pasted on the AI custom instructions, either for Cline, Claude or Cursor, or any other MCP client. You should copy and paste these rules. For reference, see `custom-instructions.md` which contains these rules.
+
+### Development
+Basic development commands:
+
+```
+# Install dependencies
+npm install
+
+# Build the project
+npm run build
+
+# Run tests
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run the server directly with ts-node for quick testing
+npm run dev
+```
+
+### Running with Docker
+Build the Docker image:
+
+```
+docker build -t memory-bank-mcp:local .
+```
+
+Run the Docker container for testing:
+
+```
+docker run -i --rm \
+  -e MEMORY_BANK_ROOT="/mnt/memory_bank" \
+  -v /path/to/memory-bank:/mnt/memory_bank \
+  --entrypoint /bin/sh \
+  memory-bank-mcp:local \
+  -c "ls -la /mnt/memory_bank"
+```
+
+Add MCP configuration, example for Roo Code:
+
+```
+"allpepper-memory-bank": {
+  "command": "docker",
+  "args": [
+    "run", "-i", "--rm",
+    "-e", 
+    "MEMORY_BANK_ROOT",
+    "-v", 
+    "/path/to/memory-bank:/mnt/memory_bank",
+    "memory-bank-mcp:local"
+  ],
+  "env": {
+    "MEMORY_BANK_ROOT": "/mnt/memory_bank"
+  },
+  "disabled": false,
+  "alwaysAllow": [
+    "list_projects",
+    "list_project_files",
+    "memory_bank_read",
+    "memory_bank_update",
+    "memory_bank_write"
+  ]
+}
+```

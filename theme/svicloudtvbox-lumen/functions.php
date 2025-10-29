@@ -262,6 +262,47 @@ if (!function_exists('svic_get_homepage_hero_image_meta')) {
     }
 }
 
+if (!function_exists('svic_get_compare_page_meta_definitions')) {
+    /**
+     * Retrieve localized metadata for the compare page experience.
+     *
+     * @return array{title:string,description:string,image_alt:string,image:array}
+     */
+    function svic_get_compare_page_meta_definitions(): array
+    {
+        $post_id = get_queried_object_id();
+
+        $title = trim(wp_strip_all_tags(svic_translate('compare.meta.title')));
+        if ($title === '' || $title === 'title') {
+            if ($post_id) {
+                $title = wp_strip_all_tags(get_the_title($post_id));
+            }
+        }
+
+        $description = trim(wp_strip_all_tags(svic_translate('compare.meta.description')));
+        if ($description === '' || $description === 'description') {
+            $description = trim(wp_strip_all_tags(svic_translate('compare.hero.subtitle')));
+        }
+
+        $image_alt = trim(wp_strip_all_tags(svic_translate('compare.meta.image_alt')));
+        if ($image_alt === '' || $image_alt === 'image_alt') {
+            $image_alt = 'SVICLOUD streaming boxes';
+        }
+
+        $image_meta = svic_get_theme_image_meta('/assets/images/svicloud-hero-product.png');
+        if (empty($image_meta['url'])) {
+            $image_meta = svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.png');
+        }
+
+        return [
+            'title'       => $title,
+            'description' => $description,
+            'image_alt'   => $image_alt,
+            'image'       => $image_meta,
+        ];
+    }
+}
+
 if (!function_exists('svic_get_store_postal_address_schema')) {
     /**
      * Build a PostalAddress node using the WooCommerce store address fields.
@@ -712,6 +753,7 @@ if (!function_exists('svic_output_homepage_social_meta')) {
 }
 
 add_action('wp_head', 'svic_output_homepage_social_meta', 7);
+add_action('wp_head', 'svic_output_compare_page_meta', 7);
 
 if (!function_exists('svic_get_featured_image_meta')) {
     function svic_get_featured_image_meta(int $post_id): ?array
@@ -825,6 +867,155 @@ if (!function_exists('svic_output_singular_social_meta')) {
         foreach ($twitter_tags as $tag) {
             echo '<meta name="' . esc_attr($tag['name']) . '" content="' . esc_attr($tag['content']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
+    }
+}
+
+if (!function_exists('svic_output_compare_page_meta')) {
+    function svic_output_compare_page_meta(): void
+    {
+        if (is_admin() || (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION'))) {
+            return;
+        }
+
+        if (!function_exists('is_page_template') || !is_page_template('page-compare.php')) {
+            return;
+        }
+
+        $meta         = svic_get_compare_page_meta_definitions();
+        $title        = isset($meta['title']) ? trim((string) $meta['title']) : '';
+        $description  = isset($meta['description']) ? trim((string) $meta['description']) : '';
+        $image_meta   = isset($meta['image']) && is_array($meta['image']) ? $meta['image'] : [];
+        $image_url    = isset($image_meta['url']) ? (string) $image_meta['url'] : '';
+        $image_width  = isset($image_meta['width']) && $image_meta['width'] ? (int) $image_meta['width'] : null;
+        $image_height = isset($image_meta['height']) && $image_meta['height'] ? (int) $image_meta['height'] : null;
+        $image_alt    = isset($meta['image_alt']) ? trim((string) $meta['image_alt']) : '';
+
+        $post_id = get_queried_object_id();
+
+        if ($title === '' && $post_id) {
+            $title = wp_strip_all_tags(get_the_title($post_id));
+        }
+
+        if ($description === '') {
+            $description = $title;
+        }
+
+        if ($title === '' && $description === '') {
+            return;
+        }
+
+        $canonical = svic_get_localized_canonical_url();
+        if (!is_string($canonical) || $canonical === '') {
+            if ($post_id) {
+                $canonical = get_permalink($post_id);
+            }
+        }
+
+        if (!is_string($canonical) || $canonical === '') {
+            return;
+        }
+
+        $canonical = esc_url_raw($canonical);
+        $site_name = get_bloginfo('name') ?: 'SVICLOUD TV BOX US';
+
+        echo '<meta name="description" content="' . esc_attr($description) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+        $meta_tags = [
+            ['property' => 'og:type', 'content' => 'website'],
+            ['property' => 'og:site_name', 'content' => $site_name],
+            ['property' => 'og:title', 'content' => $title],
+            ['property' => 'og:description', 'content' => $description],
+            ['property' => 'og:url', 'content' => $canonical],
+        ];
+
+        if ($image_url !== '') {
+            $meta_tags[] = ['property' => 'og:image', 'content' => $image_url];
+            if ($image_alt !== '') {
+                $meta_tags[] = ['property' => 'og:image:alt', 'content' => $image_alt];
+            }
+            if ($image_width) {
+                $meta_tags[] = ['property' => 'og:image:width', 'content' => (string) $image_width];
+            }
+            if ($image_height) {
+                $meta_tags[] = ['property' => 'og:image:height', 'content' => (string) $image_height];
+            }
+        }
+
+        foreach ($meta_tags as $tag) {
+            echo '<meta property="' . esc_attr($tag['property']) . '" content="' . esc_attr($tag['content']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+
+        $twitter_tags = [
+            ['name' => 'twitter:card', 'content' => 'summary_large_image'],
+            ['name' => 'twitter:title', 'content' => $title],
+            ['name' => 'twitter:description', 'content' => $description],
+        ];
+
+        if ($image_url !== '') {
+            $twitter_tags[] = ['name' => 'twitter:image', 'content' => $image_url];
+            if ($image_alt !== '') {
+                $twitter_tags[] = ['name' => 'twitter:image:alt', 'content' => $image_alt];
+            }
+        }
+
+        foreach ($twitter_tags as $tag) {
+            echo '<meta name="' . esc_attr($tag['name']) . '" content="' . esc_attr($tag['content']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+
+        $locale   = function_exists('svic_current_locale') ? svic_current_locale() : get_locale();
+        $hreflang = '';
+        if (is_string($locale) && $locale !== '' && function_exists('svic_locale_to_hreflang')) {
+            $hreflang = svic_locale_to_hreflang($locale);
+        }
+        $language = $hreflang ? strtolower(str_replace('_', '-', $hreflang)) : 'en-us';
+
+        $site_url = home_url('/');
+        $schema   = [
+            '@context'   => 'https://schema.org',
+            '@type'      => 'CollectionPage',
+            '@id'        => trailingslashit($canonical) . '#webpage',
+            'url'        => $canonical,
+            'name'       => $title,
+            'description' => $description,
+            'inLanguage' => $language,
+            'isPartOf'   => [
+                '@type' => 'WebSite',
+                '@id'   => trailingslashit($site_url) . '#website',
+                'name'  => $site_name,
+                'url'   => $site_url,
+            ],
+        ];
+
+        if ($image_url !== '') {
+            $image_object = [
+                '@type' => 'ImageObject',
+                'url'   => $image_url,
+            ];
+
+            if ($image_width) {
+                $image_object['width'] = $image_width;
+            }
+
+            if ($image_height) {
+                $image_object['height'] = $image_height;
+            }
+
+            if ($image_alt !== '') {
+                $image_object['caption'] = $image_alt;
+            }
+
+            $schema['image']              = [$image_object];
+            $schema['primaryImageOfPage'] = $image_object;
+            $schema['thumbnailUrl']       = $image_url;
+        }
+
+        if (class_exists('WooCommerce')) {
+            $schema['mainEntity'] = [
+                '@id' => untrailingslashit($canonical) . '#compare-itemlist',
+            ];
+        }
+
+        echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
 }
 
