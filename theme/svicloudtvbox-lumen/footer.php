@@ -64,7 +64,7 @@
               <?php foreach ($footer_benefit_map as $benefit) : ?>
                 <li class="footer-benefits__item">
                   <span class="footer-benefits__icon" style="color:rgba(236,246,255,0.95);">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svg/' . $benefit['icon'] ); ?>" alt="" loading="lazy" />
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svg/' . $benefit['icon'] ); ?>" alt="<?php echo esc_attr( svic_icon_label( $benefit['icon'] ) ); ?>" loading="lazy" />
                   </span>
                   <div class="footer-benefits__content">
                     <span class="footer-benefits__label"><?php echo svic_translate_html($benefit['label_key']); ?></span>

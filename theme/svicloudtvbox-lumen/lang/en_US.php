@@ -133,6 +133,19 @@ return [
             ],
         ],
     ],
+    'icons' => [
+        'truck'     => 'Truck icon highlighting 小雲電視盒 美國代理 48-hour U.S. shipping',
+        'tool'      => 'Tools icon showing concierge setup support for 小雲盒子10P+',
+        'lock'      => 'Shield icon representing secure SVICLOUD warranty protection',
+        'star'      => 'Star badge icon for authorized SVICLOUD dealer status',
+        'box'       => 'SVICLOUD streaming box icon for 小雲盒子10P+ hardware',
+        'bolt'      => 'Lightning bolt icon for fast Wi-Fi 6 and AV1 performance',
+        'handshake' => 'Handshake icon for bilingual concierge service',
+        'satellite' => 'Satellite icon for activation and channel onboarding help',
+        'wifi'      => 'Wi-Fi icon for network optimization assistance',
+        'mic'       => 'Microphone icon for karaoke setup guidance',
+        'family'    => 'Family icon representing bilingual household support',
+    ],
     'return_policy' => [
         'hero' => [
             'badge'    => 'Returns & exchanges',

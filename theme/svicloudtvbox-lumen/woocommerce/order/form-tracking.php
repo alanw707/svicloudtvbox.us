@@ -15,7 +15,7 @@ $help_url = svic_url_with_lang(home_url('/contact/'));
   <header class="lumen-order-tracking__header">
     <div class="lumen-order-tracking__visual" aria-hidden="true">
       <span class="lumen-order-tracking__glow"></span>
-      <img class="lumen-order-tracking__icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/svg/icon-box.svg' ); ?>" alt="" />
+      <img class="lumen-order-tracking__icon" src="<?php echo esc_url( get_template_directory_uri() . '/assets/svg/icon-box.svg' ); ?>" alt="<?php echo esc_attr( svic_icon_label('icon-box.svg') ); ?>" />
     </div>
     <div class="lumen-order-tracking__heading">
       <span class="lumen-order-tracking__badge"><?php echo svic_translate_html('order_tracking.badge'); ?></span>

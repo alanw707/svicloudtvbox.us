@@ -460,6 +460,44 @@ if (!function_exists('svic_post_title')) {
     }
 }
 
+if (!function_exists('svic_icon_translation_key')) {
+    function svic_icon_translation_key(string $icon_filename): string {
+        $filename = trim($icon_filename);
+        if ($filename === '') {
+            return 'icons.generic';
+        }
+
+        $basename = pathinfo($filename, PATHINFO_FILENAME);
+        if ($basename === '') {
+            $basename = $filename;
+        }
+
+        if (stripos($basename, 'icon-') === 0) {
+            $basename = substr($basename, 5);
+        }
+
+        $slug = strtolower(str_replace('-', '_', $basename));
+        if ($slug === '') {
+            $slug = 'generic';
+        }
+
+        return 'icons.' . $slug;
+    }
+}
+
+if (!function_exists('svic_icon_label')) {
+    function svic_icon_label(string $icon_filename): string {
+        $key = svic_icon_translation_key($icon_filename);
+        $label = svic_translate($key);
+
+        if (!is_string($label) || $label === '' || $label === $key) {
+            $label = ucwords(str_replace('_', ' ', str_replace('icons.', '', $key)));
+        }
+
+        return $label;
+    }
+}
+
 if (!function_exists('svic_text_domain')) {
     function svic_text_domain(): string {
         if (defined('SVIC_THEME_TEXT_DOMAIN')) {

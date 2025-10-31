@@ -488,7 +488,7 @@ if (!$blog_posts_query instanceof WP_Query) {
         <article class="lumen-metric">
           <span class="lumen-metric__glow" aria-hidden="true"></span>
           <span class="lumen-metric__icon">
-            <img src="<?php echo esc_url($icon_path); ?>" alt="" loading="lazy" />
+            <img src="<?php echo esc_url($icon_path); ?>" alt="<?php echo esc_attr(svic_icon_label($metric['icon'])); ?>" loading="lazy" />
           </span>
           <div class="lumen-metric__copy">
             <strong><?php echo svic_translate_html($metric['title_key']); ?></strong>
@@ -510,7 +510,7 @@ if (!$blog_posts_query instanceof WP_Query) {
         <?php foreach ($feature_cards as $card) : ?>
           <article class="lumen-feature-card">
             <span class="lumen-feature-card__icon">
-              <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/svg/' . $card['icon']); ?>" alt="" loading="lazy" />
+              <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/svg/' . $card['icon']); ?>" alt="<?php echo esc_attr(svic_icon_label($card['icon'])); ?>" loading="lazy" />
             </span>
             <h3 class="lumen-feature-card__title"><?php echo svic_translate_html($card['title_key']); ?></h3>
             <p class="lumen-feature-card__copy"><?php echo svic_translate_html($card['copy_key']); ?></p>
@@ -538,8 +538,8 @@ if (!$blog_posts_query instanceof WP_Query) {
         <ul class="lumen-experience__card-list">
           <?php foreach ($experience_services as $service) : ?>
             <li>
-              <span class="lumen-experience__icon"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/svg/' . $service['icon']); ?>" alt="" loading="lazy" /></span>
-              <?php echo svic_translate_html($service['text_key']); ?>
+              <span class="lumen-experience__icon"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/svg/' . $service['icon']); ?>" alt="<?php echo esc_attr(svic_icon_label($service['icon'])); ?>" loading="lazy" /></span>
+            <?php echo svic_translate_html($service['text_key']); ?>
             </li>
           <?php endforeach; ?>
         </ul>

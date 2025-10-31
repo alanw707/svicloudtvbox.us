@@ -206,19 +206,19 @@ if (!function_exists('svic_homepage_meta_definitions')) {
 
         $definitions = [
             'zh_tw' => [
-                'title'       => '小雲電視盒 美國｜SVICLOUD 10P Plus / 10S 授權經銷店',
-                'description' => '美國授權小雲電視盒經銷，10P Plus 與 10S 現貨 48 小時內從內華達出貨。繁體中文介面、無月費裝置、美國保固與中英雙語客服。',
-                'image_alt'   => '小雲電視盒與語音遙控器',
+                'title'       => '小雲電視盒 美國代理｜小雲盒子10P+ / 10S 授權經銷商',
+                'description' => '小雲電視盒 美國代理提供小雲盒子10P+、10S 現貨，內華達 48 小時出貨，正版保固與中英雙語禮賓服務，協助安裝、換機與售後。',
+                'image_alt'   => '小雲盒子10P+ 美國代理展示圖',
             ],
             'zh_cn' => [
-                'title'       => '小云电视盒 美国｜SVICLOUD 10P Plus / 10S 授权经销店',
-                'description' => '美国授权小云电视盒经销，10P Plus 与 10S 现货 48 小时内从内华达发货。繁体/简体界面，无月费设备，美国保固与双语客服。',
-                'image_alt'   => '小云电视盒与语音遥控器',
+                'title'       => '小云电视盒 美国代理｜小云盒子10P+ / 10S 授权经销商',
+                'description' => '小云电视盒美国代理提供小云盒子10P+、10S 现货，内华达仓 48 小时发货，原厂保固与中英双语礼宾客服，全程协助安装与售后。',
+                'image_alt'   => '小云盒子10P+ 美国代理产品展示',
             ],
             'en_us' => [
-                'title'       => 'SVICLOUD TV Box US – Chinese TV Box with U.S. Warranty',
-                'description' => 'Authorized U.S. dealer for SVICLOUD 10P Plus & 10S. Ships from Nevada within 48 hours, bilingual support, no monthly device fees.',
-                'image_alt'   => 'SVICLOUD streaming device with voice remote',
+                'title'       => 'SVICLOUD TV Box US – 小雲電視盒 美國代理 & 小雲盒子10P+ Dealer',
+                'description' => 'Authorized U.S. distributor for 小雲電視盒 美國代理 with 小雲盒子10P+ and 10S in stock, 48-hour Nevada shipping, bilingual concierge, and authentic warranty support.',
+                'image_alt'   => 'SVICLOUD TV box with remote for 小雲盒子10P+',
             ],
         ];
 
