@@ -12,8 +12,7 @@ $categories     = get_the_category($post_id);
 $primary_cat    = $categories ? $categories[0] : null;
 $published_time = get_the_date('', $post_id);
 $updated_time   = get_the_modified_date('', $post_id);
-$word_count     = str_word_count(wp_strip_all_tags(get_post_field('post_content', $post_id)));
-$reading_time   = max(1, (int) ceil($word_count / 220));
+$reading_time   = svic_estimated_read_time($post_id);
 $reading_label  = sprintf(
     /* translators: %d: estimated reading time in minutes */
     esc_html__('%d min read', 'svicloudtvbox-lumen'),

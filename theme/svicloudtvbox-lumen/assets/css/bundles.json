@@ -31,6 +31,7 @@
       "48-lumen-section-experience.css",
       "49-lumen-section-pricing.css",
       "50-lumen-section-utilities.css",
+      "51-frontpage-blog.css",
       "41-frontpage-helpers.css"
     ]
   },
@@ -90,6 +91,7 @@
     "label": "Blog posts",
     "output": "blog.css",
     "parts": [
+      "50-blog-archive.css",
       "70-blog.css"
     ]
   },

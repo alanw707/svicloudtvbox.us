@@ -28,6 +28,66 @@ return [
             'primary_label'   => '查看 10P+ vs 10S 比較',
             'secondary_label' => '聯絡禮賓客服',
         ],
+        'index' => [
+            'hero' => [
+                'eyebrow'         => 'SVICLOUD 洞察',
+                'title'           => '安裝教學、機型比較與客服最新消息',
+                'lead'            => '每週更新中英雙語內容，分享硬體重點、串流秘訣以及美國保固提醒。',
+                'primary_label'   => '查看比較表',
+                'secondary_label' => '聯絡禮賓客服',
+            ],
+            'highlights' => [
+                'cadence' => [
+                    'label' => '固定更新節奏',
+                    'copy'  => '每週 2 篇新文章，加上雙週產業快訊整理。',
+                ],
+                'categories' => [
+                    'label' => '重點主題',
+                    'copy'  => '安裝教學、合法收看指南、產品發表與疑難排解。',
+                ],
+                'support' => [
+                    'label' => '中英雙語覆蓋',
+                    'copy'  => '每篇文章同步提供 English 與 中文版本，並附上在地化截圖。',
+                ],
+            ],
+            'list_label'   => '最新文章',
+            'empty_title'  => '部落格建置中',
+            'empty_copy'   => '核心文章正在準備上線，敬請期待最新的安裝教學與比較懶人包。',
+            'empty_cta'    => '返回首頁',
+            'pagination'   => [
+                'label'    => 'Blog 分頁',
+                'previous' => '較新的文章',
+                'next'     => '較舊的文章',
+            ],
+        ],
+        'card' => [
+            'updated' => '更新於 {{date}}',
+            'fallback_alt' => 'SVICLOUD 部落格示意圖：{{title}}',
+        ],
+        'categories' => [
+            'comparisons' => '比較文章',
+            'buying-checklist' => '選購清單',
+        ],
+        'posts' => [
+            'svicloud-10p-plus-usa-launch-playbook' => [
+                'title' => '小雲電視盒 10P+ 美國上市攻略',
+            ],
+            'svicloud-10p-plus-usa-launch-playbook-zh' => [
+                'title' => '小雲電視盒 10P+ 美國上市攻略',
+            ],
+            'svicloud-10p-plus-vs-unblocktech-ubox-12' => [
+                'title' => '小雲電視盒 10P+ vs 安博 UBOX 12 功能對比',
+            ],
+            'svicloud-10p-plus-vs-evpad-10-pro' => [
+                'title' => '小雲電視盒 10P+ vs EVPAD 10 Pro 功能對比',
+            ],
+            'svicloud-tv-box-us-guide' => [
+                'title' => '小雲電視盒美國選購清單',
+            ],
+            'svicloud-tv-box-us-guide-zh' => [
+                'title' => '小雲電視盒美國選購清單',
+            ],
+        ],
     ],
 
     'support' => [
@@ -508,6 +568,7 @@ return [
             'compare'  => '比較機型',
             'compare_evpad'  => '小雲電視盒 10P+ vs EVPAD 10 Pro',
             'compare_ubox12' => '小雲電視盒 10P+ vs 安博電視盒 12 代',
+            'blog'     => '部落格',
             'shop'     => '選購',
             'faq'      => '常見問題',
             'ten_p'    => '小雲電視盒 10P+ 旗艦款',
@@ -667,6 +728,13 @@ return [
                 'kids'       => '兒童安全帳號與觀看時間設定',
             ],
             'cta' => '聯絡專家',
+        ],
+        'blog' => [
+            'badge'     => '最新部落格文章',
+            'title'     => '最新教學、機型比較與禮賓提醒',
+            'lead'      => '每週推出英文與中文內容，分享安裝步驟、硬體解析與合法收看資訊，掌握小雲最新消息。',
+            'read_more' => '閱讀文章',
+            'cta_label' => '瀏覽部落格',
         ],
         'faq' => [
             'badge' => '常見問題',

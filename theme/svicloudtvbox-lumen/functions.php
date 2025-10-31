@@ -1594,6 +1594,7 @@ add_filter('wp_nav_menu_objects', function ($items, $args) {
     $menu_key_map = [
         'home'                 => 'header.nav.home',
         'compare'              => 'header.nav.compare',
+        'blog'                 => 'header.nav.blog',
         'shop'                 => 'header.nav.shop',
         'store'                => 'header.nav.shop',
         'faq'                  => 'header.nav.faq',
@@ -1839,7 +1840,9 @@ add_action('wp_enqueue_scripts', function () {
     $is_support_page = is_page_template('page-support.php') || is_page('support');
     $is_faq_page = is_page_template('page-faq.php') || is_page('faq');
     $is_compare_page = is_page_template('page-compare.php') || is_page('compare');
-    $is_blog_post = is_singular('post');
+    $is_blog_post    = is_singular('post');
+    $is_blog_listing = is_home() || is_post_type_archive('post') || is_category() || is_tag() || is_author() || is_date();
+    $is_blog_context = $is_blog_post || $is_blog_listing;
 
     // WooCommerce bundle
     $is_woo_request = false;
@@ -1890,7 +1893,7 @@ add_action('wp_enqueue_scripts', function () {
         ],
         'svicloudtvbox-blog' => [
             'key'       => 'blog',
-            'condition' => $is_blog_post,
+            'condition' => $is_blog_context,
             'deps'      => ['svicloudtvbox-style'],
         ],
         'svicloudtvbox-faq' => [

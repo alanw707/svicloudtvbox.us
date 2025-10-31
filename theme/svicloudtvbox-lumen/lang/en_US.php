@@ -72,6 +72,66 @@ return [
             'primary_label'   => 'Compare 10P+ vs 10S',
             'secondary_label' => 'Talk to Concierge',
         ],
+        'index' => [
+            'hero' => [
+                'eyebrow'         => 'SVICLOUD Insights',
+                'title'           => 'Guides, comparisons, and concierge updates',
+                'lead'            => 'Stay current with bilingual setup walkthroughs, hardware deep dives, and US warranty tips from the SVICLOUD concierge team.',
+                'primary_label'   => 'View Compare Table',
+                'secondary_label' => 'Chat with Concierge',
+            ],
+            'highlights' => [
+                'cadence' => [
+                    'label' => 'Reliable cadence',
+                    'copy'  => 'Two new posts every week plus a bi-weekly industry roundup.',
+                ],
+                'categories' => [
+                    'label' => 'Core topics',
+                    'copy'  => 'Setup guides, IPTV compliance, product launches, and troubleshooting playbooks.',
+                ],
+                'support' => [
+                    'label' => 'Bilingual coverage',
+                    'copy'  => 'Every article ships in English and 中文 with localized screenshots and tips.',
+                ],
+            ],
+            'list_label'   => 'Latest posts',
+            'empty_title'  => 'Blog launch in progress',
+            'empty_copy'   => 'Our editorial team is finalizing cornerstone articles. Check back soon for fresh setup guides and comparisons.',
+            'empty_cta'    => 'Return to homepage',
+            'pagination'   => [
+                'label'    => 'Blog pagination',
+                'previous' => 'Newer posts',
+                'next'     => 'Older posts',
+            ],
+        ],
+        'card' => [
+            'updated' => 'Updated {{date}}',
+            'fallback_alt' => 'SVICLOUD blog illustration for {{title}}',
+        ],
+        'categories' => [
+            'comparisons' => 'Comparisons',
+            'buying-checklist' => 'Buying Checklist',
+        ],
+        'posts' => [
+            'svicloud-10p-plus-usa-launch-playbook' => [
+                'title' => 'SVICLOUD 10P+ USA Launch Playbook — 10P+ USA Promotion',
+            ],
+            'svicloud-10p-plus-usa-launch-playbook-zh' => [
+                'title' => 'SVICLOUD 10P+ USA Launch Playbook — 10P+ USA Promotion',
+            ],
+            'svicloud-10p-plus-vs-unblocktech-ubox-12' => [
+                'title' => 'SVICLOUD 10P Plus vs UBOX 12 — Feature Comparison for 2025',
+            ],
+            'svicloud-10p-plus-vs-evpad-10-pro' => [
+                'title' => 'SVICLOUD 10P Plus vs EVPAD 10 Pro — Feature Comparison',
+            ],
+            'svicloud-tv-box-us-guide' => [
+                'title' => 'SVICLOUD TV Box US Guide — US Buying Checklist',
+            ],
+            'svicloud-tv-box-us-guide-zh' => [
+                'title' => 'SVICLOUD TV Box US Guide — US Buying Checklist',
+            ],
+        ],
     ],
     'return_policy' => [
         'hero' => [
@@ -507,6 +567,7 @@ return [
             'compare'  => 'Compare',
             'compare_evpad'  => 'SVICLOUD 10P+ vs EVPAD 10 Pro',
             'compare_ubox12' => 'SVICLOUD 10P+ vs UBOX 12',
+            'blog'     => 'Blog',
             'shop'     => 'Shop',
             'faq'      => 'FAQ',
             'ten_p'    => 'SVICLOUD 10P+',
@@ -666,6 +727,13 @@ return [
                 'kids'       => 'Kid-safe profiles & timers',
             ],
             'cta' => 'Talk to an expert',
+        ],
+        'blog' => [
+            'badge'      => 'From the SVICLOUD Blog',
+            'title'      => 'Latest guides, comparisons, and concierge tips',
+            'lead'       => 'Weekly bilingual posts covering setup walkthroughs, hardware deep dives, and IPTV compliance news curated by our concierge team.',
+            'read_more'  => 'Read article',
+            'cta_label'  => 'Visit the blog',
         ],
         'faq' => [
             'badge' => 'FAQ',

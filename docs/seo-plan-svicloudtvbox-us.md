@@ -84,9 +84,22 @@ Conversion Enhancements
 
 ## Content Strategy (Weeks 3–12)
 
+Blog Architecture & Operations (Weeks 3–6)
+- Stand up the `/blog/` archive using the native posts index or a dedicated `page-blog.php`; wire primary navigation, breadcrumbs, and footer sitemap to expose the hub.
+- Add a reusable blog card partial on the homepage (latest 3 posts) to drive crawl depth and cross-linking from `front-page.php`.
+- Create `theme/svicloudtvbox-lumen/assets/css/parts/50-blog.css`, register it in `bundles.json`, rebuild via `python3 scripts/build_css.py --theme svicloudtvbox-lumen`, and sync to Docker (`./scripts/sync_theme_container.sh`).
+- Document authoring workflow in Notion/Trello: outline briefs, copy deck, localized screenshots, QA checklist, and LiteSpeed cache purge after publish.
+- Seed the archive with four cornerstone posts (2 EN + 2 zh) before promoting the blog to avoid an empty index state.
+
+Publishing Cadence & Calendar
+- Baseline cadence: two posts per week (one 1,500+ word pillar, one 800–1,000 word supporting/how-to) alternating between EN and zh to keep hreflang parity.
+- Layer in a 400–600 word industry/news roundup every other week to capture timely queries and internal link to evergreen pieces.
+- Refresh top-performing pillars quarterly: update specs, pricing, and screenshots; retest keywords in GSC to prevent cannibalization.
+- Maintain an editorial calendar tracking keyword targets, owners, status, publish dates, and required product/UX stakeholders for review.
+
 Content Hubs & Topics
 - Hub: “Chinese TV Boxes in the USA – Buyer’s Guide”.
-- Clusters (publish 2–3 per week):
+- Clusters (align to 2 posts/week cadence outlined above):
   1) “SVICLOUD 10P+ vs 9P: What changed in performance, AV1, Wi‑Fi 6?”
   2) “How to set up SVICLOUD on any TV (step-by-step, images)”
   3) “Best Chinese TV box for seniors: Remote, voice search, support options”
@@ -101,7 +114,7 @@ Content Hubs & Topics
   12) “Parental controls & safe kids content on SVICLOUD”
 
 Editorial
-- Each article: 900–1,600 words; include 2–3 internal links to products/categories; 1–2 FAQ schema items; original images/screenshots.
+- Pillar posts: 1,500–1,800 words; supporting/how-to posts: 800–1,000 words; include 2–3 internal links to products/categories; 1–2 FAQ schema items; original images/screenshots.
 - Publish in EN and zh with localized screenshots and examples.
 
 ## Authority & Off-Page (Weeks 4–12)

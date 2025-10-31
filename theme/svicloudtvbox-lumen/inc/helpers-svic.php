@@ -254,6 +254,212 @@ if (!function_exists('svic_translate_rich')) {
     }
 }
 
+if (!function_exists('svic_estimated_read_time')) {
+    function svic_estimated_read_time(int $post_id, int $words_per_minute = 220): int {
+        $content = get_post_field('post_content', $post_id);
+        if (!is_string($content) || $content === '') {
+            return 1;
+        }
+
+        $sanitized   = wp_strip_all_tags($content, true);
+        $word_count  = str_word_count($sanitized);
+        $wpm_sanitized = max(1, $words_per_minute);
+
+        $minutes = (int) ceil($word_count / $wpm_sanitized);
+
+        return $minutes > 0 ? $minutes : 1;
+    }
+}
+
+if (!function_exists('svic_post_card_image')) {
+    function svic_post_card_image(int $post_id, string $size = 'large', array $attr = []): string {
+        if ($post_id <= 0) {
+            return '';
+        }
+
+        $attr = is_array($attr) ? $attr : [];
+
+        $html = get_the_post_thumbnail($post_id, $size, $attr);
+        if (is_string($html) && $html !== '') {
+            return $html;
+        }
+
+        $content = get_post_field('post_content', $post_id);
+        if (is_string($content) && $content !== '') {
+            if (preg_match('/<img[^>]+src=["\"]([^"\"]+)["\"][^>]*>/i', $content, $image_match)) {
+                $img_html = $image_match[0];
+                $src      = $image_match[1] ?? '';
+                if ($src !== '') {
+                    $alt = '';
+                    if (preg_match('/alt=["\"](.*?)["\"]/i', $img_html, $alt_match)) {
+                        $alt = $alt_match[1] ?? '';
+                    }
+
+                    $attributes = svic_prepare_image_attributes($attr, [
+                        'src'     => esc_url($src),
+                        'alt'     => $alt !== '' ? $alt : get_the_title($post_id),
+                    ]);
+
+                    return '<img ' . $attributes . ' />';
+                }
+            }
+        }
+
+        $fallback_relative = apply_filters('svic_blog_fallback_image', '/assets/images/svicloud-10p-plus-lifestyle-1.png', $post_id, $size, $attr);
+        $meta = function_exists('svic_get_theme_image_meta') ? svic_get_theme_image_meta($fallback_relative) : [
+            'url' => get_template_directory_uri() . '/' . ltrim((string) $fallback_relative, '/'),
+            'width' => null,
+            'height' => null,
+        ];
+
+        if (empty($meta['url'])) {
+            return '';
+        }
+
+        $fallback_alt = svic_translate('blog.card.fallback_alt', ['title' => get_the_title($post_id)]);
+        if (!is_string($fallback_alt) || trim($fallback_alt) === '' || trim($fallback_alt) === 'fallback_alt') {
+            $fallback_alt = get_the_title($post_id);
+        }
+
+        $attr_defaults = [
+            'src'     => esc_url($meta['url']),
+            'alt'     => $fallback_alt,
+        ];
+
+        if (!empty($meta['width'])) {
+            $attr_defaults['width'] = (string) (int) $meta['width'];
+        }
+        if (!empty($meta['height'])) {
+            $attr_defaults['height'] = (string) (int) $meta['height'];
+        }
+
+        $attributes = svic_prepare_image_attributes($attr, $attr_defaults);
+
+        return '<img ' . $attributes . ' />';
+    }
+}
+
+if (!function_exists('svic_prepare_image_attributes')) {
+    function svic_prepare_image_attributes(array $attr, array $overrides = []): string {
+        $final = array_merge(
+            [
+                'loading'  => 'lazy',
+                'decoding' => 'async',
+            ],
+            $attr,
+            $overrides
+        );
+
+        if (isset($attr['class']) && isset($overrides['class'])) {
+            $final['class'] = trim($attr['class'] . ' ' . $overrides['class']);
+        }
+
+        $compiled = [];
+        foreach ($final as $key => $value) {
+            if ($value === null) {
+                continue;
+            }
+            if ($key === 'class') {
+                $value = trim((string) $value);
+                if ($value === '') {
+                    continue;
+                }
+            }
+            $compiled[] = sprintf('%s="%s"', esc_attr($key), esc_attr((string) $value));
+        }
+
+        return implode(' ', $compiled);
+    }
+}
+
+if (!function_exists('svic_category_label')) {
+    function svic_category_label($term): string {
+        if (!($term instanceof WP_Term)) {
+            return '';
+        }
+
+        $label = trim((string) $term->name);
+        $slug  = sanitize_title($term->slug ?: $label);
+
+        if ($slug !== '') {
+            $translation = trim(svic_translate('blog.categories.' . $slug));
+
+            if ($translation !== '' && strcasecmp($translation, $slug) !== 0) {
+                $label = $translation;
+            } elseif ($label === '' || strcasecmp($label, $slug) === 0) {
+                $label = ucwords(str_replace(['-', '_'], ' ', $slug));
+            }
+        }
+
+        return $label !== '' ? $label : $term->name;
+    }
+}
+
+if (!function_exists('svic_post_title')) {
+    function svic_post_title(int $post_id): string {
+        $post = get_post($post_id);
+        if (!$post instanceof WP_Post) {
+            return '';
+        }
+
+        $title = get_the_title($post_id);
+
+        $slug_candidates = [];
+        $current_slug = sanitize_title($post->post_name ?: $post->post_title ?: '');
+        if ($current_slug !== '') {
+            $slug_candidates[] = $current_slug;
+        }
+
+        if (function_exists('pll_default_language') && function_exists('pll_get_post')) {
+            $default_lang = pll_default_language('slug');
+            if (is_string($default_lang) && $default_lang !== '') {
+                $default_post_id = pll_get_post($post_id, $default_lang);
+                if ($default_post_id && (int) $default_post_id !== $post_id) {
+                    $default_post = get_post($default_post_id);
+                    if ($default_post instanceof WP_Post) {
+                        $default_slug = sanitize_title($default_post->post_name ?: $default_post->post_title ?: '');
+                        if ($default_slug !== '') {
+                            $slug_candidates[] = $default_slug;
+                        }
+                    }
+                }
+            }
+        }
+
+        $slug_candidates = array_values(array_unique(array_filter($slug_candidates)));
+
+        foreach ($slug_candidates as $slug) {
+            $translation_key = 'blog.posts.' . $slug . '.title';
+            $translation = svic_translate($translation_key);
+            if (!is_string($translation)) {
+                continue;
+            }
+            $translation = trim($translation);
+            if ($translation === '' || strcasecmp($translation, 'title') === 0 || $translation === $translation_key) {
+                continue;
+            }
+
+            $title = $translation;
+            break;
+        }
+
+        $locale = function_exists('svic_current_locale') ? svic_current_locale() : get_locale();
+        if (is_string($locale) && stripos($locale, 'zh') !== false) {
+            if (strpos($title, '—') !== false) {
+                $parts = preg_split('/\s*—\s*/u', $title);
+                if (is_array($parts) && $parts) {
+                    $candidate = trim((string) end($parts));
+                    if ($candidate !== '') {
+                        $title = $candidate;
+                    }
+                }
+            }
+        }
+
+        return $title;
+    }
+}
+
 if (!function_exists('svic_text_domain')) {
     function svic_text_domain(): string {
         if (defined('SVIC_THEME_TEXT_DOMAIN')) {

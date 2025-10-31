@@ -329,6 +329,57 @@ foreach ($pricing_cards as $slug => $card) {
         ],
     ];
 }
+
+$blog_page_id = (int) get_option('page_for_posts');
+$blog_archive_url = $blog_page_id ? svic_url_with_lang(get_permalink($blog_page_id)) : svic_url_with_lang(home_url('/blog/'));
+$blog_posts_query = null;
+$current_lang_slug = null;
+if (function_exists('pll_current_language')) {
+    $current_lang_slug = pll_current_language('slug');
+} else {
+    $current_lang_slug = svic_language_query_value();
+}
+
+$sticky_ids = array_filter(array_map('intval', (array) get_option('sticky_posts')));
+if ($sticky_ids) {
+    $sticky_ids_localized = [];
+    foreach ($sticky_ids as $post_id_candidate) {
+        if (get_post_status($post_id_candidate) !== 'publish') {
+            continue;
+        }
+
+        if ($current_lang_slug && function_exists('pll_get_post_language')) {
+            $post_lang = pll_get_post_language($post_id_candidate, 'slug');
+            if (is_string($post_lang) && $post_lang !== '' && $post_lang !== $current_lang_slug) {
+                continue;
+            }
+        }
+
+        $sticky_ids_localized[] = $post_id_candidate;
+    }
+
+    if ($sticky_ids_localized) {
+        $blog_posts_query = new WP_Query([
+            'post_type'           => 'post',
+            'post__in'            => $sticky_ids_localized,
+            'orderby'             => 'post__in',
+            'posts_per_page'      => 3,
+            'post_status'         => 'publish',
+            'ignore_sticky_posts' => false,
+            'no_found_rows'       => true,
+        ]);
+    }
+}
+
+if (!$blog_posts_query instanceof WP_Query) {
+    $blog_posts_query = new WP_Query([
+        'post_type'           => 'post',
+        'posts_per_page'      => 3,
+        'post_status'         => 'publish',
+        'ignore_sticky_posts' => true,
+        'no_found_rows'       => true,
+    ]);
+}
 ?>
 <main class="main-content">
   <!-- Hero Section -->
@@ -496,6 +547,71 @@ foreach ($pricing_cards as $slug => $card) {
       </aside>
     </div>
   </section>
+
+  <?php if ($blog_posts_query->have_posts()) : ?>
+    <section class="frontpage-blog" id="blog-insights">
+      <header class="lumen-section-header frontpage-blog__header">
+        <span class="lumen-section-header__badge"><?php echo svic_translate_html('frontpage.blog.badge'); ?></span>
+        <h2 class="lumen-section-header__title"><?php echo svic_translate_html('frontpage.blog.title'); ?></h2>
+        <p class="lumen-section-header__subtitle"><?php echo svic_translate_html('frontpage.blog.lead'); ?></p>
+      </header>
+      <div class="frontpage-blog__cards">
+        <?php while ($blog_posts_query->have_posts()) : $blog_posts_query->the_post();
+          $post_id        = get_the_ID();
+          $permalink      = svic_url_with_lang(get_permalink());
+          $categories     = get_the_category($post_id);
+          $primary_cat    = $categories ? $categories[0] : null;
+          $reading_time   = svic_estimated_read_time($post_id);
+          $reading_label  = sprintf(
+              /* translators: %d: estimated reading time in minutes */
+              esc_html__('%d min read', 'svicloudtvbox-lumen'),
+              $reading_time
+          );
+          $published_attr    = get_the_date(DATE_W3C, $post_id);
+          $published_display = get_the_date('', $post_id);
+          $raw_excerpt       = get_the_excerpt($post_id);
+          $excerpt           = wp_trim_words(wp_strip_all_tags((string) $raw_excerpt), 26, '…');
+          $thumbnail_html    = svic_post_card_image(
+              $post_id,
+              'medium_large',
+              [
+                  'class' => 'frontpage-blog__image',
+              ]
+          );
+          ?>
+          <article class="frontpage-blog__card">
+            <a class="frontpage-blog__link" href="<?php echo esc_url($permalink); ?>">
+              <div class="frontpage-blog__media">
+                <?php if ($thumbnail_html) : ?>
+                  <?php echo $thumbnail_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                <?php else : ?>
+                  <div class="frontpage-blog__media-placeholder" aria-hidden="true"></div>
+                <?php endif; ?>
+              </div>
+              <div class="frontpage-blog__content">
+                <div class="frontpage-blog__meta">
+                  <?php if ($primary_cat instanceof WP_Term) : ?>
+                    <span class="frontpage-blog__chip"><?php echo esc_html(svic_category_label($primary_cat)); ?></span>
+                  <?php endif; ?>
+                  <time datetime="<?php echo esc_attr($published_attr); ?>" class="frontpage-blog__time"><?php echo esc_html($published_display); ?></time>
+                  <span class="frontpage-blog__readtime"><?php echo esc_html($reading_label); ?></span>
+                </div>
+                <h3 class="frontpage-blog__card-title"><?php echo esc_html(svic_post_title($post_id)); ?></h3>
+                <?php if ($excerpt !== '') : ?>
+                  <p class="frontpage-blog__card-excerpt"><?php echo esc_html($excerpt); ?></p>
+                <?php endif; ?>
+                <span class="frontpage-blog__more"><?php echo svic_translate_html('frontpage.blog.read_more'); ?></span>
+              </div>
+            </a>
+          </article>
+        <?php endwhile; ?>
+      </div>
+      <div class="frontpage-blog__actions">
+        <a class="btn btn-outline" href="<?php echo esc_url($blog_archive_url); ?>"><?php echo svic_translate_html('frontpage.blog.cta_label'); ?></a>
+      </div>
+    </section>
+  <?php endif; ?>
+  <?php wp_reset_postdata(); ?>
 
   <!-- FAQ Section -->
   <section class="lumen-faq" id="faq">
