@@ -1669,6 +1669,121 @@ add_filter('wp_nav_menu_objects', function ($items, $args) {
     return $items;
 }, 20, 2);
 
+/**
+ * Automatically append the latest blog posts as children under the Blog nav item.
+ *
+ * This keeps the "Blog" submenu fresh without requiring manual menu edits every time
+ * a new article is published. It only affects the primary menu and respects the
+ * current locale when choosing link URLs and titles.
+ */
+add_filter('wp_nav_menu_objects', function ($items, $args) {
+    if (!is_array($items) || !$items) {
+        return $items;
+    }
+
+    if (($args->theme_location ?? '') !== 'primary') {
+        return $items;
+    }
+
+    $blog_page_id = (int) get_option('page_for_posts');
+    if ($blog_page_id <= 0) {
+        return $items;
+    }
+
+    $blog_menu_item_id = 0;
+    foreach ($items as $item) {
+        if (!($item instanceof WP_Post)) {
+            continue;
+        }
+        if ((int) ($item->object_id ?? 0) === $blog_page_id && ($item->object ?? '') === 'page') {
+            $blog_menu_item_id = (int) $item->ID;
+            break;
+        }
+    }
+
+    if ($blog_menu_item_id <= 0) {
+        return $items;
+    }
+
+    // Remove any dynamic entries we appended previously to avoid duplication.
+    $items = array_values(array_filter($items, static function ($item) {
+        return empty($item->svic_dynamic_blog_item);
+    }));
+
+    $recent_posts = get_posts([
+        'post_type'      => 'post',
+        'post_status'    => 'publish',
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'posts_per_page' => 5,
+        'no_found_rows'  => true,
+        'suppress_filters' => false,
+    ]);
+
+    if (!$recent_posts) {
+        return $items;
+    }
+
+    $locale = function_exists('svic_current_locale')
+        ? strtolower((string) svic_current_locale())
+        : '';
+
+    $max_menu_order = 0;
+    foreach ($items as $item) {
+        if (!empty($item->menu_order) && (int) $item->menu_order > $max_menu_order) {
+            $max_menu_order = (int) $item->menu_order;
+        }
+    }
+
+    foreach ($recent_posts as $index => $post) {
+        $title = get_the_title($post);
+        if (strpos($locale, 'zh') === 0) {
+            $translated = get_post_meta($post->ID, '_svic_title_zh_tw', true);
+            if (is_string($translated) && $translated !== '') {
+                $title = $translated;
+            }
+        }
+
+        $url = get_permalink($post);
+        if (function_exists('svic_url_with_lang')) {
+            $url = svic_url_with_lang($url);
+        }
+
+        $nav_object = (object) [
+            'ID'               => 0,
+            'db_id'            => 0,
+            'post_type'        => 'nav_menu_item',
+            'menu_item_parent' => $blog_menu_item_id,
+            'object_id'        => (string) $post->ID,
+            'object'           => 'post',
+            'type'             => 'post_type',
+            'type_label'       => __('Post'),
+            'title'            => $title,
+            'url'              => $url,
+            'target'           => '',
+            'attr_title'       => '',
+            'description'      => '',
+            'xfn'              => '',
+            'status'           => 'publish',
+            'classes'          => [
+                'menu-item',
+                'menu-item-type-post',
+                'menu-item-object-post',
+                'menu-item-svic-dynamic',
+            ],
+        ];
+
+        $nav_item = wp_setup_nav_menu_item($nav_object);
+        $nav_item->menu_item_parent = $blog_menu_item_id;
+        $nav_item->menu_order = $max_menu_order + $index + 1;
+        $nav_item->svic_dynamic_blog_item = true;
+
+        $items[] = $nav_item;
+    }
+
+    return $items;
+}, 30, 2);
+
 add_filter('nav_menu_link_attributes', function ($atts, $item, $args, $depth) {
     if (is_admin()) {
         return $atts;
