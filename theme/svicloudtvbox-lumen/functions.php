@@ -1691,12 +1691,14 @@ add_filter('wp_nav_menu_objects', function ($items, $args) {
     }
 
     $blog_menu_item_id = 0;
+    $blog_menu_item    = null;
     foreach ($items as $item) {
         if (!($item instanceof WP_Post)) {
             continue;
         }
         if ((int) ($item->object_id ?? 0) === $blog_page_id && ($item->object ?? '') === 'page') {
             $blog_menu_item_id = (int) $item->ID;
+            $blog_menu_item    = $item;
             break;
         }
     }
@@ -1735,6 +1737,15 @@ add_filter('wp_nav_menu_objects', function ($items, $args) {
         }
     }
 
+    if ($blog_menu_item instanceof WP_Post) {
+        if (!is_array($blog_menu_item->classes)) {
+            $blog_menu_item->classes = [];
+        }
+        if (!in_array('menu-item-has-children', $blog_menu_item->classes, true)) {
+            $blog_menu_item->classes[] = 'menu-item-has-children';
+        }
+    }
+
     foreach ($recent_posts as $index => $post) {
         $title = get_the_title($post);
         if (strpos($locale, 'zh') === 0) {
@@ -1759,6 +1770,8 @@ add_filter('wp_nav_menu_objects', function ($items, $args) {
             'type'             => 'post_type',
             'type_label'       => __('Post'),
             'title'            => $title,
+            'post_title'       => $title,
+            'post_name'        => sanitize_title($title),
             'url'              => $url,
             'target'           => '',
             'attr_title'       => '',
