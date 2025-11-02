@@ -181,6 +181,26 @@ final class SVIC_Locale_Resolver
             }
         }
 
+        $staticSitemapPath = self::staticSitemapPath($relativePath);
+        if ($staticSitemapPath !== null) {
+            self::$sanitizedRequestPath = $staticSitemapPath;
+            self::$pathLocale = SVIC_Translator::normalizeLocaleCode(self::PRIMARY_LOCALE);
+
+            $updatedPath = $staticSitemapPath;
+            if ($homePath !== '' && $homePath !== '/') {
+                $updatedPath = rtrim($homePath, '/') . ($staticSitemapPath === '/' ? '/' : $staticSitemapPath);
+            }
+
+            $query = isset($parsed['query']) && $parsed['query'] !== '' ? '?' . $parsed['query'] : '';
+
+            $_SERVER['REQUEST_URI'] = $updatedPath . $query;
+            if (isset($_SERVER['PATH_INFO'])) {
+                $_SERVER['PATH_INFO'] = $updatedPath;
+            }
+
+            return;
+        }
+
         $isLanguageRoute = false;
         $sanitized = $relativePath;
 
@@ -236,6 +256,34 @@ final class SVIC_Locale_Resolver
         }
 
         return $path === '' ? '/' : $path;
+    }
+
+    private static function staticSitemapPath(string $path): ?string
+    {
+        if ($path === '' || $path === '/') {
+            return null;
+        }
+
+        $trimmed = ltrim($path, '/');
+        if ($trimmed === '') {
+            return null;
+        }
+
+        $lower = strtolower($trimmed);
+
+        if (strpos($lower, 'zh/') === 0) {
+            $trimmed = substr($trimmed, 3) ?: '';
+            $lower = substr($lower, 3) ?: '';
+            if ($trimmed === '' || $lower === '') {
+                return null;
+            }
+        }
+
+        if ($lower === 'sitemap_index.xml' || $lower === 'wp-sitemap.xml' || preg_match('/^[a-z0-9_-]+-sitemap(\d+)?\.xml$/', $lower)) {
+            return self::normalizePath('/' . ltrim($trimmed, '/'));
+        }
+
+        return null;
     }
 
     private static function locale_from_query(): ?string

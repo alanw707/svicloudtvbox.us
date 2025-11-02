@@ -2817,3 +2817,78 @@ function svic_replace_inline_code_placeholders(string $html, int $post_id): stri
 
     return $html;
 }
+
+if (!function_exists('svic_get_theme_deploy_marker')) {
+    /**
+     * Returns a lightweight marker that updates whenever we deploy the theme.
+     */
+    function svic_get_theme_deploy_marker(): string
+    {
+        $theme_dir = get_template_directory();
+        $deploy_file = $theme_dir . '/.deploy-version';
+        if (file_exists($deploy_file)) {
+            $raw = trim((string) @file_get_contents($deploy_file));
+            if ($raw !== '') {
+                return $raw;
+            }
+        }
+
+        if (function_exists('wp_get_theme')) {
+            $theme = wp_get_theme();
+            if ($theme && $theme->exists()) {
+                $version = (string) $theme->get('Version');
+                if ($version !== '') {
+                    return $version;
+                }
+            }
+        }
+
+        $stylesheet_dir = function_exists('get_stylesheet_directory') ? get_stylesheet_directory() : $theme_dir;
+        $mtime = is_string($stylesheet_dir) && $stylesheet_dir !== '' ? @filemtime($stylesheet_dir) : false;
+        if (is_int($mtime) && $mtime > 0) {
+            return (string) $mtime;
+        }
+
+        return (string) time();
+    }
+}
+
+if (!function_exists('svic_flush_rewrites_once_for_sitemaps')) {
+    /**
+     * Flush rewrite rules one time per deployment so sitemap routes stay intact.
+     */
+    function svic_flush_rewrites_once_for_sitemaps(): void
+    {
+        if (is_admin() || defined('REST_REQUEST') || (defined('WP_CLI') && WP_CLI)) {
+            return;
+        }
+
+        $marker = svic_get_theme_deploy_marker();
+
+        $stored = get_option('svic_rank_math_sitemap_rewrite_flushed');
+        $stored_marker = '';
+
+        if (is_array($stored)) {
+            $stored_marker = isset($stored['marker']) ? (string) $stored['marker'] : '';
+        } elseif (is_string($stored) && $stored !== '') {
+            $stored_marker = $stored;
+        } elseif (is_numeric($stored)) {
+            $stored_marker = (string) $stored;
+        }
+
+        if ($stored_marker === $marker) {
+            return;
+        }
+
+        flush_rewrite_rules(false);
+
+        $payload = [
+            'marker'     => $marker,
+            'flushed_at' => time(),
+        ];
+
+        update_option('svic_rank_math_sitemap_rewrite_flushed', $payload, false);
+    }
+
+    add_action('init', 'svic_flush_rewrites_once_for_sitemaps', 21);
+}
