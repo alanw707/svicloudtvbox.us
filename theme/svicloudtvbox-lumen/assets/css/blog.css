@@ -92,6 +92,9 @@ html[lang*="zh"] .blog-article__content strong{font-weight:600}
 .blog-article__content th,.blog-article__content td{padding:var(--size-300) var(--size-400);text-align:left;vertical-align:top;color:var(--color-text-secondary)}
 .blog-article__content tbody tr:nth-child(odd){background:rgba(10,24,48,0.65)}
 .blog-article__content img,.blog-article__content figure{width:100%;border-radius:var(--radius-400);box-shadow:var(--shadow-sm)}
+.blog-article__featured{margin:var(--size-500) 0}
+.blog-article__featured-image{display:block;width:100%;height:auto}
+.blog-article__featured-caption{margin-top:var(--size-200);font-size:0.95rem;text-align:center;color:var(--color-text-muted)}
 .blog-article__content a{color:var(--link-primary);text-decoration:underline;text-decoration-color:var(--link-primary-underline);text-decoration-thickness:2px;text-underline-offset:4px;transition:color var(--transition-normal),text-decoration-color var(--transition-normal)}
 .blog-article__content a:hover,.blog-article__content a:focus-visible{color:var(--link-primary-hover);text-decoration-color:var(--link-primary-underline-hover)}
 .blog-article__content strong{color:var(--color-text-primary);font-weight:600}

@@ -43,6 +43,27 @@ $reading_label  = sprintf(
       </header>
 
       <div class="blog-article__content entry-content">
+        <?php if (has_post_thumbnail()) : ?>
+          <figure class="blog-article__featured">
+            <?php
+              echo get_the_post_thumbnail(
+                  $post_id,
+                  'full',
+                  [
+                      'class'   => 'blog-article__featured-image',
+                      'loading' => 'lazy',
+                  ]
+              ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+              $featured_caption = wp_get_attachment_caption(get_post_thumbnail_id($post_id));
+            ?>
+            <?php if (!empty($featured_caption)) : ?>
+              <figcaption class="blog-article__featured-caption">
+                <?php echo esc_html($featured_caption); ?>
+              </figcaption>
+            <?php endif; ?>
+          </figure>
+        <?php endif; ?>
         <?php the_content(); ?>
       </div>
 

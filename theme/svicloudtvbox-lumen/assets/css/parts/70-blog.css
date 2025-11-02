@@ -345,6 +345,23 @@ html[lang*="zh"] .blog-article__content strong {
   box-shadow: var(--shadow-sm);
 }
 
+.blog-article__featured {
+  margin: var(--size-500) 0;
+}
+
+.blog-article__featured-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.blog-article__featured-caption {
+  margin-top: var(--size-200);
+  font-size: 0.95rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
 .blog-article__content a {
   color: var(--link-primary);
   text-decoration: underline;

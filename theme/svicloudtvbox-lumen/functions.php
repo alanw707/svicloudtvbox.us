@@ -206,19 +206,19 @@ if (!function_exists('svic_homepage_meta_definitions')) {
 
         $definitions = [
             'zh_tw' => [
-                'title'       => '小雲電視盒 美國代理｜小雲盒子10P+ / 10S 授權經銷商',
-                'description' => '小雲電視盒 美國代理提供小雲盒子10P+、10S 現貨，內華達 48 小時出貨，正版保固與中英雙語禮賓服務，協助安裝、換機與售後。',
-                'image_alt'   => '小雲盒子10P+ 美國代理展示圖',
+                'title'       => '小雲電視盒 美國代理｜10P+、10S 官方現貨與保固',
+                'description' => '小雲電視盒 美國代理提供 10P+、10S 官方現貨，內華達倉 48 小時出貨，附一年美國保固與中英雙語禮賓安裝服務，無月費。',
+                'image_alt'   => '小雲電視盒 10P+ 與遙控器，強調中英雙語禮賓服務',
             ],
             'zh_cn' => [
-                'title'       => '小云电视盒 美国代理｜小云盒子10P+ / 10S 授权经销商',
-                'description' => '小云电视盒美国代理提供小云盒子10P+、10S 现货，内华达仓 48 小时发货，原厂保固与中英双语礼宾客服，全程协助安装与售后。',
-                'image_alt'   => '小云盒子10P+ 美国代理产品展示',
+                'title'       => '小云电视盒 美国代理｜10P+、10S 官方现货与保固',
+                'description' => '小云电视盒美国代理提供 10P+、10S 官方现货，内华达仓 48 小时发货，含一年美保与中英双语礼宾安装，无月费。',
+                'image_alt'   => '小云电视盒 10P+ 与遥控器，突显中英双语礼宾服务',
             ],
             'en_us' => [
-                'title'       => 'SVICLOUD TV Box US – 小雲電視盒 美國代理 & 小雲盒子10P+ Dealer',
-                'description' => 'Authorized U.S. distributor for 小雲電視盒 美國代理 with 小雲盒子10P+ and 10S in stock, 48-hour Nevada shipping, bilingual concierge, and authentic warranty support.',
-                'image_alt'   => 'SVICLOUD TV box with remote for 小雲盒子10P+',
+                'title'       => 'SVICLOUD TV Box US | Authorized 小雲電視盒 美國代理',
+                'description' => 'Shop SVICLOUD 10P+ & 10S with 48-hour Nevada shipping, bilingual concierge setup, and 1-year U.S. warranty from the official 小雲電視盒 美國代理—no monthly fees.',
+                'image_alt'   => 'SVICLOUD 10P+ streaming box with bilingual concierge support badge',
             ],
         ];
 
@@ -260,6 +260,137 @@ if (!function_exists('svic_get_homepage_hero_image_meta')) {
     {
         return svic_get_theme_image_meta('/assets/images/hero-voice-assistant.png');
     }
+}
+
+if (!function_exists('svic_get_homepage_meta_for_output')) {
+    /**
+     * Helper that returns sanitized homepage meta strings for SEO integrations.
+     *
+     * @return array{title:string,description:string,image_alt:string}
+     */
+    function svic_get_homepage_meta_for_output(): array
+    {
+        $meta = svic_homepage_meta_definitions();
+
+        $title       = isset($meta['title']) ? trim(wp_strip_all_tags((string) $meta['title'])) : '';
+        $description = isset($meta['description']) ? trim(wp_strip_all_tags((string) $meta['description'])) : '';
+        $image_alt   = isset($meta['image_alt']) ? trim(wp_strip_all_tags((string) $meta['image_alt'])) : '';
+
+        return [
+            'title'       => $title,
+            'description' => $description,
+            'image_alt'   => $image_alt,
+        ];
+    }
+}
+
+if (!function_exists('svic_filter_rank_math_front_page_title')) {
+    function svic_filter_rank_math_front_page_title($title)
+    {
+        if (!function_exists('is_front_page') || !is_front_page()) {
+            return $title;
+        }
+
+        $meta_title = svic_get_homepage_meta_for_output()['title'];
+        return $meta_title !== '' ? $meta_title : $title;
+    }
+
+    add_filter('rank_math/frontend/title', 'svic_filter_rank_math_front_page_title', 20);
+}
+
+if (!function_exists('svic_filter_rank_math_front_page_description')) {
+    function svic_filter_rank_math_front_page_description($description)
+    {
+        if (!function_exists('is_front_page') || !is_front_page()) {
+            return $description;
+        }
+
+        $meta_description = svic_get_homepage_meta_for_output()['description'];
+        return $meta_description !== '' ? $meta_description : $description;
+    }
+
+    add_filter('rank_math/frontend/description', 'svic_filter_rank_math_front_page_description', 20);
+    add_filter('rank_math/frontend/snippet_description', 'svic_filter_rank_math_front_page_description', 20);
+}
+
+if (!function_exists('svic_filter_rank_math_front_page_og_title')) {
+    function svic_filter_rank_math_front_page_og_title($title)
+    {
+        if (!function_exists('is_front_page') || !is_front_page()) {
+            return $title;
+        }
+
+        $meta_title = svic_get_homepage_meta_for_output()['title'];
+        return $meta_title !== '' ? $meta_title : $title;
+    }
+
+    add_filter('rank_math/opengraph/facebook_title', 'svic_filter_rank_math_front_page_og_title', 20);
+    add_filter('rank_math/opengraph/twitter_title', 'svic_filter_rank_math_front_page_og_title', 20);
+}
+
+if (!function_exists('svic_filter_rank_math_front_page_og_description')) {
+    function svic_filter_rank_math_front_page_og_description($description)
+    {
+        if (!function_exists('is_front_page') || !is_front_page()) {
+            return $description;
+        }
+
+        $meta_description = svic_get_homepage_meta_for_output()['description'];
+        return $meta_description !== '' ? $meta_description : $description;
+    }
+
+    add_filter('rank_math/opengraph/facebook_description', 'svic_filter_rank_math_front_page_og_description', 20);
+    add_filter('rank_math/opengraph/twitter_description', 'svic_filter_rank_math_front_page_og_description', 20);
+}
+
+if (!function_exists('svic_filter_rank_math_front_page_og_image')) {
+    function svic_filter_rank_math_front_page_og_image($image)
+    {
+        if (!function_exists('is_front_page') || !is_front_page()) {
+            return $image;
+        }
+
+        $hero_meta = svic_get_homepage_hero_image_meta();
+        if (empty($hero_meta['url'])) {
+            return $image;
+        }
+
+        return $hero_meta['url'];
+    }
+
+    add_filter('rank_math/opengraph/facebook_image', 'svic_filter_rank_math_front_page_og_image', 20);
+    add_filter('rank_math/opengraph/twitter_image', 'svic_filter_rank_math_front_page_og_image', 20);
+}
+
+if (!function_exists('svic_filter_rank_math_front_page_og_image_alt')) {
+    function svic_filter_rank_math_front_page_og_image_alt($alt)
+    {
+        if (!function_exists('is_front_page') || !is_front_page()) {
+            return $alt;
+        }
+
+        $image_alt = svic_get_homepage_meta_for_output()['image_alt'];
+        return $image_alt !== '' ? $image_alt : $alt;
+    }
+
+    add_filter('rank_math/opengraph/facebook_image_alt', 'svic_filter_rank_math_front_page_og_image_alt', 20);
+    add_filter('rank_math/opengraph/twitter_image_alt', 'svic_filter_rank_math_front_page_og_image_alt', 20);
+}
+
+if (!function_exists('svic_disable_rank_math_front_page_schema')) {
+    /**
+     * Force Rank Math to skip its default schema on the static homepage.
+     */
+    function svic_disable_rank_math_front_page_schema($schema, $type, $object_id)
+    {
+        if (function_exists('is_front_page') && is_front_page()) {
+            return 'none';
+        }
+
+        return $schema;
+    }
+
+    add_filter('rank_math/frontend/schema/post_type', 'svic_disable_rank_math_front_page_schema', 20, 3);
 }
 
 if (!function_exists('svic_get_compare_page_meta_definitions')) {
@@ -583,6 +714,14 @@ if (!function_exists('svic_get_organization_schema_enhancements')) {
     {
         $enhancements = [];
 
+        $legal_name = apply_filters('svic_organization_legal_name', '168 Media Group LLC');
+        if (is_string($legal_name)) {
+            $legal_name = trim($legal_name);
+        }
+        if (!empty($legal_name)) {
+            $enhancements['legalName'] = $legal_name;
+        }
+
         $contact_email = svic_support_form_recipient();
         if (is_string($contact_email) && $contact_email !== '') {
             $enhancements['contactPoint'] = [
@@ -633,12 +772,98 @@ if (!function_exists('svic_apply_organization_schema_enhancements')) {
                 continue;
             }
 
+            if ($key === 'legalName') {
+                $schema[$key] = $value;
+                continue;
+            }
+
             if (!isset($schema[$key]) || $schema[$key] === '' || $schema[$key] === null) {
                 $schema[$key] = $value;
             }
         }
 
         return $schema;
+    }
+}
+
+if (!function_exists('svic_adjust_homepage_schema_node')) {
+    function svic_adjust_homepage_schema_node(array $node): array
+    {
+        $meta       = svic_get_homepage_meta_for_output();
+        $image_meta = svic_get_homepage_hero_image_meta();
+
+        $types = [];
+        if (isset($node['@type'])) {
+            $types = is_array($node['@type']) ? array_values($node['@type']) : [$node['@type']];
+        }
+
+        $filtered_types = [];
+        foreach ($types as $type) {
+            $type_string = is_string($type) ? trim($type) : '';
+            if ($type_string === '') {
+                continue;
+            }
+            if (strcasecmp($type_string, 'Article') === 0) {
+                continue;
+            }
+            if (!in_array($type_string, $filtered_types, true)) {
+                $filtered_types[] = $type_string;
+            }
+        }
+
+        $has_webpage_type = false;
+        foreach ($filtered_types as $type) {
+            if (strcasecmp($type, 'WebPage') === 0) {
+                $has_webpage_type = true;
+                break;
+            }
+        }
+        if (!$has_webpage_type) {
+            $filtered_types[] = 'WebPage';
+        }
+
+        $node['@type'] = count($filtered_types) === 1 ? $filtered_types[0] : $filtered_types;
+
+        if ($meta['title'] !== '') {
+            $node['name'] = $meta['title'];
+            $node['headline'] = $meta['title'];
+        }
+
+        if ($meta['description'] !== '') {
+            $node['description'] = $meta['description'];
+        }
+
+        if (function_exists('svic_current_locale') && function_exists('svic_locale_to_hreflang')) {
+            $lang = svic_locale_to_hreflang(svic_current_locale());
+            if ($lang !== '') {
+                $node['inLanguage'] = strtolower(str_replace('_', '-', $lang));
+            }
+        }
+
+        if (!empty($image_meta['url'])) {
+            $image_object = [
+                '@type' => 'ImageObject',
+                'url'   => $image_meta['url'],
+            ];
+
+            if (!empty($image_meta['width'])) {
+                $image_object['width'] = (int) $image_meta['width'];
+            }
+
+            if (!empty($image_meta['height'])) {
+                $image_object['height'] = (int) $image_meta['height'];
+            }
+
+            if ($meta['image_alt'] !== '') {
+                $image_object['caption'] = $meta['image_alt'];
+            }
+
+            $node['image'] = [$image_object];
+            $node['primaryImageOfPage'] = $image_object;
+            $node['thumbnailUrl'] = $image_meta['url'];
+        }
+
+        return $node;
     }
 }
 
@@ -654,6 +879,28 @@ if (!function_exists('svic_filter_rank_math_schema_graph')) {
     {
         if (is_admin() || empty($schema_graph) || !is_array($schema_graph)) {
             return $schema_graph;
+        }
+
+        $is_front_page = function_exists('is_front_page') && is_front_page();
+        $homepage_ids  = [];
+        if ($is_front_page) {
+            $canonical = svic_get_localized_canonical_url();
+            if (!is_string($canonical) || $canonical === '') {
+                $canonical = home_url('/');
+            }
+
+            $site_home = home_url('/');
+
+            $homepage_ids = array_unique([
+                trailingslashit($canonical) . '#webpage',
+                untrailingslashit($canonical) . '#webpage',
+                $canonical,
+                untrailingslashit($canonical),
+                trailingslashit($site_home) . '#webpage',
+                untrailingslashit($site_home) . '#webpage',
+                $site_home,
+                untrailingslashit($site_home),
+            ]);
         }
 
         foreach ($schema_graph as $key => $node) {
@@ -677,6 +924,19 @@ if (!function_exists('svic_filter_rank_math_schema_graph')) {
 
             if ($is_organization) {
                 $schema_graph[$key] = svic_apply_organization_schema_enhancements($node);
+                continue;
+            }
+
+            if ($is_front_page && !empty($homepage_ids)) {
+                $node_id = isset($node['@id']) && is_string($node['@id']) ? $node['@id'] : '';
+                $node_url = isset($node['url']) && is_string($node['url']) ? $node['url'] : '';
+
+                $matches_homepage = ($node_id !== '' && in_array($node_id, $homepage_ids, true))
+                    || ($node_url !== '' && in_array($node_url, $homepage_ids, true));
+
+                if ($matches_homepage) {
+                    $schema_graph[$key] = svic_adjust_homepage_schema_node($node);
+                }
             }
         }
 
