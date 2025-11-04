@@ -193,6 +193,31 @@ if (!function_exists('svic_current_base_url')) {
     }
 }
 
+if (!function_exists('svic_theme_image_relative')) {
+    function svic_theme_image_relative(string $relative_path): string
+    {
+        $relative_path = '/' . ltrim($relative_path, '/');
+        $webp_candidate = preg_replace('/\\.(png|jpe?g)$/i', '.webp', $relative_path);
+
+        if ($webp_candidate && $webp_candidate !== $relative_path) {
+            $webp_path = get_template_directory() . $webp_candidate;
+            if (file_exists($webp_path)) {
+                return $webp_candidate;
+            }
+        }
+
+        return $relative_path;
+    }
+}
+
+if (!function_exists('svic_theme_image_uri')) {
+    function svic_theme_image_uri(string $relative_path): string
+    {
+        $relative = svic_theme_image_relative($relative_path);
+        return get_template_directory_uri() . $relative;
+    }
+}
+
 if (!function_exists('svic_locale_to_hreflang')) {
     function svic_locale_to_hreflang(string $locale): string {
         $locale = trim($locale);
@@ -305,7 +330,7 @@ if (!function_exists('svic_post_card_image')) {
             }
         }
 
-        $fallback_relative = apply_filters('svic_blog_fallback_image', '/assets/images/svicloud-10p-plus-lifestyle-1.png', $post_id, $size, $attr);
+        $fallback_relative = apply_filters('svic_blog_fallback_image', '/assets/images/svicloud-10p-plus-lifestyle-1.webp', $post_id, $size, $attr);
         $meta = function_exists('svic_get_theme_image_meta') ? svic_get_theme_image_meta($fallback_relative) : [
             'url' => get_template_directory_uri() . '/' . ltrim((string) $fallback_relative, '/'),
             'width' => null,
@@ -595,7 +620,7 @@ if (!function_exists('svic_product_primary_image')) {
             );
         }
 
-        return '<img src="' . esc_url(get_template_directory_uri() . '/assets/images/svicloud-hero-product.png') . '" alt="' . esc_attr($product->get_name()) . '" loading="lazy" decoding="async" />';
+        return '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . esc_attr($product->get_name()) . '" loading="lazy" decoding="async" />';
     }
 }
 
@@ -733,7 +758,7 @@ if (!function_exists('svic_render_product_card')) {
         }
 
         if (!$slides) {
-            $slides[] = get_template_directory_uri() . '/assets/images/svicloud-hero-product.png';
+            $slides[] = svic_theme_image_uri('/assets/images/svicloud-hero-product.webp');
         }
 
         $feature_tags = [];

@@ -64,7 +64,7 @@ review:
 2. **連接 HDMI 2.0 以上**：使用附贈線材或 18 Gbps HDMI 線，才能在 4K HDR 電視上發揮最佳畫質。
 3. **優先使用網路線**：能接 Ethernet 時請優先使用；若使用 Wi-Fi，選 5 GHz 頻段並保持與路由器 20 呎內距離。
 4. **選擇語言與地區**：初次設定時選擇「English (United States)」或「繁體中文 (美國)」，節目表與推薦內容才會對應。
-5. **掃描啟用 QR Code**：以 SVICLOUD App 掃描或前往 `svicloud.com/activate` 綁定設備至美國伺服器。
+5. **免手動啟用**：svicloudtvbox.us 出貨的機器已預先綁定美國伺服器，只要連上網路並登入 SVICLOUD 帳號即可使用。
 6. **調整串流設定**：設定 → 播放中維持「智慧路由」開啟，預設畫質設為「Auto」，依據網速動態調整。
 7. **定期更新**：每週檢查系統更新、每月清理快取，保持介面與播放速度。
 
@@ -75,7 +75,7 @@ review:
 - 僅向 **美國官方授權經銷商** 購買，例如 svicloudtvbox.us（內華達出貨、雙語線上客服）。
 - 14 天內完成註冊，啟動 **一年美國硬體保固** 與 90 天遠端禮賓服務。
 - 保存發票與序號，申請換貨或韌體協助時必備。
-- 收藏 [`/zh/support/setup-guide/`](https://svicloudtvbox.us/zh/support/setup-guide/) 教學頁，特別適合從 SVICLOUD 9P 或 UBOX 升級的使用者。
+- 收藏 [`/zh/guides-setup/`](https://svicloudtvbox.us/zh/guides-setup/) 教學頁，特別適合從 SVICLOUD 9P 或 UBOX 升級的使用者。
 
 ## 與其他免月費電視盒的價格比較
 
@@ -110,4 +110,4 @@ review:
 
 ## 準備好開箱了嗎？
 
-到 [`/zh/compare/`](https://svicloudtvbox.us/zh/compare/) 查看規格，並在 [`/zh/product/svicloud-10p-plus/`](https://svicloudtvbox.us/zh/product/svicloud-10p-plus/) 或 [`/zh/product/svicloud-10s/`](https://svicloudtvbox.us/zh/product/svicloud-10s/) 下單。別忘了收藏 [`/zh/support/setup-guide/`](https://svicloudtvbox.us/zh/support/setup-guide/) 做為安裝手冊。英中文雙版本同步上線，有助於覆蓋「小雲電視盒 美國」等核心關鍵字，持續強化雙語 SEO 版圖。
+到 [`/zh/compare/`](https://svicloudtvbox.us/zh/compare/) 查看規格，並在 [`/zh/product/svicloud-10p-plus/`](https://svicloudtvbox.us/zh/product/svicloud-10p-plus/) 或 [`/zh/product/svicloud-10s/`](https://svicloudtvbox.us/zh/product/svicloud-10s/) 下單。別忘了收藏 [`/zh/guides-setup/`](https://svicloudtvbox.us/zh/guides-setup/) 做為安裝手冊。英中文雙版本同步上線，有助於覆蓋「小雲電視盒 美國」等核心關鍵字，持續強化雙語 SEO 版圖。

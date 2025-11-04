@@ -66,7 +66,7 @@ Follow this checklist to avoid buffering and keep the interface in English or Tr
 2. **Connect over HDMI 2.0+:** Use the included cable (or a certified 18 Gbps option) for 4K HDR TVs.
 3. **Hardwire whenever possible:** Plug into Ethernet for the most reliable Chinese channels in USA streaming. When relying on Wi-Fi, choose the 5 GHz SSID and keep the box within 20 feet of the router.
 4. **Select language & region:** During onboarding, choose “English (United States)” or “繁體中文 (美國)” so program guides, weather widgets, and app tiles match your household.
-5. **Activate via QR code:** Scan the on-screen code with the SVICLOUD concierge app or visit `svicloud.com/activate` to bind your device to U.S. servers.
+5. **Skip manual activation:** Units shipped by svicloudtvbox.us arrive pre-activated on U.S. servers—just connect to Wi-Fi or Ethernet and sign in with your SVICLOUD ID.
 6. **Tune LiteSpeed routing:** In Settings → Playback, leave “Smart Routing” enabled and set “Default Resolution” to “Auto” so the box adapts to real-time bandwidth.
 7. **Update firmware regularly:** Run “System Update” weekly and clear cache monthly to keep launch times crisp.
 
@@ -77,7 +77,7 @@ The “svicloud warranty” search spike in 2025 proved how many parallel import
 - Purchasing from an **authorized SVICLOUD US dealer** with verifiable California or Nevada operations—svicloudtvbox.us ships from Las Vegas with bilingual live chat.
 - Registering your device within 14 days to activate the **1-year U.S. hardware warranty** plus 90-day setup concierge support.
 - Storing your proof of purchase and serial numbers; both are required for RMAs or firmware escalations.
-- Bookmarking the [`/support/setup-guide/`](https://svicloudtvbox.us/support/setup-guide/) resources for firmware notes, network tweaks, and tutorial videos—especially if you upgraded from SVICLOUD 9P or UBOX units.
+- Bookmarking the [`/guides-setup/`](https://svicloudtvbox.us/guides-setup/) resources for firmware notes, network tweaks, and tutorial videos—especially if you upgraded from SVICLOUD 9P or UBOX units.
 
 ## Cost Comparison vs Other Chinese TV Boxes in the USA
 
@@ -112,4 +112,4 @@ Yes. Enable Travel Mode in Settings → Network, sign in through the captive por
 
 ## Ready to Stream?
 
-Compare specs on [`/compare/`](https://svicloudtvbox.us/compare/), add the right model to cart via [`/product/svicloud-10p-plus/`](https://svicloudtvbox.us/product/svicloud-10p-plus/) or [`/product/svicloud-10s/`](https://svicloudtvbox.us/product/svicloud-10s/), and bookmark the [`/support/setup-guide/`](https://svicloudtvbox.us/support/setup-guide/) for day-one success. Once the English version is live, schedule the Traditional Chinese translation under `/zh/` to capture “小雲電視盒 美國” searches and reinforce your bilingual SEO strategy.
+Compare specs on [`/compare/`](https://svicloudtvbox.us/compare/), add the right model to cart via [`/product/svicloud-10p-plus/`](https://svicloudtvbox.us/product/svicloud-10p-plus/) or [`/product/svicloud-10s/`](https://svicloudtvbox.us/product/svicloud-10s/), and bookmark the [`/guides-setup/`](https://svicloudtvbox.us/guides-setup/) for day-one success. Once the English version is live, schedule the Traditional Chinese translation under `/zh/` to capture “小雲電視盒 美國” searches and reinforce your bilingual SEO strategy.

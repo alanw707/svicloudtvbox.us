@@ -68,9 +68,9 @@ $stats = [
     ],
 ];
 
-$certificate_asset_relative = '/assets/images/certification-authorized-dealer.jpg';
+$certificate_asset_relative = '/assets/images/certification-authorized-dealer.webp';
 $certificate_asset_path     = get_template_directory() . $certificate_asset_relative;
-$certificate_asset_url      = file_exists($certificate_asset_path) ? get_template_directory_uri() . $certificate_asset_relative : '';
+$certificate_asset_url      = file_exists($certificate_asset_path) ? svic_theme_image_uri($certificate_asset_relative) : '';
 
 $concierge_car_asset_relative = '/assets/svg/illustration-concierge-car.svg';
 $concierge_car_asset_path     = get_template_directory() . $concierge_car_asset_relative;

@@ -71,7 +71,7 @@ while (have_posts()) :
 
     if (empty($gallery_entries) && $fallback_gallery_files) {
         foreach ($fallback_gallery_files as $file) {
-            $full = get_template_directory_uri() . '/assets/images/' . $file;
+            $full = svic_theme_image_uri('/assets/images/' . $file);
             $thumb_html = '<img src="' . esc_url($full) . '" alt="" class="product-thumb-img" loading="lazy" />';
             $gallery_entries[] = [
                 'full'   => $full,
@@ -90,7 +90,7 @@ while (have_posts()) :
     } elseif (!empty($gallery_entries)) {
         $primary_image_html = '<img class="product-hero-image" src="' . esc_url($gallery_entries[0]['full']) . '" alt="' . esc_attr(get_the_title()) . '" loading="lazy" />';
     } else {
-        $primary_image_html = '<img class="product-hero-image" src="' . esc_url(get_template_directory_uri() . '/assets/images/svicloud-hero-product.png') . '" alt="' . esc_attr(get_the_title()) . '" />';
+        $primary_image_html = '<img class="product-hero-image" src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.png')) . '" alt="' . esc_attr(get_the_title()) . '" />';
     }
 
     $product_highlight_keys = [

@@ -131,7 +131,7 @@ $hero_metric_keys = [
         <div class="compare-hero__devices" aria-hidden="true">
           <img
             class="compare-hero__device compare-hero__device--10p"
-            src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/svicloud-10p-plus.png'); ?>"
+            src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-10p-plus.png')); ?>"
             alt=""
             loading="lazy"
             decoding="async"
@@ -140,7 +140,7 @@ $hero_metric_keys = [
           />
           <img
             class="compare-hero__device compare-hero__device--10s"
-            src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/svicloud-tvbox-10s.jpg'); ?>"
+            src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-tvbox-10s.jpg')); ?>"
             alt=""
             loading="lazy"
             decoding="async"
@@ -185,7 +185,7 @@ $hero_metric_keys = [
           if ($img_10p) {
               echo $img_10p; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
           } else {
-              echo '<img src="' . esc_url(get_template_directory_uri() . '/assets/images/svicloud-10p-plus.png') . '" alt="' . esc_attr__('SVICLOUD 10P+', 'svicloudtvbox-lumen') . '" loading="lazy" decoding="async" />';
+              echo '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-10p-plus.png')) . '" alt="' . esc_attr__('SVICLOUD 10P+', 'svicloudtvbox-lumen') . '" loading="lazy" decoding="async" />';
           }
           ?>
         </figure>
@@ -219,7 +219,7 @@ $hero_metric_keys = [
 
       <article class="compare-product-card">
         <figure class="compare-product-card__media">
-          <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/svicloud-tvbox-10s.jpg'); ?>" alt="<?php echo esc_attr__('SVICLOUD 10S', 'svicloudtvbox-lumen'); ?>" loading="lazy" decoding="async" />
+          <img src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-tvbox-10s.jpg')); ?>" alt="<?php echo esc_attr__('SVICLOUD 10S', 'svicloudtvbox-lumen'); ?>" loading="lazy" decoding="async" />
         </figure>
         <div class="compare-product-card__header">
           <h2 class="compare-product-card__title"><?php echo svic_translate_html('shop.cards.10s.title'); ?></h2>

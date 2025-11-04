@@ -43,7 +43,7 @@
                   'loading' => 'lazy',
                 ] ); ?>
               <?php else : ?>
-                <img class="footer-logo__image footer-logo__image--fallback" src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/favicon.png' ); ?>" alt="<?php echo esc_attr( $site_name ); ?>" loading="lazy" />
+                <img class="footer-logo__image footer-logo__image--fallback" src="<?php echo esc_url( svic_theme_image_uri('/assets/images/favicon.png') ); ?>" alt="<?php echo esc_attr( $site_name ); ?>" loading="lazy" />
               <?php endif; ?>
             </span>
             <span class="footer-logo__text">

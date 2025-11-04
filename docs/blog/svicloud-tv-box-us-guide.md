@@ -63,7 +63,7 @@ Start with the concierge team or read the [return policy](https://svicloudtvbox.
 1. **Pair the voice remote**: Hold `VOL-` + `VOL+` for five seconds until the on-screen prompt confirms Bluetooth pairing.
 2. **Install core apps**: Launch the Orz installer, enter `8989c.cc`, and add Yogurt TV, Yogurt Kids, Karaoke, and Cherry TV. The entire flow is documented in the [setup guide](https://svicloudtvbox.us/guides-setup/).
 3. **Switch language anytime**: Tap the “EN / 中文” toggle in the top nav or append `?lang=zh` to any URL for the Traditional Chinese interface.
-4. **Share the handbook**: Bookmark the [guides hub](https://svicloudtvbox.us/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/) so parents or roommates can reference after-setup tips, troubleshooting, and app recommendations.
+4. **Share the handbook**: Bookmark the [guides hub](https://svicloudtvbox.us/guides/) so parents or roommates can reference after-setup tips, troubleshooting, and app recommendations.
 
 ## Keyword integration tips for marketers
 

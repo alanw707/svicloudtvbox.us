@@ -55,6 +55,538 @@ if (!function_exists('svic_get_localized_canonical_url')) {
     }
 }
 
+if (!function_exists('svic_static_page_meta_registry')) {
+    function svic_static_page_meta_registry(): array
+    {
+        static $registry = null;
+        if ($registry !== null) {
+            return $registry;
+        }
+
+        $default_image = '/assets/images/svicloud-hero-product.webp';
+
+        $registry = [
+            'support' => [
+                'title'       => [
+                    'en' => 'SVICLOUD Support & Concierge | Bilingual Help in the USA',
+                    'zh' => '小雲電視盒客服｜中英雙語禮賓支援',
+                ],
+                'description' => [
+                    'en' => 'Chat with the Las Vegas concierge team for setup help, warranty claims, returns, and upgrades in English or 繁體中文.',
+                    'zh' => '拉斯維加斯禮賓客服提供中文與英文安裝協助、保固申請、退換貨與升級諮詢。',
+                ],
+                'image'       => '/assets/images/hero-voice-assistant.webp',
+                'image_alt'   => [
+                    'en' => 'SVICLOUD concierge helping customers in Las Vegas',
+                    'zh' => '小雲電視盒禮賓客服提供拉斯維加斯支援',
+                ],
+            ],
+            'contact' => [
+                'title'       => [
+                    'en' => 'Talk to SVICLOUD Concierge | SMS, WhatsApp, Email Support',
+                    'zh' => '聯絡小雲禮賓客服｜SMS、WhatsApp、Email 即時支援',
+                ],
+                'description' => [
+                    'en' => 'Reach our Nevada-based concierge for orders, setup walkthroughs, Wi-Fi tuning, and app updates with a one-business-day SLA.',
+                    'zh' => '美國內華達客服一個工作天回覆訂單、安裝、網路調校與應用更新需求。',
+                ],
+                'image'       => '/assets/images/hero-voice-assistant.webp',
+                'image_alt'   => [
+                    'en' => 'Concierge specialist answering SVICLOUD questions',
+                    'zh' => '小雲禮賓客服回覆客戶問題',
+                ],
+            ],
+            'faq' => [
+                'title'       => [
+                    'en' => 'SVICLOUD FAQ | Warranty, Setup, Shipping & Payments',
+                    'zh' => '小雲電視盒常見問題｜保固、安裝、物流與付款',
+                ],
+                'description' => [
+                    'en' => 'Browse bilingual answers covering SVICLOUD warranty rules, activation tips, streaming apps, and delivery timelines.',
+                    'zh' => '查詢小雲電視盒保固規範、安裝秘訣、串流應用與出貨時程的中英解答。',
+                ],
+                'image'       => $default_image,
+                'image_alt'   => [
+                    'en' => 'SVICLOUD FAQ illustration',
+                    'zh' => '小雲電視盒常見問題示意圖',
+                ],
+            ],
+            'guides' => [
+                'title'       => [
+                    'en' => 'SVICLOUD Guides Hub | Setup, Apps, Troubleshooting',
+                    'zh' => '小雲使用指南總覽｜安裝、應用、疑難排解',
+                ],
+                'description' => [
+                    'en' => 'Find curated SVICLOUD setup checklists, app tutorials, after-setup tips, and bilingual troubleshooting workflows.',
+                    'zh' => '收錄小雲安裝檢查表、應用教學、安裝後建議與雙語故障排除流程。',
+                ],
+                'image'       => '/assets/images/svicloud-10p-plus-lifestyle-1.webp',
+                'image_alt'   => [
+                    'en' => 'SVICLOUD 10P+ setup guide illustration',
+                    'zh' => '小雲 10P+ 安裝指南示意圖',
+                ],
+            ],
+            'guides-setup' => [
+                'title'       => [
+                    'en' => 'SVICLOUD Setup Guide | Wi-Fi, Apps, Language Tips',
+                    'zh' => '小雲安裝指南｜網路、應用與語言設定',
+                ],
+                'description' => [
+                    'en' => 'Follow step-by-step onboarding for SVICLOUD 10P+/10S covering network placement, language, and core app installs.',
+                    'zh' => '逐步完成小雲 10P+/10S 安裝：網路擺位、語言設定與核心應用安裝一次到位。',
+                ],
+                'image'       => '/assets/images/svicloud-10p-plus.webp',
+                'image_alt'   => [
+                    'en' => 'SVICLOUD 10P+ setup hero image',
+                    'zh' => '小雲 10P+ 安裝示意圖',
+                ],
+            ],
+            'guides-after-setup' => [
+                'title'       => [
+                    'en' => 'After Setup Guide | Profiles, Parental Controls & Tips',
+                    'zh' => '安裝後指南｜多用戶、家長監護與調校技巧',
+                ],
+                'description' => [
+                    'en' => 'Optimize SVICLOUD after day one with parental controls, profile tips, smart home integrations, and bilingual shortcuts.',
+                    'zh' => '完成安裝後，利用家長監護、個人化設定與智慧家庭整合讓小雲體驗更順。',
+                ],
+                'image'       => $default_image,
+                'image_alt'   => [
+                    'en' => 'Family using SVICLOUD after setup',
+                    'zh' => '家庭使用小雲的場景',
+                ],
+            ],
+            'guides-support' => [
+                'title'       => [
+                    'en' => 'Concierge Support Guide | Warranty & Escalation Paths',
+                    'zh' => '禮賓客服指南｜保固與升級流程',
+                ],
+                'description' => [
+                    'en' => 'Understand concierge tiers, warranty checkpoints, and how to escalate SVICLOUD requests in English or Chinese.',
+                    'zh' => '了解禮賓等級、保固檢核與中英升級流程，確保小雲支援快速到位。',
+                ],
+                'image'       => '/assets/images/certification-authorized-dealer.webp',
+                'image_alt'   => [
+                    'en' => 'Authorized SVICLOUD concierge badge',
+                    'zh' => '小雲禮賓客服認證徽章',
+                ],
+            ],
+            'guides-resources' => [
+                'title'       => [
+                    'en' => 'Resources Hub | Warranty Docs, Compliance & Playbooks',
+                    'zh' => '資源中心｜保固文件、合規與行銷手冊',
+                ],
+                'description' => [
+                    'en' => 'Download SVICLOUD warranty forms, compliance checklists, and marketing playbooks to support US households.',
+                    'zh' => '下載小雲保固文件、合規清單與行銷手冊，掌握美國市場需求。',
+                ],
+                'image'       => $default_image,
+                'image_alt'   => [
+                    'en' => 'SVICLOUD resource library illustration',
+                    'zh' => '小雲資源中心示意圖',
+                ],
+            ],
+            'guides-troubleshooting' => [
+                'title'       => [
+                    'en' => 'Troubleshooting Guide | Remote, Streaming & Network Fixes',
+                    'zh' => '疑難排解指南｜遙控、串流與網路修復',
+                ],
+                'description' => [
+                    'en' => 'Resolve SVICLOUD buffering, remote pairing, and streaming glitches with concierge-approved checklists.',
+                    'zh' => '依照禮賓核可清單排除小雲緩衝、遙控配對與串流異常問題。',
+                ],
+                'image'       => '/assets/images/svicloud-10s-lifestyle-1.webp',
+                'image_alt'   => [
+                    'en' => 'SVICLOUD troubleshooting illustration',
+                    'zh' => '小雲疑難排解示意圖',
+                ],
+            ],
+            'guides-apps' => [
+                'title'       => [
+                    'en' => 'Apps & Channels Guide | Yogurt TV, Cherry TV, Kids Mode',
+                    'zh' => '應用與頻道指南｜Yogurt TV、Cherry TV 與兒童模式',
+                ],
+                'description' => [
+                    'en' => 'Install and organize SVICLOUD live TV, on-demand, karaoke, and kid-friendly apps with bilingual tips.',
+                    'zh' => '以雙語教學安裝與整理小雲直播、隨選、卡拉OK與兒童應用。',
+                ],
+                'image'       => '/assets/images/svicloud-10s-lifestyle-3.webp',
+                'image_alt'   => [
+                    'en' => 'SVICLOUD apps and channels collage',
+                    'zh' => '小雲應用與頻道拼貼圖',
+                ],
+            ],
+            'return-policy' => [
+                'title'       => [
+                    'en' => 'SVICLOUD Return Policy | 30-Day U.S. Exchanges & Refunds',
+                    'zh' => '小雲退貨政策｜30 天美國換貨與退款',
+                ],
+                'description' => [
+                    'en' => 'Review eligibility, timelines, and shipping steps for SVICLOUD returns handled from the Nevada warehouse.',
+                    'zh' => '了解小雲美國倉庫退貨資格、時程與物流步驟。',
+                ],
+                'image'       => '/assets/images/certification-authorized-dealer.webp',
+                'image_alt'   => [
+                    'en' => 'Return and exchange timeline graphic',
+                    'zh' => '退換貨流程圖示',
+                ],
+            ],
+            'legal-disclaimer' => [
+                'title'       => [
+                    'en' => 'Legal Disclaimer | SVICLOUD TV BOX US Policies',
+                    'zh' => '法律聲明｜SVICLOUD TV BOX US 政策',
+                ],
+                'description' => [
+                    'en' => 'Review SVICLOUD TV BOX US legal terms covering service boundaries, intellectual property, and compliance notes.',
+                    'zh' => '檢視 SVICLOUD TV BOX US 服務範圍、智慧財產與合規聲明。',
+                ],
+                'image'       => $default_image,
+                'image_alt'   => [
+                    'en' => 'SVICLOUD legal policy illustration',
+                    'zh' => '小雲法律政策示意圖',
+                ],
+            ],
+            'order-tracking' => [
+                'title'       => [
+                    'en' => 'SVICLOUD Order Tracking | Live Status & Support',
+                    'zh' => '小雲訂單查詢｜即時狀態與客服支援',
+                ],
+                'description' => [
+                    'en' => 'Enter your order number to see SVICLOUD shipping progress, signatures, and concierge follow-up options.',
+                    'zh' => '輸入訂單編號即可查看小雲出貨進度、簽收資訊與禮賓客服選項。',
+                ],
+                'image'       => '/assets/images/svicloud-10p-plus-lifestyle-2.webp',
+                'image_alt'   => [
+                    'en' => 'Order tracking illustration',
+                    'zh' => '訂單追蹤示意圖',
+                ],
+            ],
+            'blog' => [
+                'title'       => [
+                    'en' => 'SVICLOUD Blog | 小雲電視盒 美國 Buying Guides & Updates',
+                    'zh' => '小雲部落格｜美國購買指南與最新更新',
+                ],
+                'description' => [
+                    'en' => 'Read bilingual buying checklists, launch news, and troubleshooting tips for SVICLOUD customers in North America.',
+                    'zh' => '閱讀面向北美小雲客戶的雙語購買清單、產品更新與疑難排解建議。',
+                ],
+                'image'       => '/assets/images/hero-voice-assistant.webp',
+                'image_alt'   => [
+                    'en' => 'SVICLOUD blog hero image',
+                    'zh' => '小雲部落格主圖',
+                ],
+            ],
+            'about' => [
+                'title'       => [
+                    'en' => 'About SVICLOUD TV BOX US | Authorized 小雲電視盒 Partner',
+                    'zh' => '關於 SVICLOUD TV BOX US｜小雲電視盒美國授權夥伴',
+                ],
+                'description' => [
+                    'en' => 'Discover our Las Vegas fulfillment center, bilingual concierge, and mission to support 小雲電視盒 households in the US.',
+                    'zh' => '了解我們的拉斯維加斯倉庫、中英禮賓客服與服務美國小雲家庭的使命。',
+                ],
+                'image'       => '/assets/images/svicloud-10s-lifestyle-2.webp',
+                'image_alt'   => [
+                    'en' => 'SVICLOUD team in Las Vegas warehouse',
+                    'zh' => '小雲團隊於拉斯維加斯倉庫',
+                ],
+            ],
+            'compare' => [
+                'title'       => [
+                    'en' => 'SVICLOUD 10P+ vs 10S Comparison | Specs, Warranty, Concierge',
+                    'zh' => '小雲 10P+ vs 10S 比較｜規格、保固與禮賓服務',
+                ],
+                'description' => [
+                    'en' => 'Break down CPUs, storage, voice control, and support perks to pick the right SVICLOUD box for your household.',
+                    'zh' => '比較處理器、儲存、語音控制與支援服務，挑選最合適的小雲機型。',
+                ],
+                'image'       => '/assets/images/svicloud-10p-plus-lifestyle-3.webp',
+                'image_alt'   => [
+                    'en' => 'SVICLOUD 10P+ and 10S side-by-side',
+                    'zh' => '小雲 10P+ 與 10S 並排圖',
+                ],
+            ],
+            'shop' => [
+                'title'       => [
+                    'en' => 'Shop SVICLOUD 10P+ & 10S | Authorized U.S. Inventory',
+                    'zh' => '選購小雲 10P+／10S｜美國授權現貨',
+                ],
+                'description' => [
+                    'en' => 'Browse in-stock SVICLOUD bundles with 48-hour Nevada shipping, 1-year warranty, and bilingual concierge setup.',
+                    'zh' => '瀏覽小雲現貨組合，內華達 48 小時出貨、附一年保固與中英禮賓安裝。',
+                ],
+                'image'       => '/assets/images/svicloud-10p-plus.webp',
+                'image_alt'   => [
+                    'en' => 'SVICLOUD 10P+ product photo',
+                    'zh' => '小雲 10P+ 產品照',
+                ],
+            ],
+            'cart' => [
+                'title'       => [
+                    'en' => 'SVICLOUD Cart | Review Items Before Checkout',
+                    'zh' => '小雲購物車｜結帳前確認商品',
+                ],
+                'description' => [
+                    'en' => 'Confirm SVICLOUD models, shipping protection, and concierge add-ons before entering checkout.',
+                    'zh' => '結帳前確認小雲機型、出貨保障與禮賓加值項目。',
+                ],
+                'image'       => $default_image,
+                'image_alt'   => [
+                    'en' => 'Shopping cart illustration',
+                    'zh' => '購物車示意圖',
+                ],
+            ],
+            'checkout' => [
+                'title'       => [
+                    'en' => 'Secure Checkout | SVICLOUD 10P+ & 10S in the USA',
+                    'zh' => '安全結帳｜小雲 10P+／10S 美國訂單',
+                ],
+                'description' => [
+                    'en' => 'Complete your SVICLOUD order with encrypted payment, Nevada fulfillment, and bilingual concierge confirmation.',
+                    'zh' => '使用加密付款完成小雲訂單，內華達出貨並附中英禮賓確認。',
+                ],
+                'image'       => $default_image,
+                'image_alt'   => [
+                    'en' => 'Secure checkout illustration',
+                    'zh' => '安全結帳示意圖',
+                ],
+            ],
+            'my-account' => [
+                'title'       => [
+                    'en' => 'My Account | Track SVICLOUD Orders & Concierge Tickets',
+                    'zh' => '會員中心｜查詢小雲訂單與客服案件',
+                ],
+                'description' => [
+                    'en' => 'Log in to download invoices, track warranty submissions, and manage concierge conversations.',
+                    'zh' => '登入下載發票、追蹤保固案件並管理禮賓對話。',
+                ],
+                'image'       => $default_image,
+                'image_alt'   => [
+                    'en' => 'Account dashboard illustration',
+                    'zh' => '會員中心儀表板示意',
+                ],
+            ],
+        ];
+
+        return $registry;
+    }
+}
+
+if (!function_exists('svic_normalize_meta_slug')) {
+    function svic_normalize_meta_slug(?string $slug): ?string
+    {
+        if (!is_string($slug) || $slug === '') {
+            return null;
+        }
+
+        $slug = strtolower($slug);
+        $decoded = rawurldecode($slug);
+
+        $aliases = [
+            '%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97' => 'guides',
+            '%e6%a9%9f%e5%9e%8b%e6%af%94%e8%bc%83' => 'compare',
+            '使用指南'                         => 'guides',
+            '機型比較'                         => 'compare',
+        ];
+
+        if (isset($aliases[$slug])) {
+            return $aliases[$slug];
+        }
+
+        if ($decoded !== $slug && isset($aliases[$decoded])) {
+            return $aliases[$decoded];
+        }
+
+        return $slug;
+    }
+}
+
+if (!function_exists('svic_resolve_static_page_meta')) {
+    function svic_resolve_static_page_meta(?string $slug): ?array
+    {
+        $normalized = svic_normalize_meta_slug($slug);
+        if (!$normalized) {
+            return null;
+        }
+
+        $registry = svic_static_page_meta_registry();
+        if (!isset($registry[$normalized])) {
+            return null;
+        }
+
+        $entry = $registry[$normalized];
+        $lang  = function_exists('svic_language_query_value') ? svic_language_query_value() : 'en';
+        $lang  = $lang === 'zh' ? 'zh' : 'en';
+
+        $title = $entry['title'][$lang] ?? $entry['title']['en'] ?? '';
+        $description = $entry['description'][$lang] ?? $entry['description']['en'] ?? '';
+        $image_alt = $entry['image_alt'][$lang] ?? ($entry['image_alt']['en'] ?? '');
+
+        return [
+            'title'       => $title,
+            'description' => $description,
+            'image'       => $entry['image'] ?? null,
+            'image_alt'   => $image_alt,
+        ];
+    }
+}
+
+if (!function_exists('svic_get_static_page_meta_slug')) {
+    function svic_get_static_page_meta_slug(): ?string
+    {
+        $post = get_queried_object();
+        if ($post instanceof WP_Post && !empty($post->post_name)) {
+            return $post->post_name;
+        }
+
+        if (function_exists('is_shop') && is_shop()) {
+            return 'shop';
+        }
+
+        if (function_exists('is_cart') && is_cart()) {
+            return 'cart';
+        }
+        if (function_exists('is_checkout') && is_checkout()) {
+            return 'checkout';
+        }
+        if (function_exists('is_account_page') && is_account_page()) {
+            return 'my-account';
+        }
+
+        return null;
+    }
+}
+
+if (!function_exists('svic_should_output_static_page_meta')) {
+    function svic_should_output_static_page_meta(): bool
+    {
+        if (is_admin() || (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION'))) {
+            return false;
+        }
+
+        if (is_front_page()) {
+            return false;
+        }
+
+        $is_static_page = is_page() || is_home();
+        $is_shop_archive = function_exists('is_shop') && is_shop();
+
+        if (!$is_static_page && !$is_shop_archive) {
+            return false;
+        }
+
+        if (function_exists('is_page_template') && is_page_template('page-compare.php')) {
+            return false;
+        }
+
+        return true;
+    }
+}
+
+add_filter('document_title_parts', function ($parts) {
+    if (!svic_should_output_static_page_meta()) {
+        return $parts;
+    }
+
+    $slug = svic_get_static_page_meta_slug();
+    $meta = svic_resolve_static_page_meta($slug);
+
+    if ($meta && !empty($meta['title'])) {
+        $parts['title'] = $meta['title'];
+    }
+
+    return $parts;
+}, 40);
+
+if (!function_exists('svic_output_static_page_meta')) {
+    function svic_output_static_page_meta(): void
+    {
+        if (!svic_should_output_static_page_meta()) {
+            return;
+        }
+
+        $slug = svic_get_static_page_meta_slug();
+        $meta = svic_resolve_static_page_meta($slug);
+
+        if (!$meta) {
+            return;
+        }
+
+        $post_id = get_queried_object_id();
+        $title = $meta['title'] ?: ($post_id ? wp_strip_all_tags(get_the_title($post_id)) : '');
+
+        $description = $meta['description'];
+        if ($description === '') {
+            if ($post_id) {
+                $description = wp_strip_all_tags(get_post_field('post_excerpt', $post_id));
+            }
+            if ($description === '' && $post_id) {
+                $description = wp_trim_words(wp_strip_all_tags(get_post_field('post_content', $post_id)), 32, '…');
+            }
+        }
+
+        if ($title === '' && $description === '') {
+            return;
+        }
+
+        $canonical = svic_get_localized_canonical_url();
+        if (!is_string($canonical) || $canonical === '') {
+            $canonical = $post_id ? get_permalink($post_id) : home_url('/');
+        }
+
+        $image_meta = [];
+        if (!empty($meta['image']) && function_exists('svic_get_theme_image_meta')) {
+            $image_meta = svic_get_theme_image_meta($meta['image']);
+            if (!empty($meta['image_alt'])) {
+                $image_meta['alt'] = $meta['image_alt'];
+            }
+        }
+
+        echo '<meta name="description" content="' . esc_attr($description) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
+        $og_tags = [
+            ['property' => 'og:type', 'content' => 'website'],
+            ['property' => 'og:site_name', 'content' => get_bloginfo('name')],
+            ['property' => 'og:title', 'content' => $title],
+            ['property' => 'og:description', 'content' => $description],
+            ['property' => 'og:url', 'content' => esc_url_raw($canonical)],
+        ];
+
+        if (!empty($image_meta['url'])) {
+            $og_tags[] = ['property' => 'og:image', 'content' => $image_meta['url']];
+            if (!empty($image_meta['width'])) {
+                $og_tags[] = ['property' => 'og:image:width', 'content' => (string) $image_meta['width']];
+            }
+            if (!empty($image_meta['height'])) {
+                $og_tags[] = ['property' => 'og:image:height', 'content' => (string) $image_meta['height']];
+            }
+            if (!empty($image_meta['alt'])) {
+                $og_tags[] = ['property' => 'og:image:alt', 'content' => $image_meta['alt']];
+            }
+        }
+
+        foreach ($og_tags as $tag) {
+            echo '<meta property="' . esc_attr($tag['property']) . '" content="' . esc_attr($tag['content']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+
+        $twitter_tags = [
+            ['name' => 'twitter:card', 'content' => 'summary_large_image'],
+            ['name' => 'twitter:title', 'content' => $title],
+            ['name' => 'twitter:description', 'content' => $description],
+        ];
+
+        if (!empty($image_meta['url'])) {
+            $twitter_tags[] = ['name' => 'twitter:image', 'content' => $image_meta['url']];
+        }
+
+        foreach ($twitter_tags as $tag) {
+            echo '<meta name="' . esc_attr($tag['name']) . '" content="' . esc_attr($tag['content']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+    }
+}
+
+add_action('wp_head', 'svic_output_static_page_meta', 7);
+
 if (!function_exists('svic_is_order_tracking_request')) {
     function svic_is_order_tracking_request(): bool
     {
@@ -234,8 +766,22 @@ if (!function_exists('svic_get_theme_image_meta')) {
     function svic_get_theme_image_meta(string $relative_path): array
     {
         $relative_path = '/' . ltrim($relative_path, '/');
+        $original_path = $relative_path;
         $file_path     = get_template_directory() . $relative_path;
         $url           = get_template_directory_uri() . $relative_path;
+
+        if (!file_exists($file_path)) {
+            $webp_candidate = preg_replace('/\\.(png|jpe?g)$/i', '.webp', $relative_path);
+            if ($webp_candidate && $webp_candidate !== $relative_path) {
+                $candidate_path = get_template_directory() . $webp_candidate;
+                if (file_exists($candidate_path)) {
+                    $relative_path = $webp_candidate;
+                    $file_path     = $candidate_path;
+                    $url           = get_template_directory_uri() . $relative_path;
+                }
+            }
+        }
+
         $width         = null;
         $height        = null;
 
@@ -247,18 +793,24 @@ if (!function_exists('svic_get_theme_image_meta')) {
             }
         }
 
-        return [
+        $meta = [
             'url'    => esc_url_raw($url),
             'width'  => $width,
             'height' => $height,
         ];
+
+        if ($relative_path !== $original_path) {
+            $meta['fallback'] = esc_url_raw(get_template_directory_uri() . $original_path);
+        }
+
+        return $meta;
     }
 }
 
 if (!function_exists('svic_get_homepage_hero_image_meta')) {
     function svic_get_homepage_hero_image_meta(): array
     {
-        return svic_get_theme_image_meta('/assets/images/hero-voice-assistant.png');
+        return svic_get_theme_image_meta('/assets/images/hero-voice-assistant.webp');
     }
 }
 
@@ -420,9 +972,9 @@ if (!function_exists('svic_get_compare_page_meta_definitions')) {
             $image_alt = 'SVICLOUD streaming boxes';
         }
 
-        $image_meta = svic_get_theme_image_meta('/assets/images/svicloud-hero-product.png');
+        $image_meta = svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
         if (empty($image_meta['url'])) {
-            $image_meta = svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.png');
+            $image_meta = svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.webp');
         }
 
         return [
@@ -1080,13 +1632,13 @@ if (!function_exists('svic_output_singular_social_meta')) {
             if ($is_product) {
                 $slug = get_post_field('post_name', $post_id);
                 if ($slug === 'svicloud-10p-plus') {
-                    $image_meta = svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.png');
+                    $image_meta = svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.webp');
                 } elseif ($slug === 'svicloud-10s') {
-                    $image_meta = svic_get_theme_image_meta('/assets/images/svicloud-tvbox-10s.jpg');
+                    $image_meta = svic_get_theme_image_meta('/assets/images/svicloud-tvbox-10s.webp');
                 }
             }
             if (!$image_meta) {
-                $image_meta = svic_get_theme_image_meta('/assets/images/hero-voice-assistant.png');
+                $image_meta = svic_get_theme_image_meta('/assets/images/hero-voice-assistant.webp');
             }
         }
 
@@ -2396,6 +2948,71 @@ add_action('template_redirect', function () {
         }
     }
 }, 20);
+
+/**
+ * Legacy URL guardrails for blog posts that referenced older slugs/files.
+ *
+ * The crawler still hits /support/setup-guide/ (and the zh version) plus an
+ * outdated marketing .md path. Redirect them permanently to the current
+ * destinations so future internal/external links inherit the fix.
+ */
+add_action('template_redirect', function () {
+    if (!is_404()) {
+        return;
+    }
+
+    $uri = $_SERVER['REQUEST_URI'] ?? '';
+    $path = $uri ? wp_parse_url($uri, PHP_URL_PATH) : '';
+
+    if (class_exists('SVIC_Locale_Resolver')) {
+        $original = SVIC_Locale_Resolver::originalRequestPath();
+        if (is_string($original) && $original !== '') {
+            $path = $original;
+        }
+    }
+    if (!is_string($path) || $path === '') {
+        return;
+    }
+
+    $path = rtrim($path, '/');
+    $redirects = [
+        '/support/setup-guide' => [
+            'path' => '/guides-setup/',
+            'lang' => 'en',
+        ],
+        '/zh/support/setup-guide' => [
+            'path' => '/guides-setup/',
+            'lang' => 'zh',
+        ],
+        '/zh/marketing/google-review-stars-playbook.md' => [
+            'path' => '/svicloud-tv-box-us-guide/',
+            'lang' => 'zh',
+        ],
+    ];
+
+    if (!isset($redirects[$path])) {
+        return;
+    }
+
+    $target = $redirects[$path];
+    $lang = is_array($target) ? ($target['lang'] ?? null) : null;
+    $target_path = is_array($target) ? ($target['path'] ?? '') : (string) $target;
+
+    if ($target_path === '') {
+        return;
+    }
+
+    if (function_exists('svic_url_with_lang')) {
+        $destination = svic_url_with_lang($target_path, $lang);
+    }
+
+    if (empty($destination)) {
+        $destination = home_url($target_path);
+    }
+
+    wp_safe_redirect($destination, 301);
+    exit;
+}, 30);
 
 // Redirect to a stable order summary page after purchase.
 // This ensures users always land on the order-received view, even if a gateway

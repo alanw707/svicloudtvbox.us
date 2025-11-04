@@ -126,11 +126,11 @@ $faq_groups = [
 $pricing_card_images = [
     '10p' => array_merge(
         ['alt' => esc_html__('SVICLOUD 10P+ flagship streaming device and remote', 'svicloudtvbox-lumen')],
-        svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.png')
+        svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.webp')
     ),
     '10s' => array_merge(
         ['alt' => esc_html__('SVICLOUD 10S compact streaming device with HDMI and power accessories', 'svicloudtvbox-lumen')],
-        svic_get_theme_image_meta('/assets/images/svicloud-tvbox-10s.jpg')
+        svic_get_theme_image_meta('/assets/images/svicloud-tvbox-10s.webp')
     ),
 ];
 
@@ -412,7 +412,10 @@ if (!$blog_posts_query instanceof WP_Query) {
         <div class="hero-dashboard__badge"><?php echo svic_translate_html('frontpage.hero.card.badge'); ?></div>
         <div class="hero-dashboard__card">
           <div class="hero-dashboard__product">
-            <img class="hero-dashboard__product-main" src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-voice-assistant.png'); ?>" alt="<?php esc_attr_e('SVICLOUD voice assistant interface with Google Play, movies, and YouTube apps', 'svicloudtvbox-lumen'); ?>" loading="lazy" width="1601" height="898" />
+            <picture>
+              <source srcset="<?php echo esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant.png')); ?>" type="image/webp" />
+              <img class="hero-dashboard__product-main" src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-voice-assistant.png'); ?>" alt="<?php esc_attr_e('SVICLOUD voice assistant interface with Google Play, movies, and YouTube apps', 'svicloudtvbox-lumen'); ?>" loading="lazy" decoding="async" width="1601" height="898" />
+            </picture>
           </div>
           <div class="hero-dashboard__card-header">
             <span><?php echo svic_translate_html('frontpage.hero.card.headline'); ?></span>
@@ -440,9 +443,9 @@ if (!$blog_posts_query instanceof WP_Query) {
   </section>
 
   <?php
-  $certificate_asset_relative = '/assets/images/certification-authorized-dealer.jpg';
+$certificate_asset_relative = '/assets/images/certification-authorized-dealer.webp';
   $certificate_asset_path     = get_template_directory() . $certificate_asset_relative;
-  $certificate_asset_url      = file_exists($certificate_asset_path) ? get_template_directory_uri() . $certificate_asset_relative : '';
+  $certificate_asset_url      = file_exists($certificate_asset_path) ? svic_theme_image_uri($certificate_asset_relative) : '';
   ?>
   <!-- Authorized Dealer Certificate -->
   <section class="lumen-certification" id="authorized-dealer">

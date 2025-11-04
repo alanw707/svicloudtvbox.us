@@ -62,13 +62,13 @@ review:
 1. **配對語音遙控**：長按 `VOL-` + `VOL+` 約 5 秒，螢幕會顯示配對完成。
 2. **安裝常用 App**：開啟 Orz 安裝器，輸入 `8989c.cc`，下載 Yogurt TV、Yogurt Kids、Karaoke、Cherry TV 等應用。詳細步驟見 [安裝指南](https://svicloudtvbox.us/zh/guides-setup/)。
 3. **一鍵切換語言**：網站右上角「EN／中文」即可切換，也可以在網址後加上 `?lang=zh`。
-4. **分享指南給家人**：將 [使用指南入口](https://svicloudtvbox.us/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/) 加入書籤，包括安裝後建議、資源與排障流程。
+4. **分享指南給家人**：將 [使用指南入口](https://svicloudtvbox.us/zh/guides/) 加入書籤，包括安裝後建議、資源與排障流程。
 
 ## 行銷／關鍵字應用小撇步
 
 - 在部落格或廣告素材中自然地嵌入「小雲電視盒 美國」、「SVICLOUD 10P+ USA」，並加上指向美國官方網站的內部連結。
 - 文字敘述記得提到「內華達倉庫 48 小時出貨」、「一年美國保固」、「中英雙語禮賓客服」等在地化賣點。
-- 未來若要顯示 Google Review 星等，請遵循 [Google Review Stars Playbook](../marketing/google-review-stars-playbook.md) 的實際評論與 schema 規範。
+- 未來若要顯示 Google Review 星等，請遵循 Google Review Stars Playbook 的實際評論與 schema 規範。
 
 ## 推薦動作
 

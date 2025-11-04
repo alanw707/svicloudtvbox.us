@@ -54,10 +54,10 @@ $anchor_items    = svic_guides_get_anchor_items();
       <figure class="guides-hero__media" aria-hidden="true">
         <span class="guides-hero__blur"></span>
         <span class="guides-hero__device">
-          <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/svicloud-10p-plus.png'); ?>" alt="" loading="lazy" width="360" height="240" />
+          <img src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-10p-plus.png')); ?>" alt="" loading="lazy" width="360" height="240" />
         </span>
         <span class="guides-hero__remote">
-          <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/svicloud-hero-product.png'); ?>" alt="" loading="lazy" width="220" height="160" />
+          <img src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.png')); ?>" alt="" loading="lazy" width="220" height="160" />
         </span>
       </figure>
     </div>
