@@ -593,15 +593,10 @@ add_action('wp_head', 'svic_output_static_page_meta', 7);
  * Works alongside Rank Math SEO - only outputs SiteNavigationElement schemas
  */
 if (!function_exists('svic_output_site_navigation_schema')) {
-    function svic_output_site_navigation_schema(): void
+    function svic_output_site_navigation_schema()
     {
-        // Check multiple conditions for homepage detection
-        $page_id = get_queried_object_id();
-        $is_front = is_front_page();
-        $is_home = is_home();
-
-        // Output on homepage (page ID 20 based on earlier meta code)
-        if (!$is_front && !$is_home && $page_id != 20) {
+        // Only output on homepage
+        if (!is_front_page() && !is_home()) {
             return;
         }
 
