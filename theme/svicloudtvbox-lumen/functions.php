@@ -590,12 +590,18 @@ add_action('wp_head', 'svic_output_static_page_meta', 7);
 /**
  * Output site navigation structured data (JSON-LD) for Google search results
  * Helps Google display site navigation in search results as sitelinks
+ * Works alongside Rank Math SEO - only outputs SiteNavigationElement schemas
  */
 if (!function_exists('svic_output_site_navigation_schema')) {
     function svic_output_site_navigation_schema(): void
     {
-        // Only output on homepage for site-wide navigation
-        if (!is_front_page()) {
+        // Only output on homepage (check both conditions for reliability)
+        if (!is_front_page() && !is_home()) {
+            return;
+        }
+
+        // Skip if not on the main site (for multisite installations)
+        if (function_exists('is_main_site') && !is_main_site()) {
             return;
         }
 
@@ -661,50 +667,22 @@ if (!function_exists('svic_output_site_navigation_schema')) {
             });
         }, $navigation_elements);
 
-        // Build the complete schema
+        // Only output SiteNavigationElement schema (Rank Math handles WebSite/Organization)
+        // Build separate schema for navigation elements
         $schema = [
             '@context' => 'https://schema.org',
-            '@graph' => [
-                [
-                    '@type' => 'WebSite',
-                    '@id' => home_url('/#website'),
-                    'url' => home_url('/'),
-                    'name' => get_bloginfo('name'),
-                    'description' => get_bloginfo('description'),
-                    'publisher' => [
-                        '@id' => home_url('/#organization'),
-                    ],
-                    'potentialAction' => [
-                        '@type' => 'SearchAction',
-                        'target' => [
-                            '@type' => 'EntryPoint',
-                            'urlTemplate' => home_url('/?s={search_term_string}'),
-                        ],
-                        'query-input' => 'required name=search_term_string',
-                    ],
-                ],
-                [
-                    '@type' => 'Organization',
-                    '@id' => home_url('/#organization'),
-                    'name' => get_bloginfo('name'),
-                    'url' => home_url('/'),
-                ],
-            ],
+            '@graph' => $navigation_elements,
         ];
 
-        // Add navigation elements to the graph
-        foreach ($navigation_elements as $nav_element) {
-            $schema['@graph'][] = $nav_element;
-        }
-
         // Output the JSON-LD script tag
+        echo "\n" . '<!-- SVICLOUD Navigation Schema -->' . "\n";
         echo '<script type="application/ld+json">';
         echo wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
         echo '</script>' . "\n";
     }
 }
 
-add_action('wp_head', 'svic_output_site_navigation_schema', 8);
+add_action('wp_head', 'svic_output_site_navigation_schema', 99);
 
 if (!function_exists('svic_is_order_tracking_request')) {
     function svic_is_order_tracking_request(): bool
