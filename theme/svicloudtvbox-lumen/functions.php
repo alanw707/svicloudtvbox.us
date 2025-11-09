@@ -595,13 +595,13 @@ add_action('wp_head', 'svic_output_static_page_meta', 7);
 if (!function_exists('svic_output_site_navigation_schema')) {
     function svic_output_site_navigation_schema(): void
     {
-        // Only output on homepage (check both conditions for reliability)
-        if (!is_front_page() && !is_home()) {
-            return;
-        }
+        // Check multiple conditions for homepage detection
+        $page_id = get_queried_object_id();
+        $is_front = is_front_page();
+        $is_home = is_home();
 
-        // Skip if not on the main site (for multisite installations)
-        if (function_exists('is_main_site') && !is_main_site()) {
+        // Output on homepage (page ID 20 based on earlier meta code)
+        if (!$is_front && !$is_home && $page_id != 20) {
             return;
         }
 
