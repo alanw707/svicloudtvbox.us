@@ -587,6 +587,125 @@ if (!function_exists('svic_output_static_page_meta')) {
 
 add_action('wp_head', 'svic_output_static_page_meta', 7);
 
+/**
+ * Output site navigation structured data (JSON-LD) for Google search results
+ * Helps Google display site navigation in search results as sitelinks
+ */
+if (!function_exists('svic_output_site_navigation_schema')) {
+    function svic_output_site_navigation_schema(): void
+    {
+        // Only output on homepage for site-wide navigation
+        if (!is_front_page()) {
+            return;
+        }
+
+        // Get the primary navigation menu items
+        $menu_items = wp_get_nav_menu_items('primary');
+
+        // Fallback to default navigation if no menu is set
+        if (!$menu_items || empty($menu_items)) {
+            $menu_items = [
+                (object) [
+                    'title' => function_exists('svic_translate') ? svic_translate('header.nav.home') : 'Home',
+                    'url' => svic_url_with_lang(home_url('/')),
+                ],
+                (object) [
+                    'title' => function_exists('svic_translate') ? svic_translate('header.nav.compare') : 'Compare',
+                    'url' => svic_url_with_lang(home_url('/compare/')),
+                ],
+                (object) [
+                    'title' => function_exists('svic_translate') ? svic_translate('header.nav.faq') : 'FAQ',
+                    'url' => svic_url_with_lang(home_url('/faq/')),
+                ],
+                (object) [
+                    'title' => function_exists('svic_translate') ? svic_translate('header.nav.ten_p') : 'SViCloud 10P+',
+                    'url' => svic_url_with_lang(home_url('/product/svicloud-10p-plus/')),
+                ],
+                (object) [
+                    'title' => function_exists('svic_translate') ? svic_translate('header.nav.ten_s') : 'SViCloud 10S',
+                    'url' => svic_url_with_lang(home_url('/product/svicloud-10s/')),
+                ],
+                (object) [
+                    'title' => function_exists('svic_translate') ? svic_translate('header.nav.concierge') : 'Contact',
+                    'url' => svic_url_with_lang(home_url('/contact/')),
+                ],
+            ];
+        }
+
+        // Build navigation elements for schema
+        $navigation_elements = [];
+        $position = 1;
+
+        foreach ($menu_items as $item) {
+            // Skip child items (only include top-level navigation)
+            if (isset($item->menu_item_parent) && $item->menu_item_parent != 0) {
+                continue;
+            }
+
+            $navigation_elements[] = [
+                '@type' => 'SiteNavigationElement',
+                '@id' => esc_url($item->url ?? $item->title) . '#nav-' . $position,
+                'position' => $position,
+                'name' => wp_strip_all_tags($item->title ?? ''),
+                'description' => !empty($item->description) ? wp_strip_all_tags($item->description) : null,
+                'url' => esc_url($item->url ?? ''),
+            ];
+
+            $position++;
+        }
+
+        // Filter out null descriptions
+        $navigation_elements = array_map(function($element) {
+            return array_filter($element, function($value) {
+                return $value !== null;
+            });
+        }, $navigation_elements);
+
+        // Build the complete schema
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@graph' => [
+                [
+                    '@type' => 'WebSite',
+                    '@id' => home_url('/#website'),
+                    'url' => home_url('/'),
+                    'name' => get_bloginfo('name'),
+                    'description' => get_bloginfo('description'),
+                    'publisher' => [
+                        '@id' => home_url('/#organization'),
+                    ],
+                    'potentialAction' => [
+                        '@type' => 'SearchAction',
+                        'target' => [
+                            '@type' => 'EntryPoint',
+                            'urlTemplate' => home_url('/?s={search_term_string}'),
+                        ],
+                        'query-input' => 'required name=search_term_string',
+                    ],
+                ],
+                [
+                    '@type' => 'Organization',
+                    '@id' => home_url('/#organization'),
+                    'name' => get_bloginfo('name'),
+                    'url' => home_url('/'),
+                ],
+            ],
+        ];
+
+        // Add navigation elements to the graph
+        foreach ($navigation_elements as $nav_element) {
+            $schema['@graph'][] = $nav_element;
+        }
+
+        // Output the JSON-LD script tag
+        echo '<script type="application/ld+json">';
+        echo wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        echo '</script>' . "\n";
+    }
+}
+
+add_action('wp_head', 'svic_output_site_navigation_schema', 8);
+
 if (!function_exists('svic_is_order_tracking_request')) {
     function svic_is_order_tracking_request(): bool
     {
