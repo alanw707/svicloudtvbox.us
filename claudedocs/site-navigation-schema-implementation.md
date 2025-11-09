@@ -8,56 +8,32 @@ Implemented JSON-LD structured data for site navigation to help Google display s
 ### Location
 - **File**: `theme/svicloudtvbox-lumen/functions.php`
 - **Function**: `svic_output_site_navigation_schema()`
-- **Hook**: `wp_head` (priority 8)
+- **Hook**: `wp_head` (priority 99 - runs after Rank Math SEO)
 
 ### What It Does
-1. **Outputs on Homepage Only**: The structured data is only rendered on the front page to represent the site-wide navigation
+1. **Outputs on Homepage Only**: The structured data is only rendered on the front page using `is_front_page() && is_home()` detection
 2. **Reads WordPress Menu**: Automatically pulls navigation items from the 'primary' WordPress menu
 3. **Fallback Navigation**: If no menu is set, uses the hardcoded fallback navigation from the header
 4. **Schema.org Compliance**: Outputs valid JSON-LD structured data following Schema.org standards
+5. **Rank Math Integration**: Only outputs SiteNavigationElement schema (Rank Math SEO handles WebSite/Organization schemas)
+6. **PHP Compatibility**: Function uses no return type declaration for PHP 7.0+ compatibility
 
 ### Schema Structure
-The implementation outputs three main schema types:
+The implementation outputs SiteNavigationElement schema only. Rank Math SEO plugin already handles WebSite and Organization schemas, so we avoid duplication.
 
-#### 1. WebSite Schema
-```json
-{
-  "@type": "WebSite",
-  "@id": "https://example.com/#website",
-  "url": "https://example.com/",
-  "name": "Site Name",
-  "description": "Site Description",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://example.com/?s={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
-  }
-}
-```
-
-#### 2. Organization Schema
-```json
-{
-  "@type": "Organization",
-  "@id": "https://example.com/#organization",
-  "name": "Organization Name",
-  "url": "https://example.com/"
-}
-```
-
-#### 3. SiteNavigationElement Schema (for each nav item)
+#### SiteNavigationElement Schema (for each nav item)
 ```json
 {
   "@type": "SiteNavigationElement",
   "@id": "https://example.com/page/#nav-1",
   "position": 1,
   "name": "Page Name",
+  "description": "Optional description if provided in menu",
   "url": "https://example.com/page/"
 }
 ```
+
+**Note**: The `description` field is only included if the menu item has a description set in WordPress admin.
 
 ## Features
 
@@ -109,22 +85,11 @@ Test the implementation with:
 
 ### Expected Output Example
 ```html
+<!-- SVICLOUD Navigation Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://svicloudtvbox.us/#website",
-      "url": "https://svicloudtvbox.us/",
-      "name": "SViCloud TV Box",
-      ...
-    },
-    {
-      "@type": "Organization",
-      "@id": "https://svicloudtvbox.us/#organization",
-      ...
-    },
     {
       "@type": "SiteNavigationElement",
       "@id": "https://svicloudtvbox.us/#nav-1",
@@ -139,11 +104,40 @@ Test the implementation with:
       "name": "Compare",
       "url": "https://svicloudtvbox.us/compare/"
     },
-    ...
+    {
+      "@type": "SiteNavigationElement",
+      "@id": "https://svicloudtvbox.us/faq/#nav-3",
+      "position": 3,
+      "name": "FAQ",
+      "url": "https://svicloudtvbox.us/faq/"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "@id": "https://svicloudtvbox.us/product/svicloud-10p-plus/#nav-4",
+      "position": 4,
+      "name": "10P Plus",
+      "url": "https://svicloudtvbox.us/product/svicloud-10p-plus/"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "@id": "https://svicloudtvbox.us/product/svicloud-10s/#nav-5",
+      "position": 5,
+      "name": "10S",
+      "url": "https://svicloudtvbox.us/product/svicloud-10s/"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "@id": "https://svicloudtvbox.us/contact/#nav-6",
+      "position": 6,
+      "name": "Contact",
+      "url": "https://svicloudtvbox.us/contact/"
+    }
   ]
 }
 </script>
 ```
+
+**Note**: WebSite and Organization schemas are provided by Rank Math SEO and appear separately in the page source.
 
 ## Maintenance
 
@@ -162,7 +156,7 @@ To customize the schema output:
 To temporarily disable:
 ```php
 // Comment out or remove this line in functions.php
-// add_action('wp_head', 'svic_output_site_navigation_schema', 8);
+// add_action('wp_head', 'svic_output_site_navigation_schema', 99);
 ```
 
 ## References
@@ -175,7 +169,53 @@ To temporarily disable:
 ## Implementation Date
 November 9, 2025
 
+## Implementation Challenges & Fixes
+
+### Challenge 1: Schema Not Appearing After Deployment
+**Issue**: After initial deployment, the schema markup didn't appear on the live site.
+
+**Root Cause**: LiteSpeed Cache was serving cached HTML from before the function was added.
+
+**Solution**: Required manual cache flush via WordPress admin panel. Cache needed to be flushed twice:
+1. First flush after initial deployment
+2. Second flush after PHP compatibility fix
+
+### Challenge 2: PHP Compatibility Issue
+**Issue**: Function may have failed silently on PHP 7.0.
+
+**Root Cause**: The function originally used `: void` return type declaration, which requires PHP 7.1+.
+
+**Solution**: Removed the return type declaration to ensure compatibility with PHP 7.0+:
+```php
+// Before (PHP 7.1+ only)
+function svic_output_site_navigation_schema(): void
+
+// After (PHP 7.0+ compatible)
+function svic_output_site_navigation_schema()
+```
+
+### Challenge 3: Homepage Detection Complexity
+**Issue**: Initial implementation used complex homepage detection logic with page ID checks.
+
+**Solution**: Simplified to use only WordPress built-in functions:
+```php
+// Final simplified detection
+if (!is_front_page() && !is_home()) {
+    return;
+}
+```
+
+### Challenge 4: Schema Duplication with Rank Math SEO
+**Issue**: Initial plan included WebSite and Organization schemas, but Rank Math SEO already outputs these.
+
+**Solution**:
+- Changed implementation to output only SiteNavigationElement schemas
+- Moved hook priority from 8 to 99 to run after Rank Math
+- This avoids duplicate schema markup and potential conflicts
+
 ## Notes
 - The structured data appears only on the homepage (front page)
+- Works automatically for both English and Chinese homepages via theme translation functions
 - Google may take several weeks to process and display the enhanced search results
 - Sitelinks appearance is ultimately decided by Google's algorithms based on site quality and relevance
+- **Important**: After any code changes, LiteSpeed Cache must be manually flushed via WordPress admin to see updates on the live site
