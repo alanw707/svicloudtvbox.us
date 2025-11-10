@@ -587,97 +587,318 @@ if (!function_exists('svic_output_static_page_meta')) {
 
 add_action('wp_head', 'svic_output_static_page_meta', 7);
 
-/**
- * Output site navigation structured data (JSON-LD) for Google search results
- * Helps Google display site navigation in search results as sitelinks
- * Works alongside Rank Math SEO - only outputs SiteNavigationElement schemas
- */
-if (!function_exists('svic_output_site_navigation_schema')) {
-    function svic_output_site_navigation_schema()
+if (!function_exists('svic_should_output_navigation_schema')) {
+    function svic_should_output_navigation_schema(): bool
     {
-        // Only output on homepage
-        if (!is_front_page() && !is_home()) {
-            return;
+        if (is_admin()) {
+            return false;
         }
 
-        // Get the primary navigation menu items
-        $menu_items = wp_get_nav_menu_items('primary');
-
-        // Fallback to default navigation if no menu is set
-        if (!$menu_items || empty($menu_items)) {
-            $menu_items = [
-                (object) [
-                    'title' => function_exists('svic_translate') ? svic_translate('header.nav.home') : 'Home',
-                    'url' => svic_url_with_lang(home_url('/')),
-                ],
-                (object) [
-                    'title' => function_exists('svic_translate') ? svic_translate('header.nav.compare') : 'Compare',
-                    'url' => svic_url_with_lang(home_url('/compare/')),
-                ],
-                (object) [
-                    'title' => function_exists('svic_translate') ? svic_translate('header.nav.faq') : 'FAQ',
-                    'url' => svic_url_with_lang(home_url('/faq/')),
-                ],
-                (object) [
-                    'title' => function_exists('svic_translate') ? svic_translate('header.nav.ten_p') : 'SViCloud 10P+',
-                    'url' => svic_url_with_lang(home_url('/product/svicloud-10p-plus/')),
-                ],
-                (object) [
-                    'title' => function_exists('svic_translate') ? svic_translate('header.nav.ten_s') : 'SViCloud 10S',
-                    'url' => svic_url_with_lang(home_url('/product/svicloud-10s/')),
-                ],
-                (object) [
-                    'title' => function_exists('svic_translate') ? svic_translate('header.nav.concierge') : 'Contact',
-                    'url' => svic_url_with_lang(home_url('/contact/')),
-                ],
-            ];
+        if (!function_exists('is_front_page') || !function_exists('is_home')) {
+            return false;
         }
 
-        // Build navigation elements for schema
-        $navigation_elements = [];
-        $position = 1;
-
-        foreach ($menu_items as $item) {
-            // Skip child items (only include top-level navigation)
-            if (isset($item->menu_item_parent) && $item->menu_item_parent != 0) {
-                continue;
-            }
-
-            $navigation_elements[] = [
-                '@type' => 'SiteNavigationElement',
-                '@id' => esc_url($item->url ?? $item->title) . '#nav-' . $position,
-                'position' => $position,
-                'name' => wp_strip_all_tags($item->title ?? ''),
-                'description' => !empty($item->description) ? wp_strip_all_tags($item->description) : null,
-                'url' => esc_url($item->url ?? ''),
-            ];
-
-            $position++;
-        }
-
-        // Filter out null descriptions
-        $navigation_elements = array_map(function($element) {
-            return array_filter($element, function($value) {
-                return $value !== null;
-            });
-        }, $navigation_elements);
-
-        // Only output SiteNavigationElement schema (Rank Math handles WebSite/Organization)
-        // Build separate schema for navigation elements
-        $schema = [
-            '@context' => 'https://schema.org',
-            '@graph' => $navigation_elements,
-        ];
-
-        // Output the JSON-LD script tag
-        echo "\n" . '<!-- SVICLOUD Navigation Schema -->' . "\n";
-        echo '<script type="application/ld+json">';
-        echo wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-        echo '</script>' . "\n";
+        return is_front_page() || is_home();
     }
 }
 
-add_action('wp_head', 'svic_output_site_navigation_schema', 99);
+if (!function_exists('svic_fetch_primary_nav_menu_items')) {
+    function svic_fetch_primary_nav_menu_items(): array
+    {
+        if (!function_exists('wp_get_nav_menu_items')) {
+            return [];
+        }
+
+        $menu_items = [];
+        $locations  = function_exists('get_nav_menu_locations') ? get_nav_menu_locations() : [];
+
+        if (isset($locations['primary'])) {
+            $menu_id = (int) $locations['primary'];
+            if ($menu_id > 0) {
+                $menu_items = wp_get_nav_menu_items($menu_id);
+            }
+        }
+
+        if (!$menu_items && function_exists('has_nav_menu') && has_nav_menu('primary')) {
+            $menus = wp_get_nav_menus();
+            foreach ($menus as $menu) {
+                if (!($menu instanceof WP_Term)) {
+                    continue;
+                }
+
+                if (isset($locations['primary']) && (int) $menu->term_id === (int) $locations['primary']) {
+                    continue;
+                }
+
+                if (stripos($menu->slug, 'primary') !== false || stripos($menu->name, 'primary') !== false) {
+                    $menu_items = wp_get_nav_menu_items($menu->term_id);
+                    break;
+                }
+            }
+        }
+
+        if (!$menu_items) {
+            $menu_object = wp_get_nav_menu_object('primary');
+            if ($menu_object instanceof WP_Term) {
+                $menu_items = wp_get_nav_menu_items($menu_object->term_id);
+            }
+        }
+
+        return is_array($menu_items) ? $menu_items : [];
+    }
+}
+
+if (!function_exists('svic_fallback_navigation_schema_items')) {
+    function svic_fallback_navigation_schema_items(): array
+    {
+        $defaults = [
+            [
+                'label_key' => 'header.nav.home',
+                'fallback'  => 'Home',
+                'url'       => home_url('/'),
+            ],
+            [
+                'label_key' => 'header.nav.compare',
+                'fallback'  => 'Compare',
+                'url'       => home_url('/compare/'),
+            ],
+            [
+                'label_key' => 'header.nav.faq',
+                'fallback'  => 'FAQ',
+                'url'       => home_url('/faq/'),
+            ],
+            [
+                'label_key' => 'header.nav.ten_p',
+                'fallback'  => 'SViCloud 10P+',
+                'url'       => home_url('/product/svicloud-10p-plus/'),
+            ],
+            [
+                'label_key' => 'header.nav.ten_s',
+                'fallback'  => 'SViCloud 10S',
+                'url'       => home_url('/product/svicloud-10s/'),
+            ],
+            [
+                'label_key' => 'header.nav.concierge',
+                'fallback'  => 'Contact',
+                'url'       => home_url('/contact/'),
+            ],
+        ];
+
+        $items = [];
+        foreach ($defaults as $entry) {
+            $label = function_exists('svic_translate') ? (string) svic_translate($entry['label_key']) : '';
+            if ($label === '') {
+                $label = $entry['fallback'];
+            }
+
+            $url = svic_url_with_lang($entry['url']);
+
+            $items[] = [
+                'name'        => wp_strip_all_tags($label),
+                'url'         => esc_url_raw($url),
+                'description' => '',
+            ];
+        }
+
+        return $items;
+    }
+}
+
+if (!function_exists('svic_resolve_navigation_schema_items')) {
+    function svic_resolve_navigation_schema_items(): array
+    {
+        static $cache = null;
+        if ($cache !== null) {
+            return $cache;
+        }
+
+        $resolved   = [];
+        $menu_items = svic_fetch_primary_nav_menu_items();
+
+        if ($menu_items) {
+            foreach ($menu_items as $item) {
+                if (!($item instanceof WP_Post)) {
+                    continue;
+                }
+
+                if ((int) ($item->menu_item_parent ?? 0) !== 0) {
+                    continue;
+                }
+
+                $title = isset($item->title) ? wp_strip_all_tags((string) $item->title) : '';
+                $url   = isset($item->url) ? (string) $item->url : '';
+
+                if ($url !== '') {
+                    $url = svic_url_with_lang($url);
+                }
+
+                $url = esc_url_raw($url);
+
+                if ($title === '' || $url === '') {
+                    continue;
+                }
+
+                $description = isset($item->description) && $item->description !== ''
+                    ? wp_strip_all_tags((string) $item->description)
+                    : '';
+
+                if (!isset($resolved[$url])) {
+                    $resolved[$url] = [
+                        'name'        => $title,
+                        'url'         => $url,
+                        'description' => $description,
+                    ];
+                }
+            }
+        }
+
+        if (!$resolved) {
+            $resolved = [];
+            foreach (svic_fallback_navigation_schema_items() as $entry) {
+                if ($entry['url'] === '') {
+                    continue;
+                }
+                $resolved[$entry['url']] = $entry;
+            }
+        }
+
+        $cache = array_slice(array_values($resolved), 0, 8);
+        return $cache;
+    }
+}
+
+if (!function_exists('svic_build_site_navigation_elements')) {
+    function svic_build_site_navigation_elements(?string $website_id = null): array
+    {
+        $items = svic_resolve_navigation_schema_items();
+        if (!$items) {
+            return [];
+        }
+
+        $website_id = $website_id ?: untrailingslashit(home_url('/')) . '#website';
+
+        $elements = [];
+        $position = 1;
+        foreach ($items as $item) {
+            $element = [
+                '@type'    => 'SiteNavigationElement',
+                '@id'      => untrailingslashit($item['url']) . '#nav-' . $position,
+                'position' => $position,
+                'name'     => $item['name'],
+                'url'      => $item['url'],
+                'isPartOf' => [
+                    '@id' => $website_id,
+                ],
+            ];
+
+            if (!empty($item['description'])) {
+                $element['description'] = $item['description'];
+            }
+
+            $elements[] = $element;
+            $position++;
+        }
+
+        return $elements;
+    }
+}
+
+/**
+ * Output a standalone SiteNavigationElement graph when no SEO plugin handles schema.
+ */
+if (!function_exists('svic_output_site_navigation_schema')) {
+    function svic_output_site_navigation_schema(): void
+    {
+        if (defined('RANK_MATH_VERSION') || !svic_should_output_navigation_schema()) {
+            return;
+        }
+
+        $navigation_elements = svic_build_site_navigation_elements();
+        if (!$navigation_elements) {
+            return;
+        }
+
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@graph'   => [
+                [
+                    '@type'   => 'WebSite',
+                    '@id'     => untrailingslashit(home_url('/')) . '#website',
+                    'url'     => home_url('/'),
+                    'name'    => get_bloginfo('name'),
+                    'hasPart' => $navigation_elements,
+                ],
+            ],
+        ];
+
+        echo "\n" . '<!-- SVICLOUD Navigation Schema -->' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo '<script type="application/ld+json">'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+}
+
+if (!function_exists('svic_rank_math_inject_site_navigation_schema')) {
+    function svic_rank_math_inject_site_navigation_schema($schema_graph, $jsonld = null)
+    {
+        if (!svic_should_output_navigation_schema()) {
+            return $schema_graph;
+        }
+
+        $website_index = null;
+        $website_id    = null;
+
+        foreach ($schema_graph as $index => $node) {
+            if (!is_array($node) || empty($node['@type'])) {
+                continue;
+            }
+
+            $types = is_array($node['@type']) ? $node['@type'] : [$node['@type']];
+            $types = array_map('strtolower', array_map('strval', $types));
+
+            if (in_array('website', $types, true)) {
+                $website_index = $index;
+                $website_id    = isset($node['@id']) ? (string) $node['@id'] : null;
+                break;
+            }
+        }
+
+        $navigation_elements = svic_build_site_navigation_elements($website_id ?: null);
+        if (!$navigation_elements) {
+            return $schema_graph;
+        }
+
+        if ($website_index !== null) {
+            $existing = $schema_graph[$website_index]['hasPart'] ?? [];
+            if ($existing && !is_array($existing)) {
+                $existing = [$existing];
+            }
+
+            if (!is_array($existing)) {
+                $existing = [];
+            }
+
+            $schema_graph[$website_index]['hasPart'] = array_merge($existing, $navigation_elements);
+            return $schema_graph;
+        }
+
+        $schema_graph[] = [
+            '@type'   => 'WebSite',
+            '@id'     => untrailingslashit(home_url('/')) . '#website',
+            'url'     => home_url('/'),
+            'name'    => get_bloginfo('name'),
+            'hasPart' => $navigation_elements,
+        ];
+
+        return $schema_graph;
+    }
+}
+
+if (defined('RANK_MATH_VERSION')) {
+    add_filter('rank_math/json_ld', 'svic_rank_math_inject_site_navigation_schema', 85, 2);
+} else {
+    add_action('wp_head', 'svic_output_site_navigation_schema', 99);
+}
 
 if (!function_exists('svic_is_order_tracking_request')) {
     function svic_is_order_tracking_request(): bool
