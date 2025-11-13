@@ -58,9 +58,9 @@
           </ul>
         </div>
 
-        <div class="footer-pillars" role="list">
-          <article class="footer-pillar footer-pillar--list" role="listitem">
-            <ul class="footer-benefits" role="list">
+        <div class="footer-pillars">
+          <article class="footer-pillar footer-pillar--list">
+            <ul class="footer-benefits">
               <?php foreach ($footer_benefit_map as $benefit) : ?>
                 <li class="footer-benefits__item">
                   <span class="footer-benefits__icon" style="color:rgba(236,246,255,0.95);">

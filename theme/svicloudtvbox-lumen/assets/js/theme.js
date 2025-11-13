@@ -163,6 +163,7 @@
         };
 
         const criticalImages = [
+            assetFromTheme('assets/images/hero-voice-assistant.webp'),
             assetFromTheme('assets/images/svicloud-hero-product.webp'),
             assetFromTheme('assets/images/svicloud-10p-plus.webp'),
             assetFromTheme('assets/images/svicloud-tvbox-10s.webp')

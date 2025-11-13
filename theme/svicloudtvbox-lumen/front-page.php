@@ -412,9 +412,38 @@ if (!$blog_posts_query instanceof WP_Query) {
         <div class="hero-dashboard__badge"><?php echo svic_translate_html('frontpage.hero.card.badge'); ?></div>
         <div class="hero-dashboard__card">
           <div class="hero-dashboard__product">
+            <?php
+              $hero_image_sizes = '(max-width: 600px) 88vw, (max-width: 1024px) 62vw, 640px';
+              $hero_webp_srcset = sprintf(
+                  '%1$s 800w, %2$s 1200w, %3$s 1601w',
+                  esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant-800.webp')),
+                  esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant-1200.webp')),
+                  esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant.webp'))
+              );
+              $hero_png_srcset = sprintf(
+                  '%1$s 800w, %2$s 1200w, %3$s 1601w',
+                  esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant-800.png')),
+                  esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant-1200.png')),
+                  esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant.png'))
+              );
+            ?>
             <picture>
-              <source srcset="<?php echo esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant.png')); ?>" type="image/webp" />
-              <img class="hero-dashboard__product-main" src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/hero-voice-assistant.png'); ?>" alt="<?php esc_attr_e('SVICLOUD voice assistant interface with Google Play, movies, and YouTube apps', 'svicloudtvbox-lumen'); ?>" loading="lazy" decoding="async" width="1601" height="898" />
+              <source
+                type="image/webp"
+                srcset="<?php echo $hero_webp_srcset; ?>"
+                sizes="<?php echo esc_attr($hero_image_sizes); ?>"
+              />
+              <img
+                class="hero-dashboard__product-main"
+                src="<?php echo esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant-1200.png')); ?>"
+                srcset="<?php echo $hero_png_srcset; ?>"
+                sizes="<?php echo esc_attr($hero_image_sizes); ?>"
+                alt="<?php esc_attr_e('SVICLOUD voice assistant interface with Google Play, movies, and YouTube apps', 'svicloudtvbox-lumen'); ?>"
+                decoding="async"
+                fetchpriority="high"
+                width="1601"
+                height="898"
+              />
             </picture>
           </div>
           <div class="hero-dashboard__card-header">

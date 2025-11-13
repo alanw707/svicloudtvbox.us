@@ -111,6 +111,9 @@ if (!function_exists('svic_url_with_lang')) {
             $path = '/';
         }
 
+        $path = svic_normalize_route_path($path);
+        $path = svic_route_alias_path_for_locale($path, $langValue);
+
         $hadTrailingSlash = $path !== '/' && substr($path, -1) === '/';
         $trimmedPath = ltrim($path, '/');
 
@@ -162,6 +165,235 @@ if (!function_exists('svic_url_with_lang')) {
         return $localizedUrl;
     }
 }
+
+if (!function_exists('svic_normalize_route_path')) {
+    function svic_normalize_route_path(string $path): string
+    {
+        $path = trim($path);
+        if ($path === '') {
+            return '/';
+        }
+
+        if ($path[0] !== '/') {
+            $path = '/' . $path;
+        }
+
+        $path = preg_replace('#/+#', '/', $path);
+        $path = preg_replace_callback('/%[0-9a-fA-F]{2}/', static function ($match) {
+            return strtolower($match[0]);
+        }, $path);
+        if ($path !== '/' && substr($path, -1) !== '/') {
+            $path .= '/';
+        }
+
+        return $path;
+    }
+}
+
+if (!function_exists('svic_strip_route_locale_prefix')) {
+    function svic_strip_route_locale_prefix(string $path): string
+    {
+        $normalized = svic_normalize_route_path($path);
+
+        if (strpos($normalized, '/zh/') === 0) {
+            $normalized = substr($normalized, 3);
+            if ($normalized === false || $normalized === '') {
+                $normalized = '/';
+            } elseif ($normalized[0] !== '/') {
+                $normalized = '/' . $normalized;
+            }
+            $normalized = svic_normalize_route_path($normalized);
+        }
+
+        return $normalized;
+    }
+}
+
+if (!function_exists('svic_route_alias_definitions')) {
+    function svic_route_alias_definitions(): array
+    {
+        static $cache = null;
+        if ($cache !== null) {
+            return $cache;
+        }
+
+        $aliases = [
+            'compare' => [
+                'canonical_base' => [
+                    'en' => '/compare/',
+                    'zh' => '/%e6%a9%9f%e5%9e%8b%e6%af%94%e8%bc%83/',
+                ],
+                'legacy' => [],
+            ],
+            'guides' => [
+                'canonical_base' => [
+                    'en' => '/guides/',
+                    'zh' => '/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/',
+                ],
+                'legacy' => [],
+            ],
+        ];
+
+        foreach ($aliases as $key => $alias) {
+            $alias['canonical_base'] = array_map('svic_normalize_route_path', $alias['canonical_base']);
+            $alias['legacy']         = array_map('svic_normalize_route_path', $alias['legacy']);
+            $aliases[$key]           = $alias;
+        }
+
+        return $cache = $aliases;
+    }
+}
+
+if (!function_exists('svic_route_alias_by_base')) {
+    function svic_route_alias_by_base(string $path): ?array
+    {
+        $base = svic_strip_route_locale_prefix($path);
+        foreach (svic_route_alias_definitions() as $alias) {
+            if (in_array($base, $alias['canonical_base'], true) || in_array($base, $alias['legacy'], true)) {
+                return $alias;
+            }
+        }
+
+        return null;
+    }
+}
+
+if (!function_exists('svic_alias_base_for_locale')) {
+    function svic_alias_base_for_locale(array $alias, string $langKey): ?string
+    {
+        $langKey = $langKey === 'zh' ? 'zh' : 'en';
+        if (!empty($alias['canonical_base'][$langKey])) {
+            return $alias['canonical_base'][$langKey];
+        }
+
+        return $alias['canonical_base']['en'] ?? null;
+    }
+}
+
+if (!function_exists('svic_alias_localized_path')) {
+    function svic_alias_localized_path(array $alias, string $langKey): ?string
+    {
+        $base = svic_alias_base_for_locale($alias, $langKey);
+        if (!$base) {
+            return null;
+        }
+
+        if ($langKey === 'zh') {
+            return svic_normalize_route_path('/zh' . $base);
+        }
+
+        return $base;
+    }
+}
+
+if (!function_exists('svic_route_alias_path_for_locale')) {
+    function svic_route_alias_path_for_locale(string $path, string $langKey): string
+    {
+        $alias = svic_route_alias_by_base($path);
+        if (!$alias) {
+            return svic_normalize_route_path($path);
+        }
+
+        $target = svic_alias_base_for_locale($alias, $langKey);
+        if (!$target) {
+            return svic_normalize_route_path($path);
+        }
+
+        return $target;
+    }
+}
+
+if (!function_exists('svic_alias_resolve_existing_page_id')) {
+    function svic_alias_resolve_existing_page_id(array $alias): ?int
+    {
+        foreach ($alias['canonical_base'] as $base) {
+            $slug = trim($base, '/');
+            if ($slug === '') {
+                continue;
+            }
+
+            $page = get_page_by_path($slug);
+            if ($page instanceof WP_Post) {
+                return (int) $page->ID;
+            }
+        }
+
+        return null;
+    }
+}
+
+if (!function_exists('svic_register_route_alias_rewrites')) {
+    function svic_register_route_alias_rewrites(): void
+    {
+        foreach (svic_route_alias_definitions() as $alias) {
+            $englishBase = svic_alias_base_for_locale($alias, 'en');
+            if (!$englishBase) {
+                continue;
+            }
+
+            $englishSlug = trim($englishBase, '/');
+            if ($englishSlug === '') {
+                continue;
+            }
+
+            $englishPage = get_page_by_path($englishSlug);
+            if ($englishPage instanceof WP_Post) {
+                continue;
+            }
+
+            $targetPageId = svic_alias_resolve_existing_page_id($alias);
+            if (!$targetPageId) {
+                continue;
+            }
+
+            $pattern = '^' . preg_quote($englishSlug, '#') . '/?$';
+            add_rewrite_rule($pattern, 'index.php?page_id=' . $targetPageId, 'top');
+        }
+    }
+}
+add_action('init', 'svic_register_route_alias_rewrites', 20);
+
+if (!function_exists('svic_enforce_route_alias_canonical')) {
+    function svic_enforce_route_alias_canonical(): void
+    {
+        if (is_admin() || is_feed() || wp_doing_ajax()) {
+            return;
+        }
+
+        $originalPath = null;
+        if (class_exists('SVIC_Locale_Resolver') && method_exists('SVIC_Locale_Resolver', 'originalRequestPath')) {
+            $originalPath = SVIC_Locale_Resolver::originalRequestPath();
+        }
+
+        if (!is_string($originalPath) || $originalPath === '') {
+            $requestUri = $_SERVER['REQUEST_URI'] ?? '';
+            $parsed     = is_string($requestUri) ? wp_parse_url($requestUri, PHP_URL_PATH) : '';
+            $originalPath = is_string($parsed) && $parsed !== '' ? $parsed : '/';
+        }
+
+        $normalizedOriginal = svic_normalize_route_path($originalPath);
+        $alias              = svic_route_alias_by_base($normalizedOriginal);
+        if (!$alias) {
+            return;
+        }
+
+        $requestLang   = strpos($normalizedOriginal, '/zh/') === 0 ? 'zh' : 'en';
+        $canonicalPath = svic_alias_localized_path($alias, $requestLang);
+        if (!$canonicalPath || $canonicalPath === $normalizedOriginal) {
+            return;
+        }
+
+        $target = home_url($canonicalPath);
+        $query  = isset($_SERVER['QUERY_STRING']) ? (string) $_SERVER['QUERY_STRING'] : '';
+        if ($query !== '') {
+            $target .= (strpos($target, '?') === false ? '?' : '&') . $query;
+        }
+
+        wp_safe_redirect($target, 301);
+        exit;
+    }
+}
+add_action('template_redirect', 'svic_enforce_route_alias_canonical', 1);
 
 if (!function_exists('svic_current_base_url')) {
     function svic_current_base_url(): string {
