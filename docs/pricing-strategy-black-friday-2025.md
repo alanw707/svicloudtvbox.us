@@ -554,6 +554,65 @@ This caps downside while preserving upside optionality.
 
 ---
 
+## Facebook Marketing Activation Plan (20% Hero Offer)
+
+**Context (Nov 2025 Update)**: Paid social will promote an *“Up to 20% Off Black Friday”* narrative to stay competitive in Facebook auctions while still anchoring the core pricing recommendation (18% on 10P Plus, 10% on 10S). The full 20% headline is reserved for the 10P Plus hero bundle + concierge/free premium channel add-on so margins remain viable; the 10S SKU maintains a 10% cap and is framed as “Get 10S from $165”.
+
+### Offer Architecture & Goals
+- Hero offer: 20% off SVICLOUD 10P Plus bundles + free 3-month premium channel pack or free shipping; stackable with concierge/lifetime priority positioning.
+- Supporting offer: 10S stays at 10% off; disclose “Up to 20% off select bundles” in ad copy to keep compliance with actual pricing.
+- Primary KPIs: ROAS ≥4.5, CPA ≤$40, CTR ≥1.5%, add 15% more email leads for December retargeting.
+
+### Audience & Targeting
+- **Existing customers / high intent**: Custom Audience from CRM + site engagers (90-day window); bid higher with loyalty upsells.
+- **Lookalikes**: 1% LAL built from top 10% LTV purchasers and repeat concierge users.
+- **Interest stack**: Cord-cutters, IPTV/OTT enthusiasts, expat communities needing international channels, tech deal hunters.
+- **Retargeting pools**: ViewContent, AddToCart, and checkout abandoners within 30 days, plus lead-ad responders who haven’t purchased.
+
+### Messaging Pillars
+- Urgency + scarcity: “Black Friday ends Cyber Monday / limited units at 20% off.”
+- Value + differentiation: 4K streaming, 1,000+ channels, authorized dealer + concierge support, lifetime priority service callout.
+- Social proof: 4.8⭐ average, testimonials, influencer quotes.
+- Offer clarity: “Save 20% on 10P Plus bundles” vs. “Save $40 now” A/B frames to gauge percentage vs. absolute appeal.
+
+### Creative Toolkit
+- Video: 15s feature reel, 10s testimonial, 6s offer stinger with animated 20% badge.
+- Static/carousel: Channel lineup, hardware close-ups, “limited units” badge, concierge/support story card.
+- Stories/Reels: Motion graphics with countdown stickers, swipe-up linking to `/black-friday`.
+- Copy matrix: Urgency (Last chance), Value (Authorized dealer), Savings (20% + free premium pack), Assurance (Lifetime support).
+- Tracking: Unique UTM parameters per asset (utm_campaign=bf25-fb-20off, utm_content distinguishing creative IDs).
+
+### Funnel & Budget Structure
+- Campaign objective: Conversion → Sales with Advantage Campaign Budget.
+- Spend split: 60% prospecting (broad + LAL), 25% retargeting, 15% loyalty upsell.
+- Prospecting bidding: Lowest-cost with cost cap fallback if CPA drifts >$40; retargeting may use manual bid caps to protect frequency.
+- Automation rules: Pause assets when frequency >6 and CTR <0.8%; boost top performer +20% budget when ROAS >5 for 12h.
+
+### Landing Experience & Tracking
+- Dedicated `/black-friday` page mirroring offer, hero countdown timer synced to sale end, FAQ accordion, testimonials, and form for hesitant users (10% voucher for email capture).
+- Ensure WooCommerce promo rules differentiate 20% hero bundle vs. 10% 10S to avoid margin leakage.
+- Validate Facebook Pixel + Conversion API for ViewContent / AddToCart / Purchase; QA GA4 events with UTM mapping.
+
+### Timeline & Cadence
+- **Teaser (Nov 10–20)**: Warm-up awareness, lead ads teasing early access, light spend on loyalists.
+- **Main push (Nov 21–29)**: Full budget, rotate creatives daily, increase bids on Nov 23–24 when competition spikes.
+- **Last-chance (Nov 30–Dec 2)**: Retargeting-heavy, creative copy flips to “Final hours—20% off bundles ends tonight.”
+
+### Measurement & Reporting
+- Daily Ad Manager check: ROAS/CPA by audience + placement, creative fatigue indicators, frequency.
+- GA4 dashboard for onsite engagement, landing-page CVR, add-to-cart drop-offs.
+- Lift test if total Facebook spend exceeds $20k to validate incremental conversions.
+
+### Immediate Next Steps
+1. Draft creative briefs + storyboards reflecting 20% hero offer and concierge positioning.
+2. Update `/black-friday` landing module copy/assets; verify promo codes display correct pricing.
+3. Build campaign/ad set/ad structure in Ads Manager with placeholder creatives for compliance review.
+4. Refresh automated rules, pixel audiences, and reporting template for the Black Friday window.
+
+> **Margin Guardrail**: Keep 10S discount capped at 10% despite “20% off” messaging; if marketing requires 20% headline for all ads, bundle 10S with accessories/service add-ons to maintain ≥$20 profit/unit per the risk table above.
+
+---
+
 ## Conclusion: Strategic Synthesis
 
 **Porter**: Competitive positioning maintained while capturing holiday volume

@@ -170,6 +170,25 @@ Note: Aligns with PRD and Launch Plan. Use this as the working checklist.
 
 ---
 
+## Epic M — Black Friday 2025 Marketing Activation
+
+- [ ] Facebook creative suite production
+  - AC: Assets defined in `docs/marketing/facebook-black-friday-2025-creative-brief.md` (videos, carousel, stories, statics) exported with EN/zh captions, UTMs sheet, and delivered to `/assets/facebook/bf25`.
+- [ ] `/black-friday` landing module build
+  - AC: Page implements modules specified in `docs/marketing/black-friday-landing-page-plan.md`, hero countdown wired, Klaviyo form connected, CSS partial `55-black-friday.css` added to `front-page` bundle.
+- [ ] Promo code configuration & QA
+  - AC: Coupons `BF25-20`, `BF25-10`, `BF25-HOLD` live with auto-apply query params; regression tests captured per QA checklist.
+- [ ] Landing page QA runbook
+  - AC: Device tests, Lighthouse, screenshot set, translation toggle verified; issues logged/resolved.
+- [ ] Ads Manager build-out
+  - AC: Campaign/ad sets/ad names and automation rules implemented per `docs/marketing/facebook-bf25-ads-structure.md`; pixel event tests captured.
+- [ ] Pixel/CAPI + audience refresh
+  - AC: Conversion API dedup validated, CRM and LAL seeds refreshed, reporting in `docs/marketing/facebook-bf25-ops-checklist.md` noted complete.
+- [ ] BF25 reporting dashboard
+  - AC: Looker Studio dashboard pulling Meta/GA4/Klaviyo data with annotated daily updates; link stored in ops checklist.
+
+---
+
 ## Fill-ins (Blockers to resolve)
 
 - Final prices — 10P+: ${{PRICE_10P}} • 10S: ${{PRICE_10S}}
