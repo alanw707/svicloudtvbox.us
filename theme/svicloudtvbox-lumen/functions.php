@@ -15,6 +15,21 @@ if (!defined('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID')) {
     define('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID', 5317978135);
 }
 
+const SVIC_LITESPEED_PURGE_MARK = 'svic-litespeed-sitemap-20251113a';
+
+add_action('init', function () {
+    if (get_option('svic_litespeed_last_purge') === SVIC_LITESPEED_PURGE_MARK) {
+        return;
+    }
+
+    if (!class_exists('\LiteSpeed\Purge')) {
+        return;
+    }
+
+    update_option('svic_litespeed_last_purge', SVIC_LITESPEED_PURGE_MARK, false);
+    \LiteSpeed\Purge::purge_all('SVIC hero chunk hotfix');
+}, 1);
+
 require_once get_template_directory() . '/inc/class-svic-translator.php';
 require_once get_template_directory() . '/inc/class-svic-markdown.php';
 
@@ -3209,6 +3224,54 @@ add_action('wp_enqueue_scripts', function () {
     ]);
 });
 
+add_action('wp_enqueue_scripts', function () {
+    if (!is_front_page()) {
+        return;
+    }
+
+    $styles_to_remove = [
+        'wp-block-library',
+        'wp-block-library-theme',
+        'wc-block-style',
+        'wc-address-autocomplete',
+        'hostinger-reach-subscription-block',
+        'brands-styles',
+        'mediaelement',
+        'wp-mediaelement',
+        'global-styles',
+        'classic-theme-styles',
+    ];
+
+    foreach ($styles_to_remove as $handle) {
+        if (wp_style_is($handle, 'enqueued')) {
+            wp_dequeue_style($handle);
+        }
+    }
+}, 100);
+
+add_action('wp_enqueue_scripts', function () {
+    if (!is_front_page()) {
+        return;
+    }
+
+    $script_handles = [
+        'jquery',
+        'jquery-core',
+        'jquery-migrate',
+    ];
+
+    foreach ($script_handles as $handle) {
+        if (wp_script_is($handle, 'enqueued')) {
+            wp_script_add_data($handle, 'group', 1);
+            wp_script_add_data($handle, 'strategy', 'defer');
+        }
+    }
+
+    if (wp_script_is('svicloudtvbox-script', 'enqueued')) {
+        wp_script_add_data('svicloudtvbox-script', 'strategy', 'defer');
+    }
+}, 20);
+
 // Provide accessible text for checkout payment method icons.
 add_filter('woocommerce_gateway_icon', function ($icon_html, $gateway_id) {
     if (strpos($icon_html, 'wc-stripe-card-icons-container') === false) {
@@ -3783,6 +3846,94 @@ if (!function_exists('svic_get_theme_deploy_marker')) {
     }
 }
 
+if (!function_exists('svic_rank_math_sitemap_rules_missing')) {
+    function svic_rank_math_sitemap_rules_missing(): bool
+    {
+        if (!defined('RANK_MATH_VERSION')) {
+            return false;
+        }
+
+        $rules = get_option('rewrite_rules');
+        if (!is_array($rules) || $rules === []) {
+            return true;
+        }
+
+        foreach ($rules as $regex => $query) {
+            if (!is_string($regex) || stripos($regex, 'sitemap') === false) {
+                continue;
+            }
+
+            if (is_string($query) && strpos($query, 'rank-math-sitemap') !== false) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+if (!function_exists('svic_is_legacy_sitemap_request')) {
+    function svic_is_legacy_sitemap_request(): bool
+    {
+        $candidates = [];
+
+        if (class_exists('SVIC_Locale_Resolver')) {
+            if (method_exists('SVIC_Locale_Resolver', 'originalRequestPath')) {
+                $candidates[] = SVIC_Locale_Resolver::originalRequestPath();
+            }
+            if (method_exists('SVIC_Locale_Resolver', 'currentRequestPath')) {
+                $candidates[] = SVIC_Locale_Resolver::currentRequestPath();
+            }
+        }
+
+        $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+        if (is_string($request_uri) && $request_uri !== '') {
+            $parsed = wp_parse_url($request_uri);
+            if (isset($parsed['path']) && is_string($parsed['path'])) {
+                $candidates[] = $parsed['path'];
+            }
+        }
+
+        $redirect_url = $_SERVER['REDIRECT_URL'] ?? '';
+        if (is_string($redirect_url) && $redirect_url !== '') {
+            $candidates[] = $redirect_url;
+        }
+
+        foreach ($candidates as $path) {
+            if (!is_string($path) || $path === '') {
+                continue;
+            }
+
+            $normalized = strtolower($path);
+            $normalized = $normalized === '/' ? '/' : rtrim($normalized, '/');
+
+            if ($normalized === '/sitemap_index.xml' || $normalized === '/zh/sitemap_index.xml') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+add_action('template_redirect', function () {
+    if (!svic_is_legacy_sitemap_request()) {
+        return;
+    }
+
+    if (!function_exists('wp_sitemaps_get_server')) {
+        return;
+    }
+
+    $server = wp_sitemaps_get_server();
+    if (!is_object($server) || !method_exists($server, 'render_index')) {
+        return;
+    }
+
+    $server->render_index();
+    exit;
+}, 0);
+
 if (!function_exists('svic_flush_rewrites_once_for_sitemaps')) {
     /**
      * Flush rewrite rules one time per deployment so sitemap routes stay intact.
@@ -3806,7 +3957,9 @@ if (!function_exists('svic_flush_rewrites_once_for_sitemaps')) {
             $stored_marker = (string) $stored;
         }
 
-        if ($stored_marker === $marker) {
+        $force_flush = svic_rank_math_sitemap_rules_missing();
+
+        if (!$force_flush && $stored_marker === $marker) {
             return;
         }
 
@@ -3815,6 +3968,7 @@ if (!function_exists('svic_flush_rewrites_once_for_sitemaps')) {
         $payload = [
             'marker'     => $marker,
             'flushed_at' => time(),
+            'reason'     => $force_flush ? 'auto-missing-rules' : 'deploy',
         ];
 
         update_option('svic_rank_math_sitemap_rewrite_flushed', $payload, false);
