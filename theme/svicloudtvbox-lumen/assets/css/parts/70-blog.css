@@ -27,6 +27,7 @@
   box-shadow: var(--shadow-md);
   border: 1px solid rgba(126, 178, 255, 0.22);
   backdrop-filter: var(--glass-blur-soft);
+  box-sizing: border-box;
 }
 
 .blog-hero {
@@ -93,6 +94,7 @@ html[lang*="zh"] .blog-article__content strong {
   margin-bottom: var(--size-1000);
   display: grid;
   gap: var(--size-500);
+  box-sizing: border-box;
 }
 
 .blog-hero__summary {
@@ -208,6 +210,7 @@ html[lang*="zh"] .blog-article__content strong {
 
 .blog-article__content > * {
   margin: 0;
+  min-width: 0;
 }
 
 .blog-article__content h2,
@@ -307,6 +310,17 @@ html[lang*="zh"] .blog-article__content strong {
 }
 
 .blog-article__content .svic-markdown-table table {
+  min-width: 640px;
+}
+
+.blog-spec-table {
+  margin-block: var(--size-500);
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.blog-spec-table table {
   min-width: 640px;
 }
 

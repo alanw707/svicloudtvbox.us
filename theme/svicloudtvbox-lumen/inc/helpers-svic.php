@@ -221,7 +221,7 @@ if (!function_exists('svic_route_alias_definitions')) {
             'compare' => [
                 'canonical_base' => [
                     'en' => '/compare/',
-                    'zh' => '/%e6%a9%9f%e5%9e%8b%e6%af%94%e8%bc%83/',
+                    'zh' => '/compare/',
                 ],
                 'legacy' => [],
             ],

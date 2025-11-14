@@ -28,6 +28,7 @@ from __future__ import annotations
 import argparse
 import base64
 import json
+import os
 import shlex
 import subprocess
 import sys
@@ -47,6 +48,26 @@ except ImportError:  # pragma: no cover - optional dependency
 
 
 DEFAULT_DOCS_DIR = Path("docs/blog")
+
+
+def load_env_file(file_path: str = ".env") -> None:
+    """Populate os.environ with keys from a .env file if present."""
+
+    env_path = Path(file_path)
+    if not env_path.exists():
+        return
+
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = value
 
 
 class ImportError(Exception):
@@ -420,6 +441,8 @@ class RestImporter:
 
 
 def main() -> int:
+    load_env_file()
+
     parser = argparse.ArgumentParser(description="Sync docs/blog content into WordPress.")
     parser.add_argument(
         "--wp-cli",
@@ -477,6 +500,21 @@ def main() -> int:
     )
 
     args = parser.parse_args()
+
+    # Allow REST credentials + endpoint to fall back to environment variables
+    # defined in .env (e.g., WP_REST_ENDPOINT, WP_REST_USERNAME, WP_REST_PASSWORD).
+    if not args.rest_endpoint:
+        env_endpoint = os.getenv("WP_REST_ENDPOINT")
+        if env_endpoint:
+            args.rest_endpoint = env_endpoint
+    if not args.rest_username:
+        env_user = os.getenv("WP_REST_USERNAME")
+        if env_user:
+            args.rest_username = env_user
+    if not args.rest_password:
+        env_pass = os.getenv("WP_REST_PASSWORD")
+        if env_pass:
+            args.rest_password = env_pass
 
     docs_dir = Path(args.docs_dir).resolve()
     zh_dir = (docs_dir / "zh") if "zh" not in args.docs_dir else Path(args.docs_dir).resolve()
