@@ -1,0 +1,78 @@
+# Example configuration for the autonomous blog automation script.
+# Copy to config.yaml and adjust for your environment.
+apis:
+  claude_model_brief: "claude-3-5-haiku-20241022"
+  claude_model_outline: "claude-3-5-haiku-20241022"
+  claude_model_full: "claude-3-5-sonnet-20241022"
+  claude_model_qa: "claude-3-5-haiku-20241022"
+  openai_embedding: "text-embedding-3-small"
+
+quality:
+  min_score: 80
+  duplicate_threshold: 0.85
+  min_length: 4000
+  outline_score_threshold: 0.75
+
+publishing:
+  staging_hold_hours: 24
+  max_posts_per_week: 7
+  schedule:
+    - day: "Tuesday"
+      time: "09:00"
+    - day: "Thursday"
+      time: "09:00"
+
+wordpress:
+  url: "https://svicloudtvbox.us"
+  method: "rest-api"  # or wp-cli
+  rest:
+    username: "content-bot@svicloudtvbox.us"
+    password_env: "WP_REST_PASSWORD"
+    endpoint: "https://svicloudtvbox.us/wp-json/wp/v2/posts"
+  categories:
+    - "Blog"
+    - "Chinese"
+
+storage:
+  db_path: "posts_history.db"
+  github_backup:
+    enabled: false
+    repo: ""
+    branch: "main"
+    token_env: "GITHUB_TOKEN"
+
+brand_voice:
+  tone: "專業且友善，強調美國倉庫與客服優勢"
+  key_phrases:
+    - "內華達倉庫48小時快速配送"
+    - "美國本土一年保固"
+    - "中英雙語客服"
+  product_terms:
+    - "小雲電視盒"
+    - "SVICLOUD 10P+"
+    - "SVICLOUD 10S"
+
+content_inputs:
+  keyword_source: "claudedocs/chinese-keyword-ranking-strategy-nov-2025.md"
+  locale_targets:
+    - "加州"
+    - "紐約"
+    - "德州"
+
+notifications:
+  email: "admin@svicloudtvbox.us"
+  smtp:
+    host: "smtp.gmail.com"
+    port: 587
+    username: "alerts@svicloudtvbox.us"
+    password_env: "SMTP_PASSWORD"
+
+monitoring:
+  log_level: "INFO"
+  log_path: "logs/automation.log"
+  cron_log_path: "logs/cron.log"
+  retention_days: 90
+
+safety:
+  dry_run: true
+  emergency_stop_file: "EMERGENCY_STOP"
