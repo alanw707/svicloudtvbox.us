@@ -86,8 +86,9 @@ Set `content_inputs.competitors.auto_refresh: true` (plus `sites` and `min_lengt
 3. Run it (mounting data/log directories so history persists):
    ```bash
    docker run --rm \
-     --env-file .env \
-     -v $(pwd)/data:/app/data \
+      --env-file .env \
+      -e OPENAI_PROJECT=your_project_id \
+      -v $(pwd)/data:/app/data \
      -v $(pwd)/logs:/app/logs \
      -v $(pwd)/drafts:/app/drafts \
      -v $(pwd)/../../claudedocs:/claudedocs \
@@ -100,7 +101,8 @@ Set `content_inputs.competitors.auto_refresh: true` (plus `sites` and `min_lengt
       --env-file /home/alanw/blog-automation/.env \
       -v /home/alanw/blog-automation/data:/app/data \
       -v /home/alanw/blog-automation/logs:/app/logs \
-      -v /home/alanw/claudedocs:/claudedocs \
+   -v /home/alanw/claudedocs:/claudedocs \
+    -e OPENAI_PROJECT=your_project_id \
       svicloud/autoblog:latest --max-posts 1 >> /home/alanw/blog-automation/logs/cron.log 2>&1
    ```
 
