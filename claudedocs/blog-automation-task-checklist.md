@@ -3,11 +3,11 @@
 This list covers everything you need to gather or configure before the automation build can run end-to-end.
 
 ## Credentials & Secrets
-- [ ] Claude API key with quota for multi-pass generation
-- [ ] OpenAI API key for text-embedding-3-small duplicate checks
-- [ ] WordPress application password for an editor/admin user with zh-Hant publishing rights
-- [ ] Google Search Console service-account JSON scoped to the svicloudtvbox.us property
-- [ ] SMTP credentials (or sendmail path) for weekly summary/error emails
+- [x] Claude API key with quota for multi-pass generation (`CLAUDE_API_KEY` already present in repo `.env`)
+- [x] OpenAI API key for text-embedding-3-small duplicate checks (`OPENAI_API_KEY` already present in repo `.env`)
+- [x] WordPress application password for an editor/admin user with zh-Hant publishing rights (`WP_REST_PASSWORD` in `.env`)
+- [x] Google Search Console service-account JSON scoped to the svicloudtvbox.us property (`secrets/svicloudtvboxus-5b50cc5f2e26.json`)
+- [x] SMTP credentials (or sendmail path) for weekly summary/error emails (Brevo API key in `.env` via `BREVO_API_KEY`) — ensure the automation server's public IP (currently `71.38.148.86` while testing locally) is added to Brevo's Authorized IP list so REST calls succeed
 
 ## Server & Environment
 - [ ] Confirm target install path (e.g., `/home/alanw/blog-automation`) and ensure 2GB free disk space

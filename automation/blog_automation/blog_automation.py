@@ -6,14 +6,20 @@ import argparse
 import json
 import logging
 import os
+import smtplib
 import sqlite3
+import math
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+from email.message import EmailMessage
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List, Optional, Tuple
 
+import requests
 import yaml
+from bs4 import BeautifulSoup
 from dotenv import load_dotenv
+import markdown
 
 try:
     import anthropic
@@ -58,6 +64,7 @@ class BlogAutomation:
         self.db = self._init_database()
         self.claude = self._init_claude_client()
         self.openai = self._init_openai_client()
+        self.embedding_model = self.config.get("apis", {}).get("openai_embedding", "text-embedding-3-small")
         self.log.info("BlogAutomation ready (dry_run=%s)", self.dry_run)
 
     # ------------------------------------------------------------------
@@ -171,7 +178,6 @@ class BlogAutomation:
             if self.dry_run:
                 self.log.info("[DRY] Would publish '%s' (score %.1f)", post.title, score)
                 published += 1
-                self._record_post(post, status="dry-run")
                 continue
 
             if self.publish_post(post):
@@ -204,70 +210,104 @@ class BlogAutomation:
     # Pipeline stages (initial stubs)
     def research_topics(self) -> List[TopicCandidate]:
         """Derive topic candidates from the configured keyword source or fallback list."""
-        content_cfg = self.config.get("content_inputs", {})
-        keyword_source = content_cfg.get("keyword_source")
-        candidates: List[TopicCandidate] = []
-
-        if keyword_source:
-            source_path = self._resolve_path(keyword_source)
-            if source_path.exists():
-                with source_path.open("r", encoding="utf-8") as fp:
-                    for line in fp:
-                        stripped = line.strip()
-                        if not stripped.startswith("- "):
-                            continue
-                        keyword = stripped[2:].strip().strip("\"")
-                        if not keyword:
-                            continue
-                        score_hint = len(keyword.encode("utf-8")) % 100
-                        candidates.append(
-                            TopicCandidate(
-                                keyword=keyword,
-                                search_volume=200 + score_hint,
-                                opportunity_score=round(0.4 + (score_hint / 250), 2),
-                                metadata={"source": str(source_path)},
-                            )
-                        )
-        if not candidates:
-            seed_keywords = [
-                "美國買小雲電視盒完整指南 2025",
-                "小雲10P+ vs 10S 機型比較",
-                "紐約小雲電視盒購買",
+        plan_candidates = self._load_keyword_plan_candidates()
+        gsc_candidates = self._load_gsc_candidates()
+        merged_candidates = self._merge_candidates(plan_candidates, gsc_candidates)
+        if not merged_candidates:
+            content_cfg = self.config.get("content_inputs", {})
+            locale_targets = content_cfg.get("locale_targets", [])
+            fallback = [
+                self._build_topic_candidate(
+                    "美國買小雲電視盒完整指南 2025",
+                    base_score=75,
+                    section="fallback",
+                    volume_estimate=350,
+                    locale_targets=locale_targets,
+                    source="fallback",
+                ),
+                self._build_topic_candidate(
+                    "小雲10P+ vs 10S 機型比較",
+                    base_score=72,
+                    section="fallback",
+                    volume_estimate=340,
+                    locale_targets=locale_targets,
+                    source="fallback",
+                ),
+                self._build_topic_candidate(
+                    "紐約小雲電視盒購買",
+                    base_score=70,
+                    section="fallback",
+                    volume_estimate=320,
+                    locale_targets=locale_targets,
+                    source="fallback",
+                ),
             ]
-            candidates = [
-                TopicCandidate(keyword=kw, search_volume=250, opportunity_score=0.65, metadata={"source": "fallback"})
-                for kw in seed_keywords
-            ]
-        self.log.debug("Collected %s topic candidates", len(candidates))
-        return candidates
+            return fallback
+        sorted_candidates = sorted(merged_candidates, key=lambda c: c.metadata.get("score", 0), reverse=True)
+        self.log.info(
+            "Loaded %s topic candidates (plan: %s, gsc: %s)",
+            len(sorted_candidates),
+            len(plan_candidates),
+            len(gsc_candidates),
+        )
+        return sorted_candidates
 
     def filter_duplicates(self, topics: Iterable[TopicCandidate]) -> List[TopicCandidate]:
         """Remove topics that already exist in the posts_history table based on plaintext match."""
+        topics_list = list(topics)
         existing_keywords = {
             row[0].lower()
             for row in self.db.execute("SELECT DISTINCT keyword FROM posts_history WHERE keyword IS NOT NULL")
             if row[0]
         }
-        unique = [topic for topic in topics if topic.keyword.lower() not in existing_keywords]
-        dropped = len(list(topics)) - len(unique) if not isinstance(topics, list) else len(topics) - len(unique)
+        if not topics_list:
+            return []
+
+        unique: List[TopicCandidate] = []
+        dropped = 0
+        embedding_threshold = self.config.get("quality", {}).get("duplicate_threshold", 0.85)
+        embedding_cache: Dict[str, List[float]] = {}
+        existing_embeddings = self._load_existing_embeddings() if self.openai else []
+
+        for topic in topics_list:
+            keyword_lower = topic.keyword.lower()
+            if keyword_lower in existing_keywords:
+                dropped += 1
+                continue
+            if existing_embeddings:
+                embedding = embedding_cache.get(keyword_lower)
+                if embedding is None:
+                    embedding = self._generate_embedding_vector(topic.keyword)
+                    if embedding:
+                        embedding_cache[keyword_lower] = embedding
+                if embedding and self._is_duplicate_embedding(embedding, existing_embeddings, embedding_threshold):
+                    dropped += 1
+                    continue
+            unique.append(topic)
+
         if dropped:
-            self.log.info("Dropped %s topics already covered", dropped)
+            self.log.info("Dropped %s topics already covered or too similar", dropped)
         return unique
 
     def generate_post(self, topic: TopicCandidate) -> GeneratedPost:
-        """Placeholder multi-pass generation hook."""
+        """Multi-pass generation pipeline using Claude with fallbacks."""
         brief = self.generate_brief(topic)
-        outline = self.generate_outline(brief)
+        outline = self.generate_outline(topic, brief)
         if not self.validate_outline(outline):
             self.log.warning("Outline validation failed for '%s', regenerating once", topic.keyword)
-            outline = self.generate_outline(brief, retry=True)
-        post_body = self.generate_full_post(outline)
+            outline = self.generate_outline(topic, brief, retry=True)
+        post_body = self.generate_full_post(topic, outline, brief)
+        post_body = self._insert_internal_links(post_body)
+        post_body = self._inject_images(post_body, topic)
+        post_body = self._append_cta(post_body, topic)
         excerpt = post_body.split("\n\n", maxsplit=1)[0][:160]
         slug = _slugify(topic.keyword)
         frontmatter = {
             "keyword": topic.keyword,
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "outline": outline,
+            "topic_type": topic.metadata.get("topic_type") if topic.metadata else None,
+            "geo_target": topic.metadata.get("geo_target") if topic.metadata else None,
         }
         return GeneratedPost(
             title=f"{topic.keyword}｜SVICLOUD 專家指南",
@@ -280,7 +320,10 @@ class BlogAutomation:
         )
 
     def validate_quality(self, post: GeneratedPost) -> float:
-        """Composite score builder. Actual AI checks wired later."""
+        score = self._qa_with_claude(post)
+        if score is not None:
+            post.quality_score = score
+            return score
         scores = {
             "length": 25 if len(post.content) >= self.config.get("quality", {}).get("min_length", 4000) else 10,
             "structure": 20 if "##" in post.content else 10,
@@ -302,11 +345,46 @@ class BlogAutomation:
         return False
 
     def publish_via_rest_api(self, post: GeneratedPost) -> bool:
+        rest_cfg = self.config.get("wordpress", {}).get("rest", {})
+        endpoint = rest_cfg.get("endpoint")
+        username = rest_cfg.get("username")
+        password_env = rest_cfg.get("password_env")
+        password = os.getenv(password_env) if password_env else rest_cfg.get("password")
+        status = rest_cfg.get("status", "draft")
+        if not endpoint or not username or not password:
+            self.log.error("REST API not fully configured (endpoint/username/password missing)")
+            return False
+        html_content = self._markdown_to_html(post.content)
+        excerpt_text = self._excerpt_from_html(html_content)
+        payload = {
+            "title": post.title,
+            "slug": post.slug,
+            "content": html_content,
+            "excerpt": excerpt_text,
+            "status": status,
+        }
+        if rest_cfg.get("author"):
+            payload["author"] = rest_cfg["author"]
+        selected_categories = self._select_categories_for_post(post)
+        if selected_categories:
+            payload["categories"] = selected_categories
         if self.dry_run:
-            self.log.info("[DRY] REST publish stub for '%s'", post.title)
+            self.log.info("[DRY] Would POST to %s with status '%s'", endpoint, status)
+            self.log.debug("Payload: %s", payload)
             return True
-        self.log.info("REST publishing not yet implemented; leaving as draft")
-        return False
+        try:
+            response = requests.post(endpoint, auth=(username, password), json=payload, timeout=30)
+            if response.status_code >= 200 and response.status_code < 300:
+                data = response.json()
+                post.frontmatter["wp_post_id"] = data.get("id")
+                post.frontmatter["wp_status"] = data.get("status")
+                self.log.info("Published draft '%s' (WP ID %s)", post.title, data.get("id"))
+                return True
+            self.log.error("WordPress REST API error %s: %s", response.status_code, response.text[:500])
+            return False
+        except requests.RequestException as exc:
+            self.log.error("Failed to call WordPress REST API: %s", exc)
+            return False
 
     def publish_via_wpcli(self, post: GeneratedPost) -> bool:
         if self.dry_run:
@@ -331,18 +409,30 @@ class BlogAutomation:
         self._record_post(post, status="draft")
 
     def send_report(self, run_stats: Dict[str, Any]) -> None:
-        self.log.info(
-            "Weekly report → topics:%s unique:%s published:%s dry:%s",
-            run_stats.get("topics_found"),
-            run_stats.get("unique_topics"),
-            run_stats.get("published"),
-            run_stats.get("dry_run"),
-        )
-        # SMTP integration will be added later
+        lines = [
+            "SVICLOUD blog automation run summary",
+            f"- Topics discovered: {run_stats.get('topics_found', 0)}",
+            f"- Unique topics: {run_stats.get('unique_topics', 0)}",
+            f"- Posts attempted: {run_stats.get('attempts', 0)}",
+            f"- Posts published: {run_stats.get('published', 0)}",
+            f"- Dry run: {run_stats.get('dry_run', False)}",
+            f"- Timestamp: {datetime.now(timezone.utc).isoformat()}",
+        ]
+        body = "\n".join(lines)
+        subject = "SVICLOUD Blog Automation Report"
+        self.log.info(" | ".join(lines))
+        self._send_email(subject, body)
 
     def send_alert(self, error: Exception) -> None:
         self.log.error("Automation failed: %s", error)
-        # Email/SMS hooks will be wired here
+        subject = "SVICLOUD Blog Automation ALERT"
+        body = (
+            "Automation run encountered an error.\n\n"
+            f"Error: {error}\n"
+            f"Timestamp: {datetime.now(timezone.utc).isoformat()}\n"
+            f"Config: {self.config_path}\n"
+        )
+        self._send_email(subject, body, high_priority=True)
 
     def rebuild_embeddings(self) -> None:
         self.log.info("Rebuilding embeddings cache (stub)")
@@ -351,38 +441,672 @@ class BlogAutomation:
     # ------------------------------------------------------------------
     # Generation stubs (to be replaced with Claude calls)
     def generate_brief(self, topic: TopicCandidate) -> str:
-        template = (
-            "目標關鍵字：{keyword}\n"
-            "受眾：美國華人家庭與長輩\n"
-            "定位：突出美國倉庫48小時配送與中文客服。"
-        )
-        return template.format(keyword=topic.keyword)
+        metadata = topic.metadata or {}
+        claude_model = self.config.get("apis", {}).get("claude_model_brief")
+        if self.claude and claude_model:
+            try:
+                system = (
+                    "You are SVICLOUD's content strategist. Produce a concise Traditional Chinese creative brief "
+                    "highlighting US-specific benefits, customer pains, and narrative angle."
+                )
+                user_prompt = (
+                    f"請以100-150字撰寫策略簡報：\n"
+                    f"- 關鍵字：{topic.keyword}\n"
+                    f"- 主題分類：{metadata.get('topic_type')}\n"
+                    f"- 地區：{metadata.get('geo_target') or '全美'}\n"
+                    f"- 比較焦點：{metadata.get('is_comparison')}\n"
+                    f"- 活動/節慶：{metadata.get('is_campaign')}\n"
+                    "務必強調：內華達倉庫48小時配送、美國本土一年保固、中英雙語客服。"
+                )
+                brief_text = self._claude_complete(
+                    model=claude_model,
+                    system_prompt=system,
+                    user_prompt=user_prompt,
+                    max_tokens=400,
+                    temperature=0.2,
+                )
+                if brief_text:
+                    return brief_text.strip()
+            except Exception as exc:
+                self.log.warning("Claude brief generation failed: %s", exc)
 
-    def generate_outline(self, brief: str, retry: bool = False) -> str:
-        prefix = "再次優化：" if retry else ""
-        return (
-            f"{prefix}## 專家指南概覽\n"
-            "1. 為何選擇美國本土小雲電視盒\n"
-            "2. 型號比較與適用族群\n"
-            "3. 安裝步驟與客服支援\n"
-            "4. 常見問題與保固政策\n"
-        )
+        lines = [
+            f"目標關鍵字：{topic.keyword}",
+            "受眾：美國華人家庭、長輩與新移民",
+            "品牌重點：內華達倉庫48小時配送、美國本土一年保固、中英雙語客服。",
+        ]
+        if metadata.get("is_geo"):
+            lines.append(f"地區聚焦：針對{metadata.get('geo_target')}地區，強調本地物流與售後。")
+        if metadata.get("is_comparison"):
+            lines.append("比較焦點：突出SVICLOUD 10P+/10S與競品在頻道數、保固與售後的差異。")
+        if metadata.get("is_campaign"):
+            lines.append("活動語境：結合節慶/派對需求，提供歌單、流程與器材搭配。")
+        if metadata.get("topic_type") == "faq":
+            lines.append("FAQ目標：回答美國華人最常見的安裝、付款與售後問題。")
+        return "\n".join(lines)
+
+    def generate_outline(self, topic: TopicCandidate, brief: str, retry: bool = False) -> str:
+        claude_model = self.config.get("apis", {}).get("claude_model_outline")
+        metadata = topic.metadata or {}
+        if self.claude and claude_model:
+            try:
+                system = (
+                    "You are SVICLOUD's editorial strategist. Produce a numbered Traditional Chinese outline "
+                    "with 5-7 sections focusing on US-based benefits, bilingual support and fast shipping."
+                )
+                retry_note = "重新優化" if retry else "首次草稿"
+                user_prompt = (
+                    f"{retry_note}，請依據以下簡報撰寫條列式大綱：\n\n"
+                    f"簡報：\n{brief}\n\n"
+                    f"主題分類：{metadata.get('topic_type')}\n"
+                    f"地區：{metadata.get('geo_target') or '全美'}\n"
+                    "輸出格式：以數字排序的清單，每條不超過40字，聚焦美國本地服務、比較與FAQ。"
+                )
+                outline_text = self._claude_complete(
+                    model=claude_model,
+                    system_prompt=system,
+                    user_prompt=user_prompt,
+                    max_tokens=600,
+                    temperature=0.3,
+                )
+                if outline_text:
+                    return outline_text.strip()
+            except Exception as exc:
+                self.log.warning("Claude outline generation failed: %s", exc)
+
+        sections = self._build_outline_sections(topic)
+        header = "## 再次優化專家概覽" if retry else "## 專家指南概覽"
+        outline_lines = [header]
+        for idx, section in enumerate(sections, 1):
+            outline_lines.append(f"{idx}. {section}")
+        return "\n".join(outline_lines)
 
     def validate_outline(self, outline: str) -> bool:
         threshold = self.config.get("quality", {}).get("outline_score_threshold", 0.75)
         score = min(outline.count("\n"), 4) / 4
         return score >= threshold
 
-    def generate_full_post(self, outline: str) -> str:
-        body_sections = []
-        for line in outline.splitlines():
-            if not line.strip() or line.startswith("##"):
-                continue
-            body_sections.append(f"## {line}\n\n美國倉庫現貨、中文客服與一年保固，確保使用者體驗安心。")
-        return "\n\n".join(body_sections)
+    def generate_full_post(self, topic: TopicCandidate, outline: str, brief: str) -> str:
+        claude_model = self.config.get("apis", {}).get("claude_model_full")
+        metadata = topic.metadata or {}
+        if self.claude and claude_model:
+            try:
+                system = (
+                    "You are SVICLOUD's Chinese content writer. Produce 4000+ Traditional Chinese characters, "
+                    "markdown formatted, referencing US-based SVICLOUD advantages, internal links, and bilingual support."
+                )
+                user_prompt = (
+                    f"請依據以下資訊撰寫完整部落格文章（Markdown）：\n"
+                    f"- 關鍵字：{topic.keyword}\n"
+                    f"- 簡報：{brief}\n"
+                    f"- 大綱：\n{outline}\n"
+                    f"- 主題分類：{metadata.get('topic_type')}\n"
+                    f"- 地區：{metadata.get('geo_target') or '全美'}\n"
+                    "需求：\n"
+                    "1. 強調內華達倉庫48小時配送、美國一年保固、中英雙語客服。\n"
+                    "2. 至少3個內部連結（以純文字描述，稍後由腳本替換）。\n"
+                    "3. 每段落加入具體情境或案例。\n"
+                    "4. 結尾加入CTA導引至購買/聯絡。\n"
+                    "輸出：純Markdown內容，不含YAML。"
+                )
+                full_text = self._claude_complete(
+                    model=claude_model,
+                    system_prompt=system,
+                    user_prompt=user_prompt,
+                    max_tokens=2800,
+                    temperature=0.35,
+                )
+                if full_text:
+                    return full_text.strip()
+            except Exception as exc:
+                self.log.warning("Claude full post generation failed: %s", exc)
+
+        sections = self._build_outline_sections(topic)
+        paragraphs = []
+        for section in sections:
+            paragraph = self._build_section_paragraph(section, topic)
+            paragraphs.append(paragraph)
+        return "\n\n".join(paragraphs)
 
     # ------------------------------------------------------------------
     # Helpers
+    def _load_keyword_plan_candidates(self) -> List[TopicCandidate]:
+        content_cfg = self.config.get("content_inputs", {})
+        keyword_source = content_cfg.get("keyword_source")
+        if not keyword_source:
+            return []
+        source_path = self._resolve_path(keyword_source)
+        if not source_path.exists():
+            self.log.warning("Keyword plan source %s does not exist", source_path)
+            return []
+
+        section_weights = {
+            "target keywords not ranking": 90,
+            "primary keywords (target now)": 88,
+            "secondary keywords (3-6 months)": 72,
+            "create chinese blog posts": 84,
+            "create location-specific pages": 78,
+            "keyword strategy expansion": 70,
+        }
+        base_volumes = {
+            "target keywords not ranking": 550,
+            "primary keywords (target now)": 500,
+            "secondary keywords (3-6 months)": 360,
+            "create chinese blog posts": 420,
+            "create location-specific pages": 300,
+            "keyword strategy expansion": 320,
+        }
+
+        locale_targets = content_cfg.get("locale_targets", [])
+        current_section = ""
+        candidates: List[TopicCandidate] = []
+
+        with source_path.open("r", encoding="utf-8") as handle:
+            for raw_line in handle:
+                line = raw_line.strip()
+                if not line:
+                    continue
+                if line.startswith("##"):
+                    current_section = line.strip("# ").lower()
+                    continue
+                if line.startswith("###"):
+                    current_section = line.strip("# ").lower()
+                    continue
+                if line.startswith("**") and line.endswith("**"):
+                    current_section = line.strip("* ").lower()
+                    continue
+
+                if not line.startswith("- "):
+                    continue
+                keyword = self._extract_keyword_from_line(line)
+                if not keyword:
+                    continue
+                if not self._looks_like_keyword(keyword):
+                    continue
+
+                normalized_section = current_section or "keyword strategy expansion"
+                base_score = section_weights.get(normalized_section, 65)
+                volume_estimate = base_volumes.get(normalized_section, 300)
+                candidate = self._build_topic_candidate(
+                    keyword=keyword,
+                    base_score=base_score,
+                    section=normalized_section,
+                    volume_estimate=volume_estimate,
+                    locale_targets=locale_targets,
+                    source=str(source_path),
+                )
+                candidates.append(candidate)
+        return candidates
+
+    def _build_topic_candidate(
+        self,
+        keyword: str,
+        base_score: int,
+        section: str,
+        volume_estimate: int,
+        locale_targets: List[str],
+        source: str,
+    ) -> TopicCandidate:
+        classification = self._classify_topic(keyword, locale_targets)
+        topic_score = base_score
+        if classification["is_geo"]:
+            topic_score += 8
+        if classification["is_comparison"]:
+            topic_score += 6
+        if classification["is_campaign"]:
+            topic_score += 4
+        if classification["topic_type"] == "faq":
+            topic_score += 3
+        novelty_bonus = 3 if any(str(year) in keyword for year in (2025, 2026, 2027)) else 0
+        length_modifier = min(len(keyword), 32) % 7
+        final_score = topic_score + novelty_bonus + length_modifier
+        metadata = {
+            "section": section,
+            "topic_type": classification["topic_type"],
+            "is_geo": classification["is_geo"],
+            "geo_target": classification.get("geo_target"),
+            "is_comparison": classification["is_comparison"],
+            "is_campaign": classification["is_campaign"],
+            "score": final_score,
+            "source": source,
+        }
+        estimated_volume = volume_estimate + classification.get("volume_bonus", 0)
+        opportunity = round(min(final_score / 100, 0.99), 2)
+        return TopicCandidate(
+            keyword=keyword,
+            search_volume=estimated_volume,
+            opportunity_score=opportunity,
+            metadata=metadata,
+        )
+
+    def _classify_topic(self, keyword: str, locale_targets: List[str]) -> Dict[str, Any]:
+        lower_kw = keyword.lower()
+        classification = {
+            "topic_type": "pillar",
+            "is_geo": False,
+            "is_comparison": False,
+            "is_campaign": False,
+            "volume_bonus": 0,
+        }
+        for region in locale_targets:
+            if region and region in keyword:
+                classification["is_geo"] = True
+                classification["geo_target"] = region
+                classification["topic_type"] = "geo"
+                classification["volume_bonus"] += 40
+                break
+        if "vs" in lower_kw or "比較" in keyword or "對比" in keyword:
+            classification["is_comparison"] = True
+            classification["topic_type"] = "comparison"
+            classification["volume_bonus"] += 20
+        if any(token in keyword for token in ["新年", "春節", "派對", "節", "2025", "2026"]):
+            classification["is_campaign"] = True
+            if classification["topic_type"] == "pillar":
+                classification["topic_type"] = "campaign"
+        if "常見問題" in keyword or "FAQ" in keyword.upper():
+            classification["topic_type"] = "faq"
+        return classification
+
+    @staticmethod
+    def _extract_keyword_from_line(line: str) -> Optional[str]:
+        candidate = line[2:].strip()
+        if not candidate:
+            return None
+        if candidate.startswith("\""):
+            parts = candidate.split("\"")
+            if len(parts) >= 3:
+                candidate = parts[1]
+        candidate = candidate.split("(")[0].strip()
+        return candidate or None
+
+    @staticmethod
+    def _looks_like_keyword(text: str) -> bool:
+        has_cjk = any("\u4e00" <= ch <= "\u9fff" for ch in text)
+        if has_cjk:
+            return True
+        lowered = text.lower()
+        return "svicloud" in lowered or "tv box" in lowered
+
+    def _load_gsc_candidates(self) -> List[TopicCandidate]:
+        gsc_config = self.config.get("content_inputs", {}).get("gsc")
+        if not gsc_config:
+            return []
+        gsc_path = gsc_config.get("path")
+        if not gsc_path:
+            return []
+        source_path = self._resolve_path(gsc_path)
+        if not source_path.exists():
+            self.log.warning("GSC data file %s not found", source_path)
+            return []
+        try:
+            data = json.loads(source_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            self.log.warning("Failed to parse GSC JSON: %s", exc)
+            return []
+        locale_targets = self.config.get("content_inputs", {}).get("locale_targets", [])
+        candidates: List[TopicCandidate] = []
+        for entry in data:
+            query = entry.get("query") or entry.get("keyword")
+            if not query:
+                continue
+            impressions = float(entry.get("impressions", 0))
+            ctr = float(entry.get("ctr", 0))
+            position = float(entry.get("position", 99))
+            score = self._score_gsc_entry(impressions, ctr, position)
+            candidate = self._build_topic_candidate(
+                keyword=query,
+                base_score=int(score * 100),
+                section="gsc",
+                volume_estimate=int(impressions),
+                locale_targets=locale_targets,
+                source=str(source_path),
+            )
+            candidate.metadata["gsc"] = {
+                "impressions": impressions,
+                "ctr": ctr,
+                "position": position,
+            }
+            candidate.metadata["score"] = score * 100
+            candidates.append(candidate)
+        return candidates
+
+    @staticmethod
+    def _score_gsc_entry(impressions: float, ctr: float, position: float) -> float:
+        impression_component = min(impressions / 5000, 1.0)
+        ctr_gap = max(0.1 - ctr, 0)
+        ctr_component = min(ctr_gap * 5, 1.0)
+        position_component = max((20 - position) / 20, 0)
+        raw = (impression_component * 0.5) + (ctr_component * 0.3) + (position_component * 0.2)
+        return min(raw, 1.0)
+
+    def _merge_candidates(
+        self,
+        plan_candidates: List[TopicCandidate],
+        gsc_candidates: List[TopicCandidate],
+    ) -> List[TopicCandidate]:
+        merged: Dict[str, TopicCandidate] = {}
+        for candidate in plan_candidates + gsc_candidates:
+            key = candidate.keyword.lower()
+            existing = merged.get(key)
+            if not existing:
+                merged[key] = candidate
+                continue
+            if candidate.metadata.get("score", 0) > existing.metadata.get("score", 0):
+                merged[key] = candidate
+        return list(merged.values())
+
+    def _notification_recipients(self) -> List[str]:
+        notifications_cfg = self.config.get("notifications", {})
+        recipients = notifications_cfg.get("recipients", [])
+        if isinstance(recipients, str):
+            return [recipients]
+        return [r for r in (recipients or []) if r]
+
+    def _build_outline_sections(self, topic: TopicCandidate) -> List[str]:
+        metadata = topic.metadata or {}
+        sections = [
+            "SVICLOUD 美國本地服務優勢",
+            "型號/方案與適用族群",
+            "安裝步驟與售後支援",
+        ]
+        if metadata.get("is_comparison"):
+            sections.insert(1, "SVICLOUD 與競品差異")
+        if metadata.get("is_geo"):
+            sections.append(f"{metadata.get('geo_target')} 客戶專屬物流與體驗")
+        if metadata.get("is_campaign"):
+            sections.append("活動/節慶使用情境")
+        sections.append("常見問題與下一步")
+        return sections
+
+    def _build_section_paragraph(self, section_title: str, topic: TopicCandidate) -> str:
+        metadata = topic.metadata or {}
+        body = [
+            f"## {section_title}",
+            "美國倉庫現貨、中文客服與一年保固，確保使用者體驗安心。"
+        ]
+        if "競品" in section_title or metadata.get("is_comparison"):
+            body.append("透過頻道數、系統穩定度與售後保固比較，說明SVICLOUD在美國市場的差異化。")
+        if metadata.get("is_geo"):
+            geo = metadata.get("geo_target", "美國主要城市")
+            body.append(f"針對{geo}客戶，強調2-3天內送達與本地時區客服。")
+        if metadata.get("is_campaign"):
+            body.append("結合節慶/派對流程，提供歌單、互動與設備建議，並導引至購買。")
+        if metadata.get("topic_type") == "faq" or "常見問題" in section_title:
+            body.append("整理付款方式、安裝疑難排解與保固流程，減少客服負擔。")
+        return "\n\n".join(body)
+
+    def _insert_internal_links(self, content: str) -> str:
+        replacements = self.config.get("content_inputs", {}).get("internal_links", {})
+        for placeholder, url in replacements.items():
+            marker = f"[{placeholder}]"
+            if marker in content:
+                content = content.replace(marker, f"[{placeholder}]({url})")
+        return content
+
+    def _inject_images(self, content: str, topic: TopicCandidate) -> str:
+        images_cfg = self.config.get("content_inputs", {}).get("images", {})
+        topic_type = (topic.metadata.get("topic_type") or "default").lower()
+        image_entries = images_cfg.get(topic_type) or images_cfg.get("default") or []
+        blocks = []
+        for entry in image_entries:
+            url = entry.get("url")
+            alt = entry.get("alt") or "SVICLOUD"
+            caption = entry.get("caption")
+            if not url:
+                continue
+            block = f"![{alt}]({url})"
+            if caption:
+                block = f"{block}\n*{caption}*"
+            blocks.append(block)
+        if not blocks:
+            return content
+        hero = "\n\n".join(blocks)
+        return f"{hero}\n\n{content}" if hero not in content else content
+
+    def _append_cta(self, content: str, topic: TopicCandidate) -> str:
+        cta = (
+            "## 下一步：美國本地SVICLOUD服務\n"
+            "想了解更多套餐或立即安排美國倉庫出貨，請洽 SVICLOUD 美國客服：\n"
+            "- 電話：702-398-3416\n"
+            "- Email：support@svicloudtvbox.us\n"
+            "- [線上表單](https://svicloudtvbox.us/zh/contact/)\n"
+            "透過內華達倉庫48小時配送與中英雙語客服，協助您快速安裝，小雲電視盒在美國使用更安心。"
+        )
+        if cta not in content:
+            content = f"{content}\n\n{cta}"
+        return content
+
+    def _markdown_to_html(self, markdown_text: str) -> str:
+        try:
+            return markdown.markdown(markdown_text, extensions=["extra", "sane_lists"])
+        except Exception as exc:
+            self.log.warning("Markdown conversion failed: %s", exc)
+            return markdown_text
+
+    def _excerpt_from_html(self, html_text: str, length: int = 220) -> str:
+        soup = BeautifulSoup(html_text, "html.parser")
+        text = soup.get_text(separator=" ", strip=True)
+        return text[:length]
+
+    def _select_categories_for_post(self, post: GeneratedPost) -> List[int]:
+        category_map = self.config.get("wordpress", {}).get("category_map", {})
+        topic_type = (post.frontmatter.get("topic_type") or "default").lower()
+        selected = category_map.get(topic_type) or category_map.get("default") or []
+        normalized: List[int] = []
+        for value in selected:
+            if isinstance(value, int):
+                normalized.append(value)
+            else:
+                try:
+                    normalized.append(int(value))
+                except (ValueError, TypeError):
+                    continue
+        return normalized
+
+    def _claude_complete(
+        self,
+        model: str,
+        system_prompt: str,
+        user_prompt: str,
+        max_tokens: int,
+        temperature: float,
+    ) -> str:
+        if not self.claude:
+            raise RuntimeError("Claude client not available")
+        response = self.claude.messages.create(
+            model=model,
+            system=system_prompt,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            messages=[{"role": "user", "content": user_prompt}],
+        )
+        chunks = []
+        for block in response.content:
+            if getattr(block, "type", None) == "text":
+                chunks.append(block.text)
+        return "".join(chunks)
+
+    def _qa_with_claude(self, post: GeneratedPost) -> Optional[float]:
+        model = self.config.get("apis", {}).get("claude_model_qa")
+        if not self.claude or not model:
+            return None
+        try:
+            system = (
+                "You are SVICLOUD's QA bot. Score Traditional Chinese blog posts 0-100 "
+                "based on grammar, SEO, brand alignment, technical correctness."
+            )
+            user_prompt = (
+                "請以JSON格式回覆：{\"score\": 整數, \"notes\": [\"...\" ]}。\n"
+                "評估以下文章是否符合：傳統中文、關鍵字自然出現、強調美國本地優勢、包含內部連結描述、長度>4000字。\n"
+                f"文章內容：\n{post.content}\n"
+            )
+            completion = self._claude_complete(
+                model=model,
+                system_prompt=system,
+                user_prompt=user_prompt,
+                max_tokens=400,
+                temperature=0.2,
+            )
+            data = json.loads(completion)
+            score = float(data.get("score", 0))
+            notes = data.get("notes") or []
+            post.frontmatter["qa_notes"] = notes
+            return score
+        except Exception as exc:
+            self.log.warning("Claude QA failed: %s", exc)
+            return None
+
+    def _smtp_settings(self) -> Optional[Dict[str, Any]]:
+        smtp_cfg = self.config.get("notifications", {}).get("smtp")
+        if not smtp_cfg:
+            return None
+        password = smtp_cfg.get("password")
+        password_env = smtp_cfg.get("password_env")
+        if password_env:
+            password = os.getenv(password_env, password)
+        if not password:
+            self.log.warning("SMTP password missing; set %s", password_env)
+            return None
+        username = smtp_cfg.get("username")
+        if not username:
+            self.log.warning("SMTP username missing; set notifications.smtp.username")
+            return None
+        from_address = smtp_cfg.get("from_address") or username
+        return {
+            "host": smtp_cfg.get("host", "localhost"),
+            "port": int(smtp_cfg.get("port", 25)),
+            "username": username,
+            "password": password,
+            "use_tls": smtp_cfg.get("use_tls", True),
+            "from_address": from_address,
+        }
+
+    def _send_email(self, subject: str, body: str, high_priority: bool = False) -> bool:
+        recipients = self._notification_recipients()
+        if not recipients:
+            self.log.debug("No notification recipients configured; skipping email '%s'", subject)
+            return False
+        provider = self.config.get("notifications", {}).get("provider", "smtp").lower()
+        if provider == "brevo":
+            return self._send_via_brevo_api(subject, body, recipients, high_priority)
+        return self._send_via_smtp(subject, body, recipients, high_priority)
+
+    def _send_via_smtp(
+        self, subject: str, body: str, recipients: List[str], high_priority: bool = False
+    ) -> bool:
+        settings = self._smtp_settings()
+        if not settings:
+            self.log.debug("SMTP not configured; skipping email '%s'", subject)
+            return False
+        message = EmailMessage()
+        message["Subject"] = subject
+        message["From"] = settings["from_address"]
+        message["To"] = ", ".join(recipients)
+        if high_priority:
+            message["X-Priority"] = "1"
+        message.set_content(body)
+        try:
+            with smtplib.SMTP(settings["host"], settings["port"], timeout=30) as client:
+                if settings.get("use_tls", True):
+                    client.starttls()
+                if settings["username"]:
+                    client.login(settings["username"], settings["password"])
+                client.send_message(message)
+            self.log.info("Notification '%s' sent to %s via SMTP", subject, recipients)
+            return True
+        except Exception as exc:
+            self.log.error("Failed to send email '%s': %s", subject, exc)
+            return False
+
+    def _send_via_brevo_api(
+        self, subject: str, body: str, recipients: List[str], high_priority: bool = False
+    ) -> bool:
+        brevo_cfg = self.config.get("notifications", {}).get("brevo", {})
+        api_key_env = brevo_cfg.get("api_key_env", "BREVO_API_KEY")
+        api_key = os.getenv(api_key_env) or brevo_cfg.get("api_key")
+        if not api_key:
+            self.log.warning("Brevo API key missing; set %s", api_key_env)
+            return False
+        sender_email = brevo_cfg.get("sender_email")
+        if not sender_email:
+            self.log.warning("Brevo sender_email missing in configuration")
+            return False
+        sender_name = brevo_cfg.get("sender_name", sender_email)
+        api_base = brevo_cfg.get("api_base", "https://api.brevo.com/v3/smtp/email")
+        payload = {
+            "sender": {"email": sender_email, "name": sender_name},
+            "to": [{"email": addr} for addr in recipients],
+            "subject": subject,
+            "textContent": body,
+        }
+        if high_priority:
+            payload["headers"] = {"X-Priority": "1"}
+        headers = {
+            "api-key": api_key,
+            "accept": "application/json",
+            "content-type": "application/json",
+        }
+        try:
+            response = requests.post(api_base, json=payload, headers=headers, timeout=30)
+            if 200 <= response.status_code < 300:
+                self.log.info("Notification '%s' sent via Brevo API", subject)
+                return True
+            self.log.error("Brevo API error %s: %s", response.status_code, response.text[:500])
+            return False
+        except requests.RequestException as exc:
+            self.log.error("Brevo API request failed: %s", exc)
+            return False
+
+    def _load_existing_embeddings(self) -> List[Dict[str, Any]]:
+        if not self.openai:
+            return []
+        embeddings: List[Dict[str, Any]] = []
+        cursor = self.db.execute("SELECT id, keyword, title, embedding FROM posts_history WHERE embedding IS NOT NULL")
+        for row in cursor:
+            stored = row[3]
+            vector: Optional[List[float]] = None
+            if stored:
+                try:
+                    if isinstance(stored, bytes):
+                        stored = stored.decode("utf-8")
+                    vector = json.loads(stored)
+                except (ValueError, TypeError):
+                    vector = None
+            if vector:
+                embeddings.append({"id": row[0], "keyword": row[1], "embedding": vector})
+        return embeddings
+
+    def _generate_embedding_vector(self, text: str) -> Optional[List[float]]:
+        if not self.openai:
+            return None
+        trimmed = text.strip()
+        if not trimmed:
+            return None
+        try:
+            response = self.openai.embeddings.create(model=self.embedding_model, input=trimmed)
+            return response.data[0].embedding  # type: ignore[attr-defined]
+        except Exception as exc:  # pragma: no cover - external call
+            self.log.warning("Failed to generate embedding: %s", exc)
+            return None
+
+    @staticmethod
+    def _is_duplicate_embedding(
+        candidate: List[float], existing: List[Dict[str, Any]], threshold: float
+    ) -> bool:
+        def cosine_similarity(vec_a: List[float], vec_b: List[float]) -> float:
+            dot = sum(a * b for a, b in zip(vec_a, vec_b))
+            norm_a = math.sqrt(sum(a * a for a in vec_a))
+            norm_b = math.sqrt(sum(b * b for b in vec_b))
+            if not norm_a or not norm_b:
+                return 0.0
+            return dot / (norm_a * norm_b)
+
+        for row in existing:
+            similarity = cosine_similarity(candidate, row["embedding"])
+            if similarity >= threshold:
+                return True
+        return False
+
     def _resolve_path(self, relative: str) -> Path:
         path = Path(relative)
         if not path.is_absolute():
@@ -390,8 +1114,12 @@ class BlogAutomation:
         return path
 
     def _record_post(self, post: GeneratedPost, status: str) -> None:
+        embedding_blob = None
+        embedding_vector = self._generate_embedding_vector(post.keyword or post.title)
+        if embedding_vector:
+            embedding_blob = json.dumps(embedding_vector).encode("utf-8")
         self.db.execute(
-            "INSERT INTO posts_history (title, slug, keyword, quality_score, status, metadata) VALUES (?, ?, ?, ?, ?, ?)",
+            "INSERT INTO posts_history (title, slug, keyword, quality_score, status, metadata, embedding) VALUES (?, ?, ?, ?, ?, ?, ?)",
             (
                 post.title,
                 post.slug,
@@ -399,6 +1127,7 @@ class BlogAutomation:
                 post.quality_score,
                 status,
                 json.dumps(post.frontmatter, ensure_ascii=False),
+                embedding_blob,
             ),
         )
         self.db.commit()
@@ -435,7 +1164,7 @@ def _env_or_raise(name: str) -> str:
 def parse_args() -> argparse.Namespace:
     script_dir = Path(__file__).resolve().parent
     default_config = script_dir / "config.yaml"
-    repo_root = script_dir.parents[1]
+    repo_root = script_dir.parents[1] if len(script_dir.parents) > 1 else script_dir
 
     parser = argparse.ArgumentParser(description="SVICLOUD autonomous blog automation")
     parser.add_argument("--config", type=Path, default=default_config, help="Path to config.yaml")

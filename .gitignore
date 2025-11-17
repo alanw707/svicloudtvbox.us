@@ -35,3 +35,9 @@ deployconfig.py
 core/
 sites/
 db/
+
+# Automation runtime artifacts
+automation/blog_automation/data/
+automation/blog_automation/logs/
+automation/blog_automation/drafts/
+env/
