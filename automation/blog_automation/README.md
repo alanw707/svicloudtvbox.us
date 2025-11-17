@@ -42,6 +42,20 @@ automation/blog_automation/
    python automation/blog_automation/blog_automation.py --config automation/blog_automation/config.yaml --test
    ```
 
+### Updating Google Search Console Data
+
+Use the helper script to pull fresh queries into `data/gsc_topics.json`.
+
+```bash
+python automation/blog_automation/scripts/fetch_gsc.py \
+  --site https://svicloudtvbox.us \
+  --credentials /path/to/service-account.json \
+  --output automation/blog_automation/data/gsc_topics.json \
+  --days 30 --limit 150 --min-impressions 25 --max-position 25
+```
+
+`--credentials` defaults to the `GSC_CREDENTIALS_PATH` environment variable (load from `.env` via `--env-file` if needed). The script writes the JSON the pipeline consumes, so run it before triggering the automation.
+
 ### Docker Workflow
 
 1. Copy `.env` and `config.yaml` into `automation/blog_automation/` (same folder as the Dockerfile).
