@@ -77,6 +77,10 @@ content_inputs:
       - url: "https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/certification-authorized-dealer.webp"
         alt: "SVICLOUD 美國授權經銷商"
         caption: "美國本地授權服務據點與雙語客服"
+  competitors:
+    path: "data/competitor_topics.json"
+    base_score: 75
+    base_volume: 150
 
 notifications:
   provider: "brevo"

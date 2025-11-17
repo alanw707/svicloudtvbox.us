@@ -23,6 +23,9 @@ test-results/
 .serena/
 .venv/
 .venv*/
+gsc-env/
+competitor-env/
+venv/
 
 # Build outputs
 *.log

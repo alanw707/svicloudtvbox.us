@@ -212,7 +212,12 @@ class BlogAutomation:
         """Derive topic candidates from the configured keyword source or fallback list."""
         plan_candidates = self._load_keyword_plan_candidates()
         gsc_candidates = self._load_gsc_candidates()
-        merged_candidates = self._merge_candidates(plan_candidates, gsc_candidates)
+        competitor_candidates = self._load_competitor_candidates()
+        merged_candidates = self._merge_candidates([
+            plan_candidates,
+            gsc_candidates,
+            competitor_candidates,
+        ])
         if not merged_candidates:
             content_cfg = self.config.get("content_inputs", {})
             locale_targets = content_cfg.get("locale_targets", [])
@@ -245,10 +250,11 @@ class BlogAutomation:
             return fallback
         sorted_candidates = sorted(merged_candidates, key=lambda c: c.metadata.get("score", 0), reverse=True)
         self.log.info(
-            "Loaded %s topic candidates (plan: %s, gsc: %s)",
+            "Loaded %s topic candidates (plan: %s, gsc: %s, competitor: %s)",
             len(sorted_candidates),
             len(plan_candidates),
             len(gsc_candidates),
+            len(competitor_candidates),
         )
         return sorted_candidates
 
@@ -770,6 +776,41 @@ class BlogAutomation:
             candidates.append(candidate)
         return candidates
 
+    def _load_competitor_candidates(self) -> List[TopicCandidate]:
+        content_cfg = self.config.get("content_inputs", {})
+        competitor_cfg = content_cfg.get("competitors", {})
+        path = competitor_cfg.get("path", "data/competitor_topics.json")
+        source_path = self._resolve_path(path)
+        if not source_path.exists():
+            return []
+        try:
+            entries = json.loads(source_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            self.log.warning("Failed to parse competitor topics JSON: %s", exc)
+            return []
+        locale_targets = content_cfg.get("locale_targets", [])
+        base_score = competitor_cfg.get("base_score", 75)
+        base_volume = competitor_cfg.get("base_volume", 150)
+        candidates: List[TopicCandidate] = []
+        for entry in entries:
+            keyword = entry.get("query")
+            if not keyword:
+                continue
+            impressions = int(entry.get("impressions", base_volume))
+            score = base_score + min(int(impressions / 20), 10)
+            candidate = self._build_topic_candidate(
+                keyword=keyword,
+                base_score=score,
+                section="competitor",
+                volume_estimate=impressions,
+                locale_targets=locale_targets,
+                source=str(source_path),
+            )
+            candidate.metadata["source_domain"] = entry.get("source")
+            candidate.metadata["score"] = score
+            candidates.append(candidate)
+        return candidates
+
     @staticmethod
     def _score_gsc_entry(impressions: float, ctr: float, position: float) -> float:
         impression_component = min(impressions / 5000, 1.0)
@@ -781,11 +822,10 @@ class BlogAutomation:
 
     def _merge_candidates(
         self,
-        plan_candidates: List[TopicCandidate],
-        gsc_candidates: List[TopicCandidate],
+        candidate_groups: List[List[TopicCandidate]],
     ) -> List[TopicCandidate]:
         merged: Dict[str, TopicCandidate] = {}
-        for candidate in plan_candidates + gsc_candidates:
+        for candidate in [c for group in candidate_groups for c in group]:
             key = candidate.keyword.lower()
             existing = merged.get(key)
             if not existing:

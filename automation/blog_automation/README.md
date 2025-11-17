@@ -56,6 +56,21 @@ python automation/blog_automation/scripts/fetch_gsc.py \
 
 `--credentials` defaults to the `GSC_CREDENTIALS_PATH` environment variable (load from `.env` via `--env-file` if needed). The script writes the JSON the pipeline consumes, so run it before triggering the automation.
 
+### Scraping Competitor Topics
+
+You can pull fresh keywords/headlines from competitor blogs to diversify topic intake:
+
+```bash
+python automation/blog_automation/scripts/fetch_competitor_topics.py \
+  --output automation/blog_automation/data/competitor_topics.json \
+  --min-length 4 \
+  --sites techunblock.com=https://techunblock.com/blog/ \
+          svicloudtw.com=https://svicloudtw.com/ \
+          safeprosys.com=https://safeprosys.com/
+```
+
+Each `domain=url1,url2` entry is optional; omit `--sites` to use the defaults baked into the script. The resulting JSON file is merged with GSC and the curated plan inside `research_topics()`.
+
 ### Docker Workflow
 
 1. Copy `.env` and `config.yaml` into `automation/blog_automation/` (same folder as the Dockerfile).
