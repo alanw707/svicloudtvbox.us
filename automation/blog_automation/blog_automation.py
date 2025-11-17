@@ -6,11 +6,12 @@ import argparse
 import json
 import logging
 import os
+import re
 import smtplib
 import sqlite3
 import math
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, date, timedelta
 from email.message import EmailMessage
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple, Union
@@ -20,6 +21,8 @@ import yaml
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 import markdown
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
 
 try:
     import anthropic
@@ -157,6 +160,7 @@ class BlogAutomation:
         if self._emergency_stop():
             return
 
+        self._auto_refresh_sources()
         topics = self.research_topics()
         unique_topics = self.filter_duplicates(topics)
         self.log.info("Processing %s topics (max_posts=%s)", len(unique_topics), max_posts)
@@ -829,6 +833,114 @@ class BlogAutomation:
                 merged[key] = candidate
         return list(merged.values())
 
+    def _refresh_gsc_topics(self) -> None:
+        gsc_cfg = self.config.get("content_inputs", {}).get("gsc", {})
+        if not gsc_cfg.get("auto_refresh"):
+            return
+        site = gsc_cfg.get("site")
+        cred_setting = gsc_cfg.get("credentials") or os.getenv("GSC_CREDENTIALS_PATH")
+        if not site or not cred_setting:
+            self.log.warning("Skipping GSC refresh, missing site or credentials path")
+            return
+        cred_path = self._resolve_path(cred_setting)
+        if not cred_path.exists():
+            self.log.warning("GSC credentials not found at %s", cred_path)
+            return
+        target_path = self._resolve_path(gsc_cfg.get("path", "data/gsc_topics.json"))
+        lookback = int(gsc_cfg.get("lookback_days", 30))
+        min_impressions = float(gsc_cfg.get("min_impressions", 1))
+        max_position = float(gsc_cfg.get("max_position", 50))
+        limit = int(gsc_cfg.get("limit", 200))
+        try:
+            creds = service_account.Credentials.from_service_account_file(str(cred_path), scopes=GSC_SCOPES)
+            service = build("searchconsole", "v1", credentials=creds, cache_discovery=False)
+            end_date = date.today() - timedelta(days=1)
+            start_date = end_date - timedelta(days=lookback)
+            request_body = {
+                "startDate": start_date.isoformat(),
+                "endDate": end_date.isoformat(),
+                "dimensions": ["query"],
+                "rowLimit": limit,
+                "type": "web",
+                "dataState": "all",
+            }
+            response = service.searchanalytics().query(siteUrl=site, body=request_body).execute()
+            rows = response.get("rows", [])
+            filtered = []
+            for row in rows:
+                query = row.get("keys", [""])[0]
+                impressions = row.get("impressions", 0)
+                position = row.get("position", 99)
+                ctr = row.get("ctr", 0)
+                if impressions < min_impressions or position > max_position:
+                    continue
+                filtered.append(
+                    {
+                        "query": query,
+                        "impressions": impressions,
+                        "position": position,
+                        "ctr": ctr,
+                    }
+                )
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            target_path.write_text(json.dumps(filtered, ensure_ascii=False, indent=2), encoding="utf-8")
+            self.log.info("Refreshed GSC topics (%s rows)", len(filtered))
+        except Exception as exc:  # pragma: no cover - network/credential dependent
+            self.log.warning("GSC refresh failed: %s", exc)
+
+    def _refresh_competitor_topics(self) -> None:
+        comp_cfg = self.config.get("content_inputs", {}).get("competitors", {})
+        if not comp_cfg.get("auto_refresh"):
+            return
+        sites = comp_cfg.get("sites") or {}
+        if not sites:
+            self.log.warning("Competitor auto-refresh enabled but no sites configured")
+            return
+        min_length = int(comp_cfg.get("min_length", 4))
+        entries = []
+        for domain, urls in sites.items():
+            for url in urls:
+                for keyword in self._scrape_competitor_keywords(url, min_length):
+                    entries.append(
+                        {
+                            "query": keyword,
+                            "source": domain,
+                            "impressions": comp_cfg.get("base_volume", 150),
+                            "position": 15,
+                            "ctr": 0.01,
+                        }
+                    )
+        if not entries:
+            self.log.warning("Competitor refresh yielded no keywords")
+            return
+        target_path = self._resolve_path(comp_cfg.get("path", "data/competitor_topics.json"))
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        target_path.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
+        self.log.info("Refreshed competitor topics (%s rows)", len(entries))
+
+    def _scrape_competitor_keywords(self, url: str, min_length: int) -> List[str]:
+        tokens: List[str] = []
+        try:
+            resp = requests.get(url, timeout=15)
+            resp.raise_for_status()
+            soup = BeautifulSoup(resp.text, "html.parser")
+            seen = set()
+            for tag in soup.find_all(["h1", "h2", "h3", "h4", "strong"]):
+                text = tag.get_text(strip=True)
+                if not text:
+                    continue
+                for token in re.findall(r"[\u4e00-\u9fffA-Za-z0-9＋+\- ]{2,40}", text):
+                    cleaned = token.strip()
+                    if len(cleaned) < min_length:
+                        continue
+                    if cleaned in seen:
+                        continue
+                    seen.add(cleaned)
+                    tokens.append(cleaned)
+        except requests.RequestException as exc:
+            self.log.warning("Competitor fetch failed for %s: %s", url, exc)
+        return tokens
+
     def _notification_recipients(self) -> List[str]:
         notifications_cfg = self.config.get("notifications", {})
         recipients = notifications_cfg.get("recipients", [])
@@ -1261,3 +1373,7 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+GSC_SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"]
+    def _auto_refresh_sources(self) -> None:
+        self._refresh_gsc_topics()
+        self._refresh_competitor_topics()

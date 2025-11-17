@@ -56,6 +56,8 @@ python automation/blog_automation/scripts/fetch_gsc.py \
 
 `--credentials` defaults to the `GSC_CREDENTIALS_PATH` environment variable (load from `.env` via `--env-file` if needed). The script writes the JSON the pipeline consumes, so run it before triggering the automation.
 
+To refresh automatically on each run, populate `content_inputs.gsc` in `config.yaml` with `auto_refresh: true`, `site`, and `credentials`. The automation will fetch Search Console data before selecting topics.
+
 ### Scraping Competitor Topics
 
 You can pull fresh keywords/headlines from competitor blogs to diversify topic intake:
@@ -70,6 +72,8 @@ python automation/blog_automation/scripts/fetch_competitor_topics.py \
 ```
 
 Each `domain=url1,url2` entry is optional; omit `--sites` to use the defaults baked into the script. The resulting JSON file is merged with GSC and the curated plan inside `research_topics()`.
+
+Set `content_inputs.competitors.auto_refresh: true` (plus `sites` and `min_length`) if you want the pipeline to scrape these URLs automatically before each run.
 
 ### Docker Workflow
 

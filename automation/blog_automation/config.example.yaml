@@ -67,6 +67,13 @@ content_inputs:
   keyword_source: "../../claudedocs/chinese-keyword-ranking-strategy-nov-2025.md"
   gsc:
     path: "data/gsc_topics.json"
+    auto_refresh: false
+    site: "https://svicloudtvbox.us/"
+    credentials: "../../secrets/your-gsc-service-account.json"
+    lookback_days: 30
+    limit: 200
+    min_impressions: 1
+    max_position: 50
   locale_targets:
     - "加州"
     - "紐約"
@@ -83,6 +90,15 @@ content_inputs:
     path: "data/competitor_topics.json"
     base_score: 75
     base_volume: 150
+    auto_refresh: false
+    min_length: 4
+    sites:
+      techunblock.com:
+        - "https://techunblock.com/blog/"
+      svicloudtw.com:
+        - "https://svicloudtw.com/"
+      safeprosys.com:
+        - "https://safeprosys.com/"
 
 notifications:
   provider: "smtp"  # or "brevo"
