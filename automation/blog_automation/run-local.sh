@@ -6,8 +6,13 @@ cd "$REPO_ROOT/automation/blog_automation"
 
 docker build -t svicloud/autoblog:local .
 
+ENV_FILE=".env"
+if [ ! -f "$ENV_FILE" ]; then
+  ENV_FILE="../../.env"
+fi
+
 docker run --rm \
-  --env-file .env \
+  --env-file "$ENV_FILE" \
   -v "$PWD/data:/app/data" \
   -v "$PWD/logs:/app/logs" \
   -v "$PWD/drafts:/app/drafts" \

@@ -154,7 +154,9 @@ class BlogAutomation:
             self.log.warning("openai package not installed; embeddings disabled until deps installed")
             return None
         api_key = _env_or_raise("OPENAI_API_KEY")
-        return OpenAI(api_key=api_key)
+        project = os.getenv("OPENAI_PROJECT")
+        client = OpenAI(api_key=api_key, project=project)
+        return client
 
     # ------------------------------------------------------------------
     # Core flow
