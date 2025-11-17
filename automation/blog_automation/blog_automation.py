@@ -210,6 +210,10 @@ class BlogAutomation:
             "dry_run": self.dry_run,
         })
 
+    def _auto_refresh_sources(self) -> None:
+        self._refresh_gsc_topics()
+        self._refresh_competitor_topics()
+
     # ------------------------------------------------------------------
     # Pipeline stages (initial stubs)
     def research_topics(self) -> List[TopicCandidate]:
@@ -319,6 +323,7 @@ class BlogAutomation:
             "outline": outline,
             "topic_type": topic.metadata.get("topic_type") if topic.metadata else None,
             "geo_target": topic.metadata.get("geo_target") if topic.metadata else None,
+            "source_domain": topic.metadata.get("source_domain") if topic.metadata else None,
         }
         return GeneratedPost(
             title=f"{topic.keyword}｜SVICLOUD 專家指南",
@@ -466,6 +471,9 @@ class BlogAutomation:
                     f"- 活動/節慶：{metadata.get('is_campaign')}\n"
                     "務必強調：內華達倉庫48小時配送、美國本土一年保固、中英雙語客服。"
                 )
+                competitor_note = self._competitor_context(metadata)
+                if competitor_note:
+                    user_prompt += f"\n- 競品提醒：{competitor_note}"
                 brief_text = self._claude_complete(
                     model=claude_model,
                     system_prompt=system,
@@ -509,6 +517,9 @@ class BlogAutomation:
                     f"地區：{metadata.get('geo_target') or '全美'}\n"
                     "輸出格式：以數字排序的清單，每條不超過40字，聚焦美國本地服務、比較與FAQ。"
                 )
+                competitor_note = self._competitor_context(metadata)
+                if competitor_note:
+                    user_prompt += f"\n競品提醒：{competitor_note}"
                 outline_text = self._claude_complete(
                     model=claude_model,
                     system_prompt=system,
@@ -553,6 +564,9 @@ class BlogAutomation:
                     "4. 結尾加入CTA導引至購買/聯絡。\n"
                     "輸出：純Markdown內容，不含YAML。"
                 )
+                competitor_note = self._competitor_context(metadata)
+                if competitor_note:
+                    user_prompt += f"\n- 競品提醒：{competitor_note}"
                 full_text = self._claude_complete(
                     model=claude_model,
                     system_prompt=system,
@@ -805,6 +819,7 @@ class BlogAutomation:
                 source=str(source_path),
             )
             candidate.metadata["source_domain"] = entry.get("source")
+            candidate.metadata["competitor_query"] = keyword
             candidate.metadata["score"] = score
             candidates.append(candidate)
         return candidates
@@ -1055,6 +1070,13 @@ class BlogAutomation:
         if topic_type == "faq":
             modifiers.append("以問答形式整理常見問題。")
         return base_prompts.get(prompt_type, base_prompts["full"]) + " " + " ".join(modifiers)
+
+    def _competitor_context(self, metadata: Dict[str, Any]) -> str:
+        domain = metadata.get("source_domain")
+        query = metadata.get("competitor_query")
+        if not domain or not query:
+            return ""
+        return f"競品 {domain} 近期內容聚焦「{query}」，須強調SVICLOUD的差異化優勢。"
 
     def _markdown_to_html(self, markdown_text: str) -> str:
         try:
@@ -1378,7 +1400,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-GSC_SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"]
-    def _auto_refresh_sources(self) -> None:
-        self._refresh_gsc_topics()
-        self._refresh_competitor_topics()
