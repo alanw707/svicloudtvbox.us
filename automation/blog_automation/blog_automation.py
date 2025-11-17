@@ -1110,28 +1110,33 @@ class BlogAutomation:
         model = self.config.get("apis", {}).get("claude_model_qa")
         if not self.claude or not model:
             return None
-        try:
-            system = self._prompt_library("qa", post)
-            user_prompt = (
-                "請以JSON格式回覆：{\"score\": 整數, \"notes\": [\"...\" ]}。\n"
-                "評估以下文章是否符合：傳統中文、關鍵字自然出現、強調美國本地優勢、包含內部連結描述、長度>4000字。\n"
-                f"文章內容：\n{post.content}\n"
-            )
-            completion = self._claude_complete(
-                model=model,
-                system_prompt=system,
-                user_prompt=user_prompt,
-                max_tokens=400,
-                temperature=0.2,
-            )
-            data = json.loads(completion)
-            score = float(data.get("score", 0))
-            notes = data.get("notes") or []
-            post.frontmatter["qa_notes"] = notes
-            return score
-        except Exception as exc:
-            self.log.warning("Claude QA failed: %s", exc)
-            return None
+        system = self._prompt_library("qa", post)
+        user_prompt = (
+            "請以 JSON 格式回覆，範例：```json{\"score\":85,\"notes\":[\"語句順暢\"]}```。\n"
+            "評估以下文章是否符合：傳統中文、關鍵字自然出現、強調美國本地優勢、包含內部連結描述、長度>4000字。\n"
+            f"文章內容：\n{post.content}\n"
+        )
+        for attempt in range(2):
+            try:
+                completion = self._claude_complete(
+                    model=model,
+                    system_prompt=system,
+                    user_prompt=user_prompt,
+                    max_tokens=400,
+                    temperature=0.2,
+                )
+                cleaned = completion.strip().strip("`")
+                data = json.loads(cleaned)
+                score = float(data.get("score", 0))
+                notes = data.get("notes") or []
+                post.frontmatter["qa_notes"] = notes
+                return score
+            except json.JSONDecodeError as exc:
+                self.log.warning("QA JSON parse failed (attempt %s): %s", attempt + 1, exc)
+            except Exception as exc:
+                self.log.warning("Claude QA failed: %s", exc)
+                break
+        return None
 
     def _smtp_settings(self) -> Optional[Dict[str, Any]]:
         smtp_cfg = self.config.get("notifications", {}).get("smtp")
