@@ -24,6 +24,8 @@ import markdown
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 
+GSC_SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"]
+
 try:
     import anthropic
 except ImportError:  # pragma: no cover - optional until deps installed

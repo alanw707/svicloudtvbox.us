@@ -12,4 +12,5 @@ docker run --rm \
   -v "$PWD/logs:/app/logs" \
   -v "$PWD/drafts:/app/drafts" \
   -v "$REPO_ROOT/claudedocs:/claudedocs" \
+  -v "$REPO_ROOT/secrets:/secrets" \
   svicloud/autoblog:local "$@"
