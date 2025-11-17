@@ -13,7 +13,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from email.message import EmailMessage
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Tuple, Union
 
 import requests
 import yaml
@@ -303,6 +303,7 @@ class BlogAutomation:
             self.log.warning("Outline validation failed for '%s', regenerating once", topic.keyword)
             outline = self.generate_outline(topic, brief, retry=True)
         post_body = self.generate_full_post(topic, outline, brief)
+        post_body = self._enforce_internal_requirements(topic, post_body)
         post_body = self._insert_internal_links(post_body)
         post_body = self._inject_images(post_body, topic)
         post_body = self._append_cta(post_body, topic)
@@ -451,10 +452,7 @@ class BlogAutomation:
         claude_model = self.config.get("apis", {}).get("claude_model_brief")
         if self.claude and claude_model:
             try:
-                system = (
-                    "You are SVICLOUD's content strategist. Produce a concise Traditional Chinese creative brief "
-                    "highlighting US-specific benefits, customer pains, and narrative angle."
-                )
+                system = self._prompt_library("brief", topic)
                 user_prompt = (
                     f"請以100-150字撰寫策略簡報：\n"
                     f"- 關鍵字：{topic.keyword}\n"
@@ -497,8 +495,7 @@ class BlogAutomation:
         if self.claude and claude_model:
             try:
                 system = (
-                    "You are SVICLOUD's editorial strategist. Produce a numbered Traditional Chinese outline "
-                    "with 5-7 sections focusing on US-based benefits, bilingual support and fast shipping."
+                    self._prompt_library("outline", topic)
                 )
                 retry_note = "重新優化" if retry else "首次草稿"
                 user_prompt = (
@@ -537,10 +534,7 @@ class BlogAutomation:
         metadata = topic.metadata or {}
         if self.claude and claude_model:
             try:
-                system = (
-                    "You are SVICLOUD's Chinese content writer. Produce 4000+ Traditional Chinese characters, "
-                    "markdown formatted, referencing US-based SVICLOUD advantages, internal links, and bilingual support."
-                )
+                system = self._prompt_library("full", topic)
                 user_prompt = (
                     f"請依據以下資訊撰寫完整部落格文章（Markdown）：\n"
                     f"- 關鍵字：{topic.keyword}\n"
@@ -916,6 +910,40 @@ class BlogAutomation:
             content = f"{content}\n\n{cta}"
         return content
 
+    def _enforce_internal_requirements(self, topic: TopicCandidate, content: str) -> str:
+        required_phrases = self.config.get("brand_voice", {}).get("key_phrases", [])
+        for phrase in required_phrases:
+            if phrase not in content:
+                content = f"{phrase}\n\n{content}"
+        return content
+
+    def _prompt_library(self, prompt_type: str, context: Union[TopicCandidate, GeneratedPost]) -> str:
+        if isinstance(context, TopicCandidate):
+            metadata = context.metadata or {}
+        else:
+            metadata = {
+                "topic_type": context.frontmatter.get("topic_type"),
+                "geo_target": context.frontmatter.get("geo_target"),
+            }
+        topic_type = metadata.get("topic_type", "pillar")
+        geo = metadata.get("geo_target") or "全美"
+        base_prompts = {
+            "brief": "你是 SVICLOUD 策略總監，撰寫100字簡報，聚焦美國本地優勢與受眾痛點。",
+            "outline": "你是 SVICLOUD 編輯總監，產出5-7個段落，涵蓋美國倉儲、售後與FAQ。",
+            "full": "你是 SVICLOUD 中文內容顧問，撰寫4000字以上Markdown文章，需含實例與內部連結。",
+            "qa": "你是 SVICLOUD 品質稽核，需回傳 JSON score 與 notes。",
+        }
+        modifiers = []
+        if topic_type == "comparison":
+            modifiers.append("比較SVICLOUD與競品的頻道數、保固、售後。")
+        if topic_type == "geo":
+            modifiers.append(f"聚焦{geo}地區的物流與售後需求。")
+        if topic_type == "campaign":
+            modifiers.append("融入節慶/活動情境、歌單或互動建議。")
+        if topic_type == "faq":
+            modifiers.append("以問答形式整理常見問題。")
+        return base_prompts.get(prompt_type, base_prompts["full"]) + " " + " ".join(modifiers)
+
     def _markdown_to_html(self, markdown_text: str) -> str:
         try:
             return markdown.markdown(markdown_text, extensions=["extra", "sane_lists"])
@@ -971,10 +999,7 @@ class BlogAutomation:
         if not self.claude or not model:
             return None
         try:
-            system = (
-                "You are SVICLOUD's QA bot. Score Traditional Chinese blog posts 0-100 "
-                "based on grammar, SEO, brand alignment, technical correctness."
-            )
+            system = self._prompt_library("qa", post)
             user_prompt = (
                 "請以JSON格式回覆：{\"score\": 整數, \"notes\": [\"...\" ]}。\n"
                 "評估以下文章是否符合：傳統中文、關鍵字自然出現、強調美國本地優勢、包含內部連結描述、長度>4000字。\n"
