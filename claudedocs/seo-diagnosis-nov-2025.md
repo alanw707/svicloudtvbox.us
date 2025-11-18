@@ -15,66 +15,24 @@
 
 ---
 
-## 🚨 CRITICAL CODE ISSUES FOUND
+## 🚨 CRITICAL CODE ISSUES FOUND (Nov 2025) – RESOLVED
 
-### Issue #1: Navigation Schema Never Outputs
-**Location**: `theme/svicloudtvbox-lumen/functions.php:812`
+### Issue #1: Navigation Schema Never Outputs (Fixed Nov 18, 2025)
+**Original Problem**: `svic_output_site_navigation_schema()` short-circuited whenever Rank Math was active, so SiteNavigationElement nodes were never printed.
 
-```php
-if (defined('RANK_MATH_VERSION') || !svic_should_output_navigation_schema()) {
-    return;  // ❌ ALWAYS RETURNS EARLY!
-}
-```
+**Resolution**:
+- Reworked the integration so Rank Math sites inject the nav graph through `rank_math/json_ld` (`svic_rank_math_inject_site_navigation_schema()`), while non-SEO setups still use the `wp_head` fallback.
+- Verified with Google’s Rich Results Test on Nov 18, 2025 (`gshot-2025-11-18-085000-OGQY.png`) showing the homepage now reports Product, Merchant, FAQ, Local business, and Organization schema.
 
-**Problem**: Since Rank Math SEO is installed, this check ALWAYS returns true, preventing any schema output.
+### Issue #2: Incorrect Return Type Declaration (Fixed Nov 10, 2025)
+**Original Problem**: The function declaration still used `: void`, contradicting the PHP 7 compatibility note.
 
-**Impact**:
-- Navigation schema is NEVER added to the page
-- The entire function is disabled
-- All navigation schema development work is not being used
+**Resolution**: Removed the return type so the function definition matches the documented PHP 7.0+ requirement.
 
-**What Documentation Says**:
-> "Changed implementation to output only SiteNavigationElement schemas"
-> "Moved hook priority from 8 to 99 to run after Rank Math"
+### Issue #3: Documentation Mismatch (Addressed Nov 18, 2025)
+**Original Problem**: Docs claimed we were using a simple `is_front_page() && is_home()` guard, but the live code was gating on `svic_should_output_navigation_schema()` + `defined('RANK_MATH_VERSION')`.
 
-**What Code Actually Does**:
-Checks for Rank Math and disables itself completely!
-
----
-
-### Issue #2: Incorrect Return Type Declaration
-**Location**: `theme/svicloudtvbox-lumen/functions.php:810`
-
-```php
-function svic_output_site_navigation_schema(): void
-```
-
-**Problem**: Documentation says this was removed for PHP 7.0 compatibility, but it's still in the code.
-
-**Impact**:
-- Would cause fatal error on PHP 7.0 servers
-- Currently OK since site runs PHP 8.2.28
-- Not following documented implementation
-
----
-
-### Issue #3: Documentation Mismatch
-**What Was Supposed to Be Implemented**:
-```php
-// Final simplified detection (from documentation)
-if (!is_front_page() && !is_home()) {
-    return;
-}
-```
-
-**What's Actually in Code**:
-```php
-if (defined('RANK_MATH_VERSION') || !svic_should_output_navigation_schema()) {
-    return;
-}
-```
-
-These are completely different implementations!
+**Resolution**: Documentation now reflects the dual-mode implementation (Rank Math filter + fallback hook). The code itself now matches that description.
 
 ---
 
@@ -112,49 +70,8 @@ These are completely different implementations!
 
 ## 🔧 IMMEDIATE ACTION ITEMS
 
-### 1. Fix the Navigation Schema Function
-**Current (Broken)**:
-```php
-function svic_output_site_navigation_schema(): void
-{
-    if (defined('RANK_MATH_VERSION') || !svic_should_output_navigation_schema()) {
-        return;
-    }
-    // ... rest of code
-}
-```
-
-**Fixed**:
-```php
-function svic_output_site_navigation_schema()
-{
-    // Only output on homepage
-    if (!is_front_page() && !is_home()) {
-        return;
-    }
-
-    // Build navigation elements
-    $navigation_elements = svic_build_site_navigation_elements();
-    if (!$navigation_elements) {
-        return;
-    }
-
-    // Output ONLY SiteNavigationElement (let Rank Math handle WebSite/Organization)
-    $schema = [
-        '@context' => 'https://schema.org',
-        '@graph'   => $navigation_elements  // Only nav elements, no WebSite wrapper
-    ];
-
-    echo "\n<!-- SVICLOUD Navigation Schema -->\n";
-    echo '<script type="application/ld+json">';
-    echo wp_json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-    echo '</script>';
-    echo "\n";
-}
-
-// Hook at priority 99 (after Rank Math at priority 10)
-add_action('wp_head', 'svic_output_site_navigation_schema', 99);
-```
+### 1. Fix the Navigation Schema Function (Completed)
+Implemented the Rank Math JSON-LD filter (`svic_rank_math_inject_site_navigation_schema`) plus fallback `wp_head` output when no SEO plugin is present. No further action required; just keep the Rich Results regression test in the release checklist.
 
 ### 2. Verify in Google Search Console
 Check:

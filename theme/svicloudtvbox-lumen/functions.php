@@ -1038,6 +1038,65 @@ if (!function_exists('svic_output_canonical_link')) {
 remove_action('wp_head', 'rel_canonical');
 add_action('wp_head', 'svic_output_canonical_link', 6);
 
+if (!function_exists('svic_preserve_language_prefix_canonical')) {
+    /**
+     * Prevent WordPress canonical redirects from stripping the /zh/ prefix when the
+     * original request explicitly targeted the zh route.
+     */
+    function svic_preserve_language_prefix_canonical($redirect_url, $requested_url)
+    {
+        if (!is_string($redirect_url) || $redirect_url === '' || !is_string($requested_url) || $requested_url === '') {
+            return $redirect_url;
+        }
+
+        $requested_parts = wp_parse_url($requested_url);
+        $redirect_parts  = wp_parse_url($redirect_url);
+
+        if (!is_array($requested_parts) || empty($requested_parts['path'])) {
+            return $redirect_url;
+        }
+
+        $requested_path = svic_normalize_route_path($requested_parts['path']);
+        if (strpos($requested_path, '/zh/') !== 0 && $requested_path !== '/zh/') {
+            return $redirect_url;
+        }
+
+        if (!is_array($redirect_parts) || empty($redirect_parts['path'])) {
+            return $redirect_url;
+        }
+
+        $redirect_path = svic_normalize_route_path($redirect_parts['path']);
+        $requested_base = svic_strip_route_locale_prefix($requested_path);
+
+        if ($requested_base === $redirect_path) {
+            return false;
+        }
+
+        return $redirect_url;
+    }
+
+    add_filter('redirect_canonical', 'svic_preserve_language_prefix_canonical', 99, 2);
+}
+
+add_action('template_redirect', function () {
+    if (is_admin()) {
+        return;
+    }
+
+    if (!class_exists('SVIC_Locale_Resolver')) {
+        return;
+    }
+
+    $original_path = SVIC_Locale_Resolver::originalRequestPath();
+    if (!is_string($original_path) || $original_path === '') {
+        return;
+    }
+
+    if (strpos($original_path, '/zh/') === 0 || $original_path === '/zh/') {
+        remove_action('template_redirect', 'redirect_canonical');
+    }
+}, 0);
+
 // Adjust canonical via popular SEO plugins if active so zh pages canonicalize
 // to their /zh/... variants instead of the English version.
 // Yoast SEO
@@ -1260,6 +1319,9 @@ if (!function_exists('svic_filter_rank_math_front_page_og_image_alt')) {
 if (!function_exists('svic_disable_rank_math_front_page_schema')) {
     /**
      * Force Rank Math to skip its default schema on the static homepage.
+     *
+     * Only relevant when Rank Math is not controlling schema output. If Rank Math
+     * is active, we leave its WebPage node intact so structured data stays complete.
      */
     function svic_disable_rank_math_front_page_schema($schema, $type, $object_id)
     {
@@ -1270,7 +1332,9 @@ if (!function_exists('svic_disable_rank_math_front_page_schema')) {
         return $schema;
     }
 
-    add_filter('rank_math/frontend/schema/post_type', 'svic_disable_rank_math_front_page_schema', 20, 3);
+    if (!defined('RANK_MATH_VERSION')) {
+        add_filter('rank_math/frontend/schema/post_type', 'svic_disable_rank_math_front_page_schema', 20, 3);
+    }
 }
 
 if (!function_exists('svic_get_compare_page_meta_definitions')) {

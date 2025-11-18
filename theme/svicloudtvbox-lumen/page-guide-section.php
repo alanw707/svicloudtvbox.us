@@ -372,4 +372,84 @@ foreach ($other_sections as $item) {
 </main>
 
 <?php
+if ($section_key === 'setup' && !empty($content_items) && is_array($content_items)) {
+    $howto_steps = [];
+    $canonical   = function_exists('svic_get_localized_canonical_url') ? svic_get_localized_canonical_url() : '';
+    if (!$canonical && isset($post) && $post instanceof WP_Post) {
+        $canonical = get_permalink($post);
+    }
+
+    $language = '';
+    if (function_exists('svic_locale_to_hreflang') && function_exists('svic_current_locale')) {
+        $language = svic_locale_to_hreflang(svic_current_locale());
+    } elseif (function_exists('get_locale')) {
+        $language = get_locale();
+    }
+    $language = $language ? strtolower(str_replace('_', '-', $language)) : 'en-us';
+
+    foreach ($content_items as $index => $step) {
+        if (!is_array($step)) {
+            continue;
+        }
+
+        $title_key = $step['title_key'] ?? '';
+        $copy_key  = $step['copy_key'] ?? '';
+
+        $step_title = $title_key ? svic_translate($title_key) : '';
+        $step_title = trim(wp_strip_all_tags((string) $step_title));
+        if ($step_title === '') {
+            $step_title = sprintf(__('Step %d', 'svicloudtvbox-lumen'), $index + 1);
+        }
+
+        $copy_value = $copy_key ? svic_translate_rich($copy_key) : '';
+        $step_text  = trim(wp_strip_all_tags((string) $copy_value));
+
+        if ($step_title === '' && $step_text === '') {
+            continue;
+        }
+
+        $step_url = '';
+        if ($canonical) {
+            $step_url = untrailingslashit($canonical) . '#setup-step-' . ($index + 1);
+        }
+
+        $step_entry = [
+            '@type' => 'HowToStep',
+            'name'  => $step_title,
+        ];
+
+        if ($step_text !== '') {
+            $step_entry['text'] = $step_text;
+        }
+        if ($step_url !== '') {
+            $step_entry['url'] = $step_url;
+        }
+
+        $howto_steps[] = $step_entry;
+    }
+
+    if ($howto_steps) {
+        $howto_name        = trim(wp_strip_all_tags((string) $title));
+        $howto_description = trim(wp_strip_all_tags((string) $lead));
+        if ($howto_description === '') {
+            $howto_description = $howto_name;
+        }
+
+        $howto_schema = [
+            '@context'        => 'https://schema.org',
+            '@type'           => 'HowTo',
+            'name'            => $howto_name ?: __('SVICLOUD Setup Guide', 'svicloudtvbox-lumen'),
+            'description'     => $howto_description ?: __('Follow these steps to set up your SVICLOUD TV box.', 'svicloudtvbox-lumen'),
+            'inLanguage'      => $language,
+            'step'            => $howto_steps,
+            'totalTime'       => 'PT15M',
+            'mainEntityOfPage'=> $canonical ?: home_url('/guides-setup/'),
+        ];
+
+        echo '<script type="application/ld+json">' . wp_json_encode($howto_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+}
+?>
+
+<?php
 get_footer();

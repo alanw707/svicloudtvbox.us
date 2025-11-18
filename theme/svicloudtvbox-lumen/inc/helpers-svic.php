@@ -218,6 +218,13 @@ if (!function_exists('svic_route_alias_definitions')) {
         }
 
         $aliases = [
+            'blog' => [
+                'canonical_base' => [
+                    'en' => '/blog/',
+                    'zh' => '/blog/',
+                ],
+                'legacy' => [],
+            ],
             'compare' => [
                 'canonical_base' => [
                     'en' => '/compare/',

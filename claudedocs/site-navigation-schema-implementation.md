@@ -7,16 +7,17 @@ Implemented JSON-LD structured data for site navigation to help Google display s
 
 ### Location
 - **File**: `theme/svicloudtvbox-lumen/functions.php`
-- **Function**: `svic_output_site_navigation_schema()`
-- **Hook**: `wp_head` (priority 99 - runs after Rank Math SEO)
+- **Functions**:
+  - `svic_rank_math_inject_site_navigation_schema()` (primary path when Rank Math is active, hooked via `rank_math/json_ld`)
+  - `svic_output_site_navigation_schema()` (fallback `wp_head` hook when no SEO plugin handles schema)
 
 ### What It Does
 1. **Outputs on Homepage Only**: The structured data is only rendered on the front page using `is_front_page() && is_home()` detection
 2. **Reads WordPress Menu**: Automatically pulls navigation items from the 'primary' WordPress menu
 3. **Fallback Navigation**: If no menu is set, uses the hardcoded fallback navigation from the header
 4. **Schema.org Compliance**: Outputs valid JSON-LD structured data following Schema.org standards
-5. **Rank Math Integration**: Only outputs SiteNavigationElement schema (Rank Math SEO handles WebSite/Organization schemas)
-6. **PHP Compatibility**: Function uses no return type declaration for PHP 7.0+ compatibility
+5. **Rank Math Integration**: When Rank Math is active we inject the nav nodes through its JSON-LD filter so the SiteNavigationElement list is appended to the existing WebSite graph. If Rank Math is disabled we fall back to a standalone block in `wp_head`.
+6. **PHP Compatibility**: Functions avoid strict return types so the theme stays compatible with PHP 7.0+
 
 ### Schema Structure
 The implementation outputs SiteNavigationElement schema only. Rank Math SEO plugin already handles WebSite and Organization schemas, so we avoid duplication.
@@ -68,7 +69,7 @@ Test the implementation with:
 
 1. **Google Rich Results Test**
    - URL: https://search.google.com/test/rich-results
-   - Test your homepage URL
+   - Test your homepage URL (latest verification: Nov 18, 2025 @ 08:49 AM PT — screenshot `gshot-2025-11-18-085000-OGQY.png` shows Product/Merchant/FAQ/Organization all valid)
 
 2. **Schema.org Validator**
    - URL: https://validator.schema.org/
@@ -210,8 +211,8 @@ if (!is_front_page() && !is_home()) {
 
 **Solution**:
 - Changed implementation to output only SiteNavigationElement schemas
-- Moved hook priority from 8 to 99 to run after Rank Math
-- This avoids duplicate schema markup and potential conflicts
+- When Rank Math is active we inject via `rank_math/json_ld` so the nodes live inside the WebSite graph, otherwise we output a standalone block in `wp_head` at priority 99.
+- This avoids duplicate schema markup and keeps the SiteNavigationElement list paired with whatever plugin currently owns the WebSite node.
 
 ## Notes
 - The structured data appears only on the homepage (front page)

@@ -161,4 +161,45 @@ $faq_sections = [
 </main>
 
 <?php
+$faq_entities = [];
+foreach ($faq_sections as $section) {
+    if (empty($section['items']) || !is_array($section['items'])) {
+        continue;
+    }
+
+    foreach ($section['items'] as $item) {
+        $question = isset($item['question_key']) ? svic_translate($item['question_key']) : '';
+        $question = trim(wp_strip_all_tags((string) $question));
+
+        $replacements = isset($item['replacements']) && is_array($item['replacements']) ? $item['replacements'] : [];
+        $answer_raw  = isset($item['answer_key']) ? svic_translate_rich($item['answer_key'], $replacements) : '';
+        $answer_text = trim(wp_strip_all_tags((string) $answer_raw));
+
+        if ($question === '' || $answer_text === '') {
+            continue;
+        }
+
+        $faq_entities[] = [
+            '@type' => 'Question',
+            'name'  => $question,
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text'  => $answer_text,
+            ],
+        ];
+    }
+}
+
+if ($faq_entities) {
+    $faq_schema = [
+        '@context'   => 'https://schema.org',
+        '@type'      => 'FAQPage',
+        'mainEntity' => array_values($faq_entities),
+    ];
+
+    echo '<script type="application/ld+json">' . wp_json_encode($faq_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+}
+?>
+
+<?php
 get_footer();
