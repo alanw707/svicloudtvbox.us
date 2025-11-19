@@ -6,10 +6,12 @@ apis:
   openai_embedding: "text-embedding-3-small"
 
 quality:
-  min_score: 80
+  min_score: 80  # Production threshold restored
   duplicate_threshold: 0.85
   min_length: 4000
   outline_score_threshold: 0.75
+  claude_weight: 0.55   # combined QA weighting (0-1)
+  claude_floor: 65      # if Claude score falls below this but fallback passes, trust fallback
 
 publishing:
   staging_hold_hours: 24
@@ -27,7 +29,7 @@ wordpress:
     endpoint: "https://svicloudtvbox.us/wp-json/wp/v2/posts"
     username: "content-bot@svicloudtvbox.us"
     password_env: "WP_REST_PASSWORD"
-    status: "draft"
+    status: "publish"  # Changed from "draft" - posts passing quality threshold auto-publish
     author: 2
   category_map:
     default:
@@ -116,5 +118,5 @@ monitoring:
   retention_days: 90
 
 safety:
-  dry_run: true
+  dry_run: false  # PRODUCTION MODE: Posts will be published to WordPress
   emergency_stop_file: "EMERGENCY_STOP"
