@@ -7,21 +7,32 @@
 
 get_header();
 
-$post_id        = get_the_ID();
-$categories     = get_the_category($post_id);
-$primary_cat    = $categories ? $categories[0] : null;
-$published_time = get_the_date('', $post_id);
-$updated_time   = get_the_modified_date('', $post_id);
-$reading_time   = svic_estimated_read_time($post_id);
-$reading_label  = sprintf(
-    /* translators: %d: estimated reading time in minutes */
-    esc_html__('%d min read', 'svicloudtvbox-lumen'),
-    $reading_time
-);
 ?>
 
 <main class="page-shell blog-shell">
   <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+    <?php
+      $post_id        = get_the_ID();
+      $categories     = get_the_category($post_id);
+      $primary_cat    = $categories ? $categories[0] : null;
+      $published_time = get_the_date('', $post_id);
+      $updated_time   = get_the_modified_date('', $post_id);
+      $reading_time   = svic_estimated_read_time($post_id);
+      $reading_label  = sprintf(
+          /* translators: %d: estimated reading time in minutes */
+          esc_html__('%d min read', 'svicloudtvbox-lumen'),
+          $reading_time
+      );
+      $raw_content        = get_post_field('post_content', $post_id);
+      $rendered_content   = is_string($raw_content) ? apply_filters('the_content', $raw_content) : '';
+      $featured_image_url = has_post_thumbnail($post_id) ? get_the_post_thumbnail_url($post_id, 'full') : null;
+      $content_segments   = svic_extract_intro_media_blocks($rendered_content, $featured_image_url);
+      $hero_highlights    = isset($content_segments['blocks']) ? $content_segments['blocks'] : [];
+      $article_body       = isset($content_segments['content']) ? $content_segments['content'] : '';
+      if ($article_body === '' && $rendered_content !== '' && empty($hero_highlights)) {
+          $article_body = $rendered_content;
+      }
+    ?>
     <article id="post-<?php the_ID(); ?>" <?php post_class('blog-article'); ?>>
       <header class="blog-hero">
         <div class="blog-hero__meta">
@@ -64,7 +75,16 @@ $reading_label  = sprintf(
             <?php endif; ?>
           </figure>
         <?php endif; ?>
-        <?php the_content(); ?>
+        <?php if (!empty($hero_highlights)) : ?>
+          <section class="blog-hero-highlights" aria-label="<?php esc_attr_e('Key delivery highlights', 'svicloudtvbox-lumen'); ?>">
+            <?php foreach ($hero_highlights as $highlight_block) : ?>
+              <div class="blog-hero-highlights__item">
+                <?php echo $highlight_block; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+              </div>
+            <?php endforeach; ?>
+          </section>
+        <?php endif; ?>
+        <?php echo $article_body; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
       </div>
 
       <footer class="blog-article__footer">

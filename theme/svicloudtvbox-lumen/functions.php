@@ -70,6 +70,31 @@ if (!function_exists('svic_get_localized_canonical_url')) {
     }
 }
 
+add_filter('wp_get_attachment_image_attributes', 'svic_apply_meaningful_image_alt', 10, 3);
+
+if (!function_exists('svic_apply_meaningful_image_alt')) {
+    /**
+     * Ensure every attachment image tag ships with a meaningful alt attribute.
+     *
+     * @param array        $attr
+     * @param WP_Post|null $attachment
+     * @param string|array $size
+     *
+     * @return array
+     */
+    function svic_apply_meaningful_image_alt(array $attr, $attachment, $size): array
+    {
+        $current_alt = isset($attr['alt']) ? trim((string) $attr['alt']) : '';
+        if ($current_alt !== '') {
+            return $attr;
+        }
+
+        $attr['alt'] = svic_generate_default_image_alt($attachment);
+
+        return $attr;
+    }
+}
+
 if (!function_exists('svic_static_page_meta_registry')) {
     function svic_static_page_meta_registry(): array
     {
@@ -327,8 +352,8 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh' => '選購小雲 10P+／10S｜美國授權現貨',
                 ],
                 'description' => [
-                    'en' => 'Browse in-stock SVICLOUD bundles with 48-hour Nevada shipping, 1-year warranty, and bilingual concierge setup.',
-                    'zh' => '瀏覽小雲現貨組合，內華達 48 小時出貨、附一年保固與中英禮賓安裝。',
+                    'en' => 'Browse in-stock SVICLOUD bundles with 1-year U.S. warranty, bilingual concierge setup, and easy returns.',
+                    'zh' => '瀏覽小雲現貨組合，附一年美國保固與中英禮賓安裝，提供簡易退換貨服務。',
                 ],
                 'image'       => '/assets/images/svicloud-10p-plus.webp',
                 'image_alt'   => [
@@ -342,8 +367,8 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh' => '小雲購物車｜結帳前確認商品',
                 ],
                 'description' => [
-                    'en' => 'Confirm SVICLOUD models, shipping protection, and concierge add-ons before entering checkout.',
-                    'zh' => '結帳前確認小雲機型、出貨保障與禮賓加值項目。',
+                    'en' => 'Confirm SVICLOUD models, extended warranty, and concierge add-ons before entering checkout.',
+                    'zh' => '結帳前確認小雲機型、延長保固與禮賓加值項目。',
                 ],
                 'image'       => $default_image,
                 'image_alt'   => [
@@ -1097,6 +1122,121 @@ add_action('template_redirect', function () {
     }
 }, 0);
 
+// Serve a minimal zh-v1.1.json translation payload to prevent front-end 404s.
+add_action('template_redirect', function () {
+    if (is_admin()) {
+        return;
+    }
+
+    $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+    $path        = is_string($request_uri) ? wp_parse_url($request_uri, PHP_URL_PATH) : '';
+    if (!is_string($path) || $path === '') {
+        return;
+    }
+
+    if (rtrim(strtolower($path), '/') !== '/zh-v1.1.json') {
+        return;
+    }
+
+    if (!headers_sent()) {
+        header('Content-Type: application/json; charset=UTF-8');
+        header('Cache-Control: public, max-age=86400, immutable');
+    }
+
+    $payload = [
+        'translation-revision-date' => gmdate('Y-m-d H:i:s+0000'),
+        'generator'                 => 'svicloudtvbox-lumen',
+        'domain'                    => 'default',
+        'locale_data'               => [
+            'messages' => [
+                '' => [
+                    'domain'        => 'messages',
+                    'lang'          => 'zh',
+                    'plural-forms'  => 'nplurals=1; plural=0;',
+                ],
+            ],
+        ],
+    ];
+
+    echo wp_json_encode($payload, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    exit;
+}, 1);
+
+// Normalize legacy ?lang= querystring requests to the canonical language-prefixed URL so
+// Search Console stops surfacing /contact?lang=zh style 404s.
+add_action('template_redirect', function () {
+    if (is_admin() || (defined('REST_REQUEST') && REST_REQUEST)) {
+        return;
+    }
+
+    if (!isset($_GET['lang'])) {
+        return;
+    }
+
+    $lang_raw = wp_unslash((string) $_GET['lang']);
+    $lang     = sanitize_text_field($lang_raw);
+    if ($lang === '') {
+        return;
+    }
+
+    $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+    $current     = home_url(is_string($request_uri) && $request_uri !== '' ? $request_uri : '/');
+    $target      = svic_url_with_lang(remove_query_arg('lang', $current), $lang);
+
+    if (!is_string($target) || $target === '' || $target === $current) {
+        return;
+    }
+
+    wp_safe_redirect($target, 301);
+    exit;
+}, 4);
+
+// Harden thin/error-prone archives and placeholder search URLs so they 404 cleanly
+// instead of returning 5xx or being indexed.
+add_action('template_redirect', function () {
+    if (is_admin() || is_feed()) {
+        return;
+    }
+
+    // Hard 404 for author archives (thin content) to avoid crawler 5xx noise.
+    if (is_author()) {
+        global $wp_query;
+        $wp_query->set_404();
+        status_header(404);
+        nocache_headers();
+        include get_query_template('404');
+        exit;
+    }
+
+    // Block placeholder/invalid searches like ?s={search_term_string} or encoded variants.
+    if (is_search()) {
+        $term   = get_query_var('s');
+        $raw_qs = $_SERVER['QUERY_STRING'] ?? '';
+        $match_placeholder = false;
+
+        if (is_string($term) && preg_match('/\{\s*search_term_string\s*\}/i', $term)) {
+            $match_placeholder = true;
+        }
+
+        if (!$match_placeholder && is_string($raw_qs)) {
+            // Also catch URL-encoded placeholder from bots
+            $decoded_qs = rawurldecode($raw_qs);
+            if (stripos($decoded_qs, 'search_term_string') !== false) {
+                $match_placeholder = true;
+            }
+        }
+
+        if ($match_placeholder) {
+            global $wp_query;
+            $wp_query->set_404();
+            status_header(404);
+            nocache_headers();
+            include get_query_template('404');
+            exit;
+        }
+    }
+}, 6);
+
 // Adjust canonical via popular SEO plugins if active so zh pages canonicalize
 // to their /zh/... variants instead of the English version.
 // Yoast SEO
@@ -1126,17 +1266,17 @@ if (!function_exists('svic_homepage_meta_definitions')) {
         $definitions = [
             'zh_tw' => [
                 'title'       => '小雲電視盒 美國代理｜10P+、10S 官方現貨與保固',
-                'description' => '小雲電視盒 美國代理提供 10P+、10S 官方現貨，內華達倉 48 小時出貨，附一年美國保固與中英雙語禮賓安裝服務，無月費。',
+                'description' => '小雲電視盒 美國代理提供 10P+、10S 官方現貨，附一年美國保固與中英雙語禮賓安裝服務，無月費。',
                 'image_alt'   => '小雲電視盒 10P+ 與遙控器，強調中英雙語禮賓服務',
             ],
             'zh_cn' => [
                 'title'       => '小云电视盒 美国代理｜10P+、10S 官方现货与保固',
-                'description' => '小云电视盒美国代理提供 10P+、10S 官方现货，内华达仓 48 小时发货，含一年美保与中英双语礼宾安装，无月费。',
+                'description' => '小云电视盒美国代理提供 10P+、10S 官方现货，含一年美保与中英双语礼宾安装，无月费。',
                 'image_alt'   => '小云电视盒 10P+ 与遥控器，突显中英双语礼宾服务',
             ],
             'en_us' => [
                 'title'       => 'SVICLOUD TV Box US | Authorized 小雲電視盒 美國代理',
-                'description' => 'Shop SVICLOUD 10P+ & 10S with 48-hour Nevada shipping, bilingual concierge setup, and 1-year U.S. warranty from the official 小雲電視盒 美國代理—no monthly fees.',
+                'description' => 'Shop SVICLOUD 10P+ & 10S with bilingual concierge setup and 1-year U.S. warranty from the official 小雲電視盒 美國代理—no monthly fees.',
                 'image_alt'   => 'SVICLOUD 10P+ streaming box with bilingual concierge support badge',
             ],
         ];
@@ -3048,7 +3188,8 @@ add_filter('wp_sitemaps_posts_query_args', function ($args, $postType) {
         return $args;
     }
 
-    $slugsToExclude = ['my-account'];
+    // Keep utility/transactional pages out of sitemaps to avoid 3xx/robots conflicts.
+    $slugsToExclude = ['my-account', 'cart', 'checkout', 'order-tracking'];
     $idsToExclude   = [];
 
     foreach ($slugsToExclude as $slug) {
@@ -3062,10 +3203,19 @@ add_filter('wp_sitemaps_posts_query_args', function ($args, $postType) {
         return $args;
     }
 
-    $notIn                 = isset($args['post__not_in']) ? (array) $args['post__not_in'] : [];
-    $args['post__not_in']  = array_unique(array_merge($notIn, $idsToExclude));
+    $notIn                = isset($args['post__not_in']) ? (array) $args['post__not_in'] : [];
+    $args['post__not_in'] = array_unique(array_merge($notIn, $idsToExclude));
 
     return $args;
+}, 10, 2);
+
+// Remove the default user (author) sitemap to avoid thin archive URLs and 5xxs on bad author slugs.
+add_filter('wp_sitemaps_add_provider', function ($provider, $name) {
+    if ($name === 'users') {
+        return false;
+    }
+
+    return $provider;
 }, 10, 2);
 
 // Theme setup
@@ -3428,6 +3578,10 @@ add_action('template_redirect', function () {
             'path' => '/svicloud-tv-box-us-guide/',
             'lang' => 'zh',
         ],
+        '/zh/reviews' => [
+            'path' => '/blog/',
+            'lang' => 'zh',
+        ],
     ];
 
     if (!isset($redirects[$path])) {
@@ -3571,12 +3725,74 @@ if (!function_exists('svic_theme_serve_favicon')) {
     }
 
     add_action('do_favicon', 'svic_theme_serve_favicon');
-    add_action('template_redirect', function () {
-        $request_uri = $_SERVER['REQUEST_URI'] ?? '';
-        if ($request_uri === '/favicon.ico' || $request_uri === 'favicon.ico') {
-            svic_theme_serve_favicon();
+add_action('template_redirect', function () {
+    $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+    if ($request_uri === '/favicon.ico' || $request_uri === 'favicon.ico') {
+        svic_theme_serve_favicon();
+    }
+}, 0);
+
+// Seed missing Rank Math focus keywords for published content (posts/pages/products)
+// to satisfy SEO analyzer checks. Runs once per deploy and only in admin for users
+// who can manage options.
+add_action('admin_init', function () {
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+
+    // Avoid re-running after initial seed
+    $already_seeded = get_option('svic_rankmath_focus_seeded');
+    if ($already_seeded) {
+        return;
+    }
+
+    $types = ['post', 'page'];
+    if (post_type_exists('product')) {
+        $types[] = 'product';
+    }
+
+    $query = new WP_Query([
+        'post_type'      => $types,
+        'post_status'    => 'publish',
+        'posts_per_page' => 200,
+        'fields'         => 'ids',
+        'meta_query'     => [
+            'relation' => 'OR',
+            [
+                'key'     => 'rank_math_focus_keyword',
+                'compare' => 'NOT EXISTS',
+            ],
+            [
+                'key'     => 'rank_math_focus_keyword',
+                'value'   => '',
+                'compare' => '=',
+            ],
+        ],
+    ]);
+
+    if (!($query instanceof WP_Query) || empty($query->posts)) {
+        update_option('svic_rankmath_focus_seeded', ['count' => 0, 'ts' => time()], false);
+        return;
+    }
+
+    $count = 0;
+    foreach ($query->posts as $post_id) {
+        $title = get_the_title($post_id);
+        if (!is_string($title) || $title === '') {
+            continue;
         }
-    }, 0);
+
+        $keyword = sanitize_text_field(wp_trim_words($title, 12, ''));
+        if ($keyword === '') {
+            continue;
+        }
+
+        update_post_meta($post_id, 'rank_math_focus_keyword', $keyword);
+        $count++;
+    }
+
+    update_option('svic_rankmath_focus_seeded', ['count' => $count, 'ts' => time()], false);
+}, 99);
 }
 
 
@@ -4040,3 +4256,13 @@ if (!function_exists('svic_flush_rewrites_once_for_sitemaps')) {
 
     add_action('init', 'svic_flush_rewrites_once_for_sitemaps', 21);
 }
+
+add_action('pre_get_posts', function ($query) {
+    if (is_admin() || !$query->is_main_query()) {
+        return;
+    }
+
+    if ($query->is_home()) {
+        $query->set('posts_per_page', 12);
+    }
+});

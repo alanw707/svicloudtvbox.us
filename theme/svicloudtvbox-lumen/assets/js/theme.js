@@ -142,6 +142,14 @@
      * Performance optimizations
      */
     function initPerformanceOptimizations() {
+        // Only preload hero assets on the homepage to avoid console warnings on inner pages
+        const bodyHasClass = (cls) => document.body && document.body.classList.contains(cls);
+        const isHomeLike = bodyHasClass('home') || bodyHasClass('front-page') || bodyHasClass('page-template-front-page');
+
+        if (!isHomeLike) {
+            return;
+        }
+
         // Preload critical images
         const themeBaseUrl = (() => {
             if (window.svicTheme && window.svicTheme.themeUrl) {

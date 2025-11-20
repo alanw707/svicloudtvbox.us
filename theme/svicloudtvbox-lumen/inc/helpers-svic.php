@@ -526,7 +526,10 @@ if (!function_exists('svic_estimated_read_time')) {
         }
 
         $sanitized   = wp_strip_all_tags($content, true);
-        $word_count  = str_word_count($sanitized);
+        // str_word_count() ignores CJK; add a CJK character count so Chinese/Japanese/Korean posts aren't treated as 1-word articles.
+        $latin_words = str_word_count($sanitized);
+        $cjk_chars   = preg_match_all('/[\x{4e00}-\x{9fff}\x{3040}-\x{30ff}\x{ac00}-\x{d7af}]/u', $sanitized, $matches) ?: 0;
+        $word_count  = $latin_words + (int) $cjk_chars;
         $wpm_sanitized = max(1, $words_per_minute);
 
         $minutes = (int) ceil($word_count / $wpm_sanitized);
@@ -1263,5 +1266,162 @@ if (!function_exists('svic_render_google_customer_reviews_optin')) {
           };
         </script>
         <?php
+    }
+}
+
+if (!function_exists('svic_extract_intro_media_blocks')) {
+    /**
+     * Extract the first few media-heavy blocks so the template can restyle them.
+     *
+     * @param string      $content      Rendered post content.
+     * @param string|null $featured_url URL of the featured image for duplicate detection.
+     *
+     * @return array{blocks: array<int, string>, content: string}
+     */
+    function svic_extract_intro_media_blocks(string $content, ?string $featured_url = null): array
+    {
+        $remaining           = ltrim($content);
+        $blocks              = [];
+        $consumed_intro_html = false;
+        $normalized_featured = svic_normalize_media_src($featured_url);
+        $seen_sources        = [];
+
+        if ($remaining === '') {
+            return [
+                'blocks'  => [],
+                'content' => '',
+            ];
+        }
+
+        $pattern  = '/^\s*(<(?:figure\b[^>]*>.*?<\\/figure>|p\b[^>]*>.*?<\\/p>))/isu';
+        $attempts = 0;
+
+        while (count($blocks) < 3 && $attempts < 6) {
+            $attempts++;
+
+            if (!preg_match($pattern, $remaining, $match)) {
+                break;
+            }
+
+            $matched_block = $match[1];
+            if (strpos($matched_block, '<img') === false) {
+                break;
+            }
+
+            $slice = substr($remaining, strlen($match[0]));
+            $remaining = $slice === false ? '' : $slice;
+            $consumed_intro_html = true;
+
+            $image_src      = svic_extract_first_image_src($matched_block);
+            $normalized_src = svic_normalize_media_src($image_src);
+
+            if ($normalized_src !== '' && $normalized_featured !== '' && $normalized_src === $normalized_featured) {
+                continue;
+            }
+
+            if ($normalized_src !== '' && isset($seen_sources[$normalized_src])) {
+                continue;
+            }
+
+            $blocks[] = $matched_block;
+
+            if ($normalized_src !== '') {
+                $seen_sources[$normalized_src] = true;
+            }
+        }
+
+        $body = ltrim($remaining);
+        if (!$consumed_intro_html) {
+            $body = $content;
+        }
+
+        return [
+            'blocks'  => $blocks,
+            'content' => $body,
+        ];
+    }
+}
+
+if (!function_exists('svic_extract_first_image_src')) {
+    function svic_extract_first_image_src(string $html): string
+    {
+        if ($html === '') {
+            return '';
+        }
+
+        if (!preg_match('/<img[^>]+src=["\']([^"\']+)["\']/i', $html, $match)) {
+            return '';
+        }
+
+        return trim((string) $match[1]);
+    }
+}
+
+if (!function_exists('svic_normalize_media_src')) {
+    function svic_normalize_media_src(?string $url): string
+    {
+        if (!is_string($url) || $url === '') {
+            return '';
+        }
+
+        $trimmed = trim($url);
+        if ($trimmed === '') {
+            return '';
+        }
+
+        $parts = wp_parse_url($trimmed);
+        if ($parts === false) {
+            return '';
+        }
+
+        $host = isset($parts['host']) ? strtolower((string) $parts['host']) : '';
+        $path = isset($parts['path']) ? strtolower((string) $parts['path']) : '';
+
+        if ($path !== '') {
+            $path = preg_replace('/-\d+x\d+(?=\.[a-z0-9]+$)/i', '', $path);
+            $path = preg_replace('#/+#', '/', $path);
+        }
+
+        return ($host !== '' ? $host : '') . $path;
+    }
+}
+
+if (!function_exists('svic_generate_default_image_alt')) {
+    function svic_generate_default_image_alt($attachment, ?string $fallback = null): string
+    {
+        $candidates = [];
+
+        if ($attachment instanceof WP_Post) {
+            $candidates[] = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true);
+            $candidates[] = $attachment->post_excerpt ?? '';
+            $candidates[] = $attachment->post_title ?? '';
+
+            if (!empty($attachment->post_parent)) {
+                $parent_title = get_the_title((int) $attachment->post_parent);
+                if (is_string($parent_title) && $parent_title !== '') {
+                    $candidates[] = sprintf(
+                        /* translators: %s is the parent post title. */
+                        esc_html__('Illustration for %s', 'svicloudtvbox-lumen'),
+                        wp_strip_all_tags($parent_title)
+                    );
+                }
+            }
+        }
+
+        if (is_string($fallback) && $fallback !== '') {
+            $candidates[] = $fallback;
+        }
+
+        foreach ($candidates as $candidate) {
+            if (!is_string($candidate)) {
+                continue;
+            }
+            $trimmed = trim(wp_strip_all_tags($candidate));
+            if ($trimmed !== '') {
+                return $trimmed;
+            }
+        }
+
+        return esc_html__('SVICLOUD TV Box illustration', 'svicloudtvbox-lumen');
     }
 }

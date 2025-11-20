@@ -376,6 +376,54 @@ html[lang*="zh"] .blog-article__content strong {
   color: var(--color-text-muted);
 }
 
+.blog-hero-highlights {
+  display: grid;
+  gap: var(--size-400);
+  margin: var(--size-500) 0 var(--size-700);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.blog-hero-highlights__item {
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-500);
+  padding: var(--size-400);
+  background: rgba(8, 19, 41, 0.9);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  gap: var(--size-200);
+  align-content: start;
+  text-align: left;
+}
+
+.blog-hero-highlights__item figure,
+.blog-hero-highlights__item p {
+  margin: 0;
+}
+
+.blog-hero-highlights__item img {
+  width: 100%;
+  border-radius: var(--radius-400);
+  object-fit: cover;
+  aspect-ratio: 4/3;
+  box-shadow: none;
+}
+
+.blog-hero-highlights__item figcaption,
+.blog-hero-highlights__item em {
+  display: block;
+  margin-top: var(--size-200);
+  font-size: 0.95rem;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+@media (min-width: 768px) {
+  .blog-hero-highlights__item {
+    text-align: left;
+  }
+}
+
 .blog-article__content a {
   color: var(--link-primary);
   text-decoration: underline;

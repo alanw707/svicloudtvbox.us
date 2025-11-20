@@ -59,36 +59,23 @@ $list_label = svic_translate('blog.index.list_label');
 <main class="page-shell blog-shell blog-archive">
   <div class="blog-archive__container">
     <section class="blog-archive__hero" aria-labelledby="blog-archive-title">
-      <?php if ($hero_eyebrow !== '') : ?>
-        <span class="blog-archive__eyebrow"><?php echo esc_html($hero_eyebrow); ?></span>
-      <?php endif; ?>
-      <h1 id="blog-archive-title" class="blog-archive__title"><?php echo esc_html($hero_title); ?></h1>
-      <div class="blog-archive__lead"><?php echo $hero_summary; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
-      <?php if ($hero_primary_label !== '' || $hero_secondary_label !== '') : ?>
-        <div class="blog-archive__actions">
-          <?php if ($hero_primary_label !== '') : ?>
-            <a class="btn btn-primary" href="<?php echo esc_url($hero_primary_url); ?>"><?php echo esc_html($hero_primary_label); ?></a>
-          <?php endif; ?>
-          <?php if ($hero_secondary_label !== '') : ?>
-            <a class="btn btn-outline" href="<?php echo esc_url($hero_secondary_url); ?>"><?php echo esc_html($hero_secondary_label); ?></a>
-          <?php endif; ?>
-        </div>
-      <?php endif; ?>
-
-      <?php if ($highlights) : ?>
-        <dl class="blog-archive__highlights">
-          <?php foreach ($highlights as $highlight) : ?>
-            <div class="blog-highlight">
-              <?php if (!empty($highlight['label'])) : ?>
-                <dt class="blog-highlight__label"><?php echo esc_html($highlight['label']); ?></dt>
-              <?php endif; ?>
-              <?php if (!empty($highlight['copy'])) : ?>
-                <dd class="blog-highlight__copy"><?php echo esc_html($highlight['copy']); ?></dd>
-              <?php endif; ?>
-            </div>
-          <?php endforeach; ?>
-        </dl>
-      <?php endif; ?>
+      <div class="blog-hero__main">
+        <?php if ($hero_eyebrow !== '') : ?>
+          <div class="blog-archive__eyebrow"><?php echo esc_html($hero_eyebrow); ?></div>
+        <?php endif; ?>
+        <h1 id="blog-archive-title" class="blog-archive__title"><?php echo esc_html($hero_title); ?></h1>
+        <div class="blog-archive__lead blog-hero__lead"><?php echo $hero_summary; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+        <?php if ($hero_primary_label !== '' || $hero_secondary_label !== '') : ?>
+          <div class="blog-archive__actions blog-hero__actions">
+            <?php if ($hero_primary_label !== '') : ?>
+              <a class="btn btn-primary" href="<?php echo esc_url($hero_primary_url); ?>"><?php echo esc_html($hero_primary_label); ?></a>
+            <?php endif; ?>
+            <?php if ($hero_secondary_label !== '') : ?>
+              <a class="btn btn-outline" href="<?php echo esc_url($hero_secondary_url); ?>"><?php echo esc_html($hero_secondary_label); ?></a>
+            <?php endif; ?>
+          </div>
+        <?php endif; ?>
+      </div>
     </section>
 
     <?php if (have_posts()) : ?>
@@ -113,7 +100,7 @@ $list_label = svic_translate('blog.index.list_label');
             $updated_label          = $show_updated ? svic_translate_html('blog.card.updated', ['date' => $updated_time_display]) : '';
 
             $raw_excerpt    = get_the_excerpt($post_id);
-            $trimmed_excerpt = wp_trim_words(wp_strip_all_tags((string) $raw_excerpt), 32, '…');
+            $trimmed_excerpt = wp_trim_words(wp_strip_all_tags((string) $raw_excerpt), 26, '…');
 
             $thumbnail_html = svic_post_card_image(
                 $post_id,
