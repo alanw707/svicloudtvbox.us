@@ -935,7 +935,7 @@ if (!function_exists('svic_rank_math_inject_site_navigation_schema')) {
 }
 
 if (defined('RANK_MATH_VERSION')) {
-    add_filter('rank_math/json_ld', 'svic_rank_math_inject_site_navigation_schema', 85, 2);
+    // Let Rank Math handle schema output without theme overrides.
 } else {
     add_action('wp_head', 'svic_output_site_navigation_schema', 99);
 }
@@ -1249,13 +1249,16 @@ add_filter('wpseo_canonical', function ($url) {
 });
 
 // RankMath SEO
-add_filter('rank_math/frontend/canonical', function ($url) {
-    if (is_admin()) {
-        return $url;
-    }
-    $canonical = svic_get_localized_canonical_url();
-    return $canonical ?: $url;
-}, 10, 1);
+// When Rank Math is active, let it manage canonicals without theme overrides.
+if (!defined('RANK_MATH_VERSION')) {
+    add_filter('rank_math/frontend/canonical', function ($url) {
+        if (is_admin()) {
+            return $url;
+        }
+        $canonical = svic_get_localized_canonical_url();
+        return $canonical ?: $url;
+    }, 10, 1);
+}
 
 if (!function_exists('svic_homepage_meta_definitions')) {
     function svic_homepage_meta_definitions(): array
@@ -1374,7 +1377,9 @@ if (!function_exists('svic_filter_rank_math_front_page_title')) {
         return $meta_title !== '' ? $meta_title : $title;
     }
 
-    add_filter('rank_math/frontend/title', 'svic_filter_rank_math_front_page_title', 20);
+    if (!defined('RANK_MATH_VERSION')) {
+        add_filter('rank_math/frontend/title', 'svic_filter_rank_math_front_page_title', 20);
+    }
 }
 
 if (!function_exists('svic_filter_rank_math_front_page_description')) {
@@ -1388,8 +1393,10 @@ if (!function_exists('svic_filter_rank_math_front_page_description')) {
         return $meta_description !== '' ? $meta_description : $description;
     }
 
-    add_filter('rank_math/frontend/description', 'svic_filter_rank_math_front_page_description', 20);
-    add_filter('rank_math/frontend/snippet_description', 'svic_filter_rank_math_front_page_description', 20);
+    if (!defined('RANK_MATH_VERSION')) {
+        add_filter('rank_math/frontend/description', 'svic_filter_rank_math_front_page_description', 20);
+        add_filter('rank_math/frontend/snippet_description', 'svic_filter_rank_math_front_page_description', 20);
+    }
 }
 
 if (!function_exists('svic_filter_rank_math_front_page_og_title')) {
@@ -1403,8 +1410,10 @@ if (!function_exists('svic_filter_rank_math_front_page_og_title')) {
         return $meta_title !== '' ? $meta_title : $title;
     }
 
-    add_filter('rank_math/opengraph/facebook_title', 'svic_filter_rank_math_front_page_og_title', 20);
-    add_filter('rank_math/opengraph/twitter_title', 'svic_filter_rank_math_front_page_og_title', 20);
+    if (!defined('RANK_MATH_VERSION')) {
+        add_filter('rank_math/opengraph/facebook/og_title', 'svic_filter_rank_math_front_page_og_title', 20);
+        add_filter('rank_math/opengraph/twitter/twitter_title', 'svic_filter_rank_math_front_page_og_title', 20);
+    }
 }
 
 if (!function_exists('svic_filter_rank_math_front_page_og_description')) {
@@ -1418,8 +1427,10 @@ if (!function_exists('svic_filter_rank_math_front_page_og_description')) {
         return $meta_description !== '' ? $meta_description : $description;
     }
 
-    add_filter('rank_math/opengraph/facebook_description', 'svic_filter_rank_math_front_page_og_description', 20);
-    add_filter('rank_math/opengraph/twitter_description', 'svic_filter_rank_math_front_page_og_description', 20);
+    if (!defined('RANK_MATH_VERSION')) {
+        add_filter('rank_math/opengraph/facebook/og_description', 'svic_filter_rank_math_front_page_og_description', 20);
+        add_filter('rank_math/opengraph/twitter/twitter_description', 'svic_filter_rank_math_front_page_og_description', 20);
+    }
 }
 
 if (!function_exists('svic_filter_rank_math_front_page_og_image')) {
@@ -1429,31 +1440,46 @@ if (!function_exists('svic_filter_rank_math_front_page_og_image')) {
             return $image;
         }
 
+        $existing_url = '';
+        if (is_array($image) && !empty($image['url'])) {
+            $existing_url = (string) $image['url'];
+        } elseif (is_string($image)) {
+            $existing_url = trim($image);
+        }
+
+        if ($existing_url !== '') {
+            return $image;
+        }
+
         $hero_meta = svic_get_homepage_hero_image_meta();
         if (empty($hero_meta['url'])) {
             return $image;
         }
 
-        return $hero_meta['url'];
-    }
+        $attachment = [
+            'url' => $hero_meta['url'],
+        ];
 
-    add_filter('rank_math/opengraph/facebook_image', 'svic_filter_rank_math_front_page_og_image', 20);
-    add_filter('rank_math/opengraph/twitter_image', 'svic_filter_rank_math_front_page_og_image', 20);
-}
+        if (!empty($hero_meta['width'])) {
+            $attachment['width'] = (int) $hero_meta['width'];
+        }
 
-if (!function_exists('svic_filter_rank_math_front_page_og_image_alt')) {
-    function svic_filter_rank_math_front_page_og_image_alt($alt)
-    {
-        if (!function_exists('is_front_page') || !is_front_page()) {
-            return $alt;
+        if (!empty($hero_meta['height'])) {
+            $attachment['height'] = (int) $hero_meta['height'];
         }
 
         $image_alt = svic_get_homepage_meta_for_output()['image_alt'];
-        return $image_alt !== '' ? $image_alt : $alt;
+        if ($image_alt !== '') {
+            $attachment['alt'] = $image_alt;
+        }
+
+        return $attachment;
     }
 
-    add_filter('rank_math/opengraph/facebook_image_alt', 'svic_filter_rank_math_front_page_og_image_alt', 20);
-    add_filter('rank_math/opengraph/twitter_image_alt', 'svic_filter_rank_math_front_page_og_image_alt', 20);
+    if (!defined('RANK_MATH_VERSION')) {
+        add_filter('rank_math/opengraph/facebook/image_array', 'svic_filter_rank_math_front_page_og_image', 20);
+        add_filter('rank_math/opengraph/twitter/image_array', 'svic_filter_rank_math_front_page_og_image', 20);
+    }
 }
 
 if (!function_exists('svic_disable_rank_math_front_page_schema')) {
@@ -2027,7 +2053,9 @@ if (!function_exists('svic_filter_rank_math_schema_graph')) {
         return $schema_graph;
     }
 
-    add_filter('rank_math/json_ld', 'svic_filter_rank_math_schema_graph', 80, 2);
+    if (!defined('RANK_MATH_VERSION')) {
+        add_filter('rank_math/json_ld', 'svic_filter_rank_math_schema_graph', 80, 2);
+    }
 }
 
 if (!function_exists('svic_output_max_image_preview_meta')) {
