@@ -13,6 +13,20 @@ quality:
   claude_weight: 0.55   # combined QA weighting (0-1)
   claude_floor: 65      # if Claude score falls below this but fallback passes, trust fallback
 
+seo:
+  title:
+    claude_model: "claude-haiku-4-5-20251001"
+    max_length: 26
+    fallback_templates:
+      - "{keyword}｜{geo}家庭影音攻略"
+      - "{keyword} 實測心得：{benefit} 全解析"
+      - "{keyword} {descriptor}｜2025 完整指南"
+      - "{keyword} FAQ：{geo} 安裝與設定"
+    benefits:
+      - "4K HDR 串流"
+      - "Wi-Fi 6 雙頻"
+      - "Dolby Audio"
+      - "語音遙控"
 publishing:
   staging_hold_hours: 24
   max_posts_per_week: 3
@@ -53,15 +67,32 @@ storage:
     token_env: "GITHUB_TOKEN"
 
 brand_voice:
-  tone: "專業且友善，強調美國倉庫與客服優勢"
+  tone: "專業且友善，強調產品體驗與美國本地服務"
   key_phrases:
-    - "內華達倉庫48小時快速配送"
-    - "美國本土一年保固"
-    - "中英雙語客服"
+    - "SVICLOUD 10P+ 4K HDR 串流與 Dolby Audio 影音體驗"
+    - "Wi-Fi 6 雙頻與 128GB 儲存讓長時間追劇依舊順暢"
+    - "中文/英文介面與語音搜尋讓長輩也能輕鬆操作"
   product_terms:
     - "小雲電視盒"
     - "SVICLOUD 10P+"
     - "SVICLOUD 10S"
+  feature_statements:
+    core:
+      - "SVICLOUD 10P+ 旗艦盒搭載 4K HDR 與 Dolby Audio，可同時處理 OTT 串流與 IPTV 頻道，畫質與音效勝過一般 Android TV 盒。"
+      - "Wi-Fi 6 雙頻與 128GB 儲存結合 AI 智慧快取，讓長時間追劇、錄影備份與 App 切換依舊順暢。"
+      - "中英雙語介面、語音搜尋與家長 PIN 保護，讓長輩與孩子都能快速找到想看的節目。"
+    comparison:
+      - "相較於 EVPAD/UnblockTech 僅有單頻 Wi-Fi，SVICLOUD 10P+ 提供 Wi-Fi 6 + Gigabit Ethernet，4K 串流更穩定。"
+      - "SVICLOUD 維持 Google Play 認證與自有 App Hub，可同時安裝 Netflix、Disney+ 與華語專屬應用。"
+    geo:
+      - "針對 {geo} 用戶，SVICLOUD 10P+ 內建美西/美東內容伺服器節點，華語直播延遲低於 0.8 秒。"
+      - "{geo} 家庭可用語音搜尋快速切換 ESPN、HBO Max 與華語頻道，遙控器內建麥克風。"
+  cta_title: "下一步：實測 SVICLOUD 旗艦盒"
+  cta_points:
+    - "預約 4K HDR + Dolby Audio 示範，體驗戲院等級聲畫"
+    - "詢問 Wi-Fi 6 擺位與 Mesh 配置，解決卡頓延遲"
+    - "請專人遠端設定 App、語言與家長 PIN"
+  cta_tagline: "填寫表單或致電 702-398-3416，由 SVICLOUD 美國產品顧問提供一對一建議。"
 
 content_inputs:
   keyword_source: "../../claudedocs/chinese-keyword-ranking-strategy-nov-2025.md"
@@ -81,11 +112,40 @@ content_inputs:
   images:
     default:
       - url: "https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant-1200.webp"
-        alt: "SVICLOUD 10P+ 美國倉庫現貨"
-        caption: "內華達倉庫 48 小時快速配送"
+        alt: "SVICLOUD 10P+ 4K HDR 旗艦盒"
+        caption: "4K HDR 畫質、Dolby Audio 與 Wi-Fi 6 雙頻串流"
       - url: "https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/certification-authorized-dealer.webp"
-        alt: "SVICLOUD 美國授權經銷商"
-        caption: "美國本地授權服務據點與雙語客服"
+        alt: "SVICLOUD 應用程式與語音搜尋介面"
+        caption: "App 市集、語音搜尋與個人化中英介面"
+  hero_images:
+    provider: "openai"
+    output_dir: "data/generated_images"
+    prompt_template: "在{geo}家庭客廳展示SVICLOUD小雲電視盒，呼應{keyword}主題並凸顯{benefit}。"
+    benefits:
+      - "4K HDR 畫質"
+      - "Wi-Fi 6 穩定串流"
+      - "中文/英文介面與語音搜尋"
+    openai:
+      model: "gpt-image-1"
+      size: "1024x1024"
+  internal_links:
+    "方案比較": "https://svicloudtvbox.us/compare/"
+    "購買官網": "https://svicloudtvbox.us/"
+    "客服支援": "https://svicloudtvbox.us/zh/contact/"
+    "常見問題": "https://svicloudtvbox.us/zh/blog/svicloud-faq/"
+  internal_link_targets:
+    - label: "SVICLOUD 方案比較"
+      url: "https://svicloudtvbox.us/compare/"
+      description: "快速比較 10P+ 與 10S 功能、價格與贈品。"
+    - label: "SVICLOUD 美國官網"
+      url: "https://svicloudtvbox.us/"
+      description: "查看現貨庫存與美國本地折扣。"
+    - label: "美國客服與售後支援"
+      url: "https://svicloudtvbox.us/zh/contact/"
+      description: "預約中文客服協助安裝或報修。"
+    - label: "SVICLOUD 常見問題"
+      url: "https://svicloudtvbox.us/zh/blog/svicloud-faq/"
+      description: "了解安裝、付款與保固細節。"
   competitors:
     path: "data/competitor_topics.json"
     base_score: 75
@@ -99,6 +159,37 @@ content_inputs:
         - "https://svicloudtw.com/"
       safeprosys.com:
         - "https://safeprosys.com/"
+      svicloudusa.com:
+        - "https://www.svicloudusa.com/"
+  official_features:
+    path: "data/official_features.json"
+    auto_refresh: true
+    url: "https://www.svicloudtvbox.com/"
+    base_score: 90
+    base_volume: 420
+  keyword_filters:
+    allow_patterns:
+      - '(?i)svicloud'
+      - '小雲'
+      - '電視盒'
+      - '(?i)tv ?box'
+      - '(?i)10p\+'
+      - '(?i)10s'
+      - '串流'
+      - '華語'
+      - '(?i)unblock'
+      - '(?i)unblocktech'
+      - '(?i)evpad'
+      - '(?i)super\s*box'
+      - '(?i)gtbox'
+    block_patterns:
+      - '(?i)toothbrush'
+      - '(?i)jazpiper'
+      - '(?i)sonic\s*clean'
+      - '(?i)electric\s*clean'
+      - '(?i)air\s*fryer'
+      - '(?i)vacuum'
+      - '(?i)limited\s*offers?'
 
 notifications:
   provider: "brevo"
@@ -120,3 +211,5 @@ monitoring:
 safety:
   dry_run: false  # PRODUCTION MODE: Posts will be published to WordPress
   emergency_stop_file: "EMERGENCY_STOP"
+  lock_file: "data/.automation.lock"
+  lock_timeout_minutes: 180

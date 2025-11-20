@@ -44,6 +44,9 @@ Examples:
         """
     )
 
+    script_dir = Path(__file__).resolve().parent
+    repo_root_env = script_dir.parent.parent.parent / ".env"
+
     parser.add_argument(
         "--config",
         type=Path,
@@ -54,7 +57,7 @@ Examples:
     parser.add_argument(
         "--env",
         type=Path,
-        default=Path(__file__).parent.parent.parent / ".env",
+        default=repo_root_env,
         help="Path to .env file with credentials (default: repo root .env)"
     )
 
@@ -86,10 +89,24 @@ Examples:
     args = parser.parse_args()
 
     # Load environment variables from .env file
-    if args.env.exists():
-        load_dotenv(args.env)
-    else:
-        print(f"Warning: .env file not found: {args.env}", file=sys.stderr)
+    env_loaded = False
+    env_candidates = [args.env]
+
+    # Fallback to automation-local .env when running inside Docker image
+    if (
+        not args.env.exists()
+        and args.env.resolve() == repo_root_env
+    ):
+        env_candidates.append(script_dir / ".env")
+
+    for env_path in env_candidates:
+        if env_path.exists():
+            load_dotenv(env_path)
+            env_loaded = True
+            break
+
+    if not env_loaded:
+        print(f"Warning: .env file not found: {env_candidates[-1]}", file=sys.stderr)
         print("Continuing without .env (credentials must be in environment)", file=sys.stderr)
 
     # Resolve config path

@@ -75,6 +75,43 @@ Each `domain=url1,url2` entry is optional; omit `--sites` to use the defaults ba
 
 Set `content_inputs.competitors.auto_refresh: true` (plus `sites` and `min_length`) if you want the pipeline to scrape these URLs automatically before each run.
 
+### SEO Titles & Dynamic Hero Images
+
+- Configure `seo.title` to control how Claude+fallback templates build Traditional Chinese headlines. Adjust `fallback_templates`, `benefits`, and `descriptors` to fit campaign language or disable the Claude model by removing `claude_model`.
+- To generate unique hero artwork for every post, set `content_inputs.hero_images.provider: "openai"` and supply an `OPENAI_API_KEY`. Images are rendered with `gpt-image-1`, saved under `data/generated_images/`, uploaded to WordPress via the media API, and injected as both featured images and inline hero blocks. Customize `prompt_template`, `benefits`, and `output_dir` as needed. Set `provider` to `null` (or remove the block) to fall back to the static theme images listed under `content_inputs.images`.
+- WordPress media uploads default to `<posts-endpoint>/../media`. Override with `wordpress.rest.media_endpoint` if your site routes uploads somewhere else.
+- Need to retrofit a hero onto an already-published article? Run:
+  ```bash
+  python automation/blog_automation/scripts/update_post_image.py \
+    --config automation/blog_automation/config.yaml \
+    --env automation/blog_automation/.env \
+    --post-id 366 \
+    --keyword "SVICLOUD 10P+ 美國倉儲配送" \
+    --geo "美國"
+  ```
+  The script generates a fresh hero image, uploads it via the REST API, prepends it to the post body, and updates the featured image.
+
+### Rich Results QA Helper
+
+Run structured-data validation in batch using the URL Inspection API:
+
+```bash
+python automation/blog_automation/scripts/check_rich_results.py \
+  --config automation/blog_automation/config.yaml \
+  --credentials ../../secrets/svicloudtvboxus-5b50cc5f2e26.json \
+  --sitemap https://svicloudtvbox.us/sitemap_index.xml \
+  --json automation/blog_automation/logs/rich-results-report.json
+```
+
+Flags:
+- `--url https://...` (repeatable) to check specific pages.
+- `--urls-file urls.txt` to read a newline-delimited list.
+- `--sitemap path-or-url` to inspect every `<loc>` entry.
+- `--json path` writes the parsed verdicts/issues for reporting.
+- `--limit N` to sample only the first `N` URLs from the collected list.
+
+If `content_inputs.gsc.site` and `.credentials` are already filled in `config.yaml`, the script will use them automatically, so you typically only need `--sitemap` or `--url`.
+
 ### Docker Workflow
 
 1. Copy `.env` and `config.yaml` into `automation/blog_automation/` (same folder as the Dockerfile).

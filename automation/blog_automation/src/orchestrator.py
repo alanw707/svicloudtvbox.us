@@ -6,6 +6,7 @@ all stage modules and client services.
 
 import json
 import logging
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Iterable
@@ -16,12 +17,14 @@ from .models import TopicCandidate, GeneratedPost
 from .database import DatabaseManager
 from .clients.openai_client import OpenAIClient
 from .clients.email import EmailClient
+from .clients.image_generator import HeroImageGenerator
 from .stages.discovery import TopicDiscovery
 from .stages.briefing import BriefGenerator
 from .stages.outlining import OutlineGenerator
 from .stages.quality import QualityValidator
 from .stages.drafting import PostDrafter
 from .stages.publishing import Publisher
+from .stages.titling import TitleGenerator
 
 try:
     from anthropic import Anthropic
@@ -56,6 +59,8 @@ class BlogAutomation:
 
         # Setup logging
         self.log = self._setup_logging()
+        self._lock_path: Optional[Path] = None
+        self._lock_acquired = False
 
         # Initialize database
         self.db = self._init_database()
@@ -68,6 +73,10 @@ class BlogAutomation:
 
         # Initialize Email client
         self.email = self._init_email_client()
+
+        # Media generator
+        hero_cfg = self.config.get("content_inputs", {}).get("hero_images", {})
+        self.hero_images = HeroImageGenerator(hero_cfg, self.log)
 
         # Initialize all pipeline stages
         self.discovery = TopicDiscovery(
@@ -88,10 +97,17 @@ class BlogAutomation:
             logger=self.log
         )
 
-        self.drafting = PostDrafter(
+        self.titles = TitleGenerator(
             claude_client=self.claude,
             config=self.config,
             logger=self.log
+        )
+
+        self.drafting = PostDrafter(
+            claude_client=self.claude,
+            config=self.config,
+            logger=self.log,
+            image_generator=self.hero_images
         )
 
         self.quality = QualityValidator(
@@ -124,56 +140,66 @@ class BlogAutomation:
         if self._emergency_stop():
             return
 
-        # Discover topics
-        topics = self.discovery.discover_topics()
-        unique_topics = self.filter_duplicates(topics)
-        self.log.info("Processing %s topics (max_posts=%s)", len(unique_topics), max_posts)
+        if not self._acquire_lock():
+            return
 
-        # Determine post limit
-        publishing_cfg = self.config.get("publishing", {})
-        weekly_cap = publishing_cfg.get("max_posts_per_week", 7)
-        limit = max_posts or weekly_cap
-        attempts = published = 0
+        try:
+            # Discover topics
+            topics = self.discovery.discover_topics()
+            unique_topics = self.filter_duplicates(topics)
+            self.log.info("Processing %s topics (max_posts=%s)", len(unique_topics), max_posts)
 
-        # Generate and publish posts
-        for topic in unique_topics[:limit]:
-            attempts += 1
-            post = self.generate_post(topic)
-            score = self.quality.validate_quality(post)
+            # Determine post limit
+            publishing_cfg = self.config.get("publishing", {})
+            weekly_cap = publishing_cfg.get("max_posts_per_week", 7)
+            limit = max_posts or weekly_cap
+            attempts = published = 0
 
-            if score < self.config.get("quality", {}).get("min_score", 80):
-                self.log.warning("Quality score %.1f below threshold for '%s'", score, post.title)
-                self._save_draft(post)
-                continue
+            # Generate and publish posts
+            for topic in unique_topics[:limit]:
+                attempts += 1
+                post = self.generate_post(topic)
+                score = self.quality.validate_quality(post)
 
-            if self.dry_run:
-                self.log.info("[DRY] Would publish '%s' (score %.1f)", post.title, score)
-                published += 1
-                continue
+                if score < self.config.get("quality", {}).get("min_score", 80):
+                    self.log.warning("Quality score %.1f below threshold for '%s'", score, post.title)
+                    self._save_draft(post)
+                    continue
 
-            if self.publisher.publish_post(post):
-                published += 1
-                self._record_post(post, status="published")
-            else:
-                self._save_draft(post)
+                if self.dry_run:
+                    self.log.info("[DRY] Would publish '%s' (score %.1f)", post.title, score)
+                    published += 1
+                    continue
 
-        # Record run statistics
-        self.db.record_run(
-            topics_found=len(topics),
-            unique_topics=len(unique_topics),
-            posts_attempted=attempts,
-            posts_published=published,
-            dry_run=self.dry_run
-        )
+                if self._keyword_recently_published(post.keyword):
+                    self.log.warning("Skipping '%s' because keyword '%s' was already published recently", post.title, post.keyword)
+                    continue
 
-        # Send summary report
-        self.email.send_report(run_stats={
-            "topics_found": len(topics),
-            "unique_topics": len(unique_topics),
-            "attempts": attempts,
-            "published": published,
-            "dry_run": self.dry_run,
-        })
+                if self.publisher.publish_post(post):
+                    published += 1
+                    self._record_post(post, status="published")
+                else:
+                    self._save_draft(post)
+
+            # Record run statistics
+            self.db.record_run(
+                topics_found=len(topics),
+                unique_topics=len(unique_topics),
+                posts_attempted=attempts,
+                posts_published=published,
+                dry_run=self.dry_run
+            )
+
+            # Send summary report
+            self.email.send_report(run_stats={
+                "topics_found": len(topics),
+                "unique_topics": len(unique_topics),
+                "attempts": attempts,
+                "published": published,
+                "dry_run": self.dry_run,
+            })
+        finally:
+            self._release_lock()
 
     def filter_duplicates(self, topics: Iterable[TopicCandidate]) -> List[TopicCandidate]:
         """Remove duplicate topics using database and embeddings.
@@ -268,12 +294,17 @@ class BlogAutomation:
         # Stage 4: Content enhancement
         post_body = self.drafting.enforce_requirements(topic, post_body)
         post_body = self.drafting.insert_internal_links(post_body)
-        post_body = self.drafting.inject_images(post_body, topic)
+        post_body, hero_meta = self.drafting.inject_images(post_body, topic, brief, outline)
+        post_body = self.drafting.ensure_internal_links(post_body)
         post_body = self.drafting.append_cta(post_body, topic)
+
+        title_info = self.titles.generate_title(topic, brief, outline)
+        title = title_info.get("title") or f"{topic.keyword}"
 
         # Build post metadata
         excerpt = post_body.split("\n\n", maxsplit=1)[0][:160]
-        slug = _slugify(topic.keyword)
+        slug_source = title_info.get("slug_source") or title
+        slug = _slugify(slug_source)
         frontmatter = {
             "keyword": topic.keyword,
             "generated_at": datetime.now(timezone.utc).isoformat(),
@@ -281,10 +312,13 @@ class BlogAutomation:
             "topic_type": topic.metadata.get("topic_type") if topic.metadata else None,
             "geo_target": topic.metadata.get("geo_target") if topic.metadata else None,
             "source_domain": topic.metadata.get("source_domain") if topic.metadata else None,
+            "seo_title_candidates": title_info.get("candidates"),
         }
+        if hero_meta:
+            frontmatter["hero_image"] = hero_meta
 
         return GeneratedPost(
-            title=f"{topic.keyword}｜SVICLOUD 專家指南",
+            title=title,
             slug=slug,
             content=post_body,
             excerpt=excerpt,
@@ -405,6 +439,12 @@ class BlogAutomation:
 
         self.db.record_post(post, status, embedding_vector)
 
+    def _keyword_recently_published(self, keyword: Optional[str]) -> bool:
+        """Check database for an existing keyword record to avoid duplicates."""
+        if not keyword:
+            return False
+        return self.db.keyword_exists(keyword)
+
     def _emergency_stop(self) -> bool:
         """Check for emergency stop file.
 
@@ -420,6 +460,53 @@ class BlogAutomation:
             self.log.warning("Emergency stop engaged via %s", path)
             return True
         return False
+
+    def _acquire_lock(self) -> bool:
+        """Create a file lock to prevent overlapping automation runs."""
+        safety_cfg = self.config.get("safety", {})
+        lock_rel = safety_cfg.get("lock_file", "data/.automation.lock")
+        max_age_minutes = float(safety_cfg.get("lock_timeout_minutes", 180))
+        lock_path = self._resolve_path(lock_rel)
+        lock_path.parent.mkdir(parents=True, exist_ok=True)
+
+        if lock_path.exists():
+            modified = datetime.fromtimestamp(lock_path.stat().st_mtime, timezone.utc)
+            age_minutes = (datetime.now(timezone.utc) - modified).total_seconds() / 60
+            if age_minutes < max_age_minutes:
+                self.log.warning(
+                    "Another automation run appears active (lock %s, age %.1f min)",
+                    lock_path,
+                    age_minutes,
+                )
+                return False
+            self.log.warning(
+                "Stale automation lock %s detected (age %.1f min > %.0f min). Removing.",
+                lock_path,
+                age_minutes,
+                max_age_minutes,
+            )
+            try:
+                lock_path.unlink()
+            except FileNotFoundError:
+                pass
+
+        lock_path.write_text(f"{datetime.now(timezone.utc).isoformat()}|pid={os.getpid()}", encoding="utf-8")
+        self._lock_path = lock_path
+        self._lock_acquired = True
+        self.log.debug("Automation lock acquired at %s", lock_path)
+        return True
+
+    def _release_lock(self) -> None:
+        """Remove automation lock file if held."""
+        if self._lock_acquired and self._lock_path:
+            try:
+                self._lock_path.unlink()
+                self.log.debug("Automation lock %s released", self._lock_path)
+            except FileNotFoundError:
+                pass
+            finally:
+                self._lock_acquired = False
+                self._lock_path = None
 
     def _resolve_path(self, relative: str) -> Path:
         """Resolve relative path to absolute path.

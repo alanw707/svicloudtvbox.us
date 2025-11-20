@@ -13,6 +13,20 @@ quality:
   min_length: 4000
   outline_score_threshold: 0.75
 
+seo:
+  title:
+    claude_model: "claude-haiku-4-5-20251001"
+    max_length: 26
+    fallback_templates:
+      - "{keyword}｜{geo}家庭影音攻略"
+      - "{keyword} 實測心得：{benefit} 全解析"
+      - "{keyword} {descriptor}｜2025 完整指南"
+      - "{keyword} FAQ：{geo} 安裝與設定"
+    benefits:
+      - "4K HDR 串流"
+      - "Wi-Fi 6 雙頻"
+      - "Dolby Audio"
+      - "語音遙控"
 publishing:
   staging_hold_hours: 24
   max_posts_per_week: 7
@@ -53,11 +67,11 @@ storage:
     token_env: "GITHUB_TOKEN"
 
 brand_voice:
-  tone: "專業且友善，強調美國倉庫與客服優勢"
+  tone: "專業且友善，強調影音體驗與美國本地客服/保固"
   key_phrases:
-    - "內華達倉庫48小時快速配送"
-    - "美國本土一年保固"
-    - "中英雙語客服"
+    - "4K HDR 串流與 Dolby Audio 影音體驗"
+    - "Wi-Fi 6 雙頻與 128GB 儲存讓長時間追劇依舊順暢"
+    - "中英雙語介面與一年美國保固"
   product_terms:
     - "小雲電視盒"
     - "SVICLOUD 10P+"
@@ -81,11 +95,40 @@ content_inputs:
   images:
     default:
       - url: "https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant-1200.webp"
-        alt: "SVICLOUD 10P+ 美國倉庫現貨"
-        caption: "內華達倉庫 48 小時快速配送"
+        alt: "SVICLOUD 10P+ 4K HDR 旗艦盒"
+        caption: "4K HDR 畫質、Dolby Audio 與 Wi-Fi 6 雙頻串流"
       - url: "https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/certification-authorized-dealer.webp"
         alt: "SVICLOUD 美國授權經銷商"
         caption: "美國本地授權服務據點與雙語客服"
+  hero_images:
+    provider: "openai"
+    output_dir: "data/generated_images"
+    prompt_template: "在{geo}家庭客廳展示SVICLOUD小雲電視盒，呼應{keyword}主題並凸顯{benefit}。"
+    benefits:
+      - "4K HDR 畫質"
+      - "Wi-Fi 6 穩定串流"
+      - "一年保固"
+    openai:
+      model: "gpt-image-1"
+      size: "1024x1024"
+  internal_links:
+    "方案比較": "https://svicloudtvbox.us/compare/"
+    "購買官網": "https://svicloudtvbox.us/"
+    "客服支援": "https://svicloudtvbox.us/zh/contact/"
+    "常見問題": "https://svicloudtvbox.us/zh/blog/svicloud-faq/"
+  internal_link_targets:
+    - label: "SVICLOUD 方案比較"
+      url: "https://svicloudtvbox.us/compare/"
+      description: "比較 10P+ 與 10S 功能、價格與售後。"
+    - label: "SVICLOUD 美國官網"
+      url: "https://svicloudtvbox.us/"
+      description: "查看現貨狀態與美國地區優惠。"
+    - label: "美國客服與售後支援"
+      url: "https://svicloudtvbox.us/zh/contact/"
+      description: "預約中文客服協助安裝或保固。"
+    - label: "SVICLOUD 常見問題"
+      url: "https://svicloudtvbox.us/zh/blog/svicloud-faq/"
+      description: "了解設定、付款與保固細節。"
   competitors:
     path: "data/competitor_topics.json"
     base_score: 75
@@ -126,3 +169,5 @@ monitoring:
 safety:
   dry_run: true
   emergency_stop_file: "EMERGENCY_STOP"
+  lock_file: "data/.automation.lock"
+  lock_timeout_minutes: 180

@@ -2,4 +2,5 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-"$SCRIPT_DIR/run-local.sh" --config "$SCRIPT_DIR/config.yaml" --max-posts 1 "$@"
+# Don't pass --config since config.yaml is copied into Docker container
+"$SCRIPT_DIR/run-local.sh" --max-posts 1 "$@"

@@ -14,4 +14,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENTRYPOINT ["python", "blog_automation.py"]
+# New modular structure entry point
+ENTRYPOINT ["python", "main.py"]

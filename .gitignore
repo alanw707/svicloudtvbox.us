@@ -43,4 +43,7 @@ db/
 automation/blog_automation/data/
 automation/blog_automation/logs/
 automation/blog_automation/drafts/
+automation/blog_automation/EMERGENCY_STOP
+automation/posts_history.db
+data/
 env/

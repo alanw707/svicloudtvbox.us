@@ -344,15 +344,82 @@ class BlogAutomation:
         if score is not None:
             post.quality_score = score
             return score
+
+        # FIX: Fallback scoring now actually validates criteria (not just awards points)
+        content = post.content
+        min_length = self.config.get("quality", {}).get("min_length", 4000)
+
+        # Length validation (25 points)
+        length_score = 25 if len(content) >= min_length else (10 if len(content) >= min_length * 0.7 else 0)
+
+        # Structure validation (20 points) - check for proper H2 headings
+        has_structure = "##" in content
+        structure_score = 20 if has_structure else 10
+
+        # Brand voice validation (20 points) - check for required product terms
+        brand_terms = self.config.get("brand_voice", {}).get("product_terms", [])
+        brand_count = sum(1 for term in brand_terms if term in content)
+        if brand_count >= 3:
+            brand_score = 20
+        elif brand_count >= 2:
+            brand_score = 15
+        elif brand_count >= 1:
+            brand_score = 10
+        else:
+            brand_score = 0
+
+        # Internal links validation (15 points) - actually check for site URLs
+        import re
+        site_domain = "svicloudtvbox.us"
+        internal_links = re.findall(rf"https?://{re.escape(site_domain)}/[^\s\)\]]+", content)
+        links_count = len(internal_links)
+        if links_count >= 3:
+            links_score = 15
+        elif links_count >= 2:
+            links_score = 10
+        elif links_count >= 1:
+            links_score = 5
+        else:
+            links_score = 0
+
+        # Language validation (20 points) - check for Traditional Chinese
+        # Traditional Chinese characters (繁體中文): U+4E00-U+9FFF
+        chinese_chars = re.findall(r'[\u4e00-\u9fff]', content)
+        chinese_char_count = len(chinese_chars)
+
+        # Check if predominantly Traditional Chinese (vs Simplified)
+        # Simplified-specific chars often in: 国, 为, 这, 么, 们, 时, 个, 过
+        simplified_indicators = ['国', '为', '这', '么', '们', '时', '个', '过']
+        simplified_count = sum(content.count(char) for char in simplified_indicators)
+
+        if chinese_char_count >= 500:  # Good amount of Chinese content
+            # If Simplified indicators are less than 5% of total Chinese chars, it's Traditional
+            if simplified_count < (chinese_char_count * 0.05):
+                language_score = 20
+            else:
+                language_score = 10  # Mixed or Simplified
+        elif chinese_char_count >= 200:
+            language_score = 10  # Some Chinese but not enough
+        else:
+            language_score = 0  # Insufficient Chinese content
+
         scores = {
-            "length": 25 if len(post.content) >= self.config.get("quality", {}).get("min_length", 4000) else 10,
-            "structure": 20 if "##" in post.content else 10,
-            "brand": 20 if any(term in post.content for term in self.config.get("brand_voice", {}).get("product_terms", [])) else 5,
-            "links": 15,
-            "language": 20,
+            "length": length_score,
+            "structure": structure_score,
+            "brand": brand_score,
+            "links": links_score,
+            "language": language_score,
         }
+
         total = float(sum(scores.values()))
         post.quality_score = total
+
+        # Log detailed breakdown for debugging
+        self.log.info(
+            "Fallback quality score: %.1f (length=%d, structure=%d, brand=%d, links=%d, language=%d)",
+            total, length_score, structure_score, brand_score, links_score, language_score
+        )
+
         return total
 
     def publish_post(self, post: GeneratedPost) -> bool:
@@ -375,7 +442,7 @@ class BlogAutomation:
             self.log.error("REST API not fully configured (endpoint/username/password missing)")
             return False
         html_content = self._markdown_to_html(post.content)
-        excerpt_text = self._excerpt_from_html(html_content)
+        excerpt_text = self._excerpt_from_html(html_content, keyword=post.keyword)
         payload = {
             "title": post.title,
             "slug": post.slug,
@@ -473,7 +540,7 @@ class BlogAutomation:
                     f"- 地區：{metadata.get('geo_target') or '全美'}\n"
                     f"- 比較焦點：{metadata.get('is_comparison')}\n"
                     f"- 活動/節慶：{metadata.get('is_campaign')}\n"
-                    "務必強調：內華達倉庫48小時配送、美國本土一年保固、中英雙語客服。"
+                    "務必強調：4K HDR + Dolby Audio、Wi-Fi 6 雙頻、中文/英文語音介面與一年美國保固。"
                 )
                 competitor_note = self._competitor_context(metadata)
                 if competitor_note:
@@ -493,7 +560,7 @@ class BlogAutomation:
         lines = [
             f"目標關鍵字：{topic.keyword}",
             "受眾：美國華人家庭、長輩與新移民",
-            "品牌重點：內華達倉庫48小時配送、美國本土一年保固、中英雙語客服。",
+            "品牌重點：4K HDR + Dolby Audio、Wi-Fi 6 雙頻、中文/英文語音介面與一年美國保固。",
         ]
         if metadata.get("is_geo"):
             lines.append(f"地區聚焦：針對{metadata.get('geo_target')}地區，強調本地物流與售後。")
@@ -562,7 +629,7 @@ class BlogAutomation:
                     f"- 主題分類：{metadata.get('topic_type')}\n"
                     f"- 地區：{metadata.get('geo_target') or '全美'}\n"
                     "需求：\n"
-                    "1. 強調內華達倉庫48小時配送、美國一年保固、中英雙語客服。\n"
+                    "1. 強調 SVICLOUD 10P+/10S 的 4K HDR、Dolby Audio、Wi-Fi 6、中文/英文語音介面與一年美國保固。\n"
                     "2. 至少3個內部連結（以純文字描述，稍後由腳本替換）。\n"
                     "3. 每段落加入具體情境或案例。\n"
                     "4. 結尾加入CTA導引至購買/聯絡。\n"
@@ -987,13 +1054,17 @@ class BlogAutomation:
         metadata = topic.metadata or {}
         body = [
             f"## {section_title}",
-            "美國倉庫現貨、中文客服與一年保固，確保使用者體驗安心。"
+            self._select_feature_statement(section_title, topic)
         ]
         if "競品" in section_title or metadata.get("is_comparison"):
-            body.append("透過頻道數、系統穩定度與售後保固比較，說明SVICLOUD在美國市場的差異化。")
+            body.append(
+                "透過處理器、Wi-Fi 規格、App 相容性與售後流程比較 SVICLOUD 與其他影音盒，凸顯 4K HDR 與 Google Play 認證的優勢。"
+            )
         if metadata.get("is_geo"):
             geo = metadata.get("geo_target", "美國主要城市")
-            body.append(f"針對{geo}客戶，強調2-3天內送達與本地時區客服。")
+            body.append(
+                f"針對{geo}客戶，說明 Wi-Fi 6 擺位、Mesh 建議與本地節目清單，讓華語直播穩定無延遲。"
+            )
         if metadata.get("is_campaign"):
             body.append("結合節慶/派對流程，提供歌單、互動與設備建議，並導引至購買。")
         if metadata.get("topic_type") == "faq" or "常見問題" in section_title:
@@ -1029,24 +1100,77 @@ class BlogAutomation:
         return f"{hero}\n\n{content}" if hero not in content else content
 
     def _append_cta(self, content: str, topic: TopicCandidate) -> str:
-        cta = (
-            "## 下一步：美國本地SVICLOUD服務\n"
-            "想了解更多套餐或立即安排美國倉庫出貨，請洽 SVICLOUD 美國客服：\n"
+        voice = self.config.get("brand_voice", {})
+        title = voice.get("cta_title", "下一步：體驗 SVICLOUD 旗艦盒")
+        point_lines = voice.get("cta_points", [
+            "預約 4K HDR + Dolby Audio 示範",
+            "取得 Wi-Fi 6 擺位與 Mesh 建議",
+            "請專人代為設定 App 與語音搜尋",
+        ])
+        tagline = voice.get(
+            "cta_tagline",
+            "填寫表單或致電 702-398-3416，由 SVICLOUD 美國顧問協助規劃。"
+        )
+        points = "\n".join(f"- {line}" for line in point_lines)
+        contact = (
             "- 電話：702-398-3416\n"
             "- Email：support@svicloudtvbox.us\n"
-            "- [線上表單](https://svicloudtvbox.us/zh/contact/)\n"
-            "透過內華達倉庫48小時配送與中英雙語客服，協助您快速安裝，小雲電視盒在美國使用更安心。"
+            "- [線上表單](https://svicloudtvbox.us/zh/contact/)"
+        )
+        cta = (
+            f"## {title}\n"
+            f"{points}\n"
+            f"{tagline}\n"
+            f"{contact}"
         )
         if cta not in content:
             content = f"{content}\n\n{cta}"
         return content
 
+    def _select_feature_statement(self, section_title: str, topic: TopicCandidate) -> str:
+        voice = self.config.get("brand_voice", {})
+        statements_cfg = voice.get("feature_statements", {})
+        metadata = topic.metadata or {}
+        pool: List[str] = []
+
+        comparison_statements = statements_cfg.get("comparison", []) or []
+        geo_statements = statements_cfg.get("geo", []) or []
+        core_statements = statements_cfg.get("core", []) or []
+        official_summary = metadata.get("official_summary")
+        if official_summary:
+            pool.append(official_summary)
+
+        if metadata.get("is_comparison") or "競品" in section_title:
+            pool.extend(comparison_statements)
+
+        if metadata.get("is_geo"):
+            geo = metadata.get("geo_target") or "美國"
+            for statement in geo_statements:
+                pool.append(statement.replace("{geo}", geo))
+
+        pool.extend(core_statements)
+
+        if not pool:
+            return "SVICLOUD 10P+ 搭載 4K HDR、Dolby Audio、Wi-Fi 6 與 Google Play 認證，兼顧畫質與 App 兼容性。"
+
+        index = abs(hash(f"{section_title}-{topic.keyword}")) % len(pool)
+        return pool[index]
+
     def _enforce_internal_requirements(self, topic: TopicCandidate, content: str) -> str:
         required_phrases = self.config.get("brand_voice", {}).get("key_phrases", [])
+        missing: List[str] = []
+        keyword = topic.keyword if isinstance(topic.keyword, str) else ""
         for phrase in required_phrases:
-            if phrase not in content:
-                content = f"{phrase}\n\n{content}"
-        return content
+            if phrase in content:
+                continue
+            contextual = f"{keyword}｜{phrase}" if keyword else phrase
+            missing.append(contextual)
+
+        if not missing:
+            return content
+
+        reminder_block = "\n\n".join(f"> {line}" for line in missing)
+        return f"{content}\n\n{reminder_block}"
 
     def _prompt_library(self, prompt_type: str, context: Union[TopicCandidate, GeneratedPost]) -> str:
         if isinstance(context, TopicCandidate):
@@ -1089,10 +1213,48 @@ class BlogAutomation:
             self.log.warning("Markdown conversion failed: %s", exc)
             return markdown_text
 
-    def _excerpt_from_html(self, html_text: str, length: int = 220) -> str:
+    def _excerpt_from_html(
+        self,
+        html_text: str,
+        length: int = 220,
+        keyword: Optional[str] = None,
+    ) -> str:
         soup = BeautifulSoup(html_text, "html.parser")
         text = soup.get_text(separator=" ", strip=True)
-        return text[:length]
+        if text == "":
+            return ""
+
+        keyword = (keyword or "").strip()
+        sentences = [
+            segment.strip()
+            for segment in re.split(r"(?<=[。！？!?\.])\s*", text)
+            if segment.strip()
+        ]
+        generic_markers = (
+            "內華達倉庫48小時",
+            "內華達倉庫 48",
+            "美國本地授權服務據點與雙語客服",
+        )
+
+        def is_generic(sentence: str) -> bool:
+            return any(marker in sentence for marker in generic_markers)
+
+        ordered: List[str] = []
+        if keyword:
+            ordered.extend([s for s in sentences if keyword in s])
+        ordered.extend([s for s in sentences if not is_generic(s)])
+        ordered.extend(sentences)
+
+        result_parts: List[str] = []
+        for sentence in ordered:
+            if sentence in result_parts:
+                continue
+            result_parts.append(sentence)
+            if len("".join(result_parts)) >= length:
+                break
+
+        excerpt = "".join(result_parts).strip() or text
+        return excerpt[:length]
 
     def _select_categories_for_post(self, post: GeneratedPost) -> List[int]:
         category_map = self.config.get("wordpress", {}).get("category_map", {})
@@ -1137,31 +1299,76 @@ class BlogAutomation:
         if not self.claude or not model:
             return None
         system = self._prompt_library("qa", post)
+
+        # FIX: Truncate content to avoid token limit (242K > 200K max)
+        # Use first 10K characters - sufficient for quality validation
+        content_sample = post.content[:10000] if len(post.content) > 10000 else post.content
+        truncated_note = "（內容已截取前10000字元進行評估）" if len(post.content) > 10000 else ""
+
         user_prompt = (
-            "請以 JSON 格式回覆，範例：```json{\"score\":85,\"notes\":[\"語句順暢\"]}```。\n"
+            "請以純 JSON 格式回覆（不要用 markdown 代碼塊包裹），格式範例：{\"score\":85,\"notes\":[\"語句順暢\"]}\n"
             "評估以下文章是否符合：傳統中文、關鍵字自然出現、強調美國本地優勢、包含內部連結描述、長度>4000字。\n"
-            f"文章內容：\n{post.content}\n"
+            f"{truncated_note}\n"
+            f"文章內容：\n{content_sample}\n"
         )
-        for attempt in range(2):
+        for attempt in range(3):  # Increased from 2 to 3 attempts
             try:
                 completion = self._claude_complete(
                     model=model,
                     system_prompt=system,
                     user_prompt=user_prompt,
-                    max_tokens=400,
+                    max_tokens=500,  # Increased from 400 for more context
                     temperature=0.2,
                 )
-                cleaned = completion.strip().strip("`")
+
+                # FIX: Improved JSON extraction with multiple strategies
+                cleaned = completion.strip()
+
+                # Strategy 1: Extract from markdown code blocks
+                if "```json" in cleaned:
+                    json_start = cleaned.find("```json") + 7
+                    json_end = cleaned.find("```", json_start)
+                    if json_end > json_start:
+                        cleaned = cleaned[json_start:json_end].strip()
+
+                # Strategy 2: Remove any remaining backticks and whitespace
+                cleaned = cleaned.strip("`").strip()
+
+                # Strategy 3: Find first { and last } to extract JSON object
+                first_brace = cleaned.find("{")
+                last_brace = cleaned.rfind("}")
+                if first_brace >= 0 and last_brace > first_brace:
+                    cleaned = cleaned[first_brace : last_brace + 1]
+
+                # Parse and validate JSON
                 data = json.loads(cleaned)
+
+                # Validate schema: must have 'score' field
+                if "score" not in data:
+                    self.log.warning("QA JSON missing 'score' field (attempt %s)", attempt + 1)
+                    continue
+
                 score = float(data.get("score", 0))
+
+                # Validate score range: 0-100
+                if not (0 <= score <= 100):
+                    self.log.warning("QA score out of range: %.1f (attempt %s)", score, attempt + 1)
+                    continue
+
                 notes = data.get("notes") or []
                 post.frontmatter["qa_notes"] = notes
+                self.log.info("Claude QA successful: score=%.1f (attempt %s)", score, attempt + 1)
                 return score
+
             except json.JSONDecodeError as exc:
-                self.log.warning("QA JSON parse failed (attempt %s): %s", attempt + 1, exc)
+                self.log.warning("QA JSON parse failed (attempt %s): %s - Response: %s", attempt + 1, exc, completion[:200])
+            except ValueError as exc:
+                self.log.warning("QA score conversion failed (attempt %s): %s", attempt + 1, exc)
             except Exception as exc:
-                self.log.warning("Claude QA failed: %s", exc)
-                break
+                self.log.warning("Claude QA failed (attempt %s): %s", attempt + 1, exc)
+                if "token" in str(exc).lower() or "limit" in str(exc).lower():
+                    self.log.error("Token limit still exceeded - content may need further truncation")
+                    break
         return None
 
     def _smtp_settings(self) -> Optional[Dict[str, Any]]:
