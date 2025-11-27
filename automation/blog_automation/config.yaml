@@ -29,11 +29,15 @@ seo:
       - "語音遙控"
 publishing:
   staging_hold_hours: 24
-  max_posts_per_week: 3
+  max_posts_per_week: 4  # one post per slot, roughly every 2 days
   schedule:
-    - day: "Tuesday"
+    - day: "Monday"
       time: "09:00"
-    - day: "Thursday"
+    - day: "Wednesday"
+      time: "09:00"
+    - day: "Friday"
+      time: "09:00"
+    - day: "Sunday"
       time: "09:00"
 
 wordpress:
