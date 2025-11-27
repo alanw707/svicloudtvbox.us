@@ -633,6 +633,8 @@ class BlogAutomation:
                     "2. 至少3個內部連結（以純文字描述，稍後由腳本替換）。\n"
                     "3. 每段落加入具體情境或案例。\n"
                     "4. 結尾加入CTA導引至購買/聯絡。\n"
+                    "5. 如果提到競品比較，請直接寫出實際品牌或產品名稱；"
+                    "避免使用「競品A」「競品B」等佔位符，必要時可改用「4K 常見競品」「1080p 入門盒」這類描述。\n"
                     "輸出：純Markdown內容，不含YAML。"
                 )
                 competitor_note = self._competitor_context(metadata)
@@ -741,11 +743,15 @@ class BlogAutomation:
         if classification["is_geo"]:
             topic_score += 8
         if classification["is_comparison"]:
-            topic_score += 6
+            # Comparisons are a core growth lever: prioritize them
+            topic_score += 10
         if classification["is_campaign"]:
             topic_score += 4
         if classification["topic_type"] == "faq":
-            topic_score += 3
+            # Troubleshooting / FAQ content is highly requested
+            topic_score += 8
+        if classification.get("is_troubleshooting"):
+            topic_score += 4
         novelty_bonus = 3 if any(str(year) in keyword for year in (2025, 2026, 2027)) else 0
         length_modifier = min(len(keyword), 32) % 7
         final_score = topic_score + novelty_bonus + length_modifier
@@ -756,6 +762,7 @@ class BlogAutomation:
             "geo_target": classification.get("geo_target"),
             "is_comparison": classification["is_comparison"],
             "is_campaign": classification["is_campaign"],
+            "is_troubleshooting": classification.get("is_troubleshooting", False),
             "score": final_score,
             "source": source,
         }
@@ -775,6 +782,7 @@ class BlogAutomation:
             "is_geo": False,
             "is_comparison": False,
             "is_campaign": False,
+            "is_troubleshooting": False,
             "volume_bonus": 0,
         }
         for region in locale_targets:
@@ -787,13 +795,21 @@ class BlogAutomation:
         if "vs" in lower_kw or "比較" in keyword or "對比" in keyword:
             classification["is_comparison"] = True
             classification["topic_type"] = "comparison"
-            classification["volume_bonus"] += 20
+            classification["volume_bonus"] += 30
         if any(token in keyword for token in ["新年", "春節", "派對", "節", "2025", "2026"]):
             classification["is_campaign"] = True
             if classification["topic_type"] == "pillar":
                 classification["topic_type"] = "campaign"
+        # Troubleshooting / FAQ style queries
+        trouble_tokens_zh = ["不能看", "看不到", "連不上", "連線問題", "故障", "排除", "排解", "錯誤碼", "錯誤代碼"]
+        trouble_tokens_en = ["troubleshooting", "not working", "no signal", "cannot connect", "can't connect"]
+        if any(token in keyword for token in trouble_tokens_zh) or any(token in lower_kw for token in trouble_tokens_en):
+            classification["topic_type"] = "faq"
+            classification["is_troubleshooting"] = True
+            classification["volume_bonus"] += 20
         if "常見問題" in keyword or "FAQ" in keyword.upper():
             classification["topic_type"] = "faq"
+            classification["volume_bonus"] += 15
         return classification
 
     @staticmethod

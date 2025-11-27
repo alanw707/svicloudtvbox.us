@@ -20,6 +20,112 @@ if (!function_exists('svic_current_locale')) {
     }
 }
 
+if (!function_exists('svic_localize_brand_in_text')) {
+    function svic_localize_brand_in_text(string $text, ?string $locale = null): string {
+        $text = (string) $text;
+        if ($text === '') {
+            return $text;
+        }
+
+        if ($locale === null) {
+            $locale = svic_current_locale();
+        }
+
+        if (!is_string($locale) || stripos($locale, 'zh') === false) {
+            return $text;
+        }
+
+        $search = [
+            'SVICLOUD 10P+',
+            'SVICLOUD 10P Plus',
+            'SVICLOUD TV BOX',
+            'SVICLOUD TV Box',
+            'SVICLOUD TV',
+            'SVICLOUD',
+        ];
+
+        $replace = [
+            '小雲電視盒 10P+',
+            '小雲電視盒 10P Plus',
+            '小雲電視盒',
+            '小雲電視盒',
+            '小雲電視盒',
+            '小雲電視盒',
+        ];
+
+        // If there is no markup, perform a simple text replacement.
+        if (strpos($text, '<') === false) {
+            return str_ireplace($search, $replace, $text);
+        }
+
+        // For HTML content, only localise visible text and safe attributes,
+        // never URLs such as img/src or anchor hrefs.
+        if (!class_exists('DOMDocument')) {
+            return str_ireplace($search, $replace, $text);
+        }
+
+        $document = new DOMDocument();
+        $internalErrors = libxml_use_internal_errors(true);
+
+        // Wrap in a body element so we can reliably extract the inner markup.
+        $html = '<!DOCTYPE html><html><head><meta charset="utf-8"></head><body>' . $text . '</body></html>';
+        $loaded = $document->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+
+        if ($loaded === false) {
+            libxml_clear_errors();
+            libxml_use_internal_errors($internalErrors);
+            return str_ireplace($search, $replace, $text);
+        }
+
+        $xpath = new DOMXPath($document);
+
+        // Replace in text nodes.
+        foreach ($xpath->query('//text()') as $node) {
+            if (!($node instanceof DOMText)) {
+                continue;
+            }
+            $node->nodeValue = str_ireplace($search, $replace, $node->nodeValue);
+        }
+
+        // Replace in selected attributes that are never expected to hold URLs.
+        $attribute_names = ['alt', 'title', 'aria-label'];
+        foreach ($attribute_names as $attr_name) {
+            foreach ($xpath->query('//*[@' . $attr_name . ']') as $element) {
+                if (!($element instanceof DOMElement)) {
+                    continue;
+                }
+
+                $value = $element->getAttribute($attr_name);
+                if ($value === '') {
+                    continue;
+                }
+
+                // Skip attributes that look like URLs just in case.
+                if (preg_match('#https?://|/wp-content/#i', $value)) {
+                    continue;
+                }
+
+                $element->setAttribute($attr_name, str_ireplace($search, $replace, $value));
+            }
+        }
+
+        libxml_clear_errors();
+        libxml_use_internal_errors($internalErrors);
+
+        $body = $document->getElementsByTagName('body')->item(0);
+        if (!$body instanceof DOMElement) {
+            return str_ireplace($search, $replace, $text);
+        }
+
+        $output = '';
+        foreach ($body->childNodes as $child) {
+            $output .= $document->saveHTML($child);
+        }
+
+        return $output !== '' ? $output : str_ireplace($search, $replace, $text);
+    }
+}
+
 if (!function_exists('svic_language_query_value')) {
     function svic_language_query_value(?string $locale = null): string {
         $normalized = $locale ? SVIC_Translator::normalizeLocaleCode($locale) : svic_current_locale();
@@ -721,6 +827,8 @@ if (!function_exists('svic_post_title')) {
                     }
                 }
             }
+
+            $title = svic_localize_brand_in_text($title, $locale);
         }
 
         return $title;

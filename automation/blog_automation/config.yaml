@@ -171,6 +171,8 @@ content_inputs:
     allow_patterns:
       - '(?i)svicloud'
       - '小雲'
+      - '小雲盒子'
+      - '小雲電視盒'
       - '電視盒'
       - '(?i)tv ?box'
       - '(?i)10p\+'

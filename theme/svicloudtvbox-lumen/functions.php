@@ -15,7 +15,15 @@ if (!defined('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID')) {
     define('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID', 5317978135);
 }
 
-const SVIC_LITESPEED_PURGE_MARK = 'svic-litespeed-sitemap-20251113a';
+if (!defined('SVIC_GA4_MEASUREMENT_ID')) {
+    define('SVIC_GA4_MEASUREMENT_ID', '');
+}
+
+if (!defined('SVIC_META_PIXEL_ID')) {
+    define('SVIC_META_PIXEL_ID', '');
+}
+
+const SVIC_LITESPEED_PURGE_MARK = 'svic-litespeed-nav-20251127a';
 
 add_action('init', function () {
     if (get_option('svic_litespeed_last_purge') === SVIC_LITESPEED_PURGE_MARK) {
@@ -935,7 +943,7 @@ if (!function_exists('svic_rank_math_inject_site_navigation_schema')) {
 }
 
 if (defined('RANK_MATH_VERSION')) {
-    // Let Rank Math handle schema output without theme overrides.
+    add_filter('rank_math/json_ld', 'svic_rank_math_inject_site_navigation_schema', 60, 2);
 } else {
     add_action('wp_head', 'svic_output_site_navigation_schema', 99);
 }
@@ -2053,7 +2061,7 @@ if (!function_exists('svic_filter_rank_math_schema_graph')) {
         return $schema_graph;
     }
 
-    if (!defined('RANK_MATH_VERSION')) {
+    if (defined('RANK_MATH_VERSION')) {
         add_filter('rank_math/json_ld', 'svic_filter_rank_math_schema_graph', 80, 2);
     }
 }
@@ -3099,7 +3107,7 @@ add_filter('wp_nav_menu_objects', function ($items, $args) {
     }
 
     $locale = function_exists('svic_current_locale')
-        ? strtolower((string) svic_current_locale())
+        ? (string) svic_current_locale()
         : '';
 
     $max_menu_order = 0;
@@ -3120,10 +3128,14 @@ add_filter('wp_nav_menu_objects', function ($items, $args) {
 
     foreach ($recent_posts as $index => $post) {
         $title = get_the_title($post);
-        if (strpos($locale, 'zh') === 0) {
+        if (stripos($locale, 'zh') === 0) {
             $translated = get_post_meta($post->ID, '_svic_title_zh_tw', true);
             if (is_string($translated) && $translated !== '') {
                 $title = $translated;
+            }
+
+            if (function_exists('svic_localize_brand_in_text')) {
+                $title = svic_localize_brand_in_text($title, $locale);
             }
         }
 
@@ -3946,23 +3958,29 @@ add_filter('the_content', function ($content) {
         return $content;
     }
 
-    $locale = strtolower(svic_current_locale());
-    if (strpos($locale, 'zh') !== 0) {
+    $locale = svic_current_locale();
+    if (!is_string($locale) || stripos($locale, 'zh') !== 0) {
         return $content;
     }
+
+    $base = $content;
 
     $translated = get_post_meta(get_the_ID(), '_svic_content_zh_tw', true);
-    if (!is_string($translated) || $translated === '') {
-        return $content;
+    if (is_string($translated) && $translated !== '') {
+        $base = $translated;
+
+        if (class_exists('SVIC_Markdown') && !SVIC_Markdown::looks_like_html($base)) {
+            $base = SVIC_Markdown::to_html($base);
+        }
+
+        $base = svic_replace_inline_code_placeholders($base, get_the_ID());
     }
 
-    if (class_exists('SVIC_Markdown') && !SVIC_Markdown::looks_like_html($translated)) {
-        $translated = SVIC_Markdown::to_html($translated);
+    if (function_exists('svic_localize_brand_in_text')) {
+        $base = svic_localize_brand_in_text($base, $locale);
     }
 
-    $translated = svic_replace_inline_code_placeholders($translated, get_the_ID());
-
-    $safe_html = wp_kses_post($translated);
+    $safe_html = wp_kses_post($base);
     return $safe_html !== '' ? $safe_html : $content;
 }, 20);
 
@@ -3975,13 +3993,19 @@ add_filter('the_title', function ($title, $post_id) {
         return $title;
     }
 
-    $locale = strtolower(svic_current_locale());
-    if (strpos($locale, 'zh') !== 0) {
+    $locale = svic_current_locale();
+    if (!is_string($locale) || stripos($locale, 'zh') !== 0) {
         return $title;
     }
 
     $translated = get_post_meta($post_id, '_svic_title_zh_tw', true);
-    return is_string($translated) && $translated !== '' ? $translated : $title;
+    $chosen_title = is_string($translated) && $translated !== '' ? $translated : $title;
+
+    if (function_exists('svic_localize_brand_in_text')) {
+        $chosen_title = svic_localize_brand_in_text($chosen_title, $locale);
+    }
+
+    return $chosen_title;
 }, 10, 2);
 
 add_filter('get_the_excerpt', function ($excerpt, $post) {
@@ -3993,13 +4017,19 @@ add_filter('get_the_excerpt', function ($excerpt, $post) {
         return $excerpt;
     }
 
-    $locale = strtolower(svic_current_locale());
-    if (strpos($locale, 'zh') !== 0) {
+    $locale = svic_current_locale();
+    if (!is_string($locale) || stripos($locale, 'zh') !== 0) {
         return $excerpt;
     }
 
     $translated = get_post_meta($post->ID, '_svic_description_zh_tw', true);
-    return is_string($translated) && $translated !== '' ? $translated : $excerpt;
+    $chosen_excerpt = is_string($translated) && $translated !== '' ? $translated : $excerpt;
+
+    if (function_exists('svic_localize_brand_in_text')) {
+        $chosen_excerpt = svic_localize_brand_in_text((string) $chosen_excerpt, $locale);
+    }
+
+    return $chosen_excerpt;
 }, 10, 2);
 
 add_filter('woocommerce_short_description', function ($excerpt) {
@@ -4284,6 +4314,284 @@ if (!function_exists('svic_flush_rewrites_once_for_sitemaps')) {
 
     add_action('init', 'svic_flush_rewrites_once_for_sitemaps', 21);
 }
+
+if (!function_exists('svic_is_tracking_enabled')) {
+    /**
+     * Central gate for frontend analytics scripts.
+     */
+    function svic_is_tracking_enabled(): bool
+    {
+        if (is_admin()) {
+            return false;
+        }
+
+        if (defined('WP_INSTALLING') && WP_INSTALLING) {
+            return false;
+        }
+
+        /**
+         * Allow integrations or environments to disable tracking.
+         *
+         * @param bool $enabled
+         */
+        return (bool) apply_filters('svic_tracking_enabled', true);
+    }
+}
+
+if (!function_exists('svic_render_ga4_base_tag')) {
+    /**
+     * Outputs the GA4 base tag with page_view tracking.
+     */
+    function svic_render_ga4_base_tag(): void
+    {
+        // If Site Kit is active, let it handle the GA4 base snippet.
+        if (defined('GOOGLESITEKIT_VERSION')) {
+            return;
+        }
+
+        if (!svic_is_tracking_enabled()) {
+            return;
+        }
+
+        $measurement_id = defined('SVIC_GA4_MEASUREMENT_ID') ? trim((string) SVIC_GA4_MEASUREMENT_ID) : '';
+        /**
+         * Filter the GA4 measurement ID used in the base tag.
+         *
+         * @param string $measurement_id
+         */
+        $measurement_id = (string) apply_filters('svic_ga4_measurement_id', $measurement_id);
+
+        if ($measurement_id === '') {
+            return;
+        }
+        ?>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr($measurement_id); ?>"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '<?php echo esc_js($measurement_id); ?>', {
+            'send_page_view': true
+        });
+        </script>
+        <?php
+    }
+}
+
+add_action('wp_head', 'svic_render_ga4_base_tag', 20);
+
+if (!function_exists('svic_render_meta_pixel_base_tag')) {
+    /**
+     * Outputs the Meta Pixel base tag with PageView tracking.
+     */
+    function svic_render_meta_pixel_base_tag(): void
+    {
+        if (!svic_is_tracking_enabled()) {
+            return;
+        }
+
+        $pixel_id = defined('SVIC_META_PIXEL_ID') ? trim((string) SVIC_META_PIXEL_ID) : '';
+        /**
+         * Filter the Meta Pixel ID used in the base tag.
+         *
+         * @param string $pixel_id
+         */
+        $pixel_id = (string) apply_filters('svic_meta_pixel_id', $pixel_id);
+
+        if ($pixel_id === '') {
+            return;
+        }
+        ?>
+        <!-- Meta Pixel Code -->
+        <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '<?php echo esc_js($pixel_id); ?>');
+        fbq('track', 'PageView');
+        </script>
+        <noscript>
+            <img alt="" height="1" width="1" style="display:none"
+                 src="https://www.facebook.com/tr?id=<?php echo esc_attr($pixel_id); ?>&amp;ev=PageView&amp;noscript=1" />
+        </noscript>
+        <!-- End Meta Pixel Code -->
+        <?php
+    }
+}
+
+add_action('wp_head', 'svic_render_meta_pixel_base_tag', 21);
+
+if (!function_exists('svic_render_ga4_purchase_event')) {
+    /**
+     * Fires a GA4 purchase event on the WooCommerce thank-you page.
+     *
+     * @param int $order_id
+     */
+    function svic_render_ga4_purchase_event(int $order_id): void
+    {
+        if (!svic_is_tracking_enabled()) {
+            return;
+        }
+
+        if (!function_exists('wc_get_order')) {
+            return;
+        }
+
+        $measurement_id = defined('SVIC_GA4_MEASUREMENT_ID') ? trim((string) SVIC_GA4_MEASUREMENT_ID) : '';
+        $measurement_id = (string) apply_filters('svic_ga4_measurement_id', $measurement_id);
+        if ($measurement_id === '' && !defined('GOOGLESITEKIT_VERSION')) {
+            return;
+        }
+
+        $order = wc_get_order($order_id);
+        if (!$order instanceof WC_Order) {
+            return;
+        }
+
+        if (!$order->is_paid()) {
+            return;
+        }
+
+        $currency = $order->get_currency() ?: 'USD';
+        $items    = [];
+
+        foreach ($order->get_items() as $item) {
+            if (!$item instanceof WC_Order_Item_Product) {
+                continue;
+            }
+
+            $product = $item->get_product();
+            if (!$product) {
+                continue;
+            }
+
+            $items[] = [
+                'item_id'   => $product->get_sku() ?: $product->get_id(),
+                'item_name' => $item->get_name(),
+                'quantity'  => (float) $item->get_quantity(),
+                'price'     => (float) $order->get_item_total($item, true, true),
+            ];
+        }
+
+        $payload = [
+            'transaction_id' => (string) $order->get_order_number(),
+            'value'          => (float) $order->get_total(),
+            'currency'       => $currency,
+            'tax'            => (float) $order->get_total_tax(),
+            'shipping'       => (float) $order->get_shipping_total(),
+            'items'          => $items,
+        ];
+
+        /**
+         * Filter the GA4 purchase payload before it is rendered.
+         *
+         * @param array    $payload
+         * @param WC_Order $order
+         */
+        $payload = (array) apply_filters('svic_ga4_purchase_payload', $payload, $order);
+
+        $json = wp_json_encode($payload);
+        if (!is_string($json) || $json === '') {
+            return;
+        }
+        ?>
+        <script>
+        if (typeof gtag === 'function') {
+            gtag('event', 'purchase', <?php echo $json; ?>);
+        }
+        </script>
+        <?php
+    }
+}
+
+add_action('woocommerce_thankyou', 'svic_render_ga4_purchase_event', 20);
+
+if (!function_exists('svic_render_meta_pixel_purchase_event')) {
+    /**
+     * Fires a Meta Pixel Purchase event on the WooCommerce thank-you page.
+     *
+     * @param int $order_id
+     */
+    function svic_render_meta_pixel_purchase_event(int $order_id): void
+    {
+        if (!svic_is_tracking_enabled()) {
+            return;
+        }
+
+        if (!function_exists('wc_get_order')) {
+            return;
+        }
+
+        $pixel_id = defined('SVIC_META_PIXEL_ID') ? trim((string) SVIC_META_PIXEL_ID) : '';
+        $pixel_id = (string) apply_filters('svic_meta_pixel_id', $pixel_id);
+        if ($pixel_id === '') {
+            return;
+        }
+
+        $order = wc_get_order($order_id);
+        if (!$order instanceof WC_Order) {
+            return;
+        }
+
+        if (!$order->is_paid()) {
+            return;
+        }
+
+        $contents = [];
+
+        foreach ($order->get_items() as $item) {
+            if (!$item instanceof WC_Order_Item_Product) {
+                continue;
+            }
+
+            $product = $item->get_product();
+            if (!$product) {
+                continue;
+            }
+
+            $contents[] = [
+                'id'         => $product->get_sku() ?: $product->get_id(),
+                'quantity'   => (int) $item->get_quantity(),
+                'item_price' => (float) $order->get_item_total($item, true, true),
+            ];
+        }
+
+        $payload = [
+            'value'        => (float) $order->get_total(),
+            'currency'     => $order->get_currency() ?: 'USD',
+            'contents'     => $contents,
+            'content_type' => 'product',
+        ];
+
+        /**
+         * Filter the Meta Pixel Purchase payload before it is rendered.
+         *
+         * @param array    $payload
+         * @param WC_Order $order
+         */
+        $payload = (array) apply_filters('svic_meta_pixel_purchase_payload', $payload, $order);
+
+        $json = wp_json_encode($payload);
+        if (!is_string($json) || $json === '') {
+            return;
+        }
+        ?>
+        <script>
+        if (typeof fbq === 'function') {
+            fbq('track', 'Purchase', <?php echo $json; ?>);
+        }
+        </script>
+        <?php
+    }
+}
+
+add_action('woocommerce_thankyou', 'svic_render_meta_pixel_purchase_event', 21);
 
 add_action('pre_get_posts', function ($query) {
     if (is_admin() || !$query->is_main_query()) {

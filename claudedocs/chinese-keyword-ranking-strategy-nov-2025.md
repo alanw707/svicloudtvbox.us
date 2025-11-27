@@ -1,5 +1,11 @@
 # Chinese Keyword Ranking Issue - November 2025
 
+> **2025-11-26 Priority Update（for automation）**  
+> 未來 4–8 週，中文自動部落格優先產出兩種內容：  
+> 1) **機型／品牌比較文**：例如「SVICLOUD 10P+ vs EVPAD 10 Pro」、「SVICLOUD vs 安博盒子 UBOX 12」等實際品牌對比。  
+> 2) **疑難排解／Troubleshooting 文**：例如「小雲電視盒不能看怎麼辦」、「Wi-Fi 連不上、小雲盒子沒有訊號」等 FAQ 內容。  
+> 這兩類主題在自動選題與分數計算中視為高優先級，優先於一般導購型長文。
+
 ## Target Keywords NOT Ranking
 
 **Keywords**:
@@ -190,6 +196,8 @@ Multiple regional sites (Taiwan, Hong Kong) are outranking your .us domain for U
 - 小雲電視盒美國代理 ⭐⭐⭐
 - svicloud tv box usa
 - svicloud 美國
+- 小雲電視盒 vs 安博
+- 小雲電視盒 10P+
 
 ### Secondary Keywords (3-6 months)
 - 小雲電視盒 加州
@@ -198,6 +206,10 @@ Multiple regional sites (Taiwan, Hong Kong) are outranking your .us domain for U
 - 華人電視盒 美國
 - 小雲電視盒評價
 - svicloud 美國經銷商
+- 小雲盒子是什麼
+- 小雲盒子代理
+- 小雲盒子海外版
+- 小雲電視盒不能看（疑難排解與合法使用教學）
 
 ### Long-tail Keywords (6-12 months)
 - 美國哪裡買小雲電視盒

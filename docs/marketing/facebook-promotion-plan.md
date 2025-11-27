@@ -258,6 +258,14 @@ Weeks 5–8
 - SEO: Comparison guides (“SVICLOUD 10P Plus vs 10S”), troubleshooting pages
 - Support ops: Add Facebook Chat Plugin to site; saved replies; response SLA <24h
 
+### Chinese Keyword Themes to Emphasize (2025 Update)
+
+- 小雲電視盒 美國／小雲電視盒美國代理（品牌＋地區信任）
+- 小雲電視盒 vs 安博（比較＆導向官方授權）
+- 小雲電視盒 10P+／小雲盒子10P（機型與升級訴求）
+- 小雲盒子是什麼／小雲盒子海外版（教育與海外使用情境）
+- 小雲電視盒不能看（問題排解與合法使用說明）
+
 ---
 
 ## Common Pitfalls To Avoid
