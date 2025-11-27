@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone, date, timedelta
 from email.message import EmailMessage
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Tuple, Union
+from typing import Any, Dict, Iterable, List, Optional, Tuple, Union, Set
 
 import requests
 import yaml
@@ -173,8 +173,13 @@ class BlogAutomation:
         weekly_cap = publishing_cfg.get("max_posts_per_week", 7)
         limit = max_posts or weekly_cap
         attempts = published = 0
+        existing_slugs = self._existing_slugs()
 
         for topic in unique_topics[:limit]:
+            proposed_slug = _slugify(topic.keyword)
+            if proposed_slug in existing_slugs:
+                self.log.info("Skipping topic '%s' because slug '%s' already exists", topic.keyword, proposed_slug)
+                continue
             attempts += 1
             post = self.generate_post(topic)
             score = self.validate_quality(post)
@@ -186,14 +191,16 @@ class BlogAutomation:
             if self.dry_run:
                 self.log.info("[DRY] Would publish '%s' (score %.1f)", post.title, score)
                 published += 1
+                existing_slugs.add(post.slug)
                 continue
 
             if self.publish_post(post):
                 published += 1
                 self._record_post(post, status="published")
+                existing_slugs.add(post.slug)
             else:
                 self.save_draft(post)
-
+                existing_slugs.add(post.slug)
         self.db.execute(
             "INSERT INTO run_log (run_at, topics_found, unique_topics, posts_attempted, posts_published, dry_run) VALUES (?, ?, ?, ?, ?, ?)",
             (
@@ -1102,20 +1109,20 @@ class BlogAutomation:
             return content
 
         # Skip if content is very short.
-        if len(re.findall(r"\\w+", content)) < min_word_count:
+        if len(re.findall(r"\w+", content)) < min_word_count:
             return content
 
         # Avoid duplication of URLs already present.
-        existing_urls = set(re.findall(r"https?://[^)\\s]+", content))
+        existing_urls = set(re.findall(r"https?://[^\)\s]+", content))
 
         # Light language detection to choose heading copy.
-        is_zh = bool(re.search(r"[\\u4e00-\\u9fff]", content))
+        is_zh = bool(re.search(r"[\u4e00-\u9fff]", content))
         section_title = "延伸閱讀 / 推薦連結" if is_zh else "Related links"
 
         # Deterministic shuffle based on topic keyword to vary links across posts.
         sorted_targets = sorted(
             [t for t in targets if t.get("url") and t.get("label")],
-            key=lambda t: hash(f\"{topic.keyword}-{t.get('url')}\"),
+            key=lambda t: hash(f"{topic.keyword}-{t.get('url')}"),
         )
 
         chosen: List[str] = []
@@ -1128,33 +1135,83 @@ class BlogAutomation:
             if url in existing_urls:
                 continue
             anchor_text = label
-            line = f\"- [{anchor_text}]({url})\"
+            line = f"- [{anchor_text}]({url})"
             if desc:
-                line = f\"{line} — {desc}\"
+                line = f"{line} — {desc}"
             chosen.append(line)
             existing_urls.add(url)
 
         if not chosen:
             return content
 
-        block = f\"## {section_title}\\n\" + \"\\n\".join(chosen)
+        block = f"## {section_title}\n" + "\n".join(chosen)
 
         # Insert before CTA if present, else append.
-        cta_index = content.find(\"## 下一步\") if is_zh else content.find(\"## Next steps\")
+        cta_index = content.find("## 下一步") if is_zh else content.find("## Next steps")
         if cta_index != -1:
-            return content[:cta_index].rstrip() + \"\\n\\n\" + block + \"\\n\\n\" + content[cta_index:].lstrip()
+            return content[:cta_index].rstrip() + "\n\n" + block + "\n\n" + content[cta_index:].lstrip()
 
         if block in content:
             return content
-        return f\"{content}\\n\\n{block}\"
+        return f"{content}\n\n{block}"
 
     def _replace_placeholder_links(self, content: str) -> str:
-        replacements = self.config.get(\"content_inputs\", {}).get(\"internal_links\", {})
+        replacements = self.config.get("content_inputs", {}).get("internal_links", {})
         for placeholder, url in replacements.items():
-            marker = f\"[{placeholder}]\"
+            marker = f"[{placeholder}]"
             if marker in content:
-                content = content.replace(marker, f\"[{placeholder}]({url})\")
+                content = content.replace(marker, f"[{placeholder}]({url})")
         return content
+
+    def _existing_slugs(self) -> Set[str]:
+        """Gather existing slugs from local history and remote WP to prevent duplicates."""
+        slugs: Set[str] = set()
+        try:
+            rows = self.db.execute("SELECT slug FROM posts_history WHERE slug IS NOT NULL")
+            slugs.update([row[0] for row in rows if row and row[0]])
+        except Exception as exc:
+            self.log.warning("Failed to read local post history: %s", exc)
+
+        rest_cfg = self.config.get("wordpress", {}).get("rest", {})
+        if rest_cfg.get("dedupe_remote", True):
+            slugs.update(self._fetch_remote_slugs(rest_cfg))
+        return slugs
+
+    def _fetch_remote_slugs(self, rest_cfg: Dict[str, Any]) -> Set[str]:
+        endpoint = rest_cfg.get("endpoint")
+        if not endpoint:
+            return set()
+        per_page = 100
+        max_pages = int(rest_cfg.get("dedupe_pages", 3))
+        collected: Set[str] = set()
+        for page in range(1, max_pages + 1):
+            try:
+                resp = requests.get(
+                    endpoint,
+                    params={
+                        "per_page": per_page,
+                        "page": page,
+                        "_fields": "slug",
+                        "status": "publish",
+                        "orderby": "date",
+                        "order": "desc",
+                    },
+                    timeout=20,
+                )
+                if resp.status_code != 200:
+                    self.log.warning("Remote slug fetch page %s failed (%s): %s", page, resp.status_code, resp.text[:200])
+                    break
+                rows = resp.json()
+                if not rows:
+                    break
+                for row in rows:
+                    slug = row.get("slug")
+                    if slug:
+                        collected.add(slug)
+            except requests.RequestException as exc:
+                self.log.warning("Remote slug fetch failed on page %s: %s", page, exc)
+                break
+        return collected
 
     def _inject_images(self, content: str, topic: TopicCandidate) -> str:
         images_cfg = self.config.get("content_inputs", {}).get("images", {})
