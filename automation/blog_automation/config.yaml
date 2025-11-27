@@ -137,6 +137,9 @@ content_inputs:
     "購買官網": "https://svicloudtvbox.us/"
     "客服支援": "https://svicloudtvbox.us/zh/contact/"
     "常見問題": "https://svicloudtvbox.us/zh/blog/svicloud-faq/"
+  internal_link_settings:
+    max_links: 5
+    min_word_count: 600
   internal_link_targets:
     - label: "SVICLOUD 方案比較"
       url: "https://svicloudtvbox.us/compare/"

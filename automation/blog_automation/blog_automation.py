@@ -316,7 +316,7 @@ class BlogAutomation:
             outline = self.generate_outline(topic, brief, retry=True)
         post_body = self.generate_full_post(topic, outline, brief)
         post_body = self._enforce_internal_requirements(topic, post_body)
-        post_body = self._insert_internal_links(post_body)
+        post_body = self._insert_internal_links(post_body, topic)
         post_body = self._inject_images(post_body, topic)
         post_body = self._append_cta(post_body, topic)
         excerpt = post_body.split("\n\n", maxsplit=1)[0][:160]
@@ -1087,12 +1087,73 @@ class BlogAutomation:
             body.append("整理付款方式、安裝疑難排解與保固流程，減少客服負擔。")
         return "\n\n".join(body)
 
-    def _insert_internal_links(self, content: str) -> str:
-        replacements = self.config.get("content_inputs", {}).get("internal_links", {})
+    def _insert_internal_links(self, content: str, topic: TopicCandidate) -> str:
+        """Insert internal links without relying on placeholders, with light heuristics."""
+        # First, replace any explicit placeholders if present for backward compatibility.
+        content = self._replace_placeholder_links(content)
+
+        cfg = self.config.get("content_inputs", {})
+        settings = cfg.get("internal_link_settings", {})
+        max_links = int(settings.get("max_links", 5))
+        min_word_count = int(settings.get("min_word_count", 600))
+        targets: List[Dict[str, str]] = cfg.get("internal_link_targets", []) or []
+
+        if not targets or max_links <= 0:
+            return content
+
+        # Skip if content is very short.
+        if len(re.findall(r"\\w+", content)) < min_word_count:
+            return content
+
+        # Avoid duplication of URLs already present.
+        existing_urls = set(re.findall(r"https?://[^)\\s]+", content))
+
+        # Light language detection to choose heading copy.
+        is_zh = bool(re.search(r"[\\u4e00-\\u9fff]", content))
+        section_title = "延伸閱讀 / 推薦連結" if is_zh else "Related links"
+
+        # Deterministic shuffle based on topic keyword to vary links across posts.
+        sorted_targets = sorted(
+            [t for t in targets if t.get("url") and t.get("label")],
+            key=lambda t: hash(f\"{topic.keyword}-{t.get('url')}\"),
+        )
+
+        chosen: List[str] = []
+        for entry in sorted_targets:
+            if len(chosen) >= max_links:
+                break
+            url = entry["url"]
+            label = entry["label"]
+            desc = entry.get("description", "")
+            if url in existing_urls:
+                continue
+            anchor_text = label
+            line = f\"- [{anchor_text}]({url})\"
+            if desc:
+                line = f\"{line} — {desc}\"
+            chosen.append(line)
+            existing_urls.add(url)
+
+        if not chosen:
+            return content
+
+        block = f\"## {section_title}\\n\" + \"\\n\".join(chosen)
+
+        # Insert before CTA if present, else append.
+        cta_index = content.find(\"## 下一步\") if is_zh else content.find(\"## Next steps\")
+        if cta_index != -1:
+            return content[:cta_index].rstrip() + \"\\n\\n\" + block + \"\\n\\n\" + content[cta_index:].lstrip()
+
+        if block in content:
+            return content
+        return f\"{content}\\n\\n{block}\"
+
+    def _replace_placeholder_links(self, content: str) -> str:
+        replacements = self.config.get(\"content_inputs\", {}).get(\"internal_links\", {})
         for placeholder, url in replacements.items():
-            marker = f"[{placeholder}]"
+            marker = f\"[{placeholder}]\"
             if marker in content:
-                content = content.replace(marker, f"[{placeholder}]({url})")
+                content = content.replace(marker, f\"[{placeholder}]({url})\")
         return content
 
     def _inject_images(self, content: str, topic: TopicCandidate) -> str:
