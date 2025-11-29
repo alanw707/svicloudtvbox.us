@@ -15,6 +15,7 @@ from datetime import datetime, timezone, date, timedelta
 from email.message import EmailMessage
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple, Union, Set
+from difflib import SequenceMatcher
 
 import requests
 import yaml
@@ -172,8 +173,10 @@ class BlogAutomation:
         publishing_cfg = self.config.get("publishing", {})
         weekly_cap = publishing_cfg.get("max_posts_per_week", 7)
         limit = max_posts or weekly_cap
-        attempts = published = skipped_dupes = 0
+        attempts = published = skipped_dupes = skipped_fuzzy = 0
         existing_slugs = self._existing_slugs()
+        existing_titles = self._existing_titles()
+        fuzzy_threshold = float(self.config.get("safety", {}).get("fuzzy_title_threshold", 0.82))
 
         for topic in unique_topics[:limit]:
             proposed_slug = _slugify(topic.keyword)
@@ -183,6 +186,10 @@ class BlogAutomation:
                 continue
             attempts += 1
             post = self.generate_post(topic)
+            if self._is_title_duplicate(post.title, existing_titles, fuzzy_threshold):
+                self.log.info("Skipping topic '%s' because title fuzzy-matches existing content", topic.keyword)
+                skipped_fuzzy += 1
+                continue
             score = self.validate_quality(post)
             if score < self.config.get("quality", {}).get("min_score", 80):
                 self.log.warning("Quality score %.1f below threshold for '%s'", score, post.title)
@@ -193,15 +200,18 @@ class BlogAutomation:
                 self.log.info("[DRY] Would publish '%s' (score %.1f)", post.title, score)
                 published += 1
                 existing_slugs.add(post.slug)
+                existing_titles.append(post.title)
                 continue
 
             if self.publish_post(post):
                 published += 1
                 self._record_post(post, status="published")
                 existing_slugs.add(post.slug)
+                existing_titles.append(post.title)
             else:
                 self.save_draft(post)
                 existing_slugs.add(post.slug)
+                existing_titles.append(post.title)
         self.db.execute(
             "INSERT INTO run_log (run_at, topics_found, unique_topics, posts_attempted, posts_published, dry_run) VALUES (?, ?, ?, ?, ?, ?)",
             (
@@ -220,6 +230,7 @@ class BlogAutomation:
             "attempts": attempts,
             "published": published,
             "skipped_dupes": skipped_dupes,
+            "skipped_fuzzy": skipped_fuzzy,
             "dry_run": self.dry_run,
         })
 
@@ -1180,6 +1191,29 @@ class BlogAutomation:
             slugs.update(self._fetch_remote_slugs(rest_cfg))
         return slugs
 
+    def _is_title_duplicate(self, title: str, existing_titles: List[str], threshold: float) -> bool:
+        """Check for fuzzy duplicates against existing titles."""
+        for existing in existing_titles:
+            if not existing:
+                continue
+            ratio = SequenceMatcher(None, title.lower(), existing.lower()).ratio()
+            if ratio >= threshold:
+                return True
+        return False
+
+    def _existing_titles(self) -> List[str]:
+        titles: List[str] = []
+        try:
+            rows = self.db.execute("SELECT title FROM posts_history WHERE title IS NOT NULL")
+            titles.extend([row[0] for row in rows if row and row[0]])
+        except Exception as exc:
+            self.log.warning("Failed to read local titles: %s", exc)
+
+        rest_cfg = self.config.get("wordpress", {}).get("rest", {})
+        if rest_cfg.get("dedupe_remote", True):
+            titles.extend(self._fetch_remote_titles(rest_cfg))
+        return titles
+
     def _fetch_remote_slugs(self, rest_cfg: Dict[str, Any]) -> Set[str]:
         endpoint = rest_cfg.get("endpoint")
         if not endpoint:
@@ -1215,6 +1249,43 @@ class BlogAutomation:
                 self.log.warning("Remote slug fetch failed on page %s: %s", page, exc)
                 break
         return collected
+
+    def _fetch_remote_titles(self, rest_cfg: Dict[str, Any]) -> List[str]:
+        endpoint = rest_cfg.get("endpoint")
+        if not endpoint:
+            return []
+        per_page = 100
+        max_pages = int(rest_cfg.get("dedupe_pages", 3))
+        titles: List[str] = []
+        for page in range(1, max_pages + 1):
+            try:
+                resp = requests.get(
+                    endpoint,
+                    params={
+                        "per_page": per_page,
+                        "page": page,
+                        "_fields": "title",
+                        "status": "publish",
+                        "orderby": "date",
+                        "order": "desc",
+                    },
+                    timeout=20,
+                )
+                if resp.status_code != 200:
+                    self.log.warning("Remote title fetch page %s failed (%s): %s", page, resp.status_code, resp.text[:200])
+                    break
+                rows = resp.json()
+                if not rows:
+                    break
+                for row in rows:
+                    title_obj = row.get("title") or {}
+                    title_rendered = title_obj.get("rendered")
+                    if title_rendered:
+                        titles.append(title_rendered)
+            except requests.RequestException as exc:
+                self.log.warning("Remote title fetch failed on page %s: %s", page, exc)
+                break
+        return titles
 
     def _inject_images(self, content: str, topic: TopicCandidate) -> str:
         images_cfg = self.config.get("content_inputs", {}).get("images", {})
