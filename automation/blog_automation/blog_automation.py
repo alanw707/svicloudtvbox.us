@@ -172,13 +172,14 @@ class BlogAutomation:
         publishing_cfg = self.config.get("publishing", {})
         weekly_cap = publishing_cfg.get("max_posts_per_week", 7)
         limit = max_posts or weekly_cap
-        attempts = published = 0
+        attempts = published = skipped_dupes = 0
         existing_slugs = self._existing_slugs()
 
         for topic in unique_topics[:limit]:
             proposed_slug = _slugify(topic.keyword)
             if proposed_slug in existing_slugs:
                 self.log.info("Skipping topic '%s' because slug '%s' already exists", topic.keyword, proposed_slug)
+                skipped_dupes += 1
                 continue
             attempts += 1
             post = self.generate_post(topic)
@@ -218,6 +219,7 @@ class BlogAutomation:
             "unique_topics": len(unique_topics),
             "attempts": attempts,
             "published": published,
+            "skipped_dupes": skipped_dupes,
             "dry_run": self.dry_run,
         })
 
@@ -509,6 +511,7 @@ class BlogAutomation:
             f"- Unique topics: {run_stats.get('unique_topics', 0)}",
             f"- Posts attempted: {run_stats.get('attempts', 0)}",
             f"- Posts published: {run_stats.get('published', 0)}",
+            f"- Skipped duplicates: {run_stats.get('skipped_dupes', 0)}",
             f"- Dry run: {run_stats.get('dry_run', False)}",
             f"- Timestamp: {datetime.now(timezone.utc).isoformat()}",
         ]

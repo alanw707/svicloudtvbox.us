@@ -49,6 +49,8 @@ wordpress:
     password_env: "WP_REST_PASSWORD"
     status: "publish"  # Changed from "draft" - posts passing quality threshold auto-publish
     author: 2
+    dedupe_remote: true   # check remote slugs to avoid duplicates
+    dedupe_pages: 3       # how many pages of recent posts to scan for slug duplicates
   category_map:
     default:
       - 24    # Guides
