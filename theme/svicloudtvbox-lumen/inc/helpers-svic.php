@@ -336,7 +336,11 @@ if (!function_exists('svic_route_alias_definitions')) {
                     'en' => '/compare/',
                     'zh' => '/compare/',
                 ],
-                'legacy' => [],
+                // Older Chinese slug /%e6%a9%9f%e5%9e%8b%e6%af%94%e8%bc%83/ should canonicalize to /compare/
+                'legacy' => [
+                    '/%e6%a9%9f%e5%9e%8b%e6%af%94%e8%bc%83/',
+                    '/機型比較/',
+                ],
             ],
             'guides' => [
                 'canonical_base' => [
@@ -419,7 +423,9 @@ if (!function_exists('svic_route_alias_path_for_locale')) {
 if (!function_exists('svic_alias_resolve_existing_page_id')) {
     function svic_alias_resolve_existing_page_id(array $alias): ?int
     {
-        foreach ($alias['canonical_base'] as $base) {
+        $candidates = array_merge($alias['canonical_base'], $alias['legacy']);
+
+        foreach ($candidates as $base) {
             $slug = trim($base, '/');
             if ($slug === '') {
                 continue;

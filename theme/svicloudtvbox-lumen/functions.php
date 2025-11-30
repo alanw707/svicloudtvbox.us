@@ -24,6 +24,7 @@ if (!defined('SVIC_META_PIXEL_ID')) {
 }
 
 const SVIC_LITESPEED_PURGE_MARK = 'svic-litespeed-nav-20251127a';
+const SVIC_REWRITE_FLUSH_MARK   = 'svic-rewrite-flush-20251130b';
 
 add_action('init', function () {
     if (get_option('svic_litespeed_last_purge') === SVIC_LITESPEED_PURGE_MARK) {
@@ -37,6 +38,21 @@ add_action('init', function () {
     update_option('svic_litespeed_last_purge', SVIC_LITESPEED_PURGE_MARK, false);
     \LiteSpeed\Purge::purge_all('SVIC hero chunk hotfix');
 }, 1);
+
+// One-time rewrite flush to ensure alias rewrites (e.g., /compare/) take effect.
+// Run after our custom rewrites have been registered.
+add_action('init', function () {
+    if (get_option('svic_last_rewrite_flush') === SVIC_REWRITE_FLUSH_MARK) {
+        return;
+    }
+
+    if (function_exists('svic_register_route_alias_rewrites')) {
+        svic_register_route_alias_rewrites();
+    }
+
+    flush_rewrite_rules(false);
+    update_option('svic_last_rewrite_flush', SVIC_REWRITE_FLUSH_MARK, false);
+}, 30);
 
 require_once get_template_directory() . '/inc/class-svic-translator.php';
 require_once get_template_directory() . '/inc/class-svic-markdown.php';
@@ -56,12 +72,24 @@ if (!function_exists('svic_get_localized_canonical_url')) {
             return null;
         }
 
-        $base = svic_current_base_url();
+        $basePath = method_exists('SVIC_Locale_Resolver', 'originalRequestPath')
+            ? SVIC_Locale_Resolver::originalRequestPath()
+            : null;
+
+        if (!is_string($basePath) || $basePath === '') {
+            $basePath = SVIC_Locale_Resolver::currentRequestPath();
+        }
+
+        $pathForLang = is_string($basePath) ? $basePath : '/';
+        $isZhPath = ($pathForLang === '/zh' || $pathForLang === '/zh/' || strpos($pathForLang, '/zh/') === 0);
+        $langValue = $isZhPath ? 'zh' : 'en';
+
+        $base = home_url($basePath);
         if (!is_string($base) || $base === '') {
             return null;
         }
 
-        $localized = svic_url_with_lang($base);
+        $localized = svic_url_with_lang($base, $langValue);
         $parts     = wp_parse_url($localized);
         if (!is_array($parts)) {
             return null;
@@ -1078,6 +1106,23 @@ if (!function_exists('svic_preserve_language_prefix_canonical')) {
      */
     function svic_preserve_language_prefix_canonical($redirect_url, $requested_url)
     {
+        // Avoid redirect loops between /compare/ and legacy Chinese slugs.
+        $path = is_string($requested_url) ? (string) wp_parse_url($requested_url, PHP_URL_PATH) : '';
+        if (is_string($path) && $path !== '') {
+            $path = svic_normalize_route_path($path);
+            $compare_aliases = [
+                '/compare/',
+                '/%e6%a9%9f%e5%9e%8b%e6%af%94%e8%bc%83/',
+                '/機型比較/',
+                '/zh/compare/',
+                '/zh/%e6%a9%9f%e5%9e%8b%e6%af%94%e8%bc%83/',
+                '/zh/機型比較/',
+            ];
+            if (in_array($path, $compare_aliases, true)) {
+                return false;
+            }
+        }
+
         if (!is_string($redirect_url) || $redirect_url === '' || !is_string($requested_url) || $requested_url === '') {
             return $redirect_url;
         }
@@ -1257,15 +1302,15 @@ add_filter('wpseo_canonical', function ($url) {
 });
 
 // RankMath SEO
-// When Rank Math is active, let it manage canonicals without theme overrides.
-if (!defined('RANK_MATH_VERSION')) {
+// When Rank Math is active, force localized canonicals so /zh/ pages self-canonicalize.
+if (defined('RANK_MATH_VERSION')) {
     add_filter('rank_math/frontend/canonical', function ($url) {
         if (is_admin()) {
             return $url;
         }
         $canonical = svic_get_localized_canonical_url();
         return $canonical ?: $url;
-    }, 10, 1);
+    }, 99, 1);
 }
 
 if (!function_exists('svic_homepage_meta_definitions')) {
@@ -1385,7 +1430,7 @@ if (!function_exists('svic_filter_rank_math_front_page_title')) {
         return $meta_title !== '' ? $meta_title : $title;
     }
 
-    if (!defined('RANK_MATH_VERSION')) {
+    if (defined('RANK_MATH_VERSION')) {
         add_filter('rank_math/frontend/title', 'svic_filter_rank_math_front_page_title', 20);
     }
 }
@@ -1401,7 +1446,7 @@ if (!function_exists('svic_filter_rank_math_front_page_description')) {
         return $meta_description !== '' ? $meta_description : $description;
     }
 
-    if (!defined('RANK_MATH_VERSION')) {
+    if (defined('RANK_MATH_VERSION')) {
         add_filter('rank_math/frontend/description', 'svic_filter_rank_math_front_page_description', 20);
         add_filter('rank_math/frontend/snippet_description', 'svic_filter_rank_math_front_page_description', 20);
     }
@@ -1418,7 +1463,7 @@ if (!function_exists('svic_filter_rank_math_front_page_og_title')) {
         return $meta_title !== '' ? $meta_title : $title;
     }
 
-    if (!defined('RANK_MATH_VERSION')) {
+    if (defined('RANK_MATH_VERSION')) {
         add_filter('rank_math/opengraph/facebook/og_title', 'svic_filter_rank_math_front_page_og_title', 20);
         add_filter('rank_math/opengraph/twitter/twitter_title', 'svic_filter_rank_math_front_page_og_title', 20);
     }
@@ -1435,7 +1480,7 @@ if (!function_exists('svic_filter_rank_math_front_page_og_description')) {
         return $meta_description !== '' ? $meta_description : $description;
     }
 
-    if (!defined('RANK_MATH_VERSION')) {
+    if (defined('RANK_MATH_VERSION')) {
         add_filter('rank_math/opengraph/facebook/og_description', 'svic_filter_rank_math_front_page_og_description', 20);
         add_filter('rank_math/opengraph/twitter/twitter_description', 'svic_filter_rank_math_front_page_og_description', 20);
     }
@@ -1484,7 +1529,7 @@ if (!function_exists('svic_filter_rank_math_front_page_og_image')) {
         return $attachment;
     }
 
-    if (!defined('RANK_MATH_VERSION')) {
+    if (defined('RANK_MATH_VERSION')) {
         add_filter('rank_math/opengraph/facebook/image_array', 'svic_filter_rank_math_front_page_og_image', 20);
         add_filter('rank_math/opengraph/twitter/image_array', 'svic_filter_rank_math_front_page_og_image', 20);
     }
