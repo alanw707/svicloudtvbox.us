@@ -677,6 +677,9 @@ if (!function_exists('svic_post_card_image')) {
                     $attributes = svic_prepare_image_attributes($attr, [
                         'src'     => esc_url($src),
                         'alt'     => $alt !== '' ? $alt : get_the_title($post_id),
+                        'loading' => 'lazy',
+                        'decoding'=> 'async',
+                        'sizes'   => '(max-width: 600px) 92vw, 360px',
                     ]);
 
                     return '<img ' . $attributes . ' />';
@@ -703,6 +706,9 @@ if (!function_exists('svic_post_card_image')) {
         $attr_defaults = [
             'src'     => esc_url($meta['url']),
             'alt'     => $fallback_alt,
+            'loading' => 'lazy',
+            'decoding'=> 'async',
+            'sizes'   => '(max-width: 600px) 92vw, 360px',
         ];
 
         if (!empty($meta['width'])) {

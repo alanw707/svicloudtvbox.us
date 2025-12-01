@@ -400,9 +400,6 @@ if (!$blog_posts_query instanceof WP_Query) {
         </ul>
         <div class="hero-dashboard__cta">
           <a class="hero-dashboard__button hero-dashboard__button--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.primary'); ?></a>
-          <a class="hero-dashboard__button hero-dashboard__button--secondary" href="#pricing">
-            <span><?php echo svic_translate_html('frontpage.hero.cta.bundles'); ?></span>
-          </a>
           <a class="hero-dashboard__button hero-dashboard__button--secondary" href="<?php echo esc_url(svic_url_with_lang(home_url('/compare'))); ?>">
             <span><?php echo svic_translate_html('frontpage.hero.cta.compare'); ?></span>
           </a>
@@ -513,7 +510,7 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
   </section>
 
   <!-- Credibility Bar -->
-  <section class="lumen-metrics" aria-label="<?php esc_attr_e('Key SVICLOUD advantages', 'svicloudtvbox-lumen'); ?>">
+  <section class="lumen-metrics" aria-label="<?php esc_attr_e('Key SVICLOUD advantages', 'svicloudtvbox-lumen'); ?>" data-bg>
     <div class="lumen-metrics__inner">
       <?php foreach ($metrics as $metric) : ?>
         <?php $icon_path = get_template_directory_uri() . '/assets/svg/' . $metric['icon']; ?>
@@ -532,7 +529,7 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
   </section>
 
   <!-- Feature Highlights -->
-  <section class="lumen-feature-grid" id="experience">
+  <section class="lumen-feature-grid" id="experience" data-bg>
     <div class="lumen-feature-grid__inner">
       <header class="lumen-section-header">
         <h2 class="lumen-section-header__title"><?php echo svic_translate_html('frontpage.feature_grid.title'); ?></h2>
@@ -553,7 +550,7 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
   </section>
 
   <!-- Experience Section -->
-  <section class="lumen-experience">
+  <section class="lumen-experience" data-bg>
     <div class="lumen-experience__inner">
       <div class="lumen-experience__copy">
         <span class="lumen-experience__badge"><?php echo svic_translate_html('frontpage.experience.badge'); ?></span>
@@ -580,69 +577,6 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
     </div>
   </section>
 
-  <?php if ($blog_posts_query->have_posts()) : ?>
-    <section class="frontpage-blog" id="blog-insights">
-      <header class="lumen-section-header frontpage-blog__header">
-        <span class="lumen-section-header__badge"><?php echo svic_translate_html('frontpage.blog.badge'); ?></span>
-        <h2 class="lumen-section-header__title"><?php echo svic_translate_html('frontpage.blog.title'); ?></h2>
-        <p class="lumen-section-header__subtitle"><?php echo svic_translate_html('frontpage.blog.lead'); ?></p>
-      </header>
-      <div class="frontpage-blog__cards">
-        <?php while ($blog_posts_query->have_posts()) : $blog_posts_query->the_post();
-          $post_id        = get_the_ID();
-          $permalink      = svic_url_with_lang(get_permalink());
-          $categories     = get_the_category($post_id);
-          $primary_cat    = $categories ? $categories[0] : null;
-          $reading_time   = svic_estimated_read_time($post_id);
-          $reading_label  = sprintf(
-              /* translators: %d: estimated reading time in minutes */
-              esc_html__('%d min read', 'svicloudtvbox-lumen'),
-              $reading_time
-          );
-          $published_attr    = get_the_date(DATE_W3C, $post_id);
-          $published_display = get_the_date('', $post_id);
-          $raw_excerpt       = get_the_excerpt($post_id);
-          $excerpt           = wp_trim_words(wp_strip_all_tags((string) $raw_excerpt), 26, '…');
-          $thumbnail_html    = svic_post_card_image(
-              $post_id,
-              'medium_large',
-              [
-                  'class' => 'frontpage-blog__image',
-              ]
-          );
-          ?>
-          <article class="frontpage-blog__card">
-            <a class="frontpage-blog__link" href="<?php echo esc_url($permalink); ?>">
-              <div class="frontpage-blog__media">
-                <?php if ($thumbnail_html) : ?>
-                  <?php echo $thumbnail_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-                <?php else : ?>
-                  <div class="frontpage-blog__media-placeholder" aria-hidden="true"></div>
-                <?php endif; ?>
-              </div>
-              <div class="frontpage-blog__content">
-                <div class="frontpage-blog__meta">
-                  <?php if ($primary_cat instanceof WP_Term) : ?>
-                    <span class="frontpage-blog__chip"><?php echo esc_html(svic_category_label($primary_cat)); ?></span>
-                  <?php endif; ?>
-                  <time datetime="<?php echo esc_attr($published_attr); ?>" class="frontpage-blog__time"><?php echo esc_html($published_display); ?></time>
-                  <span class="frontpage-blog__readtime"><?php echo esc_html($reading_label); ?></span>
-                </div>
-                <h3 class="frontpage-blog__card-title"><?php echo esc_html(svic_post_title($post_id)); ?></h3>
-                <?php if ($excerpt !== '') : ?>
-                  <p class="frontpage-blog__card-excerpt"><?php echo esc_html($excerpt); ?></p>
-                <?php endif; ?>
-                <span class="frontpage-blog__more"><?php echo svic_translate_html('frontpage.blog.read_more'); ?></span>
-              </div>
-            </a>
-          </article>
-        <?php endwhile; ?>
-      </div>
-      <div class="frontpage-blog__actions">
-        <a class="btn btn-outline" href="<?php echo esc_url($blog_archive_url); ?>"><?php echo svic_translate_html('frontpage.blog.cta_label'); ?></a>
-      </div>
-    </section>
-  <?php endif; ?>
   <?php wp_reset_postdata(); ?>
 
   <!-- FAQ Section -->
@@ -706,74 +640,6 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
       echo '<script type="application/ld+json">' . wp_json_encode($faq_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
   }
   ?>
-
-  <!-- Pricing Section -->
-  <section class="lumen-pricing" id="pricing">
-    <div class="lumen-pricing__inner">
-      <header class="lumen-section-header">
-        <h2 class="lumen-section-header__title"><?php echo svic_translate_html('frontpage.pricing.title'); ?></h2>
-        <p class="lumen-section-header__subtitle"><?php echo svic_translate_html('frontpage.pricing.subtitle'); ?></p>
-      </header>
-      <div class="lumen-pricing__grid">
-        <?php foreach ($pricing_cards as $card) : ?>
-          <?php
-          $card_classes   = 'lumen-pricing-card';
-          $button_classes = 'lumen-pill lumen-pill--outline';
-
-          // Featured cards get primary styling by default.
-          if (!empty($card['highlight'])) {
-              $card_classes   .= ' lumen-pricing-card--featured';
-              $button_classes  = 'lumen-pill lumen-pill--primary';
-          } else {
-              // Allow per-card CTA style override via translations, e.g., frontpage.pricing.cards.10s.cta_style => 'primary'.
-              // Derive the cta_style key from the provided cta key path.
-              $cta_style_key = is_string($card['cta_key']) ? str_replace('.cta', '.cta_style', $card['cta_key']) : '';
-              if ($cta_style_key !== '') {
-                  $cta_style_value = svic_translate($cta_style_key);
-                  if (is_string($cta_style_value) && strtolower($cta_style_value) === 'primary') {
-                      $button_classes = 'lumen-pill lumen-pill--primary';
-                  }
-              }
-          }
-          ?>
-          <article class="<?php echo esc_attr($card_classes); ?>">
-            <?php if (!empty($card['badge_key'])) : ?>
-              <div class="lumen-pricing-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></div>
-            <?php endif; ?>
-            <?php if (!empty($card['image']['url'])) : ?>
-              <figure class="lumen-pricing-card__figure">
-                <img
-                  src="<?php echo esc_url($card['image']['url']); ?>"
-                  alt="<?php echo esc_attr($card['image']['alt'] ?? ''); ?>"
-                  loading="lazy"
-                  decoding="async"
-                  width="<?php echo esc_attr((string) ($card['image']['width'] ?? 800)); ?>"
-                  height="<?php echo esc_attr((string) ($card['image']['height'] ?? 600)); ?>"
-                />
-              </figure>
-            <?php endif; ?>
-            <h3 class="lumen-pricing-card__title"><?php echo svic_translate_html($card['title_key']); ?></h3>
-            <div class="lumen-pricing-card__price">
-              <?php echo $card['price_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-              <span class="lumen-pricing-card__interval"><?php echo svic_translate_html($card['interval_key']); ?></span>
-            </div>
-            <p class="lumen-pricing-card__copy"><?php echo svic_translate_html($card['copy_key']); ?></p>
-            <ul class="lumen-pricing-card__features">
-              <?php foreach ($card['feature_keys'] as $feature_key) : ?>
-                <li><?php echo svic_translate_html($feature_key); ?></li>
-              <?php endforeach; ?>
-            </ul>
-            <a class="<?php echo esc_attr($button_classes); ?>" href="<?php echo esc_url($card['cta_url']); ?>"><?php echo svic_translate_html($card['cta_key']); ?></a>
-            <div class="lumen-pricing-card__meta">
-              <?php foreach ($card['meta_keys'] as $meta_key) : ?>
-                <span><?php echo svic_translate_html($meta_key); ?></span>
-              <?php endforeach; ?>
-            </div>
-          </article>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </section>
 
   <?php
   if (!empty($product_schema_nodes)) {

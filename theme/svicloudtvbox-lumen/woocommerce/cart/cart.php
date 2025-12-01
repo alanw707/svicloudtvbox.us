@@ -75,7 +75,7 @@ if (is_object($cart)) {
                                 ]), $cart_item, $cart_item_key);
 
                                 if (!$thumbnail || stripos($thumbnail, 'woocommerce-placeholder') !== false) {
-                                    $fallback_url = svic_theme_image_uri('/assets/images/svicloud-hero-product.png');
+                                    $fallback_url = svic_theme_image_uri('/assets/images/svicloud-hero-product.webp');
                                     $thumbnail    = '<img class="lumen-cart-product__image" src="' . esc_url($fallback_url) . '" alt="' . esc_attr($product->get_name()) . '" />';
                                 }
 

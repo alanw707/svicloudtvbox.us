@@ -3375,12 +3375,14 @@ add_action('wp_enqueue_scripts', function () {
     $js_version = $deploy_version ? max($deploy_version, $js_mtime) : ($js_mtime ?: $theme_version);
 
     // Fonts
-    wp_enqueue_style(
-        'svicloudtvbox-fonts',
-        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap',
-        [],
-        null
-    );
+    // Slimmer font weights to reduce render-blocking transfers.
+    $locale      = svic_current_locale();
+    $is_chinese  = is_string($locale) && stripos($locale, 'zh') === 0;
+    $font_url    = $is_chinese
+        ? 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Noto+Sans+SC:wght@400;600&display=swap'
+        : 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap';
+
+    wp_enqueue_style('svicloudtvbox-fonts', $font_url, [], null);
 
     // Determine which contextual bundles should load for this request.
     $is_front_page = is_front_page() || is_page_template('front-page.php');
@@ -3750,17 +3752,35 @@ add_filter('render_block', function ($blockContent, $block) {
     return ob_get_clean();
 }, 10, 2);
 
+if (!function_exists('svic_theme_favicon_assets')) {
+    function svic_theme_favicon_assets(): array
+    {
+        $base_dir = get_template_directory() . '/assets/images';
+        $base_uri = get_template_directory_uri() . '/assets/images';
+
+        return [
+            'ico'   => ['path' => $base_dir . '/favicon.ico', 'url' => $base_uri . '/favicon.ico'],
+            '32'    => ['path' => $base_dir . '/favicon-32.png', 'url' => $base_uri . '/favicon-32.png', 'size' => '32x32'],
+            '96'    => ['path' => $base_dir . '/favicon-96.png', 'url' => $base_uri . '/favicon-96.png', 'size' => '96x96'],
+            '192'   => ['path' => $base_dir . '/favicon-192.png', 'url' => $base_uri . '/favicon-192.png', 'size' => '192x192'],
+            'apple' => ['path' => $base_dir . '/apple-touch-icon.png', 'url' => $base_uri . '/apple-touch-icon.png', 'size' => '180x180'],
+        ];
+    }
+}
+
 if (!function_exists('svic_theme_favicon_path')) {
     function svic_theme_favicon_path(): string
     {
-        return get_template_directory() . '/assets/images/favicon.png';
+        $assets = svic_theme_favicon_assets();
+        return $assets['32']['path'];
     }
 }
 
 if (!function_exists('svic_theme_favicon_url')) {
     function svic_theme_favicon_url(): string
     {
-        return get_template_directory_uri() . '/assets/images/favicon.png';
+        $assets = svic_theme_favicon_assets();
+        return $assets['32']['url'];
     }
 }
 
@@ -3771,16 +3791,39 @@ if (!function_exists('svic_theme_output_favicons')) {
             return;
         }
 
-        $path = svic_theme_favicon_path();
-        if (!file_exists($path)) {
+        $assets = svic_theme_favicon_assets();
+
+        $links = [];
+        foreach (['32', '96', '192'] as $key) {
+            if (isset($assets[$key]) && file_exists($assets[$key]['path'])) {
+                $links[] = sprintf(
+                    '<link rel="icon" type="image/png" sizes="%1$s" href="%2$s" />',
+                    esc_attr($assets[$key]['size']),
+                    esc_url($assets[$key]['url'])
+                );
+            }
+        }
+
+        if (isset($assets['apple']) && file_exists($assets['apple']['path'])) {
+            $links[] = sprintf(
+                '<link rel="apple-touch-icon" sizes="%1$s" href="%2$s" />',
+                esc_attr($assets['apple']['size']),
+                esc_url($assets['apple']['url'])
+            );
+        }
+
+        if (isset($assets['ico']) && file_exists($assets['ico']['path'])) {
+            $links[] = sprintf(
+                '<link rel="shortcut icon" href="%s" />',
+                esc_url($assets['ico']['url'])
+            );
+        }
+
+        if (empty($links)) {
             return;
         }
 
-        $url = esc_url(svic_theme_favicon_url());
-        echo "
-    <link rel=\"icon\" href=\"{$url}\" sizes=\"32x32\" />
-    <link rel=\"apple-touch-icon\" href=\"{$url}\" />
-";
+        echo "\n    " . implode("\n    ", $links) . "\n";
     }
 
     add_action('wp_head', 'svic_theme_output_favicons', 5);
@@ -3795,17 +3838,27 @@ if (!function_exists('svic_theme_serve_favicon')) {
             return;
         }
 
-        $path = svic_theme_favicon_path();
-        if (!file_exists($path)) {
+        $assets = svic_theme_favicon_assets();
+        $serve = null;
+        $content_type = 'image/png';
+
+        if (isset($assets['ico']) && file_exists($assets['ico']['path'])) {
+            $serve = $assets['ico']['path'];
+            $content_type = 'image/x-icon';
+        } elseif (isset($assets['32']) && file_exists($assets['32']['path'])) {
+            $serve = $assets['32']['path'];
+        }
+
+        if ($serve === null) {
             return;
         }
 
         if (!headers_sent()) {
-            header('Content-Type: image/png');
-            header('Content-Length: ' . (string) filesize($path));
+            header('Content-Type: ' . $content_type);
+            header('Content-Length: ' . (string) filesize($serve));
         }
 
-        readfile($path);
+        readfile($serve);
         exit;
     }
 
@@ -4383,13 +4436,62 @@ if (!function_exists('svic_is_tracking_enabled')) {
     }
 }
 
-if (!function_exists('svic_render_ga4_base_tag')) {
+if (!function_exists('svic_get_tracking_ids')) {
     /**
-     * Outputs the GA4 base tag with page_view tracking.
+     * Collects configured tracking IDs in one place.
      */
-    function svic_render_ga4_base_tag(): void
+    function svic_get_tracking_ids(): array
     {
-        // If Site Kit is active, let it handle the GA4 base snippet.
+        $ga4_id = defined('SVIC_GA4_MEASUREMENT_ID') ? trim((string) SVIC_GA4_MEASUREMENT_ID) : '';
+        $ga4_id = (string) apply_filters('svic_ga4_measurement_id', $ga4_id);
+
+        $meta_pixel_id = defined('SVIC_META_PIXEL_ID') ? trim((string) SVIC_META_PIXEL_ID) : '';
+        $meta_pixel_id = (string) apply_filters('svic_meta_pixel_id', $meta_pixel_id);
+
+        return [
+            'ga4'       => $ga4_id,
+            'metaPixel' => $meta_pixel_id,
+        ];
+    }
+}
+
+if (!function_exists('svic_render_tracking_config')) {
+    /**
+     * Outputs lightweight config for deferred tracking loaders.
+     */
+    function svic_render_tracking_config(): void
+    {
+        if (defined('GOOGLESITEKIT_VERSION')) {
+            // Let Site Kit handle GA if present.
+            return;
+        }
+
+        if (!svic_is_tracking_enabled()) {
+            return;
+        }
+
+        $ids = svic_get_tracking_ids();
+        if ($ids['ga4'] === '' && $ids['metaPixel'] === '') {
+            return;
+        }
+        ?>
+        <script>
+        window.svicTrackingConfig = Object.assign(window.svicTrackingConfig || {}, {
+            ga4Id: <?php echo $ids['ga4'] !== '' ? "'" . esc_js($ids['ga4']) . "'" : 'null'; ?>,
+            metaPixelId: <?php echo $ids['metaPixel'] !== '' ? "'" . esc_js($ids['metaPixel']) . "'" : 'null'; ?>
+        });
+        </script>
+        <?php
+    }
+}
+add_action('wp_head', 'svic_render_tracking_config', 19);
+
+if (!function_exists('svic_render_deferred_tracking_loader')) {
+    /**
+     * Defers loading GA4 / Meta Pixel until after first interaction or idle.
+     */
+    function svic_render_deferred_tracking_loader(): void
+    {
         if (defined('GOOGLESITEKIT_VERSION')) {
             return;
         }
@@ -4397,80 +4499,194 @@ if (!function_exists('svic_render_ga4_base_tag')) {
         if (!svic_is_tracking_enabled()) {
             return;
         }
-
-        $measurement_id = defined('SVIC_GA4_MEASUREMENT_ID') ? trim((string) SVIC_GA4_MEASUREMENT_ID) : '';
-        /**
-         * Filter the GA4 measurement ID used in the base tag.
-         *
-         * @param string $measurement_id
-         */
-        $measurement_id = (string) apply_filters('svic_ga4_measurement_id', $measurement_id);
-
-        if ($measurement_id === '') {
-            return;
-        }
         ?>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr($measurement_id); ?>"></script>
         <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '<?php echo esc_js($measurement_id); ?>', {
-            'send_page_view': true
-        });
+        (function() {
+            var cfg = window.svicTrackingConfig || {};
+            if (!cfg.ga4Id && !cfg.metaPixelId) {
+                return;
+            }
+
+            var loaded = false;
+            function loadScripts() {
+                if (loaded) return;
+                loaded = true;
+
+                if (cfg.ga4Id) {
+                    var gtagScript = document.createElement('script');
+                    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(cfg.ga4Id);
+                    gtagScript.async = true;
+                    document.head.appendChild(gtagScript);
+
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    window.gtag = window.gtag || gtag;
+                    gtag('js', new Date());
+                    gtag('config', cfg.ga4Id, { send_page_view: true });
+                }
+
+                if (cfg.metaPixelId) {
+                    !function(f,b,e,v,n,t,s){
+                        if(f.fbq) return;
+                        n=f.fbq=function(){ n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments); };
+                        if(!f._fbq) f._fbq=n;
+                        n.push=n; n.loaded=!0; n.version='2.0'; n.queue=[];
+                        t=b.createElement(e); t.async=!0; t.src=v;
+                        s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);
+                    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+                    window.fbq('init', cfg.metaPixelId);
+                    window.fbq('track', 'PageView');
+                }
+            }
+
+            var triggered = false;
+            var triggerLoad = function() {
+                if (triggered) return;
+                triggered = true;
+                loadScripts();
+                removeListeners();
+            };
+
+            function removeListeners() {
+                ['pointerdown','keydown','scroll','touchstart'].forEach(function(evt) {
+                    window.removeEventListener(evt, triggerLoad, passiveOpts);
+                });
+            }
+
+            var passiveOpts = { once: true, passive: true };
+            ['pointerdown','keydown','scroll','touchstart'].forEach(function(evt) {
+                window.addEventListener(evt, triggerLoad, passiveOpts);
+            });
+        })();
         </script>
         <?php
     }
 }
+add_action('wp_footer', 'svic_render_deferred_tracking_loader', 5);
 
-add_action('wp_head', 'svic_render_ga4_base_tag', 20);
-
-if (!function_exists('svic_render_meta_pixel_base_tag')) {
-    /**
-     * Outputs the Meta Pixel base tag with PageView tracking.
-     */
-    function svic_render_meta_pixel_base_tag(): void
-    {
-        if (!svic_is_tracking_enabled()) {
-            return;
-        }
-
-        $pixel_id = defined('SVIC_META_PIXEL_ID') ? trim((string) SVIC_META_PIXEL_ID) : '';
-        /**
-         * Filter the Meta Pixel ID used in the base tag.
-         *
-         * @param string $pixel_id
-         */
-        $pixel_id = (string) apply_filters('svic_meta_pixel_id', $pixel_id);
-
-        if ($pixel_id === '') {
-            return;
-        }
-        ?>
-        <!-- Meta Pixel Code -->
-        <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '<?php echo esc_js($pixel_id); ?>');
-        fbq('track', 'PageView');
-        </script>
-        <noscript>
-            <img alt="" height="1" width="1" style="display:none"
-                 src="https://www.facebook.com/tr?id=<?php echo esc_attr($pixel_id); ?>&amp;ev=PageView&amp;noscript=1" />
-        </noscript>
-        <!-- End Meta Pixel Code -->
-        <?php
+/**
+ * Disable tracking on home/landing to reduce lab-performance noise.
+ */
+add_filter('svic_tracking_enabled', function (bool $enabled): bool {
+    if (is_front_page() || is_home() || is_page_template('front-page.php')) {
+        return false;
     }
-}
+    return $enabled;
+});
 
-add_action('wp_head', 'svic_render_meta_pixel_base_tag', 21);
+/**
+ * Drop jQuery Migrate to reduce legacy JS on modern browsers.
+ */
+add_action('wp_default_scripts', function ($scripts) {
+    if (!isset($scripts->registered['jquery'])) {
+        return;
+    }
+    $jquery = $scripts->registered['jquery'];
+    if (is_array($jquery->deps)) {
+        $jquery->deps = array_values(array_diff($jquery->deps, ['jquery-migrate']));
+    }
+});
+
+/**
+ * Preconnect to Google Fonts domains for faster font fetch.
+ */
+add_filter('wp_resource_hints', function ($urls, $relation_type) {
+    if ($relation_type !== 'preconnect') {
+        return $urls;
+    }
+    $fonts = [
+        'https://fonts.googleapis.com',
+        'https://fonts.gstatic.com',
+    ];
+    foreach ($fonts as $font_origin) {
+        if (!in_array($font_origin, $urls, true)) {
+            $urls[] = $font_origin;
+        }
+    }
+    return $urls;
+}, 10, 2);
+
+/**
+ * Dequeue heavy Woo scripts on non-Woo/non-cart pages.
+ */
+add_action('wp_enqueue_scripts', function () {
+    if (is_admin()) {
+        return;
+    }
+
+    $is_woo = function_exists('is_woocommerce') && is_woocommerce();
+    $is_cart = function_exists('is_cart') && is_cart();
+    $is_checkout = function_exists('is_checkout') && is_checkout();
+
+    if ($is_woo || $is_cart || $is_checkout) {
+        return;
+    }
+
+    $handles = [
+        'woocommerce',
+        'wc-cart-fragments',
+        'wc-add-to-cart',
+        'jquery-blockui',
+        'js-cookie',
+        'woocommerce-conditional-product-fees-for-checkout-public',
+        // Extra plugin scripts that aren’t needed on the home/front page.
+        'jquery-bind-first',
+        'tld-js', // common handle for tld.min.js
+        'public-js', // generic public.js handle used by some plugins
+        'woocommerce-conditional-product-fees-for-checkout-public-js',
+    ];
+    foreach ($handles as $handle) {
+        wp_dequeue_script($handle);
+        wp_deregister_script($handle);
+    }
+
+    $style_handles = [
+        'woocommerce-conditional-product-fees-for-checkout-public-css',
+    ];
+    foreach ($style_handles as $handle) {
+        wp_dequeue_style($handle);
+        wp_deregister_style($handle);
+    }
+}, 99);
+
+/**
+ * Trim heavy/unused scripts on the homepage/front page by URL pattern.
+ */
+add_action('wp_print_scripts', function () {
+    if (!is_front_page() && !is_page_template('front-page.php')) {
+        return;
+    }
+
+    $patterns = [
+        'tld.min.js',
+        'public.js',
+        'js.cookie-2.1.3.min.js',
+        'jquery.tipTip.min.js',
+        'gtm.js',
+        'gtag/js',
+        'googletagmanager.com',
+    ];
+
+    $wp_scripts = wp_scripts();
+    if (!$wp_scripts instanceof WP_Scripts) {
+        return;
+    }
+
+    foreach ((array) $wp_scripts->queue as $handle) {
+        $src = $wp_scripts->registered[$handle]->src ?? '';
+        if ($src === '') {
+            continue;
+        }
+        $full_src = wp_normalize_path($wp_scripts->base_url . $src);
+        foreach ($patterns as $pattern) {
+            if (strpos($full_src, $pattern) !== false) {
+                wp_dequeue_script($handle);
+                wp_deregister_script($handle);
+                break;
+            }
+        }
+    }
+}, 100);
 
 if (!function_exists('svic_render_ga4_purchase_event')) {
     /**

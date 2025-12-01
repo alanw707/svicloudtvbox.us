@@ -185,6 +185,27 @@
             document.head.appendChild(link);
         });
 
+        // Lazy load background sections with data-bg marker
+        const lazyBgSections = document.querySelectorAll('[data-bg]');
+        if ('IntersectionObserver' in window && lazyBgSections.length) {
+            const bgObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+                    const el = entry.target;
+                    const bg = el.getAttribute('data-bg-src');
+                    if (bg) {
+                        el.style.backgroundImage = `url(${bg})`;
+                    }
+                    el.removeAttribute('data-bg-src');
+                    observer.unobserve(el);
+                });
+            }, { rootMargin: '200px 0px' });
+
+            lazyBgSections.forEach((section) => bgObserver.observe(section));
+        }
+
         const $header = $('[data-lumen-header]');
         let ticking = false;
 

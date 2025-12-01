@@ -40,15 +40,15 @@ while (have_posts()) :
     $fallback_gallery_files = [];
     if ($slug === 'svicloud-10p-plus') {
         $fallback_gallery_files = [
-            'svicloud-10p-plus-lifestyle-1.png',
-            'svicloud-10p-plus-lifestyle-2.png',
-            'svicloud-10p-plus-lifestyle-3.png',
+            'svicloud-10p-plus-lifestyle-1.webp',
+            'svicloud-10p-plus-lifestyle-2.webp',
+            'svicloud-10p-plus-lifestyle-3.webp',
         ];
     } elseif ($slug === 'svicloud-10s') {
         $fallback_gallery_files = [
-            'svicloud-10s-lifestyle-1.png',
-            'svicloud-10s-lifestyle-2.png',
-            'svicloud-10s-lifestyle-3.png',
+            'svicloud-10s-lifestyle-1.webp',
+            'svicloud-10s-lifestyle-2.webp',
+            'svicloud-10s-lifestyle-3.webp',
         ];
     }
 
@@ -90,7 +90,7 @@ while (have_posts()) :
     } elseif (!empty($gallery_entries)) {
         $primary_image_html = '<img class="product-hero-image" src="' . esc_url($gallery_entries[0]['full']) . '" alt="' . esc_attr(get_the_title()) . '" loading="lazy" />';
     } else {
-        $primary_image_html = '<img class="product-hero-image" src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.png')) . '" alt="' . esc_attr(get_the_title()) . '" />';
+        $primary_image_html = '<img class="product-hero-image" src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . esc_attr(get_the_title()) . '" />';
     }
 
     $product_highlight_keys = [

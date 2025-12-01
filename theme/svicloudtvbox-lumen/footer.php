@@ -38,17 +38,17 @@
             <span class="footer-logo__mark">
               <?php if ( $has_custom_logo && $custom_logo_id ) : ?>
                 <?php echo wp_get_attachment_image( $custom_logo_id, 'full', false, [
-                  'class'   => 'footer-logo__image footer-logo__image--custom',
-                  'alt'     => esc_attr( $logo_alt ),
-                  'loading' => 'lazy',
-                ] ); ?>
-              <?php else : ?>
-                <img class="footer-logo__image footer-logo__image--fallback" src="<?php echo esc_url( svic_theme_image_uri('/assets/images/favicon.png') ); ?>" alt="<?php echo esc_attr( $site_name ); ?>" loading="lazy" />
-              <?php endif; ?>
-            </span>
-            <span class="footer-logo__text">
-              <span class="footer-logo__tagline"><?php echo svic_translate_html('footer.tagline'); ?></span>
-            </span>
+              'class'   => 'footer-logo__image footer-logo__image--custom',
+              'alt'     => esc_attr( $logo_alt ),
+              'loading' => 'lazy',
+            ] ); ?>
+          <?php else : ?>
+            <img class="footer-logo__image footer-logo__image--fallback" src="<?php echo esc_url( svic_theme_image_uri('/assets/images/favicon-96.png') ); ?>" alt="<?php echo esc_attr( $site_name ); ?>" loading="lazy" />
+          <?php endif; ?>
+        </span>
+        <span class="footer-logo__text">
+          <span class="footer-logo__tagline"><?php echo svic_translate_html('footer.tagline'); ?></span>
+        </span>
           </a>
           <p class="footer-brand__summary"><?php echo svic_translate_html('footer.summary'); ?></p>
           <ul class="footer-brand__badges" role="list">

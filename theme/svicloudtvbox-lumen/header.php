@@ -3,6 +3,12 @@
 <head>
   <meta charset="<?php bloginfo('charset'); ?>" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <?php
+    if (is_front_page() || is_page_template('front-page.php')) {
+        $lcp_href = esc_url(get_template_directory_uri() . '/assets/images/hero-voice-assistant.webp');
+        echo '<link rel="preload" as="image" href="' . $lcp_href . '" imagesrcset="' . $lcp_href . ' 1601w" imagesizes="(max-width: 600px) 88vw, (max-width: 1024px) 62vw, 640px" fetchpriority="high" />';
+    }
+  ?>
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>

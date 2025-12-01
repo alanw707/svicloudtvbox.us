@@ -304,7 +304,7 @@
 .compare-hero__photo--primary {
   background-image:
     linear-gradient(160deg, rgba(5, 15, 34, 0.58), rgba(5, 15, 34, 0.82)),
-    url('../images/svicloud-10p-plus-lifestyle-2.png');
+    url('../images/svicloud-10p-plus-lifestyle-2.webp');
   background-image:
     linear-gradient(160deg, rgba(5, 15, 34, 0.58), rgba(5, 15, 34, 0.82)),
     image-set(
@@ -314,7 +314,7 @@
 }
 
 .compare-hero__photo--secondary {
-  background-image: url('../images/svicloud-10s-lifestyle-1.png');
+  background-image: url('../images/svicloud-10s-lifestyle-1.webp');
   background-image: image-set(
     url('../images/svicloud-10s-lifestyle-1.webp') type('image/webp'),
     url('../images/svicloud-10s-lifestyle-1.png') type('image/png')

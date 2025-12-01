@@ -30,7 +30,7 @@ $card_data = [
         'price_note_key'  => 'shop.cards.price_note',
         'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-10p-plus')),
         'fallback_price'  => '$248.99',
-        'image_fallback'  => svic_theme_image_uri('/assets/images/svicloud-10p-plus-lifestyle-2.png'),
+        'image_fallback'  => svic_theme_image_uri('/assets/images/svicloud-10p-plus-lifestyle-2.webp'),
     ],
     '10s' => [
         'product'         => class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null,
@@ -54,7 +54,7 @@ $card_data = [
         'price_note_key'  => 'shop.cards.price_note',
         'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-10s')),
         'fallback_price'  => '$183.99',
-        'image_fallback'  => svic_theme_image_uri('/assets/images/svicloud-10s-lifestyle-2.png'),
+        'image_fallback'  => svic_theme_image_uri('/assets/images/svicloud-10s-lifestyle-2.webp'),
     ],
 ];
 
@@ -86,7 +86,7 @@ foreach ($card_data as $key => $card) {
     if ($image_html === '') {
         $fallback_src = isset($card['image_fallback']) ? $card['image_fallback'] : '';
         if ($fallback_src === '') {
-            $fallback_src = svic_theme_image_uri('/assets/images/svicloud-10p-plus.png');
+            $fallback_src = svic_theme_image_uri('/assets/images/svicloud-10p-plus.webp');
         }
 
         $alt_text = svic_translate($card['title_key']);
