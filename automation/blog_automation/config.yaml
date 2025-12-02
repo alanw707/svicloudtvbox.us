@@ -29,7 +29,7 @@ seo:
       - "語音遙控"
 publishing:
   staging_hold_hours: 24
-  max_posts_per_week: 4  # one post per slot, roughly every 2 days
+  max_posts_per_week: 1  # enforce single-post runs to prevent multi-drop days
   schedule:
     - day: "Monday"
       time: "09:00"
