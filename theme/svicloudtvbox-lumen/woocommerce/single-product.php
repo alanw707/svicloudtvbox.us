@@ -238,6 +238,38 @@ while (have_posts()) :
     </main>
 
     <?php
+    $product_faq_entities = [];
+    foreach ($product_faq_items as $item) {
+        $question = isset($item['question_key']) ? svic_translate($item['question_key']) : '';
+        $question = trim(wp_strip_all_tags((string) $question));
+
+        $answer_raw  = isset($item['answer_key']) ? svic_translate_rich($item['answer_key']) : '';
+        $answer_text = trim(wp_strip_all_tags((string) $answer_raw));
+
+        if ($question === '' || $answer_text === '') {
+            continue;
+        }
+
+        $product_faq_entities[] = [
+            '@type' => 'Question',
+            'name'  => $question,
+            'acceptedAnswer' => [
+                '@type' => 'Answer',
+                'text'  => $answer_text,
+            ],
+        ];
+    }
+
+    if ($product_faq_entities) {
+        $faq_schema = [
+            '@context'   => 'https://schema.org',
+            '@type'      => 'FAQPage',
+            'mainEntity' => array_values($product_faq_entities),
+        ];
+
+        echo '<script type="application/ld+json">' . wp_json_encode($faq_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+
     do_action('woocommerce_after_single_product');
 endwhile;
 

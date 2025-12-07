@@ -23,8 +23,19 @@ get_header();
           esc_html__('%d min read', 'svicloudtvbox-lumen'),
           $reading_time
       );
+      $hero_title = function_exists('svic_post_title') ? svic_post_title($post_id) : get_the_title($post_id);
+      $hero_excerpt = '';
+      if (function_exists('svic_post_locale_meta')) {
+          $hero_excerpt = svic_post_locale_meta($post_id, 'description');
+      }
+      if ($hero_excerpt === '' && has_excerpt()) {
+          $hero_excerpt = get_the_excerpt();
+      }
       $raw_content        = get_post_field('post_content', $post_id);
-      $rendered_content   = is_string($raw_content) ? apply_filters('the_content', $raw_content) : '';
+      $localized_content  = function_exists('svic_post_localized_content') ? svic_post_localized_content($post_id) : '';
+      $rendered_content   = $localized_content !== ''
+          ? $localized_content
+          : (is_string($raw_content) ? apply_filters('the_content', $raw_content) : '');
       $featured_image_url = has_post_thumbnail($post_id) ? get_the_post_thumbnail_url($post_id, 'full') : null;
       $content_segments   = svic_extract_intro_media_blocks($rendered_content, $featured_image_url);
       $hero_highlights    = isset($content_segments['blocks']) ? $content_segments['blocks'] : [];
@@ -47,9 +58,9 @@ get_header();
           <?php endif; ?>
           <span class="blog-hero__reading-time"><?php echo esc_html($reading_label); ?></span>
         </div>
-        <h1 class="blog-hero__title"><?php the_title(); ?></h1>
-        <?php if (has_excerpt()) : ?>
-          <p class="blog-hero__excerpt"><?php echo esc_html(get_the_excerpt()); ?></p>
+        <h1 class="blog-hero__title"><?php echo esc_html($hero_title); ?></h1>
+        <?php if ($hero_excerpt !== '') : ?>
+          <p class="blog-hero__excerpt"><?php echo esc_html($hero_excerpt); ?></p>
         <?php endif; ?>
       </header>
 
@@ -99,6 +110,9 @@ get_header();
             </a>
             <a class="btn btn-outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/support/'))); ?>">
               <?php echo svic_translate_html('blog.cta.secondary_label'); ?>
+            </a>
+            <a class="blog-article__cta-text" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact/'))); ?>">
+              <?php echo svic_translate_html('contact.hero.title'); ?>
             </a>
           </div>
         </div>

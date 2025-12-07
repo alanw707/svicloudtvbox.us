@@ -8,6 +8,8 @@
   justify-self: end;
   gap: clamp(10px, 2vw, 22px);
   flex-wrap: nowrap;
+  position: relative;
+  z-index: 5;
 }
 
 .lumen-lang-toggle {
@@ -32,6 +34,8 @@
 }
 
 .lumen-lang-toggle__link {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;

@@ -109,6 +109,7 @@ return [
             'fallback_alt' => 'SVICLOUD blog illustration for {{title}}',
         ],
         'categories' => [
+            'guides' => 'Guides',
             'comparisons' => 'Comparisons',
             'buying-checklist' => 'Buying Checklist',
         ],
@@ -130,6 +131,78 @@ return [
             ],
             'svicloud-tv-box-us-guide-zh' => [
                 'title' => 'SVICLOUD TV Box US Guide — US Buying Checklist',
+            ],
+            'svicloud-stb%e7%be%8e%e5%9c%8b%e6%a9%9f%e9%a0%82%e7%9b%92-4k-hdr%e5%bd%b1%e9%99%a2' => [
+                'title' => 'SviCloud STB美國機頂盒｜4K HDR影院',
+            ],
+            'svicloud-tv-box-4k%e4%b8%b2%e6%b5%81%e7%9b%92-2026' => [
+                'title' => 'SviCloud TV Box 4K串流盒｜2026',
+            ],
+            '2025%e6%9c%80%e4%bd%b3android%e9%9b%bb%e8%a6%96%e7%9b%92-4k-hdr-wi' => [
+                'title' => '2025最佳Android電視盒｜4K HDR+Wi',
+            ],
+            'svicloud%e9%9f%b3%e9%9f%bf%e6%a2%9dhdmi%e9%9f%b3%e9%a0%bb%e7%a6%81%e7%94%a8%e6%95%99%e5%ad%b8-%e9%81%99%e6%8e%a7%e8%aa%9e%e9%9f%b3' => [
+                'title' => 'SVICLOUD音響條HDMI音頻禁用教學｜遙控語音',
+            ],
+            'svicloud-10p-plus-las-vegas-setup' => [
+                'title' => '拉斯維加斯實測：SVICLOUD 10P+ 安裝到開播 35 分鐘',
+            ],
+            '%e4%b8%ad%e7%a7%8b%e5%ae%b6%e5%ba%ad%e8%81%9a%e6%9c%83%e9%a6%96%e9%81%b8-svicloud-4k%e5%bd%b1%e9%99%a2%e7%b4%9a%e7%95%ab%e8%b3%aa' => [
+                'title' => '中秋家庭聚會首選｜SVICLOUD 4K影院級畫質+',
+            ],
+            'svicloud-%e4%b8%ad%e7%a7%8b%e7%8d%bb%e7%a6%ae-4k-hdr-wi' => [
+                'title' => 'SVICLOUD 中秋獻禮：4K HDR + Wi-Fi 6',
+            ],
+            '%e9%bb%91%e4%ba%94%e6%9c%80%e5%a4%a7%e5%84%aa%e6%83%a0%e9%96%8b%e8%b7%91-svicloud-4k-hdr-%e9%a0%82' => [
+                'title' => '黑五最大優惠開跑！SviCloud 4K HDR 頂',
+            ],
+            '%e5%b0%8f%e9%9b%b2%e9%9b%bb%e8%a6%96%e7%9b%92-vs-%e5%ae%89%e5%8d%9a-%e7%be%8e%e5%9c%8b%e7%94%a8%e6%88%b6%e5%bf%85%e7%9c%8b%e7%9a%844k%e7%95%ab%e8%b3%aa%e8%88%87%e5%94%ae%e5%be%8c' => [
+                'title' => '小雲電視盒 vs 安博：美國用戶必看的4K畫質與售後',
+            ],
+            'svicloud-tv-box%e7%be%8e%e5%9c%8b%e4%bb%a3%e7%90%86-4k%e9%a0%82%e7%b4%9a%e7%95%ab%e8%b3%aa' => [
+                'title' => 'SVICLOUD TV Box美國代理｜4K頂級畫質',
+            ],
+            'svicloud%e7%be%8e%e5%9c%8b%e6%9c%ac%e5%9c%b0%e6%9c%8d%e5%8b%99-4k-hdr-wi-f' => [
+                'title' => 'SVICLOUD美國本地服務｜4K HDR+Wi-F 6',
+            ],
+            '2026%e6%96%b0%e9%81%8a%e6%88%b2%e5%a4%a7%e4%bd%9c-%e4%b8%83%e7%8e%8b%e9%a8%8e%e5%a3%ab-%e4%b8%8a%e5%b8%82-%e7%be%8b%e5%9c%8b48%e5%b0%8f%e6%99%82%e5%bf%ab%e9%80%9f' => [
+                'title' => '2026《七王騎士》串流攻略｜SVICLOUD 4K HDR 模式',
+            ],
+            'svicloud-tv-box-2025%ef%bd%9c%e7%be%8e%e5%9c%8b%e6%8e%88%e6%ac%8a%e7%b6%93%e9%8a%b7%e5%95%86' => [
+                'title' => 'SviCloud TV Box 2025｜美國授權經銷商',
+            ],
+            '2025%e6%9c%80%e4%bd%b3%e5%ae%89%e5%8d%93%e9%9b%bb%e8%a6%96%e7%9b%92%e6%8e%a8%e8%96%a6-svicloud-tv' => [
+                'title' => '2025最佳安卓電視盒推薦｜SviCloud TV',
+            ],
+            '%e5%8a%a0%e5%b7%9e%e7%9c%8b%e4%b8%ad%e6%96%87%e9%9b%bb%e8%a6%96-%e5%b0%8f%e9%9b%b2%e9%9b%bb%e8%a6%96%e7%9b%92' => [
+                'title' => '加州看中文電視？小雲電視盒',
+            ],
+            '%e6%98%93%e6%92%adevpad%e7%be%8b%e5%9c%8b%e5%ae%98%e6%96%b9%ef%bd%9c%e4%b8%80%e5%b9%b4%e4%bf%9d%e5%9b%ba' => [
+                'title' => '易播EVPAD美國官方｜一年保固',
+            ],
+            '%e5%b0%8f%e9%9b%b2%e9%9b%bb%e8%a6%96%e7%9b%92%e7%be%8b%e5%9c%8b%e5%ae%98%e6%96%b9%ef%bd%9c%e9%9b%99%e8%aa%9e%e5%ae%a2%e6%9c%8d' => [
+                'title' => '小雲電視盒美國官方｜雙語客服',
+            ],
+            '%e7%be%8e%e5%9c%8b%e9%99%90%e6%99%82%e5%84%aa%e6%83%a0%ef%bd%9c%e4%b8%80%e5%b9%b4%e4%bf%9d%e5%9b%ba%e6%9c%8d%e5%8b%99' => [
+                'title' => '美國限時優惠｜一年保固服務',
+            ],
+            'svicloud-10p%2b%e7%be%8b%e5%9c%8b%e5%80%89%e5%84%b2%e9%85%8d%e9%80%81' => [
+                'title' => 'SVICLOUD 10P+美國倉儲配送',
+            ],
+            '%e5%b0%8f%e9%9b%b2%e9%9b%bb%e8%a6%96%e7%9b%92%e7%be%8b%e5%9c%8b%e4%bb%a3%e7%90%86' => [
+                'title' => '小雲電視盒美國代理 ⭐⭐⭐｜SVICLOUD 專家指南',
+            ],
+            'best-chinese-tv-box-north-america' => [
+                'title' => 'Best Chinese TV Box for North America — Warranty, Shipping & Support',
+            ],
+            'lunar-new-year-karaoke-party-2026-svicloud-guide' => [
+                'title' => 'Host the Perfect Lunar New Year Karaoke Party 2026 with SVICLOUD — Complete Setup Guide',
+            ],
+            'svicloud-tv-box-usa-guide-2026' => [
+                'title' => 'SVICLOUD TV Box USA Guide 2026',
+            ],
+            'svicloud-10p%2bvs-evpad-10-pro-best-family-streaming-box-in-2025' => [
+                'title' => 'SVICLOUD 10P+vs EVPAD 10 Pro — Best Family Streaming Box in 2025?',
             ],
         ],
     ],
@@ -1559,6 +1632,201 @@ return [
                     'a' => 'Yes. Our bilingual concierge can schedule a remote session in 中文 or English and guide Kids Mode, karaoke mics, and app updates.',
                 ],
             ],
+            'sections' => [
+                'device_models' => [
+                    'title' => 'Device & models',
+                    'items' => [
+                        'model_choice' => [
+                            'question' => 'Which SviCloud model should I buy?',
+                            'answer'   => 'Choose 10P+ if you want flagship performance, Kids Mode, karaoke, and the fastest Wi-Fi 6 hardware. Choose 10S for value or a secondary room. See the <a href="{{compare_url}}">compare table</a> for details.',
+                        ],
+                        'international_use' => [
+                            'question' => 'Does the TV box work outside of Asia?',
+                            'answer'   => 'Yes. It runs on your local internet in the U.S./Canada and abroad. Region-locked apps still follow their own policies; use official sources and legal services.',
+                        ],
+                        'box_contents' => [
+                            'question' => 'What comes in the box?',
+                            'answer'   => 'SVICLOUD box, U.S. power adapter, HDMI cable, Bluetooth voice remote, batteries, and quick-start guide.',
+                        ],
+                    ],
+                ],
+                'setup_activation' => [
+                    'title' => 'Setup & activation',
+                    'items' => [
+                        'power_on' => [
+                            'question' => 'How do I turn on my SviCloud TV box?',
+                            'answer'   => 'Connect HDMI and power, select the HDMI input on your TV, then follow the on-screen setup. See the <a href="{{setup_guide_url}}">setup guide</a> for screenshots.',
+                        ],
+                        'change_language' => [
+                            'question' => 'How do I change the system language?',
+                            'answer'   => 'Go to Settings → Language and input, then choose English or 中文. You can switch anytime; no factory reset needed.',
+                        ],
+                        'remote_pairing' => [
+                            'question' => 'My remote is not responding. What should I do?',
+                            'answer'   => 'Replace the batteries, then hold VOL- and VOL+ together near the box to re-pair. Reboot the box and re-pair if needed.',
+                        ],
+                    ],
+                ],
+                'apps_content' => [
+                    'title' => 'Apps & content',
+                    'items' => [
+                        'preinstalled' => [
+                            'question' => 'Are SviCloud apps pre-installed?',
+                            'answer'   => 'The box ships with the stock Android launcher. We do not preload third-party streaming apps. Concierge can guide safe installs.',
+                        ],
+                        'third_party' => [
+                            'question' => 'Can I install Netflix or other third-party apps?',
+                            'answer'   => 'You can install from Google Play or official sources. App availability/quality depends on each provider; use legal, licensed services only.',
+                        ],
+                        'family_content' => [
+                            'question' => 'What content is available for families?',
+                            'answer'   => 'Kids Mode, bilingual content, and parental controls are supported. You can add family-friendly apps from official stores.',
+                        ],
+                        'adult_content' => [
+                            'question' => 'Is there adult content?',
+                            'answer'   => 'No. We do not preload adult content and do not support illegal or age-restricted services. Follow local laws and platform policies.',
+                        ],
+                    ],
+                ],
+                'features_limitations' => [
+                    'title' => 'Features & limitations',
+                    'items' => [
+                        'karaoke_support' => [
+                            'question' => 'Does every SviCloud unit support karaoke?',
+                            'answer'   => 'Karaoke features are on 10P+ (dual mic-friendly). 10S focuses on core streaming and does not include karaoke extras.',
+                        ],
+                        'voice_control' => [
+                            'question' => 'How does voice control work?',
+                            'answer'   => 'Use the Bluetooth voice remote to search, open apps, and control playback. Pairing is automatic; re-pair via VOL- + VOL+ if needed.',
+                        ],
+                        'subtitle_speed' => [
+                            'question' => 'Can I adjust subtitle speed?',
+                            'answer'   => 'Subtitle timing is controlled by each app or player. Use in-app subtitle settings; system-wide subtitle speed is not available.',
+                        ],
+                    ],
+                ],
+                'troubleshooting_support' => [
+                    'title' => 'Troubleshooting & support',
+                    'items' => [
+                        'buffering' => [
+                            'question' => 'Streaming looks fuzzy or keeps buffering. What should I try?',
+                            'answer'   => 'Test internet speed, prefer Ethernet or Wi-Fi 6, move closer to the router, and reboot the box/router. See the <a href="{{setup_guide_url}}">setup guide</a> for network tips.',
+                        ],
+                        'orz_installer' => [
+                            'question' => 'A streaming app or installer will not load. What now?',
+                            'answer'   => 'Reinstall from the official source, clear app cache, and reboot. Avoid unofficial APKs. If it persists, share the exact app name and error with concierge.',
+                        ],
+                        'contact_support' => [
+                            'question' => 'How do I reach support?',
+                            'answer'   => 'Use the contact form and include your order number, device model, and screenshots: <a href="{{support_url}}">contact concierge</a>.',
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
 ];
+
+// FAQ page translations
+return array_merge($GLOBALS['svic_lang_en_us'] ?? [], [
+    'faq' => [
+        'hero' => [
+            'badge'      => 'Support center',
+            'title'      => 'SviCloud TV Box FAQ',
+            'subtitle'   => 'Quick answers for choosing, installing, and enjoying your SviCloud TV box.',
+            'cta_primary'=> 'Read setup guide',
+            'cta_secondary' => 'Compare models',
+        ],
+        'sections' => [
+            'device_models' => [
+                'title' => 'Device & models',
+                'items' => [
+                    'model_choice' => [
+                        'question' => 'Which SviCloud model should I buy?',
+                        'answer'   => 'Choose 10P+ for flagship performance, Kids Mode, and karaoke; choose 10S for value/secondary rooms. See the <a href="{{compare_url}}">compare table</a> for details.',
+                    ],
+                    'international_use' => [
+                        'question' => 'Does the TV box work outside of Asia?',
+                        'answer'   => 'Yes. It runs on your local internet in the U.S./Canada and abroad. Region-locked apps still follow their own policies; use official, legal services.',
+                    ],
+                    'box_contents' => [
+                        'question' => 'What comes in the box?',
+                        'answer'   => 'SVICLOUD box, U.S. power adapter, HDMI cable, Bluetooth voice remote, batteries, and a quick-start guide.',
+                    ],
+                ],
+            ],
+            'setup_activation' => [
+                'title' => 'Setup & activation',
+                'items' => [
+                    'power_on' => [
+                        'question' => 'How do I turn on my SviCloud TV box?',
+                        'answer'   => 'Connect HDMI and power, select the HDMI input on your TV, then follow on-screen setup. See the <a href="{{setup_guide_url}}">setup guide</a> for screenshots.',
+                    ],
+                    'change_language' => [
+                        'question' => 'How do I change the system language?',
+                        'answer'   => 'Settings → Language and input, then choose English or 中文. Switch anytime—no factory reset needed.',
+                    ],
+                    'remote_pairing' => [
+                        'question' => 'My remote is not responding. What should I do?',
+                        'answer'   => 'Replace the batteries, then hold VOL- and VOL+ near the box to re-pair. Reboot the box and re-pair if needed.',
+                    ],
+                ],
+            ],
+            'apps_content' => [
+                'title' => 'Apps & content',
+                'items' => [
+                    'preinstalled' => [
+                        'question' => 'Are SviCloud apps pre-installed?',
+                        'answer'   => 'The box ships with the stock Android launcher. We do not preload third-party streaming apps. Concierge can guide safe installs.',
+                    ],
+                    'third_party' => [
+                        'question' => 'Can I install Netflix or other third-party apps?',
+                        'answer'   => 'You can install from Google Play or official sources. Availability/quality depends on each provider; use legal, licensed services.',
+                    ],
+                    'family_content' => [
+                        'question' => 'What content is available for families?',
+                        'answer'   => 'Kids Mode, bilingual content, and parental controls are supported. Add family-friendly apps from official stores.',
+                    ],
+                    'adult_content' => [
+                        'question' => 'Is there adult content?',
+                        'answer'   => 'No. We do not preload adult content and do not support illegal or age-restricted services. Follow local laws and platform policies.',
+                    ],
+                ],
+            ],
+            'features_limitations' => [
+                'title' => 'Features & limitations',
+                'items' => [
+                    'karaoke_support' => [
+                        'question' => 'Does every SviCloud unit support karaoke?',
+                        'answer'   => 'Karaoke features are on 10P+ (dual mic-friendly). 10S focuses on core streaming and does not include karaoke extras.',
+                    ],
+                    'voice_control' => [
+                        'question' => 'How does voice control work?',
+                        'answer'   => 'Use the Bluetooth voice remote to search, open apps, and control playback. Re-pair via VOL- + VOL+ if needed.',
+                    ],
+                    'subtitle_speed' => [
+                        'question' => 'Can I adjust subtitle speed?',
+                        'answer'   => 'Subtitle timing is controlled by each app/player. Use in-app subtitle settings; there is no system-wide subtitle speed.',
+                    ],
+                ],
+            ],
+            'troubleshooting_support' => [
+                'title' => 'Troubleshooting & support',
+                'items' => [
+                    'buffering' => [
+                        'question' => 'Streaming looks fuzzy or keeps buffering. What should I try?',
+                        'answer'   => 'Test internet speed, prefer Ethernet or Wi-Fi 6, move closer to the router, and reboot the box/router. See the <a href="{{setup_guide_url}}">setup guide</a> for network tips.',
+                    ],
+                    'orz_installer' => [
+                        'question' => 'A streaming app or installer will not load. What now?',
+                        'answer'   => 'Reinstall from the official source, clear app cache, and reboot. Avoid unofficial APKs. If it persists, share the exact app name and error with concierge.',
+                    ],
+                    'contact_support' => [
+                        'question' => 'How do I reach support?',
+                        'answer'   => 'Use the contact form and include your order number, device model, and screenshots: <a href="{{support_url}}">contact concierge</a>.',
+                    ],
+                ],
+            ],
+        ],
+    ],
+]);

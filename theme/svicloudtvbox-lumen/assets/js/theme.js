@@ -55,12 +55,29 @@
             return;
         }
 
-        $links.on('click', function() {
+        $links.on('click', function(event) {
             const locale = ($(this).data('locale') || '').toString().toLowerCase();
+            const href = $(this).attr('href');
+
             if (locale.indexOf('zh') === 0) {
                 $body.addClass('lang-zh');
             } else {
                 $body.removeClass('lang-zh');
+            }
+
+            // Persist language selection so subsequent requests keep the locale.
+            try {
+                const maxAge = 60 * 60 * 24 * 30; // 30 days
+                const secure = window.location.protocol === 'https:' ? ';secure' : '';
+                document.cookie = 'svic_lang=' + locale + ';path=/;samesite=lax;max-age=' + maxAge + secure;
+            } catch (e) {
+                // no-op
+            }
+
+            // Force navigation in the same tab to avoid blocked clicks.
+            if (href) {
+                event.preventDefault();
+                window.location.assign(href);
             }
         });
     }

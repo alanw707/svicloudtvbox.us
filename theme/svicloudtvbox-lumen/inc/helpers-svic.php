@@ -522,6 +522,11 @@ if (!function_exists('svic_enforce_route_alias_canonical')) {
         }
 
         $normalizedOriginal = svic_normalize_route_path($originalPath);
+
+        // Do not canonicalize away explicit zh-cn prefix; allow it to remain distinct from zh.
+        if (strpos($normalizedOriginal, '/zh-cn/') === 0 || $normalizedOriginal === '/zh-cn/') {
+            return;
+        }
         $alias              = svic_route_alias_by_base($normalizedOriginal);
         if (!$alias) {
             return;
@@ -811,6 +816,51 @@ if (!function_exists('svic_category_label')) {
     }
 }
 
+if (!function_exists('svic_post_locale_meta')) {
+    function svic_post_locale_meta(int $post_id, string $field): string {
+        $post_id = (int) $post_id;
+        if ($post_id <= 0) {
+            return '';
+        }
+
+        $locale = function_exists('svic_current_locale') ? svic_current_locale() : get_locale();
+        $locale = is_string($locale) ? strtolower($locale) : '';
+
+        $meta_keys = [];
+        if (strpos($locale, 'zh_cn') !== false || strpos($locale, 'zh-cn') !== false) {
+            $meta_keys[] = '_svic_' . $field . '_zh_cn';
+            $meta_keys[] = '_svic_' . $field . '_zh_tw';
+        } elseif (strpos($locale, 'zh') !== false) {
+            $meta_keys[] = '_svic_' . $field . '_zh_tw';
+        } else {
+            $meta_keys[] = '_svic_' . $field . '_en_us';
+        }
+
+        foreach ($meta_keys as $key) {
+            $value = get_post_meta($post_id, $key, true);
+            if (is_string($value)) {
+                $trimmed = trim($value);
+                if ($trimmed !== '') {
+                    return $trimmed;
+                }
+            }
+        }
+
+        return '';
+    }
+}
+
+if (!function_exists('svic_post_localized_content')) {
+    function svic_post_localized_content(int $post_id): string {
+        $localized = function_exists('svic_post_locale_meta') ? svic_post_locale_meta($post_id, 'content') : '';
+        if ($localized === '') {
+            return '';
+        }
+
+        return apply_filters('the_content', $localized);
+    }
+}
+
 if (!function_exists('svic_post_title')) {
     function svic_post_title(int $post_id): string {
         $post = get_post($post_id);
@@ -818,7 +868,18 @@ if (!function_exists('svic_post_title')) {
             return '';
         }
 
+        $locale = function_exists('svic_current_locale') ? svic_current_locale() : get_locale();
+
         $title = get_the_title($post_id);
+
+        $meta_title = function_exists('svic_post_locale_meta') ? svic_post_locale_meta($post_id, 'title') : '';
+        if ($meta_title !== '') {
+            if (function_exists('svic_localize_brand_in_text')) {
+                $meta_title = svic_localize_brand_in_text($meta_title, $locale);
+            }
+
+            return $meta_title;
+        }
 
         $slug_candidates = [];
         $current_slug = sanitize_title($post->post_name ?: $post->post_title ?: '');
@@ -859,7 +920,6 @@ if (!function_exists('svic_post_title')) {
             break;
         }
 
-        $locale = function_exists('svic_current_locale') ? svic_current_locale() : get_locale();
         if (is_string($locale) && stripos($locale, 'zh') !== false) {
             if (strpos($title, '—') !== false) {
                 $parts = preg_split('/\s*—\s*/u', $title);

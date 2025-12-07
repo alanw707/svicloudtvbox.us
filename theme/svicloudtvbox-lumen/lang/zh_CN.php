@@ -656,6 +656,203 @@ $overrides = [
             'cta_10s' => '选购小云电视盒 10S',
         ],
     ],
+    'product' => [
+        'faq' => [
+            'sections' => [
+                'device_models' => [
+                    'title' => '装置与选购',
+                    'items' => [
+                        'model_choice' => [
+                            'question' => '要买哪一款小云电视盒？',
+                            'answer'   => '想要旗舰性能、儿童模式与 K 歌请选择 10P+；次要房间或精省预算选 10S。详细请看<a href="{{compare_url}}">比较表</a>。',
+                        ],
+                        'international_use' => [
+                            'question' => '小云电视盒在海外可以用吗？',
+                            'answer'   => '可以。装置使用所在地的网络（美加与海外皆可）。各串流服务仍受自身地区政策限制，请使用合法官方来源。',
+                        ],
+                        'box_contents' => [
+                            'question' => '盒内附带哪些配件？',
+                            'answer'   => '主机、美规电源适配器、HDMI 线、蓝牙语音遥控器、电池、快速入门指南。',
+                        ],
+                    ],
+                ],
+                'setup_activation' => [
+                    'title' => '安装与启动',
+                    'items' => [
+                        'power_on' => [
+                            'question' => '如何启动小云电视盒？',
+                            'answer'   => '接上 HDMI 与电源，切换到对应的 HDMI 输入，按照画面指示完成设置。参考<a href="{{setup_guide_url}}">安装指南</a>有图解。',
+                        ],
+                        'change_language' => [
+                            'question' => '如何切换系统语言？',
+                            'answer'   => '设置 → 语言与输入法，选 English 或 中文，随时可切换，不需恢复出厂设置。',
+                        ],
+                        'remote_pairing' => [
+                            'question' => '遥控器没有反应怎么办？',
+                            'answer'   => '先换电池，再按住 VOL- + VOL+ 靠近主机配对；如有需要重启主机后再配对。',
+                        ],
+                    ],
+                ],
+                'apps_content' => [
+                    'title' => 'App 与内容',
+                    'items' => [
+                        'preinstalled' => [
+                            'question' => '小云专属 App 会预先安装吗？',
+                            'answer'   => '出厂是原生 Android 桌面，未预载第三方串流 App。礼宾客服可指引安全安装。',
+                        ],
+                        'third_party' => [
+                            'question' => '可以安装 Netflix 或其他 App 吗？',
+                            'answer'   => '可从 Google Play 或官方来源安装。相容性与画质依各服务而定，请使用合法授权来源。',
+                        ],
+                        'family_content' => [
+                            'question' => '有适合孩子的内容吗？',
+                            'answer'   => '支持儿童模式、双语内容与家长监护，并可安装适合全家的官方 App。',
+                        ],
+                        'adult_content' => [
+                            'question' => '有成人内容吗？',
+                            'answer'   => '没有。我们不预载成人内容，也不支持非法或未成年不宜的服务。请遵守当地法律与平台政策。',
+                        ],
+                    ],
+                ],
+                'features_limitations' => [
+                    'title' => '功能与限制',
+                    'items' => [
+                        'karaoke_support' => [
+                            'question' => '每台都支持 K 歌吗？',
+                            'answer'   => '10P+ 支持 K 歌与双麦克风；10S 专注核心串流功能，没有额外 K 歌特色。',
+                        ],
+                        'voice_control' => [
+                            'question' => '语音控制怎么用？',
+                            'answer'   => '蓝牙语音遥控可搜索、开 App、控制播放；如需重配对，按 VOL- + VOL+。',
+                        ],
+                        'subtitle_speed' => [
+                            'question' => '字幕速度可以调吗？',
+                            'answer'   => '字幕时间由各 App/播放器控制，请在 App 内调整；系统没有全域字幕速度设定。',
+                        ],
+                    ],
+                ],
+                'troubleshooting_support' => [
+                    'title' => '疑难排解与客服',
+                    'items' => [
+                        'buffering' => [
+                            'question' => '画面模糊或常缓冲，怎么办？',
+                            'answer'   => '测速、优先使用有线或 Wi-Fi 6，将主机靠近路由器并重启主机/路由器。更多建议见<a href="{{setup_guide_url}}">安装指南</a>。',
+                        ],
+                        'orz_installer' => [
+                            'question' => '某串流 App 或安装程序无法开启怎么办？',
+                            'answer'   => '请从官方来源重新安装、清除 App 缓存并重启。避免非官方 APK。如仍有问题，提供 App 名称与错误讯息给客服。',
+                        ],
+                        'contact_support' => [
+                            'question' => '怎么联系客服电话？',
+                            'answer'   => '通过联系表单并附上订单编号、装置型号与截图：<a href="{{support_url}}">联络礼宾客服</a>。',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+
+    // FAQ page (简体中文)
+    'faq' => [
+        'hero' => [
+            'badge'      => '支持中心',
+            'title'      => '小云电视盒常见问题',
+            'subtitle'   => '快速了解选购、安装与使用小云电视盒的重点。',
+            'cta_primary'=> '查看安装指南',
+            'cta_secondary' => '比较机型',
+        ],
+        'sections' => [
+            'device_models' => [
+                'title' => '装置与选购',
+                'items' => [
+                    'model_choice' => [
+                        'question' => '要买哪一款小云电视盒？',
+                        'answer'   => '旗舰性能、儿童模式与 K 歌请选择 10P+；精省/次卧选 10S。详见<a href="{{compare_url}}">比较表</a>。',
+                    ],
+                    'international_use' => [
+                        'question' => '小云电视盒在海外可以用吗？',
+                        'answer'   => '可以，在美加及海外使用本地网络即可。各串流服务仍受自身地区政策限制，请使用合法官方来源。',
+                    ],
+                    'box_contents' => [
+                        'question' => '盒内附带哪些配件？',
+                        'answer'   => '主机、美规电源、HDMI 线、蓝牙语音遥控器、电池、快速入门指南。',
+                    ],
+                ],
+            ],
+            'setup_activation' => [
+                'title' => '安装与启动',
+                'items' => [
+                    'power_on' => [
+                        'question' => '如何启动小云电视盒？',
+                        'answer'   => '接上 HDMI 与电源，切到对应 HDMI 输入，依画面完成设置。图解请看<a href="{{setup_guide_url}}">安装指南</a>。',
+                    ],
+                    'change_language' => [
+                        'question' => '如何切换系统语言？',
+                        'answer'   => '设置 → 语言与输入法，选 English 或 中文，可随时切换，无需恢复出厂设置。',
+                    ],
+                    'remote_pairing' => [
+                        'question' => '遥控器没有反应怎么办？',
+                        'answer'   => '先换电池，再按 VOL- + VOL+ 靠近主机配对；必要时重启后再配对。',
+                    ],
+                ],
+            ],
+            'apps_content' => [
+                'title' => 'App 与内容',
+                'items' => [
+                    'preinstalled' => [
+                        'question' => '小云专属 App 会预先安装吗？',
+                        'answer'   => '出厂是原生 Android 桌面，未预载第三方串流 App。礼宾客服可指引安全安装。',
+                    ],
+                    'third_party' => [
+                        'question' => '可以安装 Netflix 或其他 App 吗？',
+                        'answer'   => '可从 Google Play 或官方来源安装。相容性与画质依各服务而定，请使用合法授权来源。',
+                    ],
+                    'family_content' => [
+                        'question' => '有适合孩子的内容吗？',
+                        'answer'   => '支持儿童模式、双语内容与家长监护，并可安装适合全家的官方 App。',
+                    ],
+                    'adult_content' => [
+                        'question' => '有成人内容吗？',
+                        'answer'   => '没有。不预载成人内容，也不支持非法或未成年不宜的服务。请遵守当地法律与平台政策。',
+                    ],
+                ],
+            ],
+            'features_limitations' => [
+                'title' => '功能与限制',
+                'items' => [
+                    'karaoke_support' => [
+                        'question' => '每台都支持 K 歌吗？',
+                        'answer'   => '10P+ 支持 K 歌与双麦克风；10S 专注核心串流功能，无额外 K 歌特色。',
+                    ],
+                    'voice_control' => [
+                        'question' => '语音控制怎么用？',
+                        'answer'   => '蓝牙语音遥控可搜索、开 App、控制播放；如需重配对，按 VOL- + VOL+。',
+                    ],
+                    'subtitle_speed' => [
+                        'question' => '字幕速度可以调吗？',
+                        'answer'   => '字幕时间由各 App/播放器控制，请在 App 内调整；系统没有全域字幕速度。',
+                    ],
+                ],
+            ],
+            'troubleshooting_support' => [
+                'title' => '疑难排解与客服',
+                'items' => [
+                    'buffering' => [
+                        'question' => '画面模糊或常缓冲，怎么办？',
+                        'answer'   => '测速，优先用有线或 Wi-Fi 6，把主机靠近路由器并重启主机/路由器。更多建议见<a href="{{setup_guide_url}}">安装指南</a>。',
+                    ],
+                    'orz_installer' => [
+                        'question' => '某串流 App 或安装程序无法开启怎么办？',
+                        'answer'   => '请从官方来源重新安装、清除 App 缓存并重启。避免非官方 APK。如仍有问题，提供 App 名称与错误信息给客服。',
+                    ],
+                    'contact_support' => [
+                        'question' => '怎么联系客服？',
+                        'answer'   => '通过联系表单并附上订单编号、装置型号与截图：<a href="{{support_url}}">联络礼宾客服</a>。',
+                    ],
+                ],
+            ],
+        ],
+    ],
 ];
 
 return array_replace_recursive($base, $overrides);

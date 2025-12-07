@@ -35,6 +35,7 @@ $hero_secondary_label = svic_translate('blog.index.hero.secondary_label');
 
 $hero_primary_url   = svic_url_with_lang(home_url('/compare/'));
 $hero_secondary_url = svic_url_with_lang(home_url('/support/'));
+$hero_tertiary_url  = svic_url_with_lang(home_url('/contact/'));
 
 $highlight_keys = ['cadence', 'categories', 'support'];
 $highlights     = [];
@@ -73,6 +74,7 @@ $list_label = svic_translate('blog.index.list_label');
             <?php if ($hero_secondary_label !== '') : ?>
               <a class="btn btn-outline" href="<?php echo esc_url($hero_secondary_url); ?>"><?php echo esc_html($hero_secondary_label); ?></a>
             <?php endif; ?>
+            <a class="blog-archive__textlink" href="<?php echo esc_url($hero_tertiary_url); ?>"><?php echo svic_translate_html('contact.hero.primary_cta'); ?></a>
           </div>
         <?php endif; ?>
       </div>
@@ -99,8 +101,20 @@ $list_label = svic_translate('blog.index.list_label');
             $show_updated           = $updated_time_display && $updated_time_display !== $published_time_display;
             $updated_label          = $show_updated ? svic_translate_html('blog.card.updated', ['date' => $updated_time_display]) : '';
 
-            $raw_excerpt    = get_the_excerpt($post_id);
-            $trimmed_excerpt = wp_trim_words(wp_strip_all_tags((string) $raw_excerpt), 26, '…');
+            $excerpt_source = '';
+            if (function_exists('svic_post_locale_meta')) {
+                $excerpt_source = svic_post_locale_meta($post_id, 'description');
+                if ($excerpt_source === '') {
+                    $excerpt_source = svic_post_locale_meta($post_id, 'content');
+                }
+            }
+
+            if ($excerpt_source !== '') {
+                $trimmed_excerpt = wp_trim_words(wp_strip_all_tags($excerpt_source), 26, '…');
+            } else {
+                $raw_excerpt     = get_the_excerpt($post_id);
+                $trimmed_excerpt = wp_trim_words(wp_strip_all_tags((string) $raw_excerpt), 26, '…');
+            }
 
             $thumbnail_html = svic_post_card_image(
                 $post_id,

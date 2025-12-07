@@ -65,6 +65,7 @@ return [
             'fallback_alt' => 'SVICLOUD 部落格示意圖：{{title}}',
         ],
         'categories' => [
+            'guides' => '指南',
             'comparisons' => '比較文章',
             'buying-checklist' => '選購清單',
         ],
@@ -86,6 +87,78 @@ return [
             ],
             'svicloud-tv-box-us-guide-zh' => [
                 'title' => '小雲電視盒美國選購清單',
+            ],
+            'svicloud-stb%e7%be%8e%e5%9c%8b%e6%a9%9f%e9%a0%82%e7%9b%92-4k-hdr%e5%bd%b1%e9%99%a2' => [
+                'title' => 'SviCloud STB美國機頂盒｜4K HDR影院',
+            ],
+            'svicloud-tv-box-4k%e4%b8%b2%e6%b5%81%e7%9b%92-2026' => [
+                'title' => 'SviCloud TV Box 4K串流盒｜2026',
+            ],
+            '2025%e6%9c%80%e4%bd%b3android%e9%9b%bb%e8%a6%96%e7%9b%92-4k-hdr-wi' => [
+                'title' => '2025最佳Android電視盒｜4K HDR+Wi',
+            ],
+            'svicloud%e9%9f%b3%e9%9f%bf%e6%a2%9dhdmi%e9%9f%b3%e9%a0%bb%e7%a6%81%e7%94%a8%e6%95%99%e5%ad%b8-%e9%81%99%e6%8e%a7%e8%aa%9e%e9%9f%b3' => [
+                'title' => 'SVICLOUD音響條HDMI音頻禁用教學｜遙控語音',
+            ],
+            'svicloud-10p-plus-las-vegas-setup' => [
+                'title' => '拉斯維加斯實測：SVICLOUD 10P+ 安裝到開播 35 分鐘',
+            ],
+            '%e4%b8%ad%e7%a7%8b%e5%ae%b6%e5%ba%ad%e8%81%9a%e6%9c%83%e9%a6%96%e9%81%b8-svicloud-4k%e5%bd%b1%e9%99%a2%e7%b4%9a%e7%95%ab%e8%b3%aa' => [
+                'title' => '中秋家庭聚會首選｜SVICLOUD 4K影院級畫質+',
+            ],
+            'svicloud-%e4%b8%ad%e7%a7%8b%e7%8d%bb%e7%a6%ae-4k-hdr-wi' => [
+                'title' => 'SVICLOUD 中秋獻禮：4K HDR + Wi-Fi 6',
+            ],
+            '%e9%bb%91%e4%ba%94%e6%9c%80%e5%a4%a7%e5%84%aa%e6%83%a0%e9%96%8b%e8%b7%91-svicloud-4k-hdr-%e9%a0%82' => [
+                'title' => '黑五最大優惠開跑！SviCloud 4K HDR 頂',
+            ],
+            '%e5%b0%8f%e9%9b%b2%e9%9b%bb%e8%a6%96%e7%9b%92-vs-%e5%ae%89%e5%8d%9a-%e7%be%8e%e5%9c%8b%e7%94%a8%e6%88%b6%e5%bf%85%e7%9c%8b%e7%9a%844k%e7%95%ab%e8%b3%aa%e8%88%87%e5%94%ae%e5%be%8c' => [
+                'title' => '小雲電視盒 vs 安博：美國用戶必看的4K畫質與售後',
+            ],
+            'svicloud-tv-box%e7%be%8e%e5%9c%8b%e4%bb%a3%e7%90%86-4k%e9%a0%82%e7%b4%9a%e7%95%ab%e8%b3%aa' => [
+                'title' => 'SVICLOUD TV Box美國代理｜4K頂級畫質',
+            ],
+            'svicloud%e7%be%8e%e5%9c%8b%e6%9c%ac%e5%9c%b0%e6%9c%8d%e5%8b%99-4k-hdr-wi-f' => [
+                'title' => 'SVICLOUD美國本地服務｜4K HDR+Wi-F 6',
+            ],
+            '2026%e6%96%b0%e9%81%8a%e6%88%b2%e5%a4%a7%e4%bd%9c-%e4%b8%83%e7%8e%8b%e9%a8%8e%e5%a3%ab-%e4%b8%8a%e5%b8%82-%e7%be%8b%e5%9c%8b48%e5%b0%8f%e6%99%82%e5%bf%ab%e9%80%9f' => [
+                'title' => '2026《七王騎士》串流攻略｜SVICLOUD 4K HDR 模式',
+            ],
+            'svicloud-tv-box-2025%ef%bd%9c%e7%be%8e%e5%9c%8b%e6%8e%88%e6%ac%8a%e7%b6%93%e9%8a%b7%e5%95%86' => [
+                'title' => 'SviCloud TV Box 2025｜美國授權經銷商',
+            ],
+            '2025%e6%9c%80%e4%bd%b3%e5%ae%89%e5%8d%93%e9%9b%bb%e8%a6%96%e7%9b%92%e6%8e%a8%e8%96%a6-svicloud-tv' => [
+                'title' => '2025最佳安卓電視盒推薦｜SviCloud TV',
+            ],
+            '%e5%8a%a0%e5%b7%9e%e7%9c%8b%e4%b8%ad%e6%96%87%e9%9b%bb%e8%a6%96-%e5%b0%8f%e9%9b%b2%e9%9b%bb%e8%a6%96%e7%9b%92' => [
+                'title' => '加州看中文電視？小雲電視盒',
+            ],
+            '%e6%98%93%e6%92%adevpad%e7%be%8b%e5%9c%8b%e5%ae%98%e6%96%b9%ef%bd%9c%e4%b8%80%e5%b9%b4%e4%bf%9d%e5%9b%ba' => [
+                'title' => '易播EVPAD美國官方｜一年保固',
+            ],
+            '%e5%b0%8f%e9%9b%b2%e9%9b%bb%e8%a6%96%e7%9b%92%e7%be%8b%e5%9c%8b%e5%ae%98%e6%96%b9%ef%bd%9c%e9%9b%99%e8%aa%9e%e5%ae%a2%e6%9c%8d' => [
+                'title' => '小雲電視盒美國官方｜雙語客服',
+            ],
+            '%e7%be%8e%e5%9c%8b%e9%99%90%e6%99%82%e5%84%aa%e6%83%a0%ef%bd%9c%e4%b8%80%e5%b9%b4%e4%bf%9d%e5%9b%ba%e6%9c%8d%e5%8b%99' => [
+                'title' => '美國限時優惠｜一年保固服務',
+            ],
+            'svicloud-10p%2b%e7%be%8b%e5%9c%8b%e5%80%89%e5%84%b2%e9%85%8d%e9%80%81' => [
+                'title' => 'SVICLOUD 10P+美國倉儲配送',
+            ],
+            '%e5%b0%8f%e9%9b%b2%e9%9b%bb%e8%a6%96%e7%9b%92%e7%be%8b%e5%9c%8b%e4%bb%a3%e7%90%86' => [
+                'title' => '小雲電視盒美國代理 ⭐⭐⭐｜SVICLOUD 專家指南',
+            ],
+            'best-chinese-tv-box-north-america' => [
+                'title' => 'Best Chinese TV Box for North America — Warranty, Shipping & Support',
+            ],
+            'lunar-new-year-karaoke-party-2026-svicloud-guide' => [
+                'title' => 'Host the Perfect Lunar New Year Karaoke Party 2026 with SVICLOUD — Complete Setup Guide',
+            ],
+            'svicloud-tv-box-usa-guide-2026' => [
+                'title' => 'SVICLOUD TV Box USA Guide 2026',
+            ],
+            'svicloud-10p%2bvs-evpad-10-pro-best-family-streaming-box-in-2025' => [
+                'title' => 'SVICLOUD 10P+vs EVPAD 10 Pro — Best Family Streaming Box in 2025?',
             ],
         ],
     ],
@@ -1559,6 +1632,97 @@ return [
                 'concierge' => [
                     'q' => '可以用中文協助我安裝嗎？',
                     'a' => '可以。禮賓可用中文或英文遠端帶你設定，包含 Kids Mode、卡拉 OK 麥克風配對與應用更新。',
+                ],
+            ],
+            'sections' => [
+                'device_models' => [
+                    'title' => '機型與選購',
+                    'items' => [
+                        'model_choice' => [
+                            'question' => '該買哪一款 SviCloud？',
+                            'answer'   => '想要旗艦效能、兒童模式與 K 歌請選 10P+；次要房間或精省預算選 10S。詳細請看<a href="{{compare_url}}">比較表</a>。',
+                        ],
+                        'international_use' => [
+                            'question' => '離開亞洲也能用嗎？',
+                            'answer'   => '可以。裝置使用您所在地的網路（美加與海外皆可）。各串流服務仍受自身地區政策限制，請使用合法官方來源。',
+                        ],
+                        'box_contents' => [
+                            'question' => '盒裝有哪些配件？',
+                            'answer'   => '主機、美規電源供應器、HDMI 線、藍牙語音遙控器、電池、快速入門指南。',
+                        ],
+                    ],
+                ],
+                'setup_activation' => [
+                    'title' => '安裝與啟用',
+                    'items' => [
+                        'power_on' => [
+                            'question' => '如何開機？',
+                            'answer'   => '接上 HDMI 與電源，切換到對應的 HDMI 輸入，依照畫面指示完成設定。參考<a href="{{setup_guide_url}}">安裝指南</a>有圖解。',
+                        ],
+                        'change_language' => [
+                            'question' => '怎麼切換系統語言？',
+                            'answer'   => '設定 → 語言與輸入法，選 English 或 中文，隨時可切換，不需回復原廠設定。',
+                        ],
+                        'remote_pairing' => [
+                            'question' => '遙控器沒反應怎麼辦？',
+                            'answer'   => '先換電池，再按住 VOL- + VOL+ 靠近主機配對；如有需要重開主機後再配對。',
+                        ],
+                    ],
+                ],
+                'apps_content' => [
+                    'title' => 'App 與內容',
+                    'items' => [
+                        'preinstalled' => [
+                            'question' => '有預載 SviCloud App 嗎？',
+                            'answer'   => '出廠是原生 Android 桌面，未預載第三方串流 App。禮賓客服可指引安全安裝。',
+                        ],
+                        'third_party' => [
+                            'question' => '可以裝 Netflix 或其他 App 嗎？',
+                            'answer'   => '可從 Google Play 或官方來源安裝。相容性與畫質依各服務而定，請使用合法授權的來源。',
+                        ],
+                        'family_content' => [
+                            'question' => '有適合家庭的內容嗎？',
+                            'answer'   => '支援兒童模式、雙語內容與家長監護，並可安裝適合全家的官方 App。',
+                        ],
+                        'adult_content' => [
+                            'question' => '有成人內容嗎？',
+                            'answer'   => '沒有。我們不預載成人內容，也不支援非法或未成年不宜的服務。請遵守當地法律與平台政策。',
+                        ],
+                    ],
+                ],
+                'features_limitations' => [
+                    'title' => '功能與限制',
+                    'items' => [
+                        'karaoke_support' => [
+                            'question' => '每台都支援 K 歌嗎？',
+                            'answer'   => '10P+ 支援 K 歌與雙麥克風；10S 專注於核心串流功能，沒有額外 K 歌特色。',
+                        ],
+                        'voice_control' => [
+                            'question' => '語音控制怎麼用？',
+                            'answer'   => '藍牙語音遙控可搜尋、開 App、控制播放；如需重配對，按 VOL- + VOL+。',
+                        ],
+                        'subtitle_speed' => [
+                            'question' => '字幕速度可以調嗎？',
+                            'answer'   => '字幕時間由各 App/播放器控制，請在 App 內調整；系統沒有全域字幕速度設定。',
+                        ],
+                    ],
+                ],
+                'troubleshooting_support' => [
+                    'title' => '疑難排解與客服',
+                    'items' => [
+                        'buffering' => [
+                            'question' => '畫面模糊或常緩衝，怎麼辦？',
+                            'answer'   => '測速、優先使用有線或 Wi-Fi 6，將主機靠近路由器並重開主機/路由器。更多建議見<a href="{{setup_guide_url}}">安裝指南</a>。',
+                        ],
+                        'orz_installer' => [
+                            'question' => '某串流 App 或安裝程式無法開啟怎麼辦？',
+                            'answer'   => '請從官方來源重新安裝、清除 App 快取並重啟。避免非官方 APK。如仍有問題，提供 App 名稱與錯誤訊息給客服。',
+                        ],
+                        'contact_support' => [
+                            'question' => '怎麼聯絡客服？',
+                            'answer'   => '透過聯絡表單並附上訂單編號、裝置型號與截圖：<a href="{{support_url}}">聯絡禮賓客服</a>。',
+                        ],
+                    ],
                 ],
             ],
         ],
