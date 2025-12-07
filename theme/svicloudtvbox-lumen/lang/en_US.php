@@ -670,6 +670,22 @@ return [
                 ],
             ],
         ],
+        'traffic' => [
+            'badge' => 'SVICLOUD 10P+ for U.S. Chinese/Asian homes',
+            'title' => 'Bilingual, U.S.-stock 10P+ with concierge and warranty',
+            'lead'  => 'Serve U.S.-based Chinese/Asian families with fast Nevada fulfillment, 中文/English setup help, and hardware ready for 4K sports, drama marathons, karaoke, and kids profiles.',
+            'bullets' => [
+                'shipping'  => '48-hour U.S. shipping with localized power, HDMI, and tracking',
+                'concierge' => 'Bilingual concierge: setup calls, Wi-Fi tuning, karaoke mic pairing, Kids Mode',
+                'warranty'  => '1-year U.S. warranty + 30-day returns handled by the concierge team',
+            ],
+            'links' => [
+                'pdp'     => 'Shop 10P+',
+                'compare' => 'Compare 10P+ vs 10S',
+                'faq'     => 'Read FAQ',
+                'contact' => 'Talk to concierge',
+            ],
+        ],
         'certification' => [
             'badge' => 'Manufacturer Certified',
             'title' => 'SVI.STUDIO Authorized Dealer Certification',
@@ -897,6 +913,22 @@ return [
             'title'    => 'SVICLOUD 10P+ vs 10S',
             'subtitle' => 'See the hardware, features, and best-use scenarios side-by-side to pick the perfect SVICLOUD for your home.',
         ],
+        'traffic' => [
+            'badge' => 'Buy with confidence in the U.S.',
+            'title' => 'Bilingual U.S. support, 48-hour shipping, and warranty on both models',
+            'lead'  => 'Built for U.S.-based Chinese/Asian households: Nevada fulfillment, 中文/English concierge, and clear guidance on which model fits your rooms.',
+            'bullets' => [
+                'shipping'  => '48-hour U.S. shipping with tracking and localized power/HDMI',
+                'concierge' => 'Bilingual concierge for setup, Wi-Fi tuning, karaoke mics, Kids Mode',
+                'warranty'  => '1-year U.S. warranty + 30-day returns with concierge handling',
+            ],
+            'links' => [
+                'p10p'    => 'Shop 10P+',
+                'p10s'    => 'Shop 10S',
+                'faq'     => 'Read FAQ',
+                'contact' => 'Talk to concierge',
+            ],
+        ],
         'differences' => [
             'premium_performance' => [
                 'title'       => 'Premium Performance',
@@ -1121,6 +1153,7 @@ return [
             'troubleshooting' => 'Troubleshooting',
             'resources'       => 'Resources',
             'support'         => 'Need support',
+            'faq'             => 'FAQ',
         ],
         'nav_summaries' => [
             'overview'        => 'See the concierge overview and why these guides matter.',
@@ -1492,6 +1525,40 @@ return [
             'inventory' => 'Certified U.S. inventory & warranty',
             'concierge' => 'Bilingual concierge setup support',
             'no_fees'   => 'No monthly fees or hidden renewals',
+        ],
+        'traffic' => [
+            'badge' => 'Why 10P+ for U.S.-based Chinese/Asian homes',
+            'title' => 'U.S. stock, bilingual concierge, and warranty-backed 10P+',
+            'lead'  => 'Serve U.S. Chinese/Asian families with Nevada fulfillment, 中文/English setup help, and hardware ready for 4K sports, dramas, karaoke, and kids profiles.',
+            'bullets' => [
+                'shipping'  => '48-hour U.S. shipping with localized power/HDMI and tracking',
+                'concierge' => 'Bilingual concierge: remote setup, Wi-Fi tuning, karaoke mic pairing, Kids Mode guidance',
+                'warranty'  => '1-year U.S. warranty + 30-day returns handled by concierge',
+            ],
+            'links' => [
+                'compare' => 'Compare 10P+ vs 10S',
+                'faq'     => 'Read FAQ',
+                'contact' => 'Talk to concierge',
+            ],
+        ],
+        'faq' => [
+            'badge' => 'FAQ',
+            'title' => 'Top questions before you buy',
+            'lead'  => 'Shipping speed, warranty, and setup help for U.S./Canada buyers.',
+            'items' => [
+                'shipping' => [
+                    'q' => 'How fast do you ship to the U.S. and Canada?',
+                    'a' => 'Orders placed before 2 p.m. Pacific leave our Nevada warehouse within 48 hours via USPS/UPS/FedEx. Canada deliveries typically arrive in 5–7 business days including customs.',
+                ],
+                'warranty' => [
+                    'q' => 'What warranty and returns are included?',
+                    'a' => 'Every device on SVICLOUDTVBOX.US includes a 1-year U.S. hardware warranty and 30-day returns. Contact the concierge team with your order number for troubleshooting, exchanges, or returns.',
+                ],
+                'concierge' => [
+                    'q' => 'Can you help me set it up in Chinese?',
+                    'a' => 'Yes. Our bilingual concierge can schedule a remote session in 中文 or English and guide Kids Mode, karaoke mics, and app updates.',
+                ],
+            ],
         ],
     ],
 ];
