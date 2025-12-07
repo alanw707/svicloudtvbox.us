@@ -47,3 +47,7 @@ automation/blog_automation/EMERGENCY_STOP
 automation/posts_history.db
 data/
 env/
+# BMAD tooling and generated configs
+.bmad/
+docs/bmad/
+tmp/wp-config*.php
