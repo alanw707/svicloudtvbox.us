@@ -98,6 +98,25 @@ while (have_posts()) :
         'product.highlights.concierge',
         'product.highlights.no_fees',
     ];
+
+    $compare_url  = svic_url_with_lang(home_url('/compare/'));
+    $faq_url      = svic_url_with_lang(home_url('/faq/'));
+    $contact_url  = svic_url_with_lang(home_url('/contact/'));
+
+    $product_faq_items = [
+        [
+            'question_key' => 'product.faq.items.shipping.q',
+            'answer_key'   => 'product.faq.items.shipping.a',
+        ],
+        [
+            'question_key' => 'product.faq.items.warranty.q',
+            'answer_key'   => 'product.faq.items.warranty.a',
+        ],
+        [
+            'question_key' => 'product.faq.items.concierge.q',
+            'answer_key'   => 'product.faq.items.concierge.a',
+        ],
+    ];
     ?>
 
     <main class="page-shell lumen-product">
@@ -172,6 +191,48 @@ while (have_posts()) :
 
           echo wp_kses_post($description_html);
           ?>
+        </div>
+      </section>
+
+      <section class="product-traffic">
+        <div class="product-traffic__inner">
+          <div class="product-traffic__copy">
+            <span class="product-traffic__badge"><?php echo svic_translate_html('product.traffic.badge'); ?></span>
+            <h2 class="product-traffic__title"><?php echo svic_translate_html('product.traffic.title'); ?></h2>
+            <p class="product-traffic__lead"><?php echo svic_translate_html('product.traffic.lead'); ?></p>
+            <ul class="product-traffic__list" role="list">
+              <li><?php echo svic_translate_html('product.traffic.bullets.shipping'); ?></li>
+              <li><?php echo svic_translate_html('product.traffic.bullets.concierge'); ?></li>
+              <li><?php echo svic_translate_html('product.traffic.bullets.warranty'); ?></li>
+            </ul>
+          </div>
+          <div class="product-traffic__links" role="group" aria-label="<?php esc_attr_e('Key SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
+            <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($compare_url); ?>"><?php echo svic_translate_html('product.traffic.links.compare'); ?></a>
+            <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($faq_url); ?>"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
+            <a class="product-traffic__textlink" href="<?php echo esc_url($contact_url); ?>"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="product-faq" id="product-faq">
+        <div class="product-faq__inner">
+          <header class="product-faq__header">
+            <span class="product-faq__badge"><?php echo svic_translate_html('product.faq.badge'); ?></span>
+            <h2 class="product-faq__title"><?php echo svic_translate_html('product.faq.title'); ?></h2>
+            <p class="product-faq__lead"><?php echo svic_translate_html('product.faq.lead'); ?></p>
+          </header>
+          <div class="product-faq__grid">
+            <?php foreach ($product_faq_items as $idx => $item) : ?>
+              <details class="product-faq__item"<?php echo $idx === 0 ? ' open' : ''; ?>>
+                <summary class="product-faq__question"><?php echo svic_translate_html($item['question_key']); ?></summary>
+                <div class="product-faq__answer"><?php echo wp_kses_post(svic_translate($item['answer_key'])); ?></div>
+              </details>
+            <?php endforeach; ?>
+          </div>
+          <div class="product-faq__cta">
+            <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($faq_url); ?>"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
+            <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($contact_url); ?>"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
+          </div>
         </div>
       </section>
     </main>

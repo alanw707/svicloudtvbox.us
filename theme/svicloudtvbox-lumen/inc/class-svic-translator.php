@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 final class SVIC_Translator
 {
     private const DEFAULT_LOCALE = 'en_US';
-    private const SUPPORTED_LOCALES = ['en_US', 'zh_TW'];
+    private const SUPPORTED_LOCALES = ['en_US', 'zh_TW', 'zh_CN'];
     private const CACHE_GROUP    = 'svic_i18n';
 
     private static ?self $instance = null;

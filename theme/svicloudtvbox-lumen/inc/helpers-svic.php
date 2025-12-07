@@ -135,6 +135,11 @@ if (!function_exists('svic_language_query_value')) {
             return 'zh';
         }
 
+        // Preserve zh-cn vs zh-tw so we can map to distinct path prefixes.
+        if (strpos($normalized, 'zh_cn') === 0 || strpos($normalized, 'zh-cn') === 0) {
+            return 'zh-cn';
+        }
+
         $parts = preg_split('/[-_]/', $normalized);
         $language = is_array($parts) && isset($parts[0]) ? trim((string) $parts[0]) : $normalized;
         if ($language === '') {
@@ -223,7 +228,14 @@ if (!function_exists('svic_url_with_lang')) {
         $hadTrailingSlash = $path !== '/' && substr($path, -1) === '/';
         $trimmedPath = ltrim($path, '/');
 
-        if ($langValue === 'zh') {
+        if ($langValue === 'zh-cn') {
+            if ($trimmedPath === '' || $trimmedPath === 'zh-cn') {
+                $trimmedPath = 'zh-cn';
+                $hadTrailingSlash = true;
+            } elseif (strpos($trimmedPath, 'zh-cn/') !== 0) {
+                $trimmedPath = 'zh-cn/' . $trimmedPath;
+            }
+        } elseif ($langValue === 'zh') {
             if ($trimmedPath === '' || $trimmedPath === 'zh') {
                 $trimmedPath = 'zh';
                 $hadTrailingSlash = true;
@@ -231,16 +243,25 @@ if (!function_exists('svic_url_with_lang')) {
                 $trimmedPath = 'zh/' . $trimmedPath;
             }
         } else {
-            if ($trimmedPath === 'zh') {
+            if ($trimmedPath === 'zh' || $trimmedPath === 'zh-cn') {
                 $trimmedPath = '';
                 $hadTrailingSlash = true;
             } elseif (strpos($trimmedPath, 'zh/') === 0) {
                 $trimmedPath = substr($trimmedPath, 3);
             }
+            if (strpos($trimmedPath, 'zh-cn/') === 0) {
+                $trimmedPath = substr($trimmedPath, 6);
+            }
         }
 
         if ($trimmedPath === '') {
-            $localizedPath = $langValue === 'zh' ? '/zh/' : '/';
+            if ($langValue === 'zh-cn') {
+                $localizedPath = '/zh-cn/';
+            } elseif ($langValue === 'zh') {
+                $localizedPath = '/zh/';
+            } else {
+                $localizedPath = '/';
+            }
         } else {
             $localizedPath = '/' . $trimmedPath;
             if ($hadTrailingSlash && substr($localizedPath, -1) !== '/') {
@@ -300,6 +321,16 @@ if (!function_exists('svic_strip_route_locale_prefix')) {
     function svic_strip_route_locale_prefix(string $path): string
     {
         $normalized = svic_normalize_route_path($path);
+
+        if (strpos($normalized, '/zh-cn/') === 0) {
+            $normalized = substr($normalized, 6);
+            if ($normalized === false || $normalized === '') {
+                $normalized = '/';
+            } elseif ($normalized[0] !== '/') {
+                $normalized = '/' . $normalized;
+            }
+            $normalized = svic_normalize_route_path($normalized);
+        }
 
         if (strpos($normalized, '/zh/') === 0) {
             $normalized = substr($normalized, 3);

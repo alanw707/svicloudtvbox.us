@@ -468,6 +468,28 @@ if (!$blog_posts_query instanceof WP_Query) {
     </div>
   </section>
 
+  <!-- Traffic & intent copy for 10P+ -->
+  <section class="frontpage-traffic" id="traffic">
+    <div class="frontpage-traffic__inner">
+      <div class="frontpage-traffic__copy">
+        <span class="frontpage-traffic__badge"><?php echo svic_translate_html('frontpage.traffic.badge'); ?></span>
+        <h2 class="frontpage-traffic__title"><?php echo svic_translate_html('frontpage.traffic.title'); ?></h2>
+        <p class="frontpage-traffic__lead"><?php echo svic_translate_html('frontpage.traffic.lead'); ?></p>
+        <ul class="frontpage-traffic__list" role="list">
+          <li><?php echo svic_translate_html('frontpage.traffic.bullets.shipping'); ?></li>
+          <li><?php echo svic_translate_html('frontpage.traffic.bullets.concierge'); ?></li>
+          <li><?php echo svic_translate_html('frontpage.traffic.bullets.warranty'); ?></li>
+        </ul>
+      </div>
+      <div class="frontpage-traffic__links" role="group" aria-label="<?php esc_attr_e('Key SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.traffic.links.pdp'); ?></a>
+        <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url(svic_url_with_lang(home_url('/compare'))); ?>"><?php echo svic_translate_html('frontpage.traffic.links.compare'); ?></a>
+        <a class="frontpage-traffic__textlink" href="<?php echo esc_url(svic_url_with_lang(home_url('/faq'))); ?>"><?php echo svic_translate_html('frontpage.traffic.links.faq'); ?></a>
+        <a class="frontpage-traffic__textlink" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact'))); ?>"><?php echo svic_translate_html('frontpage.traffic.links.contact'); ?></a>
+      </div>
+    </div>
+  </section>
+
   <?php
 $certificate_asset_relative = '/assets/images/certification-authorized-dealer.webp';
   $certificate_asset_path     = get_template_directory() . $certificate_asset_relative;

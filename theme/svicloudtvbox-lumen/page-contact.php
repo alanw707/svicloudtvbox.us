@@ -21,6 +21,8 @@ $email_href    = filter_var($email_address, FILTER_VALIDATE_EMAIL) ? 'mailto:' .
 $support_form_url = svic_url_with_lang(home_url('/support/'));
 $faq_url          = svic_url_with_lang(home_url('/faq/'));
 $guides_url       = svic_url_with_lang(home_url('/guides-setup/'));
+$compare_url      = svic_url_with_lang(home_url('/compare/'));
+$pdp_url          = svic_url_with_lang(home_url('/product/svicloud-10p-plus/'));
 
 $hero_primary_href   = $whatsapp_href ?: ($phone_href ?: $email_href);
 $hero_secondary_href = $support_form_url;
@@ -73,6 +75,27 @@ $faq_copy = svic_translate_rich('contact.faq.copy', [
         <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_secondary_href); ?>">
           <?php echo svic_translate_html('contact.hero.secondary_cta'); ?>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-intent" id="contact-intent">
+    <div class="contact-intent__inner">
+      <div class="contact-intent__copy">
+        <span class="contact-intent__badge"><?php echo svic_translate_html('product.traffic.badge'); ?></span>
+        <h2 class="contact-intent__title"><?php echo svic_translate_html('product.traffic.title'); ?></h2>
+        <p class="contact-intent__lead"><?php echo svic_translate_html('product.traffic.lead'); ?></p>
+        <ul class="contact-intent__list" role="list">
+          <li><?php echo svic_translate_html('product.traffic.bullets.shipping'); ?></li>
+          <li><?php echo svic_translate_html('product.traffic.bullets.concierge'); ?></li>
+          <li><?php echo svic_translate_html('product.traffic.bullets.warranty'); ?></li>
+        </ul>
+      </div>
+      <div class="contact-intent__links" role="group" aria-label="<?php echo esc_attr__('Primary SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($pdp_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.primary'); ?></a>
+        <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($compare_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.compare'); ?></a>
+        <a class="contact-intent__textlink" href="<?php echo esc_url($faq_url); ?>"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
+        <a class="contact-intent__textlink" href="<?php echo esc_url($support_form_url); ?>"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
       </div>
     </div>
   </section>

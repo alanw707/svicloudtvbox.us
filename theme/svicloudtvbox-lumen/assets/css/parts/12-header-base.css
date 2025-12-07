@@ -31,7 +31,7 @@
   margin: 0 auto;
   padding: 22px clamp(20px, 4vw, 40px);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   column-gap: clamp(24px, 4.5vw, 64px);
   row-gap: 12px;
@@ -93,7 +93,7 @@
   justify-content: center;
   justify-self: center;
   padding: 0 6px;
-  max-width: min(100%, calc(100% - 240px));
+  max-width: min(100%, calc(100% - 320px));
   width: fit-content;
 }
 
@@ -286,25 +286,98 @@
 }
 
 @media (max-width: 1200px) {
+  .lumen-header__inner {
+    column-gap: clamp(16px, 3vw, 36px);
+  }
+
   .lumen-nav {
-    max-width: min(100%, calc(100% - 180px));
+    max-width: min(100%, calc(100% - 230px));
   }
 
   .lumen-nav__list {
-    gap: clamp(4px, 1.4vw, 12px);
+    gap: clamp(4px, 1.2vw, 12px);
   }
 
   .lumen-nav__list a {
-    font-size: clamp(0.82rem, 0.78rem + 0.18vw, 0.92rem);
-    padding: 7px clamp(9px, 1.25vw, 12px);
+    font-size: clamp(0.82rem, 0.78rem + 0.14vw, 0.9rem);
+    padding: 7px clamp(8px, 1.1vw, 11px);
   }
 
   .lumen-nav__list .menu-item-has-children > a {
-    padding-inline-end: clamp(18px, 2.4vw, 24px);
+    padding-inline-end: clamp(18px, 2.2vw, 24px);
   }
 
   .lumen-nav__list .menu-item-has-children > a::after {
     right: clamp(8px, 1.5vw, 14px);
     inset-inline-end: clamp(8px, 1.5vw, 14px);
+  }
+}
+
+@media (max-width: 1180px) {
+  .lumen-header__inner {
+    column-gap: clamp(14px, 2.8vw, 30px);
+  }
+
+  .lumen-nav {
+    max-width: min(100%, calc(100% - 270px));
+  }
+
+  .lumen-nav__list {
+    gap: clamp(2px, 1vw, 9px);
+  }
+
+  .lumen-nav__list a {
+    font-size: clamp(0.8rem, 0.76rem + 0.12vw, 0.88rem);
+    padding: 6px clamp(7px, 1vw, 10px);
+  }
+
+  .lumen-nav__list .menu-item-has-children > a {
+    padding-inline-end: clamp(16px, 2vw, 22px);
+  }
+}
+
+@media (max-width: 1120px) {
+  .lumen-header__inner {
+    column-gap: clamp(12px, 2.6vw, 28px);
+  }
+
+  .lumen-nav {
+    max-width: min(100%, calc(100% - 280px));
+  }
+
+  .lumen-nav__list {
+    gap: clamp(2px, 0.9vw, 9px);
+  }
+
+  .lumen-nav__list a {
+    font-size: clamp(0.78rem, 0.74rem + 0.12vw, 0.86rem);
+    padding: 6px clamp(6px, 0.9vw, 9px);
+  }
+
+  .lumen-nav__list .menu-item-has-children > a {
+    padding-inline-end: clamp(14px, 1.9vw, 20px);
+  }
+}
+
+@media (max-width: 1120px) {
+  .lumen-header__inner {
+    column-gap: clamp(12px, 2.6vw, 28px);
+  }
+
+  .lumen-nav {
+    max-width: min(100%, calc(100% - 260px));
+  }
+
+  .lumen-nav__list {
+    gap: clamp(3px, 1vw, 10px);
+  }
+
+  .lumen-nav__list a {
+    font-size: clamp(0.8rem, 0.76rem + 0.12vw, 0.88rem);
+    padding: 6px clamp(7px, 0.9vw, 10px);
+  }
+
+  .lumen-nav__list .menu-item-has-children > a {
+    padding-inline-end: clamp(16px, 2vw, 22px);
   }
 }

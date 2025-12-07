@@ -94,6 +94,28 @@ $hero_metric_keys = [
     'best_for',
 ];
 
+$compare_faq_items = [
+    [
+        'question_key' => 'product.faq.items.shipping.q',
+        'answer_key'   => 'product.faq.items.shipping.a',
+    ],
+    [
+        'question_key' => 'product.faq.items.warranty.q',
+        'answer_key'   => 'product.faq.items.warranty.a',
+    ],
+    [
+        'question_key' => 'product.faq.items.concierge.q',
+        'answer_key'   => 'product.faq.items.concierge.a',
+    ],
+];
+
+$compare_cta_links = [
+    'p10p'    => $hero_10p_url,
+    'p10s'    => $hero_10s_url,
+    'faq'     => svic_url_with_lang(home_url('/faq/')),
+    'contact' => svic_url_with_lang(home_url('/contact/')),
+];
+
 ?>
 
 <main class="compare-page">
@@ -163,6 +185,27 @@ $hero_metric_keys = [
     </div>
   </section>
 
+  <section class="compare-traffic" id="why-us">
+    <div class="compare-traffic__inner">
+      <div class="compare-traffic__copy">
+        <span class="compare-traffic__badge"><?php echo svic_translate_html('compare.traffic.badge'); ?></span>
+        <h2 class="compare-traffic__title"><?php echo svic_translate_html('compare.traffic.title'); ?></h2>
+        <p class="compare-traffic__lead"><?php echo svic_translate_html('compare.traffic.lead'); ?></p>
+        <ul class="compare-traffic__list" role="list">
+          <li><?php echo svic_translate_html('compare.traffic.bullets.shipping'); ?></li>
+          <li><?php echo svic_translate_html('compare.traffic.bullets.concierge'); ?></li>
+          <li><?php echo svic_translate_html('compare.traffic.bullets.warranty'); ?></li>
+        </ul>
+      </div>
+      <div class="compare-traffic__links" role="group" aria-label="<?php echo esc_attr__('Primary compare actions', 'svicloudtvbox-lumen'); ?>">
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($compare_cta_links['p10p']); ?>"><?php echo svic_translate_html('compare.traffic.links.p10p'); ?></a>
+        <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($compare_cta_links['p10s']); ?>"><?php echo svic_translate_html('compare.traffic.links.p10s'); ?></a>
+        <a class="compare-traffic__textlink" href="<?php echo esc_url($compare_cta_links['faq']); ?>"><?php echo svic_translate_html('compare.traffic.links.faq'); ?></a>
+        <a class="compare-traffic__textlink" href="<?php echo esc_url($compare_cta_links['contact']); ?>"><?php echo svic_translate_html('compare.traffic.links.contact'); ?></a>
+      </div>
+    </div>
+  </section>
+
   <section class="compare-differences" aria-label="<?php echo esc_attr__('Key differences between models', 'svicloudtvbox-lumen'); ?>">
     <div class="compare-differences__grid">
       <?php foreach ($key_differences as $difference) : ?>
@@ -172,6 +215,28 @@ $hero_metric_keys = [
           <p class="compare-difference-card__copy"><?php echo svic_translate_html($difference['base_key'] . '.description'); ?></p>
         </article>
       <?php endforeach; ?>
+    </div>
+  </section>
+
+  <section class="compare-faq" id="compare-faq">
+    <div class="compare-faq__inner">
+      <header class="compare-faq__header">
+        <span class="compare-faq__badge"><?php echo svic_translate_html('product.faq.badge'); ?></span>
+        <h2 class="compare-faq__title"><?php echo svic_translate_html('product.faq.title'); ?></h2>
+        <p class="compare-faq__lead"><?php echo svic_translate_html('product.faq.lead'); ?></p>
+      </header>
+      <div class="compare-faq__grid">
+        <?php foreach ($compare_faq_items as $idx => $item) : ?>
+          <details class="compare-faq__item"<?php echo $idx === 0 ? ' open' : ''; ?>>
+            <summary class="compare-faq__question"><?php echo svic_translate_html($item['question_key']); ?></summary>
+            <div class="compare-faq__answer"><?php echo wp_kses_post(svic_translate($item['answer_key'])); ?></div>
+          </details>
+        <?php endforeach; ?>
+      </div>
+      <div class="compare-faq__cta">
+        <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($compare_cta_links['faq']); ?>"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($compare_cta_links['contact']); ?>"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
+      </div>
     </div>
   </section>
 

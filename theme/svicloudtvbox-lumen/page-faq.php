@@ -10,6 +10,8 @@ get_header();
 $setup_guide_url = svic_url_with_lang(home_url('/guides-setup/'));
 $compare_url     = svic_url_with_lang(home_url('/compare/'));
 $support_url     = svic_url_with_lang(home_url('/contact/'));
+$pdp_url         = svic_url_with_lang(home_url('/product/svicloud-10p-plus/'));
+$faq_url         = svic_url_with_lang(home_url('/faq/'));
 
 $faq_sections = [
     [
@@ -129,6 +131,27 @@ $faq_sections = [
         <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($compare_url); ?>">
           <?php echo svic_translate_html('faq.hero.cta_secondary'); ?>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-intent" id="faq-intent">
+    <div class="faq-intent__inner">
+      <div class="faq-intent__copy">
+        <span class="faq-intent__badge"><?php echo svic_translate_html('product.traffic.badge'); ?></span>
+        <h2 class="faq-intent__title"><?php echo svic_translate_html('product.traffic.title'); ?></h2>
+        <p class="faq-intent__lead"><?php echo svic_translate_html('product.traffic.lead'); ?></p>
+        <ul class="faq-intent__list" role="list">
+          <li><?php echo svic_translate_html('product.traffic.bullets.shipping'); ?></li>
+          <li><?php echo svic_translate_html('product.traffic.bullets.concierge'); ?></li>
+          <li><?php echo svic_translate_html('product.traffic.bullets.warranty'); ?></li>
+        </ul>
+      </div>
+      <div class="faq-intent__links" role="group" aria-label="<?php echo esc_attr__('Key actions', 'svicloudtvbox-lumen'); ?>">
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($pdp_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.primary'); ?></a>
+        <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($compare_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.compare'); ?></a>
+        <a class="faq-intent__textlink" href="<?php echo esc_url($faq_url); ?>"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
+        <a class="faq-intent__textlink" href="<?php echo esc_url($support_url); ?>"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
       </div>
     </div>
   </section>

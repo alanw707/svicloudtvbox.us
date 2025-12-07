@@ -215,6 +215,19 @@ final class SVIC_Locale_Resolver
             } elseif ($sanitized[0] !== '/') {
                 $sanitized = '/' . $sanitized;
             }
+        } elseif ($relativePath === '/zh-cn' || $relativePath === '/zh-cn/') {
+            $isLanguageRoute = true;
+            $sanitized = '/';
+            self::$pathLocale = 'zh_CN';
+        } elseif (strpos($relativePath, '/zh-cn/') === 0) {
+            $isLanguageRoute = true;
+            $sanitized = substr($relativePath, 6);
+            if ($sanitized === false || $sanitized === '') {
+                $sanitized = '/';
+            } elseif ($sanitized[0] !== '/') {
+                $sanitized = '/' . $sanitized;
+            }
+            self::$pathLocale = 'zh_CN';
         }
 
         if (!$isLanguageRoute) {
@@ -225,7 +238,9 @@ final class SVIC_Locale_Resolver
 
         $sanitized = self::normalizePath($sanitized);
         self::$sanitizedRequestPath = $sanitized;
-        self::$pathLocale = 'zh_TW';
+        if (!self::$pathLocale) {
+            self::$pathLocale = 'zh_TW';
+        }
 
         $updatedPath = $sanitized;
         if ($homePath !== '' && $homePath !== '/') {

@@ -63,3 +63,104 @@
   color: rgba(214, 232, 255, 0.82);
   line-height: 1.6;
 }
+
+/* FAQ band on compare page */
+.compare-faq {
+  margin: clamp(2.5rem, 6vw, 4rem) auto;
+  padding: clamp(2rem, 5vw, 3rem);
+  background: linear-gradient(180deg, rgba(3, 6, 16, 0.92) 0%, rgba(3, 8, 22, 0.88) 100%);
+  border-radius: 24px;
+  border: 1px solid rgba(92, 132, 212, 0.2);
+  box-shadow: var(--shadow-lg);
+}
+
+.compare-faq__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.compare-faq__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: rgba(226, 236, 255, 0.86);
+  background: rgba(94, 141, 255, 0.18);
+  width: fit-content;
+}
+
+.compare-faq__title {
+  margin: 0;
+  color: var(--lumen-text-primary);
+}
+
+.compare-faq__lead {
+  margin: 0;
+  color: rgba(223, 232, 255, 0.82);
+}
+
+.compare-faq__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.compare-faq__item {
+  background: rgba(4, 8, 20, 0.7);
+  border: 1px solid rgba(92, 132, 212, 0.2);
+  border-radius: 16px;
+  padding: 0.9rem 1rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.compare-faq__item[open] {
+  border-color: rgba(122, 189, 255, 0.55);
+  transform: translateY(-2px);
+}
+
+.compare-faq__question {
+  list-style: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: rgba(243, 246, 255, 0.95);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.compare-faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.compare-faq__question::after {
+  content: '+';
+  margin-left: auto;
+  font-size: 1.2rem;
+  color: rgba(160, 186, 232, 0.85);
+  transition: transform 0.2s ease;
+}
+
+.compare-faq__item[open] .compare-faq__question::after {
+  transform: rotate(45deg);
+}
+
+.compare-faq__answer {
+  margin-top: 0.65rem;
+  color: rgba(219, 229, 255, 0.82);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.compare-faq__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}

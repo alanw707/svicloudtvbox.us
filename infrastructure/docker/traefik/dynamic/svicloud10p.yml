@@ -5,6 +5,12 @@ http:
       service: svicloud10p
       entryPoints:
         - web
+    svicloud10p-https:
+      rule: "Host(`svicloud10p.svic.local`)"
+      service: svicloud10p
+      entryPoints:
+        - websecure
+      tls: {}
 
   services:
     svicloud10p:

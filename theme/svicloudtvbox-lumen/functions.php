@@ -1493,17 +1493,6 @@ if (!function_exists('svic_filter_rank_math_front_page_og_image')) {
             return $image;
         }
 
-        $existing_url = '';
-        if (is_array($image) && !empty($image['url'])) {
-            $existing_url = (string) $image['url'];
-        } elseif (is_string($image)) {
-            $existing_url = trim($image);
-        }
-
-        if ($existing_url !== '') {
-            return $image;
-        }
-
         $hero_meta = svic_get_homepage_hero_image_meta();
         if (empty($hero_meta['url'])) {
             return $image;
@@ -2576,6 +2565,11 @@ add_action('wp_head', 'svic_output_global_site_schema', 6);
 if (!function_exists('svic_output_single_product_schema')) {
     function svic_output_single_product_schema(): void
     {
+        // When Rank Math is active, let its Product schema be the single source of truth.
+        if (defined('RANK_MATH_VERSION')) {
+            return;
+        }
+
         if (is_admin() || !function_exists('is_product') || !is_product() || !class_exists('WooCommerce')) {
             return;
         }
@@ -2599,6 +2593,15 @@ if (!function_exists('svic_output_single_product_schema')) {
 }
 
 add_action('wp_head', 'svic_output_single_product_schema', 8);
+
+// Prevent WooCommerce from outputting its own Product structured data when Rank Math (or our custom schema) is present.
+add_filter('woocommerce_structured_data_enabled', function ($enabled) {
+    if (is_product()) {
+        return false;
+    }
+
+    return $enabled;
+}, 10, 1);
 
 if (!function_exists('svic_should_render_breadcrumbs')) {
     function svic_should_render_breadcrumbs(): bool

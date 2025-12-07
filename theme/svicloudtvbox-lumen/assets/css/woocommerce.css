@@ -269,6 +269,36 @@ to{opacity:1;transform:translateY(0)}
 }
 .lumen-product .badge-row{display:flex;flex-wrap:wrap;gap:10px}
 .lumen-product .badge-row .badge{padding:8px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.18);background:rgba(7,18,44,0.8);color:var(--lumen-text-primary);letter-spacing:0.08em;font-size:0.85rem;font-weight:600;text-transform:uppercase}
+.product-traffic{margin-top:clamp(2.5rem,6vw,4rem);padding:clamp(2.25rem,6vw,4rem);background:linear-gradient(120deg,rgba(12,22,46,0.9) 0%,rgba(8,14,28,0.92) 100%);border:1px solid rgba(92,132,212,0.2);border-radius:var(--radius-2xl);box-shadow:var(--shadow-lg)}
+.product-traffic__inner{display:grid;gap:clamp(1.25rem,3vw,2rem);grid-template-columns:1fr}
+@media(min-width:960px){.product-traffic__inner{grid-template-columns:1.2fr 0.8fr;align-items:center}
+}
+.product-traffic__badge{display:inline-flex;align-items:center;gap:0.35rem;padding:0.4rem 0.85rem;border-radius:999px;background:rgba(94,141,255,0.14);color:rgba(226,236,255,0.9);text-transform:uppercase;letter-spacing:0.04em;font-size:0.8rem;margin-bottom:0.35rem}
+.product-traffic__title{margin:0 0 0.35rem 0;font-size:clamp(1.3rem,3vw,1.7rem);color:var(--lumen-text-primary)}
+.product-traffic__lead{margin:0 0 0.8rem 0;color:rgba(223,232,255,0.9);line-height:1.6}
+.product-traffic__list{list-style:none;padding:0;margin:0;display:grid;gap:0.55rem}
+.product-traffic__list li{position:relative;padding-left:1.6rem;color:rgba(223,232,255,0.92);line-height:1.5}
+.product-traffic__list li::before{content:'';position:absolute;left:0;top:0.55rem;width:0.5rem;height:0.5rem;border-radius:50%;background:linear-gradient(135deg,#6ec6ff 0%,#5b8bff 100%);box-shadow:0 0 0 6px rgba(94,139,255,0.18)}
+.product-traffic__links{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.product-traffic__links .lumen-pill{width:100%;justify-content:center}
+.product-traffic__textlink{display:inline-flex;align-items:center;justify-content:center;gap:0.4rem;padding:0.85rem 1rem;border-radius:12px;color:rgba(226,236,255,0.95);background:rgba(255,255,255,0.04);border:1px solid rgba(92,132,212,0.2);text-decoration:none;transition:border-color 0.2s ease,transform 0.2s ease,background 0.2s ease}
+.product-traffic__textlink:hover{border-color:rgba(122,189,255,0.55);background:rgba(92,132,212,0.12);transform:translateY(-1px)}
+@media(max-width:720px){.product-traffic__links{grid-template-columns:1fr}
+}
+.product-faq{margin-top:clamp(2rem,5vw,3.5rem);padding:clamp(2rem,5vw,3rem);background:linear-gradient(180deg,rgba(3,6,16,0.92) 0%,rgba(3,8,22,0.88) 100%);border-radius:var(--radius-2xl);border:1px solid rgba(92,132,212,0.2);box-shadow:var(--shadow-lg)}
+.product-faq__inner{max-width:1100px;margin:0 auto;display:grid;gap:1.25rem}
+.product-faq__badge{display:inline-flex;align-items:center;justify-content:center;padding:0.35rem 0.9rem;border-radius:999px;text-transform:uppercase;font-size:0.75rem;letter-spacing:0.08em;color:rgba(226,236,255,0.86);background:rgba(94,141,255,0.18);width:fit-content}
+.product-faq__title{margin:0;color:var(--lumen-text-primary)}
+.product-faq__lead{margin:0;color:rgba(223,232,255,0.82)}
+.product-faq__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.product-faq__item{background:rgba(4,8,20,0.7);border:1px solid rgba(92,132,212,0.2);border-radius:16px;padding:0.9rem 1rem;transition:border-color 0.2s ease,transform 0.2s ease}
+.product-faq__item[open]{border-color:rgba(122,189,255,0.55);transform:translateY(-2px)}
+.product-faq__question{list-style:none;cursor:pointer;font-weight:600;font-size:0.98rem;color:rgba(243,246,255,0.95);display:flex;align-items:center;gap:0.65rem}
+.product-faq__question::-webkit-details-marker{display:none}
+.product-faq__question::after{content:'+';margin-left:auto;font-size:1.2rem;color:rgba(160,186,232,0.85);transition:transform 0.2s ease}
+.product-faq__item[open] .product-faq__question::after{transform:rotate(45deg)}
+.product-faq__answer{margin-top:0.65rem;color:rgba(219,229,255,0.82);font-size:0.95rem;line-height:1.7}
+.product-faq__cta{display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:0.5rem}
 .lumen-product .product-hero-title{font-family:var(--font-accent);font-size:clamp(2.2rem,3.8vw,3.2rem);letter-spacing:-0.02em;color:var(--lumen-text-primary)}
 .lumen-product .product-hero-subtitle{margin:0;color:var(--lumen-text-secondary);font-size:1.02rem;line-height:1.75}
 .lumen-product .product-hero-price{font-size:2.4rem;font-weight:600;color:var(--lumen-accent-teal)}

@@ -20,13 +20,17 @@
     $logo_alt        = $logo_alt ? $logo_alt : get_bloginfo( 'name' );
     $site_name       = get_bloginfo( 'name' );
 
-    $base_url     = function_exists('svic_current_base_url') ? svic_current_base_url() : home_url('/');
-    $english_url  = svic_url_with_lang($base_url, 'en');
-    $chinese_url  = svic_url_with_lang($base_url, 'zh');
-    $current_lang = function_exists('svic_current_locale') ? svic_current_locale() : get_locale();
+    $base_url       = function_exists('svic_current_base_url') ? svic_current_base_url() : home_url('/');
+    $english_url    = svic_url_with_lang($base_url, 'en');
+    $chinese_url_tw = svic_url_with_lang($base_url, 'zh');
+    $chinese_url_cn = svic_url_with_lang($base_url, 'zh-cn');
+    $current_lang   = function_exists('svic_current_locale') ? svic_current_locale() : get_locale();
     $logo_classes = ['lumen-header__logo'];
     $english_link_classes = 'lumen-lang-toggle__link' . ($current_lang === 'en_US' ? ' is-active' : '');
-    $chinese_link_classes = 'lumen-lang-toggle__link' . ($current_lang !== 'en_US' ? ' is-active' : '');
+    $tw_active = ($current_lang === 'zh_TW');
+    $cn_active = ($current_lang === 'zh_CN');
+    $chinese_tw_link_classes = 'lumen-lang-toggle__link' . ($tw_active ? ' is-active' : '');
+    $chinese_cn_link_classes = 'lumen-lang-toggle__link' . ($cn_active ? ' is-active' : '');
 
     if ( $has_custom_logo && $custom_logo_id ) {
         $logo_classes[] = 'lumen-header__logo--image';
@@ -106,7 +110,8 @@
       <div class="lumen-header__actions">
         <div class="lumen-lang-toggle lumen-lang-toggle--desktop" role="group" aria-label="<?php esc_attr_e( 'Language selector', 'svicloudtvbox-lumen' ); ?>">
           <a class="<?php echo esc_attr($english_link_classes); ?>" href="<?php echo esc_url($english_url); ?>" data-locale="en_US" hreflang="en-US">EN</a>
-          <a class="<?php echo esc_attr($chinese_link_classes); ?>" href="<?php echo esc_url($chinese_url); ?>" data-locale="zh_TW" hreflang="zh-Hant-US">中文</a>
+          <a class="<?php echo esc_attr($chinese_tw_link_classes); ?>" href="<?php echo esc_url($chinese_url_tw); ?>" data-locale="zh_TW" hreflang="zh-Hant-US">繁</a>
+          <a class="<?php echo esc_attr($chinese_cn_link_classes); ?>" href="<?php echo esc_url($chinese_url_cn); ?>" data-locale="zh_CN" hreflang="zh-Hans-US">简</a>
         </div>
         <?php
           echo svic_header_cart_link([
@@ -152,7 +157,8 @@
       <div class="lumen-mobile-nav__actions">
         <div class="lumen-lang-toggle lumen-lang-toggle--mobile" role="group" aria-label="<?php esc_attr_e( 'Language selector', 'svicloudtvbox-lumen' ); ?>">
           <a class="<?php echo esc_attr($english_link_classes); ?>" href="<?php echo esc_url($english_url); ?>" data-locale="en_US" hreflang="en-US">EN</a>
-          <a class="<?php echo esc_attr($chinese_link_classes); ?>" href="<?php echo esc_url($chinese_url); ?>" data-locale="zh_TW" hreflang="zh-Hant-US">中文</a>
+          <a class="<?php echo esc_attr($chinese_tw_link_classes); ?>" href="<?php echo esc_url($chinese_url_tw); ?>" data-locale="zh_TW" hreflang="zh-Hant-US">繁</a>
+          <a class="<?php echo esc_attr($chinese_cn_link_classes); ?>" href="<?php echo esc_url($chinese_url_cn); ?>" data-locale="zh_CN" hreflang="zh-Hans-US">简</a>
         </div>
         <?php
           echo svic_header_cart_link([

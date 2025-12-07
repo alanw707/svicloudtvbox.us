@@ -6,7 +6,7 @@
   display: inline-flex;
   align-items: center;
   justify-self: end;
-  gap: clamp(8px, 1.5vw, 18px);
+  gap: clamp(10px, 2vw, 22px);
   flex-wrap: nowrap;
 }
 
@@ -317,6 +317,40 @@
     min-width: 30px;
     font-size: clamp(0.62rem, 0.58rem + 0.12vw, 0.74rem);
     padding: 0 6px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .lumen-header__actions {
+    gap: clamp(3px, 0.9vw, 10px);
+  }
+
+  .lumen-lang-toggle--desktop .lumen-lang-toggle__link {
+    min-width: 26px;
+    padding: 0 4px;
+    font-size: clamp(0.6rem, 0.55rem + 0.12vw, 0.7rem);
+  }
+
+  .lumen-cart-link {
+    min-height: 30px;
+    padding-inline: 0.5rem;
+  }
+}
+
+@media (max-width: 1120px) {
+  .lumen-header__actions {
+    gap: clamp(3px, 0.9vw, 10px);
+  }
+
+  .lumen-lang-toggle--desktop .lumen-lang-toggle__link {
+    min-width: 28px;
+    padding: 0 5px;
+    font-size: clamp(0.6rem, 0.56rem + 0.12vw, 0.72rem);
+  }
+
+  .lumen-cart-link {
+    min-height: 32px;
+    padding-inline: 0.55rem;
   }
 }
 
