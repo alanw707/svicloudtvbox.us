@@ -89,7 +89,14 @@ class TopicDiscovery:
             gsc_candidates,
             competitor_candidates,
             official_candidates,
+            self._diversity_seed_topics(),
         ])
+
+        # Drop overused/low-novelty topics early (e.g., repetitive 4K-only headlines)
+        merged_candidates = [
+            c for c in merged_candidates
+            if not self._should_drop_overused(c.keyword, c.metadata)
+        ]
 
         # Fallback if no topics discovered
         if not merged_candidates:
@@ -350,6 +357,9 @@ class TopicDiscovery:
 
                 keyword = self._extract_keyword_from_line(line)
                 if not keyword or not self._looks_like_keyword(keyword):
+                    continue
+
+                if not self._keyword_allowed(keyword):
                     continue
 
                 # Get section priority and volume
@@ -734,6 +744,7 @@ class TopicDiscovery:
             "is_campaign": False,
             "volume_bonus": 0,
         }
+        overused_tokens = ("4k", "hdr", "dolby", "wi-fi 6", "wifi 6")
 
         # Check for geo-targeting
         for region in locale_targets:
@@ -760,7 +771,30 @@ class TopicDiscovery:
         if "常見問題" in keyword or "FAQ" in keyword.upper():
             classification["topic_type"] = "faq"
 
+        # Penalize overused tokens when no new angle; bonus when absent
+        has_overused = any(tok in lower_kw for tok in overused_tokens)
+        has_new_angle = classification["is_geo"] or classification["is_comparison"] or classification["is_campaign"] or classification["topic_type"] == "faq"
+        if has_overused and not has_new_angle:
+            classification["volume_bonus"] -= 20
+        if not has_overused:
+            classification["volume_bonus"] += 8
+
         return classification
+
+    @staticmethod
+    def _should_drop_overused(keyword: str, metadata: Dict[str, Any]) -> bool:
+        """Drop topics that are repetitive '4K' style with no new angle."""
+        lower_kw = keyword.lower()
+        overused_tokens = ("4k", "hdr", "dolby", "wi-fi 6", "wifi 6")
+        has_overused = any(tok in lower_kw for tok in overused_tokens)
+        has_new_angle = (
+            metadata.get("is_geo")
+            or metadata.get("is_comparison")
+            or metadata.get("is_campaign")
+            or metadata.get("topic_type") == "faq"
+        )
+        # Allow if new angle exists; otherwise drop
+        return bool(has_overused and not has_new_angle)
 
     def _merge_candidates(
         self,
@@ -830,6 +864,30 @@ class TopicDiscovery:
 
         return fallback
 
+    def _diversity_seed_topics(self) -> List[TopicCandidate]:
+        """Inject non-4K seed topics to diversify pipeline."""
+        seeds = [
+            "SVICLOUD 遙控器配對與連線問題排查",
+            "SVICLOUD 設定家長監控與頻道鎖定指南",
+            "SVICLOUD Wi-Fi 6 連網設定步驟與常見錯誤碼",
+            "SVICLOUD 年度保固與維修流程（美國地區）",
+            "SVICLOUD App 安裝與語言切換實務（英文/中文介面）",
+            "SVICLOUD 遙控器配對故障碼與連線異常排查指南",
+        ]
+        locale_targets = self.config.get("content_inputs", {}).get("locale_targets", [])
+        seeds_candidates: List[TopicCandidate] = []
+        for kw in seeds:
+            candidate = self._build_topic_candidate(
+                keyword=kw,
+                base_score=99 if "故障碼" in kw else 95,
+                section="diversity-seed",
+                volume_estimate=220,
+                locale_targets=locale_targets,
+                source="seed",
+            )
+            seeds_candidates.append(candidate)
+        return seeds_candidates
+
     def _scrape_competitor_keywords(self, url: str, min_length: int) -> List[str]:
         """Scrape Chinese keywords from competitor blog page.
 
@@ -850,7 +908,25 @@ class TopicDiscovery:
             resp.raise_for_status()
             soup = BeautifulSoup(resp.text, "html.parser")
 
+            for container in soup.find_all(["nav", "footer", "aside", "header"]):
+                container.decompose()
+
             seen = set()
+            excluded_exact = {
+                "categories",
+                "tags",
+                "recent comments",
+                "recent posts",
+                "search",
+                "product",
+                "item",
+                "lifestyle",
+                "seller",
+                "collection",
+                "best product",
+                "new product",
+                "hot selling",
+            }
 
             # Extract from headings and strong tags
             for tag in soup.find_all(["h1", "h2", "h3", "h4", "strong"]):
@@ -858,11 +934,17 @@ class TopicDiscovery:
                 if not text:
                     continue
 
+                if text.strip().lower() in excluded_exact:
+                    continue
+
                 # Find Chinese/English keywords
                 for token in re.findall(r"[\u4e00-\u9fffA-Za-z0-9＋+\- ]{2,40}", text):
                     cleaned = token.strip()
 
                     if len(cleaned) < min_length:
+                        continue
+
+                    if not self._keyword_allowed(cleaned):
                         continue
 
                     if cleaned in seen:

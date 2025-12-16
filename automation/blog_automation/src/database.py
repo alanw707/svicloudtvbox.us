@@ -55,11 +55,22 @@ class DatabaseManager:
                 unique_topics INTEGER,
                 posts_attempted INTEGER,
                 posts_published INTEGER,
+                posts_staged INTEGER,
                 dry_run INTEGER
             );
             """
         )
+        self._ensure_run_log_columns()
         self.conn.commit()
+
+    def _ensure_run_log_columns(self) -> None:
+        """Ensure run_log schema has expected columns (safe migration)."""
+        existing = {
+            row[1] for row in self.conn.execute("PRAGMA table_info(run_log)")
+            if row and len(row) > 1
+        }
+        if "posts_staged" not in existing:
+            self.conn.execute("ALTER TABLE run_log ADD COLUMN posts_staged INTEGER")
 
     def get_existing_keywords(self) -> Set[str]:
         """Retrieve all existing keywords from posts_history (case-insensitive).
@@ -148,6 +159,7 @@ class DatabaseManager:
         unique_topics: int,
         posts_attempted: int,
         posts_published: int,
+        posts_staged: int = 0,
         dry_run: bool = False
     ) -> None:
         """Log an automation run to run_log table for monitoring.
@@ -162,8 +174,8 @@ class DatabaseManager:
         self.conn.execute(
             """
             INSERT INTO run_log
-            (run_at, topics_found, unique_topics, posts_attempted, posts_published, dry_run)
-            VALUES (?, ?, ?, ?, ?, ?)
+            (run_at, topics_found, unique_topics, posts_attempted, posts_published, posts_staged, dry_run)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 datetime.now(timezone.utc).isoformat(),
@@ -171,10 +183,86 @@ class DatabaseManager:
                 unique_topics,
                 posts_attempted,
                 posts_published,
+                posts_staged,
                 1 if dry_run else 0,
             ),
         )
         self.conn.commit()
+
+    @staticmethod
+    def _normalize_sqlite_utc(ts: str) -> str:
+        """Normalize an ISO-like timestamp to SQLite CURRENT_TIMESTAMP format (UTC)."""
+        if not ts:
+            return ts
+        try:
+            normalized = ts.replace("Z", "+00:00")
+            dt = datetime.fromisoformat(normalized)
+            dt_utc = dt.astimezone(timezone.utc)
+            return dt_utc.strftime("%Y-%m-%d %H:%M:%S")
+        except Exception:
+            return ts
+
+    def count_published_since(self, since_iso: str) -> int:
+        """Count published posts since a given ISO timestamp."""
+        since_sqlite = self._normalize_sqlite_utc(since_iso)
+        cursor = self.conn.execute(
+            """
+            SELECT COUNT(*) FROM posts_history
+            WHERE status = 'published' AND created_at >= ?
+            """,
+            (since_sqlite,),
+        )
+        row = cursor.fetchone()
+        return int(row[0]) if row else 0
+
+    def count_wp_created_since(self, since_iso: str) -> int:
+        """Count WordPress-created posts since a given timestamp.
+
+        Includes records with status 'published' (live) and 'staged' (WP draft/future),
+        but excludes local-only 'draft' files.
+        """
+        since_sqlite = self._normalize_sqlite_utc(since_iso)
+        cursor = self.conn.execute(
+            """
+            SELECT COUNT(*) FROM posts_history
+            WHERE status IN ('published', 'staged') AND created_at >= ?
+            """,
+            (since_sqlite,),
+        )
+        row = cursor.fetchone()
+        return int(row[0]) if row else 0
+
+    def last_run_at(self) -> Optional[str]:
+        """Return ISO timestamp of the most recent automation run."""
+        cursor = self.conn.execute(
+            "SELECT run_at FROM run_log ORDER BY run_at DESC LIMIT 1"
+        )
+        row = cursor.fetchone()
+        return row[0] if row else None
+
+    def recent_posts(self, limit: int = 50) -> List[Dict[str, Any]]:
+        """Fetch recent posts from history for duplicate checking."""
+        cursor = self.conn.execute(
+            """
+            SELECT title, slug, keyword, created_at, metadata
+            FROM posts_history
+            ORDER BY created_at DESC
+            LIMIT ?
+            """,
+            (limit,),
+        )
+        results: List[Dict[str, Any]] = []
+        for title, slug, keyword, created_at, metadata in cursor.fetchall():
+            results.append(
+                {
+                    "title": title or "",
+                    "slug": slug or "",
+                    "keyword": keyword or "",
+                    "created_at": created_at or "",
+                    "metadata": metadata or "",
+                }
+            )
+        return results
 
     def close(self) -> None:
         """Close the database connection."""

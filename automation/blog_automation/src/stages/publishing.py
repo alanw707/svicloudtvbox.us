@@ -101,6 +101,128 @@ class Publisher:
 
         self.log.info("Saved draft to %s", path)
 
+    def publish_translation(
+        self,
+        post: GeneratedPost,
+        locale: str,
+        lang_field: str = "lang",
+        translated_title: Optional[str] = None,
+        translated_slug: Optional[str] = None,
+        translated_content: Optional[str] = None,
+        translated_excerpt: Optional[str] = None,
+    ) -> Optional[int]:
+        """Publish a translated variant of a post."""
+        rest_cfg = self.config.get("wordpress", {}).get("rest", {})
+        endpoint = rest_cfg.get("endpoint")
+        username = rest_cfg.get("username")
+        password_env = rest_cfg.get("password_env")
+        password = os.getenv(password_env) if password_env else rest_cfg.get("password")
+        status = rest_cfg.get("status", "draft")
+
+        if not endpoint or not username or not password:
+            self.log.error("REST API not fully configured (endpoint/username/password missing)")
+            return None
+
+        title = translated_title or post.title
+        slug = translated_slug or f"{post.slug}-{locale.lower()}"
+
+        markdown_source = translated_content or post.content
+        html_content = self._markdown_to_html(markdown_source)
+        excerpt_text = translated_excerpt or self._excerpt_from_html(html_content, keyword=post.keyword)
+
+        payload = {
+            "title": title,
+            "slug": slug,
+            "content": html_content,
+            "excerpt": excerpt_text,
+            "status": status,
+            lang_field: locale,
+        }
+
+        if rest_cfg.get("author"):
+            payload["author"] = rest_cfg["author"]
+
+        selected_categories = self._select_categories_for_post(post)
+        if selected_categories:
+            payload["categories"] = selected_categories
+
+        try:
+            response = requests.post(
+                endpoint,
+                auth=(username, password),
+                json=payload,
+                timeout=30
+            )
+
+            if response.status_code >= 200 and response.status_code < 300:
+                data = response.json()
+                self.log.info("Published translation '%s' (%s) (WP ID %s)", title, locale, data.get("id"))
+                return data.get("id")
+
+            self.log.error("WordPress REST API error %s for locale %s: %s", response.status_code, locale, response.text[:500])
+            return None
+
+        except requests.RequestException as exc:
+            self.log.error("Failed to call WordPress REST API for locale %s: %s", locale, exc)
+            return None
+
+    def update_translation_meta(
+        self,
+        post_id: Optional[int],
+        locale: str,
+        translation: Dict[str, str],
+    ) -> bool:
+        """Store translated content into meta fields on the base post."""
+        if post_id is None:
+            self.log.warning("Cannot update translation meta without post_id")
+            return False
+
+        suffix = self._locale_suffix(locale)
+        if not suffix:
+            self.log.warning("Unsupported locale for translation meta: %s", locale)
+            return False
+
+        rest_cfg = self.config.get("wordpress", {}).get("rest", {})
+        endpoint = rest_cfg.get("endpoint")
+        username = rest_cfg.get("username")
+        password_env = rest_cfg.get("password_env")
+        password = os.getenv(password_env) if password_env else rest_cfg.get("password")
+        if not endpoint or not username or not password:
+            self.log.error("REST API not fully configured (endpoint/username/password missing)")
+            return False
+
+        meta_payload = {
+            f"_svic_content_{suffix}": translation.get("content", ""),
+            f"_svic_title_{suffix}": translation.get("title", ""),
+            f"_svic_description_{suffix}": translation.get("excerpt", ""),
+        }
+
+        url = f"{endpoint.rstrip('/')}/{post_id}"
+        try:
+            resp = requests.post(
+                url,
+                auth=(username, password),
+                json={"meta": meta_payload},
+                timeout=30,
+            )
+            if 200 <= resp.status_code < 300:
+                self.log.info("Updated translation meta for post %s locale %s", post_id, locale)
+                return True
+            self.log.warning("Failed to update translation meta (%s): %s", resp.status_code, resp.text[:200])
+            return False
+        except requests.RequestException as exc:
+            self.log.error("Translation meta update failed for post %s locale %s: %s", post_id, locale, exc)
+            return False
+
+    @staticmethod
+    def _locale_suffix(locale: str) -> Optional[str]:
+        mapping = {
+            "zh_TW": "zh_tw",
+            "zh_CN": "zh_cn",
+            "en_US": "en_us",
+        }
+        return mapping.get(locale)
+
     def _publish_via_rest_api(self, post: GeneratedPost) -> bool:
         """Publish post via WordPress REST API.
 
@@ -142,6 +264,12 @@ class Publisher:
             "excerpt": excerpt_text,
             "status": status,
         }
+
+        # Apply base language if configured
+        base_locale = self.config.get("publishing", {}).get("base_locale")
+        lang_field = self.config.get("publishing", {}).get("locale_param", "lang")
+        if base_locale:
+            payload[lang_field] = base_locale
 
         # Add optional fields
         if rest_cfg.get("author"):

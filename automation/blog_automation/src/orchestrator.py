@@ -7,11 +7,14 @@ all stage modules and client services.
 import json
 import logging
 import os
-from datetime import datetime, timezone
+import re
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Iterable
+from difflib import SequenceMatcher
 
 import yaml
+import requests
 
 from .models import TopicCandidate, GeneratedPost
 from .database import DatabaseManager
@@ -149,14 +152,51 @@ class BlogAutomation:
             unique_topics = self.filter_duplicates(topics)
             self.log.info("Processing %s topics (max_posts=%s)", len(unique_topics), max_posts)
 
-            # Determine post limit
-            publishing_cfg = self.config.get("publishing", {})
-            weekly_cap = publishing_cfg.get("max_posts_per_week", 7)
-            limit = max_posts or weekly_cap
-            attempts = published = 0
+            # Cadence + quota gates
+            now = datetime.now(timezone.utc)
+            start_of_week = (now - timedelta(days=now.isoweekday() - 1)).replace(hour=0, minute=0, second=0, microsecond=0)
+            weekly_cap = self.config.get("publishing", {}).get("max_posts_per_week", 2)
+            per_run_cap = self.config.get("publishing", {}).get("max_posts_per_run", 1)
+            already_created = self.db.count_wp_created_since(start_of_week.isoformat())
+            remaining_week = max(0, weekly_cap - already_created)
+
+            # Backlog visibility
+            last_run_iso = self.db.last_run_at()
+            backlog_windows = self._count_missed_windows(last_run_iso, now)
+            if backlog_windows > 0:
+                self.log.info("Detected %s missed scheduled windows since last run", backlog_windows)
+
+            limit = min(per_run_cap, remaining_week)
+            if max_posts is not None:
+                limit = min(limit, max_posts)
+
+            if limit <= 0:
+                msg = f"Weekly cap reached (cap={weekly_cap}, created={already_created}). No new WordPress posts will be created this run."
+                self.log.warning(msg)
+                self.email.send_notice("SVICLOUD Autoblog cadence cap reached", msg)
+                self.db.record_run(
+                    topics_found=len(topics),
+                    unique_topics=len(unique_topics),
+                    posts_attempted=0,
+                    posts_published=0,
+                    posts_staged=0,
+                    dry_run=self.dry_run,
+                )
+                return
+
+            rest_cfg = self.config.get("wordpress", {}).get("rest", {})
+            desired_wp_status = (rest_cfg.get("status") or "draft").lower()
+
+            attempts = created = published = staged = 0
+
+            # Pre-fetch remote posts for dedupe
+            remote_posts = self._recent_remote_posts()
+            local_recent = self.db.recent_posts()
 
             # Generate and publish posts
-            for topic in unique_topics[:limit]:
+            for topic in unique_topics:
+                if created >= limit:
+                    break
                 attempts += 1
                 post = self.generate_post(topic)
                 score = self.quality.validate_quality(post)
@@ -166,9 +206,21 @@ class BlogAutomation:
                     self._save_draft(post)
                     continue
 
+                if self._is_duplicate_post(post, local_recent, remote_posts):
+                    self.log.warning("Skipping '%s' due to duplicate detection", post.title)
+                    self.email.send_notice(
+                        "SVICLOUD Autoblog duplicate skipped",
+                        f"Skipped post '{post.title}' (keyword='{post.keyword}') due to duplicate detection."
+                    )
+                    continue
+
                 if self.dry_run:
                     self.log.info("[DRY] Would publish '%s' (score %.1f)", post.title, score)
-                    published += 1
+                    created += 1
+                    if desired_wp_status == "publish":
+                        published += 1
+                    else:
+                        staged += 1
                     continue
 
                 if self._keyword_recently_published(post.keyword):
@@ -176,8 +228,15 @@ class BlogAutomation:
                     continue
 
                 if self.publisher.publish_post(post):
-                    published += 1
-                    self._record_post(post, status="published")
+                    created += 1
+                    wp_status = (post.frontmatter.get("wp_status") or desired_wp_status or "draft").lower()
+                    if wp_status == "publish":
+                        published += 1
+                        self._record_post(post, status="published")
+                    else:
+                        staged += 1
+                        self._record_post(post, status="staged")
+                    self._publish_translations(post)
                 else:
                     self._save_draft(post)
 
@@ -187,6 +246,7 @@ class BlogAutomation:
                 unique_topics=len(unique_topics),
                 posts_attempted=attempts,
                 posts_published=published,
+                posts_staged=staged,
                 dry_run=self.dry_run
             )
 
@@ -195,9 +255,16 @@ class BlogAutomation:
                 "topics_found": len(topics),
                 "unique_topics": len(unique_topics),
                 "attempts": attempts,
+                "created": created,
                 "published": published,
+                "staged": staged,
                 "dry_run": self.dry_run,
             })
+            if created == 0:
+                self.email.send_notice(
+                    "SVICLOUD Autoblog skipped all candidates",
+                    "No WordPress post was created this run (all candidates skipped or failed)."
+                )
         finally:
             self._release_lock()
 
@@ -521,6 +588,199 @@ class BlogAutomation:
         if not path.is_absolute():
             return (self.base_dir / path).resolve()
         return path
+
+    def _count_missed_windows(self, last_run_iso: Optional[str], now: datetime) -> int:
+        """Estimate missed scheduled windows since last run."""
+        if not last_run_iso:
+            return 0
+        try:
+            last_run = datetime.fromisoformat(last_run_iso)
+        except Exception:
+            return 0
+
+        sched = self.config.get("publishing", {}).get("schedule", [])
+        if not sched:
+            return 0
+
+        weekday_map = {
+            "monday": 0,
+            "tuesday": 1,
+            "wednesday": 2,
+            "thursday": 3,
+            "friday": 4,
+            "saturday": 5,
+            "sunday": 6,
+        }
+
+        missed = 0
+        day_cursor = last_run.date()
+        while day_cursor <= now.date():
+            for entry in sched:
+                day_raw = (entry.get("day") or "").strip().lower()
+                time_raw = (entry.get("time") or "").strip()
+                if day_raw not in weekday_map or ":" not in time_raw:
+                    continue
+                hour, minute = [int(part) for part in time_raw.split(":", 1)]
+                scheduled_dt = datetime.combine(day_cursor, datetime.min.time()).replace(
+                    hour=hour, minute=minute, tzinfo=now.tzinfo
+                )
+                if last_run < scheduled_dt < now:
+                    missed += 1
+            day_cursor += timedelta(days=1)
+        return missed
+
+    def _recent_remote_posts(self, pages: int = 2, per_page: int = 10) -> List[Dict[str, Any]]:
+        """Fetch recent WP posts for duplicate detection."""
+        rest_cfg = self.config.get("wordpress", {}).get("rest", {})
+        endpoint = rest_cfg.get("endpoint")
+        username = rest_cfg.get("username")
+        password_env = rest_cfg.get("password_env")
+        password = os.getenv(password_env) if password_env else rest_cfg.get("password")
+        if not endpoint:
+            return []
+
+        headers = {"Accept": "application/json"}
+        auth = (username, password) if username and password else None
+        collected: List[Dict[str, Any]] = []
+        for page in range(1, pages + 1):
+            params = {"per_page": per_page, "page": page, "_fields": "id,title,slug,content"}
+            try:
+                resp = requests.get(endpoint, params=params, headers=headers, auth=auth, timeout=20)
+                if resp.status_code != 200:
+                    self.log.debug("Remote posts fetch error %s: %s", resp.status_code, resp.text[:200])
+                    break
+                rows = resp.json()
+                if not rows:
+                    break
+                for row in rows:
+                    collected.append(
+                        {
+                            "id": row.get("id"),
+                            "title": (row.get("title") or {}).get("rendered", ""),
+                            "slug": row.get("slug", ""),
+                            "content": (row.get("content") or {}).get("rendered", ""),
+                        }
+                    )
+            except requests.RequestException as exc:
+                self.log.debug("Remote posts fetch failed: %s", exc)
+                break
+        return collected
+
+    def _is_duplicate_post(
+        self,
+        post: GeneratedPost,
+        local_recent: List[Dict[str, Any]],
+        remote_posts: List[Dict[str, Any]],
+    ) -> bool:
+        """Check for duplicate titles/slugs/content against local and remote sources."""
+        threshold = float(self.config.get("quality", {}).get("duplicate_threshold", 0.85))
+
+        existing_titles = [p.get("title", "") for p in local_recent]
+        existing_slugs = {p.get("slug", "") for p in local_recent}
+        remote_titles = [p.get("title", "") for p in remote_posts]
+        remote_slugs = {p.get("slug", "") for p in remote_posts}
+
+        # Exact slug collision
+        if post.slug in existing_slugs or post.slug in remote_slugs:
+            return True
+
+        def similar(a: str, b: str) -> float:
+            return SequenceMatcher(None, a or "", b or "").ratio()
+
+        for title in existing_titles + remote_titles:
+            if similar(post.title, title) >= threshold:
+                return True
+
+        # Embedding-based content similarity (local + remote)
+        if self.openai:
+            candidate_embedding = self.openai.generate_embedding((post.content or "")[:4000])
+            if candidate_embedding:
+                existing_embeddings = self.db.load_existing_embeddings()
+                remote_embeddings: List[Dict[str, Any]] = []
+                for remote in remote_posts[:10]:
+                    plain = self._strip_html(remote.get("content", ""))[:4000]
+                    if not plain:
+                        continue
+                    emb = self.openai.generate_embedding(plain)
+                    if emb:
+                        remote_embeddings.append({"embedding": emb})
+
+                combined = existing_embeddings + remote_embeddings
+                if self.openai.is_duplicate(candidate_embedding, combined, threshold):
+                    return True
+        return False
+
+    def _publish_translations(self, post: GeneratedPost) -> None:
+        """Generate translations and store into meta fields (single-post model)."""
+        publishing_cfg = self.config.get("publishing", {})
+        locales: List[str] = publishing_cfg.get("locales", []) or []
+        if not locales or not publishing_cfg.get("publish_translations", False):
+            return
+        base_locale = publishing_cfg.get("base_locale")
+        for locale in locales:
+            if base_locale and locale == base_locale:
+                continue
+            translated = self._translate_for_locale(post, locale)
+            if translated:
+                self.publisher.update_translation_meta(
+                    post_id=post.frontmatter.get("wp_post_id"),
+                    locale=locale,
+                    translation=translated,
+                )
+
+    def _translate_for_locale(self, post: GeneratedPost, locale: str) -> Optional[Dict[str, str]]:
+        """Translate post content/title/excerpt into target locale."""
+        if not self.claude:
+            return None
+        model = self.config.get("apis", {}).get("claude_model_full")
+        if not model:
+            return None
+
+        locale_map = {
+            "zh_TW": "Traditional Chinese (zh-TW)",
+            "zh_CN": "Simplified Chinese (zh-CN)",
+            "en_US": "English (en-US)",
+        }
+        target = locale_map.get(locale, locale)
+        system = (
+            "You are a precise localization assistant. Translate Markdown while keeping structure, headings, links, and URLs unchanged. "
+            "Do not change code blocks or URLs. Keep brand terms (SVICLOUD, 10P+, 10S) as-is."
+        )
+        user_prompt = (
+            f"Target language/locale: {target}\n"
+            "Translate the following Markdown blog post. Preserve Markdown, headings, links, image URLs, CTA, and numeric data.\n\n"
+            f"TITLE:\n{post.title}\n\n"
+            f"CONTENT:\n{post.content}"
+        )
+        try:
+            from anthropic import NOT_GIVEN  # type: ignore
+        except Exception:
+            NOT_GIVEN = None  # type: ignore
+        try:
+            completion = self.claude.messages.create(  # type: ignore[attr-defined]
+                model=model,
+                max_tokens=3000,
+                temperature=0.1,
+                system=system,
+                messages=[{"role": "user", "content": user_prompt}],
+            )
+            translated_text = completion.content[0].text if completion and completion.content else None  # type: ignore
+            if not translated_text:
+                return None
+            return {
+                "title": post.title,  # keep original title unless caller overrides
+                "content": translated_text.strip(),
+                "excerpt": translated_text.strip().split("\n\n", 1)[0][:220],
+            }
+        except Exception as exc:
+            self.log.warning("Translation failed for locale %s: %s", locale, exc)
+            return None
+
+    @staticmethod
+    def _strip_html(html_text: str) -> str:
+        if not html_text:
+            return ""
+        return re.sub(r"<[^>]+>", " ", html_text)
 
     def close(self) -> None:
         """Clean up resources."""

@@ -16,7 +16,7 @@ quality:
 seo:
   title:
     claude_model: "claude-haiku-4-5-20251001"
-    max_length: 26
+    max_length: 32
     fallback_templates:
       - "{keyword}｜{geo}家庭影音攻略"
       - "{keyword} 實測心得：{benefit} 全解析"
@@ -29,16 +29,20 @@ seo:
       - "語音遙控"
 publishing:
   staging_hold_hours: 24
-  max_posts_per_week: 1  # enforce single-post runs to prevent multi-drop days
+  max_posts_per_week: 2
+  max_posts_per_run: 1    # hard single-post runs
   schedule:
-    - day: "Monday"
+    - day: "Tuesday"
       time: "09:00"
-    - day: "Wednesday"
+    - day: "Saturday"
       time: "09:00"
-    - day: "Friday"
-      time: "09:00"
-    - day: "Sunday"
-      time: "09:00"
+  base_locale: "zh_TW"
+  locale_param: "lang"
+  publish_translations: true   # generate translations into meta fields (single-post model)
+  locales:
+    - "zh_TW"
+    - "zh_CN"
+    - "en_US"
 
 wordpress:
   url: "https://svicloudtvbox.us"
@@ -47,7 +51,7 @@ wordpress:
     endpoint: "https://svicloudtvbox.us/wp-json/wp/v2/posts"
     username: "content-bot@svicloudtvbox.us"
     password_env: "WP_REST_PASSWORD"
-    status: "publish"  # Changed from "draft" - posts passing quality threshold auto-publish
+    status: "draft"  # Safer default: stage drafts for review before publishing
     author: 2
     dedupe_remote: true   # check remote slugs to avoid duplicates
     dedupe_pages: 3       # how many pages of recent posts to scan for slug duplicates
@@ -135,25 +139,25 @@ content_inputs:
       model: "gpt-image-1"
       size: "1024x1024"
   internal_links:
-    "方案比較": "https://svicloudtvbox.us/compare/"
-    "購買官網": "https://svicloudtvbox.us/"
+    "方案比較": "https://svicloudtvbox.us/zh/compare/"
+    "購買官網": "https://svicloudtvbox.us/zh/"
     "客服支援": "https://svicloudtvbox.us/zh/contact/"
-    "常見問題": "https://svicloudtvbox.us/zh/blog/svicloud-faq/"
+    "常見問題": "https://svicloudtvbox.us/zh/faq/"
   internal_link_settings:
     max_links: 5
     min_word_count: 600
   internal_link_targets:
     - label: "SVICLOUD 方案比較"
-      url: "https://svicloudtvbox.us/compare/"
+      url: "https://svicloudtvbox.us/zh/compare/"
       description: "快速比較 10P+ 與 10S 功能、價格與贈品。"
     - label: "SVICLOUD 美國官網"
-      url: "https://svicloudtvbox.us/"
+      url: "https://svicloudtvbox.us/zh/"
       description: "查看現貨庫存與美國本地折扣。"
     - label: "美國客服與售後支援"
       url: "https://svicloudtvbox.us/zh/contact/"
       description: "預約中文客服協助安裝或報修。"
     - label: "SVICLOUD 常見問題"
-      url: "https://svicloudtvbox.us/zh/blog/svicloud-faq/"
+      url: "https://svicloudtvbox.us/zh/faq/"
       description: "了解安裝、付款與保固細節。"
   competitors:
     path: "data/competitor_topics.json"
@@ -188,8 +192,10 @@ content_inputs:
       - '(?i)10s'
       - '串流'
       - '華語'
+      - '安博'
       - '(?i)unblock'
       - '(?i)unblocktech'
+      - '(?i)ubox'
       - '(?i)evpad'
       - '(?i)super\s*box'
       - '(?i)gtbox'

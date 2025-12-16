@@ -71,6 +71,7 @@ class BlogAutomation:
         self.claude = self._init_claude_client()
         self.openai = self._init_openai_client()
         self.embedding_model = self.config.get("apis", {}).get("openai_embedding", "text-embedding-3-small")
+        self.keyword_filter_allow, self.keyword_filter_block = self._compile_keyword_filters()
         self.log.info("BlogAutomation ready (dry_run=%s)", self.dry_run)
 
     # ------------------------------------------------------------------
@@ -159,6 +160,47 @@ class BlogAutomation:
         client = OpenAI(api_key=api_key, project=project)
         return client
 
+    def _compile_keyword_filters(self) -> Tuple[List[re.Pattern], List[re.Pattern]]:
+        """Compile allow/block regex patterns used to filter topic candidates."""
+        filters = self.config.get("content_inputs", {}).get("keyword_filters", {}) or {}
+        allow_patterns = filters.get("allow_patterns") or []
+        block_patterns = filters.get("block_patterns") or []
+
+        allow_compiled: List[re.Pattern] = []
+        block_compiled: List[re.Pattern] = []
+
+        for pattern in allow_patterns:
+            if not isinstance(pattern, str) or pattern.strip() == "":
+                continue
+            try:
+                allow_compiled.append(re.compile(pattern))
+            except re.error as exc:
+                self.log.warning("Invalid allow_patterns regex '%s': %s", pattern, exc)
+
+        for pattern in block_patterns:
+            if not isinstance(pattern, str) or pattern.strip() == "":
+                continue
+            try:
+                block_compiled.append(re.compile(pattern))
+            except re.error as exc:
+                self.log.warning("Invalid block_patterns regex '%s': %s", pattern, exc)
+
+        return allow_compiled, block_compiled
+
+    def _passes_keyword_filters(self, keyword: str) -> bool:
+        keyword = keyword.strip()
+        if keyword == "":
+            return False
+
+        for pattern in self.keyword_filter_block:
+            if pattern.search(keyword):
+                return False
+
+        if self.keyword_filter_allow and not any(pattern.search(keyword) for pattern in self.keyword_filter_allow):
+            return False
+
+        return True
+
     # ------------------------------------------------------------------
     # Core flow
     def run(self, max_posts: Optional[int] = None) -> None:
@@ -172,8 +214,15 @@ class BlogAutomation:
 
         publishing_cfg = self.config.get("publishing", {})
         weekly_cap = publishing_cfg.get("max_posts_per_week", 7)
-        limit = max_posts or weekly_cap
-        attempts = published = skipped_dupes = skipped_fuzzy = 0
+        max_per_run = publishing_cfg.get("max_posts_per_run")
+        if max_per_run is None:
+            max_per_run = weekly_cap
+        try:
+            max_per_run = int(max_per_run)
+        except (TypeError, ValueError):
+            max_per_run = weekly_cap
+        limit = max_posts if max_posts is not None else max_per_run
+        attempts = published = staged = skipped_dupes = skipped_fuzzy = 0
         existing_slugs = self._existing_slugs()
         existing_titles = self._existing_titles()
         fuzzy_threshold = float(self.config.get("safety", {}).get("fuzzy_title_threshold", 0.82))
@@ -198,14 +247,20 @@ class BlogAutomation:
 
             if self.dry_run:
                 self.log.info("[DRY] Would publish '%s' (score %.1f)", post.title, score)
-                published += 1
+                staged += 1
                 existing_slugs.add(post.slug)
                 existing_titles.append(post.title)
                 continue
 
             if self.publish_post(post):
-                published += 1
-                self._record_post(post, status="published")
+                wp_status = str(post.frontmatter.get("wp_status") or "").lower()
+                if wp_status == "publish":
+                    published += 1
+                    record_status = "published"
+                else:
+                    staged += 1
+                    record_status = wp_status or "staged"
+                self._record_post(post, status=record_status)
                 existing_slugs.add(post.slug)
                 existing_titles.append(post.title)
             else:
@@ -229,6 +284,7 @@ class BlogAutomation:
             "unique_topics": len(unique_topics),
             "attempts": attempts,
             "published": published,
+            "staged": staged,
             "skipped_dupes": skipped_dupes,
             "skipped_fuzzy": skipped_fuzzy,
             "dry_run": self.dry_run,
@@ -522,6 +578,7 @@ class BlogAutomation:
             f"- Unique topics: {run_stats.get('unique_topics', 0)}",
             f"- Posts attempted: {run_stats.get('attempts', 0)}",
             f"- Posts published: {run_stats.get('published', 0)}",
+            f"- Posts staged (draft/future): {run_stats.get('staged', 0)}",
             f"- Skipped duplicates: {run_stats.get('skipped_dupes', 0)}",
             f"- Dry run: {run_stats.get('dry_run', False)}",
             f"- Timestamp: {datetime.now(timezone.utc).isoformat()}",
@@ -735,6 +792,8 @@ class BlogAutomation:
                     continue
                 if not self._looks_like_keyword(keyword):
                     continue
+                if not self._passes_keyword_filters(keyword):
+                    continue
 
                 normalized_section = current_section or "keyword strategy expansion"
                 base_score = section_weights.get(normalized_section, 65)
@@ -875,6 +934,8 @@ class BlogAutomation:
             query = entry.get("query") or entry.get("keyword")
             if not query:
                 continue
+            if not self._passes_keyword_filters(str(query)):
+                continue
             impressions = float(entry.get("impressions", 0))
             ctr = float(entry.get("ctr", 0))
             position = float(entry.get("position", 99))
@@ -915,6 +976,8 @@ class BlogAutomation:
         for entry in entries:
             keyword = entry.get("query")
             if not keyword:
+                continue
+            if not self._passes_keyword_filters(str(keyword)):
                 continue
             impressions = int(entry.get("impressions", base_volume))
             score = base_score + min(int(impressions / 20), 10)
@@ -1047,14 +1110,35 @@ class BlogAutomation:
             resp = requests.get(url, timeout=15)
             resp.raise_for_status()
             soup = BeautifulSoup(resp.text, "html.parser")
+            for container in soup.find_all(["nav", "footer", "aside", "header"]):
+                container.decompose()
             seen = set()
+            excluded_exact = {
+                "categories",
+                "tags",
+                "recent comments",
+                "recent posts",
+                "search",
+                "product",
+                "item",
+                "lifestyle",
+                "seller",
+                "collection",
+                "best product",
+                "new product",
+                "hot selling",
+            }
             for tag in soup.find_all(["h1", "h2", "h3", "h4", "strong"]):
                 text = tag.get_text(strip=True)
                 if not text:
                     continue
+                if text.strip().lower() in excluded_exact:
+                    continue
                 for token in re.findall(r"[\u4e00-\u9fffA-Za-z0-9＋+\- ]{2,40}", text):
                     cleaned = token.strip()
                     if len(cleaned) < min_length:
+                        continue
+                    if not self._passes_keyword_filters(cleaned):
                         continue
                     if cleaned in seen:
                         continue

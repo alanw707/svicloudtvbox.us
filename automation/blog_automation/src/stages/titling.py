@@ -35,16 +35,35 @@ class TitleGenerator:
         if not candidates:
             candidates = self._fallback_titles(topic, seo_cfg)
 
-        title = candidates[0]
         max_len = int(seo_cfg.get("max_length", 32))
-        if len(title) > max_len:
-            title = title[:max_len]
+        short_candidates = [t for t in candidates if len(t) <= max_len]
+        if short_candidates:
+            title = short_candidates[0]
+        else:
+            title = self._trim_safely(candidates[0], max_len)
 
         result = {
             "title": title,
             "candidates": candidates,
         }
         return result
+
+    @staticmethod
+    def _trim_safely(title: str, max_len: int) -> str:
+        """Trim title at safe boundaries without leaving broken suffixes."""
+        if len(title) <= max_len:
+            return title
+        cutoff = title[:max_len]
+        # Prefer to cut at common separators if present
+        for sep in ("｜", "|", "：", ":", "，", " ", "、"):
+            if sep in cutoff:
+                candidate = cutoff.rsplit(sep, 1)[0].strip()
+                if candidate:
+                    return candidate
+        # Fallback: strip trailing non-alnum
+        import re
+        cleaned = re.sub(r"[^\w\u4e00-\u9fff]+$", "", cutoff)
+        return cleaned.strip() or cutoff.strip()
 
     def _claude_titles(
         self,

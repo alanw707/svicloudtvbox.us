@@ -6,7 +6,9 @@ Python implementation of the autonomous Chinese blog workflow described in `clau
 
 ```
 automation/blog_automation/
-├─ blog_automation.py      # Main entry point
+├─ main.py                 # Main CLI entry point (Docker uses this)
+├─ src/                    # Modular pipeline (orchestrator + stages)
+├─ blog_automation.py      # Legacy monolithic script (kept for reference)
 ├─ config.example.yaml     # Copy to config.yaml with your settings
 ├─ config.yaml             # Environment-specific settings (committed here for reference)
 ├─ requirements.txt        # Python dependencies
@@ -39,8 +41,9 @@ automation/blog_automation/
    - WordPress category targeting is configured via `wordpress.category_map`; adjust IDs (e.g., Guides `24`, Comparisons `22`) to match your taxonomy, and set `wordpress.rest.author` to the ID of your publishing account.
 4. Run a dry test:
    ```bash
-   python automation/blog_automation/blog_automation.py --config automation/blog_automation/config.yaml --test
+   python automation/blog_automation/main.py --config automation/blog_automation/config.yaml --test
    ```
+   Note: `wordpress.rest.status: draft` is the recommended default; runs will create staged WordPress drafts for review.
 
 ### Updating Google Search Console Data
 
@@ -145,11 +148,12 @@ If `content_inputs.gsc.site` and `.credentials` are already filled in `config.ya
 
 ## Command Flags
 
-- `--config PATH` – path to config file (defaults to `config.yaml` next to the script).
-- `--env PATH` – optional `.env` file to load (defaults to repo root `.env`).
-- `--test` – skip publishing actions, log what would happen.
-- `--max-posts N` – override weekly post cap for a single run.
-- `--rebuild-embeddings` – regenerate embeddings cache / duplicate index.
+- `--config PATH` – path to config file (default: `config.yaml`).
+- `--env PATH` – optional `.env` file to load (default: repo root `.env`).
+- `--dry-run` – simulate operations without creating WordPress posts.
+- `--test` – dry run with `--max-posts 1`.
+- `--max-posts N` – override the per-run limit for a single run.
+- `--debug` – enable debug logging.
 
 ## Next Implementation Steps
 

@@ -48,7 +48,9 @@ class EmailClient:
                 - topics_found: Number of topics discovered
                 - unique_topics: Number after deduplication
                 - attempts: Number of posts attempted
+                - created: Number of WP posts created (published+staged)
                 - published: Number successfully published
+                - staged: Number created as WP draft/future
                 - dry_run: Whether this was a dry run
 
         Example:
@@ -61,12 +63,20 @@ class EmailClient:
             ... }
             >>> email_client.send_report(stats)
         """
+        published = int(run_stats.get("published", 0) or 0)
+        staged = int(run_stats.get("staged", 0) or 0)
+        created = run_stats.get("created")
+        if created is None:
+            created = published + staged
+
         lines = [
             "SVICLOUD blog automation run summary",
             f"- Topics discovered: {run_stats.get('topics_found', 0)}",
             f"- Unique topics: {run_stats.get('unique_topics', 0)}",
             f"- Posts attempted: {run_stats.get('attempts', 0)}",
+            f"- WP posts created: {created}",
             f"- Posts published: {run_stats.get('published', 0)}",
+            f"- Posts staged (draft): {run_stats.get('staged', 0)}",
             f"- Dry run: {run_stats.get('dry_run', False)}",
             f"- Timestamp: {datetime.now(timezone.utc).isoformat()}",
         ]
@@ -101,6 +111,10 @@ class EmailClient:
         if config_path:
             body += f"Config: {config_path}\n"
         self._send_email(subject, body, high_priority=True)
+
+    def send_notice(self, subject: str, body: str) -> bool:
+        """Send a lightweight notification (non-error)."""
+        return self._send_email(subject, body, high_priority=False)
 
     def _send_email(self, subject: str, body: str, high_priority: bool = False) -> bool:
         """Send email via configured provider.
