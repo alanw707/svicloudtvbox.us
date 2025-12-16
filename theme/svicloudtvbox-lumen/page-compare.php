@@ -140,7 +140,7 @@ $compare_cta_links = [
             <span class="page-subtitle-text"><?php echo svic_translate_html('compare.hero.subtitle'); ?></span>
           </p>
 
-          <div class="compare-hero__actions" role="group" aria-label="<?php echo esc_attr__('Primary product actions', 'svicloudtvbox-lumen'); ?>">
+          <div class="compare-hero__actions lumen-action-group" role="group" aria-label="<?php echo esc_attr__('Primary product actions', 'svicloudtvbox-lumen'); ?>">
             <a class="lumen-pill lumen-pill--primary compare-hero__action" href="<?php echo esc_url($hero_10p_url); ?>">
               <?php echo svic_translate_html('compare.products.10p.cta'); ?>
             </a>
@@ -197,7 +197,7 @@ $compare_cta_links = [
           <li><?php echo svic_translate_html('compare.traffic.bullets.warranty'); ?></li>
         </ul>
       </div>
-      <div class="compare-traffic__links" role="group" aria-label="<?php echo esc_attr__('Primary compare actions', 'svicloudtvbox-lumen'); ?>">
+      <div class="compare-traffic__links lumen-action-group" role="group" aria-label="<?php echo esc_attr__('Primary compare actions', 'svicloudtvbox-lumen'); ?>">
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($compare_cta_links['p10p']); ?>"><?php echo svic_translate_html('compare.traffic.links.p10p'); ?></a>
         <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($compare_cta_links['p10s']); ?>"><?php echo svic_translate_html('compare.traffic.links.p10s'); ?></a>
         <a class="compare-traffic__textlink" href="<?php echo esc_url($compare_cta_links['faq']); ?>"><?php echo svic_translate_html('compare.traffic.links.faq'); ?></a>
@@ -323,7 +323,7 @@ $compare_cta_links = [
       <span class="compare-final-cta__badge"><?php echo svic_translate_html('compare.final_cta.badge'); ?></span>
       <h2 class="compare-final-cta__title"><?php echo svic_translate_html('compare.final_cta.title'); ?></h2>
       <p class="compare-final-cta__copy"><?php echo svic_translate_html('compare.final_cta.copy'); ?></p>
-      <div class="compare-final-cta__actions">
+      <div class="compare-final-cta__actions lumen-action-group">
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('compare.final_cta.cta_10p'); ?></a>
         <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>"><?php echo svic_translate_html('compare.final_cta.cta_10s'); ?></a>
       </div>

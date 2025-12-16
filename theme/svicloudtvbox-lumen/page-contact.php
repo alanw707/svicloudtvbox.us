@@ -66,7 +66,7 @@ $faq_copy = svic_translate_rich('contact.faq.copy', [
       <span class="contact-hero__badge"><?php echo svic_translate_html('contact.hero.badge'); ?></span>
       <h1 class="contact-hero__title"><?php echo svic_translate_html('contact.hero.title'); ?></h1>
       <p class="contact-hero__subtitle"><?php echo svic_translate_html('contact.hero.subtitle'); ?></p>
-      <div class="contact-hero__actions">
+      <div class="contact-hero__actions lumen-action-group">
         <?php if ($hero_primary_href) : ?>
           <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_primary_href); ?>">
             <?php echo svic_translate_html('contact.hero.primary_cta'); ?>
@@ -91,7 +91,7 @@ $faq_copy = svic_translate_rich('contact.faq.copy', [
           <li><?php echo svic_translate_html('product.traffic.bullets.warranty'); ?></li>
         </ul>
       </div>
-      <div class="contact-intent__links" role="group" aria-label="<?php echo esc_attr__('Primary SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
+      <div class="contact-intent__links lumen-action-group" role="group" aria-label="<?php echo esc_attr__('Primary SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($pdp_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.primary'); ?></a>
         <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($compare_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.compare'); ?></a>
         <a class="contact-intent__textlink" href="<?php echo esc_url($faq_url); ?>"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>

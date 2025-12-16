@@ -481,7 +481,7 @@ if (!$blog_posts_query instanceof WP_Query) {
           <li><?php echo svic_translate_html('frontpage.traffic.bullets.warranty'); ?></li>
         </ul>
       </div>
-      <div class="frontpage-traffic__links" role="group" aria-label="<?php esc_attr_e('Key SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
+      <div class="frontpage-traffic__links lumen-action-group" role="group" aria-label="<?php esc_attr_e('Key SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.traffic.links.pdp'); ?></a>
         <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url(svic_url_with_lang(home_url('/compare'))); ?>"><?php echo svic_translate_html('frontpage.traffic.links.compare'); ?></a>
         <a class="frontpage-traffic__textlink" href="<?php echo esc_url(svic_url_with_lang(home_url('/faq'))); ?>"><?php echo svic_translate_html('frontpage.traffic.links.faq'); ?></a>
@@ -629,39 +629,6 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
       </div>
     </div>
   </section>
-
-  <?php
-  $faq_entities = [];
-  foreach ($faq_groups as $group) {
-      foreach ($group['items'] as $item) {
-          $question_text = trim(wp_strip_all_tags(svic_translate($item['question_key'])));
-          $answer_text   = trim(wp_strip_all_tags(svic_translate($item['answer_key'])));
-
-          if ($question_text === '' || $answer_text === '') {
-              continue;
-          }
-
-          $faq_entities[] = [
-              '@type' => 'Question',
-              'name'  => $question_text,
-              'acceptedAnswer' => [
-                  '@type' => 'Answer',
-                  'text'  => $answer_text,
-              ],
-          ];
-      }
-  }
-
-  if (!empty($faq_entities)) {
-      $faq_schema = [
-          '@context'    => 'https://schema.org',
-          '@type'       => 'FAQPage',
-          'mainEntity'  => $faq_entities,
-      ];
-
-      echo '<script type="application/ld+json">' . wp_json_encode($faq_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-  }
-  ?>
 
   <?php
   if (!empty($product_schema_nodes)) {

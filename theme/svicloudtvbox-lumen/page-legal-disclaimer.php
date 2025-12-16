@@ -92,7 +92,7 @@ $contact_page_url = function_exists('svic_url_with_lang')
           <h2 class="policy-support__title"><?php echo svic_translate_html('legal_disclaimer.contact.title'); ?></h2>
           <p class="policy-support__body"><?php echo svic_translate_html('legal_disclaimer.contact.copy'); ?></p>
         </div>
-        <div class="policy-support__actions">
+        <div class="policy-support__actions lumen-action-group">
           <a class="policy-support__cta" href="<?php echo esc_url($contact_page_url); ?>">
             <?php echo svic_translate_html('legal_disclaimer.contact.cta'); ?>
           </a>

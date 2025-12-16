@@ -131,11 +131,7 @@
   transform: translateY(-1px);
 }
 
-@media (max-width: 720px) {
-  .frontpage-traffic__links {
-    grid-template-columns: 1fr;
-  }
-}
+/* Mobile action-group sizing is standardized by `.lumen-action-group` (see 90-utilities.css). */
 
 /* ------------------------------------------
    Homepage FAQ section

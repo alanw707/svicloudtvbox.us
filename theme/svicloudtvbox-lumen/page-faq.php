@@ -124,7 +124,7 @@ $faq_sections = [
       <span class="faq-hero__badge"><?php echo svic_translate_html('faq.hero.badge'); ?></span>
       <h1 class="faq-hero__title"><?php echo svic_translate_html('faq.hero.title'); ?></h1>
       <p class="faq-hero__subtitle"><?php echo svic_translate_html('faq.hero.subtitle'); ?></p>
-      <div class="faq-hero__actions" role="group">
+      <div class="faq-hero__actions lumen-action-group" role="group">
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($setup_guide_url); ?>">
           <?php echo svic_translate_html('faq.hero.cta_primary'); ?>
         </a>
@@ -147,7 +147,7 @@ $faq_sections = [
           <li><?php echo svic_translate_html('product.traffic.bullets.warranty'); ?></li>
         </ul>
       </div>
-      <div class="faq-intent__links" role="group" aria-label="<?php echo esc_attr__('Key actions', 'svicloudtvbox-lumen'); ?>">
+      <div class="faq-intent__links lumen-action-group" role="group" aria-label="<?php echo esc_attr__('Key actions', 'svicloudtvbox-lumen'); ?>">
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($pdp_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.primary'); ?></a>
         <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($compare_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.compare'); ?></a>
         <a class="faq-intent__textlink" href="<?php echo esc_url($faq_url); ?>"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
@@ -182,47 +182,6 @@ $faq_sections = [
     </div>
   </section>
 </main>
-
-<?php
-$faq_entities = [];
-foreach ($faq_sections as $section) {
-    if (empty($section['items']) || !is_array($section['items'])) {
-        continue;
-    }
-
-    foreach ($section['items'] as $item) {
-        $question = isset($item['question_key']) ? svic_translate($item['question_key']) : '';
-        $question = trim(wp_strip_all_tags((string) $question));
-
-        $replacements = isset($item['replacements']) && is_array($item['replacements']) ? $item['replacements'] : [];
-        $answer_raw  = isset($item['answer_key']) ? svic_translate_rich($item['answer_key'], $replacements) : '';
-        $answer_text = trim(wp_strip_all_tags((string) $answer_raw));
-
-        if ($question === '' || $answer_text === '') {
-            continue;
-        }
-
-        $faq_entities[] = [
-            '@type' => 'Question',
-            'name'  => $question,
-            'acceptedAnswer' => [
-                '@type' => 'Answer',
-                'text'  => $answer_text,
-            ],
-        ];
-    }
-}
-
-if ($faq_entities) {
-    $faq_schema = [
-        '@context'   => 'https://schema.org',
-        '@type'      => 'FAQPage',
-        'mainEntity' => array_values($faq_entities),
-    ];
-
-    echo '<script type="application/ld+json">' . wp_json_encode($faq_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-}
-?>
 
 <?php
 get_footer();

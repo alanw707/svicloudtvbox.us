@@ -104,6 +104,9 @@
   --max-width-hero: min(1180px, calc(100% - 80px));
   --max-width-readable: min(62ch, 100%);
 
+  /* CTA sizing */
+  --lumen-action-max-width-mobile: 312px;
+
   /* Content spacing helpers */
   --size-100: 0.25rem;
   --size-200: 0.5rem;

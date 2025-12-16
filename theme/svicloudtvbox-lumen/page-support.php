@@ -47,7 +47,7 @@ get_header();
           <li><?php echo svic_translate_html('product.traffic.bullets.warranty'); ?></li>
         </ul>
       </div>
-      <div class="support-intent__links" role="group" aria-label="<?php echo esc_attr__('Primary SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
+      <div class="support-intent__links lumen-action-group" role="group" aria-label="<?php echo esc_attr__('Primary SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($pdp_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.primary'); ?></a>
         <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($compare_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.compare'); ?></a>
         <a class="support-intent__textlink" href="<?php echo esc_url($faq_url); ?>"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>

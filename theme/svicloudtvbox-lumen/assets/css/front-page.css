@@ -126,6 +126,9 @@
 @media(max-width:600px){body.home{--max-width-hero:100%}
 body.home .hero-dashboard{padding-left:0;padding-right:0}
 body.home .hero-dashboard__inner{width:100%;margin:0;padding:0 clamp(18px,6vw,24px);box-sizing:border-box}
+body.home .hero-dashboard__cta{flex-direction:column;align-items:center;gap:12px}
+body.home .hero-dashboard__cta .hero-dashboard__button{width:min(100%,340px);box-sizing:border-box}
+body.home .hero-dashboard__button{padding:12px 20px;font-size:0.95rem;letter-spacing:0.03em}
 }
 .hero-dashboard__visual{position:relative;display:grid;gap:18px;place-items:center}
 .hero-dashboard__badge{position:absolute;top:-34px;left:-34px;width:128px;height:128px;display:grid;place-items:center;background:linear-gradient(135deg,var(--lumen-accent-teal),var(--lumen-accent-amber));color:#041018;border-radius:50%;font-size:0.82rem;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;box-shadow:var(--shadow-glow-amber);transform:rotate(-8deg);animation:heroBadgeFloat 12s ease-in-out infinite}
@@ -393,8 +396,6 @@ html[lang*="zh"] .frontpage-blog__card-title{font-family:var(--font-chinese)}
 .frontpage-traffic__links .lumen-pill{width:100%;justify-content:center}
 .frontpage-traffic__textlink{display:inline-flex;align-items:center;justify-content:center;gap:0.4rem;padding:0.85rem 1rem;border-radius:12px;color:rgba(226,236,255,0.95);background:rgba(255,255,255,0.04);border:1px solid rgba(92,132,212,0.2);text-decoration:none;transition:border-color 0.2s ease,transform 0.2s ease,background 0.2s ease}
 .frontpage-traffic__textlink:hover{border-color:rgba(122,189,255,0.55);background:rgba(92,132,212,0.12);transform:translateY(-1px)}
-@media(max-width:720px){.frontpage-traffic__links{grid-template-columns:1fr}
-}
 .lumen-faq{padding:clamp(3rem,6vw,5rem) clamp(1.25rem,5vw,3rem);background:linear-gradient(180deg,rgba(3,6,16,0.92) 0%,rgba(3,8,22,0.88) 100%)}
 .lumen-faq__inner{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(1.5rem,3vw,2rem)}
 .lumen-faq__badge{display:inline-flex;align-items:center;justify-content:center;padding:0.35rem 0.9rem;border-radius:999px;text-transform:uppercase;font-size:0.75rem;letter-spacing:0.08em;color:rgba(226,236,255,0.86);background:rgba(94,141,255,0.18);width:fit-content;margin:0 auto}

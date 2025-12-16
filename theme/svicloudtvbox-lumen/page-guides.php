@@ -42,7 +42,7 @@ $anchor_items    = svic_guides_get_anchor_items();
             <li><?php echo svic_translate_html($callout_key); ?></li>
           <?php endforeach; ?>
         </ul>
-        <div class="guides-hero__actions">
+        <div class="guides-hero__actions lumen-action-group">
           <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($setup_detail_url); ?>">
             <?php echo svic_translate_html('guides.hero.primary_label'); ?>
           </a>
@@ -141,7 +141,7 @@ $anchor_items    = svic_guides_get_anchor_items();
       <span class="guides-badge guides-badge--on-dark"><?php echo svic_translate_html('guides.support.badge'); ?></span>
       <h2 class="guides-support__title"><?php echo svic_translate_html('guides.support.title'); ?></h2>
       <p class="guides-support__copy"><?php echo svic_translate_html('guides.support.copy'); ?></p>
-      <div class="guides-support__actions">
+      <div class="guides-support__actions lumen-action-group">
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($contact_url); ?>">
           <?php echo svic_translate_html('guides.support.primary_label'); ?>
         </a>

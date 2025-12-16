@@ -137,7 +137,7 @@ if ($article) {
               <?php endif; ?>
               <h2 class="guides-support__title"><?php echo svic_translate_html('guides.support.title'); ?></h2>
               <p class="guides-support__copy"><?php echo svic_translate_html('guides.support.copy'); ?></p>
-              <div class="guides-support__actions">
+              <div class="guides-support__actions lumen-action-group">
                 <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($links['contact']); ?>">
                   <?php echo svic_translate_html('guides.support.primary_label'); ?>
                 </a>

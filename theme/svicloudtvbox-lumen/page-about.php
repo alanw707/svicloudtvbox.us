@@ -82,7 +82,7 @@ $concierge_car_asset_url      = file_exists($concierge_car_asset_path) ? get_tem
       <span class="about-hero__badge"><?php echo svic_translate_html('about.hero.badge'); ?></span>
       <h1 class="about-hero__title"><?php echo svic_translate_html('about.hero.title'); ?></h1>
       <p class="about-hero__lead"><?php echo svic_translate_html('about.hero.lead'); ?></p>
-      <div class="about-hero__cta">
+      <div class="about-hero__cta lumen-action-group">
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact'))); ?>">
           <?php echo svic_translate_html('about.hero.cta'); ?>
         </a>

@@ -135,6 +135,43 @@ button:focus:not(:focus-visible), .wp-block-button__link:focus:not(:focus-visibl
   gap: var(--space-md);
 }
 
+.lumen-action-group {
+  gap: clamp(0.65rem, 1.6vw, 0.9rem);
+}
+
+@media (max-width: 720px) {
+  .lumen-action-group {
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    grid-template-columns: 1fr;
+  }
+
+  .lumen-action-group > a.lumen-pill,
+  .lumen-action-group > button.lumen-pill,
+  .lumen-action-group > a[class*="__textlink"],
+  .lumen-action-group > a.policy-support__cta {
+    width: 100%;
+    max-width: var(--lumen-action-max-width-mobile);
+    box-sizing: border-box;
+    justify-self: center;
+  }
+
+  .lumen-action-group--fullbleed-mobile {
+    justify-content: stretch;
+    justify-items: stretch;
+    align-items: stretch;
+  }
+
+  .lumen-action-group--fullbleed-mobile > a.lumen-pill,
+  .lumen-action-group--fullbleed-mobile > button.lumen-pill,
+  .lumen-action-group--fullbleed-mobile > a[class*="__textlink"],
+  .lumen-action-group--fullbleed-mobile > a.policy-support__cta {
+    max-width: none;
+  }
+}
+
 .screen-reader-text {
   position: absolute;
   width: 1px;

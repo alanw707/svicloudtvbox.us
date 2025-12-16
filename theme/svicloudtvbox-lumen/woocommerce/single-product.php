@@ -206,7 +206,7 @@ while (have_posts()) :
               <li><?php echo svic_translate_html('product.traffic.bullets.warranty'); ?></li>
             </ul>
           </div>
-          <div class="product-traffic__links" role="group" aria-label="<?php esc_attr_e('Key SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
+          <div class="product-traffic__links lumen-action-group" role="group" aria-label="<?php esc_attr_e('Key SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
             <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($compare_url); ?>"><?php echo svic_translate_html('product.traffic.links.compare'); ?></a>
             <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($faq_url); ?>"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
             <a class="product-traffic__textlink" href="<?php echo esc_url($contact_url); ?>"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
@@ -229,7 +229,7 @@ while (have_posts()) :
               </details>
             <?php endforeach; ?>
           </div>
-          <div class="product-faq__cta">
+          <div class="product-faq__cta lumen-action-group">
             <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($faq_url); ?>"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
             <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($contact_url); ?>"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
           </div>
@@ -238,38 +238,6 @@ while (have_posts()) :
     </main>
 
     <?php
-    $product_faq_entities = [];
-    foreach ($product_faq_items as $item) {
-        $question = isset($item['question_key']) ? svic_translate($item['question_key']) : '';
-        $question = trim(wp_strip_all_tags((string) $question));
-
-        $answer_raw  = isset($item['answer_key']) ? svic_translate_rich($item['answer_key']) : '';
-        $answer_text = trim(wp_strip_all_tags((string) $answer_raw));
-
-        if ($question === '' || $answer_text === '') {
-            continue;
-        }
-
-        $product_faq_entities[] = [
-            '@type' => 'Question',
-            'name'  => $question,
-            'acceptedAnswer' => [
-                '@type' => 'Answer',
-                'text'  => $answer_text,
-            ],
-        ];
-    }
-
-    if ($product_faq_entities) {
-        $faq_schema = [
-            '@context'   => 'https://schema.org',
-            '@type'      => 'FAQPage',
-            'mainEntity' => array_values($product_faq_entities),
-        ];
-
-        echo '<script type="application/ld+json">' . wp_json_encode($faq_schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-    }
-
     do_action('woocommerce_after_single_product');
 endwhile;
 

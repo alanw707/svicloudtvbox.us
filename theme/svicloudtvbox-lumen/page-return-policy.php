@@ -139,7 +139,7 @@ $contact_page_url = function_exists('svic_url_with_lang')
             <?php endif; ?>
           </div>
         </div>
-        <div class="policy-support__actions">
+        <div class="policy-support__actions lumen-action-group">
           <a class="policy-support__cta" href="<?php echo esc_url($contact_page_url); ?>">
             <?php echo $support_cta; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
           </a>

@@ -362,6 +362,16 @@ if (!function_exists('svic_route_alias_definitions')) {
                 ],
                 'legacy' => [],
             ],
+            'faq' => [
+                'canonical_base' => [
+                    'en' => '/faq/',
+                    'zh' => '/faq/',
+                ],
+                'legacy' => [
+                    // Legacy internal link target used by early blog automation drafts.
+                    '/blog/svicloud-faq/',
+                ],
+            ],
             'compare' => [
                 'canonical_base' => [
                     'en' => '/compare/',
@@ -379,6 +389,16 @@ if (!function_exists('svic_route_alias_definitions')) {
                     'zh' => '/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/',
                 ],
                 'legacy' => [],
+            ],
+            'svicloud-10p-vs-evpad-10-pro' => [
+                'canonical_base' => [
+                    'en' => '/svicloud-10p%2bvs-evpad-10-pro-best-family-streaming-box-in-2025/',
+                    'zh' => '/svicloud-10p%2bvs-evpad-10-pro-best-family-streaming-box-in-2025/',
+                ],
+                'legacy' => [
+                    // Incorrect shorter slug referenced by some internal links.
+                    '/svicloud-10p-plus-vs-evpad-10-pro/',
+                ],
             ],
         ];
 
@@ -409,7 +429,7 @@ if (!function_exists('svic_route_alias_by_base')) {
 if (!function_exists('svic_alias_base_for_locale')) {
     function svic_alias_base_for_locale(array $alias, string $langKey): ?string
     {
-        $langKey = $langKey === 'zh' ? 'zh' : 'en';
+        $langKey = ($langKey === 'zh' || $langKey === 'zh-cn') ? 'zh' : 'en';
         if (!empty($alias['canonical_base'][$langKey])) {
             return $alias['canonical_base'][$langKey];
         }
@@ -424,6 +444,10 @@ if (!function_exists('svic_alias_localized_path')) {
         $base = svic_alias_base_for_locale($alias, $langKey);
         if (!$base) {
             return null;
+        }
+
+        if ($langKey === 'zh-cn') {
+            return svic_normalize_route_path('/zh-cn' . $base);
         }
 
         if ($langKey === 'zh') {
@@ -523,16 +547,17 @@ if (!function_exists('svic_enforce_route_alias_canonical')) {
 
         $normalizedOriginal = svic_normalize_route_path($originalPath);
 
-        // Do not canonicalize away explicit zh-cn prefix; allow it to remain distinct from zh.
-        if (strpos($normalizedOriginal, '/zh-cn/') === 0 || $normalizedOriginal === '/zh-cn/') {
-            return;
-        }
         $alias              = svic_route_alias_by_base($normalizedOriginal);
         if (!$alias) {
             return;
         }
 
-        $requestLang   = strpos($normalizedOriginal, '/zh/') === 0 ? 'zh' : 'en';
+        $requestLang = 'en';
+        if ($normalizedOriginal === '/zh-cn/' || strpos($normalizedOriginal, '/zh-cn/') === 0) {
+            $requestLang = 'zh-cn';
+        } elseif ($normalizedOriginal === '/zh/' || strpos($normalizedOriginal, '/zh/') === 0) {
+            $requestLang = 'zh';
+        }
         $canonicalPath = svic_alias_localized_path($alias, $requestLang);
         if (!$canonicalPath || $canonicalPath === $normalizedOriginal) {
             return;
@@ -548,7 +573,7 @@ if (!function_exists('svic_enforce_route_alias_canonical')) {
         exit;
     }
 }
-add_action('template_redirect', 'svic_enforce_route_alias_canonical', 1);
+add_action('template_redirect', 'svic_enforce_route_alias_canonical', 0);
 
 if (!function_exists('svic_current_base_url')) {
     function svic_current_base_url(): string {
@@ -620,9 +645,18 @@ if (!function_exists('svic_locale_to_hreflang')) {
         $language = strtolower($segments[0]);
         $variants = array_slice($segments, 1);
 
-        // Target Traditional Chinese content to US audiences
-        // via hreflang zh-Hant-US regardless of internal zh_TW locale.
         if ($language === 'zh') {
+            $variantsUpper = array_map(static function ($value) {
+                return strtoupper((string) $value);
+            }, $variants);
+
+            // Default to Traditional Chinese, but distinguish Simplified Chinese (zh-CN).
+            // - zh_TW -> zh-Hant-US
+            // - zh_CN -> zh-Hans-US
+            if (in_array('CN', $variantsUpper, true) || in_array('HANS', $variantsUpper, true) || in_array('SG', $variantsUpper, true)) {
+                return 'zh-Hans-US';
+            }
+
             return 'zh-Hant-US';
         }
 

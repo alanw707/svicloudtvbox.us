@@ -305,7 +305,7 @@ foreach ($other_sections as $item) {
             <?php endif; ?>
             <h2 class="guides-support__title"><?php echo $translate_html('guides.support.title'); ?></h2>
             <p class="guides-support__copy"><?php echo $translate_html('guides.support.copy'); ?></p>
-            <div class="guides-support__actions">
+            <div class="guides-support__actions lumen-action-group">
               <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($contact_url); ?>"><?php echo $translate_html('guides.support.primary_label'); ?></a>
               <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($faq_url); ?>"><?php echo $translate_html('guides.support.secondary_label'); ?></a>
             </div>
@@ -362,7 +362,7 @@ foreach ($other_sections as $item) {
         <?php endif; ?>
         <h2 class="guides-support__title"><?php echo $translate_html('guides.support.title'); ?></h2>
         <p class="guides-support__copy"><?php echo $translate_html('guides.support.copy'); ?></p>
-        <div class="guides-support__actions">
+        <div class="guides-support__actions lumen-action-group">
           <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($contact_url); ?>"><?php echo $translate_html('guides.support.primary_label'); ?></a>
           <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($faq_url); ?>"><?php echo $translate_html('guides.support.secondary_label'); ?></a>
         </div>
