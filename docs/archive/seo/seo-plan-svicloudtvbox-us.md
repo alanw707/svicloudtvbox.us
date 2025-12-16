@@ -21,7 +21,7 @@ Primary measurement: Google Search Console (GSC), GA4, and Core Web Vitals field
 
 2) Crawlability & Sitemaps
 - robots.txt is fine (admin/logs disallowed). Keep it. Consider also disallowing `/cart/`, `/checkout/` (already noindex via meta; optional duplicate block in robots for crawl budget).
-- Submit `https://svicloudtvbox.us/wp-sitemap.xml` in GSC and Bing WMT; ensure products, pages, categories are included.
+- Submit `https://svicloudtvbox.us/sitemap_index.xml` in GSC and Bing WMT; ensure products, pages, categories are included.
 - Verify clean 200/301 responses for canonical URLs (http→https, www→non-www already good).
 
 3) Coverage & Indexing

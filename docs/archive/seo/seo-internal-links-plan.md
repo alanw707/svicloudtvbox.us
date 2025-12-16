@@ -7,10 +7,10 @@
 
 ## Link sources (current config)
 - Defined in `automation/blog_automation/config.yaml` under `internal_links` and `internal_link_targets`:
-  - Compare: `https://svicloudtvbox.us/compare/`
-  - Shop/Home: `https://svicloudtvbox.us/`
+  - Compare: `https://svicloudtvbox.us/zh/compare/`
+  - Shop/Home: `https://svicloudtvbox.us/zh/`
   - Contact/Support (ZH): `https://svicloudtvbox.us/zh/contact/`
-  - FAQ (ZH): `https://svicloudtvbox.us/zh/blog/svicloud-faq/`
+  - FAQ (ZH): `https://svicloudtvbox.us/zh/faq/`
 
 ## Rules of thumb
 - Count: 3–5 internal links per 1,000–1,200 words (cap at 6 per post).
