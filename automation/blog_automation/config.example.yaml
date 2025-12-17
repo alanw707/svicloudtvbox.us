@@ -12,11 +12,18 @@ quality:
   duplicate_threshold: 0.85
   min_length: 4000
   outline_score_threshold: 0.75
+  topic_dedupe_top_n: 35
 
 seo:
   title:
     claude_model: "claude-haiku-4-5-20251001"
-    max_length: 26
+    max_length: 32
+    min_length_zh: 30
+    overused_tokens:
+      - "4K"
+      - "HDR"
+      - "Wi-Fi"
+      - "Dolby"
     fallback_templates:
       - "{keyword}｜{geo}家庭影音攻略"
       - "{keyword} 實測心得：{benefit} 全解析"
@@ -29,11 +36,20 @@ seo:
       - "語音遙控"
 publishing:
   staging_hold_hours: 24
-  max_posts_per_week: 7
+  max_posts_per_week: 2
+  max_posts_per_run: 1
+  timezone: "America/Los_Angeles"
+  topic_type_priority:
+    - "comparison"
+    - "service"
+    - "campaign"
+    - "geo"
+    - "faq"
+    - "pillar"
   schedule:
     - day: "Tuesday"
       time: "09:00"
-    - day: "Thursday"
+    - day: "Saturday"
       time: "09:00"
 
 wordpress:
@@ -50,6 +66,8 @@ wordpress:
       - 24
     comparison:
       - 22
+      - 24
+    service:
       - 24
     geo:
       - 24
@@ -68,6 +86,7 @@ storage:
 
 brand_voice:
   tone: "專業且友善，強調影音體驗與美國本地客服/保固"
+  max_enforced_key_phrases: 2
   key_phrases:
     - "4K HDR 串流與 Dolby Audio 影音體驗"
     - "Wi-Fi 6 雙頻與 128GB 儲存讓長時間追劇依舊順暢"

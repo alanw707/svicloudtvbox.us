@@ -70,7 +70,8 @@ class BriefGenerator:
                     f"- 地區：{metadata.get('geo_target') or '全美'}\n"
                     f"- 比較焦點：{metadata.get('is_comparison')}\n"
                     f"- 活動/節慶：{metadata.get('is_campaign')}\n"
-                    "務必強調：4K HDR + Dolby Audio、Wi-Fi 6 雙頻、中文/英文語音介面與一年美國保固。"
+                    "務必強調：美國倉儲現貨/快速出貨、中文/雙語客服、售後保固與遠端協助；"
+                    "並依主題分類選擇性帶到 4K/Wi‑Fi/Dolby 等規格（不要每篇都把 4K 當主角）。"
                 )
 
                 # Add competitor context if available

@@ -10,6 +10,7 @@ quality:
   duplicate_threshold: 0.85
   min_length: 4000
   outline_score_threshold: 0.75
+  topic_dedupe_top_n: 35
   claude_weight: 0.55   # combined QA weighting (0-1)
   claude_floor: 65      # if Claude score falls below this but fallback passes, trust fallback
 
@@ -17,6 +18,12 @@ seo:
   title:
     claude_model: "claude-haiku-4-5-20251001"
     max_length: 32
+    min_length_zh: 30
+    overused_tokens:
+      - "4K"
+      - "HDR"
+      - "Wi-Fi"
+      - "Dolby"
     fallback_templates:
       - "{keyword}｜{geo}家庭影音攻略"
       - "{keyword} 實測心得：{benefit} 全解析"
@@ -31,6 +38,14 @@ publishing:
   staging_hold_hours: 24
   max_posts_per_week: 2
   max_posts_per_run: 1    # hard single-post runs
+  timezone: "America/Los_Angeles"
+  topic_type_priority:
+    - "comparison"
+    - "service"
+    - "campaign"
+    - "geo"
+    - "faq"
+    - "pillar"
   schedule:
     - day: "Tuesday"
       time: "09:00"
@@ -61,6 +76,8 @@ wordpress:
     comparison:
       - 22    # Comparisons
       - 24
+    service:
+      - 24
     geo:
       - 24
     faq:
@@ -78,6 +95,7 @@ storage:
 
 brand_voice:
   tone: "專業且友善，強調產品體驗與美國本地服務"
+  max_enforced_key_phrases: 2
   key_phrases:
     - "SVICLOUD 10P+ 4K HDR 串流與 Dolby Audio 影音體驗"
     - "Wi-Fi 6 雙頻與 128GB 儲存讓長時間追劇依舊順暢"

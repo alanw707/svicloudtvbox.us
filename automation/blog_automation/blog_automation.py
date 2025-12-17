@@ -213,7 +213,7 @@ class BlogAutomation:
         self.log.info("Processing %s topics (max_posts=%s)", len(unique_topics), max_posts)
 
         publishing_cfg = self.config.get("publishing", {})
-        weekly_cap = publishing_cfg.get("max_posts_per_week", 7)
+        weekly_cap = publishing_cfg.get("max_posts_per_week", 2)
         max_per_run = publishing_cfg.get("max_posts_per_run")
         if max_per_run is None:
             max_per_run = weekly_cap

@@ -35,18 +35,61 @@ class TitleGenerator:
         if not candidates:
             candidates = self._fallback_titles(topic, seo_cfg)
 
-        max_len = int(seo_cfg.get("max_length", 32))
-        short_candidates = [t for t in candidates if len(t) <= max_len]
-        if short_candidates:
-            title = short_candidates[0]
+        configured_max = int(seo_cfg.get("max_length", 32))
+        min_zh = int(seo_cfg.get("min_length_zh", 30))
+        max_len = configured_max
+
+        # Avoid overly short zh title caps that cause awkward truncation (e.g., ending on "電")
+        if any("\u4e00" <= ch <= "\u9fff" for ch in "".join(candidates)):
+            max_len = max(max_len, min_zh)
+
+        overused_tokens = seo_cfg.get("overused_tokens") or ["4K", "HDR", "Wi-Fi", "Dolby"]
+
+        def overused_count(text: str) -> int:
+            return sum(1 for tok in overused_tokens if tok and tok in text)
+
+        def normalize_choice(text: str) -> str:
+            return text.strip()
+
+        # Prefer candidates that avoid overused tokens while respecting max length
+        within = [normalize_choice(t) for t in candidates if len(t) <= max_len]
+        if within:
+            within.sort(key=lambda t: (overused_count(t), len(t)))
+            title = within[0]
         else:
-            title = self._trim_safely(candidates[0], max_len)
+            trimmed = [self._trim_safely(normalize_choice(t), max_len) for t in candidates]
+            trimmed.sort(key=lambda t: (overused_count(t), len(t)))
+            title = trimmed[0]
+
+        title = self._sanitize_title(title)
 
         result = {
             "title": title,
             "candidates": candidates,
+            "slug_source": title,
         }
         return result
+
+    @staticmethod
+    def _sanitize_title(title: str) -> str:
+        """Remove overly-specific shipping guarantees from titles (avoid misleading promises)."""
+        import re
+
+        text = (title or "").strip()
+        if not text:
+            return text
+
+        # Replace explicit delivery/fulfillment timelines when tied to shipping verbs.
+        # Examples: "48小時快速出貨" -> "快速出貨", "2天送達" -> "快速送達"
+        text = re.sub(
+            r"\\b\\d+\\s*(?:天|日|小時|hours?|hrs?)\\s*(?:內)?\\s*(?=(送達|到貨|出貨|配送))",
+            "快速",
+            text,
+            flags=re.IGNORECASE,
+        )
+        # Normalize accidental double "快速快速"
+        text = re.sub(r"(快速)\\1+", r"\\1", text)
+        return text.strip()
 
     @staticmethod
     def _trim_safely(title: str, max_len: int) -> str:
@@ -63,7 +106,14 @@ class TitleGenerator:
         # Fallback: strip trailing non-alnum
         import re
         cleaned = re.sub(r"[^\w\u4e00-\u9fff]+$", "", cutoff)
-        return cleaned.strip() or cutoff.strip()
+        cleaned = cleaned.strip() or cutoff.strip()
+
+        # If we still end in a single-character fragment and there is no separator,
+        # back up a couple characters to avoid dangling compounds like "電視盒" -> "電".
+        if len(cleaned) >= 2 and "｜" not in cleaned and "|" not in cleaned:
+            if cleaned[-1] in {"電", "視", "盒", "保", "固", "售", "後", "免", "運"}:
+                cleaned = cleaned[:-1].strip()
+        return cleaned or cutoff.strip()
 
     def _claude_titles(
         self,

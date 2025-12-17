@@ -12,6 +12,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Iterable
 from difflib import SequenceMatcher
+from zoneinfo import ZoneInfo
 
 import yaml
 import requests
@@ -153,16 +154,29 @@ class BlogAutomation:
             self.log.info("Processing %s topics (max_posts=%s)", len(unique_topics), max_posts)
 
             # Cadence + quota gates
-            now = datetime.now(timezone.utc)
-            start_of_week = (now - timedelta(days=now.isoweekday() - 1)).replace(hour=0, minute=0, second=0, microsecond=0)
-            weekly_cap = self.config.get("publishing", {}).get("max_posts_per_week", 2)
-            per_run_cap = self.config.get("publishing", {}).get("max_posts_per_run", 1)
-            already_created = self.db.count_wp_created_since(start_of_week.isoformat())
+            now_utc = datetime.now(timezone.utc)
+            publishing_cfg = self.config.get("publishing", {}) or {}
+
+            weekly_cap = int(publishing_cfg.get("max_posts_per_week", 2))
+            per_run_cap = int(publishing_cfg.get("max_posts_per_run", 1))
+
+            tz_name = publishing_cfg.get("timezone") or os.getenv("TZ") or "UTC"
+            try:
+                local_tz = ZoneInfo(tz_name)
+            except Exception:
+                self.log.warning("Invalid publishing.timezone '%s'; falling back to UTC", tz_name)
+                local_tz = ZoneInfo("UTC")
+
+            start_of_week_utc, end_of_week_utc = self._week_window_utc(now_utc, local_tz)
+            already_created = self.db.count_wp_created_between(
+                start_of_week_utc.isoformat(),
+                end_of_week_utc.isoformat(),
+            )
             remaining_week = max(0, weekly_cap - already_created)
 
             # Backlog visibility
             last_run_iso = self.db.last_run_at()
-            backlog_windows = self._count_missed_windows(last_run_iso, now)
+            backlog_windows = self._count_missed_windows(last_run_iso, now_utc)
             if backlog_windows > 0:
                 self.log.info("Detected %s missed scheduled windows since last run", backlog_windows)
 
@@ -192,9 +206,10 @@ class BlogAutomation:
             # Pre-fetch remote posts for dedupe
             remote_posts = self._recent_remote_posts()
             local_recent = self.db.recent_posts()
+            ordered_topics = self._prioritize_topics_for_variety(unique_topics, local_recent)
 
             # Generate and publish posts
-            for topic in unique_topics:
+            for topic in ordered_topics:
                 if created >= limit:
                     break
                 attempts += 1
@@ -297,9 +312,13 @@ class BlogAutomation:
         dropped = 0
         embedding_threshold = self.config.get("quality", {}).get("duplicate_threshold", 0.85)
         embedding_cache: Dict[str, List[float]] = {}
-        existing_embeddings = self.db.load_existing_embeddings() if self.openai else []
+        existing_embeddings = self.db.load_topic_embeddings() if self.openai else []
 
-        for topic in topics_list:
+        # To control embedding cost, only do semantic checks for the highest-scoring candidates.
+        topics_list.sort(key=lambda t: (t.metadata or {}).get("score", 0), reverse=True)
+        semantic_top_n = int(self.config.get("quality", {}).get("topic_dedupe_top_n", 35))
+
+        for idx, topic in enumerate(topics_list):
             keyword_lower = topic.keyword.lower()
 
             # Check exact keyword match
@@ -308,7 +327,7 @@ class BlogAutomation:
                 continue
 
             # Check semantic similarity
-            if existing_embeddings:
+            if existing_embeddings and idx < semantic_top_n:
                 embedding = embedding_cache.get(keyword_lower)
                 if embedding is None:
                     embedding = self.openai.generate_embedding(topic.keyword)
@@ -500,11 +519,26 @@ class BlogAutomation:
             post: Generated post to record
             status: Post status ("published" or "draft")
         """
-        embedding_vector = None
+        topic_embedding = None
+        content_embedding = None
         if self.openai:
-            embedding_vector = self.openai.generate_embedding(post.keyword or post.title)
+            topic_embedding = self.openai.generate_embedding(post.keyword or post.title)
+            content_embedding = self.openai.generate_embedding(self._dedupe_text(post))
 
-        self.db.record_post(post, status, embedding_vector)
+        self.db.record_post(
+            post,
+            status,
+            topic_embedding=topic_embedding,
+            content_embedding=content_embedding,
+        )
+
+    @staticmethod
+    def _dedupe_text(post: GeneratedPost) -> str:
+        title = (post.title or "").strip()
+        excerpt = (post.excerpt or "").strip()
+        if excerpt:
+            return f"{title}\n\n{excerpt}"
+        return title
 
     def _keyword_recently_published(self, keyword: Optional[str]) -> bool:
         """Check database for an existing keyword record to avoid duplicates."""
@@ -529,39 +563,77 @@ class BlogAutomation:
         return False
 
     def _acquire_lock(self) -> bool:
-        """Create a file lock to prevent overlapping automation runs."""
+        """Create an atomic file lock to prevent overlapping automation runs."""
         safety_cfg = self.config.get("safety", {})
         lock_rel = safety_cfg.get("lock_file", "data/.automation.lock")
         max_age_minutes = float(safety_cfg.get("lock_timeout_minutes", 180))
         lock_path = self._resolve_path(lock_rel)
         lock_path.parent.mkdir(parents=True, exist_ok=True)
 
-        if lock_path.exists():
-            modified = datetime.fromtimestamp(lock_path.stat().st_mtime, timezone.utc)
-            age_minutes = (datetime.now(timezone.utc) - modified).total_seconds() / 60
-            if age_minutes < max_age_minutes:
-                self.log.warning(
-                    "Another automation run appears active (lock %s, age %.1f min)",
-                    lock_path,
-                    age_minutes,
-                )
+        payload = f"{datetime.now(timezone.utc).isoformat()}|pid={os.getpid()}"
+
+        def try_create() -> bool:
+            try:
+                fd = os.open(str(lock_path), os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+                try:
+                    os.write(fd, payload.encode("utf-8"))
+                finally:
+                    os.close(fd)
+                return True
+            except FileExistsError:
                 return False
+
+        if try_create():
+            self._lock_path = lock_path
+            self._lock_acquired = True
+            self.log.debug("Automation lock acquired at %s", lock_path)
+            return True
+
+        # Existing lock: check age
+        try:
+            modified = datetime.fromtimestamp(lock_path.stat().st_mtime, timezone.utc)
+        except FileNotFoundError:
+            # Race: lock vanished, retry once
+            return self._acquire_lock()
+
+        age_minutes = (datetime.now(timezone.utc) - modified).total_seconds() / 60
+        if age_minutes < max_age_minutes:
             self.log.warning(
-                "Stale automation lock %s detected (age %.1f min > %.0f min). Removing.",
+                "Another automation run appears active (lock %s, age %.1f min)",
                 lock_path,
                 age_minutes,
-                max_age_minutes,
             )
-            try:
-                lock_path.unlink()
-            except FileNotFoundError:
-                pass
+            return False
 
-        lock_path.write_text(f"{datetime.now(timezone.utc).isoformat()}|pid={os.getpid()}", encoding="utf-8")
+        self.log.warning(
+            "Stale automation lock %s detected (age %.1f min > %.0f min). Removing.",
+            lock_path,
+            age_minutes,
+            max_age_minutes,
+        )
+        try:
+            lock_path.unlink()
+        except FileNotFoundError:
+            pass
+
+        if not try_create():
+            self.log.warning("Failed to acquire lock after stale cleanup (another run started)")
+            return False
+
         self._lock_path = lock_path
         self._lock_acquired = True
         self.log.debug("Automation lock acquired at %s", lock_path)
         return True
+
+    @staticmethod
+    def _week_window_utc(now_utc: datetime, tz: ZoneInfo) -> tuple[datetime, datetime]:
+        """Return (start_utc, end_utc) for Monday–Sunday in the provided timezone."""
+        local_now = now_utc.astimezone(tz)
+        start_local = (local_now - timedelta(days=local_now.weekday())).replace(
+            hour=0, minute=0, second=0, microsecond=0
+        )
+        end_local = start_local + timedelta(days=7)
+        return start_local.astimezone(timezone.utc), end_local.astimezone(timezone.utc)
 
     def _release_lock(self) -> None:
         """Remove automation lock file if held."""
@@ -643,7 +715,7 @@ class BlogAutomation:
         auth = (username, password) if username and password else None
         collected: List[Dict[str, Any]] = []
         for page in range(1, pages + 1):
-            params = {"per_page": per_page, "page": page, "_fields": "id,title,slug,content"}
+            params = {"per_page": per_page, "page": page, "_fields": "id,title,slug,excerpt,content"}
             try:
                 resp = requests.get(endpoint, params=params, headers=headers, auth=auth, timeout=20)
                 if resp.status_code != 200:
@@ -658,6 +730,7 @@ class BlogAutomation:
                             "id": row.get("id"),
                             "title": (row.get("title") or {}).get("rendered", ""),
                             "slug": row.get("slug", ""),
+                            "excerpt": (row.get("excerpt") or {}).get("rendered", ""),
                             "content": (row.get("content") or {}).get("rendered", ""),
                         }
                     )
@@ -693,13 +766,15 @@ class BlogAutomation:
 
         # Embedding-based content similarity (local + remote)
         if self.openai:
-            candidate_embedding = self.openai.generate_embedding((post.content or "")[:4000])
+            candidate_embedding = self.openai.generate_embedding(self._dedupe_text(post))
             if candidate_embedding:
-                existing_embeddings = self.db.load_existing_embeddings()
+                existing_embeddings = self.db.load_content_embeddings()
                 remote_embeddings: List[Dict[str, Any]] = []
-                for remote in remote_posts[:10]:
-                    plain = self._strip_html(remote.get("content", ""))[:4000]
-                    if not plain:
+                for remote in remote_posts[:5]:
+                    title = remote.get("title", "")
+                    excerpt = remote.get("excerpt", "")
+                    plain = self._strip_html(f"{title}\n\n{excerpt}")[:1000]
+                    if not plain.strip():
                         continue
                     emb = self.openai.generate_embedding(plain)
                     if emb:
@@ -781,6 +856,39 @@ class BlogAutomation:
         if not html_text:
             return ""
         return re.sub(r"<[^>]+>", " ", html_text)
+
+    def _prioritize_topics_for_variety(
+        self,
+        topics: List[TopicCandidate],
+        recent_posts: List[Dict[str, Any]],
+    ) -> List[TopicCandidate]:
+        """Reorder candidates so underrepresented topic types are preferred for this run."""
+        counts: Dict[str, int] = {}
+
+        for row in recent_posts[:20]:
+            if (row.get("status") or "").lower() not in {"published", "staged"}:
+                continue
+            meta_raw = row.get("metadata") or ""
+            try:
+                meta = json.loads(meta_raw) if meta_raw else {}
+            except Exception:
+                meta = {}
+            t = (meta.get("topic_type") or "pillar").lower()
+            counts[t] = counts.get(t, 0) + 1
+
+        default_priority = ["comparison", "service", "campaign", "geo", "faq", "pillar"]
+        priority = self.config.get("publishing", {}).get("topic_type_priority") or default_priority
+        priority_index = {t: i for i, t in enumerate(priority)}
+
+        def sort_key(candidate: TopicCandidate) -> tuple[int, int, int]:
+            meta = candidate.metadata or {}
+            topic_type = (meta.get("topic_type") or "pillar").lower()
+            used = counts.get(topic_type, 0)
+            prio = priority_index.get(topic_type, len(priority_index) + 1)
+            score = int(meta.get("score", 0))
+            return (used, prio, -score)
+
+        return sorted(list(topics), key=sort_key)
 
     def close(self) -> None:
         """Clean up resources."""

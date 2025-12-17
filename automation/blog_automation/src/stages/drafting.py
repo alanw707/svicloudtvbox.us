@@ -79,8 +79,10 @@ class PostDrafter:
         if self.claude and claude_model:
             try:
                 system = self._get_full_post_prompt(topic)
+                variant_note = self._variant_note(topic)
 
                 user_prompt = (
+                    f"{variant_note}\n"
                     f"請依據以下資訊撰寫完整部落格文章（Markdown）：\n"
                     f"- 關鍵字：{topic.keyword}\n"
                     f"- 簡報：{brief}\n"
@@ -88,7 +90,11 @@ class PostDrafter:
                     f"- 主題分類：{metadata.get('topic_type')}\n"
                     f"- 地區：{metadata.get('geo_target') or '全美'}\n"
                     "需求：\n"
-                    "1. 穿插 4K HDR + Dolby Audio 影音、Wi-Fi 6 雙頻、雙語介面與語音搜尋等產品賣點。\n"
+                    "1. 依主題分類選擇對應賣點：不要每篇都用同一組（避免每篇開頭都寫 4K/Wi‑Fi/Dolby 同一段）。\n"
+                    "   - service：美國倉儲現貨/快速出貨、售後保固、中文/雙語客服、遠端協助\n"
+                    "   - comparison：10P+ vs 10S / SVICLOUD vs 競品，對比體驗、售後、App 兼容\n"
+                    "   - campaign：節慶/季節情境 + 使用案例 + 推薦清單\n"
+                    "   - geo：結合地區生活情境（但避免絕對到貨承諾）\n"
                     "2. 至少3個內部連結（以純文字描述，稍後由腳本替換）。\n"
                     "3. 每段落加入具體情境或案例。\n"
                     "4. 結尾加入CTA導引至購買/聯絡。\n"
@@ -125,6 +131,17 @@ class PostDrafter:
 
         return self.ensure_minimum_length(topic, outline, brief, content)
 
+    @staticmethod
+    def _variant_note(topic: TopicCandidate) -> str:
+        """Deterministic style rotation to keep posts from looking identical."""
+        keyword = (topic.keyword or "").strip()
+        variant = abs(hash(keyword)) % 3
+        if variant == 0:
+            return "寫作風格：用「故事開場」+ 具體情境引入，前300字不要出現過多產品規格堆疊。"
+        if variant == 1:
+            return "寫作風格：用「清單式對比」開場（痛點→解法→差異），段落短、可掃讀。"
+        return "寫作風格：用「問答式」開場（3個常見問題），再進入完整內容。"
+
     def enforce_requirements(self, topic: TopicCandidate, content: str) -> str:
         """Ensure brand voice and keyword placement in content.
 
@@ -137,7 +154,9 @@ class PostDrafter:
         Returns:
             Content with brand voice requirements enforced
         """
-        required_phrases = self.config.get("brand_voice", {}).get("key_phrases", [])
+        voice_cfg = self.config.get("brand_voice", {}) or {}
+        required_phrases = voice_cfg.get("key_phrases", []) or []
+        max_required = int(voice_cfg.get("max_enforced_key_phrases", 2))
         keyword = topic.keyword if isinstance(topic.keyword, str) else ""
         missing: List[str] = []
 
@@ -147,10 +166,16 @@ class PostDrafter:
             contextual = f"{keyword}｜{phrase}" if keyword else phrase
             missing.append(contextual)
 
-        if not missing:
+        if not missing or max_required <= 0:
             return content
 
-        reminder_block = "\n\n".join(f"> {line}" for line in missing)
+        # Enforce only a small quota of phrases to reduce repetitive boilerplate.
+        seed = abs(hash(keyword)) if keyword else 0
+        selected: List[str] = []
+        for idx in range(min(max_required, len(missing))):
+            selected.append(missing[(seed + idx) % len(missing)])
+
+        reminder_block = "\n\n".join(f"> {line}" for line in selected)
         return f"{content}\n\n{reminder_block}"
 
     def insert_internal_links(self, content: str) -> str:
@@ -484,7 +509,11 @@ class PostDrafter:
         topic_type = metadata.get("topic_type", "pillar")
         geo = metadata.get("geo_target") or "全美"
 
-        base_prompt = "你是 SVICLOUD 中文內容顧問，撰寫4000字以上Markdown文章，需含實例與內部連結，避免提及配送時效。"
+        base_prompt = (
+            "你是 SVICLOUD 中文內容顧問，撰寫4000字以上Markdown文章，需含實例與內部連結。"
+            "可提及美國倉儲現貨/快速出貨、中文/雙語客服與一年美國保固等服務優勢，"
+            "但避免做出『絕對到貨承諾』或保證天數（例如「2天必達」）。"
+        )
 
         # Add topic-specific modifiers
         modifiers = []
@@ -493,13 +522,16 @@ class PostDrafter:
             modifiers.append("比較SVICLOUD與競品的頻道數、保固、售後。")
 
         if topic_type == "geo":
-            modifiers.append(f"聚焦{geo}地區的內容體驗、安裝與售後需求，避開配送承諾。")
+            modifiers.append(f"聚焦{geo}地區的內容體驗、安裝與售後需求，避免絕對到貨承諾。")
 
         if topic_type == "campaign":
             modifiers.append("融入節慶/活動情境、歌單或互動建議。")
 
         if topic_type == "faq":
             modifiers.append("以問答形式整理常見問題。")
+
+        if topic_type == "service":
+            modifiers.append("聚焦美國倉儲現貨、售後保固、客服/遠端協助與選購建議（避免絕對到貨天數承諾）。")
 
         if modifiers:
             return base_prompt + " " + " ".join(modifiers)

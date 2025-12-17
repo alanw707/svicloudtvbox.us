@@ -76,7 +76,12 @@ class OutlineGenerator:
                     f"簡報：\n{brief}\n\n"
                     f"主題分類：{metadata.get('topic_type')}\n"
                     f"地區：{metadata.get('geo_target') or '全美'}\n"
-                    "輸出格式：以數字排序的清單，每條不超過40字，聚焦美國本地服務、比較與FAQ。"
+                    "輸出格式：以數字排序的清單，每條不超過40字。\n"
+                    "- 一定要有：美國本地服務（現貨/快速出貨、客服、保固/維修）\n"
+                    "- 若是 comparison：要有明確對比段落\n"
+                    "- 若是 campaign：要有季節/情境段落\n"
+                    "- 若是 geo：要有地區生活情境段落\n"
+                    "- 不要每一篇都用相同段落順序"
                 )
 
                 # Add competitor context if available

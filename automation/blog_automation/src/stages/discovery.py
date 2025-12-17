@@ -628,6 +628,9 @@ class TopicDiscovery:
         if classification["is_campaign"]:
             topic_score += 4
 
+        if classification.get("is_service"):
+            topic_score += 5
+
         if classification["topic_type"] == "faq":
             topic_score += 3
 
@@ -647,6 +650,7 @@ class TopicDiscovery:
             "geo_target": classification.get("geo_target"),
             "is_comparison": classification["is_comparison"],
             "is_campaign": classification["is_campaign"],
+            "is_service": classification.get("is_service", False),
             "score": final_score,
             "source": source,
         }
@@ -742,6 +746,7 @@ class TopicDiscovery:
             "is_geo": False,
             "is_comparison": False,
             "is_campaign": False,
+            "is_service": False,
             "volume_bonus": 0,
         }
         overused_tokens = ("4k", "hdr", "dolby", "wi-fi 6", "wifi 6")
@@ -771,9 +776,26 @@ class TopicDiscovery:
         if "常見問題" in keyword or "FAQ" in keyword.upper():
             classification["topic_type"] = "faq"
 
+        # Check for service/ops content (shipping, warranty, support)
+        service_tokens = (
+            "美國倉", "現貨", "快速配送", "快遞", "免運", "運費", "退換", "退貨", "換貨",
+            "保固", "維修", "售後", "客服", "中文客服", "雙語", "支援", "遠端協助",
+        )
+        if any(tok in keyword for tok in service_tokens):
+            classification["is_service"] = True
+            if classification["topic_type"] == "pillar":
+                classification["topic_type"] = "service"
+            classification["volume_bonus"] += 16
+
         # Penalize overused tokens when no new angle; bonus when absent
         has_overused = any(tok in lower_kw for tok in overused_tokens)
-        has_new_angle = classification["is_geo"] or classification["is_comparison"] or classification["is_campaign"] or classification["topic_type"] == "faq"
+        has_new_angle = (
+            classification["is_geo"]
+            or classification["is_comparison"]
+            or classification["is_campaign"]
+            or classification["is_service"]
+            or classification["topic_type"] == "faq"
+        )
         if has_overused and not has_new_angle:
             classification["volume_bonus"] -= 20
         if not has_overused:
@@ -791,6 +813,7 @@ class TopicDiscovery:
             metadata.get("is_geo")
             or metadata.get("is_comparison")
             or metadata.get("is_campaign")
+            or metadata.get("is_service")
             or metadata.get("topic_type") == "faq"
         )
         # Allow if new angle exists; otherwise drop

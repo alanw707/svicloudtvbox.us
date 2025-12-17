@@ -42,7 +42,8 @@ class DatabaseManager:
                 status TEXT,
                 created_at TEXT DEFAULT CURRENT_TIMESTAMP,
                 metadata TEXT,
-                embedding BLOB
+                embedding BLOB,
+                content_embedding BLOB
             );
             """
         )
@@ -61,7 +62,17 @@ class DatabaseManager:
             """
         )
         self._ensure_run_log_columns()
+        self._ensure_posts_history_columns()
         self.conn.commit()
+
+    def _ensure_posts_history_columns(self) -> None:
+        """Ensure posts_history schema has expected columns (safe migration)."""
+        existing = {
+            row[1] for row in self.conn.execute("PRAGMA table_info(posts_history)")
+            if row and len(row) > 1
+        }
+        if "content_embedding" not in existing:
+            self.conn.execute("ALTER TABLE posts_history ADD COLUMN content_embedding BLOB")
 
     def _ensure_run_log_columns(self) -> None:
         """Ensure run_log schema has expected columns (safe migration)."""
@@ -94,15 +105,21 @@ class DatabaseManager:
         )
         return cursor.fetchone() is not None
 
-    def load_existing_embeddings(self) -> List[Dict[str, Any]]:
-        """Load all stored embeddings for duplicate detection.
+    def load_topic_embeddings(self) -> List[Dict[str, Any]]:
+        """Load keyword/topic embeddings for topic-level dedupe."""
+        return self._load_embeddings(column="embedding")
 
-        Returns:
-            List of dicts with 'id', 'keyword', and 'embedding' (vector) keys
-        """
+    def load_content_embeddings(self) -> List[Dict[str, Any]]:
+        """Load content embeddings for post-level semantic dedupe."""
+        return self._load_embeddings(column="content_embedding")
+
+    def _load_embeddings(self, column: str) -> List[Dict[str, Any]]:
         embeddings: List[Dict[str, Any]] = []
+        if column not in {"embedding", "content_embedding"}:
+            return embeddings
+
         cursor = self.conn.execute(
-            "SELECT id, keyword, title, embedding FROM posts_history WHERE embedding IS NOT NULL"
+            f"SELECT id, keyword, title, {column} FROM posts_history WHERE {column} IS NOT NULL"
         )
         for row in cursor:
             stored = row[3]
@@ -115,14 +132,15 @@ class DatabaseManager:
                 except (ValueError, TypeError):
                     vector = None
             if vector:
-                embeddings.append({"id": row[0], "keyword": row[1], "embedding": vector})
+                embeddings.append({"id": row[0], "keyword": row[1], "title": row[2], "embedding": vector})
         return embeddings
 
     def record_post(
         self,
         post: GeneratedPost,
         status: str,
-        embedding_vector: Optional[List[float]] = None
+        topic_embedding: Optional[List[float]] = None,
+        content_embedding: Optional[List[float]] = None,
     ) -> None:
         """Save a post record to posts_history table.
 
@@ -131,15 +149,14 @@ class DatabaseManager:
             status: Post status ('published', 'draft', 'failed', etc.)
             embedding_vector: Optional embedding vector for duplicate detection
         """
-        embedding_blob = None
-        if embedding_vector:
-            embedding_blob = json.dumps(embedding_vector).encode("utf-8")
+        embedding_blob = json.dumps(topic_embedding).encode("utf-8") if topic_embedding else None
+        content_blob = json.dumps(content_embedding).encode("utf-8") if content_embedding else None
 
         self.conn.execute(
             """
             INSERT INTO posts_history
-            (title, slug, keyword, quality_score, status, metadata, embedding)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            (title, slug, keyword, quality_score, status, metadata, embedding, content_embedding)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 post.title,
@@ -149,6 +166,7 @@ class DatabaseManager:
                 status,
                 json.dumps(post.frontmatter, ensure_ascii=False),
                 embedding_blob,
+                content_blob,
             ),
         )
         self.conn.commit()
@@ -232,6 +250,22 @@ class DatabaseManager:
         row = cursor.fetchone()
         return int(row[0]) if row else 0
 
+    def count_wp_created_between(self, start_iso: str, end_iso: str) -> int:
+        """Count WordPress-created posts between two timestamps (inclusive start, exclusive end)."""
+        start_sqlite = self._normalize_sqlite_utc(start_iso)
+        end_sqlite = self._normalize_sqlite_utc(end_iso)
+        cursor = self.conn.execute(
+            """
+            SELECT COUNT(*) FROM posts_history
+            WHERE status IN ('published', 'staged')
+              AND created_at >= ?
+              AND created_at < ?
+            """,
+            (start_sqlite, end_sqlite),
+        )
+        row = cursor.fetchone()
+        return int(row[0]) if row else 0
+
     def last_run_at(self) -> Optional[str]:
         """Return ISO timestamp of the most recent automation run."""
         cursor = self.conn.execute(
@@ -241,10 +275,10 @@ class DatabaseManager:
         return row[0] if row else None
 
     def recent_posts(self, limit: int = 50) -> List[Dict[str, Any]]:
-        """Fetch recent posts from history for duplicate checking."""
+        """Fetch recent posts from history for duplicate checking and variety heuristics."""
         cursor = self.conn.execute(
             """
-            SELECT title, slug, keyword, created_at, metadata
+            SELECT title, slug, keyword, created_at, status, metadata
             FROM posts_history
             ORDER BY created_at DESC
             LIMIT ?
@@ -252,13 +286,14 @@ class DatabaseManager:
             (limit,),
         )
         results: List[Dict[str, Any]] = []
-        for title, slug, keyword, created_at, metadata in cursor.fetchall():
+        for title, slug, keyword, created_at, status, metadata in cursor.fetchall():
             results.append(
                 {
                     "title": title or "",
                     "slug": slug or "",
                     "keyword": keyword or "",
                     "created_at": created_at or "",
+                    "status": status or "",
                     "metadata": metadata or "",
                 }
             )

@@ -25,7 +25,11 @@ class HeroImageGenerator:
         provider = self.cfg.get("provider")
         self.enabled = provider == "openai"
         self.output_dir = Path(self.cfg.get("output_dir", "data/generated_images"))
-        self.output_dir.mkdir(parents=True, exist_ok=True)
+        try:
+            self.output_dir.mkdir(parents=True, exist_ok=True)
+        except PermissionError as exc:
+            self.log.warning("Hero image output_dir not writable (%s): %s", self.output_dir, exc)
+            self.enabled = False
         openai_cfg = self.cfg.get("openai", {}) or {}
         self.model = openai_cfg.get("model", "gpt-image-1")
         self.size = openai_cfg.get("size", "1024x1024")
@@ -51,6 +55,9 @@ class HeroImageGenerator:
     def generate(self, topic, brief: str, outline: str) -> Optional[Dict[str, Any]]:
         """Generate hero image and return metadata."""
         if not self.enabled or not self.client:
+            return None
+        if not os.access(self.output_dir, os.W_OK):
+            self.log.warning("Hero image output_dir not writable (%s); skipping image generation", self.output_dir)
             return None
 
         metadata = topic.metadata or {}
@@ -91,7 +98,11 @@ class HeroImageGenerator:
         slug = self._slugify(topic.keyword)
         filename = f"{slug}-{int(time.time())}.png"
         path = self.output_dir / filename
-        path.write_bytes(image_bytes)
+        try:
+            path.write_bytes(image_bytes)
+        except PermissionError as exc:
+            self.log.warning("Failed to write hero image %s: %s", path, exc)
+            return None
 
         placeholder = f"@@HERO::{uuid4()}@@"
         alt = f"{topic.keyword} 情境示意圖"
