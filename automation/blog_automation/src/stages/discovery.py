@@ -15,12 +15,17 @@ import os
 import re
 from datetime import date, timedelta
 from pathlib import Path
-from typing import Dict, Any, List, Optional, Iterable
+from typing import Dict, Any, List, Optional, Iterable, Tuple
 import requests
 from bs4 import BeautifulSoup
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
 from ..models import TopicCandidate
+
+try:
+    from google.oauth2 import service_account
+    from googleapiclient.discovery import build
+except ImportError:  # pragma: no cover
+    service_account = None  # type: ignore
+    build = None  # type: ignore
 
 # Google Search Console API scopes
 GSC_SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"]
@@ -82,6 +87,7 @@ class TopicDiscovery:
         gsc_candidates = self._load_gsc_candidates()
         competitor_candidates = self._load_competitor_candidates()
         official_candidates = self._load_official_feature_candidates()
+        seed_candidates = self._load_seed_keyword_candidates()
 
         # Merge and prioritize
         merged_candidates = self._merge_candidates([
@@ -89,6 +95,7 @@ class TopicDiscovery:
             gsc_candidates,
             competitor_candidates,
             official_candidates,
+            seed_candidates,
             self._diversity_seed_topics(),
         ])
 
@@ -143,6 +150,10 @@ class TopicDiscovery:
         gsc_cfg = self.config.get("content_inputs", {}).get("gsc", {})
 
         if not gsc_cfg.get("auto_refresh"):
+            return
+
+        if service_account is None or build is None:
+            self.log.warning("Skipping GSC refresh, missing google-api-python-client dependencies")
             return
 
         site = gsc_cfg.get("site")
@@ -242,13 +253,15 @@ class TopicDiscovery:
         entries = []
 
         # Scrape each competitor site
-        for domain, urls in sites.items():
+        for domain, site_cfg in sites.items():
+            urls = self._expand_competitor_urls(domain, site_cfg)
             for url in urls:
                 keywords = self._scrape_competitor_keywords(url, min_length)
                 for keyword in keywords:
                     entries.append({
                         "query": keyword,
                         "source": domain,
+                        "source_url": url,
                         "impressions": comp_cfg.get("base_volume", 150),
                         "position": 15,
                         "ctr": 0.01,
@@ -285,6 +298,53 @@ class TopicDiscovery:
         target_path.parent.mkdir(parents=True, exist_ok=True)
         target_path.write_text(json.dumps(entries, ensure_ascii=False, indent=2), encoding="utf-8")
         self.log.info("Refreshed official feature topics (%s rows)", len(entries))
+
+    def _load_seed_keyword_candidates(self) -> List[TopicCandidate]:
+        """Load curated seed keywords from config.
+
+        Supports either a list of strings or a list of dicts, e.g.
+        - "小雲盒子詐騙"
+        - {keyword: "小雲盒子詐騙", base_score: 95, volume_estimate: 220}
+        """
+        content_cfg = self.config.get("content_inputs", {})
+        raw_seeds = content_cfg.get("seed_keywords") or []
+        if not raw_seeds:
+            return []
+
+        locale_targets = content_cfg.get("locale_targets", [])
+        candidates: List[TopicCandidate] = []
+
+        for entry in raw_seeds:
+            if isinstance(entry, str):
+                keyword = entry.strip()
+                base_score = 92
+                volume_estimate = 220
+                extra_meta: Dict[str, Any] = {}
+            elif isinstance(entry, dict):
+                keyword = (entry.get("keyword") or entry.get("query") or "").strip()
+                base_score = int(entry.get("base_score", 92))
+                volume_estimate = int(entry.get("volume_estimate", 220))
+                extra_meta = {k: v for k, v in entry.items() if k not in {"keyword", "query", "base_score", "volume_estimate"}}
+            else:
+                continue
+
+            if not keyword or not self._keyword_allowed(keyword):
+                continue
+
+            candidate = self._build_topic_candidate(
+                keyword=keyword,
+                base_score=base_score,
+                section="seed",
+                volume_estimate=volume_estimate,
+                locale_targets=locale_targets,
+                source="config:content_inputs.seed_keywords",
+            )
+            if extra_meta:
+                candidate.metadata["seed"] = extra_meta
+                candidate.metadata["score"] = max(candidate.metadata.get("score", base_score), base_score)
+            candidates.append(candidate)
+
+        return candidates
 
     def _load_keyword_plan_candidates(self) -> List[TopicCandidate]:
         """Load topics from manual keyword plan (Markdown file).
@@ -481,6 +541,9 @@ class TopicDiscovery:
             if not keyword:
                 continue
 
+            if not self._passes_competitor_quality_gate(keyword, min_length=4):
+                continue
+
             if not self._keyword_allowed(keyword):
                 continue
 
@@ -530,7 +593,13 @@ class TopicDiscovery:
 
         for entry in entries:
             keyword = entry.get("title") or entry.get("keyword")
-            if not keyword or not self._keyword_allowed(keyword):
+            if not keyword:
+                continue
+
+            if not self._passes_competitor_quality_gate(keyword, min_length=4):
+                continue
+
+            if not self._keyword_allowed(keyword):
                 continue
 
             summary = entry.get("summary")
@@ -586,6 +655,24 @@ class TopicDiscovery:
         if allow_patterns:
             return any(pattern.search(keyword) for pattern in allow_patterns)
 
+        return True
+
+    def _passes_competitor_quality_gate(self, keyword: str, min_length: int = 4) -> bool:
+        kw = (keyword or "").strip()
+        if len(kw) < min_length:
+            return False
+
+        has_cjk = bool(re.search(r"[\u4e00-\u9fff]", kw))
+        if has_cjk:
+            return True
+
+        words = kw.split()
+        if len(words) < 2 or len(words) > 8:
+            return False
+        if any(len(w) > 24 for w in words):
+            return False
+        if any(re.search(r"[a-z][A-Z]", w) for w in words):
+            return False
         return True
 
     def _build_topic_candidate(
@@ -964,7 +1051,7 @@ class TopicDiscovery:
                 for token in re.findall(r"[\u4e00-\u9fffA-Za-z0-9＋+\- ]{2,40}", text):
                     cleaned = token.strip()
 
-                    if len(cleaned) < min_length:
+                    if not self._passes_competitor_quality_gate(cleaned, min_length=min_length):
                         continue
 
                     if not self._keyword_allowed(cleaned):
@@ -980,6 +1067,140 @@ class TopicDiscovery:
             self.log.warning("Competitor fetch failed for %s: %s", url, exc)
 
         return tokens
+
+    def _expand_competitor_urls(self, domain: str, site_cfg: Any) -> List[str]:
+        """Expand competitor config into a list of URLs to scrape.
+
+        Backwards compatible:
+        - sites:
+            example.com:
+              - "https://example.com/blog/"
+
+        Extended:
+        - sites:
+            example.com:
+              urls: ["https://example.com/blog/"]
+              sitemap: "https://example.com/sitemap_index.xml"
+              include_patterns: ["how-to", "guide", "教學", "安裝", "設定"]
+              exclude_patterns: ["wp-content", "/tag/"]
+              max_urls: 80
+        """
+        if isinstance(site_cfg, list):
+            return [u for u in site_cfg if isinstance(u, str) and u.strip()]
+
+        if not isinstance(site_cfg, dict):
+            return []
+
+        urls: List[str] = []
+        for u in site_cfg.get("urls", []) or []:
+            if isinstance(u, str) and u.strip():
+                urls.append(u.strip())
+
+        sitemap = site_cfg.get("sitemap")
+        if isinstance(sitemap, str) and sitemap.strip():
+            include_patterns = site_cfg.get("include_patterns")
+            exclude_patterns = site_cfg.get("exclude_patterns")
+            max_urls = int(site_cfg.get("max_urls", 80))
+            try:
+                urls.extend(self._scrape_sitemap_urls(
+                    sitemap_url=sitemap.strip(),
+                    include_patterns=include_patterns,
+                    exclude_patterns=exclude_patterns,
+                    max_urls=max_urls,
+                ))
+            except Exception as exc:
+                self.log.warning("Sitemap scrape failed for %s (%s): %s", domain, sitemap, exc)
+
+        seen = set()
+        out: List[str] = []
+        for u in urls:
+            if u in seen:
+                continue
+            seen.add(u)
+            out.append(u)
+        return out
+
+    def _scrape_sitemap_urls(
+        self,
+        sitemap_url: str,
+        include_patterns: Optional[List[str]],
+        exclude_patterns: Optional[List[str]],
+        max_urls: int,
+    ) -> List[str]:
+        """Fetch URLs from a sitemap (supports sitemapindex + nested sitemaps)."""
+        import xml.etree.ElementTree as ET
+
+        default_include = [
+            "how-to",
+            "guide",
+            "setup",
+            "install",
+            "download",
+            "教學",
+            "安裝",
+            "設定",
+            "下載",
+            "故障",
+            "不能看",
+            "問題",
+        ]
+        include = include_patterns if include_patterns else default_include
+        exclude = exclude_patterns if exclude_patterns else []
+
+        include_re = re.compile("|".join(re.escape(p) for p in include), re.IGNORECASE) if include else None
+        exclude_re = re.compile("|".join(re.escape(p) for p in exclude), re.IGNORECASE) if exclude else None
+
+        def fetch(url: str) -> str:
+            resp = requests.get(url, timeout=20, headers={"User-Agent": "svicloud-autoblog/1.0"})
+            resp.raise_for_status()
+            return resp.text
+
+        def parse_locs(xml_text: str) -> Tuple[List[str], bool]:
+            try:
+                root = ET.fromstring(xml_text.encode("utf-8") if isinstance(xml_text, str) else xml_text)
+            except ET.ParseError:
+                return ([], False)
+
+            is_index = root.tag.lower().endswith("sitemapindex")
+            locs: List[str] = []
+            for node in root.findall(".//{*}loc"):
+                if node.text and node.text.strip():
+                    locs.append(node.text.strip())
+            return (locs, is_index)
+
+        xml_text = fetch(sitemap_url)
+        sitemap_locs, is_index = parse_locs(xml_text)
+
+        if is_index:
+            urls: List[str] = []
+            for loc in sitemap_locs:
+                if len(urls) >= max_urls:
+                    break
+                try:
+                    child_xml = fetch(loc)
+                except requests.RequestException:
+                    continue
+                child_locs, _ = parse_locs(child_xml)
+                for u in child_locs:
+                    if len(urls) >= max_urls:
+                        break
+                    if include_re and not include_re.search(u):
+                        continue
+                    if exclude_re and exclude_re.search(u):
+                        continue
+                    urls.append(u)
+            return urls
+
+        urls: List[str] = []
+        for u in sitemap_locs:
+            if len(urls) >= max_urls:
+                break
+            if include_re and not include_re.search(u):
+                continue
+            if exclude_re and exclude_re.search(u):
+                continue
+            urls.append(u)
+        return urls
 
     @staticmethod
     def _score_gsc_entry(impressions: float, ctr: float, position: float) -> float:

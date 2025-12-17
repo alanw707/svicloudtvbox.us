@@ -98,6 +98,37 @@ brand_voice:
 
 content_inputs:
   keyword_source: "../../claudedocs/chinese-keyword-ranking-strategy-nov-2025.md"
+  seed_keywords:
+    - keyword: "小雲盒子詐騙"
+      base_score: 96
+      volume_estimate: 260
+      intent: "reputation"
+      suggested_angle: "用中立角度解釋常見詐騙手法、如何辨識授權經銷/付款安全/保固。"
+    - keyword: "小雲盒子節目表"
+      base_score: 93
+      volume_estimate: 240
+      intent: "how-to"
+      suggested_angle: "節目表/頻道更新/地區差異與常見查詢方式。"
+    - keyword: "小雲電視盒vs安博"
+      base_score: 94
+      volume_estimate: 230
+      intent: "comparison"
+      suggested_angle: "以網路穩定性/畫質/售後/保固與美國在地服務做比較。"
+    - keyword: "小雲盒子官網"
+      base_score: 92
+      volume_estimate: 210
+      intent: "navigational"
+      suggested_angle: "官方購買管道、授權、保固與避免買到仿品。"
+    - keyword: "小雲電視盒不能看"
+      base_score: 95
+      volume_estimate: 250
+      intent: "troubleshooting"
+      suggested_angle: "不能看/卡頓/連線問題的排查流程（路由器、DNS、更新、重置）。"
+    - keyword: "小雲盒子yogurt tv怎麼下載"
+      base_score: 92
+      volume_estimate: 220
+      intent: "how-to"
+      suggested_angle: "如何下載/安裝/更新與常見安裝失敗原因。"
   gsc:
     path: "data/gsc_topics.json"
     auto_refresh: false
@@ -156,11 +187,23 @@ content_inputs:
     min_length: 4
     sites:
       techunblock.com:
-        - "https://techunblock.com/blog/"
+        urls:
+          - "https://techunblock.com/blog/"
+        sitemap: "https://techunblock.com/sitemap_index.xml"
+        include_patterns: ["how-to", "guide", "setup", "install", "教學", "安裝", "設定", "下載"]
+        max_urls: 80
       svicloudtw.com:
-        - "https://svicloudtw.com/"
+        urls:
+          - "https://svicloudtw.com/blog/"
+        sitemap: "https://svicloudtw.com/sitemap_index.xml"
+        include_patterns: ["how-to", "guide", "setup", "教學", "安裝", "設定", "下載", "節目表"]
+        max_urls: 80
       safeprosys.com:
-        - "https://safeprosys.com/"
+        urls:
+          - "https://safeprosys.com/"
+        sitemap: "https://safeprosys.com/sitemap_index.xml"
+        include_patterns: ["how-to", "guide", "setup", "教學", "安裝", "設定", "下載"]
+        max_urls: 80
 
 notifications:
   provider: "smtp"  # or "brevo"
