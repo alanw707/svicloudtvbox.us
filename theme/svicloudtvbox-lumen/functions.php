@@ -153,14 +153,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
         $registry = [
             'support' => [
                 'title'       => [
-                    'en' => 'SVICLOUD Support & Concierge | Bilingual Help in the USA',
-                    'zh' => '小雲電視盒客服｜中英雙語禮賓支援',
-                    'zh-cn' => '小云电视盒客服｜中英双语礼宾支持',
+                    'en' => 'SVICLOUD Support | 小雲盒子 客服',
+                    'zh' => 'SVICLOUD Support | 小雲盒子 客服',
+                    'zh-cn' => 'SVICLOUD Support | 小雲盒子 客服',
                 ],
                 'description' => [
-                    'en' => 'Chat with the Las Vegas concierge team for setup help, warranty claims, returns, and upgrades in English or 繁體中文.',
-                    'zh' => '拉斯維加斯禮賓客服提供中文與英文安裝協助、保固申請、退換貨與升級諮詢。',
-                    'zh-cn' => '拉斯维加斯礼宾客服提供中文与英文安装协助、保固申请、退换货与升级咨询。',
+                    'en' => 'Get help with setup, warranty, and troubleshooting from the SVICLOUD concierge team. 小雲盒子 客服與技術支援。',
+                    'zh' => 'Get help with setup, warranty, and troubleshooting from the SVICLOUD concierge team. 小雲盒子 客服與技術支援。',
+                    'zh-cn' => 'Get help with setup, warranty, and troubleshooting from the SVICLOUD concierge team. 小雲盒子 客服與技術支援。',
                 ],
                 'image'       => '/assets/images/hero-voice-assistant.webp',
                 'image_alt'   => [
@@ -171,14 +171,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'contact' => [
                 'title'       => [
-                    'en' => 'Talk to SVICLOUD Concierge | SMS, WhatsApp, Email Support',
-                    'zh' => '聯絡小雲禮賓客服｜SMS、WhatsApp、Email 即時支援',
-                    'zh-cn' => '联系小云礼宾客服｜SMS、WhatsApp、Email 即时支持',
+                    'en' => 'Contact SVICLOUD TV Box US | 小雲盒子 聯絡我們',
+                    'zh' => 'Contact SVICLOUD TV Box US | 小雲盒子 聯絡我們',
+                    'zh-cn' => 'Contact SVICLOUD TV Box US | 小雲盒子 聯絡我們',
                 ],
                 'description' => [
-                    'en' => 'Reach our Nevada-based concierge for orders, setup walkthroughs, Wi-Fi tuning, and app updates with a one-business-day SLA.',
-                    'zh' => '美國內華達客服一個工作天回覆訂單、安裝、網路調校與應用更新需求。',
-                    'zh-cn' => '美国内华达客服一个工作天回复订单、安装、网络调校与应用更新需求。',
+                    'en' => 'Reach the SVICLOUD U.S. team for orders, setup, and warranty support. 小雲盒子 聯絡方式與服務時間。',
+                    'zh' => 'Reach the SVICLOUD U.S. team for orders, setup, and warranty support. 小雲盒子 聯絡方式與服務時間。',
+                    'zh-cn' => 'Reach the SVICLOUD U.S. team for orders, setup, and warranty support. 小雲盒子 聯絡方式與服務時間。',
                 ],
                 'image'       => '/assets/images/hero-voice-assistant.webp',
                 'image_alt'   => [
@@ -189,14 +189,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'faq' => [
                 'title'       => [
-                    'en' => 'SVICLOUD FAQ | Warranty, Setup, Shipping & Payments',
-                    'zh' => '小雲電視盒常見問題｜保固、安裝、物流與付款',
-                    'zh-cn' => '小云电视盒常见问题｜保固、安装、物流与付款',
+                    'en' => 'SVICLOUD FAQ | 小雲盒子 常見問題',
+                    'zh' => 'SVICLOUD FAQ | 小雲盒子 常見問題',
+                    'zh-cn' => 'SVICLOUD FAQ | 小雲盒子 常見問題',
                 ],
                 'description' => [
-                    'en' => 'Browse bilingual answers covering SVICLOUD warranty rules, activation tips, streaming apps, and delivery timelines.',
-                    'zh' => '查詢小雲電視盒保固規範、安裝秘訣、串流應用與出貨時程的中英解答。',
-                    'zh-cn' => '查询小云电视盒保固规范、安装秘诀、串流应用与出货时程的中英解答。',
+                    'en' => 'Answers on setup, warranty, shipping, and apps. 小雲盒子 常見問題與解答。',
+                    'zh' => 'Answers on setup, warranty, shipping, and apps. 小雲盒子 常見問題與解答。',
+                    'zh-cn' => 'Answers on setup, warranty, shipping, and apps. 小雲盒子 常見問題與解答。',
                 ],
                 'image'       => $default_image,
                 'image_alt'   => [
@@ -207,14 +207,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'guides' => [
                 'title'       => [
-                    'en' => 'SVICLOUD Guides Hub | Setup, Apps, Troubleshooting',
-                    'zh' => '小雲使用指南總覽｜安裝、應用、疑難排解',
-                    'zh-cn' => '小云使用指南总览｜安装、应用、疑难排解',
+                    'en' => 'SVICLOUD Setup Guides | 小雲盒子 使用指南',
+                    'zh' => 'SVICLOUD Setup Guides | 小雲盒子 使用指南',
+                    'zh-cn' => 'SVICLOUD Setup Guides | 小雲盒子 使用指南',
                 ],
                 'description' => [
-                    'en' => 'Find curated SVICLOUD setup checklists, app tutorials, after-setup tips, and bilingual troubleshooting workflows.',
-                    'zh' => '收錄小雲安裝檢查表、應用教學、安裝後建議與雙語故障排除流程。',
-                    'zh-cn' => '收录小云安装检查表、应用教学、安装后建议与双语故障排除流程。',
+                    'en' => 'Setup, apps, and troubleshooting resources for SVICLOUD boxes. 小雲盒子 使用教學與支援資源。',
+                    'zh' => 'Setup, apps, and troubleshooting resources for SVICLOUD boxes. 小雲盒子 使用教學與支援資源。',
+                    'zh-cn' => 'Setup, apps, and troubleshooting resources for SVICLOUD boxes. 小雲盒子 使用教學與支援資源。',
                 ],
                 'image'       => '/assets/images/svicloud-10p-plus-lifestyle-1.webp',
                 'image_alt'   => [
@@ -225,14 +225,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'guides-setup' => [
                 'title'       => [
-                    'en' => 'SVICLOUD Setup Guide | Wi-Fi, Apps, Language Tips',
-                    'zh' => '小雲安裝指南｜網路、應用與語言設定',
-                    'zh-cn' => '小云安装指南｜网络、应用与语言设置',
+                    'en' => 'SVICLOUD Setup Guide | 小雲盒子 安裝指南',
+                    'zh' => 'SVICLOUD Setup Guide | 小雲盒子 安裝指南',
+                    'zh-cn' => 'SVICLOUD Setup Guide | 小雲盒子 安裝指南',
                 ],
                 'description' => [
-                    'en' => 'Follow step-by-step onboarding for SVICLOUD 10P+/10S covering network placement, language, and core app installs.',
-                    'zh' => '逐步完成小雲 10P+/10S 安裝：網路擺位、語言設定與核心應用安裝一次到位。',
-                    'zh-cn' => '逐步完成小云 10P+/10S 安装：网络摆位、语言设置与核心应用安装一次到位。',
+                    'en' => 'Step-by-step setup for SVICLOUD boxes. 小雲盒子 安裝步驟教學。',
+                    'zh' => 'Step-by-step setup for SVICLOUD boxes. 小雲盒子 安裝步驟教學。',
+                    'zh-cn' => 'Step-by-step setup for SVICLOUD boxes. 小雲盒子 安裝步驟教學。',
                 ],
                 'image'       => '/assets/images/svicloud-10p-plus.webp',
                 'image_alt'   => [
@@ -243,14 +243,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'guides-after-setup' => [
                 'title'       => [
-                    'en' => 'After Setup Guide | Profiles, Parental Controls & Tips',
-                    'zh' => '安裝後指南｜多用戶、家長監護與調校技巧',
-                    'zh-cn' => '安装后指南｜多用户、家长监护与调校技巧',
+                    'en' => 'After Setup Guide | SVICLOUD | 小雲盒子 完成設定',
+                    'zh' => 'After Setup Guide | SVICLOUD | 小雲盒子 完成設定',
+                    'zh-cn' => 'After Setup Guide | SVICLOUD | 小雲盒子 完成設定',
                 ],
                 'description' => [
-                    'en' => 'Optimize SVICLOUD after day one with parental controls, profile tips, smart home integrations, and bilingual shortcuts.',
-                    'zh' => '完成安裝後，利用家長監護、個人化設定與智慧家庭整合讓小雲體驗更順。',
-                    'zh-cn' => '完成安装后，利用家长监护、个性化设置与智能家庭整合让小云体验更顺。',
+                    'en' => 'What to do after setup with tips, apps, and settings. 小雲盒子 設定後建議。',
+                    'zh' => 'What to do after setup with tips, apps, and settings. 小雲盒子 設定後建議。',
+                    'zh-cn' => 'What to do after setup with tips, apps, and settings. 小雲盒子 設定後建議。',
                 ],
                 'image'       => $default_image,
                 'image_alt'   => [
@@ -261,14 +261,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'guides-support' => [
                 'title'       => [
-                    'en' => 'Concierge Support Guide | Warranty & Escalation Paths',
-                    'zh' => '禮賓客服指南｜保固與升級流程',
-                    'zh-cn' => '礼宾客服指南｜保固与升级流程',
+                    'en' => 'Concierge Support | SVICLOUD | 小雲盒子 專人支援',
+                    'zh' => 'Concierge Support | SVICLOUD | 小雲盒子 專人支援',
+                    'zh-cn' => 'Concierge Support | SVICLOUD | 小雲盒子 專人支援',
                 ],
                 'description' => [
-                    'en' => 'Understand concierge tiers, warranty checkpoints, and how to escalate SVICLOUD requests in English or Chinese.',
-                    'zh' => '了解禮賓等級、保固檢核與中英升級流程，確保小雲支援快速到位。',
-                    'zh-cn' => '了解礼宾等级、保固检核与中英升级流程，确保小云支持快速到位。',
+                    'en' => 'Premium concierge help for setup, warranty, and upgrades. 小雲盒子 專人支援服務。',
+                    'zh' => 'Premium concierge help for setup, warranty, and upgrades. 小雲盒子 專人支援服務。',
+                    'zh-cn' => 'Premium concierge help for setup, warranty, and upgrades. 小雲盒子 專人支援服務。',
                 ],
                 'image'       => '/assets/images/certification-authorized-dealer.webp',
                 'image_alt'   => [
@@ -279,14 +279,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'guides-resources' => [
                 'title'       => [
-                    'en' => 'Resources Hub | Warranty Docs, Compliance & Playbooks',
-                    'zh' => '資源中心｜保固文件、合規與行銷手冊',
-                    'zh-cn' => '资源中心｜保固文件、合规与营销手册',
+                    'en' => 'Resource Library | SVICLOUD | 小雲盒子 資源庫',
+                    'zh' => 'Resource Library | SVICLOUD | 小雲盒子 資源庫',
+                    'zh-cn' => 'Resource Library | SVICLOUD | 小雲盒子 資源庫',
                 ],
                 'description' => [
-                    'en' => 'Download SVICLOUD warranty forms, compliance checklists, and marketing playbooks to support US households.',
-                    'zh' => '下載小雲保固文件、合規清單與行銷手冊，掌握美國市場需求。',
-                    'zh-cn' => '下载小云保固文件、合规清单与营销手册，掌握美国市场需求。',
+                    'en' => 'Downloads, manuals, and warranty resources. 小雲盒子 資源與下載。',
+                    'zh' => 'Downloads, manuals, and warranty resources. 小雲盒子 資源與下載。',
+                    'zh-cn' => 'Downloads, manuals, and warranty resources. 小雲盒子 資源與下載。',
                 ],
                 'image'       => $default_image,
                 'image_alt'   => [
@@ -297,14 +297,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'guides-troubleshooting' => [
                 'title'       => [
-                    'en' => 'Troubleshooting Guide | Remote, Streaming & Network Fixes',
-                    'zh' => '疑難排解指南｜遙控、串流與網路修復',
-                    'zh-cn' => '疑难排解指南｜遥控、串流与网络修复',
+                    'en' => 'Troubleshooting Guide | SVICLOUD | 小雲盒子 故障排除',
+                    'zh' => 'Troubleshooting Guide | SVICLOUD | 小雲盒子 故障排除',
+                    'zh-cn' => 'Troubleshooting Guide | SVICLOUD | 小雲盒子 故障排除',
                 ],
                 'description' => [
-                    'en' => 'Resolve SVICLOUD buffering, remote pairing, and streaming glitches with concierge-approved checklists.',
-                    'zh' => '依照禮賓核可清單排除小雲緩衝、遙控配對與串流異常問題。',
-                    'zh-cn' => '依照礼宾核可清单排除小云缓冲、遥控配对与串流异常问题。',
+                    'en' => 'Fix common issues with streaming, remote, and network tips. 小雲盒子 常見問題排除。',
+                    'zh' => 'Fix common issues with streaming, remote, and network tips. 小雲盒子 常見問題排除。',
+                    'zh-cn' => 'Fix common issues with streaming, remote, and network tips. 小雲盒子 常見問題排除。',
                 ],
                 'image'       => '/assets/images/svicloud-10s-lifestyle-1.webp',
                 'image_alt'   => [
@@ -315,14 +315,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'guides-apps' => [
                 'title'       => [
-                    'en' => 'Apps & Channels Guide | Yogurt TV, Cherry TV, Kids Mode',
-                    'zh' => '應用與頻道指南｜Yogurt TV、Cherry TV 與兒童模式',
-                    'zh-cn' => '应用与频道指南｜Yogurt TV、Cherry TV 与儿童模式',
+                    'en' => 'SVICLOUD Apps & Channels | 小雲盒子 應用指南',
+                    'zh' => 'SVICLOUD Apps & Channels | 小雲盒子 應用指南',
+                    'zh-cn' => 'SVICLOUD Apps & Channels | 小雲盒子 應用指南',
                 ],
                 'description' => [
-                    'en' => 'Install and organize SVICLOUD live TV, on-demand, karaoke, and kid-friendly apps with bilingual tips.',
-                    'zh' => '以雙語教學安裝與整理小雲直播、隨選、卡拉OK與兒童應用。',
-                    'zh-cn' => '以双语教学安装与整理小云直播、随选、卡拉OK与儿童应用。',
+                    'en' => 'Recommended apps and channels for your SVICLOUD box. 小雲盒子 應用與頻道指南。',
+                    'zh' => 'Recommended apps and channels for your SVICLOUD box. 小雲盒子 應用與頻道指南。',
+                    'zh-cn' => 'Recommended apps and channels for your SVICLOUD box. 小雲盒子 應用與頻道指南。',
                 ],
                 'image'       => '/assets/images/svicloud-10s-lifestyle-3.webp',
                 'image_alt'   => [
@@ -333,14 +333,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'return-policy' => [
                 'title'       => [
-                    'en' => 'SVICLOUD Return Policy | 30-Day U.S. Exchanges & Refunds',
-                    'zh' => '小雲退貨政策｜30 天美國換貨與退款',
-                    'zh-cn' => '小云退货政策｜30 天美国换货与退款',
+                    'en' => 'Return Policy | SVICLOUD | 小雲盒子 退貨政策',
+                    'zh' => 'Return Policy | SVICLOUD | 小雲盒子 退貨政策',
+                    'zh-cn' => 'Return Policy | SVICLOUD | 小雲盒子 退貨政策',
                 ],
                 'description' => [
-                    'en' => 'Review eligibility, timelines, and shipping steps for SVICLOUD returns handled from the Nevada warehouse.',
-                    'zh' => '了解小雲美國倉庫退貨資格、時程與物流步驟。',
-                    'zh-cn' => '了解小云美国仓库退货资格、时程与物流步骤。',
+                    'en' => 'Return and exchange policy for SVICLOUD TV Box US. 小雲盒子 退換貨說明。',
+                    'zh' => 'Return and exchange policy for SVICLOUD TV Box US. 小雲盒子 退換貨說明。',
+                    'zh-cn' => 'Return and exchange policy for SVICLOUD TV Box US. 小雲盒子 退換貨說明。',
                 ],
                 'image'       => '/assets/images/certification-authorized-dealer.webp',
                 'image_alt'   => [
@@ -351,14 +351,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'legal-disclaimer' => [
                 'title'       => [
-                    'en' => 'Legal Disclaimer | SVICLOUD TV BOX US Policies',
-                    'zh' => '法律聲明｜SVICLOUD TV BOX US 政策',
-                    'zh-cn' => '法律声明｜SVICLOUD TV BOX US 政策',
+                    'en' => 'Legal Disclaimer | SVICLOUD | 小雲盒子 法律聲明',
+                    'zh' => 'Legal Disclaimer | SVICLOUD | 小雲盒子 法律聲明',
+                    'zh-cn' => 'Legal Disclaimer | SVICLOUD | 小雲盒子 法律聲明',
                 ],
                 'description' => [
-                    'en' => 'Review SVICLOUD TV BOX US legal terms covering service boundaries, intellectual property, and compliance notes.',
-                    'zh' => '檢視 SVICLOUD TV BOX US 服務範圍、智慧財產與合規聲明。',
-                    'zh-cn' => '检视 SVICLOUD TV BOX US 服务范围、知识产权与合规声明。',
+                    'en' => 'Legal disclaimer for SVICLOUD TV Box US. 小雲盒子 法律聲明。',
+                    'zh' => 'Legal disclaimer for SVICLOUD TV Box US. 小雲盒子 法律聲明。',
+                    'zh-cn' => 'Legal disclaimer for SVICLOUD TV Box US. 小雲盒子 法律聲明。',
                 ],
                 'image'       => $default_image,
                 'image_alt'   => [
@@ -369,14 +369,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'order-tracking' => [
                 'title'       => [
-                    'en' => 'SVICLOUD Order Tracking | Live Status & Support',
-                    'zh' => '小雲訂單查詢｜即時狀態與客服支援',
-                    'zh-cn' => '小云订单查询｜即时状态与客服支持',
+                    'en' => 'Order Tracking | SVICLOUD | 小雲盒子 訂單查詢',
+                    'zh' => 'Order Tracking | SVICLOUD | 小雲盒子 訂單查詢',
+                    'zh-cn' => 'Order Tracking | SVICLOUD | 小雲盒子 訂單查詢',
                 ],
                 'description' => [
-                    'en' => 'Enter your order number to see SVICLOUD shipping progress, signatures, and concierge follow-up options.',
-                    'zh' => '輸入訂單編號即可查看小雲出貨進度、簽收資訊與禮賓客服選項。',
-                    'zh-cn' => '输入订单编号即可查看小云出货进度、签收资讯与礼宾客服选项。',
+                    'en' => 'Track your SVICLOUD order status and delivery. 小雲盒子 訂單查詢。',
+                    'zh' => 'Track your SVICLOUD order status and delivery. 小雲盒子 訂單查詢。',
+                    'zh-cn' => 'Track your SVICLOUD order status and delivery. 小雲盒子 訂單查詢。',
                 ],
                 'image'       => '/assets/images/svicloud-10p-plus-lifestyle-2.webp',
                 'image_alt'   => [
@@ -387,14 +387,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'blog' => [
                 'title'       => [
-                    'en' => 'SVICLOUD Blog | 小雲電視盒 美國 Buying Guides & Updates',
-                    'zh' => '小雲部落格｜美國購買指南與最新更新',
-                    'zh-cn' => '小云博客｜美国购买指南与最新更新',
+                    'en' => 'SVICLOUD Blog | 小雲盒子 最新消息',
+                    'zh' => 'SVICLOUD Blog | 小雲盒子 最新消息',
+                    'zh-cn' => 'SVICLOUD Blog | 小雲盒子 最新消息',
                 ],
                 'description' => [
-                    'en' => 'Read bilingual buying checklists, launch news, and troubleshooting tips for SVICLOUD customers in North America.',
-                    'zh' => '閱讀面向北美小雲客戶的雙語購買清單、產品更新與疑難排解建議。',
-                    'zh-cn' => '阅读面向北美小云客户的双语购买清单、产品更新与疑难排解建议。',
+                    'en' => 'Updates, tips, and guides for SVICLOUD owners. 小雲盒子 最新消息與教學。',
+                    'zh' => 'Updates, tips, and guides for SVICLOUD owners. 小雲盒子 最新消息與教學。',
+                    'zh-cn' => 'Updates, tips, and guides for SVICLOUD owners. 小雲盒子 最新消息與教學。',
                 ],
                 'image'       => '/assets/images/hero-voice-assistant.webp',
                 'image_alt'   => [
@@ -405,14 +405,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'about' => [
                 'title'       => [
-                    'en' => 'About SVICLOUD TV BOX US | Authorized 小雲電視盒 Partner',
-                    'zh' => '關於 SVICLOUD TV BOX US｜小雲電視盒美國授權夥伴',
-                    'zh-cn' => '关于 SVICLOUD TV BOX US｜小云电视盒美国授权伙伴',
+                    'en' => 'About SVICLOUD TV Box US | 小雲盒子 美國代理',
+                    'zh' => 'About SVICLOUD TV Box US | 小雲盒子 美國代理',
+                    'zh-cn' => 'About SVICLOUD TV Box US | 小雲盒子 美國代理',
                 ],
                 'description' => [
-                    'en' => 'Discover our Las Vegas fulfillment center, bilingual concierge, and mission to support 小雲電視盒 households in the US.',
-                    'zh' => '了解我們的拉斯維加斯倉庫、中英禮賓客服與服務美國小雲家庭的使命。',
-                    'zh-cn' => '了解我们的拉斯维加斯仓库、中英礼宾客服与服务美国小云家庭的使命。',
+                    'en' => 'Learn about our authorized dealer status and U.S. fulfillment. 小雲盒子 美國代理資訊。',
+                    'zh' => 'Learn about our authorized dealer status and U.S. fulfillment. 小雲盒子 美國代理資訊。',
+                    'zh-cn' => 'Learn about our authorized dealer status and U.S. fulfillment. 小雲盒子 美國代理資訊。',
                 ],
                 'image'       => '/assets/images/svicloud-10s-lifestyle-2.webp',
                 'image_alt'   => [
@@ -423,14 +423,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'compare' => [
                 'title'       => [
-                    'en' => 'SVICLOUD 10P+ vs 10S Comparison | Specs, Warranty, Concierge',
-                    'zh' => '小雲 10P+ vs 10S 比較｜規格、保固與禮賓服務',
-                    'zh-cn' => '小云 10P+ vs 10S 比较｜规格、保固与礼宾服务',
+                    'en' => 'SVICLOUD 10P+ vs 10S | 小雲盒子 型號比較',
+                    'zh' => 'SVICLOUD 10P+ vs 10S | 小雲盒子 型號比較',
+                    'zh-cn' => 'SVICLOUD 10P+ vs 10S | 小雲盒子 型號比較',
                 ],
                 'description' => [
-                    'en' => 'Break down CPUs, storage, voice control, and support perks to pick the right SVICLOUD box for your household.',
-                    'zh' => '比較處理器、儲存、語音控制與支援服務，挑選最合適的小雲機型。',
-                    'zh-cn' => '比较处理器、存储、语音控制与支持服务，挑选最合适的小云机型。',
+                    'en' => 'Compare SVICLOUD 10P+ and 10S specs, storage, and features. 小雲盒子 型號規格比較。',
+                    'zh' => 'Compare SVICLOUD 10P+ and 10S specs, storage, and features. 小雲盒子 型號規格比較。',
+                    'zh-cn' => 'Compare SVICLOUD 10P+ and 10S specs, storage, and features. 小雲盒子 型號規格比較。',
                 ],
                 'image'       => '/assets/images/svicloud-10p-plus-lifestyle-3.webp',
                 'image_alt'   => [
@@ -441,14 +441,14 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'shop' => [
                 'title'       => [
-                    'en' => 'Shop SVICLOUD 10P+ & 10S | Authorized U.S. Inventory',
-                    'zh' => '選購小雲 10P+／10S｜美國授權現貨',
-                    'zh-cn' => '选购小云 10P+／10S｜美国授权现货',
+                    'en' => 'Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨',
+                    'zh' => 'Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨',
+                    'zh-cn' => 'Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨',
                 ],
                 'description' => [
-                    'en' => 'Browse in-stock SVICLOUD bundles with 1-year U.S. warranty, bilingual concierge setup, and easy returns.',
-                    'zh' => '瀏覽小雲現貨組合，附一年美國保固與中英禮賓安裝，提供簡易退換貨服務。',
-                    'zh-cn' => '浏览小云现货组合，附一年美国保固与中英礼宾安装，提供简易退换货服务。',
+                    'en' => 'SVICLOUD 10P+ and 10S with U.S. warranty, fast shipping, and concierge support. 小雲盒子 美國現貨保固。',
+                    'zh' => 'SVICLOUD 10P+ and 10S with U.S. warranty, fast shipping, and concierge support. 小雲盒子 美國現貨保固。',
+                    'zh-cn' => 'SVICLOUD 10P+ and 10S with U.S. warranty, fast shipping, and concierge support. 小雲盒子 美國現貨保固。',
                 ],
                 'image'       => '/assets/images/svicloud-10p-plus.webp',
                 'image_alt'   => [
@@ -1398,19 +1398,19 @@ if (!function_exists('svic_homepage_meta_definitions')) {
 
         $definitions = [
             'zh_tw' => [
-                'title'       => '小雲電視盒 美國代理｜10P+、10S 官方現貨與保固',
-                'description' => '小雲電視盒 美國代理提供 10P+、10S 官方現貨，附一年美國保固與中英雙語禮賓安裝服務，無月費。',
-                'image_alt'   => '小雲電視盒 10P+ 與遙控器，強調中英雙語禮賓服務',
+                'title'       => 'SVICLOUD TV Box US | 小雲盒子 美國授權經銷',
+                'description' => 'Buy SVICLOUD TV Box in the U.S. Authorized dealer with fast US shipping and 1-year warranty. 小雲盒子 美國現貨保固，English/中文 支援。',
+                'image_alt'   => 'SVICLOUD 10P+ streaming box with concierge support badge, 小雲盒子',
             ],
             'zh_cn' => [
-                'title'       => '小云电视盒 美国代理｜10P+、10S 官方现货与保固',
-                'description' => '小云电视盒美国代理提供 10P+、10S 官方现货，含一年美保与中英双语礼宾安装，无月费。',
-                'image_alt'   => '小云电视盒 10P+ 与遥控器，突显中英双语礼宾服务',
+                'title'       => 'SVICLOUD TV Box US | 小雲盒子 美國授權經銷',
+                'description' => 'Buy SVICLOUD TV Box in the U.S. Authorized dealer with fast US shipping and 1-year warranty. 小雲盒子 美國現貨保固，English/中文 支援。',
+                'image_alt'   => 'SVICLOUD 10P+ streaming box with concierge support badge, 小雲盒子',
             ],
             'en_us' => [
-                'title'       => 'SVICLOUD TV Box US | Authorized 小雲電視盒 美國代理',
-                'description' => 'Shop SVICLOUD 10P+ & 10S with bilingual concierge setup and 1-year U.S. warranty from the official 小雲電視盒 美國代理—no monthly fees.',
-                'image_alt'   => 'SVICLOUD 10P+ streaming box with bilingual concierge support badge',
+                'title'       => 'SVICLOUD TV Box US | 小雲盒子 美國授權經銷',
+                'description' => 'Buy SVICLOUD TV Box in the U.S. Authorized dealer with fast US shipping and 1-year warranty. 小雲盒子 美國現貨保固，English/中文 支援。',
+                'image_alt'   => 'SVICLOUD 10P+ streaming box with concierge support badge, 小雲盒子',
             ],
         ];
 
