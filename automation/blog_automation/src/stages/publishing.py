@@ -377,6 +377,11 @@ class Publisher:
             for segment in re.split(r"(?<=[。！？!?\.])\s*", text)
             if segment.strip()
         ]
+        sentences = [
+            re.sub(r"^[✅✔\s]+", "", s)
+            for s in sentences
+            if not re.search(r"chinese title\s*[:：]", s, re.IGNORECASE)
+        ]
 
         generic_markers = (
             "美國本地授權服務據點與雙語客服",

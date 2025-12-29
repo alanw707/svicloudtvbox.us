@@ -257,8 +257,12 @@ class PostDrafter:
         hero_meta: Optional[Dict[str, Any]] = None
 
         if self.image_generator:
+            hero_cfg = self.config.get("content_inputs", {}).get("hero_images", {})
+            inline_hero = bool(hero_cfg.get("inline", False))
             hero_meta = self.image_generator.generate(topic, brief, outline)
             if hero_meta:
+                if not inline_hero:
+                    return content, hero_meta
                 block = f"![{hero_meta['alt']}]({hero_meta['placeholder']})"
                 if hero_meta.get("caption"):
                     block = f"{block}\n*{hero_meta['caption']}*"

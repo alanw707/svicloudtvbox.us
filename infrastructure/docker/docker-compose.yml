@@ -1,0 +1,46 @@
+name: svicloud
+
+services:
+  traefik:
+    image: traefik:v2.11
+    container_name: svicloud-traefik
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml
+      - ./traefik/dynamic:/etc/traefik/dynamic
+      - ./traefik/certs:/etc/traefik/certs
+    networks:
+      - backend
+      - frontend
+
+  mariadb:
+    image: mariadb:10.11
+    container_name: svicloud-mariadb
+    restart: unless-stopped
+    env_file:
+      - ../../.env
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+      - ./db/backups:/var/backups/mysql
+    networks:
+      backend:
+        aliases:
+          - mariadb
+
+networks:
+  backend:
+    external: true
+    name: svicloudtvbox_backend
+  frontend:
+    external: true
+    name: svicloudtvbox_frontend
+
+volumes:
+  db-data:
+    external: true
+    name: docker_db-data

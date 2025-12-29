@@ -19,21 +19,46 @@ seo:
     claude_model: "claude-haiku-4-5-20251001"
     max_length: 32
     min_length_zh: 30
+    recent_window: 40
+    recent_similarity_threshold: 0.8
+    normalize_drop_tokens:
+      - "svicloud"
+      - "小雲"
+      - "小云"
+      - "10p+"
+      - "10p"
+      - "10s"
+      - "tvbox"
+      - "tv box"
+      - "電視盒"
+      - "电视盒"
     overused_tokens:
       - "4K"
       - "HDR"
       - "Wi-Fi"
       - "Dolby"
+    disallowed_tokens:
+      - "4K"
+    allow_disallowed_for_topic_types:
+      - "comparison"
     fallback_templates:
       - "{keyword}｜{geo}家庭影音攻略"
+      - "{keyword} 在{geo}怎麼選？{descriptor}一次看"
       - "{keyword} 實測心得：{benefit} 全解析"
-      - "{keyword} {descriptor}｜2025 完整指南"
-      - "{keyword} FAQ：{geo} 安裝與設定"
+      - "{keyword} {descriptor}：安裝、售後與服務整理"
+      - "選購{keyword}前必看：{benefit} × {descriptor}"
+      - "{keyword}｜{geo}家庭影音常見問題"
+      - "{geo}華人家庭推薦：{keyword} {descriptor}"
+      - "{keyword} 使用指南：{descriptor}+{benefit}"
     benefits:
-      - "4K HDR 串流"
       - "Wi-Fi 6 雙頻"
-      - "Dolby Audio"
-      - "語音遙控"
+      - "中文客服"
+      - "美國倉儲快速出貨"
+      - "一年美國保固"
+      - "語音搜尋"
+      - "App 市集"
+      - "遠端安裝協助"
+      - "本地維修支援"
 publishing:
   staging_hold_hours: 24
   max_posts_per_week: 2
@@ -46,6 +71,20 @@ publishing:
     - "geo"
     - "faq"
     - "pillar"
+  angle_rotation:
+    enabled: true
+    recent_window: 20
+    allow:
+      - "legal"
+      - "upgrade"
+      - "comparison"
+      - "usage"
+      - "service"
+      - "geo"
+      - "campaign"
+      - "faq"
+      - "pillar"
+    deny: []
   schedule:
     - day: "Tuesday"
       time: "09:00"
@@ -142,14 +181,68 @@ content_inputs:
     - "加州"
     - "紐約"
     - "德州"
+  angle_rules:
+    legal:
+      - "合法"
+      - "法律"
+      - "合規"
+      - "授權"
+      - "版權"
+      - "違法"
+      - "legal"
+      - "law"
+      - "compliance"
+    comparison:
+      - "vs"
+      - "比較"
+      - "對比"
+      - "差異"
+      - "對照"
+      - "PK"
+    upgrade:
+      - "升級"
+      - "更新"
+      - "新版"
+      - "新款"
+      - "新機"
+      - "新一代"
+      - "改版"
+      - "升級版"
+      - "新增功能"
+      - "upgrade"
+      - "new model"
+    usage:
+      - "安裝"
+      - "設定"
+      - "教學"
+      - "指南"
+      - "使用"
+      - "怎麼"
+      - "如何"
+      - "教你"
+      - "步驟"
+      - "FAQ"
+      - "常見問題"
+      - "疑難"
+      - "故障"
+      - "修復"
+      - "解決"
+      - "技巧"
+    service:
+      - "保固"
+      - "售後"
+      - "客服"
+      - "退貨"
+      - "換貨"
+      - "免運"
+      - "出貨"
+      - "維修"
+      - "支援"
   images:
     default:
       - url: "https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant-1200.webp"
         alt: "SVICLOUD 10P+ 4K HDR 旗艦盒"
         caption: "4K HDR 畫質、Dolby Audio 與 Wi-Fi 6 雙頻串流"
-      - url: "https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/certification-authorized-dealer.webp"
-        alt: "SVICLOUD 美國授權經銷商"
-        caption: "美國本地授權服務據點與雙語客服"
   hero_images:
     provider: "openai"
     output_dir: "data/generated_images"

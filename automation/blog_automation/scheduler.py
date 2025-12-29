@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import List, Tuple
 
 import yaml
+from zoneinfo import ZoneInfo
 
 WEEKDAY_MAP = {
     "monday": 0,
@@ -23,12 +24,18 @@ WEEKDAY_MAP = {
 }
 
 
-def load_schedule(config_path: Path) -> List[Tuple[int, int, int]]:
+def load_schedule(config_path: Path) -> tuple[List[Tuple[int, int, int]], dt.tzinfo]:
     config = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
     publishing = config.get("publishing", {})
     schedule_entries = publishing.get("schedule") or []
     if not schedule_entries:
         raise ValueError("No publishing.schedule entries found in config.yaml")
+
+    tz_name = publishing.get("timezone") or os.getenv("TZ") or "UTC"
+    try:
+        tz: dt.tzinfo = ZoneInfo(str(tz_name))
+    except Exception:
+        tz = dt.timezone.utc
 
     schedule: List[Tuple[int, int, int]] = []
     for entry in schedule_entries:
@@ -44,7 +51,7 @@ def load_schedule(config_path: Path) -> List[Tuple[int, int, int]]:
 
     if not schedule:
         raise ValueError("publishing.schedule is empty or invalid")
-    return schedule
+    return schedule, tz
 
 
 def next_run(schedule: List[Tuple[int, int, int]], now: dt.datetime) -> dt.datetime:
@@ -92,14 +99,14 @@ def run_once(args: argparse.Namespace) -> None:
 
 
 def scheduler_loop(args: argparse.Namespace) -> None:
-    schedule = load_schedule(args.config)
+    schedule, tz = load_schedule(args.config)
     stop_file = Path(args.stop_file)
     while True:
-        now = dt.datetime.now()
+        now = dt.datetime.now(tz)
         target = next_run(schedule, now)
-        log(f"Next automation run scheduled for {target}")
+        log(f"Next automation run scheduled for {target.isoformat()} ({tz})")
         while True:
-            now = dt.datetime.now()
+            now = dt.datetime.now(tz)
             remaining = (target - now).total_seconds()
             if remaining <= 0:
                 break

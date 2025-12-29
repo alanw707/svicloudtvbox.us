@@ -48,6 +48,9 @@ automation/posts_history.db
 data/
 env/
 # BMAD tooling and generated configs
-.bmad/
+_bmad/
 docs/bmad/
 tmp/wp-config*.php
+
+# Local AI assistant state
+.claude/

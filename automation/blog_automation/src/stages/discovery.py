@@ -59,6 +59,7 @@ class TopicDiscovery:
         self.log = logger
         self.base_dir = base_dir
         self.keyword_filters = self._compile_keyword_filters()
+        self.angle_rules = (self.config.get("content_inputs", {}) or {}).get("angle_rules", {}) or {}
 
     def discover_topics(self) -> List[TopicCandidate]:
         """Discover topics from all sources with fallback.
@@ -702,6 +703,7 @@ class TopicDiscovery:
         """
         # Classify topic type and attributes
         classification = self._classify_topic(keyword, locale_targets)
+        angle = self._classify_angle(keyword, classification)
 
         # Calculate final score with bonuses
         topic_score = base_score
@@ -738,6 +740,7 @@ class TopicDiscovery:
             "is_comparison": classification["is_comparison"],
             "is_campaign": classification["is_campaign"],
             "is_service": classification.get("is_service", False),
+            "topic_angle": angle,
             "score": final_score,
             "source": source,
         }
@@ -754,6 +757,35 @@ class TopicDiscovery:
             opportunity_score=opportunity,
             metadata=metadata,
         )
+
+    def _classify_angle(self, keyword: str, classification: Dict[str, Any]) -> str:
+        """Classify content angle for rotation (legal/upgrade/comparison/usage/etc.)."""
+        lower_kw = (keyword or "").lower()
+
+        def has_tokens(tokens: Iterable[str]) -> bool:
+            for token in tokens:
+                if not token:
+                    continue
+                token_str = str(token)
+                if token_str.lower() in lower_kw or token_str in keyword:
+                    return True
+            return False
+
+        if has_tokens(self.angle_rules.get("legal", [])):
+            return "legal"
+        if classification.get("is_comparison") or has_tokens(self.angle_rules.get("comparison", [])):
+            return "comparison"
+        if has_tokens(self.angle_rules.get("upgrade", [])):
+            return "upgrade"
+        if classification.get("topic_type") == "faq" or has_tokens(self.angle_rules.get("usage", [])):
+            return "usage"
+        if classification.get("is_service") or has_tokens(self.angle_rules.get("service", [])):
+            return "service"
+        if classification.get("is_geo"):
+            return "geo"
+        if classification.get("is_campaign"):
+            return "campaign"
+        return "pillar"
 
     def _scrape_official_features(self, url: str) -> List[Dict[str, str]]:
         try:
@@ -1251,11 +1283,14 @@ class TopicDiscovery:
         if not candidate:
             return None
 
-        # Handle quoted keywords
-        if candidate.startswith('"'):
-            parts = candidate.split('"')
-            if len(parts) >= 3:
-                candidate = parts[1]
+        # Prefer quoted keywords anywhere in the line.
+        quoted = re.search(r'"([^"]+)"', candidate)
+        if quoted:
+            candidate = quoted.group(1).strip()
+        elif ":" in candidate:
+            label, remainder = candidate.split(":", 1)
+            if remainder.strip() and not any("\u4e00" <= ch <= "\u9fff" for ch in label):
+                candidate = remainder.strip()
 
         # Strip parenthetical notes
         candidate = candidate.split("(")[0].strip()

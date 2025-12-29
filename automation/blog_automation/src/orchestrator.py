@@ -148,12 +148,7 @@ class BlogAutomation:
             return
 
         try:
-            # Discover topics
-            topics = self.discovery.discover_topics()
-            unique_topics = self.filter_duplicates(topics)
-            self.log.info("Processing %s topics (max_posts=%s)", len(unique_topics), max_posts)
-
-            # Cadence + quota gates
+            # Cadence + quota gates (run before expensive generation)
             now_utc = datetime.now(timezone.utc)
             publishing_cfg = self.config.get("publishing", {}) or {}
 
@@ -168,10 +163,15 @@ class BlogAutomation:
                 local_tz = ZoneInfo("UTC")
 
             start_of_week_utc, end_of_week_utc = self._week_window_utc(now_utc, local_tz)
-            already_created = self.db.count_wp_created_between(
+            local_created = self.db.count_wp_created_between(
                 start_of_week_utc.isoformat(),
                 end_of_week_utc.isoformat(),
             )
+            remote_created = self._count_remote_wp_created_between(
+                start_of_week_utc,
+                end_of_week_utc,
+            )
+            already_created = max(local_created, remote_created)
             remaining_week = max(0, weekly_cap - already_created)
 
             # Backlog visibility
@@ -189,14 +189,32 @@ class BlogAutomation:
                 self.log.warning(msg)
                 self.email.send_notice("SVICLOUD Autoblog cadence cap reached", msg)
                 self.db.record_run(
-                    topics_found=len(topics),
-                    unique_topics=len(unique_topics),
+                    topics_found=0,
+                    unique_topics=0,
                     posts_attempted=0,
                     posts_published=0,
                     posts_staged=0,
                     dry_run=self.dry_run,
                 )
                 return
+
+            self.log.info(
+                "Cadence gates: per_run_cap=%s weekly_cap=%s already_created=%s (local=%s remote=%s) remaining_week=%s timezone=%s max_posts_arg=%s => limit=%s",
+                per_run_cap,
+                weekly_cap,
+                already_created,
+                local_created,
+                remote_created,
+                remaining_week,
+                tz_name,
+                max_posts,
+                limit,
+            )
+
+            # Discover topics (expensive) after passing cadence gates
+            topics = self.discovery.discover_topics()
+            unique_topics = self.filter_duplicates(topics)
+            self.log.info("Processing %s topics (max_posts=%s)", len(unique_topics), max_posts)
 
             rest_cfg = self.config.get("wordpress", {}).get("rest", {})
             desired_wp_status = (rest_cfg.get("status") or "draft").lower()
@@ -206,7 +224,18 @@ class BlogAutomation:
             # Pre-fetch remote posts for dedupe
             remote_posts = self._recent_remote_posts()
             local_recent = self.db.recent_posts()
-            ordered_topics = self._prioritize_topics_for_variety(unique_topics, local_recent)
+            recent_titles: List[str] = []
+            for row in local_recent:
+                title = row.get("title", "")
+                if title:
+                    recent_titles.append(title)
+            for row in remote_posts:
+                title = self._strip_html(row.get("title", ""))
+                if title:
+                    recent_titles.append(title)
+            if recent_titles:
+                self.titles.set_recent_titles(recent_titles)
+            ordered_topics = self._prioritize_topics_for_variety(unique_topics, local_recent, remote_posts)
 
             # Generate and publish posts
             for topic in ordered_topics:
@@ -252,6 +281,7 @@ class BlogAutomation:
                         staged += 1
                         self._record_post(post, status="staged")
                     self._publish_translations(post)
+                    self.titles.add_recent_title(post.title)
                 else:
                     self._save_draft(post)
 
@@ -282,6 +312,60 @@ class BlogAutomation:
                 )
         finally:
             self._release_lock()
+
+    def _count_remote_wp_created_between(self, start_utc: datetime, end_utc: datetime) -> int:
+        """Count WordPress-created posts between timestamps as a safety check.
+
+        Requires REST credentials (Application Password) to include drafts/future.
+        """
+        wp_cfg = self.config.get("wordpress", {}) or {}
+        rest_cfg = wp_cfg.get("rest", {}) or {}
+        endpoint = rest_cfg.get("endpoint")
+        username = rest_cfg.get("username")
+        password_env = rest_cfg.get("password_env")
+        password = os.getenv(password_env) if password_env else rest_cfg.get("password")
+
+        if not endpoint or not username or not password:
+            return 0
+
+        params: Dict[str, Any] = {
+            "after": start_utc.isoformat().replace("+00:00", "Z"),
+            "before": end_utc.isoformat().replace("+00:00", "Z"),
+            "per_page": 100,
+            "page": 1,
+            "_fields": "id",
+            "orderby": "date",
+            "order": "asc",
+            # authenticated: include non-public statuses for accurate caps
+            "status": "publish,draft,future",
+        }
+        if rest_cfg.get("author"):
+            params["author"] = rest_cfg["author"]
+
+        count = 0
+        while True:
+            try:
+                resp = requests.get(endpoint, auth=(username, password), params=params, timeout=30)
+            except requests.RequestException as exc:
+                self.log.debug("Remote weekly count failed: %s", exc)
+                return 0
+
+            # If there are no results for this page, WP returns 400 invalid page number.
+            if resp.status_code == 400 and "rest_post_invalid_page_number" in resp.text:
+                break
+            if resp.status_code < 200 or resp.status_code >= 300:
+                self.log.debug("Remote weekly count HTTP %s: %s", resp.status_code, resp.text[:200])
+                return 0
+
+            rows = resp.json() or []
+            if not rows:
+                break
+            count += len(rows)
+            if len(rows) < int(params["per_page"]):
+                break
+            params["page"] = int(params["page"]) + 1
+
+        return count
 
     def filter_duplicates(self, topics: Iterable[TopicCandidate]) -> List[TopicCandidate]:
         """Remove duplicate topics using database and embeddings.
@@ -383,6 +467,7 @@ class BlogAutomation:
         post_body, hero_meta = self.drafting.inject_images(post_body, topic, brief, outline)
         post_body = self.drafting.ensure_internal_links(post_body)
         post_body = self.drafting.append_cta(post_body, topic)
+        post_body = self._sanitize_markdown(post_body)
 
         title_info = self.titles.generate_title(topic, brief, outline)
         title = title_info.get("title") or f"{topic.keyword}"
@@ -396,6 +481,7 @@ class BlogAutomation:
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "outline": outline,
             "topic_type": topic.metadata.get("topic_type") if topic.metadata else None,
+            "topic_angle": topic.metadata.get("topic_angle") if topic.metadata else None,
             "geo_target": topic.metadata.get("geo_target") if topic.metadata else None,
             "source_domain": topic.metadata.get("source_domain") if topic.metadata else None,
             "seo_title_candidates": title_info.get("candidates"),
@@ -792,10 +878,11 @@ class BlogAutomation:
         if not locales or not publishing_cfg.get("publish_translations", False):
             return
         base_locale = publishing_cfg.get("base_locale")
+        source_content = self._prepare_translation_content(post)
         for locale in locales:
             if base_locale and locale == base_locale:
                 continue
-            translated = self._translate_for_locale(post, locale)
+            translated = self._translate_for_locale(post, locale, content_override=source_content)
             if translated:
                 self.publisher.update_translation_meta(
                     post_id=post.frontmatter.get("wp_post_id"),
@@ -803,7 +890,12 @@ class BlogAutomation:
                     translation=translated,
                 )
 
-    def _translate_for_locale(self, post: GeneratedPost, locale: str) -> Optional[Dict[str, str]]:
+    def _translate_for_locale(
+        self,
+        post: GeneratedPost,
+        locale: str,
+        content_override: Optional[str] = None,
+    ) -> Optional[Dict[str, str]]:
         """Translate post content/title/excerpt into target locale."""
         if not self.claude:
             return None
@@ -821,11 +913,34 @@ class BlogAutomation:
             "You are a precise localization assistant. Translate Markdown while keeping structure, headings, links, and URLs unchanged. "
             "Do not change code blocks or URLs. Keep brand terms (SVICLOUD, 10P+, 10S) as-is."
         )
+        translated_title = post.title
+        title_prompt = (
+            f"Target language/locale: {target}\n"
+            "Translate the following title. Return only the translated title text.\n\n"
+            f"TITLE:\n{post.title}"
+        )
+        try:
+            title_completion = self.claude.messages.create(  # type: ignore[attr-defined]
+                model=model,
+                max_tokens=200,
+                temperature=0.1,
+                system=system,
+                messages=[{"role": "user", "content": title_prompt}],
+            )
+            raw_title = title_completion.content[0].text if title_completion and title_completion.content else None  # type: ignore
+            if raw_title:
+                translated_title = raw_title.strip().lstrip("#").strip()
+                if translated_title.lower().startswith("title:"):
+                    translated_title = translated_title.split(":", 1)[1].strip()
+                translated_title = translated_title.splitlines()[0].strip()
+        except Exception as exc:
+            self.log.warning("Title translation failed for locale %s: %s", locale, exc)
+        content_source = content_override if content_override is not None else post.content
         user_prompt = (
             f"Target language/locale: {target}\n"
-            "Translate the following Markdown blog post. Preserve Markdown, headings, links, image URLs, CTA, and numeric data.\n\n"
-            f"TITLE:\n{post.title}\n\n"
-            f"CONTENT:\n{post.content}"
+            "Translate the following Markdown blog post content. Preserve Markdown, headings, links, image URLs, CTA, and numeric data.\n"
+            "Return only the translated content body. Do not add a title heading or any labels like 'TITLE:' or 'Chinese title'.\n\n"
+            f"CONTENT:\n{content_source}"
         )
         try:
             from anthropic import NOT_GIVEN  # type: ignore
@@ -842,10 +957,21 @@ class BlogAutomation:
             translated_text = completion.content[0].text if completion and completion.content else None  # type: ignore
             if not translated_text:
                 return None
+            translated_text = self._sanitize_markdown(translated_text.strip())
+            excerpt = ""
+            for block in translated_text.split("\n\n"):
+                if not block.strip():
+                    continue
+                if re.match(r"^#+\\s+", block.strip()):
+                    continue
+                excerpt = block.strip()
+                break
+            if not excerpt:
+                excerpt = translated_text.split("\n\n", 1)[0].strip()
             return {
-                "title": post.title,  # keep original title unless caller overrides
-                "content": translated_text.strip(),
-                "excerpt": translated_text.strip().split("\n\n", 1)[0][:220],
+                "title": translated_title,
+                "content": translated_text,
+                "excerpt": excerpt[:220],
             }
         except Exception as exc:
             self.log.warning("Translation failed for locale %s: %s", locale, exc)
@@ -857,15 +983,65 @@ class BlogAutomation:
             return ""
         return re.sub(r"<[^>]+>", " ", html_text)
 
+    @staticmethod
+    def _sanitize_markdown(content: str) -> str:
+        if not content:
+            return content
+        lines = content.splitlines()
+        cleaned = []
+        for line in lines:
+            if re.search(r"chinese title\\s*[:：]", line, flags=re.IGNORECASE):
+                continue
+            cleaned.append(line)
+        for idx, line in enumerate(cleaned):
+            if line.strip() == "":
+                continue
+            if re.match(r"^#\\s+", line):
+                cleaned[idx] = ""
+                if idx + 1 < len(cleaned) and cleaned[idx + 1].strip() == "":
+                    cleaned[idx + 1] = ""
+            break
+        return "\n".join(cleaned).lstrip()
+
+    def _prepare_translation_content(self, post: GeneratedPost) -> str:
+        content = post.content or ""
+        hero = (post.frontmatter or {}).get("hero_image") or {}
+        uploaded_url = hero.get("uploaded_url")
+        placeholder = hero.get("placeholder")
+        if uploaded_url and placeholder:
+            content = content.replace(placeholder, uploaded_url)
+        return self._sanitize_markdown(content)
+
     def _prioritize_topics_for_variety(
         self,
         topics: List[TopicCandidate],
         recent_posts: List[Dict[str, Any]],
+        remote_posts: Optional[List[Dict[str, Any]]] = None,
     ) -> List[TopicCandidate]:
-        """Reorder candidates so underrepresented topic types are preferred for this run."""
+        """Reorder candidates so underrepresented topic types/angles are preferred for this run."""
         counts: Dict[str, int] = {}
+        angle_counts: Dict[str, int] = {}
 
-        for row in recent_posts[:20]:
+        angle_cfg = (self.config.get("publishing", {}) or {}).get("angle_rotation", {}) or {}
+        angle_enabled = bool(angle_cfg.get("enabled", False))
+        allow_angles = {
+            str(a).lower()
+            for a in (angle_cfg.get("allow") or [])
+            if a
+        }
+        deny_angles = {
+            str(a).lower()
+            for a in (angle_cfg.get("deny") or [])
+            if a
+        }
+        recent_window = int(angle_cfg.get("recent_window", 20)) if angle_enabled else 20
+
+        def note_angle(angle: str) -> None:
+            if not angle:
+                return
+            angle_counts[angle] = angle_counts.get(angle, 0) + 1
+
+        for row in recent_posts[:recent_window]:
             if (row.get("status") or "").lower() not in {"published", "staged"}:
                 continue
             meta_raw = row.get("metadata") or ""
@@ -876,19 +1052,70 @@ class BlogAutomation:
             t = (meta.get("topic_type") or "pillar").lower()
             counts[t] = counts.get(t, 0) + 1
 
+            angle = (meta.get("topic_angle") or "").lower()
+            if not angle:
+                angle = self._infer_angle_from_text(row.get("title", ""))
+            note_angle(angle)
+
+        if angle_enabled and remote_posts:
+            for row in remote_posts[:recent_window]:
+                title = self._strip_html(row.get("title", ""))
+                angle = self._infer_angle_from_text(title)
+                note_angle(angle)
+
         default_priority = ["comparison", "service", "campaign", "geo", "faq", "pillar"]
         priority = self.config.get("publishing", {}).get("topic_type_priority") or default_priority
         priority_index = {t: i for i, t in enumerate(priority)}
 
-        def sort_key(candidate: TopicCandidate) -> tuple[int, int, int]:
+        filtered_topics = []
+        for candidate in topics:
+            meta = candidate.metadata or {}
+            angle = (meta.get("topic_angle") or "pillar").lower()
+            if angle_enabled:
+                if allow_angles and angle not in allow_angles:
+                    continue
+                if deny_angles and angle in deny_angles:
+                    continue
+            filtered_topics.append(candidate)
+
+        def sort_key(candidate: TopicCandidate) -> tuple[int, int, int, int]:
             meta = candidate.metadata or {}
             topic_type = (meta.get("topic_type") or "pillar").lower()
-            used = counts.get(topic_type, 0)
+            angle = (meta.get("topic_angle") or "pillar").lower()
+            used_angle = angle_counts.get(angle, 0) if angle_enabled else 0
+            used_type = counts.get(topic_type, 0)
             prio = priority_index.get(topic_type, len(priority_index) + 1)
             score = int(meta.get("score", 0))
-            return (used, prio, -score)
+            return (used_angle, used_type, prio, -score)
 
-        return sorted(list(topics), key=sort_key)
+        return sorted(filtered_topics, key=sort_key)
+
+    def _infer_angle_from_text(self, text: str) -> str:
+        if not text:
+            return ""
+        rules = (self.config.get("content_inputs", {}) or {}).get("angle_rules", {}) or {}
+        lower = text.lower()
+
+        def has_tokens(tokens: Iterable[str]) -> bool:
+            for token in tokens:
+                if not token:
+                    continue
+                token_str = str(token)
+                if token_str.lower() in lower or token_str in text:
+                    return True
+            return False
+
+        if has_tokens(rules.get("legal", [])):
+            return "legal"
+        if "vs" in lower or "比較" in text or "對比" in text or has_tokens(rules.get("comparison", [])):
+            return "comparison"
+        if has_tokens(rules.get("upgrade", [])):
+            return "upgrade"
+        if "faq" in lower or "常見問題" in text or has_tokens(rules.get("usage", [])):
+            return "usage"
+        if has_tokens(rules.get("service", [])):
+            return "service"
+        return ""
 
     def close(self) -> None:
         """Clean up resources."""
