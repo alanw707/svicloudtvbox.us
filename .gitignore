@@ -47,9 +47,8 @@ automation/blog_automation/EMERGENCY_STOP
 automation/posts_history.db
 data/
 env/
+
 # BMAD tooling and generated configs
-_bmad/
-docs/bmad/
 tmp/wp-config*.php
 
 # Local AI assistant state

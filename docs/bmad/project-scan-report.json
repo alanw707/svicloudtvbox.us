@@ -1,0 +1,129 @@
+{
+  "workflow_version": "1.2.0",
+  "timestamps": {
+    "started": "2025-12-08T04:11:04-08:00",
+    "last_updated": "2025-12-08T05:04:36.000000",
+    "completed": "2025-12-08T05:04:36.000000"
+  },
+  "mode": "initial_scan",
+  "scan_level": "deep",
+  "project_root": "/home/alanw/projects/svicloudtvbox.us",
+  "output_folder": "docs/bmad",
+  "completed_steps": [
+    {
+      "step": "step_1",
+      "status": "completed",
+      "timestamp": "2025-12-08T04:32:56.584850",
+      "summary": "Classified as monolith with 1 part"
+    },
+    {
+      "step": "step_2",
+      "status": "completed",
+      "timestamp": "2025-12-08T04:39:07.146229",
+      "summary": "Inventoried docs under docs/; user context: consolidate docs under docs"
+    },
+    {
+      "step": "step_3",
+      "status": "completed",
+      "timestamp": "2025-12-08T04:40:14.237383",
+      "summary": "Tech stack: WordPress PHP theme with CSS partial bundler via scripts/build_css.py, JS assets/theme.js, WooCommerce overrides, deploy scripts"
+    },
+    {
+      "step": "step_4",
+      "status": "completed",
+      "timestamp": "2025-12-08T04:42:51.207562",
+      "summary": "Conditional analysis: no custom APIs; no repo data models; UI components inventoried; Woo UX enhancements noted"
+    },
+    {
+      "step": "step_5",
+      "status": "completed",
+      "timestamp": "2025-12-08T04:44:05.000000",
+      "summary": "Source tree documented with critical folders; wrote source-tree-analysis.md"
+    },
+    {
+      "step": "step_6",
+      "status": "completed",
+      "timestamp": "2025-12-08T04:46:12.000000",
+      "summary": "Documented dev workflow and deployment scripts; no contribution guide present"
+    },
+    {
+      "step": "step_8",
+      "status": "completed",
+      "timestamp": "2025-12-08T04:50:33.000000",
+      "summary": "Architecture doc generated for single part (architecture.md)"
+    },
+    {
+      "step": "step_9",
+      "status": "completed",
+      "timestamp": "2025-12-08T04:54:45.000000",
+      "summary": "Supporting docs generated: project-overview, component-inventory, development-guide, deployment-guide, api-contracts, data-models"
+    },
+    {
+      "step": "step_10",
+      "status": "completed",
+      "timestamp": "2025-12-08T04:56:50.000000",
+      "summary": "Master index generated"
+    },
+    {
+      "step": "step_11",
+      "status": "completed",
+      "timestamp": "2025-12-08T04:59:15.000000",
+      "summary": "Validation completed; no incomplete markers"
+    },
+    {
+      "step": "step_12",
+      "status": "completed",
+      "timestamp": "2025-12-08T05:04:36.000000",
+      "summary": "Workflow complete"
+    }
+  ],
+  "current_step": "completed",
+  "findings": {
+    "project_classification": "monolith with 1 part (root) classified as web",
+    "repository_type": "monolith",
+    "parts_count": 1,
+    "primary_tech": "WordPress PHP theme; Playwright tests",
+    "existing_docs_count": "many under docs/ (marketing, blog, plans, FAQs, i18n)",
+    "user_context": "All documentation under docs; prioritize cleanup/consolidation first",
+    "technology_stack": "WordPress PHP theme, WooCommerce templates, CSS partials with bundles.json built via scripts/build_css.py, JS assets/theme.js, deployment scripts",
+    "architecture_pattern": "WordPress theme with WooCommerce overrides",
+    "api_count": 0,
+    "data_tables": 0,
+    "component_count": "multiple UI/checkout components (nav, hero, feature/pricing, Woo cart/checkout, product gallery/carousel, language toggle)",
+    "state_management": "jQuery event-driven; no global store",
+    "outputs_generated": []
+  },
+  "outputs_generated": [
+    "api-contracts-root.md",
+    "api-contracts.md",
+    "architecture.md",
+    "component-inventory.md",
+    "data-models-root.md",
+    "data-models.md",
+    "deployment-configuration-root.md",
+    "deployment-guide.md",
+    "development-guide.md",
+    "development-instructions-root.md",
+    "index.md",
+    "project-overview.md",
+    "source-tree-analysis.md",
+    "ui-component-inventory-root.md"
+  ],
+  "resume_instructions": "Starting from step 1",
+  "project_types": [
+    {
+      "part_id": "root",
+      "project_type_id": "web",
+      "display_name": "web"
+    }
+  ],
+  "project_parts": [
+    {
+      "part_id": "root",
+      "root_path": "/home/alanw/projects/svicloudtvbox.us",
+      "project_type_id": "web",
+      "display_name": "web",
+      "notes": "Monolith with WordPress theme under theme/svicloudtvbox-lumen"
+    }
+  ]
+}

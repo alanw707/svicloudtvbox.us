@@ -1,0 +1,17 @@
+project_structure = monolith
+parts_count = 1
+parts = root (web)
+summary = monolith with 1 part (root) classified as web; WordPress PHP theme; Playwright tests
+existing_documentation_inventory = docs/ (marketing plans, SEO audits/logs, PRD, FAQ, i18n, guides, blog posts in zh/en, integration/stripe notes, hostinger plan, svicloudtvbox-lumen phase0, woocommerce snippets, quick reference cards)
+user_provided_context = All documentation under docs; prioritize cleanup/consolidation first
+api_contracts*root = docs/bmad/api-contracts-root.md
+data_models*root = docs/bmad/data-models-root.md
+ui_component_inventory_root = docs/bmad/ui-component-inventory-root.md
+source_tree_analysis = docs/bmad/source-tree-analysis.md
+critical_folders_summary = theme assets/css/js/templates + scripts build/sync/deploy + docs consolidation targets
+development_instructions = docs/bmad/development-instructions-root.md
+deployment_configuration = docs/bmad/deployment-configuration-root.md
+contribution_guidelines = none found
+architecture_document = docs/bmad/architecture.md
+supporting_documents = project-overview.md, component-inventory.md, development-guide.md, deployment-guide.md, api-contracts.md, data-models.md
+index = docs/bmad/index.md
