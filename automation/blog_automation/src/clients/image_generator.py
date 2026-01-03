@@ -6,6 +6,7 @@ import base64
 import logging
 import os
 import time
+from io import BytesIO
 from pathlib import Path
 from typing import Any, Dict, Optional
 from uuid import uuid4
@@ -15,6 +16,10 @@ try:
 except ImportError:  # pragma: no cover - optional dependency
     OpenAI = None  # type: ignore[assignment]
 
+try:
+    from PIL import Image
+except ImportError:  # pragma: no cover - optional dependency
+    Image = None  # type: ignore[assignment]
 
 class HeroImageGenerator:
     """Generates unique hero images for blog posts."""
@@ -33,6 +38,10 @@ class HeroImageGenerator:
         openai_cfg = self.cfg.get("openai", {}) or {}
         self.model = openai_cfg.get("model", "gpt-image-1")
         self.size = openai_cfg.get("size", "1024x1024")
+        self.output_format = (self.cfg.get("output_format") or "jpeg").lower()
+        self.quality = int(self.cfg.get("quality", 82))
+        self.max_width = int(self.cfg.get("max_width", 1200))
+        self.max_height = int(self.cfg.get("max_height", 1200))
         self.prompt_template = self.cfg.get("prompt_template") or (
             "以{geo}家庭客廳為背景，呈現華人喜愛的串流影音氛圍，"
             "聚焦SVICLOUD小雲電視盒，展示{keyword}主題，強調{benefit}。"
@@ -95,8 +104,9 @@ class HeroImageGenerator:
             return None
 
         image_bytes = base64.b64decode(image_b64)
+        image_bytes, ext, mime_type = self._process_image(image_bytes)
         slug = self._slugify(topic.keyword)
-        filename = f"{slug}-{int(time.time())}.png"
+        filename = f"{slug}-{int(time.time())}.{ext}"
         path = self.output_dir / filename
         try:
             path.write_bytes(image_bytes)
@@ -114,9 +124,54 @@ class HeroImageGenerator:
             "caption": caption,
             "prompt": prompt,
             "placeholder": placeholder,
+            "mime_type": mime_type,
         }
 
     def _slugify(self, text: str) -> str:
         cleaned = "".join(ch if ch.isalnum() else "-" for ch in text)
         slug = "-".join(part for part in cleaned.split("-") if part)
         return slug.lower()[:80]
+
+    def _process_image(self, image_bytes: bytes) -> tuple[bytes, str, str]:
+        if Image is None:
+            self.log.warning("Pillow not installed; saving raw PNG output.")
+            return image_bytes, "png", "image/png"
+
+        fmt = self._normalize_format(self.output_format)
+        if fmt in ("jpg", "jpeg"):
+            pil_format = "JPEG"
+            ext = "jpg"
+            mime_type = "image/jpeg"
+        elif fmt == "webp":
+            pil_format = "WEBP"
+            ext = "webp"
+            mime_type = "image/webp"
+        else:
+            pil_format = "PNG"
+            ext = "png"
+            mime_type = "image/png"
+
+        try:
+            with Image.open(BytesIO(image_bytes)) as img:
+                if pil_format in ("JPEG", "WEBP") and img.mode not in ("RGB", "L"):
+                    img = img.convert("RGB")
+                img.thumbnail((self.max_width, self.max_height), Image.LANCZOS)
+
+                out = BytesIO()
+                save_kwargs: Dict[str, Any] = {}
+                if pil_format == "JPEG":
+                    save_kwargs = {"quality": self.quality, "optimize": True, "progressive": True}
+                elif pil_format == "WEBP":
+                    save_kwargs = {"quality": self.quality, "method": 6}
+                elif pil_format == "PNG":
+                    save_kwargs = {"optimize": True}
+                img.save(out, format=pil_format, **save_kwargs)
+                return out.getvalue(), ext, mime_type
+        except Exception as exc:  # pragma: no cover - defensive fallback
+            self.log.warning("Failed to optimize hero image, saving raw PNG: %s", exc)
+            return image_bytes, "png", "image/png"
+
+    def _normalize_format(self, fmt: str) -> str:
+        if fmt in ("jpg", "jpeg", "png", "webp"):
+            return fmt
+        return "jpeg"

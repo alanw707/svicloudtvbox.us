@@ -9,6 +9,12 @@ defined('ABSPATH') || exit;
 
 // Ensure we have an order context when possible
 $order = isset($order) ? $order : (function_exists('wc_get_order') ? wc_get_order(get_query_var('order-received')) : null);
+$gtag_debug = isset($_GET['svic_gtag_debug']) && $_GET['svic_gtag_debug'] === '1';
+
+if ($gtag_debug) {
+    nocache_headers();
+    echo '<!-- SVIC gtag debug enabled -->';
+}
 
 // Helper to localize links with active language
 $home_url         = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/')) : home_url('/');
@@ -38,6 +44,7 @@ if ($order instanceof WC_Order && $order->has_status('failed')) : ?>
   $payment_method_value = $order->get_payment_method_title() ?: '';
   $billing_name         = $order->get_formatted_billing_full_name();
   $billing_email        = $order->get_billing_email();
+  // $gtag_debug set above for cache control + debug visibility.
 
   // Capture default Woo thankyou output so we can place it inside our layout
   ob_start();
@@ -108,6 +115,18 @@ if ($order instanceof WC_Order && $order->has_status('failed')) : ?>
   </section>
 
   <?php svic_render_google_customer_reviews_optin($order); ?>
+
+  <?php if ($gtag_debug) : ?>
+    <script>
+    (function () {
+        var gtagReady = (typeof gtag === 'function');
+        console.info('[SVIC] gtag present on thank-you:', gtagReady);
+        if (!gtagReady) {
+            console.warn('[SVIC] gtag not found; Google Ads conversion will not fire.');
+        }
+    })();
+    </script>
+  <?php endif; ?>
 
 <?php else : ?>
   <section class="lumen-order-status lumen-order-thankyou">

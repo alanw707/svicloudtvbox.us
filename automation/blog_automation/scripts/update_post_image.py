@@ -7,6 +7,7 @@ import argparse
 import logging
 import os
 import sys
+import mimetypes
 from pathlib import Path
 from typing import Dict, Any
 
@@ -120,7 +121,8 @@ def _upload_media(path_str: str, title: str, posts_endpoint: str, username: str,
         print(f"Image file missing: {path}", file=sys.stderr)
         return None
 
-    files = {"file": (path.name, path.read_bytes(), "image/png")}
+    content_type, _ = mimetypes.guess_type(path.name)
+    files = {"file": (path.name, path.read_bytes(), content_type or "application/octet-stream")}
     data = {"title": title}
     try:
         response = requests.post(

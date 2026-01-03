@@ -10,3 +10,4 @@ markdown>=3.7
 google-api-python-client>=2.151.0
 google-auth>=2.36.0
 google-auth-httplib2>=0.2.0
+pillow>=10.4.0

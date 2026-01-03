@@ -19,6 +19,10 @@ if (!defined('SVIC_GA4_MEASUREMENT_ID')) {
     define('SVIC_GA4_MEASUREMENT_ID', '');
 }
 
+if (!defined('SVIC_GOOGLE_ADS_CONVERSION_ID')) {
+    define('SVIC_GOOGLE_ADS_CONVERSION_ID', 'AW-17655850932/8WyxCM_gpLQbELTP--JB');
+}
+
 if (!defined('SVIC_META_PIXEL_ID')) {
     define('SVIC_META_PIXEL_ID', '');
 }
@@ -5433,6 +5437,115 @@ if (!function_exists('svic_render_ga4_purchase_event')) {
 
 add_action('woocommerce_thankyou', 'svic_render_ga4_purchase_event', 20);
 
+if (!function_exists('svic_render_google_ads_purchase_event')) {
+    /**
+     * Fires a Google Ads conversion event on the WooCommerce thank-you page.
+     *
+     * @param int $order_id
+     */
+    function svic_render_google_ads_purchase_event(int $order_id): void
+    {
+        $debug = isset($_GET['svic_gtag_debug']) && $_GET['svic_gtag_debug'] === '1';
+
+        if (!svic_is_tracking_enabled()) {
+            if ($debug) {
+                ?>
+                <script>
+                console.warn('[SVIC] Google Ads conversion skipped: tracking disabled.');
+                </script>
+                <?php
+            }
+            return;
+        }
+
+        if (!function_exists('wc_get_order')) {
+            if ($debug) {
+                ?>
+                <script>
+                console.warn('[SVIC] Google Ads conversion skipped: wc_get_order missing.');
+                </script>
+                <?php
+            }
+            return;
+        }
+
+        $conversion_id = defined('SVIC_GOOGLE_ADS_CONVERSION_ID') ? trim((string) SVIC_GOOGLE_ADS_CONVERSION_ID) : '';
+        $conversion_id = (string) apply_filters('svic_google_ads_conversion_id', $conversion_id);
+        if ($conversion_id === '') {
+            if ($debug) {
+                ?>
+                <script>
+                console.warn('[SVIC] Google Ads conversion skipped: conversion ID missing.');
+                </script>
+                <?php
+            }
+            return;
+        }
+
+        $order = wc_get_order($order_id);
+        if (!$order instanceof WC_Order) {
+            if ($debug) {
+                ?>
+                <script>
+                console.warn('[SVIC] Google Ads conversion skipped: order not found.');
+                </script>
+                <?php
+            }
+            return;
+        }
+
+        if (!$order->is_paid()) {
+            if ($debug) {
+                ?>
+                <script>
+                console.warn('[SVIC] Google Ads conversion skipped: order not paid.');
+                </script>
+                <?php
+            }
+            return;
+        }
+
+        $payload = [
+            'send_to'        => $conversion_id,
+            'value'          => (float) $order->get_total(),
+            'currency'       => $order->get_currency() ?: 'USD',
+            'transaction_id' => (string) $order->get_order_number(),
+        ];
+
+        /**
+         * Filter the Google Ads purchase payload before it is rendered.
+         *
+         * @param array    $payload
+         * @param WC_Order $order
+         */
+        $payload = (array) apply_filters('svic_google_ads_purchase_payload', $payload, $order);
+
+        $json = wp_json_encode($payload);
+        if (!is_string($json) || $json === '') {
+            if ($debug) {
+                ?>
+                <script>
+                console.warn('[SVIC] Google Ads conversion skipped: payload encoding failed.');
+                </script>
+                <?php
+            }
+            return;
+        }
+        ?>
+        <script>
+        if (typeof gtag === 'function') {
+            gtag('event', 'conversion', <?php echo $json; ?>);
+            <?php if ($debug) : ?>
+            console.info('[SVIC] Google Ads conversion fired.', <?php echo $json; ?>);
+            <?php endif; ?>
+        }
+        </script>
+        <?php
+    }
+}
+
+add_action('woocommerce_thankyou', 'svic_render_google_ads_purchase_event', 21);
+
 if (!function_exists('svic_render_meta_pixel_purchase_event')) {
     /**
      * Fires a Meta Pixel Purchase event on the WooCommerce thank-you page.
@@ -5513,6 +5626,38 @@ if (!function_exists('svic_render_meta_pixel_purchase_event')) {
 }
 
 add_action('woocommerce_thankyou', 'svic_render_meta_pixel_purchase_event', 21);
+
+if (!function_exists('svic_render_admin_thankyou_url')) {
+    /**
+     * Shows the thank-you URL on the WooCommerce order admin screen.
+     *
+     * @param WC_Order $order
+     */
+    function svic_render_admin_thankyou_url($order): void
+    {
+        if (!is_admin() || !$order instanceof WC_Order) {
+            return;
+        }
+
+        $url = method_exists($order, 'get_checkout_order_received_url')
+            ? $order->get_checkout_order_received_url()
+            : '';
+
+        if (!is_string($url) || $url === '') {
+            return;
+        }
+        ?>
+        <p class="form-field form-field-wide">
+            <strong><?php echo esc_html__('Thank-you URL', SVIC_THEME_TEXT_DOMAIN); ?>:</strong>
+            <a href="<?php echo esc_url($url); ?>" target="_blank" rel="noopener noreferrer">
+                <?php echo esc_html($url); ?>
+            </a>
+        </p>
+        <?php
+    }
+}
+
+add_action('woocommerce_admin_order_data_after_order_details', 'svic_render_admin_thankyou_url', 20);
 
 add_action('pre_get_posts', function ($query) {
     if (is_admin() || !$query->is_main_query()) {

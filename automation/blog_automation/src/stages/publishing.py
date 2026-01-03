@@ -8,6 +8,7 @@ import json
 import logging
 import os
 import re
+import mimetypes
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 import requests
@@ -457,7 +458,8 @@ class Publisher:
             self.log.warning("Hero image path does not exist: %s", path)
             return None
 
-        files = {"file": (path.name, path.read_bytes(), "image/png")}
+        content_type, _ = mimetypes.guess_type(path.name)
+        files = {"file": (path.name, path.read_bytes(), content_type or "application/octet-stream")}
         data = {"title": title}
 
         try:

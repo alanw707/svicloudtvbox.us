@@ -246,6 +246,10 @@ content_inputs:
   hero_images:
     provider: "openai"
     output_dir: "data/generated_images"
+    output_format: "webp"
+    quality: 78
+    max_width: 1024
+    max_height: 1024
     prompt_template: "在{geo}家庭客廳展示SVICLOUD小雲電視盒，呼應{keyword}主題並凸顯{benefit}。"
     benefits:
       - "4K HDR 畫質"
