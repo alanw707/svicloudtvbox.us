@@ -1089,8 +1089,10 @@ return [
         ],
         'story' => [
             'title' => 'Our story',
-            'lead'  => 'From living-room demos to the manufacturer’s official U.S. partner.',
-            'body'  => '<p>We began in 2019 by helping friends and neighboring families replace unreliable streaming boxes with authentic SVICLOUD hardware. Word spread quickly—karaoke nights, sports meetups, and Lunar New Year watch parties all wanted the same thing: a trusted source with real warranty support.</p><p>Investing in local inventory, bilingual onboarding, and responsive concierge service turned us into the go-to SVICLOUD contact on the West Coast. That dedication earned SVI.STUDIO’s formal authorization so every customer gets factory-backed devices delivered fast from Nevada.</p>',
+            'lead'  => 'From living-room demos to the manufacturer\'s official U.S. partner.',
+            'body'  => '<p>We began in 2019 by helping friends and neighboring families replace unreliable streaming boxes with authentic SVICLOUD hardware. Word spread quickly—karaoke nights, sports meetups, and Lunar New Year watch parties all wanted the same thing: a trusted source with real warranty support.</p><p>Investing in local inventory, bilingual onboarding, and responsive concierge service turned us into the go-to SVICLOUD contact on the West Coast. That dedication earned SVI.STUDIO\'s formal authorization so every customer gets factory-backed devices delivered fast from Nevada.</p>',
+            'warehouse_alt'     => 'SVICLOUD Nevada warehouse facility with inventory and fulfillment operations',
+            'warehouse_caption' => 'Our Nevada warehouse: local inventory for faster U.S. delivery',
         ],
         'stats' => [
             'orders' => [

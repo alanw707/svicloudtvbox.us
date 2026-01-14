@@ -655,8 +655,6 @@ $overrides = [
             'cta_10p' => '选购小云电视盒 10P+',
             'cta_10s' => '选购小云电视盒 10S',
         ],
-    ],
-    'product' => [
         'faq' => [
             'sections' => [
                 'device_models' => [
@@ -851,6 +849,12 @@ $overrides = [
                     ],
                 ],
             ],
+        ],
+    ],
+    'about' => [
+        'story' => [
+            'warehouse_alt'     => '小云电视盒内华达州仓库，展示库存与出货作业',
+            'warehouse_caption' => '我们的内华达州仓库：本地库存，美国配送更迅速',
         ],
     ],
 ];
