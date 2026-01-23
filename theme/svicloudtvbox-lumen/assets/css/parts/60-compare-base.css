@@ -109,6 +109,7 @@
 .compare-traffic__links .lumen-pill {
   width: 100%;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .compare-traffic__textlink {
