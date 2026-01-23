@@ -1,108 +1,209 @@
 # Repository Guidelines
 
-## Project Structure & Assets
-- Primary theme lives in `theme/svicloudtvbox-lumen/`; legacy assets remain under `theme/shared/` if needed.
-- PHP entry points: `front-page.php`, `page-compare.php`, `page-about.php`, WooCommerce overrides in `woocommerce/`, and shared layout via `header.php` / `footer.php`.
-- CSS source lives in `theme/svicloudtvbox-lumen/assets/css/parts/`. Partials are grouped by numeric prefixes (e.g., `30-hero.css`, `40-lumen-sections.css`) and bundled via `bundles.json` into multiple outputs:
-  - `style.css` → global/base styles (tokens, header/nav, utilities).
-  - `front-page.css` → homepage + marketing sections.
-  - `compare.css` → compare table experience.
-  - `woocommerce.css` → PDP, catalog, cart/checkout styling.
-- JavaScript for interactive behaviour is in `assets/js/theme.js`; keep it dependency-free and guard against missing DOM nodes.
-- Generated artifacts (`style.css`, `front-page.css`, etc.) should never be edited directly—always adjust the partials, rebuild, then sync.
+## Project Overview
+WordPress/WooCommerce e-commerce theme for SVICLOUD TV Box. Primary theme is `svicloudtvbox-lumen` with bilingual support (English/Chinese).
 
-## Build & Sync Workflow
-1. Rebuild CSS bundles whenever partials change:
-   - `python3 scripts/build_css.py --theme svicloudtvbox-lumen` (minified default).
-   - Use `--bundle front-page --pretty` while iterating on a specific bundle.
-2. Refresh the distributable before handoff or deployment: `python3 scripts/zip_theme.py`.
-3. **Always** push changes into the local Docker WordPress instance after rebuilding: `./scripts/sync_theme_container.sh`.
-4. Deployment preview/publish (FTPS) remains via:
-   - `./scripts/deploy-theme.sh --dry-run`
-   - `./scripts/deploy-theme.sh --delete-remote`
-   Both scripts read `.env` for credentials.
-
-## Coding Standards
-- Follow WordPress PHP standards (4-space indent, inline braces). Sanitize output with `esc_html__`, `esc_url`, `wp_kses_post`, etc. Prefix helper functions/hooks with `svic_`.
-- Ensure new styles land in dedicated partials; update `bundles.json` so no one drops large edits directly into generated `style.css`.
-- CSS naming mirrors section context (`hero-*`, `lumen-certification__*`, `bundle-card-*`). Keep shared variables in the `:root` token block. Document new partials in `bundles.json` so they bundle correctly.
-- When introducing route-specific styles, prefer creating a new partial and adding it to an existing bundle (or defining a new bundle) rather than expanding global CSS.
-
-## Testing Checklist
-- Homepage: hero carousel, certification section, metrics strip, pricing toggles, concierge accordion, dark-mode switch.
-- Compare flow: `/compare/` table + mobile cards.
-- WooCommerce: `/product/svicloud-10p-plus/`, `/product/svicloud-10s/`, add-to-cart/cart/checkout redirects.
-- General: favicon responses, console cleanliness (desktop + mobile widths).
-- Capture before/after screenshots when UI shifts; note manual QA steps in PRs.
-
-## Git & Collaboration
-- Use Conventional Commits (`feat(theme): …`, `fix(css): …`). Group related PHP/CSS/assets in single commits.
-- Keep `main` clean—branch for feature work (e.g., `feat/css-bundles`) and open PRs summarising customer impact, linking to Notion/Trello tickets, attaching desktop/mobile screenshots, and listing manual QA steps.
-- Inspect the ZIP artifact prior to deploy to avoid shipping PSDs/cache files; secrets stay in `.env` / `.ftppass`.
-## Custom AI Instructions
-This section contains the instructions that should be pasted on the AI custom instructions, either for Cline, Claude or Cursor, or any other MCP client. You should copy and paste these rules. For reference, see `custom-instructions.md` which contains these rules.
-
-### Development
-Basic development commands:
-
+## Project Structure
 ```
-# Install dependencies
-npm install
-
-# Build the project
-npm run build
-
-# Run tests
-npm run test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run the server directly with ts-node for quick testing
-npm run dev
+theme/svicloudtvbox-lumen/     # Primary WordPress theme
+  assets/css/parts/            # CSS partials (numbered: 00-90)
+  assets/css/bundles.json      # Bundle configuration
+  assets/js/theme.js           # Main JavaScript (jQuery, no bundler)
+  inc/                         # PHP class files and helpers
+  woocommerce/                 # WooCommerce template overrides
+  lang/                        # Translation files (en_US.php, zh_TW.php, zh_CN.php)
+scripts/                       # Python build/deploy scripts
+tests/playwright/              # End-to-end tests
+infrastructure/docker/         # Local WordPress Docker setup
 ```
 
-### Running with Docker
-Build the Docker image:
+## Build Commands
 
-```
-docker build -t memory-bank-mcp:local .
-```
+### CSS Build
+```bash
+# Build all bundles (minified)
+python3 scripts/build_css.py --theme svicloudtvbox-lumen
 
-Run the Docker container for testing:
+# Build specific bundle, pretty-printed (for debugging)
+python3 scripts/build_css.py --bundle front-page --pretty
 
-```
-docker run -i --rm \
-  -e MEMORY_BANK_ROOT="/mnt/memory_bank" \
-  -v /path/to/memory-bank:/mnt/memory_bank \
-  --entrypoint /bin/sh \
-  memory-bank-mcp:local \
-  -c "ls -la /mnt/memory_bank"
+# Build all themes
+python3 scripts/build_css.py --all
 ```
 
-Add MCP configuration, example for Roo Code:
-
+### Sync to Local Docker
+```bash
+# Always sync after CSS changes
+./scripts/sync_theme_container.sh
 ```
-"allpepper-memory-bank": {
-  "command": "docker",
-  "args": [
-    "run", "-i", "--rm",
-    "-e", 
-    "MEMORY_BANK_ROOT",
-    "-v", 
-    "/path/to/memory-bank:/mnt/memory_bank",
-    "memory-bank-mcp:local"
-  ],
-  "env": {
-    "MEMORY_BANK_ROOT": "/mnt/memory_bank"
-  },
-  "disabled": false,
-  "alwaysAllow": [
-    "list_projects",
-    "list_project_files",
-    "memory_bank_read",
-    "memory_bank_update",
-    "memory_bank_write"
-  ]
+
+### Deployment
+```bash
+# Dry run (preview changes)
+./scripts/deploy-theme.sh --dry-run
+
+# Deploy with remote cleanup
+./scripts/deploy-theme.sh --delete-remote
+```
+
+### Theme Distribution
+```bash
+python3 scripts/zip_theme.py
+```
+
+## Test Commands
+
+### Playwright E2E Tests
+```bash
+# Run all tests
+npm test
+
+# Run single test file
+npx playwright test tests/playwright/smoke.spec.ts
+
+# Run specific test by name
+npx playwright test -g "loads /compare/ without console errors"
+
+# Run in headed mode (visible browser)
+npm run test:playwright:headed
+
+# Run specific project (chromium-desktop, webkit-mobile)
+npx playwright test --project=chromium-desktop
+```
+
+Base URL defaults to `http://svicloud10p.svic.local`. Override with:
+```bash
+PLAYWRIGHT_BASE_URL=https://example.com npx playwright test
+```
+
+## Code Style Guidelines
+
+### PHP
+- Follow WordPress PHP Coding Standards (4-space indent, inline braces)
+- Prefix all functions/hooks with `svic_` (e.g., `svic_get_localized_url()`)
+- Use `declare(strict_types=1);` in helper files
+- Guard against undefined with `if (!function_exists('svic_...'))` wrappers
+- Escape all output: `esc_html()`, `esc_url()`, `esc_attr()`, `wp_kses_post()`
+- Early exit pattern: `if (!defined('ABSPATH')) { exit; }`
+
+```php
+if (!function_exists('svic_example_function')) {
+    function svic_example_function(string $param): string {
+        if ($param === '') {
+            return '';
+        }
+        return esc_html($param);
+    }
 }
 ```
+
+### CSS
+- Partials live in `assets/css/parts/` with numeric prefixes (e.g., `30-hero.css`)
+- **Never edit generated files** (`style.css`, `front-page.css`, etc.) directly
+- CSS custom properties in `:root` block of `00-tokens.css`
+- BEM-style naming following section context: `hero-*`, `lumen-*`, `compare-*`
+- Update `bundles.json` when adding new partials
+
+```css
+/* Good: Section-scoped naming */
+.lumen-certification__badge { }
+.compare-product-card__title { }
+.hero-dashboard__card { }
+
+/* Bad: Generic names */
+.card { }
+.title { }
+```
+
+### JavaScript
+- IIFE pattern with jQuery: `(function($) { 'use strict'; ... })(jQuery);`
+- Guard against missing DOM nodes before operating
+- No external dependencies beyond jQuery (WP-bundled)
+- Use `$` for jQuery, avoid global namespace pollution
+
+```javascript
+function initFeature() {
+    const $element = $('.my-element');
+    if (!$element.length) {
+        return; // Guard against missing elements
+    }
+    // ...
+}
+```
+
+### Naming Conventions
+| Type | Convention | Example |
+|------|------------|---------|
+| PHP functions | `svic_snake_case` | `svic_get_current_locale()` |
+| PHP classes | `SVIC_Pascal_Case` | `SVIC_Translator` |
+| CSS classes | `kebab-case` (BEM) | `lumen-header__logo-image` |
+| CSS variables | `--kebab-case` | `--lumen-accent-teal` |
+| JS functions | `camelCase` | `initLanguageSwitcher()` |
+
+### Error Handling
+- PHP: Use strict type hints; return early on invalid input
+- JavaScript: Guard DOM operations; use try/catch for storage APIs
+- Never suppress errors in production code
+
+## CSS Bundle System
+Bundles are defined in `theme/svicloudtvbox-lumen/assets/css/bundles.json`:
+
+| Bundle | Output File | Purpose |
+|--------|-------------|---------|
+| style | `style.css` | Global/base (header, footer, tokens) |
+| front-page | `front-page.css` | Homepage marketing sections |
+| compare | `compare.css` | Product comparison page |
+| woocommerce | `woocommerce.css` | Shop, cart, checkout, PDP |
+| about | `about.css` | About page |
+| guides | `guides.css` | Help/documentation pages |
+
+**Workflow**: Edit partials -> run `build_css.py` -> run `sync_theme_container.sh`
+
+## Testing Checklist
+Before deploying, verify:
+- [ ] Homepage: hero, metrics strip, pricing toggles, dark-mode switch
+- [ ] Compare: `/compare/` table + mobile cards
+- [ ] WooCommerce: `/product/svicloud-10p-plus/`, add-to-cart, checkout
+- [ ] Console: No JS errors (desktop + mobile viewports)
+- [ ] Capture before/after screenshots for UI changes
+
+## Git Workflow
+- Use Conventional Commits: `feat(theme):`, `fix(css):`, `docs:`, `refactor:`
+- Group related PHP/CSS/assets in single commits
+- Never commit generated CSS files without corresponding partial changes
+- Secrets stay in `.env` / `.ftppass` (gitignored)
+
+## Important Files
+- `functions.php` - Theme bootstrap, hooks, meta registry
+- `inc/class-svic-translator.php` - Bilingual translation system
+- `inc/class-svic-locale-resolver.php` - URL/locale routing
+- `inc/helpers-svic.php` - Utility functions
+- `header.php` / `footer.php` - Site chrome
+- `front-page.php` - Homepage template
+- `page-compare.php` - Comparison page template
+
+## Environment Variables
+Set in `.env` for local development:
+```
+WORDPRESS_IMAGE=wordpress:6.x
+FTP_HOST=ftp.example.com
+FTP_USER=username
+FTP_PROTOCOL=ftps
+```
+
+## Common Tasks
+
+### Add new CSS section
+1. Create `assets/css/parts/XX-section-name.css`
+2. Add to appropriate bundle in `bundles.json`
+3. Run `python3 scripts/build_css.py && ./scripts/sync_theme_container.sh`
+
+### Add new translation string
+1. Add key to `lang/en_US.php` and `lang/zh_TW.php`
+2. Use `svic_translate('key.path')` in PHP templates
+
+### Debug CSS issues
+```bash
+python3 scripts/build_css.py --bundle front-page --pretty
+```
+Check the unminified output in `assets/css/front-page.css`
