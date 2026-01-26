@@ -4052,10 +4052,18 @@ add_action('wp_enqueue_scripts', function () {
         );
     }
 
-    // Theme script
+    // Theme script — use minified version in production
+    $js_file_name = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? 'theme.js' : 'theme.min.js';
+    $js_file_path = get_template_directory() . '/assets/js/' . $js_file_name;
+    
+    // Fall back to unminified if minified doesn't exist
+    if (!file_exists($js_file_path)) {
+        $js_file_name = 'theme.js';
+    }
+    
     wp_enqueue_script(
         'svicloudtvbox-script',
-        get_template_directory_uri() . '/assets/js/theme.js',
+        get_template_directory_uri() . '/assets/js/' . $js_file_name,
         ['jquery'],
         $js_version,
         true
@@ -4086,17 +4094,32 @@ add_action('wp_enqueue_scripts', function () {
         return;
     }
 
+    // Aggressively remove unused CSS on the homepage to improve FCP/LCP.
+    // These styles are needed on cart/checkout but not on the marketing homepage.
     $styles_to_remove = [
+        // WordPress block editor styles (not using blocks on homepage)
         'wp-block-library',
         'wp-block-library-theme',
+        'global-styles',
+        'classic-theme-styles',
+
+        // WooCommerce block styles (classic checkout, no blocks)
         'wc-block-style',
+        'wc-blocks-style',
         'wc-address-autocomplete',
+
+        // Advanced Coupons for WooCommerce (cart/checkout only)
+        'acfwf-wc-cart-block-integration',
+        'acfwf-wc-checkout-block-integration',
+
+        // WooCommerce Conditional Product Fees (checkout only)
+        'woocommerce-conditional-product-fees-for-checkout',
+
+        // Misc plugin styles not needed on homepage
         'hostinger-reach-subscription-block',
         'brands-styles',
         'mediaelement',
         'wp-mediaelement',
-        'global-styles',
-        'classic-theme-styles',
     ];
 
     foreach ($styles_to_remove as $handle) {
@@ -5272,6 +5295,9 @@ add_filter('wp_resource_hints', function ($urls, $relation_type) {
 
 /**
  * Dequeue heavy Woo scripts on non-Woo/non-cart pages.
+ *
+ * This improves PageSpeed scores by removing WooCommerce attribution tracking,
+ * cart fragments, and plugin scripts that are only needed on shop/cart/checkout.
  */
 add_action('wp_enqueue_scripts', function () {
     if (is_admin()) {
@@ -5281,29 +5307,39 @@ add_action('wp_enqueue_scripts', function () {
     $is_woo = function_exists('is_woocommerce') && is_woocommerce();
     $is_cart = function_exists('is_cart') && is_cart();
     $is_checkout = function_exists('is_checkout') && is_checkout();
+    $is_account = function_exists('is_account_page') && is_account_page();
 
-    if ($is_woo || $is_cart || $is_checkout) {
+    if ($is_woo || $is_cart || $is_checkout || $is_account) {
         return;
     }
 
+    // Scripts to remove on non-WooCommerce pages
     $handles = [
         'woocommerce',
         'wc-cart-fragments',
         'wc-add-to-cart',
         'jquery-blockui',
         'js-cookie',
+
+        // WooCommerce order attribution / sourcebuster (adds ~8KB + network requests)
+        'sourcebuster-js',
+        'wc-order-attribution',
+
+        // WooCommerce Conditional Product Fees plugin
         'woocommerce-conditional-product-fees-for-checkout-public',
-        // Extra plugin scripts that aren’t needed on the home/front page.
-        'jquery-bind-first',
-        'tld-js', // common handle for tld.min.js
-        'public-js', // generic public.js handle used by some plugins
         'woocommerce-conditional-product-fees-for-checkout-public-js',
+
+        // Extra plugin scripts not needed outside checkout
+        'jquery-bind-first',
+        'tld-js',
+        'public-js',
     ];
     foreach ($handles as $handle) {
         wp_dequeue_script($handle);
         wp_deregister_script($handle);
     }
 
+    // Styles to remove on non-WooCommerce pages
     $style_handles = [
         'woocommerce-conditional-product-fees-for-checkout-public-css',
     ];
@@ -5315,20 +5351,24 @@ add_action('wp_enqueue_scripts', function () {
 
 /**
  * Trim heavy/unused scripts on the homepage/front page by URL pattern.
+ *
+ * NOTE: We intentionally keep Google Analytics (gtag) scripts for tracking.
+ * Only remove scripts that add no value to the homepage user experience.
  */
 add_action('wp_print_scripts', function () {
     if (!is_front_page() && !is_page_template('front-page.php')) {
         return;
     }
 
+    // URL patterns for scripts to remove on homepage.
+    // These are tracking/utility scripts that don't affect homepage functionality.
     $patterns = [
         'tld.min.js',
         'public.js',
         'js.cookie-2.1.3.min.js',
         'jquery.tipTip.min.js',
-        'gtm.js',
-        'gtag/js',
-        'googletagmanager.com',
+        'sourcebuster.min.js',         // WooCommerce order attribution
+        'order-attribution.min.js',    // WooCommerce order attribution
     ];
 
     $wp_scripts = wp_scripts();
@@ -5351,6 +5391,62 @@ add_action('wp_print_scripts', function () {
         }
     }
 }, 100);
+
+/**
+ * Remove Google Sign-In SDK (GSI) on non-checkout pages.
+ *
+ * The Google for WooCommerce plugin loads the GSI SDK (/gsi/client, ~91KB)
+ * globally for "Sign in with Google" functionality. However, this is only
+ * useful on checkout/account pages. On homepage and other marketing pages,
+ * it adds significant weight to the critical path without benefit.
+ *
+ * We filter out GSI-related script loader tags on non-essential pages.
+ */
+add_filter('script_loader_tag', function ($tag, $handle, $src) {
+    // Only filter on frontend, non-checkout pages
+    if (is_admin()) {
+        return $tag;
+    }
+
+    // Keep GSI on pages where sign-in is useful
+    $is_checkout = function_exists('is_checkout') && is_checkout();
+    $is_account = function_exists('is_account_page') && is_account_page();
+    $is_cart = function_exists('is_cart') && is_cart();
+
+    if ($is_checkout || $is_account || $is_cart) {
+        return $tag;
+    }
+
+    // Remove GSI client script (accounts.google.com/gsi/client)
+    if (strpos($src, 'accounts.google.com/gsi/client') !== false) {
+        return '<!-- GSI SDK deferred: not needed on this page -->';
+    }
+
+    return $tag;
+}, 10, 3);
+
+/**
+ * Prevent Google for WooCommerce from loading GSI on non-checkout pages.
+ *
+ * The plugin uses the 'woocommerce_gla_handle_gsi_script' filter. We return
+ * false on homepage to skip GSI initialization entirely.
+ */
+add_filter('woocommerce_gla_handle_gsi_script', function ($should_load) {
+    if (is_admin()) {
+        return $should_load;
+    }
+
+    // Only load GSI on checkout, cart, and account pages
+    $is_checkout = function_exists('is_checkout') && is_checkout();
+    $is_account = function_exists('is_account_page') && is_account_page();
+    $is_cart = function_exists('is_cart') && is_cart();
+
+    if ($is_checkout || $is_account || $is_cart) {
+        return $should_load;
+    }
+
+    return false;
+}, 10);
 
 if (!function_exists('svic_render_ga4_purchase_event')) {
     /**
