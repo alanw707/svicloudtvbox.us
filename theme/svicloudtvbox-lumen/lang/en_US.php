@@ -1727,10 +1727,8 @@ return [
             ],
         ],
     ],
-];
 
-// FAQ page translations
-return array_merge($GLOBALS['svic_lang_en_us'] ?? [], [
+    // FAQ page translations
     'faq' => [
         'hero' => [
             'badge'      => 'Support center',
@@ -2028,4 +2026,4 @@ return array_merge($GLOBALS['svic_lang_en_us'] ?? [], [
             'cta'   => 'Contact us',
         ],
     ],
-]);
+];
