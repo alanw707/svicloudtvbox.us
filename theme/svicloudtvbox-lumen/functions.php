@@ -3940,6 +3940,20 @@ add_action('wp_enqueue_scripts', function () {
 
     wp_enqueue_style('svicloudtvbox-fonts', $font_url, [], null);
 
+    // Make Google Fonts non-render-blocking using media="print" swap trick.
+    // The font loads async and swaps to "all" once loaded, avoiding FCP delay.
+    add_filter('style_loader_tag', function ($tag, $handle) {
+        if ($handle === 'svicloudtvbox-fonts') {
+            // Change media="all" to media="print" onload="this.media='all'"
+            $tag = str_replace(
+                "media='all'",
+                "media='print' onload=\"this.media='all'\"",
+                $tag
+            );
+        }
+        return $tag;
+    }, 10, 2);
+
     // Determine which contextual bundles should load for this request.
     $is_front_page = is_front_page() || is_page_template('front-page.php');
     $is_about_page = is_page_template('page-about.php') || is_page('about');
@@ -4052,7 +4066,7 @@ add_action('wp_enqueue_scripts', function () {
         );
     }
 
-    // Theme script — use minified version in production
+    // Theme script — use minified version in production (built with terser)
     $js_file_name = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? 'theme.js' : 'theme.min.js';
     $js_file_path = get_template_directory() . '/assets/js/' . $js_file_name;
     
@@ -4123,11 +4137,10 @@ add_action('wp_enqueue_scripts', function () {
     ];
 
     foreach ($styles_to_remove as $handle) {
-        if (wp_style_is($handle, 'enqueued')) {
-            wp_dequeue_style($handle);
-        }
+        wp_dequeue_style($handle);
+        wp_deregister_style($handle);
     }
-}, 100);
+}, 999);
 
 add_action('wp_enqueue_scripts', function () {
     if (!is_front_page()) {
@@ -5447,6 +5460,28 @@ add_filter('woocommerce_gla_handle_gsi_script', function ($should_load) {
 
     return false;
 }, 10);
+
+/**
+ * Disable Site Kit's "Sign in with Google" on homepage.
+ *
+ * The GSI SDK (~91KB) is heavy and not needed on the marketing homepage.
+ * Use Site Kit's filter to conditionally disable the feature.
+ */
+add_filter('googlesitekit_sign_in_with_google_button_enabled', function ($enabled) {
+    // Disable on homepage to reduce JS payload
+    if (!is_admin() && is_front_page()) {
+        return false;
+    }
+    return $enabled;
+}, 10);
+
+// Also filter at module level
+add_filter('googlesitekit_is_module_connected', function ($connected, $slug) {
+    if ($slug === 'sign-in-with-google' && !is_admin() && is_front_page()) {
+        return false;
+    }
+    return $connected;
+}, 10, 2);
 
 if (!function_exists('svic_render_ga4_purchase_event')) {
     /**

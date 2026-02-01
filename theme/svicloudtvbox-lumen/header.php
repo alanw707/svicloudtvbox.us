@@ -5,8 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <?php
     if (is_front_page() || is_page_template('front-page.php')) {
-        $lcp_href = esc_url(get_template_directory_uri() . '/assets/images/hero-voice-assistant.webp');
-        echo '<link rel="preload" as="image" href="' . $lcp_href . '" imagesrcset="' . $lcp_href . ' 1601w" imagesizes="(max-width: 600px) 88vw, (max-width: 1024px) 62vw, 640px" fetchpriority="high" />';
+        $hero_image_sizes = '(max-width: 600px) 88vw, (max-width: 1024px) 62vw, 640px';
+        $hero_image_base = get_template_directory_uri() . '/assets/images/';
+        $hero_lcp_srcset = sprintf(
+            '%1$s 800w, %2$s 1200w, %3$s 1601w',
+            esc_url($hero_image_base . 'hero-voice-assistant-800.webp'),
+            esc_url($hero_image_base . 'hero-voice-assistant-1200.webp'),
+            esc_url($hero_image_base . 'hero-voice-assistant.webp')
+        );
+        $hero_lcp_href = esc_url($hero_image_base . 'hero-voice-assistant-1200.webp');
+        echo '<link rel="preload" as="image" href="' . $hero_lcp_href . '" imagesrcset="' . $hero_lcp_srcset . '" imagesizes="' . esc_attr($hero_image_sizes) . '" fetchpriority="high" type="image/webp" />';
     }
   ?>
   <?php wp_head(); ?>

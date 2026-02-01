@@ -1,104 +1,106 @@
 #!/usr/bin/env python3
 '''
-Minify JavaScript files for the theme.
-
-This script minifies theme.js using a lightweight regex-based minifier.
-For production, you could swap in terser or esbuild, but this simple
-approach handles our jQuery-style code well and requires no npm deps.
+Minify JavaScript files for the theme using terser.
 
 Usage:
     python3 scripts/build_js.py --theme svicloudtvbox-lumen
     python3 scripts/build_js.py --theme svicloudtvbox-lumen --pretty
+
+Requires: npm install --save-dev terser
 '''
 
 from __future__ import annotations
 
 import argparse
-import re
+import subprocess
+import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def minify_js(js: str) -> str:
-    """
-    Simple JS minifier for jQuery-style code.
+def find_terser() -> str | None:
+    """Find terser binary - check local node_modules first, then global."""
+    # Local node_modules (preferred)
+    local_terser = ROOT / 'node_modules' / '.bin' / 'terser'
+    if local_terser.exists():
+        return str(local_terser)
     
-    Removes:
-    - Single-line comments (// ...)
-    - Multi-line comments (/* ... */)
-    - Unnecessary whitespace
+    # Global install
+    global_terser = shutil.which('terser')
+    if global_terser:
+        return global_terser
     
-    Preserves:
-    - String literals
-    - Regular expression literals
-    - Required whitespace (e.g., "return true")
-    """
-    # Remove single-line comments (but not URLs like https://)
-    js = re.sub(r'(?<!:)//[^\n]*', '', js)
-    
-    # Remove multi-line comments (but keep /*! ... */ license comments)
-    js = re.sub(r'/\*(?!\s*!)[\s\S]*?\*/', '', js)
-    
-    # Collapse multiple whitespace/newlines into single space
-    js = re.sub(r'\s+', ' ', js)
-    
-    # Remove spaces around operators and punctuation
-    # Be careful with regex literals and division
-    js = re.sub(r'\s*([{};,:\[\]()=+\-*/<>!&|?])\s*', r'\1', js)
-    
-    # Restore necessary spaces (e.g., "return true", "var x", "function name")
-    keywords = ['return', 'var', 'let', 'const', 'function', 'if', 'else', 'for', 
-                'while', 'do', 'switch', 'case', 'break', 'continue', 'new', 
-                'typeof', 'instanceof', 'in', 'of', 'throw', 'try', 'catch', 'finally']
-    
-    for kw in keywords:
-        # Add space after keyword when followed by alphanumeric
-        js = re.sub(rf'\b{kw}([a-zA-Z0-9_$])', rf'{kw} \1', js)
-    
-    # Clean up any double spaces that might have been introduced
-    js = re.sub(r' +', ' ', js)
-    
-    return js.strip()
+    return None
 
 
-def build_js(theme_dir: Path, pretty: bool = False) -> None:
-    """Build/minify JS for a theme."""
+def build_js(theme_dir: Path, pretty: bool = False) -> bool:
+    """Build/minify JS for a theme. Returns True on success."""
     js_dir = theme_dir / 'assets' / 'js'
     source_file = js_dir / 'theme.js'
+    min_file = js_dir / 'theme.min.js'
     
     if not source_file.exists():
         print(f"[SKIP] No theme.js found at {source_file}")
-        return
+        return True
     
-    # Read source
-    js_content = source_file.read_text(encoding='utf-8')
-    original_size = len(js_content.encode('utf-8'))
+    # Get original size
+    original_size = source_file.stat().st_size
     
     if pretty:
-        # Just report size, don't minify
         print(f"[INFO] {source_file.name}: {original_size:,} bytes (pretty mode, no minification)")
-        return
+        return True
     
-    # Create minified version
-    minified = minify_js(js_content)
-    minified_size = len(minified.encode('utf-8'))
+    # Find terser
+    terser = find_terser()
+    if not terser:
+        print("[ERROR] terser not found. Install with: npm install --save-dev terser")
+        return False
     
-    # Write to theme.min.js
-    min_file = js_dir / 'theme.min.js'
-    min_file.write_text(minified, encoding='utf-8')
+    # Run terser with optimal settings for our jQuery code
+    # --compress: dead code elimination, optimize booleans, etc.
+    # --mangle: shorten variable names (safe for our code)
+    # --format: output formatting options
+    cmd = [
+        terser,
+        str(source_file),
+        '--compress',
+        '--mangle',
+        '--format', 'comments=false',
+        '--output', str(min_file),
+    ]
     
-    savings = original_size - minified_size
-    pct = (savings / original_size * 100) if original_size > 0 else 0
-    
-    print(f"[OK] {source_file.name} -> {min_file.name}")
-    print(f"     Original: {original_size:,} bytes")
-    print(f"     Minified: {minified_size:,} bytes")
-    print(f"     Savings:  {savings:,} bytes ({pct:.1f}%)")
+    try:
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            cwd=ROOT,
+        )
+        
+        if result.returncode != 0:
+            print(f"[ERROR] terser failed:")
+            print(result.stderr)
+            return False
+        
+        # Report results
+        minified_size = min_file.stat().st_size
+        savings = original_size - minified_size
+        pct = (savings / original_size * 100) if original_size > 0 else 0
+        
+        print(f"[OK] {source_file.name} -> {min_file.name}")
+        print(f"     Original: {original_size:,} bytes")
+        print(f"     Minified: {minified_size:,} bytes")
+        print(f"     Savings:  {savings:,} bytes ({pct:.1f}%)")
+        return True
+        
+    except Exception as e:
+        print(f"[ERROR] Failed to run terser: {e}")
+        return False
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description='Minify theme JavaScript')
+    parser = argparse.ArgumentParser(description='Minify theme JavaScript with terser')
     parser.add_argument('--theme', required=True, help='Theme directory name')
     parser.add_argument('--pretty', action='store_true', help='Skip minification (info only)')
     args = parser.parse_args()
@@ -108,7 +110,8 @@ def main() -> None:
         print(f"[ERROR] Theme directory not found: {theme_dir}")
         return
     
-    build_js(theme_dir, pretty=args.pretty)
+    success = build_js(theme_dir, pretty=args.pretty)
+    exit(0 if success else 1)
 
 
 if __name__ == '__main__':

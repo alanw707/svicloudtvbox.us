@@ -8,13 +8,16 @@
   "scripts": {
     "test": "npm run test:playwright",
     "test:playwright": "playwright test",
-    "test:playwright:headed": "playwright test --headed"
+    "test:playwright:headed": "playwright test --headed",
+    "build:js": "python3 scripts/build_js.py --theme svicloudtvbox-lumen",
+    "build:css": "python3 scripts/build_css.py --theme svicloudtvbox-lumen"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@playwright/test": "^1.55.1"
+    "@playwright/test": "^1.55.1",
+    "terser": "^5.46.0"
   }
 }
