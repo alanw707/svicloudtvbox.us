@@ -1831,4 +1831,201 @@ return array_merge($GLOBALS['svic_lang_en_us'] ?? [], [
             ],
         ],
     ],
+
+    // =========================================================================
+    // SHIPPING POLICY
+    // =========================================================================
+    'shipping_policy' => [
+        'hero' => [
+            'badge'    => 'Shipping information',
+            'title'    => 'Shipping Policy',
+            'subtitle' => 'Fast, reliable shipping from our Nevada warehouse to your door. Free U.S. shipping on all orders.',
+        ],
+        'sections' => [
+            'processing' => [
+                'title' => 'Order processing',
+                'items' => [
+                    'cutoff'   => 'Orders placed before 2:00 PM Pacific time (Monday–Friday) are processed the same business day.',
+                    'dispatch' => 'Most orders ship within 24–48 hours of payment confirmation.',
+                    'tracking' => 'You will receive a shipping confirmation email with tracking information once your order ships.',
+                ],
+            ],
+            'domestic' => [
+                'title' => 'U.S. shipping',
+                'items' => [
+                    'standard' => 'Standard shipping typically arrives within 2–5 business days depending on your location.',
+                    'carriers' => 'We ship via USPS, UPS, or FedEx based on package size and destination.',
+                    'free'     => 'Free shipping is included on all U.S. orders. No minimum purchase required.',
+                ],
+            ],
+            'canada' => [
+                'title' => 'Canada shipping',
+                'items' => [
+                    'timeframe' => 'Canadian orders typically arrive within 5–7 business days, including customs processing.',
+                    'customs'   => 'Packages are shipped with accurate customs declarations for smooth border clearance.',
+                    'duties'    => 'Import duties, taxes, and customs fees are the responsibility of the recipient and are not included in the product price.',
+                ],
+            ],
+            'issues' => [
+                'title' => 'Shipping issues',
+                'items' => [
+                    'delays'  => 'Occasional carrier delays may occur during peak seasons or severe weather. Track your package for the most current status.',
+                    'damaged' => 'If your package arrives damaged, contact our concierge team within 48 hours with photos of the damage.',
+                    'lost'    => 'For packages showing "delivered" but not received, contact us within 7 days. We will work with the carrier to resolve the issue.',
+                ],
+            ],
+        ],
+        'support' => [
+            'title' => 'Questions about your shipment?',
+            'copy'  => 'Our bilingual concierge team is here to help track your order or resolve any shipping concerns.',
+            'cta'   => 'Contact concierge',
+        ],
+    ],
+
+    // =========================================================================
+    // PRIVACY POLICY
+    // =========================================================================
+    'privacy_policy' => [
+        'hero' => [
+            'badge'     => 'Your privacy matters',
+            'title'     => 'Privacy Policy',
+            'subtitle'  => 'We respect your privacy and are committed to protecting your personal information.',
+            'effective' => 'Effective Date: January 1, 2025',
+        ],
+        'sections' => [
+            'collect' => [
+                'title' => 'Information we collect',
+                'items' => [
+                    'personal' => '<strong>Personal information:</strong> Name, email address, phone number, and shipping address when you place an order or contact us.',
+                    'payment'  => '<strong>Payment information:</strong> Credit card details are processed securely through our payment processor and are not stored on our servers.',
+                    'device'   => '<strong>Device information:</strong> Browser type, IP address, and device identifiers when you visit our website.',
+                    'usage'    => '<strong>Usage data:</strong> Pages visited, time spent on site, and interaction with our content to improve your experience.',
+                ],
+            ],
+            'use' => [
+                'title' => 'How we use your information',
+                'items' => [
+                    'orders'      => 'Process and fulfill your orders, including shipping and delivery notifications.',
+                    'support'     => 'Provide customer support and respond to your inquiries.',
+                    'improve'     => 'Improve our website, products, and services based on your feedback and usage patterns.',
+                    'communicate' => 'Send order confirmations, shipping updates, and occasional promotional offers (you may opt out at any time).',
+                ],
+            ],
+            'sharing' => [
+                'title' => 'Information sharing',
+                'items' => [
+                    'processors' => '<strong>Payment processors:</strong> We share payment information with secure, PCI-compliant payment processors to complete transactions.',
+                    'shipping'   => '<strong>Shipping carriers:</strong> We share your name and address with carriers (USPS, UPS, FedEx) to deliver your order.',
+                    'legal'      => '<strong>Legal requirements:</strong> We may disclose information when required by law or to protect our rights and safety.',
+                    'nosell'     => '<strong>We do not sell your personal information</strong> to third parties for marketing purposes.',
+                ],
+            ],
+            'cookies' => [
+                'title' => 'Cookies and tracking',
+                'items' => [
+                    'essential' => '<strong>Essential cookies:</strong> Required for website functionality, shopping cart, and checkout process.',
+                    'analytics' => '<strong>Analytics cookies:</strong> Help us understand how visitors use our site to improve performance.',
+                    'control'   => 'You can control cookies through your browser settings. Disabling cookies may affect site functionality.',
+                ],
+            ],
+            'security' => [
+                'title' => 'Data security',
+                'items' => [
+                    'ssl'    => 'All data transmitted to and from our website is encrypted using SSL/TLS technology.',
+                    'pci'    => 'Payment processing is handled by PCI-DSS compliant providers.',
+                    'access' => 'Access to personal information is restricted to authorized personnel only.',
+                ],
+            ],
+            'rights' => [
+                'title' => 'Your rights',
+                'items' => [
+                    'access'  => '<strong>Access:</strong> Request a copy of the personal information we hold about you.',
+                    'correct' => '<strong>Correction:</strong> Request correction of inaccurate or incomplete information.',
+                    'delete'  => '<strong>Deletion:</strong> Request deletion of your personal information, subject to legal retention requirements.',
+                    'optout'  => '<strong>Opt-out:</strong> Unsubscribe from marketing emails at any time using the link in our emails.',
+                ],
+            ],
+        ],
+        'support' => [
+            'title' => 'Privacy questions?',
+            'copy'  => 'If you have questions about this policy or wish to exercise your privacy rights, contact our team.',
+            'cta'   => 'Contact us',
+        ],
+    ],
+
+    // =========================================================================
+    // TERMS AND CONDITIONS
+    // =========================================================================
+    'terms' => [
+        'hero' => [
+            'badge'     => 'Legal agreement',
+            'title'     => 'Terms and Conditions',
+            'subtitle'  => 'Please read these terms carefully before using our website or making a purchase.',
+            'effective' => 'Effective Date: January 1, 2025',
+        ],
+        'sections' => [
+            'agreement' => [
+                'title' => 'Agreement to terms',
+                'items' => [
+                    'acceptance' => 'By accessing or using SVICLOUDTVBOX.US, you agree to be bound by these Terms and Conditions.',
+                    'age'        => 'You must be at least 18 years old or have parental consent to make purchases on this website.',
+                    'changes'    => 'We reserve the right to modify these terms at any time. Continued use of the site constitutes acceptance of updated terms.',
+                ],
+            ],
+            'products' => [
+                'title' => 'Products and services',
+                'items' => [
+                    'description'  => 'We strive to display product descriptions and images accurately. Minor variations may occur.',
+                    'pricing'      => 'All prices are listed in U.S. dollars. We reserve the right to change prices without notice.',
+                    'availability' => 'Product availability is subject to change. We may limit quantities or discontinue items at any time.',
+                    'warranty'     => 'All devices include a 1-year U.S. hardware warranty. See our Return Policy for warranty claims.',
+                ],
+            ],
+            'orders' => [
+                'title' => 'Orders and payment',
+                'items' => [
+                    'acceptance'   => 'Your order is an offer to purchase. We reserve the right to accept or decline any order.',
+                    'payment'      => 'Payment is required at the time of purchase. We accept major credit cards and PayPal.',
+                    'cancellation' => 'Orders may be cancelled before shipment. Contact our concierge team promptly if you need to cancel.',
+                ],
+            ],
+            'use' => [
+                'title' => 'Acceptable use',
+                'items' => [
+                    'personal' => 'Products are sold for personal, non-commercial use unless otherwise agreed in writing.',
+                    'lawful'   => 'You agree to use our products and services only for lawful purposes.',
+                    'compliance' => 'You are responsible for compliance with all applicable laws regarding the use of streaming devices and content.',
+                ],
+            ],
+            'ip' => [
+                'title' => 'Intellectual property',
+                'items' => [
+                    'ownership'    => 'All content on this website, including text, images, and logos, is owned by 168 Media Group LLC or its licensors.',
+                    'license'      => 'You may view and download content for personal, non-commercial use only.',
+                    'restrictions' => 'You may not reproduce, distribute, or create derivative works without our written permission.',
+                ],
+            ],
+            'liability' => [
+                'title' => 'Limitation of liability',
+                'items' => [
+                    'limitation'      => 'Our liability is limited to the purchase price of the product. We are not liable for indirect or consequential damages.',
+                    'disclaimer'      => 'Products are provided "as is" without warranties beyond the express hardware warranty.',
+                    'indemnification' => 'You agree to indemnify us against claims arising from your use of our products or violation of these terms.',
+                ],
+            ],
+            'governing' => [
+                'title' => 'Governing law',
+                'items' => [
+                    'law'          => 'These terms are governed by the laws of the State of Nevada, United States.',
+                    'disputes'     => 'Any disputes shall be resolved in the state or federal courts located in Clark County, Nevada.',
+                    'severability' => 'If any provision of these terms is found invalid, the remaining provisions shall continue in effect.',
+                ],
+            ],
+        ],
+        'support' => [
+            'title' => 'Questions about these terms?',
+            'copy'  => 'If you have questions about our Terms and Conditions, please contact our team.',
+            'cta'   => 'Contact us',
+        ],
+    ],
 ]);
