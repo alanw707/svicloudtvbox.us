@@ -3996,7 +3996,11 @@ add_action('wp_enqueue_scripts', function () {
         || is_page('returns');
     $is_legal_disclaimer_page = is_page_template('page-legal-disclaimer.php')
         || is_page('legal-disclaimer');
-    $is_policy_page = $is_return_policy_page || $is_legal_disclaimer_page;
+    $is_privacy_policy_page = is_page_template('page-privacy-policy.php')
+        || is_page('privacy-policy');
+    $is_shipping_policy_page = is_page_template('page-shipping-policy.php')
+        || is_page('shipping-policy');
+    $is_policy_page = $is_return_policy_page || $is_legal_disclaimer_page || $is_privacy_policy_page || $is_shipping_policy_page;
     $is_support_page = is_page_template('page-support.php') || is_page('support');
     $is_faq_page = is_page_template('page-faq.php') || is_page('faq');
     $is_compare_page = is_page_template('page-compare.php') || is_page('compare');
