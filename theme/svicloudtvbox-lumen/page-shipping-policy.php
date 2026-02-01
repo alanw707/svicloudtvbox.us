@@ -11,9 +11,9 @@ $policy_sections = [
         'anchor' => 'processing',
         'type'   => 'list',
         'items'  => [
-            svic_translate_html('shipping_policy.sections.processing.items.cutoff'),
-            svic_translate_html('shipping_policy.sections.processing.items.dispatch'),
-            svic_translate_html('shipping_policy.sections.processing.items.tracking'),
+            svic_translate_rich('shipping_policy.sections.processing.items.cutoff'),
+            svic_translate_rich('shipping_policy.sections.processing.items.dispatch'),
+            svic_translate_rich('shipping_policy.sections.processing.items.tracking'),
         ],
     ],
     [
@@ -21,9 +21,9 @@ $policy_sections = [
         'anchor' => 'domestic',
         'type'   => 'list',
         'items'  => [
-            svic_translate_html('shipping_policy.sections.domestic.items.standard'),
-            svic_translate_html('shipping_policy.sections.domestic.items.carriers'),
-            svic_translate_html('shipping_policy.sections.domestic.items.free'),
+            svic_translate_rich('shipping_policy.sections.domestic.items.standard'),
+            svic_translate_rich('shipping_policy.sections.domestic.items.carriers'),
+            svic_translate_rich('shipping_policy.sections.domestic.items.free'),
         ],
     ],
     [
@@ -31,9 +31,9 @@ $policy_sections = [
         'anchor' => 'canada',
         'type'   => 'list',
         'items'  => [
-            svic_translate_html('shipping_policy.sections.canada.items.timeframe'),
-            svic_translate_html('shipping_policy.sections.canada.items.customs'),
-            svic_translate_html('shipping_policy.sections.canada.items.duties'),
+            svic_translate_rich('shipping_policy.sections.canada.items.timeframe'),
+            svic_translate_rich('shipping_policy.sections.canada.items.customs'),
+            svic_translate_rich('shipping_policy.sections.canada.items.duties'),
         ],
     ],
     [
@@ -41,9 +41,9 @@ $policy_sections = [
         'anchor' => 'issues',
         'type'   => 'list',
         'items'  => [
-            svic_translate_html('shipping_policy.sections.issues.items.delays'),
-            svic_translate_html('shipping_policy.sections.issues.items.damaged'),
-            svic_translate_html('shipping_policy.sections.issues.items.lost'),
+            svic_translate_rich('shipping_policy.sections.issues.items.delays'),
+            svic_translate_rich('shipping_policy.sections.issues.items.damaged'),
+            svic_translate_rich('shipping_policy.sections.issues.items.lost'),
         ],
     ],
 ];
