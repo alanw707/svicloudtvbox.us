@@ -240,7 +240,7 @@ $compare_cta_links = [
     </div>
   </section>
 
-  <section class="compare-products" aria-label="<?php echo esc_attr__('Product spotlight cards', 'svicloudtvbox-lumen'); ?>">
+  <section class="compare-products" id="product-list" aria-label="<?php echo esc_attr__('Product spotlight cards', 'svicloudtvbox-lumen'); ?>">
     <div class="compare-products__grid">
       <article class="compare-product-card compare-product-card--highlight">
         <figure class="compare-product-card__media">
