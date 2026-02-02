@@ -2071,20 +2071,21 @@ if (!function_exists('svic_get_organization_schema_enhancements')) {
         }
 
         // AggregateRating from Google Business Profile reviews
-        // Values can be filtered via svic_organization_aggregate_rating
+        // Enable via filter once Google Business Profile has real reviews:
+        // add_filter('svic_organization_aggregate_rating', fn($r) => array_merge($r, ['enabled' => true, 'reviewCount' => YOUR_COUNT]));
         $aggregate_rating = apply_filters('svic_organization_aggregate_rating', [
-            'enabled'     => true,
+            'enabled'     => false, // Disabled until Google Business Profile is set up with real reviews
             'ratingValue' => 4.9,
-            'reviewCount' => 47,
+            'reviewCount' => 0,
             'bestRating'  => 5,
             'worstRating' => 1,
         ]);
 
-        if (!empty($aggregate_rating['enabled']) && !empty($aggregate_rating['ratingValue'])) {
+        if (!empty($aggregate_rating['enabled']) && !empty($aggregate_rating['ratingValue']) && !empty($aggregate_rating['reviewCount'])) {
             $enhancements['aggregateRating'] = [
                 '@type'       => 'AggregateRating',
                 'ratingValue' => (float) $aggregate_rating['ratingValue'],
-                'reviewCount' => (int) ($aggregate_rating['reviewCount'] ?? 1),
+                'reviewCount' => (int) $aggregate_rating['reviewCount'],
                 'bestRating'  => (int) ($aggregate_rating['bestRating'] ?? 5),
                 'worstRating' => (int) ($aggregate_rating['worstRating'] ?? 1),
             ];
