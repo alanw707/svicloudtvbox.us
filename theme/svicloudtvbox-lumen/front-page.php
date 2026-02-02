@@ -186,7 +186,7 @@ $item_list_elements   = [];
 $list_position        = 1;
 $organization_id      = trailingslashit(home_url('/')) . '#organization';
 $pricing_canonical    = function_exists('svic_get_localized_canonical_url') ? svic_get_localized_canonical_url() : home_url('/');
-$pricing_section_url  = untrailingslashit($pricing_canonical) . '/#pricing';
+$pricing_section_url  = svic_url_with_lang(home_url('/compare'));
 
 foreach ($pricing_cards as $slug => $card) {
     $product = $card['product'] ?? null;
@@ -637,7 +637,7 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
       if (!empty($item_list_elements)) {
           $graph_nodes[] = [
               '@type'            => 'ItemList',
-              '@id'              => untrailingslashit($pricing_canonical) . '/#pricing-itemlist',
+              '@id'              => svic_url_with_lang(home_url('/compare')) . '#product-list',
               'name'             => esc_html__('SVICLOUD streaming devices available in North America', 'svicloudtvbox-lumen'),
               'url'              => esc_url_raw($pricing_section_url),
               'numberOfItems'    => count($item_list_elements),

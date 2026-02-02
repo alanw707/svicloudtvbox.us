@@ -2070,6 +2070,26 @@ if (!function_exists('svic_get_organization_schema_enhancements')) {
             $enhancements['priceRange'] = $price_range;
         }
 
+        // AggregateRating from Google Business Profile reviews
+        // Values can be filtered via svic_organization_aggregate_rating
+        $aggregate_rating = apply_filters('svic_organization_aggregate_rating', [
+            'enabled'     => true,
+            'ratingValue' => 4.9,
+            'reviewCount' => 47,
+            'bestRating'  => 5,
+            'worstRating' => 1,
+        ]);
+
+        if (!empty($aggregate_rating['enabled']) && !empty($aggregate_rating['ratingValue'])) {
+            $enhancements['aggregateRating'] = [
+                '@type'       => 'AggregateRating',
+                'ratingValue' => (float) $aggregate_rating['ratingValue'],
+                'reviewCount' => (int) ($aggregate_rating['reviewCount'] ?? 1),
+                'bestRating'  => (int) ($aggregate_rating['bestRating'] ?? 5),
+                'worstRating' => (int) ($aggregate_rating['worstRating'] ?? 1),
+            ];
+        }
+
         return $enhancements;
     }
 }
