@@ -104,6 +104,10 @@
     box-sizing: border-box;
     gap: clamp(var(--space-lg), 8vw, var(--space-xl));
   }
+
+  .shop-product-card__media {
+    height: clamp(200px, 52vw, 280px);
+  }
 }
 
 .shop-product-card {
@@ -159,6 +163,7 @@
   border: 0;
   border-radius: 0;
   overflow: hidden;
+  height: clamp(220px, 28vw, 300px);
 }
 
 .shop-product-card--highlight .shop-product-card__media {
@@ -167,8 +172,8 @@
 }
 
 .shop-product-card__media img {
-  width: min(100%, 360px);
-  height: auto;
+  width: auto;
+  height: 100%;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
