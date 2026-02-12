@@ -29,7 +29,7 @@
   padding: 0;
   display: grid;
   gap: clamp(0.9rem, 2.4vw, 1.2rem);
-  justify-items: start;
+  justify-items: stretch;
 }
 
 #payment ul.payment_methods > li {
@@ -45,7 +45,8 @@
   box-sizing: border-box;
   min-width: 0;
   box-shadow: none;
-  width: min(100%, 38rem);
+  width: 100%;
+  max-width: 38rem;
 }
 
 #payment ul.payment_methods > li > input[type="radio"] {
@@ -63,6 +64,7 @@
   justify-content: space-between;
   gap: clamp(0.35rem, 1.2vw, 0.65rem);
   width: 100%;
+  min-width: 0;
   min-height: clamp(2rem, 4vw, 2.4rem);
   padding: clamp(0.42rem, 1.3vw, 0.65rem) clamp(0.95rem, 2.3vw, 1.25rem);
   padding-left: clamp(2.15rem, 3.2vw, 2.45rem);
@@ -73,6 +75,8 @@
   box-shadow: 0 16px 28px rgba(3, 12, 32, 0.38);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
   text-align: left;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 #payment ul.payment_methods > li > label::before {
@@ -132,7 +136,6 @@
   border-color: rgba(126, 246, 227, 0.5);
   box-shadow: 0 22px 42px rgba(3, 14, 36, 0.5);
   transform: translateY(-1px);
-  width: auto;
 }
 
 #payment ul.payment_methods > li > input[type="radio"]:checked + label::before {
@@ -157,6 +160,14 @@
   border-color: rgba(164, 237, 232, 0.42);
   box-shadow: 0 20px 38px rgba(4, 16, 38, 0.45);
   transform: translateY(-0.5px);
+}
+
+/* Payment method icons (e.g. Cash App $, Apple Pay, etc.) */
+#payment ul.payment_methods > li > label img {
+  flex: 0 0 auto;
+  max-height: 28px;
+  width: auto;
+  display: block;
 }
 
 #payment .wc-stripe-card-icons-container {
