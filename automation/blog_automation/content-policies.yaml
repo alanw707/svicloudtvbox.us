@@ -1,0 +1,115 @@
+# ============================================================
+# SVICLOUD Content Policies — Single Source of Truth
+# ============================================================
+# This file defines verifiable factual claims about SVICLOUD
+# products and services. All auto-generated blog content MUST
+# comply with these policies. The autoblog pipeline injects
+# these rules into AI prompts and enforces them in QA.
+#
+# HOW TO UPDATE: Edit this file, then rebuild the Docker image
+# or restart the scheduler container. Changes take effect on
+# the next scheduled run.
+# ============================================================
+
+warranty:
+  duration: "1年"
+  duration_en: "1-year"
+  description: "SVICLOUD 產品享有 1 年美國保固，涵蓋硬體故障與系統問題。"
+  description_en: "SVICLOUD products include a 1-year US warranty covering hardware defects and system issues."
+  # Phrases that MUST NOT appear in generated content
+  prohibited_phrases:
+    - "2年保固"
+    - "2 年保固"
+    - "2年保修"
+    - "2 年保修"
+    - "兩年保固"
+    - "兩年保修"
+    - "3年保固"
+    - "3 年保固"
+    - "3年保修"
+    - "三年保固"
+    - "2-year warranty"
+    - "2 year warranty"
+    - "3-year warranty"
+    - "two-year warranty"
+    - "three-year warranty"
+    - "two year warranty"
+  # Correct phrases to use instead
+  approved_phrases:
+    - "1年美國保固"
+    - "一年美國保固"
+    - "1年保固"
+    - "一年保固"
+    - "1-year warranty"
+    - "1-year US warranty"
+    - "one-year warranty"
+
+shipping:
+  description: "美國倉儲現貨，快速出貨，具體到貨時間依地區而定。"
+  description_en: "Ships from US warehouse. Delivery times vary by region."
+  prohibited_phrases:
+    # Do not promise specific delivery days
+    - "隔日送達"
+    - "次日達"
+    - "24小時送達"
+    - "1天到貨"
+    - "一天到貨"
+    - "guaranteed next-day"
+    - "guaranteed same-day"
+    - "overnight delivery guaranteed"
+  approved_phrases:
+    - "美國倉儲現貨"
+    - "快速出貨"
+    - "美國本地倉儲"
+
+pricing:
+  description: "請以官網實際售價為準，不得自行捏造折扣金額或百分比。"
+  prohibited_phrases:
+    # Do not invent specific discount amounts
+    - "省下$"
+    - "折扣$"
+    - "優惠價$"
+    - "save $"
+  approved_phrases:
+    - "詳見官網售價"
+    - "以官網價格為準"
+
+support:
+  phone: "702-398-3416"
+  email: "support@svicloudtvbox.us"
+  description: "中英雙語客服支援，提供遠端技術協助。"
+  prohibited_phrases:
+    - "24/7客服"
+    - "24小時客服"
+    - "全天候客服"
+    - "24/7 support"
+    - "24/7 customer service"
+
+product_names:
+  approved:
+    - "SVICLOUD 10P+"
+    - "SVICLOUD 10S"
+    - "小雲電視盒"
+    - "小雲盒子"
+    - "SVICLOUD TV Box"
+  prohibited_phrases:
+    # Do not reference discontinued or non-existent models
+    - "SVICLOUD 11"
+    - "SVICLOUD 12"
+    - "小雲 11"
+    - "小雲 12"
+
+# Global catch-all: any phrase here triggers a hard QA failure
+global_prohibited:
+  - "2年保固"
+  - "2 年保固"
+  - "2年保修"
+  - "2 年保修"
+  - "兩年保固"
+  - "3年保固"
+  - "3 年保固"
+  - "三年保固"
+  - "2-year warranty"
+  - "3-year warranty"
+  - "24/7客服"
+  - "24/7 support"

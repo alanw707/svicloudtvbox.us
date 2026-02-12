@@ -1,6 +1,6 @@
 ---
 slug: %e7%be%8e%e5%9c%8b%e8%8f%af%e4%ba%ba%e6%96%b0%e5%b9%b4%e5%bf%85%e5%82%99-%e5%b0%8f%e9%9b%b2%e7%9b%92%e5%ad%90%e5%af%86%e7%a2%bc%e4%ba%ab2%e5%b9%b4%e4%bf%9d%e5%9b%ba%e8%88%87%e9%81%a0%e7%ab%af%e7%b6%ad
-title: 美國農曆新年必備 | SVICLOUD Box 密碼享2年保固及遠端維護
+title: 美國農曆新年必備 | SVICLOUD Box 密碼享1年保固及遠端維護
 description: # SVICLOUD Box 密碼 2025：全國新年活動，地方服務升級體驗
 status: publish
 date: 2026-01-13T17:04:04
@@ -18,7 +18,7 @@ date: 2026-01-13T17:04:04
 ### ✅ SVICLOUD Box 2025 Solutions
 - **US Warehouse Stock**: Abundant local inventory, fast shipping service covering major US cities
 - **Bilingual Customer Support**: Seamless Chinese-English communication, 24-hour professional technical team on standby
-- **Complete After-sales Protection**: 2-year warranty + remote assistance, enjoy enterprise-level maintenance service at home
+- **Complete After-sales Protection**: 1-year warranty + remote assistance, enjoy enterprise-level maintenance service at home
 - **Curated Content Playlists**: New Year exclusive entertainment recommendations, one-stop family entertainment
 
 ---

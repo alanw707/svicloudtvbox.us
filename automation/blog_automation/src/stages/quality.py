@@ -8,13 +8,74 @@ PHASE 1 FIXES PRESERVED:
 1. Token limit fix: Content truncation to 10K chars (lines 81-83)
 2. JSON parsing: 3-strategy extraction with retry logic (lines 95-116)
 3. Fallback scoring: Validated links, language, brand checks (lines 153-228)
+
+PHASE 2 ADDITION:
+4. Content-policy compliance scanner — rejects posts with prohibited phrases.
 """
 
 import json
 import logging
 import re
-from typing import Dict, Any, Optional
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+
+import yaml
+
 from ..models import GeneratedPost
+
+
+def _load_content_policies(config_dir: Optional[Path] = None) -> Dict[str, Any]:
+    """Load content-policies.yaml from the automation config directory."""
+    if config_dir is None:
+        config_dir = Path(__file__).resolve().parent.parent.parent
+    policy_path = config_dir / "content-policies.yaml"
+    if not policy_path.exists():
+        return {}
+    try:
+        return yaml.safe_load(policy_path.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return {}
+
+
+def _collect_prohibited_phrases(policies: Dict[str, Any]) -> List[str]:
+    """Gather all prohibited phrases from every policy section."""
+    phrases: List[str] = []
+    for section_key, section_val in policies.items():
+        if isinstance(section_val, dict):
+            phrases.extend(section_val.get("prohibited_phrases", []))
+        elif isinstance(section_val, list) and section_key == "global_prohibited":
+            phrases.extend(section_val)
+    # Deduplicate while preserving order
+    seen: set[str] = set()
+    unique: List[str] = []
+    for p in phrases:
+        low = p.lower()
+        if low not in seen:
+            seen.add(low)
+            unique.append(p)
+    return unique
+
+
+def check_policy_compliance(
+    content: str,
+    policies: Dict[str, Any],
+) -> Tuple[bool, List[str]]:
+    """Check content against content-policies.yaml prohibited phrases.
+
+    Returns:
+        (passes, violations) — passes is True if no violations found.
+        violations is a list of human-readable violation descriptions.
+    """
+    prohibited = _collect_prohibited_phrases(policies)
+    if not prohibited:
+        return True, []
+
+    violations: List[str] = []
+    for phrase in prohibited:
+        if phrase in content:
+            violations.append(f"禁用詞偵測：「{phrase}」出現在文章中")
+
+    return len(violations) == 0, violations
 
 
 class QualityValidator:
@@ -41,6 +102,7 @@ class QualityValidator:
         self.claude = claude_client
         self.config = config
         self.log = logger
+        self._policies = _load_content_policies()
 
     def validate_quality(self, post: GeneratedPost) -> float:
         """Validate post quality with Claude AI or fallback scoring.
@@ -65,6 +127,20 @@ class QualityValidator:
         claude_weight = float(quality_cfg.get("claude_weight", 0.6))
         claude_weight = max(0.0, min(1.0, claude_weight))
         claude_floor = float(quality_cfg.get("claude_floor", 65))
+
+        # PHASE 2: Content-policy compliance gate (runs before everything else)
+        passes, violations = check_policy_compliance(post.content, self._policies)
+        if not passes:
+            for v in violations:
+                self.log.error("POLICY VIOLATION: %s", v)
+            post.quality_score = 0.0
+            post.frontmatter["policy_violations"] = violations
+            self.log.error(
+                "Post REJECTED by content-policy scanner (%d violation(s)). "
+                "Score forced to 0 — post will be saved as draft.",
+                len(violations),
+            )
+            return 0.0
 
         # Try Claude QA first
         score = self._qa_with_claude(post)
@@ -321,7 +397,11 @@ class QualityValidator:
         topic_type = metadata.get("topic_type", "pillar")
         geo = metadata.get("geo_target") or "全美"
 
-        base_prompt = "你是 SVICLOUD 品質稽核，需回傳 JSON score 與 notes。"
+        base_prompt = (
+            "你是 SVICLOUD 品質稽核，需回傳 JSON score 與 notes。"
+            "特別注意：保固期限必須為「1年」，若文章中出現「2年保固」「3年保固」等錯誤聲明，"
+            "score 應直接給 0 分並在 notes 說明違規原因。"
+        )
 
         # Add topic-specific modifiers
         modifiers = []

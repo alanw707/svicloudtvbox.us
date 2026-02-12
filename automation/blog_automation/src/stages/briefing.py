@@ -5,8 +5,25 @@ or fallback to template-based briefs when Claude is unavailable.
 """
 
 import logging
-from typing import Dict, Any, Optional
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+import yaml
+
 from ..models import TopicCandidate
+
+
+def _load_content_policies(config_dir: Optional[Path] = None) -> Dict[str, Any]:
+    """Load content-policies.yaml from the automation config directory."""
+    if config_dir is None:
+        config_dir = Path(__file__).resolve().parent.parent.parent
+    policy_path = config_dir / "content-policies.yaml"
+    if not policy_path.exists():
+        return {}
+    try:
+        return yaml.safe_load(policy_path.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return {}
 
 
 class BriefGenerator:
@@ -33,6 +50,7 @@ class BriefGenerator:
         self.claude = claude_client
         self.config = config
         self.log = logger
+        self._policies = _load_content_policies()
 
     def generate_brief(self, topic: TopicCandidate) -> str:
         """Generate strategic content brief for topic.
@@ -71,7 +89,8 @@ class BriefGenerator:
                     f"- 比較焦點：{metadata.get('is_comparison')}\n"
                     f"- 活動/節慶：{metadata.get('is_campaign')}\n"
                     "務必強調：美國倉儲現貨/快速出貨、中文/雙語客服、售後保固與遠端協助；"
-                    "並依主題分類選擇性帶到 4K/Wi‑Fi/Dolby 等規格（不要每篇都把 4K 當主角）。"
+                    "並依主題分類選擇性帶到 4K/Wi‑Fi/Dolby 等規格（不要每篇都把 4K 當主角）。\n"
+                    "【合規提醒】保固期限一律為「1年」，不得寫成 2年或 3年。不可聲稱 24/7 客服。"
                 )
 
                 # Add competitor context if available
@@ -108,10 +127,12 @@ class BriefGenerator:
         """
         metadata = topic.metadata or {}
 
+        warranty_dur = self._policies.get("warranty", {}).get("duration", "1年")
         lines = [
             f"目標關鍵字：{topic.keyword}",
             "受眾：美國華人家庭、長輩與新移民",
-            "品牌重點：4K HDR + Dolby Audio、Wi-Fi 6 雙頻、中文/英文語音介面與一年美國保固。",
+            f"品牌重點：4K HDR + Dolby Audio、Wi-Fi 6 雙頻、中文/英文語音介面與{warranty_dur}美國保固。",
+            f"【合規】保固期限只能寫「{warranty_dur}」，不可寫 2年/3年。",
         ]
 
         # Add topic-specific focus areas

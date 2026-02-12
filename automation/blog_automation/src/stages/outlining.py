@@ -201,7 +201,10 @@ class OutlineGenerator:
         topic_type = metadata.get("topic_type", "pillar")
         geo = metadata.get("geo_target") or "全美"
 
-        base_prompt = "你是 SVICLOUD 編輯總監，產出5-7個段落，涵蓋美國倉儲、售後與FAQ。"
+        base_prompt = (
+            "你是 SVICLOUD 編輯總監，產出5-7個段落，涵蓋美國倉儲、售後與FAQ。"
+            "【合規提醒】保固期限一律為「1年」，不得寫 2年或 3年。"
+        )
 
         # Add topic-specific modifiers
         modifiers = []

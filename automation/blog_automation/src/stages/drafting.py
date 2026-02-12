@@ -7,8 +7,64 @@ internal links, images, and call-to-action footers.
 
 import logging
 import re
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+
+import yaml
+
 from ..models import TopicCandidate
+
+
+def _load_content_policies(config_dir: Optional[Path] = None) -> Dict[str, Any]:
+    """Load content-policies.yaml from the automation config directory.
+
+    Returns an empty dict if the file is missing or malformed so the
+    pipeline never crashes due to a policy-file issue.
+    """
+    if config_dir is None:
+        config_dir = Path(__file__).resolve().parent.parent.parent
+    policy_path = config_dir / "content-policies.yaml"
+    if not policy_path.exists():
+        return {}
+    try:
+        return yaml.safe_load(policy_path.read_text(encoding="utf-8")) or {}
+    except Exception:
+        return {}
+
+
+def _build_policy_prompt_block(policies: Dict[str, Any]) -> str:
+    """Convert content-policies.yaml into a concise instruction block for AI prompts."""
+    if not policies:
+        return ""
+
+    lines: List[str] = [
+        "【內容合規政策 — 務必遵守】",
+    ]
+
+    warranty = policies.get("warranty", {})
+    if warranty:
+        dur = warranty.get("duration", "1年")
+        lines.append(f"• 保固期限：{dur}。不得寫成 2 年、3 年或其他年限。")
+        prohibited = warranty.get("prohibited_phrases", [])
+        if prohibited:
+            lines.append(f"  禁用詞：{', '.join(prohibited[:8])}")
+
+    shipping = policies.get("shipping", {})
+    if shipping:
+        lines.append(f"• 物流：{shipping.get('description', '')}")
+        prohibited = shipping.get("prohibited_phrases", [])
+        if prohibited:
+            lines.append(f"  禁用詞：{', '.join(prohibited[:6])}")
+
+    support = policies.get("support", {})
+    if support:
+        prohibited = support.get("prohibited_phrases", [])
+        if prohibited:
+            lines.append(f"• 客服：不得聲稱 {', '.join(prohibited[:4])}")
+
+    lines.append("• 違反上述政策的文章會被 QA 攔截並拒絕發布。")
+
+    return "\n".join(lines)
 
 
 class PostDrafter:
@@ -40,6 +96,8 @@ class PostDrafter:
         self.config = config
         self.log = logger
         self.image_generator = image_generator
+        self._policies = _load_content_policies()
+        self._policy_prompt = _build_policy_prompt_block(self._policies)
 
     def generate_full_post(
         self,
@@ -99,6 +157,8 @@ class PostDrafter:
                     "3. 每段落加入具體情境或案例。\n"
                     "4. 結尾加入CTA導引至購買/聯絡。\n"
                     "5. 文章長度務必超過4000個字元，段落豐富且包含具體數據或案例。\n"
+                    "6. 保固期限只能寫「1年」或「一年」，絕對不可寫成 2年、3年或其他年限。\n"
+                    "7. 不可聲稱 24/7 客服或保證具體到貨天數。\n"
                     "輸出：純Markdown內容，不含YAML。"
                 )
 
@@ -381,6 +441,7 @@ class PostDrafter:
                 extension_prompt = (
                     "以下文章長度不足4000字元，請延伸內容，補強案例、數據與FAQ，"
                     "新增段落須維持繁體中文，並自然融入SVICLOUD品牌優勢與至少一個內部連結文字描述。\n"
+                    "【重要】保固只能寫「1年」或「一年」，不可寫 2年、3年。不可聲稱 24/7 客服。\n"
                     f"關鍵字：{topic.keyword}\n"
                     f"簡報重點：{brief[:800]}\n"
                     f"原始大綱：\n{outline[:1000]}\n"
@@ -513,10 +574,12 @@ class PostDrafter:
         topic_type = metadata.get("topic_type", "pillar")
         geo = metadata.get("geo_target") or "全美"
 
+        policy_block = self._policy_prompt
         base_prompt = (
             "你是 SVICLOUD 中文內容顧問，撰寫4000字以上Markdown文章，需含實例與內部連結。"
             "可提及美國倉儲現貨/快速出貨、中文/雙語客服與一年美國保固等服務優勢，"
-            "但避免做出『絕對到貨承諾』或保證天數（例如「2天必達」）。"
+            "但避免做出『絕對到貨承諾』或保證天數（例如「2天必達」）。\n"
+            f"{policy_block}"
         )
 
         # Add topic-specific modifiers
