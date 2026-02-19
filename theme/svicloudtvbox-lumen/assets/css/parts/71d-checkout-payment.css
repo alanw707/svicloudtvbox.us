@@ -867,6 +867,18 @@
   margin-bottom: 0.65rem;
 }
 
+/* Ensure ALL text inside payment box is legible on dark background.
+   Stripe/WooCommerce plugins may render instruction text (e.g. "Enter the
+   zip code") that inherits dark default colors. */
+#payment .payment_box p,
+#payment .payment_box .wc-stripe-gateway-desc,
+#payment .payment_box .wc-stripe-gateway-desc p,
+#payment .payment_box small,
+#payment .payment_box .form-row label,
+#payment ul.payment_methods > li .payment_box > p {
+  color: rgba(210, 230, 255, 0.82);
+}
+
 .woocommerce-checkout-payment .woocommerce-terms-and-conditions-wrapper {
   border-top: 1px solid rgba(164, 237, 232, 0.22);
   padding: clamp(1rem, 2.5vw, 1.35rem);

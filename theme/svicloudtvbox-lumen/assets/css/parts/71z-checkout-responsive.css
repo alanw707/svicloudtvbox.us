@@ -40,7 +40,8 @@
   }
 
   #payment .wc-stripe-card-icons-container {
-    max-width: clamp(9rem, 28vw, 12rem);
+    float: none !important;
+    max-width: clamp(10rem, 32vw, 14rem);
   }
 
   .place-order {
@@ -84,7 +85,7 @@
   #payment ul.payment_methods > li > label {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     gap: clamp(0.5rem, 4vw, 0.8rem);
     padding: clamp(0.6rem, 3.4vw, 0.9rem) clamp(1.1rem, 6vw, 1.6rem);
     padding-left: clamp(2.35rem, 6.2vw, 2.85rem);
@@ -201,12 +202,26 @@
   }
 
   #payment .wc-stripe-card-icons-container {
-    display: flex;
+    display: flex !important;
+    float: none !important;
     width: 100%;
+    flex-wrap: wrap;
     justify-content: flex-start;
+    align-items: center;
+    gap: 0.4rem;
     max-width: none;
     padding-right: 0;
     padding-left: 0;
+  }
+
+  #payment .wc-stripe-card-icons-container img,
+  li.payment_method_stripe_cc .wc-stripe-card-icons-container img.wc-stripe-card-icon {
+    height: 18px !important;
+    max-height: 18px !important;
+    width: auto !important;
+    max-width: 42px !important;
+    display: block !important;
+    flex: 0 0 auto;
   }
 
   .lumen-checkout-summary__order th,

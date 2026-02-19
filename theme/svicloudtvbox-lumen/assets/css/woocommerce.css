@@ -500,6 +500,7 @@ body.admin-bar .lumen-checkout__summary{top:calc(clamp(1rem,3vw,2.25rem)+48px)}
 #payment .wc-stripe-gateway-container input[type="radio"]+label.wc-stripe-label-payment-type,#payment input[type="radio"]+label.wc-stripe-label-payment-type,#payment label.wc-stripe-label-payment-type{color:rgba(248,252,255,0.96) !important;font-weight:700;letter-spacing:0.02em}
 #payment .wc-stripe-gateway-container input[type="radio"]+label.wc-stripe-label-payment-type:hover,#payment input[type="radio"]+label.wc-stripe-label-payment-type:hover{color:rgba(255,255,255,1) !important}
 #payment .payment_box .form-row,#payment .payment_box p{margin-bottom:0.65rem}
+#payment .payment_box p,#payment .payment_box .wc-stripe-gateway-desc,#payment .payment_box .wc-stripe-gateway-desc p,#payment .payment_box small,#payment .payment_box .form-row label,#payment ul.payment_methods>li .payment_box>p{color:rgba(210,230,255,0.82)}
 .woocommerce-checkout-payment .woocommerce-terms-and-conditions-wrapper{border-top:1px solid rgba(164,237,232,0.22);padding:clamp(1rem,2.5vw,1.35rem);margin-top:clamp(1rem,3vw,1.45rem);color:rgba(252,255,255,0.94);font-size:0.92rem;line-height:1.7;text-shadow:0 12px 28px rgba(2,10,26,0.55);box-sizing:border-box}
 .woocommerce-checkout-payment .woocommerce-terms-and-conditions-wrapper .woocommerce-privacy-policy-text{margin:0;padding:0;color:rgba(255,255,255,0.96);font-weight:500}
 .woocommerce-checkout-payment .woocommerce-terms-and-conditions-wrapper .woocommerce-privacy-policy-text p{margin:0;color:rgba(255,255,255,0.96)}
@@ -556,7 +557,7 @@ body.woocommerce-checkout .lumen-checkout-coupon__form{padding:1.1rem}
 #payment ul.payment_methods{padding:0;gap:clamp(0.75rem,3vw,1rem)}
 #payment ul.payment_methods>li{width:100%}
 #payment ul.payment_methods>li>label{gap:clamp(0.65rem,2.6vw,0.95rem);padding:clamp(0.7rem,2.8vw,0.95rem) clamp(1.35rem,4.4vw,1.75rem);padding-left:clamp(2.5rem,5vw,3rem);padding-right:clamp(1.9rem,4.8vw,2.4rem)}
-#payment .wc-stripe-card-icons-container{max-width:clamp(9rem,28vw,12rem)}
+#payment .wc-stripe-card-icons-container{float:none !important;max-width:clamp(10rem,32vw,14rem)}
 .place-order{padding:clamp(1rem,4vw,1.25rem)}
 .lumen-checkout__header{text-align:left}
 .lumen-checkout-summary__order .place-order{bottom:0;margin-left:-0.5rem;margin-right:-0.5rem;padding:1rem 1.1rem}
@@ -565,7 +566,7 @@ body.woocommerce-checkout .lumen-checkout-coupon__form{padding:1.1rem}
 body.woocommerce-checkout .lumen-checkout-coupon__form .form-row-last button.button{width:100%}
 .lumen-checkout__panel--payment .lumen-checkout__panel-inner{padding:clamp(1.5rem,4vw,2rem) 1.1rem}
 #payment ul.payment_methods>li{padding:clamp(0.15rem,1.6vw,0.35rem) clamp(0.45rem,3.6vw,0.95rem);gap:clamp(0.6rem,3vw,0.9rem);border-radius:var(--radius-lg);background:transparent;border:none;box-shadow:none}
-#payment ul.payment_methods>li>label{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(0.5rem,4vw,0.8rem);padding:clamp(0.6rem,3.4vw,0.9rem) clamp(1.1rem,6vw,1.6rem);padding-left:clamp(2.35rem,6.2vw,2.85rem);padding-right:clamp(1.7rem,6vw,2.3rem);min-height:auto}
+#payment ul.payment_methods>li>label{display:flex;flex-direction:column;align-items:stretch;gap:clamp(0.5rem,4vw,0.8rem);padding:clamp(0.6rem,3.4vw,0.9rem) clamp(1.1rem,6vw,1.6rem);padding-left:clamp(2.35rem,6.2vw,2.85rem);padding-right:clamp(1.7rem,6vw,2.3rem);min-height:auto}
 #payment ul.payment_methods>li>label::before{top:clamp(1rem,3.5vw,1.3rem);transform:none}
 #payment ul.payment_methods>li>label::after{top:clamp(1.07rem,3.7vw,1.37rem);transform:none}
 #payment .wc-saved-payment-methods input[type="radio"]+label{grid-template-columns:1fr;align-items:flex-start;gap:clamp(0.7rem,4vw,1rem);padding:clamp(0.75rem,4vw,1.05rem) clamp(1rem,5.6vw,1.45rem)}
@@ -583,7 +584,8 @@ body.woocommerce-checkout .lumen-checkout-coupon__form .form-row-last button.but
 #payment .wc-stripe_cc-new-method-container,#payment .wc-stripe_cc-container{gap:0.85rem}
 #payment .wc-stripe-save-source{padding:0.55rem 0;background:transparent;border:none}
 #payment .wc-stripe-save-source label{gap:0.45rem}
-#payment .wc-stripe-card-icons-container{display:flex;width:100%;justify-content:flex-start;max-width:none;padding-right:0;padding-left:0}
+#payment .wc-stripe-card-icons-container{display:flex !important;float:none !important;width:100%;flex-wrap:wrap;justify-content:flex-start;align-items:center;gap:0.4rem;max-width:none;padding-right:0;padding-left:0}
+#payment .wc-stripe-card-icons-container img,li.payment_method_stripe_cc .wc-stripe-card-icons-container img.wc-stripe-card-icon{height:18px !important;max-height:18px !important;width:auto !important;max-width:42px !important;display:block !important;flex:0 0 auto}
 .lumen-checkout-summary__order th,.lumen-checkout-summary__order td{padding:0.75rem 0.85rem}
 }
 @media(prefers-reduced-motion:reduce){#place_order,body.woocommerce-checkout .lumen-checkout-coupon__form button.button,.lumen-checkout__badge,.lumen-checkout-summary__benefit::before{transition:none}
