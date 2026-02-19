@@ -584,8 +584,8 @@ body.woocommerce-checkout .lumen-checkout-coupon__form .form-row-last button.but
 #payment .wc-stripe_cc-new-method-container,#payment .wc-stripe_cc-container{gap:0.85rem}
 #payment .wc-stripe-save-source{padding:0.55rem 0;background:transparent;border:none}
 #payment .wc-stripe-save-source label{gap:0.45rem}
-#payment .wc-stripe-card-icons-container{display:flex !important;float:none !important;width:100%;flex-wrap:wrap;justify-content:flex-start;align-items:center;gap:0.4rem;max-width:none;padding-right:0;padding-left:0}
-#payment .wc-stripe-card-icons-container img,li.payment_method_stripe_cc .wc-stripe-card-icons-container img.wc-stripe-card-icon{height:18px !important;max-height:18px !important;width:auto !important;max-width:42px !important;display:block !important;flex:0 0 auto}
+#payment .wc-stripe-card-icons-container{display:grid !important;grid-template-columns:repeat(auto-fill,minmax(28px,38px));float:none !important;width:100%;gap:0.35rem;max-width:none;padding-right:0;padding-left:0}
+#payment .wc-stripe-card-icons-container img,li.payment_method_stripe_cc .wc-stripe-card-icons-container img.wc-stripe-card-icon{height:18px !important;max-height:18px !important;width:100% !important;max-width:38px !important;display:block !important;object-fit:contain}
 .lumen-checkout-summary__order th,.lumen-checkout-summary__order td{padding:0.75rem 0.85rem}
 }
 @media(prefers-reduced-motion:reduce){#place_order,body.woocommerce-checkout .lumen-checkout-coupon__form button.button,.lumen-checkout__badge,.lumen-checkout-summary__benefit::before{transition:none}
