@@ -556,28 +556,34 @@ body.woocommerce-checkout .lumen-checkout-coupon__form{padding:1.1rem}
 #payment ul.payment_methods{padding:0;gap:clamp(0.75rem,3vw,1rem)}
 #payment ul.payment_methods>li{width:100%}
 #payment ul.payment_methods>li>label{gap:clamp(0.65rem,2.6vw,0.95rem);padding:clamp(0.7rem,2.8vw,0.95rem) clamp(1.35rem,4.4vw,1.75rem);padding-left:clamp(2.5rem,5vw,3rem);padding-right:clamp(1.9rem,4.8vw,2.4rem)}
+#payment .wc-stripe-card-icons-container{max-width:clamp(9rem,28vw,12rem)}
 .place-order{padding:clamp(1rem,4vw,1.25rem)}
 .lumen-checkout__header{text-align:left}
 .lumen-checkout-summary__order .place-order{bottom:0;margin-left:-0.5rem;margin-right:-0.5rem;padding:1rem 1.1rem}
 }
 @media(max-width:540px){body.woocommerce-checkout .lumen-checkout-coupon__form .form-row{flex:1 1 auto}
 body.woocommerce-checkout .lumen-checkout-coupon__form .form-row-last button.button{width:100%}
+.lumen-checkout__panel--payment .lumen-checkout__panel-inner{padding:clamp(1.5rem,4vw,2rem) 1.1rem}
 #payment ul.payment_methods>li{padding:clamp(0.15rem,1.6vw,0.35rem) clamp(0.45rem,3.6vw,0.95rem);gap:clamp(0.6rem,3vw,0.9rem);border-radius:var(--radius-lg);background:transparent;border:none;box-shadow:none}
 #payment ul.payment_methods>li>label{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(0.5rem,4vw,0.8rem);padding:clamp(0.6rem,3.4vw,0.9rem) clamp(1.1rem,6vw,1.6rem);padding-left:clamp(2.35rem,6.2vw,2.85rem);padding-right:clamp(1.7rem,6vw,2.3rem);min-height:auto}
+#payment ul.payment_methods>li>label::before{top:clamp(1rem,3.5vw,1.3rem);transform:none}
+#payment ul.payment_methods>li>label::after{top:clamp(1.07rem,3.7vw,1.37rem);transform:none}
 #payment .wc-saved-payment-methods input[type="radio"]+label{grid-template-columns:1fr;align-items:flex-start;gap:clamp(0.7rem,4vw,1rem);padding:clamp(0.75rem,4vw,1.05rem) clamp(1rem,5.6vw,1.45rem)}
 #payment .wc-saved-payment-methods .wc-stripe-token-card{flex-wrap:wrap;justify-content:space-between;gap:clamp(0.55rem,3.6vw,0.85rem)}
 #payment .wc-saved-payment-methods .wc-stripe-token-identifier{flex-basis:100%;gap:0.15rem}
 #payment .wc-saved-payment-methods .wc-stripe-token-details{margin-left:0;align-items:flex-start;text-align:left;width:100%;gap:0.15rem}
-#payment ul.payment_methods>li .payment_box{padding:0;background:transparent;border:none;box-shadow:none;display:grid;gap:0.85rem}
+#payment ul.payment_methods>li .payment_box{padding:0;background:transparent;border:none;box-shadow:none;overflow:visible;display:grid;gap:0.85rem}
 #payment [data-testid="link-account-element"],#payment #wc-stripe-link-account-element{padding:0;background:transparent;border:none;box-shadow:none;gap:0.75rem}
 .lumen-checkout__panel--payment .place-order::before{left:-15%;right:-15%}
 #payment [data-testid="link-account-element"] .p-ReturnAutofillPrompt,#payment #wc-stripe-link-account-element .p-ReturnAutofillPrompt{padding:0.85rem;border-radius:var(--radius-lg);border:none;background:rgba(10,28,60,0.88);box-shadow:0 16px 32px rgba(2,10,26,0.44)}
 #payment [data-testid="link-account-element"] .p-ReturnAutofillPrompt-header,#payment #wc-stripe-link-account-element .p-ReturnAutofillPrompt-header,#payment [data-testid="link-account-element"] [data-testid="link-autofill-prompt-content"],#payment #wc-stripe-link-account-element [data-testid="link-autofill-prompt-content"]{padding:0}
 #payment [data-testid="link-account-element"] .p-ReturnAutofillPrompt .p-PickerItem,#payment #wc-stripe-link-account-element .p-ReturnAutofillPrompt .p-PickerItem{border:none;background:rgba(28,60,110,0.32);min-width:0}
 #payment [data-testid="link-account-element"] .p-ReturnAutofillPrompt .p-PickerItem+.p-PickerItem,#payment #wc-stripe-link-account-element .p-ReturnAutofillPrompt .p-PickerItem+.p-PickerItem{margin-top:0.45rem}
+#payment .payment_box .StripeElement{min-height:52px;padding:clamp(0.85rem,3vw,1.1rem)}
+#payment .wc-stripe_cc-new-method-container,#payment .wc-stripe_cc-container{gap:0.85rem}
 #payment .wc-stripe-save-source{padding:0.55rem 0;background:transparent;border:none}
 #payment .wc-stripe-save-source label{gap:0.45rem}
-#payment .wc-stripe-card-icons-container{justify-content:flex-start;max-width:none;padding-right:0;padding-left:0}
+#payment .wc-stripe-card-icons-container{display:flex;width:100%;justify-content:flex-start;max-width:none;padding-right:0;padding-left:0}
 .lumen-checkout-summary__order th,.lumen-checkout-summary__order td{padding:0.75rem 0.85rem}
 }
 @media(prefers-reduced-motion:reduce){#place_order,body.woocommerce-checkout .lumen-checkout-coupon__form button.button,.lumen-checkout__badge,.lumen-checkout-summary__benefit::before{transition:none}
