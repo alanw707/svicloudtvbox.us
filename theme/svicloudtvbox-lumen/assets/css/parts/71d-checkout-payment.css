@@ -184,6 +184,20 @@
   max-width: clamp(5.2rem, 18vw, 7.2rem);
 }
 
+@media (max-width: 640px) {
+  #payment .wc-stripe-card-icons-container {
+    max-width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  #payment .wc-stripe-card-icons-container::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 #payment .wc-stripe-card-icons-container img {
   flex: 0 0 auto;
   max-height: 16px;
@@ -662,6 +676,7 @@
   box-shadow: inset 0 0 0 1px rgba(94, 230, 208, 0.08);
 }
 
+#payment .payment_box #wc-stripe-card-element,
 #payment .payment_box .StripeElement {
   width: 100%;
   min-height: 48px;
@@ -676,7 +691,10 @@
   max-width: 100%;
 }
 
+#payment .payment_box #wc-stripe-card-element > div,
 #payment .payment_box .StripeElement > div {
+  position: relative !important;
+  width: 100% !important;
   border-radius: calc(var(--radius-lg) - 6px);
   margin: 0 !important;
   padding: 0 !important;
@@ -684,6 +702,7 @@
   box-shadow: none !important;
 }
 
+#payment .payment_box #wc-stripe-card-element iframe,
 #payment .payment_box .StripeElement iframe {
   display: block;
   width: 100% !important;
