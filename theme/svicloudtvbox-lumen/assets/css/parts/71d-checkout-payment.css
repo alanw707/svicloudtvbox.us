@@ -170,6 +170,78 @@
   display: block;
 }
 
+#payment ul.payment_methods > li > label img.sv-wc-payment-gateway-icon {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 640px) {
+  #payment ul.payment_methods > li > label {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  #payment ul.payment_methods > li > label > * {
+    float: none !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+  }
+
+  #payment ul.payment_methods > li > label img.sv-wc-payment-gateway-icon {
+    display: inline-block !important;
+    width: 36px !important;
+    height: 18px !important;
+    margin-left: 6px !important;
+    object-fit: contain !important;
+    vertical-align: middle !important;
+  }
+}
+
+#payment .sv-wc-payment-gateway-icons {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.28rem, 1.1vw, 0.55rem);
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+#payment .sv-wc-payment-gateway-icons img,
+#payment img.sv-wc-payment-gateway-icon {
+  display: inline-block;
+  width: auto;
+  max-height: 16px;
+  height: 16px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 640px) {
+  #payment .sv-wc-payment-gateway-icons {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    display: inline-flex !important;
+    white-space: nowrap !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  #payment .sv-wc-payment-gateway-icons::-webkit-scrollbar {
+    display: none;
+  }
+
+  #payment .sv-wc-payment-gateway-icons img {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    height: 18px !important;
+    max-width: none !important;
+  }
+}
+
 #payment .wc-stripe-card-icons-container {
   display: inline-flex;
   align-items: center;
