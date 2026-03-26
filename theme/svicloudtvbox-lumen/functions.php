@@ -11,6 +11,46 @@ if (!defined('SVIC_THEME_TEXT_DOMAIN')) {
     define('SVIC_THEME_TEXT_DOMAIN', 'svicloudtvbox-lumen');
 }
 
+/**
+ * Announcement bar toggle.
+ * Set to true to show the out-of-stock (or any) banner across all pages.
+ * Set to false to hide it when back in stock.
+ */
+if (!defined('SVIC_ANNOUNCEMENT_ENABLED')) {
+    define('SVIC_ANNOUNCEMENT_ENABLED', true);
+}
+
+/**
+ * Render the site-wide announcement bar.
+ * Called from header.php just before <header>.
+ */
+function svic_render_announcement_bar(): void {
+    if (!SVIC_ANNOUNCEMENT_ENABLED) {
+        return;
+    }
+
+    $message = svic_translate_html('announcement.message');
+    $cta     = svic_translate_html('announcement.cta');
+    $cta_url = svic_translate_html('announcement.cta_url');
+
+    if (empty($message)) {
+        return;
+    }
+
+    $full_cta_url = svic_url_with_lang(home_url($cta_url));
+    ?>
+    <div class="svic-announcement-bar" role="status" aria-live="polite">
+        <div class="svic-announcement-bar__inner">
+            <span class="svic-announcement-bar__icon" aria-hidden="true">⚠️</span>
+            <span class="svic-announcement-bar__text"><?php echo $message; // phpcs:ignore ?></span>
+            <?php if ($cta && $cta_url) : ?>
+                <a class="svic-announcement-bar__cta" href="<?php echo esc_url($full_cta_url); ?>"><?php echo $cta; // phpcs:ignore ?></a>
+            <?php endif; ?>
+        </div>
+    </div>
+    <?php
+}
+
 if (!defined('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID')) {
     define('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID', 5317978135);
 }

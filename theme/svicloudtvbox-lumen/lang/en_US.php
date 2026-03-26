@@ -4,6 +4,12 @@
  */
 
 return [
+    'announcement' => [
+        'message' => 'We are currently out of stock. New inventory is on the way!',
+        'cta'     => 'Join the waitlist →',
+        'cta_url' => '/contact/',
+    ],
+
     'core' => [
         'locale' => 'English (US)',
         'cart'   => [

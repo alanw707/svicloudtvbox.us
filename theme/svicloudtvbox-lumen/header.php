@@ -75,6 +75,7 @@
     ];
 
   ?>
+  <?php svic_render_announcement_bar(); ?>
   <header class="lumen-header lumen-header--transparent" data-lumen-header>
     <div class="lumen-header__inner">
       <a class="lumen-header__brand" href="<?php echo esc_url( svic_url_with_lang( home_url('/') ) ); ?>" aria-label="<?php echo esc_attr( $site_name ); ?>">

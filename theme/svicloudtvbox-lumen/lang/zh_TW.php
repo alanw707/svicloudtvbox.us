@@ -4,6 +4,12 @@
  */
 
 return [
+    'announcement' => [
+        'message' => '目前商品暫時缺貨，新庫存即將到來！',
+        'cta'     => '加入候補名單 →',
+        'cta_url' => '/contact/',
+    ],
+
     'core' => [
         'locale' => '繁體中文',
         'cart'   => [
