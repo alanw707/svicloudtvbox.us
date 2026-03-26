@@ -8,8 +8,8 @@ $base = include __DIR__ . '/zh_TW.php';
 $overrides = [
     'announcement' => [
         'message' => '目前商品暂时缺货，新库存即将到来！',
-        'cta'     => '加入候补名单 →',
-        'cta_url' => '/contact/',
+        'cta'     => '',
+        'cta_url' => '',
     ],
 
     'header' => [
