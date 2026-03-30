@@ -254,14 +254,14 @@ return [
                 'title' => 'How to start a return',
                 'steps' => [
                     'contact' => 'Contact the concierge team with your order number and describe the issue.',
-                    'label'   => 'We email shipping instructions and, when applicable, a prepaid return label.',
+                    'label'   => 'We email shipping instructions for sending the device back to us.',
                     'pack'    => 'Pack the device securely and include the RMA form we send back to you.',
                 ],
             ],
             'shipping' => [
                 'title' => 'Return shipping & restocking',
                 'items' => [
-                    'responsibility' => 'Customers are responsible for return shipping unless the device arrived damaged or defective.',
+                    'responsibility' => 'Customers are responsible for all return shipping costs.',
                     'restock'        => 'Returned items missing accessories may incur a restocking fee up to 15% of the device price.',
                     'tracking'       => 'Keep the carrier tracking number until your refund is confirmed.',
                 ],
