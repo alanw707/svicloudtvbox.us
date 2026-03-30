@@ -1,0 +1,114 @@
+name: 🚀 Deploy to Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: 🚀 Build & Deploy Theme
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 🏗️ Build CSS bundles
+        run: |
+          cd theme/svicloudtvbox-lumen
+          python3 ../../scripts/build_css.py
+          echo "✅ CSS bundles built"
+
+      - name: 🚀 Deploy changed files via FTP
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+        run: |
+          REMOTE_BASE="ftp://${FTP_HOST}:21/wp-content/themes/svicloudtvbox-lumen"
+          LOCAL_BASE="theme/svicloudtvbox-lumen"
+
+          upload() {
+            local file="$1"
+            echo "  Uploading: $file"
+            curl -s --ftp-ssl --insecure \
+              -u "${FTP_USER}:${FTP_PASS}" \
+              -T "${LOCAL_BASE}/${file}" \
+              "${REMOTE_BASE}/${file}" \
+              -w " → %{http_code}\n"
+          }
+
+          echo "📁 Uploading PHP files..."
+          for f in $(find ${LOCAL_BASE} -maxdepth 1 -name "*.php" | sed "s|${LOCAL_BASE}/||"); do
+            upload "$f"
+          done
+
+          echo "📁 Uploading inc/ files..."
+          for f in $(find ${LOCAL_BASE}/inc -name "*.php" | sed "s|${LOCAL_BASE}/||"); do
+            upload "$f"
+          done
+
+          echo "📁 Uploading lang/ files..."
+          for f in $(find ${LOCAL_BASE}/lang -name "*.php" | sed "s|${LOCAL_BASE}/||"); do
+            upload "$f"
+          done
+
+          echo "📁 Uploading CSS bundles..."
+          for f in $(find ${LOCAL_BASE}/assets/css -maxdepth 1 -name "*.css" | sed "s|${LOCAL_BASE}/||"); do
+            upload "$f"
+          done
+
+          echo "✅ All files uploaded"
+
+      - name: 🧹 Purge LiteSpeed Cache
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: |
+          # Upload a temp purge script
+          cat > /tmp/purge.php << 'PHP'
+          <?php
+          require_once(dirname(__FILE__).'/wp-load.php');
+          if (class_exists('LiteSpeed\Purge')) { LiteSpeed\Purge::purge_all(); }
+          do_action('litespeed_purge_all');
+          wp_cache_flush();
+          echo "PURGED\n";
+          PHP
+
+          curl -s --ftp-ssl --insecure \
+            -u "${FTP_USER}:${FTP_PASS}" \
+            -T /tmp/purge.php \
+            "ftp://${FTP_HOST}:21/purge.php"
+
+          # Run it
+          RESULT=$(curl -sL "${SITE_URL}/purge.php")
+          echo "Cache purge result: $RESULT"
+
+          # Delete it
+          curl -s --ftp-ssl --insecure \
+            -u "${FTP_USER}:${FTP_PASS}" \
+            "ftp://${FTP_HOST}:21/" \
+            -Q "DELE purge.php"
+
+          echo "✅ Cache purged"
+
+      - name: ✅ Verify deployment
+        env:
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: |
+          echo "Checking site is up..."
+          STATUS=$(curl -sI "${SITE_URL}" | grep "HTTP/" | awk '{print $2}')
+          echo "Homepage status: $STATUS"
+          if [[ "$STATUS" != "200" ]]; then
+            echo "⚠️ Site returned $STATUS — check manually"
+            exit 1
+          fi
+          echo "✅ Site is live"
