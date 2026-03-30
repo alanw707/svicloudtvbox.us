@@ -11,10 +11,10 @@ $policy_sections = [
         'anchor' => 'collect',
         'type'   => 'list',
         'items'  => [
-            svic_translate_html('privacy_policy.sections.collect.items.personal'),
-            svic_translate_html('privacy_policy.sections.collect.items.payment'),
-            svic_translate_html('privacy_policy.sections.collect.items.device'),
-            svic_translate_html('privacy_policy.sections.collect.items.usage'),
+            svic_translate_rich('privacy_policy.sections.collect.items.personal'),
+            svic_translate_rich('privacy_policy.sections.collect.items.payment'),
+            svic_translate_rich('privacy_policy.sections.collect.items.device'),
+            svic_translate_rich('privacy_policy.sections.collect.items.usage'),
         ],
     ],
     [
@@ -22,10 +22,10 @@ $policy_sections = [
         'anchor' => 'use',
         'type'   => 'list',
         'items'  => [
-            svic_translate_html('privacy_policy.sections.use.items.orders'),
-            svic_translate_html('privacy_policy.sections.use.items.support'),
-            svic_translate_html('privacy_policy.sections.use.items.improve'),
-            svic_translate_html('privacy_policy.sections.use.items.communicate'),
+            svic_translate_rich('privacy_policy.sections.use.items.orders'),
+            svic_translate_rich('privacy_policy.sections.use.items.support'),
+            svic_translate_rich('privacy_policy.sections.use.items.improve'),
+            svic_translate_rich('privacy_policy.sections.use.items.communicate'),
         ],
     ],
     [
@@ -33,10 +33,10 @@ $policy_sections = [
         'anchor' => 'sharing',
         'type'   => 'list',
         'items'  => [
-            svic_translate_html('privacy_policy.sections.sharing.items.processors'),
-            svic_translate_html('privacy_policy.sections.sharing.items.shipping'),
-            svic_translate_html('privacy_policy.sections.sharing.items.legal'),
-            svic_translate_html('privacy_policy.sections.sharing.items.nosell'),
+            svic_translate_rich('privacy_policy.sections.sharing.items.processors'),
+            svic_translate_rich('privacy_policy.sections.sharing.items.shipping'),
+            svic_translate_rich('privacy_policy.sections.sharing.items.legal'),
+            svic_translate_rich('privacy_policy.sections.sharing.items.nosell'),
         ],
     ],
     [
@@ -44,9 +44,9 @@ $policy_sections = [
         'anchor' => 'cookies',
         'type'   => 'list',
         'items'  => [
-            svic_translate_html('privacy_policy.sections.cookies.items.essential'),
-            svic_translate_html('privacy_policy.sections.cookies.items.analytics'),
-            svic_translate_html('privacy_policy.sections.cookies.items.control'),
+            svic_translate_rich('privacy_policy.sections.cookies.items.essential'),
+            svic_translate_rich('privacy_policy.sections.cookies.items.analytics'),
+            svic_translate_rich('privacy_policy.sections.cookies.items.control'),
         ],
     ],
     [
@@ -54,9 +54,9 @@ $policy_sections = [
         'anchor' => 'security',
         'type'   => 'list',
         'items'  => [
-            svic_translate_html('privacy_policy.sections.security.items.ssl'),
-            svic_translate_html('privacy_policy.sections.security.items.pci'),
-            svic_translate_html('privacy_policy.sections.security.items.access'),
+            svic_translate_rich('privacy_policy.sections.security.items.ssl'),
+            svic_translate_rich('privacy_policy.sections.security.items.pci'),
+            svic_translate_rich('privacy_policy.sections.security.items.access'),
         ],
     ],
     [
@@ -64,10 +64,10 @@ $policy_sections = [
         'anchor' => 'rights',
         'type'   => 'list',
         'items'  => [
-            svic_translate_html('privacy_policy.sections.rights.items.access'),
-            svic_translate_html('privacy_policy.sections.rights.items.correct'),
-            svic_translate_html('privacy_policy.sections.rights.items.delete'),
-            svic_translate_html('privacy_policy.sections.rights.items.optout'),
+            svic_translate_rich('privacy_policy.sections.rights.items.access'),
+            svic_translate_rich('privacy_policy.sections.rights.items.correct'),
+            svic_translate_rich('privacy_policy.sections.rights.items.delete'),
+            svic_translate_rich('privacy_policy.sections.rights.items.optout'),
         ],
     ],
 ];

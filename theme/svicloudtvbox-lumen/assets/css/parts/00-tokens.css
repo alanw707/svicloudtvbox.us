@@ -118,6 +118,8 @@
   --size-800: 3rem;
   --size-900: 3.5rem;
   --size-1000: 4rem;
+  --size-1100: 4.5rem;
+  --size-1200: 5rem;
 
   /* Border radius */
   --radius-sm: 4px;
@@ -158,6 +160,13 @@
   --hero-parallax-distance: 18px;
 }
 
+/* Global box-sizing reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 /* Base sizing */
 html {
   font-size: 16px;
@@ -165,11 +174,13 @@ html {
   background: var(--lumen-page-background);
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: var(--font-primary);
   font-size: 1rem;
   line-height: 1.65;
