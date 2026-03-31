@@ -1,0 +1,43 @@
+name: Deploy Theme to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'theme/svicloudtvbox-lumen/**'
+
+  workflow_dispatch:  # allow manual trigger from GitHub UI
+
+jobs:
+  deploy:
+    name: Deploy via FTPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: PHP syntax check
+        run: |
+          sudo apt-get install -y --quiet php-cli
+          find theme/svicloudtvbox-lumen -name '*.php' -exec php -l {} \;
+
+      - name: Deploy theme to Hostinger
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+          FTP_PROTOCOL: ftps
+          LOCAL_THEME_DIR: theme/svicloudtvbox-lumen
+          REMOTE_THEME_DIR: public_html/wp-content/themes/svicloudtvbox-lumen
+        run: |
+          python3 scripts/deploy_theme.py \
+            --protocol ftps \
+            --local-dir "$LOCAL_THEME_DIR" \
+            --remote-root "$REMOTE_THEME_DIR"

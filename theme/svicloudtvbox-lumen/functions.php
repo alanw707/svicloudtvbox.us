@@ -3530,6 +3530,24 @@ function svic_handle_support_form(): void
 add_action('admin_post_svic_support_form', 'svic_handle_support_form');
 add_action('admin_post_nopriv_svic_support_form', 'svic_handle_support_form');
 
+/**
+ * Rate-limit support form submissions per IP: max 5 per hour.
+ * Runs before svic_handle_support_form (priority 1).
+ */
+add_action('admin_post_nopriv_svic_support_form', function () {
+    $ip  = sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR'] ?? ''));
+    $key = 'svic_rate_' . md5($ip);
+    $count = (int) get_transient($key);
+    if ($count >= 5) {
+        wp_die(
+            'Too many support requests. Please wait before submitting again.',
+            'Rate Limit Exceeded',
+            [ 'response' => 429 ]
+        );
+    }
+    set_transient($key, $count + 1, HOUR_IN_SECONDS);
+}, 1);
+
 if (!function_exists('svic_log_wp_mail_failure')) {
     function svic_log_wp_mail_failure($wp_error)
     {
