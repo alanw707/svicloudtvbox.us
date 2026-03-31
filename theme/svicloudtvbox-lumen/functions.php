@@ -17,7 +17,7 @@ if (!defined('SVIC_THEME_TEXT_DOMAIN')) {
  * Set to false to hide it when back in stock.
  */
 if (!defined('SVIC_ANNOUNCEMENT_ENABLED')) {
-    define('SVIC_ANNOUNCEMENT_ENABLED', true);
+    define('SVIC_ANNOUNCEMENT_ENABLED', false);
 }
 
 /**
