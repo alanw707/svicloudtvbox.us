@@ -55,7 +55,7 @@ jobs:
           done
 
           echo "📁 Uploading lang/ files..."
-          for f in $(find ${LOCAL_BASE}/lang -name "*.php" | sed "s|${LOCAL_BASE}/||"); do
+          for f in $(find ${LOCAL_BASE}/lang -name "*.php" 2>/dev/null | sed "s|${LOCAL_BASE}/||"); do
             upload "$f"
           done
 
@@ -92,13 +92,14 @@ jobs:
           SITE_URL: ${{ secrets.SITE_URL }}
         run: |
           echo "Checking site is up..."
-          # Use browser User-Agent to pass Cloudflare bot check
           STATUS=$(curl -sI -L --max-time 15 \
-            -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36" \
+            -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
             "${SITE_URL}" | grep "^HTTP/" | tail -1 | awk '{print $2}')
           echo "Homepage status: $STATUS"
-          if [[ "$STATUS" != "200" && "$STATUS" != "301" && "$STATUS" != "302" ]]; then
-            echo "⚠️ Site returned $STATUS — verify manually at ${SITE_URL}"
-          else
+          # 200 = OK, 301/302 = redirect (also fine), 403 = Cloudflare bot check (site IS up)
+          if [[ "$STATUS" == "200" || "$STATUS" == "301" || "$STATUS" == "302" || "$STATUS" == "403" ]]; then
             echo "✅ Site is live (${STATUS})"
+          else
+            echo "⚠️ Site returned unexpected status $STATUS — verify manually at ${SITE_URL}"
+            exit 1
           fi
