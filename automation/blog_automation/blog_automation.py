@@ -416,6 +416,40 @@ class BlogAutomation:
         )
 
     def validate_quality(self, post: GeneratedPost) -> float:
+        # POLICY GATE: Run content-policy compliance check BEFORE quality scoring.
+        # Any prohibited phrase (wrong warranty, fake 24/7 support, etc.) hard-fails the post.
+        from pathlib import Path as _Path
+        import yaml as _yaml
+        _policy_path = _Path(__file__).resolve().parent / "content-policies.yaml"
+        _policies: dict = {}
+        if _policy_path.exists():
+            try:
+                _policies = _yaml.safe_load(_policy_path.read_text(encoding="utf-8")) or {}
+            except Exception:
+                pass
+
+        if _policies:
+            # Collect all prohibited phrases from every section + global_prohibited
+            _prohibited: list = []
+            for _sk, _sv in _policies.items():
+                if isinstance(_sv, dict):
+                    _prohibited.extend(_sv.get("prohibited_phrases", []))
+                elif isinstance(_sv, list) and _sk == "global_prohibited":
+                    _prohibited.extend(_sv)
+            # Case-insensitive check against full content
+            _content_lower = post.content.lower()
+            _violations = [p for p in _prohibited if p.lower() in _content_lower]
+            if _violations:
+                for _v in _violations:
+                    self.log.error("POLICY VIOLATION in '%s': prohibited phrase detected: «%s»", post.title, _v)
+                self.log.error(
+                    "Post REJECTED — %d policy violation(s). Saving as draft for manual review.",
+                    len(_violations)
+                )
+                post.quality_score = 0.0
+                post.frontmatter["policy_violations"] = _violations
+                return 0.0
+
         score = self._qa_with_claude(post)
         if score is not None:
             post.quality_score = score
