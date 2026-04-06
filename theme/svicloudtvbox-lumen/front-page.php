@@ -531,6 +531,16 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
     </div>
   </section>
 
+  <!-- Inline CTA: post-certification -->
+  <div class="lumen-inline-cta" aria-label="<?php esc_attr_e('Shop now', 'svicloudtvbox-lumen'); ?>">
+    <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.inline_cta.button'); ?></a>
+    <ul class="lumen-inline-cta__trust" role="list">
+      <li><?php echo svic_translate_html('frontpage.inline_cta.trust.shipping'); ?></li>
+      <li><?php echo svic_translate_html('frontpage.inline_cta.trust.speed'); ?></li>
+      <li><?php echo svic_translate_html('frontpage.inline_cta.trust.returns'); ?></li>
+    </ul>
+  </div>
+
   <!-- Credibility Bar -->
   <section class="lumen-metrics" aria-label="<?php esc_attr_e('Key SVICLOUD advantages', 'svicloudtvbox-lumen'); ?>" data-bg>
     <div class="lumen-metrics__inner">
@@ -571,6 +581,16 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
     </div>
   </section>
 
+  <!-- Inline CTA: post-features -->
+  <div class="lumen-inline-cta" aria-label="<?php esc_attr_e('Shop now', 'svicloudtvbox-lumen'); ?>">
+    <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.inline_cta.button'); ?></a>
+    <ul class="lumen-inline-cta__trust" role="list">
+      <li><?php echo svic_translate_html('frontpage.inline_cta.trust.shipping'); ?></li>
+      <li><?php echo svic_translate_html('frontpage.inline_cta.trust.speed'); ?></li>
+      <li><?php echo svic_translate_html('frontpage.inline_cta.trust.returns'); ?></li>
+    </ul>
+  </div>
+
   <!-- Experience Section -->
   <section class="lumen-experience" data-bg>
     <div class="lumen-experience__inner">
@@ -600,6 +620,47 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
   </section>
 
   <?php wp_reset_postdata(); ?>
+
+  <!-- Pricing Section -->
+  <section class="lumen-pricing" id="pricing">
+    <div class="lumen-pricing__inner">
+      <header class="lumen-section-header">
+        <h2 class="lumen-section-header__title"><?php echo svic_translate_html('frontpage.pricing.title'); ?></h2>
+        <p class="lumen-section-header__subtitle"><?php echo svic_translate_html('frontpage.pricing.subtitle'); ?></p>
+      </header>
+      <div class="lumen-pricing__grid">
+        <?php foreach ($pricing_cards as $slug => $card) : ?>
+          <article class="lumen-pricing-card<?php echo !empty($card['highlight']) ? ' lumen-pricing-card--featured' : ''; ?>">
+            <?php if (!empty($card['badge_key'])) : ?>
+              <span class="lumen-pricing-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></span>
+            <?php endif; ?>
+            <?php if (!empty($card['image']['url'])) : ?>
+              <figure class="lumen-pricing-card__figure">
+                <img src="<?php echo esc_url($card['image']['url']); ?>" alt="<?php echo esc_attr($card['image']['alt'] ?? ''); ?>" loading="lazy" width="520" height="520" />
+              </figure>
+            <?php endif; ?>
+            <h3 class="lumen-pricing-card__title"><?php echo svic_translate_html($card['title_key']); ?></h3>
+            <div class="lumen-pricing-card__price">
+              <?php echo $card['price_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+              <span class="lumen-pricing-card__interval"><?php echo svic_translate_html($card['interval_key']); ?></span>
+            </div>
+            <p class="lumen-pricing-card__copy"><?php echo svic_translate_html($card['copy_key']); ?></p>
+            <ul class="lumen-pricing-card__features">
+              <?php foreach ($card['feature_keys'] as $fk) : ?>
+                <li><?php echo svic_translate_html($fk); ?></li>
+              <?php endforeach; ?>
+            </ul>
+            <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($card['cta_url']); ?>"><?php echo svic_translate_html($card['cta_key']); ?></a>
+            <div class="lumen-pricing-card__meta">
+              <?php foreach ($card['meta_keys'] as $mk) : ?>
+                <span><?php echo svic_translate_html($mk); ?></span>
+              <?php endforeach; ?>
+            </div>
+          </article>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </section>
 
   <!-- FAQ Section -->
   <section class="lumen-faq" id="faq">
@@ -631,9 +692,9 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
   </section>
 
   <?php
-  if (!empty($product_schema_nodes)) {
-      $graph_nodes = [];
+  $graph_nodes = [];
 
+  if (!empty($product_schema_nodes)) {
       if (!empty($item_list_elements)) {
           $graph_nodes[] = [
               '@type'            => 'ItemList',
@@ -647,13 +708,39 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
       }
 
       $graph_nodes = array_merge($graph_nodes, $product_schema_nodes);
+  }
 
-      if (!empty($graph_nodes)) {
-          echo '<script type="application/ld+json">' . wp_json_encode([
-              '@context' => 'https://schema.org',
-              '@graph'   => $graph_nodes,
-          ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+  // FAQPage schema — surfaces rich snippets in Google SERPs.
+  $faq_schema_entries = [];
+  foreach ($faq_groups as $group) {
+      foreach ($group['items'] as $item) {
+          $q = trim(wp_strip_all_tags(svic_translate($item['question_key'])));
+          $a = trim(wp_strip_all_tags(svic_translate($item['answer_key'])));
+          if ($q !== '' && $a !== '') {
+              $faq_schema_entries[] = [
+                  '@type'          => 'Question',
+                  'name'           => $q,
+                  'acceptedAnswer' => [
+                      '@type' => 'Answer',
+                      'text'  => $a,
+                  ],
+              ];
+          }
       }
+  }
+  if (!empty($faq_schema_entries)) {
+      $graph_nodes[] = [
+          '@type'      => 'FAQPage',
+          '@id'        => esc_url_raw(svic_get_localized_canonical_url()) . '#faq',
+          'mainEntity' => $faq_schema_entries,
+      ];
+  }
+
+  if (!empty($graph_nodes)) {
+      echo '<script type="application/ld+json">' . wp_json_encode([
+          '@context' => 'https://schema.org',
+          '@graph'   => $graph_nodes,
+      ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
   }
   ?>
 </main>

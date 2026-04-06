@@ -923,6 +923,14 @@ return [
             'remote_updates'           => 'Firmware & app updates pushed remotely',
             'community_access'         => 'Access to community events, karaoke playlists, and seasonal sports packages',
         ],
+        'inline_cta' => [
+            'button'  => 'Shop 10P+',
+            'trust'   => [
+                'shipping' => 'Free U.S. shipping',
+                'speed'    => 'Ships within 48 hours',
+                'returns'  => '30-day returns',
+            ],
+        ],
     ],
     'shop' => [
         'hero' => [

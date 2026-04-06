@@ -1803,8 +1803,8 @@ if (!function_exists('svic_get_store_postal_address_schema')) {
      */
     function svic_get_store_postal_address_schema(): ?array
     {
-        $street1   = trim((string) get_option('woocommerce_store_address', ''));
-        $street2   = trim((string) get_option('woocommerce_store_address_2', ''));
+        // Street address intentionally omitted — home-based business.
+        // Only city / state / country are emitted for Google location signals.
         $city      = trim((string) get_option('woocommerce_store_city', ''));
         $postcode  = trim((string) get_option('woocommerce_store_postcode', ''));
 
@@ -1822,10 +1822,6 @@ if (!function_exists('svic_get_store_postal_address_schema')) {
             '@type' => 'PostalAddress',
         ];
 
-        $street = trim($street1 . ($street2 !== '' ? ' ' . $street2 : ''));
-        if ($street !== '') {
-            $address['streetAddress'] = $street;
-        }
         if ($city !== '') {
             $address['addressLocality'] = $city;
         }
@@ -3431,6 +3427,46 @@ if (!function_exists('svic_render_breadcrumbs')) {
         echo '</ol></nav>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     }
 }
+
+if (!function_exists('svic_output_breadcrumb_schema')) {
+    /**
+     * Emits a JSON-LD BreadcrumbList block in wp_head for Google rich results.
+     * Complements the microdata breadcrumbs already rendered in the HTML.
+     */
+    function svic_output_breadcrumb_schema(): void
+    {
+        if (!svic_should_render_breadcrumbs()) {
+            return;
+        }
+
+        $items = svic_get_breadcrumb_items();
+        if (count($items) < 2) {
+            return;
+        }
+
+        $list_elements = [];
+        foreach ($items as $index => $item) {
+            $element = [
+                '@type'    => 'ListItem',
+                'position' => $index + 1,
+                'name'     => $item['label'] ?? '',
+            ];
+            if (!empty($item['url'])) {
+                $element['item'] = esc_url_raw($item['url']);
+            }
+            $list_elements[] = $element;
+        }
+
+        $schema = [
+            '@context'        => 'https://schema.org',
+            '@type'           => 'BreadcrumbList',
+            'itemListElement' => $list_elements,
+        ];
+
+        echo '<script type="application/ld+json">' . wp_json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    }
+}
+add_action('wp_head', 'svic_output_breadcrumb_schema', 10);
 
 if (!function_exists('svic_filter_body_class')) {
     function svic_filter_body_class($classes)
@@ -5880,6 +5916,63 @@ add_action('pre_get_posts', function ($query) {
 
     if ($query->is_home()) {
         $query->set('posts_per_page', 12);
+    }
+});
+
+// =============================================================================
+// Epic B — Security baseline: HTTP security headers
+// =============================================================================
+
+add_action('send_headers', function () {
+    // Prevent the site from being embedded in iframes on other origins.
+    header('X-Frame-Options: SAMEORIGIN');
+
+    // Stop browsers from MIME-sniffing the content type.
+    header('X-Content-Type-Options: nosniff');
+
+    // Send full URL for same-origin requests; only origin for cross-origin.
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+
+    // Disable browser features not used by this site.
+    header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
+});
+
+// =============================================================================
+// Epic D — WooCommerce: email branding
+// =============================================================================
+
+// NOTE (Epic D1 — Currency/locale): USD currency and store address are set in
+// WooCommerce → Settings → General (database-driven). No code override is
+// needed unless you want to hard-lock it — set "Currency" to "United States
+// dollar ($ USD)" and "Selling location(s)" to "Sell to specific countries →
+// United States" in the WooCommerce admin.
+
+add_filter('woocommerce_email_from_name', function ($name) {
+    return 'SVICLOUD TV Box';
+});
+
+add_filter('woocommerce_email_from_address', function ($email) {
+    return 'orders@svicloudtvbox.us';
+});
+
+// =============================================================================
+// Epic D — WooCommerce: cleanup / reduce bloat
+// =============================================================================
+
+// Remove the WooCommerce HTML generator meta tag (<meta name="generator" ...>).
+remove_action('wp_head', array( $GLOBALS['woocommerce'] ?? null, 'generator' ));
+add_filter('woocommerce_show_generator_tag', '__return_false');
+
+// Remove the RSS feed link WooCommerce adds to shop pages.
+add_action('wp', function () {
+    if (function_exists('is_woocommerce') && !is_woocommerce() && !is_cart() && !is_checkout()) {
+        // Dequeue WooCommerce block styles on non-shop pages.
+        add_action('wp_enqueue_scripts', function () {
+            if (!is_woocommerce() && !is_cart() && !is_checkout() && !is_account_page()) {
+                wp_dequeue_style('wc-blocks-style');
+                wp_dequeue_style('wc-blocks-vendors-style');
+            }
+        }, 99);
     }
 });
 

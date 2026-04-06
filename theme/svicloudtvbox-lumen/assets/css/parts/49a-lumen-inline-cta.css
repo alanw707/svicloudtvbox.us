@@ -1,0 +1,38 @@
+/* ==========================================
+   INLINE CTA — repeated conversion strip
+   ========================================== */
+
+.lumen-inline-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 24px);
+  padding: var(--space-xl) clamp(24px, 6vw, 64px);
+  text-align: center;
+}
+
+.lumen-inline-cta__trust {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 20px);
+}
+
+.lumen-inline-cta__trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: rgba(214, 232, 255, 0.8);
+  letter-spacing: 0.03em;
+}
+
+.lumen-inline-cta__trust li::before {
+  content: "\2713";
+  color: var(--lumen-accent-teal);
+  font-weight: 600;
+}

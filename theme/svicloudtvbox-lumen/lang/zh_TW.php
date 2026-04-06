@@ -1041,6 +1041,14 @@ return [
             'remote_updates'           => '遠端推送韌體與應用程式更新',
             'community_access'         => '社群活動、卡拉 OK 歌單與體育賽事包',
         ],
+        'inline_cta' => [
+            'button'  => '選購 10P+',
+            'trust'   => [
+                'shipping' => '美國免運',
+                'speed'    => '48 小時內出貨',
+                'returns'  => '30 天退貨',
+            ],
+        ],
     ],
     'shop' => [
         'hero' => [
