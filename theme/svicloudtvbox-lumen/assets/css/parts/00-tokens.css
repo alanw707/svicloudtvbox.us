@@ -337,6 +337,16 @@ h6,
   margin-bottom: 2rem;
 }
 
+/* ── Native <select> dropdown readability ──
+   Mobile browsers render <option> elements with a system-default
+   (white/light) background. Without explicit dark text, options
+   inherit the page's light color and become invisible.
+   This global rule ensures dropdown options are always readable. */
+select option {
+  color: #1a1a2e;
+  background: #fff;
+}
+
 /* Chinese text styling */
 .lang-zh,
 [lang="zh"],
