@@ -103,6 +103,34 @@ if (!function_exists('svic_guides_get_content')) {
                     'copy_key'  => 'guides.troubleshooting.items.streaming.copy',
                 ],
                 [
+                    'title_key' => 'guides.troubleshooting.items.no_signal.title',
+                    'copy_key'  => 'guides.troubleshooting.items.no_signal.copy',
+                ],
+                [
+                    'title_key' => 'guides.troubleshooting.items.wifi_disconnect.title',
+                    'copy_key'  => 'guides.troubleshooting.items.wifi_disconnect.copy',
+                ],
+                [
+                    'title_key' => 'guides.troubleshooting.items.audio_sync.title',
+                    'copy_key'  => 'guides.troubleshooting.items.audio_sync.copy',
+                ],
+                [
+                    'title_key' => 'guides.troubleshooting.items.frozen.title',
+                    'copy_key'  => 'guides.troubleshooting.items.frozen.copy',
+                ],
+                [
+                    'title_key' => 'guides.troubleshooting.items.firmware.title',
+                    'copy_key'  => 'guides.troubleshooting.items.firmware.copy',
+                ],
+                [
+                    'title_key' => 'guides.troubleshooting.items.voice_remote.title',
+                    'copy_key'  => 'guides.troubleshooting.items.voice_remote.copy',
+                ],
+                [
+                    'title_key' => 'guides.troubleshooting.items.hdmi_resolution.title',
+                    'copy_key'  => 'guides.troubleshooting.items.hdmi_resolution.copy',
+                ],
+                [
                     'title_key' => 'guides.troubleshooting.items.orz.title',
                     'copy_key'  => 'guides.troubleshooting.items.orz.copy',
                 ],
