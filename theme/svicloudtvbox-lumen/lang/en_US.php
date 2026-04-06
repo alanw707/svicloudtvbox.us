@@ -13,7 +13,7 @@ return [
     'core' => [
         'locale' => 'English (US)',
         'cart'   => [
-            'adding'             => 'Adding…',
+            'adding'             => 'Adding...',
             'added'              => 'Added to cart!',
             'count_label_single' => '{{count}} item in cart',
             'count_label_plural' => '{{count}} items in cart',
@@ -37,7 +37,7 @@ return [
         ],
         'hours' => [
             'title' => 'Concierge hours',
-            'copy'  => 'Live support: Monday–Saturday · 9am–6pm Pacific',
+            'copy'  => 'Live support: Monday-Saturday · 9am-6pm Pacific',
             'note'  => 'Messages received after hours are replied to the next morning.',
         ],
         'channels' => [
@@ -62,7 +62,7 @@ return [
         ],
         'form' => [
             'title' => 'Need hands-on help?',
-            'copy'  => 'Send the concierge team your order number, device, and issue—we reply within one business day.',
+            'copy'  => 'Send the concierge team your order number, device, and issue-we reply within one business day.',
             'cta'   => 'Open support form',
         ],
         'faq' => [
@@ -121,94 +121,94 @@ return [
         ],
         'posts' => [
             'svicloud-10p-plus-usa-launch-playbook' => [
-                'title' => 'SVICLOUD 10P+ USA Launch Playbook — 10P+ USA Promotion',
+                'title' => 'SVICLOUD 10P+ USA Launch Playbook - 10P+ USA Promotion',
             ],
             'svicloud-10p-plus-usa-launch-playbook-zh' => [
-                'title' => 'SVICLOUD 10P+ USA Launch Playbook — 10P+ USA Promotion',
+                'title' => 'SVICLOUD 10P+ USA Launch Playbook - 10P+ USA Promotion',
             ],
             'svicloud-10p-plus-vs-unblocktech-ubox-12' => [
-                'title' => 'SVICLOUD 10P Plus vs UBOX 12 — Feature Comparison for 2025',
+                'title' => 'SVICLOUD 10P Plus vs UBOX 12 - Feature Comparison for 2025',
             ],
             'svicloud-10p-plus-vs-evpad-10-pro' => [
-                'title' => 'SVICLOUD 10P Plus vs EVPAD 10 Pro — Feature Comparison',
+                'title' => 'SVICLOUD 10P Plus vs EVPAD 10 Pro - Feature Comparison',
             ],
             'svicloud-tv-box-us-guide' => [
-                'title' => 'SVICLOUD TV Box US Guide — US Buying Checklist',
+                'title' => 'SVICLOUD TV Box US Guide - US Buying Checklist',
             ],
             'svicloud-tv-box-us-guide-zh' => [
-                'title' => 'SVICLOUD TV Box US Guide — US Buying Checklist',
+                'title' => 'SVICLOUD TV Box US Guide - US Buying Checklist',
             ],
             'svicloud-stb%e7%be%8e%e5%9c%8b%e6%a9%9f%e9%a0%82%e7%9b%92-4k-hdr%e5%bd%b1%e9%99%a2' => [
-                'title' => 'SviCloud STB美國機頂盒｜4K HDR影院',
+                'title' => 'SviCloud STB美國機頂盒|4K HDR影院',
             ],
             'svicloud-tv-box-4k%e4%b8%b2%e6%b5%81%e7%9b%92-2026' => [
-                'title' => 'SviCloud TV Box 4K串流盒｜2026',
+                'title' => 'SviCloud TV Box 4K串流盒|2026',
             ],
             '2025%e6%9c%80%e4%bd%b3android%e9%9b%bb%e8%a6%96%e7%9b%92-4k-hdr-wi' => [
-                'title' => '2025最佳Android電視盒｜4K HDR+Wi',
+                'title' => '2025最佳Android電視盒|4K HDR+Wi',
             ],
             'svicloud%e9%9f%b3%e9%9f%bf%e6%a2%9dhdmi%e9%9f%b3%e9%a0%bb%e7%a6%81%e7%94%a8%e6%95%99%e5%ad%b8-%e9%81%99%e6%8e%a7%e8%aa%9e%e9%9f%b3' => [
-                'title' => 'SVICLOUD音響條HDMI音頻禁用教學｜遙控語音',
+                'title' => 'SVICLOUD音響條HDMI音頻禁用教學|遙控語音',
             ],
             'svicloud-10p-plus-las-vegas-setup' => [
-                'title' => '拉斯維加斯實測：SVICLOUD 10P+ 安裝到開播 35 分鐘',
+                'title' => '拉斯維加斯實測:SVICLOUD 10P+ 安裝到開播 35 分鐘',
             ],
             '%e4%b8%ad%e7%a7%8b%e5%ae%b6%e5%ba%ad%e8%81%9a%e6%9c%83%e9%a6%96%e9%81%b8-svicloud-4k%e5%bd%b1%e9%99%a2%e7%b4%9a%e7%95%ab%e8%b3%aa' => [
-                'title' => '中秋家庭聚會首選｜SVICLOUD 4K影院級畫質+',
+                'title' => '中秋家庭聚會首選|SVICLOUD 4K影院級畫質+',
             ],
             'svicloud-%e4%b8%ad%e7%a7%8b%e7%8d%bb%e7%a6%ae-4k-hdr-wi' => [
-                'title' => 'SVICLOUD 中秋獻禮：4K HDR + Wi-Fi 6',
+                'title' => 'SVICLOUD 中秋獻禮:4K HDR + Wi-Fi 6',
             ],
             '%e9%bb%91%e4%ba%94%e6%9c%80%e5%a4%a7%e5%84%aa%e6%83%a0%e9%96%8b%e8%b7%91-svicloud-4k-hdr-%e9%a0%82' => [
-                'title' => '黑五最大優惠開跑！SviCloud 4K HDR 頂',
+                'title' => '黑五最大優惠開跑!SviCloud 4K HDR 頂',
             ],
             '%e5%b0%8f%e9%9b%b2%e9%9b%bb%e8%a6%96%e7%9b%92-vs-%e5%ae%89%e5%8d%9a-%e7%be%8e%e5%9c%8b%e7%94%a8%e6%88%b6%e5%bf%85%e7%9c%8b%e7%9a%844k%e7%95%ab%e8%b3%aa%e8%88%87%e5%94%ae%e5%be%8c' => [
-                'title' => '小雲電視盒 vs 安博：美國用戶必看的4K畫質與售後',
+                'title' => '小雲電視盒 vs 安博:美國用戶必看的4K畫質與售後',
             ],
             'svicloud-tv-box%e7%be%8e%e5%9c%8b%e4%bb%a3%e7%90%86-4k%e9%a0%82%e7%b4%9a%e7%95%ab%e8%b3%aa' => [
-                'title' => 'SVICLOUD TV Box美國代理｜4K頂級畫質',
+                'title' => 'SVICLOUD TV Box美國代理|4K頂級畫質',
             ],
             'svicloud%e7%be%8e%e5%9c%8b%e6%9c%ac%e5%9c%b0%e6%9c%8d%e5%8b%99-4k-hdr-wi-f' => [
-                'title' => 'SVICLOUD美國本地服務｜4K HDR+Wi-F 6',
+                'title' => 'SVICLOUD美國本地服務|4K HDR+Wi-F 6',
             ],
             '2026%e6%96%b0%e9%81%8a%e6%88%b2%e5%a4%a7%e4%bd%9c-%e4%b8%83%e7%8e%8b%e9%a8%8e%e5%a3%ab-%e4%b8%8a%e5%b8%82-%e7%be%8b%e5%9c%8b48%e5%b0%8f%e6%99%82%e5%bf%ab%e9%80%9f' => [
-                'title' => '2026《七王騎士》串流攻略｜SVICLOUD 4K HDR 模式',
+                'title' => '2026《七王騎士》串流攻略|SVICLOUD 4K HDR 模式',
             ],
             'svicloud-tv-box-2025%ef%bd%9c%e7%be%8e%e5%9c%8b%e6%8e%88%e6%ac%8a%e7%b6%93%e9%8a%b7%e5%95%86' => [
-                'title' => 'SviCloud TV Box 2025｜美國授權經銷商',
+                'title' => 'SviCloud TV Box 2025|美國授權經銷商',
             ],
             '2025%e6%9c%80%e4%bd%b3%e5%ae%89%e5%8d%93%e9%9b%bb%e8%a6%96%e7%9b%92%e6%8e%a8%e8%96%a6-svicloud-tv' => [
-                'title' => '2025最佳安卓電視盒推薦｜SviCloud TV',
+                'title' => '2025最佳安卓電視盒推薦|SviCloud TV',
             ],
             '%e5%8a%a0%e5%b7%9e%e7%9c%8b%e4%b8%ad%e6%96%87%e9%9b%bb%e8%a6%96-%e5%b0%8f%e9%9b%b2%e9%9b%bb%e8%a6%96%e7%9b%92' => [
-                'title' => '加州看中文電視？小雲電視盒',
+                'title' => '加州看中文電視?小雲電視盒',
             ],
             '%e6%98%93%e6%92%adevpad%e7%be%8b%e5%9c%8b%e5%ae%98%e6%96%b9%ef%bd%9c%e4%b8%80%e5%b9%b4%e4%bf%9d%e5%9b%ba' => [
-                'title' => '易播EVPAD美國官方｜一年保固',
+                'title' => '易播EVPAD美國官方|一年保固',
             ],
             '%e5%b0%8f%e9%9b%b2%e9%9b%bb%e8%a6%96%e7%9b%92%e7%be%8b%e5%9c%8b%e5%ae%98%e6%96%b9%ef%bd%9c%e9%9b%99%e8%aa%9e%e5%ae%a2%e6%9c%8d' => [
-                'title' => '小雲電視盒美國官方｜雙語客服',
+                'title' => '小雲電視盒美國官方|雙語客服',
             ],
             '%e7%be%8e%e5%9c%8b%e9%99%90%e6%99%82%e5%84%aa%e6%83%a0%ef%bd%9c%e4%b8%80%e5%b9%b4%e4%bf%9d%e5%9b%ba%e6%9c%8d%e5%8b%99' => [
-                'title' => '美國限時優惠｜一年保固服務',
+                'title' => '美國限時優惠|一年保固服務',
             ],
             'svicloud-10p%2b%e7%be%8b%e5%9c%8b%e5%80%89%e5%84%b2%e9%85%8d%e9%80%81' => [
                 'title' => 'SVICLOUD 10P+美國倉儲配送',
             ],
             '%e5%b0%8f%e9%9b%b2%e9%9b%bb%e8%a6%96%e7%9b%92%e7%be%8b%e5%9c%8b%e4%bb%a3%e7%90%86' => [
-                'title' => '小雲電視盒美國代理 ⭐⭐⭐｜SVICLOUD 專家指南',
+                'title' => '小雲電視盒美國代理 ⭐⭐⭐|SVICLOUD 專家指南',
             ],
             'best-chinese-tv-box-north-america' => [
-                'title' => 'Best Chinese TV Box for North America — Warranty, Shipping & Support',
+                'title' => 'Best Chinese TV Box for North America - Warranty, Shipping & Support',
             ],
             'lunar-new-year-karaoke-party-2026-svicloud-guide' => [
-                'title' => 'Host the Perfect Lunar New Year Karaoke Party 2026 with SVICLOUD — Complete Setup Guide',
+                'title' => 'Host the Perfect Lunar New Year Karaoke Party 2026 with SVICLOUD - Complete Setup Guide',
             ],
             'svicloud-tv-box-usa-guide-2026' => [
                 'title' => 'SVICLOUD TV Box USA Guide 2026',
             ],
             'svicloud-10p%2bvs-evpad-10-pro-best-family-streaming-box-in-2025' => [
-                'title' => 'SVICLOUD 10P+vs EVPAD 10 Pro — Best Family Streaming Box in 2025?',
+                'title' => 'SVICLOUD 10P+vs EVPAD 10 Pro - Best Family Streaming Box in 2025?',
             ],
         ],
     ],
@@ -322,7 +322,7 @@ return [
                 'copy'  => 'Our concierge team assists with hardware setup, networking, and general troubleshooting. We cannot help install, configure, or reactivate unlicensed services.',
                 'items' => [
                     'line1' => 'Requests involving unofficial installers, codes, or playlists will be declined.',
-                    'line2' => 'For legitimate services, please contact that provider’s customer support directly.',
+                    'line2' => 'For legitimate services, please contact that provider's customer support directly.',
                     'line3' => 'If we suspect misuse, we may suspend concierge access or decline future orders.',
                 ],
             ],
@@ -365,7 +365,7 @@ return [
             'label'       => 'Promo code',
             'placeholder' => 'Enter code',
             'apply'       => 'Apply',
-            'hint'        => 'Codes are case-sensitive. Leaving this blank won’t affect checkout.',
+            'hint'        => 'Codes are case-sensitive. Leaving this blank won't affect checkout.',
         ],
         'summary'           => [
             'title' => 'Order summary',
@@ -438,13 +438,13 @@ return [
         'submit_value'       => 'Track order',
         'help_text'          => "Need help or have a new tracking number?",
         'help_link'          => "Contact concierge support",
-        'support_hours'      => 'Concierge hours: 9am–6pm PT · Mon–Sat',
+        'support_hours'      => 'Concierge hours: 9am-6pm PT · Mon-Sat',
         'summary' => [
             'order_label'    => 'Order details',
             'shipping_label' => 'Shipping status',
             'shipping_note'  => "We'll email you as soon as tracking updates.",
             'details_heading' => 'Items in this order',
-            'details_note'    => 'Here’s a breakdown of everything in your shipment, including totals and billing details.',
+            'details_note'    => 'Here's a breakdown of everything in your shipment, including totals and billing details.',
             'placed'         => 'Placed on {{order_date}}',
             'total'          => 'Total {{order_total}}{{dot}}{{payment_method}}',
         ],
@@ -456,16 +456,16 @@ return [
       ],
 
     'order_thankyou' => [
-        'title'        => 'Thank you — your order is confirmed',
+        'title'        => 'Thank you - your order is confirmed',
         'email_intro'  => 'We emailed your receipt and updates to {{name}} {{dot}} {{email}}',
         'summary' => [
             'order_label'    => 'Order details',
             'next_label'     => 'Next steps',
             'placed_on'      => 'Placed on {{order_date}}',
             'total'          => 'Total {{order_total}} · {{payment_method}}',
-            'tracking_note'  => "We’ll email tracking details as soon as your package ships.",
+            'tracking_note'  => "We'll email tracking details as soon as your package ships.",
             'details_heading'=> 'Items in this order',
-            'details_note'   => 'Here’s a breakdown of everything in your shipment, including totals and billing details.',
+            'details_note'   => 'Here's a breakdown of everything in your shipment, including totals and billing details.',
         ],
         'cta' => [
             'track'    => 'Track order',
@@ -497,7 +497,7 @@ return [
                     ],
                     'international_use' => [
                         'question' => 'Does the TV box work outside of Asia?',
-                        'answer'   => 'Yes. SviCloud is built for international use—connect through any broadband or stable Wi-Fi network.',
+                        'answer'   => 'Yes. SviCloud is built for international use-connect through any broadband or stable Wi-Fi network.',
                     ],
                     'box_contents' => [
                         'question' => 'What comes in the box?',
@@ -518,7 +518,7 @@ return [
                     ],
                     'remote_pairing' => [
                         'question' => 'My remote is not responding. What should I do?',
-                        'answer'   => 'Swap in fresh batteries, then hold <code>VOL-</code> and <code>VOL+</code> together to re-pair. Stay within a few feet of the box during pairing—this resolves most remote issues.',
+                        'answer'   => 'Swap in fresh batteries, then hold <code>VOL-</code> and <code>VOL+</code> together to re-pair. Stay within a few feet of the box during pairing-this resolves most remote issues.',
                     ],
                 ],
             ],
@@ -531,7 +531,7 @@ return [
                     ],
                     'third_party' => [
                         'question' => 'Can I install Netflix or other third-party apps?',
-                        'answer'   => 'Yes. SviCloud runs Android, so you can install compatible streaming apps. Always obtain software from legitimate sources and confirm your use complies with each provider’s terms.',
+                        'answer'   => 'Yes. SviCloud runs Android, so you can install compatible streaming apps. Always obtain software from legitimate sources and confirm your use complies with each provider's terms.',
                     ],
                     'family_content' => [
                         'question' => 'What content is available for families?',
@@ -587,8 +587,8 @@ return [
             'subtitle' => 'Share your device details and issue below. Our bilingual team replies within one business day.',
         ],
         'form' => [
-            'title'        => 'Tell us what’s happening',
-            'description'  => 'Fill out the form and we’ll route your request to the right specialist.',
+            'title'        => 'Tell us what's happening',
+            'description'  => 'Fill out the form and we'll route your request to the right specialist.',
             'required_note'=> '* Required fields',
             'fields' => [
                 'name' => [
@@ -617,7 +617,7 @@ return [
                 ],
                 'message' => [
                     'label'       => 'How can we help? *',
-                    'placeholder' => 'Share the steps to reproduce the issue or the help you need…',
+                    'placeholder' => 'Share the steps to reproduce the issue or the help you need...',
                 ],
             ],
             'device_options' => [
@@ -709,7 +709,7 @@ return [
             'title_lead' => 'Best Android TV Box',
             'title_separator' => ', ',
             'title_tail' => 'global entertainment ready for any TV',
-            'copy'    => 'SVICLOUD packs premium Chinese and international channels, karaoke, and kids favorites into one flagship box—ships fast from the USA with bilingual concierge support.',
+            'copy'    => 'SVICLOUD packs premium Chinese and international channels, karaoke, and kids favorites into one flagship box-ships fast from the USA with bilingual concierge support.',
             'bullets' => [
                 'shipping' => 'Ships from USA',
                 'warranty' => '1-Year U.S. Warranty',
@@ -815,7 +815,7 @@ return [
                 ],
                 'hardware' => [
                     'title' => 'Next-Gen Hardware',
-                    'copy'  => 'Latest Amlogic chipset, AV1 decode, and Wi-Fi 6 keep streams stable—even on crowded networks.',
+                    'copy'  => 'Latest Amlogic chipset, AV1 decode, and Wi-Fi 6 keep streams stable-even on crowded networks.',
                 ],
                 'support' => [
                     'title' => 'Local Expert Support',
@@ -846,7 +846,7 @@ return [
         'faq' => [
             'badge' => 'FAQ',
             'title' => 'Top questions from U.S. & Canada buyers',
-            'lead'  => 'Shipping from Nevada, warranty coverage, and bilingual setup support—here are the answers before you checkout.',
+            'lead'  => 'Shipping from Nevada, warranty coverage, and bilingual setup support-here are the answers before you checkout.',
             'cta'   => 'Visit support & FAQ',
             'groups' => [
                 'orders' => [
@@ -854,7 +854,7 @@ return [
                     'items' => [
                         'fulfillment' => [
                             'question' => 'How fast do you ship in the U.S. and Canada?',
-                            'answer'   => 'Orders placed before 2 p.m. Pacific leave our Nevada warehouse within 48 hours via USPS, UPS, or FedEx. Tracking is emailed automatically, and Canada deliveries typically arrive within 5–7 business days including customs clearance.',
+                            'answer'   => 'Orders placed before 2 p.m. Pacific leave our Nevada warehouse within 48 hours via USPS, UPS, or FedEx. Tracking is emailed automatically, and Canada deliveries typically arrive within 5-7 business days including customs clearance.',
                         ],
                         'warranty' => [
                             'question' => 'Do SVICLOUD boxes include a U.S. warranty and returns?',
@@ -867,7 +867,7 @@ return [
                     'items' => [
                         'compatibility' => [
                             'question' => 'Will SVICLOUD work with my TV and home internet?',
-                            'answer'   => 'Yes—any TV with an HDMI port is supported, and you can connect via dual-band Wi-Fi or the included Gigabit Ethernet port. The box ships with the voice remote, HDMI cable, and U.S. power adapter inside the box.',
+                            'answer'   => 'Yes-any TV with an HDMI port is supported, and you can connect via dual-band Wi-Fi or the included Gigabit Ethernet port. The box ships with the voice remote, HDMI cable, and U.S. power adapter inside the box.',
                         ],
                         'concierge' => [
                             'question' => 'Can you help me set it up in Traditional Chinese?',
@@ -879,7 +879,7 @@ return [
         ],
         'pricing' => [
             'title'    => 'Choose Your SVICLOUD Device',
-            'subtitle' => 'Pick the hardware that fits your home. No mandatory bundles—just authentic SVICLOUD boxes shipping from the USA.',
+            'subtitle' => 'Pick the hardware that fits your home. No mandatory bundles-just authentic SVICLOUD boxes shipping from the USA.',
             'sr_sale_announcement' => 'Sale price %2$s, original price %1$s',
             'cards'    => [
                 '10p' => [
@@ -902,7 +902,7 @@ return [
                 '10s' => [
                     'title'    => 'SVICLOUD 10S',
                     'interval' => 'device',
-                    'copy'     => 'Best value with 2GB RAM / 32GB storage—ideal for bedrooms or secondary TVs.',
+                    'copy'     => 'Best value with 2GB RAM / 32GB storage-ideal for bedrooms or secondary TVs.',
                     'features' => [
                         'hdr'    => '4K HDR + AV1 decode',
                         'remote' => 'AI voice remote',
@@ -930,7 +930,7 @@ return [
             'title'     => 'SVICLOUD TV Boxes',
             'subtitle'  => 'Authorized U.S. dealer with fast domestic shipping, 1-year warranty, and English/中文 support.',
             'highlights' => [
-                'shipping' => 'Free 2–4 day U.S. shipping',
+                'shipping' => 'Free 2-4 day U.S. shipping',
                 'warranty' => '1-year U.S. warranty included',
                 'support'  => 'English & 中文 concierge support',
                 'fees'     => 'No monthly device or channel fees',
@@ -983,8 +983,8 @@ return [
     ],
     'compare' => [
         'meta' => [
-            'title'       => 'SVICLOUD 10P+ vs 10S – Compare Chinese TV Boxes for U.S. homes',
-            'description' => 'Compare SVICLOUD 10P+ and 10S streaming boxes side-by-side—hardware, storage, Wi-Fi, karaoke apps, and pricing—to choose the best Chinese TV box for your home.',
+            'title'       => 'SVICLOUD 10P+ vs 10S - Compare Chinese TV Boxes for U.S. homes',
+            'description' => 'Compare SVICLOUD 10P+ and 10S streaming boxes side-by-side-hardware, storage, Wi-Fi, karaoke apps, and pricing-to choose the best Chinese TV box for your home.',
             'image_alt'   => 'SVICLOUD 10P+ and 10S streaming boxes with the voice remote',
         ],
         'hero' => [
@@ -1089,14 +1089,14 @@ return [
         'hero' => [
             'badge'         => 'Manufacturer Authorized Dealer',
             'title'         => 'The U.S. home for official SVI.STUDIO devices',
-            'lead'          => 'We are 168 Media Group LLC, the Nevada-based team that helps SVICLOUD families stream in minutes—with installation support, local inventory, and bilingual experts.',
+            'lead'          => 'We are 168 Media Group LLC, the Nevada-based team that helps SVICLOUD families stream in minutes-with installation support, local inventory, and bilingual experts.',
             'cta'           => 'Talk to concierge',
             'secondary_cta' => 'Compare devices',
         ],
         'story' => [
             'title' => 'Our story',
             'lead'  => 'From living-room demos to the manufacturer\'s official U.S. partner.',
-            'body'  => '<p>We began in 2019 by helping friends and neighboring families replace unreliable streaming boxes with authentic SVICLOUD hardware. Word spread quickly—karaoke nights, sports meetups, and Lunar New Year watch parties all wanted the same thing: a trusted source with real warranty support.</p><p>Investing in local inventory, bilingual onboarding, and responsive concierge service turned us into the go-to SVICLOUD contact on the West Coast. That dedication earned SVI.STUDIO\'s formal authorization so every customer gets factory-backed devices delivered fast from Nevada.</p>',
+            'body'  => '<p>We began in 2019 by helping friends and neighboring families replace unreliable streaming boxes with authentic SVICLOUD hardware. Word spread quickly-karaoke nights, sports meetups, and Lunar New Year watch parties all wanted the same thing: a trusted source with real warranty support.</p><p>Investing in local inventory, bilingual onboarding, and responsive concierge service turned us into the go-to SVICLOUD contact on the West Coast. That dedication earned SVI.STUDIO\'s formal authorization so every customer gets factory-backed devices delivered fast from Nevada.</p>',
             'warehouse_alt'     => 'SVICLOUD Nevada warehouse facility with inventory and fulfillment operations',
             'warehouse_caption' => 'Our Nevada warehouse: local inventory for faster U.S. delivery',
         ],
@@ -1116,8 +1116,8 @@ return [
         ],
         'certification' => [
             'badge'  => 'Official documentation',
-            'title'  => 'SVI.STUDIO’s dealer approval process',
-            'lead'   => 'Our certification confirms we passed SVI.STUDIO’s vetting across operations, post-sale support, and logistics for the Americas region.',
+            'title'  => 'SVI.STUDIO's dealer approval process',
+            'lead'   => 'Our certification confirms we passed SVI.STUDIO's vetting across operations, post-sale support, and logistics for the Americas region.',
             'points' => [
                 'vetting'   => 'Factory audits verified our serial tracking, warranty handling, and customer education practices.',
                 'inventory' => 'We maintain U.S. warehouse inventory that ships domestically within 48 hours.',
@@ -1127,7 +1127,7 @@ return [
         'timeline' => [
             'badge' => 'Milestones',
             'title' => 'A quick journey from hobby to official partner',
-            'lead'  => 'Highlights from our path to becoming SVI.STUDIO’s authorized distributor in America.',
+            'lead'  => 'Highlights from our path to becoming SVI.STUDIO's authorized distributor in America.',
             'items' => [
                 '2019' => [
                     'year'  => '2019',
@@ -1162,7 +1162,7 @@ return [
             'lead'  => 'Every SVICLOUD customer gets genuine hardware, fast help, and shared experiences that keep the box at the center of family time.',
             'authentic' => [
                 'title' => 'Genuine hardware only',
-                'copy'  => 'Direct-from-factory inventory, serialized and covered by SVI.STUDIO’s one-year U.S. warranty.',
+                'copy'  => 'Direct-from-factory inventory, serialized and covered by SVI.STUDIO's one-year U.S. warranty.',
             ],
             'concierge' => [
                 'title' => 'Concierge for every box',
@@ -1176,7 +1176,7 @@ return [
         'concierge' => [
             'badge'          => 'Concierge program',
             'title'          => 'Your streaming concierge is a message away',
-            'lead'           => 'Whether you’re unboxing a new SVICLOUD, optimizing your apps, or prepping a karaoke night, our specialists respond quickly with bilingual support.',
+            'lead'           => 'Whether you're unboxing a new SVICLOUD, optimizing your apps, or prepping a karaoke night, our specialists respond quickly with bilingual support.',
             'points'         => [
                 'setup'    => 'White-glove setup & personalization over video or chat',
                 'renewals' => 'Hands-on firmware updates and app refreshes without the headache',
@@ -1330,20 +1330,48 @@ return [
         ],
         'troubleshooting' => [
             'badge' => 'Troubleshooting',
-            'title' => 'Quick fixes for common roadblocks',
-            'lead'  => 'Try these remedies before contacting concierge. They solve most launch-day hiccups.',
+            'title' => 'Quick fixes for common issues',
+            'lead'  => 'Try these step-by-step remedies before contacting concierge. They resolve the vast majority of setup and streaming issues.',
             'items' => [
                 'remote' => [
                     'title' => 'Remote not pairing',
-                    'copy'  => 'Remove the batteries, reinsert them, stand close to the box, and press <kbd>VOL-</kbd> + <kbd>VOL+</kbd> again until you see the success banner.',
+                    'copy'  => 'Remove the batteries, wait 10 seconds, reinsert them, then hold the box within 1 meter and press <kbd>VOL-</kbd> + <kbd>VOL+</kbd> simultaneously for 3 seconds until the LED flashes and the pairing banner appears. If it still fails, try fresh AAA batteries.',
                 ],
                 'streaming' => [
-                    'title' => 'Stream buffering or blurry',
-                    'copy'  => 'Restart your router, move closer to Wi-Fi, or plug in Ethernet for the most stable connection.',
+                    'title' => 'Stream buffering or low quality',
+                    'copy'  => 'Switch to a wired Ethernet connection for the most reliable performance. If using Wi-Fi, connect to the 5 GHz band, move the box closer to your router, and avoid placing it behind the TV. Restart your router if buffering persists. A minimum of 15 Mbps is recommended for smooth 4K playback.',
+                ],
+                'no_signal' => [
+                    'title' => 'TV shows "No Signal"',
+                    'copy'  => 'Confirm the TV is set to the correct HDMI input. Unplug the HDMI cable from both ends, wait 10 seconds, and reconnect firmly. Try a different HDMI port on your TV. If using an AV receiver or soundbar pass-through, connect the box directly to the TV first to isolate the issue.',
+                ],
+                'wifi_disconnect' => [
+                    'title' => 'Wi-Fi keeps disconnecting',
+                    'copy'  => 'Go to <strong>Settings &gt; Network</strong> and forget the current Wi-Fi network, then reconnect. Use the 5 GHz band for less interference. If your router supports Wi-Fi 6, make sure it is enabled. Avoid placing the box near microwaves, baby monitors, or other 2.4 GHz devices. As a last resort, use the included Ethernet port.',
+                ],
+                'audio_sync' => [
+                    'title' => 'Audio out of sync or no sound',
+                    'copy'  => 'Go to <strong>Settings &gt; Display &amp; Sound</strong> and set audio output to PCM if using TV speakers, or Auto/Passthrough if using a soundbar or AV receiver. Toggle HDMI CEC off and on. If audio is delayed, try switching the HDMI cable or port. Restarting the box often resolves temporary sync issues.',
+                ],
+                'frozen' => [
+                    'title' => 'Box frozen or unresponsive',
+                    'copy'  => 'Hold the power button on the box for 8 seconds to force a restart. If the remote is also unresponsive, unplug the power adapter, wait 30 seconds, then plug it back in. Frequent freezes may indicate a firmware update is needed or the box is overheating—ensure proper ventilation around the device.',
+                ],
+                'firmware' => [
+                    'title' => 'How to update firmware',
+                    'copy'  => 'Navigate to <strong>Settings &gt; About &gt; System Update</strong> and tap "Check for updates." The box must be connected to the internet. Updates typically take 3–5 minutes. Do <strong>not</strong> unplug the box during an update. If no update appears, your firmware is already current. Contact concierge if you see an error.',
+                ],
+                'voice_remote' => [
+                    'title' => 'Voice search not working',
+                    'copy'  => 'Make sure the remote is Bluetooth-paired (not just IR). Hold the microphone button and speak clearly within arm\'s length. If nothing happens, re-pair the remote via <strong>Settings &gt; Remotes &amp; Accessories</strong>. Voice search requires an active internet connection and may not work during firmware updates.',
+                ],
+                'hdmi_resolution' => [
+                    'title' => 'Picture looks stretched or cropped',
+                    'copy'  => 'Go to <strong>Settings &gt; Display &amp; Sound &gt; Resolution</strong> and set it to Auto or match your TV\'s native resolution (usually 4K/2160p). If the picture overscans, check your TV\'s aspect ratio setting—set it to "Just Scan," "Dot by Dot," or "1:1" depending on your TV brand. Disable any zoom modes on the TV.',
                 ],
                 'orz' => [
                     'title' => 'Cannot access a streaming app',
-                    'copy'  => 'Confirm the service is legitimate, then reach out to that provider’s support team. Unauthorized installers are outside our scope.',
+                    'copy'  => 'Confirm the app is from a legitimate, licensed provider. Clear the app cache via <strong>Settings &gt; Apps</strong>, then reopen it. If the app crashes repeatedly, uninstall and reinstall it. Third-party or unauthorized app issues are outside our support scope—contact that app\'s provider directly.',
                 ],
             ],
         ],
@@ -1391,7 +1419,7 @@ return [
                         ],
                         'warranty' => [
                             'heading' => '1-year U.S. warranty and hassle-free returns',
-                            'body'    => '<p>Your purchase includes a 1-year U.S. warranty handled by our concierge team. If anything fails under normal use, we coordinate diagnostics, replacements, or parts from Nevada—no overseas shipping required.</p>
+                            'body'    => '<p>Your purchase includes a 1-year U.S. warranty handled by our concierge team. If anything fails under normal use, we coordinate diagnostics, replacements, or parts from Nevada-no overseas shipping required.</p>
 <ul>
   <li>30-day satisfaction window for returns or exchanges on unopened units.</li>
   <li>Hardware repairs or replacements processed domestically for faster turnaround.</li>
@@ -1411,8 +1439,8 @@ return [
                             'heading' => 'Secure checkout with transparent pricing',
                             'body'    => '<p>Checkout is protected by SSL and supports Visa, Mastercard, American Express, and PayPal. Sales tax is calculated at checkout for states where we are required to collect it.</p>
 <ul>
-  <li>Free U.S. shipping on every SVICLOUD box—no surprise handling fees.</li>
-  <li>No monthly subscription or hidden renewal charges—hardware is a one-time purchase.</li>
+  <li>Free U.S. shipping on every SVICLOUD box-no surprise handling fees.</li>
+  <li>No monthly subscription or hidden renewal charges-hardware is a one-time purchase.</li>
   <li>Receipts and tracking numbers are emailed the moment your order leaves the warehouse.</li>
 </ul>',
                         ],
@@ -1471,7 +1499,7 @@ return [
                 ],
                 'features' => [
                     'title'   => 'Top SVICLOUD 10-series features',
-                    'lead'    => 'See what makes the SVICLOUD 10P+ and 10S stand out—from flagship chipsets to bilingual entertainment experiences.',
+                    'lead'    => 'See what makes the SVICLOUD 10P+ and 10S stand out-from flagship chipsets to bilingual entertainment experiences.',
                     'updated' => 'Updated January 15, 2025',
                     'sections' => [
                         'hardware' => [
@@ -1557,7 +1585,7 @@ return [
 <p>Both models support the same firmware features. Choose based on storage, ports, and how many accessories you plug in.</p>',
                         ],
                         'ten_p' => [
-                            'heading' => 'Choose SVICLOUD 10P+ if you need…',
+                            'heading' => 'Choose SVICLOUD 10P+ if you need...',
                             'body'    => '<p>Pick the flagship 10P+ when you want maximum performance and expandability.</p>
 <ul>
   <li>You run a home theater with receivers, soundbars, or optical audio gear.</li>
@@ -1566,7 +1594,7 @@ return [
 </ul>',
                         ],
                         'ten_s' => [
-                            'heading' => 'Choose SVICLOUD 10S if you prefer…',
+                            'heading' => 'Choose SVICLOUD 10S if you prefer...',
                             'body'    => '<p>The 10S keeps the same channel lineup in a smaller, lower-priced package.</p>
 <ul>
   <li>Secondary TVs, bedrooms, dorms, or apartments where space is limited.</li>
@@ -1629,7 +1657,7 @@ return [
             'items' => [
                 'shipping' => [
                     'q' => 'How fast do you ship to the U.S. and Canada?',
-                    'a' => 'Orders placed before 2 p.m. Pacific leave our Nevada warehouse within 48 hours via USPS/UPS/FedEx. Canada deliveries typically arrive in 5–7 business days including customs.',
+                    'a' => 'Orders placed before 2 p.m. Pacific leave our Nevada warehouse within 48 hours via USPS/UPS/FedEx. Canada deliveries typically arrive in 5-7 business days including customs.',
                 ],
                 'warranty' => [
                     'q' => 'What warranty and returns are included?',
@@ -1770,7 +1798,7 @@ return [
                     ],
                     'change_language' => [
                         'question' => 'How do I change the system language?',
-                        'answer'   => 'Settings → Language and input, then choose English or 中文. Switch anytime—no factory reset needed.',
+                        'answer'   => 'Settings → Language and input, then choose English or 中文. Switch anytime-no factory reset needed.',
                     ],
                     'remote_pairing' => [
                         'question' => 'My remote is not responding. What should I do?',
@@ -1849,15 +1877,15 @@ return [
             'processing' => [
                 'title' => 'Order processing',
                 'items' => [
-                    'cutoff'   => 'Orders placed before 2:00 PM Pacific time (Monday–Friday) are processed the same business day.',
-                    'dispatch' => 'Most orders ship within 24–48 hours of payment confirmation.',
+                    'cutoff'   => 'Orders placed before 2:00 PM Pacific time (Monday-Friday) are processed the same business day.',
+                    'dispatch' => 'Most orders ship within 24-48 hours of payment confirmation.',
                     'tracking' => 'You will receive a shipping confirmation email with tracking information once your order ships.',
                 ],
             ],
             'domestic' => [
                 'title' => 'U.S. shipping',
                 'items' => [
-                    'standard' => 'Standard shipping typically arrives within 2–5 business days depending on your location.',
+                    'standard' => 'Standard shipping typically arrives within 2-5 business days depending on your location.',
                     'carriers' => 'We ship via USPS, UPS, or FedEx based on package size and destination.',
                     'free'     => 'Free shipping is included on all U.S. orders. No minimum purchase required.',
                 ],
@@ -1865,7 +1893,7 @@ return [
             'canada' => [
                 'title' => 'Canada shipping',
                 'items' => [
-                    'timeframe' => 'Canadian orders typically arrive within 5–7 business days, including customs processing.',
+                    'timeframe' => 'Canadian orders typically arrive within 5-7 business days, including customs processing.',
                     'customs'   => 'Packages are shipped with accurate customs declarations for smooth border clearance.',
                     'duties'    => 'Import duties, taxes, and customs fees are the responsibility of the recipient and are not included in the product price.',
                 ],
