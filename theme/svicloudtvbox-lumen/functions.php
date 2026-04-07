@@ -73,6 +73,34 @@ if (!defined('SVIC_TESTIMONIALS_ENABLED')) {
     define('SVIC_TESTIMONIALS_ENABLED', false);
 }
 
+// Force US state names to English regardless of UI locale.
+// - zh_CN WooCommerce pack translates states fully; zh_TW only translates DC — inconsistent.
+// - Customers shipping within the US recognise their state in English.
+// - USPS/UPS/FedEx use English state names; translated names add no practical value.
+add_filter('woocommerce_states', function (array $states): array {
+    $states['US'] = [
+        'AL' => 'Alabama',        'AK' => 'Alaska',          'AZ' => 'Arizona',
+        'AR' => 'Arkansas',       'CA' => 'California',       'CO' => 'Colorado',
+        'CT' => 'Connecticut',    'DE' => 'Delaware',         'DC' => 'District of Columbia',
+        'FL' => 'Florida',        'GA' => 'Georgia',          'HI' => 'Hawaii',
+        'ID' => 'Idaho',          'IL' => 'Illinois',         'IN' => 'Indiana',
+        'IA' => 'Iowa',           'KS' => 'Kansas',           'KY' => 'Kentucky',
+        'LA' => 'Louisiana',      'ME' => 'Maine',            'MD' => 'Maryland',
+        'MA' => 'Massachusetts',  'MI' => 'Michigan',         'MN' => 'Minnesota',
+        'MS' => 'Mississippi',    'MO' => 'Missouri',         'MT' => 'Montana',
+        'NE' => 'Nebraska',       'NV' => 'Nevada',           'NH' => 'New Hampshire',
+        'NJ' => 'New Jersey',     'NM' => 'New Mexico',       'NY' => 'New York',
+        'NC' => 'North Carolina', 'ND' => 'North Dakota',     'OH' => 'Ohio',
+        'OK' => 'Oklahoma',       'OR' => 'Oregon',           'PA' => 'Pennsylvania',
+        'RI' => 'Rhode Island',   'SC' => 'South Carolina',   'SD' => 'South Dakota',
+        'TN' => 'Tennessee',      'TX' => 'Texas',            'UT' => 'Utah',
+        'VT' => 'Vermont',        'VA' => 'Virginia',         'WA' => 'Washington',
+        'WV' => 'West Virginia',  'WI' => 'Wisconsin',        'WY' => 'Wyoming',
+        'AA' => 'Armed Forces (AA)', 'AE' => 'Armed Forces (AE)', 'AP' => 'Armed Forces (AP)',
+    ];
+    return $states;
+});
+
 // Force currency display as "$269.00" (no space) regardless of WC currency-position setting.
 add_filter('woocommerce_price_format', function ($format, $currency_pos) {
     if ($currency_pos === 'left_space') {
