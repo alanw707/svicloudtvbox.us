@@ -65,7 +65,8 @@
 
 .lumen-order-tracking {
   --order-tracking-inline-gap: clamp(1.2rem, 6vw, 2.1rem);
-  width: min(700px, calc(100% - (2 * var(--order-tracking-inline-gap))));
+  max-width: 700px;
+  width: calc(100% - 2 * var(--order-tracking-inline-gap));
   margin-block: clamp(3.25rem, 6vw, 4.75rem) clamp(3.25rem, 5vw, 4.5rem);
   margin-inline: auto;
   padding-block: clamp(2.45rem, 4.5vw, 3.35rem);

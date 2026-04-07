@@ -101,6 +101,46 @@ add_filter('woocommerce_states', function (array $states): array {
     return $states;
 });
 
+// Fix fulfillment tracking URLs that point to AfterShip without the tracking number embedded.
+// Root cause: AfterShip integration may store `_tracking_url` as `https://track.aftership.com/`
+// without appending the tracking number. This filter corrects it at write time.
+function svic_fix_fulfillment_tracking_url( $fulfillment ) {
+    if ( ! is_object( $fulfillment ) || ! method_exists( $fulfillment, 'get_meta' ) ) {
+        return $fulfillment;
+    }
+
+    $tracking_url    = $fulfillment->get_meta( '_tracking_url', true );
+    $tracking_number = $fulfillment->get_meta( '_tracking_number', true );
+
+    if ( empty( $tracking_url ) || empty( $tracking_number ) ) {
+        return $fulfillment;
+    }
+
+    // Only intervene when the URL goes to AfterShip but the tracking number is absent from it.
+    if ( strpos( $tracking_url, 'aftership.com' ) === false ) {
+        return $fulfillment;
+    }
+
+    if ( strpos( $tracking_url, $tracking_number ) !== false ) {
+        return $fulfillment; // Already correct — tracking number is already in the URL.
+    }
+
+    // USPS GS1-128 / IMpb tracking numbers start with 94/93/92/95/96.
+    $provider = $fulfillment->get_meta( '_shipment_provider', true );
+    if ( $provider === 'usps' || preg_match( '/^(94|93|92|95|96)\d{18,22}$/', (string) $tracking_number ) ) {
+        $fixed_url = 'https://tools.usps.com/go/TrackConfirmAction?tLabels=' . rawurlencode( $tracking_number );
+    } else {
+        // Non-USPS: keep AfterShip but append the tracking number to the path.
+        $fixed_url = rtrim( $tracking_url, '/' ) . '/' . rawurlencode( $tracking_number );
+    }
+
+    $fulfillment->update_meta_data( '_tracking_url', $fixed_url );
+
+    return $fulfillment;
+}
+add_filter( 'woocommerce_fulfillment_before_create', 'svic_fix_fulfillment_tracking_url' );
+add_filter( 'woocommerce_fulfillment_before_update', 'svic_fix_fulfillment_tracking_url' );
+
 // Force currency display as "$269.00" (no space) regardless of WC currency-position setting.
 add_filter('woocommerce_price_format', function ($format, $currency_pos) {
     if ($currency_pos === 'left_space') {
