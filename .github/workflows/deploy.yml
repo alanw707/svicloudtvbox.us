@@ -34,14 +34,23 @@ jobs:
           REMOTE_BASE="ftp://${FTP_HOST}:21/wp-content/themes/svicloudtvbox-lumen"
           LOCAL_BASE="theme/svicloudtvbox-lumen"
 
+          UPLOAD_ERRORS=0
+
           upload() {
             local file="$1"
             echo "  Uploading: $file"
-            curl -s --ftp-ssl --insecure \
+            HTTP_CODE=$(curl -s --ftp-ssl --insecure \
               -u "${FTP_USER}:${FTP_PASS}" \
               -T "${LOCAL_BASE}/${file}" \
               "${REMOTE_BASE}/${file}" \
-              -w " → %{http_code}\n"
+              -w "%{http_code}" -o /dev/null)
+            EXIT_CODE=$?
+            if [[ $EXIT_CODE -ne 0 ]]; then
+              echo "  ⚠️ WARN: failed to upload $file (curl exit $EXIT_CODE, ftp $HTTP_CODE) — continuing"
+              UPLOAD_ERRORS=$((UPLOAD_ERRORS + 1))
+            else
+              echo "  ✅ $file → $HTTP_CODE"
+            fi
           }
 
           echo "📁 Uploading PHP files..."
@@ -64,7 +73,11 @@ jobs:
             upload "$f"
           done
 
-          echo "✅ All files uploaded"
+          if [[ $UPLOAD_ERRORS -gt 0 ]]; then
+            echo "⚠️ $UPLOAD_ERRORS file(s) failed to upload — cache purge will still run"
+          else
+            echo "✅ All files uploaded"
+          fi
 
       - name: 🧹 Purge Cloudflare Cache
         env:
