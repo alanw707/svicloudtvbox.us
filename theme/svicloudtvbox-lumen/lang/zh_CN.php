@@ -373,10 +373,10 @@ $overrides = [
     'frontpage' => [
         'hero' => [
             'badge'   => '美国授权经销商',
-            'title'   => '中文电视盒天花板，全球娱乐任一电视即插即用',
-            'title_lead' => '中文电视盒天花板',
-            'title_separator' => '，',
-            'title_tail' => '全球娱乐任一电视即插即用',
+            'title'   => '美国华人家庭的中文电视盒首选 — 1000+ 频道 4K 直播，内华达 48 小时出货',
+            'title_lead' => '美国华人家庭的中文电视盒首选',
+            'title_separator' => ' — ',
+            'title_tail' => '1000+ 频道 4K 直播，内华达 48 小时出货',
             'copy'    => '小云电视盒 美国代理，提供 SVICLOUD 10P+ 与 10S 现货，一次打包 4K 体育、亚洲戏剧、卡拉 OK 与儿童内容，中英双语礼宾服务与一年保固，无月费。',
             'bullets' => [
                 'shipping' => '美国现货配送',
@@ -386,35 +386,54 @@ $overrides = [
             'cta' => [
                 'primary' => '选购 10P+',
                 'bundles' => '查看优惠组合',
-                'compare' => '比较各机型',
+                'compare' => '查看价格',
             ],
             'card' => [
                 'badge'     => '直播',
                 'headline'  => '小云电视盒 10P+ 硬件一览',
-                'timestamp' => '美国最新批次 · 2024 年 7 月',
+                'timestamp' => '美国最新批次 · 2026',
                 'stat'      => '4GB 内存 · 64GB 存储',
                 'specs'     => [
                     'processor'    => [
-                        'label' => '处理器',
-                        'value' => 'Amlogic S928X · 八核心',
+                        'benefit' => '4K 直播体育不卡顿',
+                        'label'   => '处理器',
+                        'value'   => 'Amlogic S928X · 八核心',
                     ],
                     'connectivity' => [
-                        'label' => '连线能力',
-                        'value' => 'Wi-Fi 6 双频 + Gigabit 有线网络',
+                        'benefit' => '家中网络再多设备也稳定串流',
+                        'label'   => '连线能力',
+                        'value'   => 'Wi-Fi 6 双频 + Gigabit 有线网络',
                     ],
                     'video'        => [
-                        'label' => '高画质解码',
-                        'value' => 'AV1 解码 · 4K HDR',
+                        'benefit' => '任何 4K 电视都有电影院级画质',
+                        'label'   => '高画质解码',
+                        'value'   => 'AV1 解码 · 4K HDR',
                     ],
                     'extras'       => [
-                        'label' => '遥控与配件',
-                        'value' => '蓝牙语音遥控 · USB 3.0 扩充',
+                        'benefit' => '支持中英双语语音遥控',
+                        'label'   => '遥控与配件',
+                        'value'   => '蓝牙语音遥控 · USB 3.0 扩充',
                     ],
                 ],
                 'footer' => [
                     'shipping' => '美国配送 · 配送时程依承运商为准',
                     'support'  => '一年美国保固 · 专人安装服务',
                 ],
+            ],
+        ],
+        'sticky_buy' => [
+            'label' => '小云电视盒 10P+',
+            'cta'   => '立即购买',
+        ],
+        'inbox' => [
+            'title' => '包装盒内容物',
+            'items' => [
+                'box'      => '小云电视盒主机',
+                'power'    => '美规电源适配器',
+                'hdmi'     => 'HDMI 线',
+                'remote'   => '蓝牙 AI 语音遥控器 + 电池',
+                'batteries'=> '备用电池',
+                'guide'    => '快速入门指南（中文／English）',
             ],
         ],
         'certification' => [
@@ -488,6 +507,34 @@ $overrides = [
             ],
             'cta' => '联络专家',
         ],
+        'testimonials' => [
+            'badge'    => '真实用户',
+            'title'    => '美国家庭怎么说小云电视盒',
+            'subtitle' => '来自全美用户的真实心得，因为熟悉的中文频道而选择小云电视盒。',
+            // TODO: 在启用 SVIC_TESTIMONIALS_ENABLED 之前，请以真实顾客留言取代
+            // 以下占位文字（FTC 规定不可造假，可使用 email、FB、WhatsApp 或 Google
+            // 评论的真实留言）。
+            'quotes' => [
+                [
+                    'quote'  => '[占位文字] 这里放真实顾客留言，1-3 句描述安装经验、客服或频道内容。',
+                    'name'   => '名 L.',
+                    'city'   => '城市, ST',
+                    'source' => '已验证买家',
+                ],
+                [
+                    'quote'  => '[占位文字] 第二则留言，建议聚焦双语礼宾或快速发货。',
+                    'name'   => '名 L.',
+                    'city'   => '城市, ST',
+                    'source' => '已验证买家',
+                ],
+                [
+                    'quote'  => '[占位文字] 第三则留言，建议来自华人家庭谈中文客服或频道体验。',
+                    'name'   => '名 L.',
+                    'city'   => '城市, ST',
+                    'source' => '已验证买家',
+                ],
+            ],
+        ],
         'blog' => [
             'badge'     => '最新博客文章',
             'title'     => '最新教学、机型比较与礼宾提醒',
@@ -497,7 +544,7 @@ $overrides = [
         ],
         'traffic' => [
             'badge' => '面向在美华人/亚洲家庭的 10P+',
-            'title' => '美国现货、双语礼宾、保修齐全的 10P+',
+            'title' => '免去水货烦恼。中文或英文礼宾代客设置，内华达 48 小时发货。',
             'lead'  => '服务在美华人/亚洲家庭：内华达仓 48 小时发货，中文/English 礼宾代客设置，硬件可跑 4K 体育、追剧、K 歌与儿童模式。',
             'bullets' => [
                 'shipping'  => '48 小时美国发货，附本地电源/HDMI 与追踪号',
@@ -528,6 +575,14 @@ $overrides = [
                             'question' => '有美国保固与退换货服务吗？',
                             'answer'   => '在 SVICLOUDTVBOX.US 购买的装置皆享一年美国原厂保固与 30 天内退换货。提供订单编号给礼宾客服，我们会先协助检测并安排换货或退款流程。',
                         ],
+                        'payment' => [
+                            'question' => '支持哪些付款方式？',
+                            'answer'   => '支持所有主流信用卡与借记卡（Visa、Mastercard、Amex、Discover）、PayPal 及 Apple Pay，通过安全结账页面完成付款。不接受电汇或加密货币。',
+                        ],
+                        'invoice' => [
+                            'question' => '可以索取发票或收据供商业用途吗？',
+                            'answer'   => '付款完成后系统会自动发送 PDF 收据。若需要附有公司名称与地址的正式发票，请提供订单编号及公司资料联系礼宾客服。',
+                        ],
                     ],
                 ],
                 'setup' => [
@@ -541,9 +596,33 @@ $overrides = [
                             'question' => '可以用繁体中文协助我完成安装吗？',
                             'answer'   => '可以，礼宾客服提供英文／繁体中文远端指导，陪你完成界面设置、Kids Mode、安全权限、卡拉 OK 与 App 更新等问题。',
                         ],
+                        'preloaded' => [
+                            'question' => '盒子出厂预装了哪些应用程序与频道？',
+                            'answer'   => '装置搭载标准 Android TV 启动器，并预装儿童模式与卡拉 OK 等双语工具。礼宾客服可协助引导你安全安装所需的串流服务。',
+                        ],
+                        'vpn' => [
+                            'question' => '使用小云电视盒需要 VPN 吗？',
+                            'answer'   => '装置本身无需 VPN 即可正常运作。是否需要 VPN 取决于你选择使用的应用程序或服务，而非盒子本身。请遵守当地法规，使用合法授权的服务。',
+                        ],
+                    ],
+                ],
+                'models' => [
+                    'title' => '机型与比较',
+                    'items' => [
+                        'vs_competitors' => [
+                            'question' => '小云电视盒与 EVPAD、UnblockTech 或 UBOX 有何不同？',
+                            'answer'   => '小云电视盒 10P+ 与 10S 是在美国仓储、附一年美国硬件保固，并提供中英双语礼宾客服的正版设备。相较之下，平行进口灰市产品通常不提供本地保固或安装协助。',
+                        ],
+                        'after_warranty' => [
+                            'question' => '一年保固到期后怎么办？',
+                            'answer'   => '硬件本身不会过期，保固到期后仍可正常使用。往后若需要技术支持或设置协助，仍可通过礼宾客服预约付费服务。',
+                        ],
                     ],
                 ],
             ],
+        ],
+        'pricing' => [
+            'stock_note' => '现货 — 48 小时内由内华达州发货',
         ],
     ],
     'product' => [

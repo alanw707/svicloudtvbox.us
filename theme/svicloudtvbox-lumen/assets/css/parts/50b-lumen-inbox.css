@@ -1,0 +1,54 @@
+/* ============================================================
+   Lumen — "What's in the Box" compact section
+   ============================================================ */
+
+.lumen-inbox {
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  background: var(--lumen-bg-deep, #060d1c);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.lumen-inbox__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+  text-align: center;
+}
+
+.lumen-inbox__heading {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 600;
+  color: var(--lumen-text-primary, #f4f8ff);
+  margin: 0 0 clamp(1.25rem, 3vw, 1.75rem);
+  letter-spacing: 0.02em;
+}
+
+.lumen-inbox__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 1rem;
+}
+
+.lumen-inbox__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  background: rgba(94, 230, 208, 0.07);
+  border: 1px solid rgba(94, 230, 208, 0.2);
+  color: rgba(220, 240, 255, 0.88);
+  font-size: 0.88rem;
+  white-space: nowrap;
+}
+
+.lumen-inbox__item::before {
+  content: "✓";
+  color: rgba(94, 230, 208, 0.85);
+  font-weight: 700;
+  font-size: 0.8rem;
+}

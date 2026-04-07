@@ -1,0 +1,58 @@
+/* ============================================================
+   Lumen — Mobile sticky buy bar
+   ============================================================ */
+
+.lumen-sticky-buy {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background: rgba(6, 13, 28, 0.96);
+  border-top: 1px solid rgba(94, 230, 208, 0.25);
+  backdrop-filter: blur(12px);
+  padding: 0.75rem 1rem;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.lumen-sticky-buy.is-visible {
+  transform: translateY(0);
+}
+
+.lumen-sticky-buy__inner {
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.lumen-sticky-buy__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--lumen-text-primary, #f4f8ff);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lumen-sticky-buy__cta {
+  flex-shrink: 0;
+  font-size: 0.88rem;
+  padding: 0.55rem 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .lumen-sticky-buy {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .lumen-sticky-buy {
+    display: block;
+  }
+}

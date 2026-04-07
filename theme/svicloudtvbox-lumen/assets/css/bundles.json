@@ -13,7 +13,8 @@
       "25-breadcrumbs.css",
       "60-pages.css",
       "80-footer.css",
-      "90-utilities.css"
+      "90-utilities.css",
+      "91-sticky-buy.css"
     ]
   },
   "front-page": {
@@ -30,11 +31,13 @@
       "46-lumen-section-metrics.css",
       "47-lumen-section-feature-grid.css",
       "48-lumen-section-experience.css",
+      "48b-lumen-section-testimonials.css",
       "49-lumen-section-pricing.css",
       "49a-lumen-inline-cta.css",
       "50-lumen-section-utilities.css",
       "51-frontpage-blog.css",
-      "41-frontpage-helpers.css"
+      "41-frontpage-helpers.css",
+      "50b-lumen-inbox.css"
     ]
   },
   "about": {

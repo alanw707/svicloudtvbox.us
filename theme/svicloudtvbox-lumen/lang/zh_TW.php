@@ -822,10 +822,10 @@ return [
     'frontpage' => [
         'hero' => [
             'badge'   => '美國授權經銷商',
-            'title'   => '中文電視盒天花板，全球娛樂任一電視即插即用',
-            'title_lead' => '中文電視盒天花板',
-            'title_separator' => '，',
-            'title_tail' => '全球娛樂任一電視即插即用',
+            'title'   => '美國華人家庭的中文電視盒首選 — 1000+ 頻道 4K 直播，內華達 48 小時出貨',
+            'title_lead' => '美國華人家庭的中文電視盒首選',
+            'title_separator' => ' — ',
+            'title_tail' => '1000+ 頻道 4K 直播，內華達 48 小時出貨',
             'copy'    => '小雲電視盒 美國代理，提供 SVICLOUD 10P+ 與 10S 現貨，一次打包 4K 體育、亞洲戲劇、卡拉 OK 與兒童內容，中英雙語禮賓服務與一年保固，無月費。',
             'bullets' => [
                 'shipping' => '美國現貨配送',
@@ -835,29 +835,33 @@ return [
             'cta' => [
                 'primary' => '選購 10P+',
                 'bundles' => '查看優惠組合',
-                'compare' => '比較各機型',
+                'compare' => '查看定價',
             ],
             'card' => [
                 'badge'     => '直播',
                 'headline'  => '小雲電視盒 10P+ 硬體一覽',
-                'timestamp' => '美國最新批次 · 2024 年 7 月',
+                'timestamp' => '美國最新批次 · 2026',
                 'stat'      => '4GB 記憶體 · 64GB 儲存',
                 'specs'     => [
                     'processor'    => [
-                        'label' => '處理器',
-                        'value' => 'Amlogic S928X · 八核心',
+                        'benefit' => '4K 直播體育不卡頓',
+                        'label'   => '處理器',
+                        'value'   => 'Amlogic S928X · 八核心',
                     ],
                     'connectivity' => [
-                        'label' => '連線能力',
-                        'value' => 'Wi-Fi 6 雙頻 + Gigabit 有線網路',
+                        'benefit' => '家中網路再多裝置也穩定串流',
+                        'label'   => '連線能力',
+                        'value'   => 'Wi-Fi 6 雙頻 + Gigabit 有線網路',
                     ],
                     'video'        => [
-                        'label' => '高畫質解碼',
-                        'value' => 'AV1 解碼 · 4K HDR',
+                        'benefit' => '任何 4K 電視都有電影院級畫質',
+                        'label'   => '高畫質解碼',
+                        'value'   => 'AV1 解碼 · 4K HDR',
                     ],
                     'extras'       => [
-                        'label' => '遙控與配件',
-                        'value' => '藍牙語音遙控 · USB 3.0 擴充',
+                        'benefit' => '支援中英雙語語音遙控',
+                        'label'   => '遙控與配件',
+                        'value'   => '藍牙語音遙控 · USB 3.0 擴充',
                     ],
                 ],
                 'footer' => [
@@ -866,9 +870,24 @@ return [
                 ],
             ],
         ],
+        'sticky_buy' => [
+            'label' => '小雲電視盒 10P+',
+            'cta'   => '立即購買',
+        ],
+        'inbox' => [
+            'title' => '包裝盒內容物',
+            'items' => [
+                'box'      => '小雲電視盒主機',
+                'power'    => '美規電源變壓器',
+                'hdmi'     => 'HDMI 線',
+                'remote'   => '藍牙 AI 語音遙控器 + 電池',
+                'batteries'=> '備用電池',
+                'guide'    => '快速入門指南（中文／English）',
+            ],
+        ],
         'traffic' => [
             'badge' => '美國華人/亞洲家庭的 10P+',
-            'title' => '美國現貨、雙語禮賓與保固完整的 10P+',
+            'title' => '免去水貨煩惱。中文或英文禮賓代客設定，內華達 48 小時出貨。',
             'lead'  => '專為在美華人/亞洲家庭：內華達倉 48 小時出貨，中文/English 禮賓代客設定，硬體能跑 4K 體育、追劇、卡拉 OK 與兒童模式。',
             'bullets' => [
                 'shipping'  => '48 小時美國出貨，附在地電源/HDMI 與追蹤編號',
@@ -977,6 +996,14 @@ return [
                             'question' => '有美國保固與退換貨服務嗎？',
                             'answer'   => '在 SVICLOUDTVBOX.US 購買的裝置皆享一年美國原廠保固與 30 天內退換貨。提供訂單編號給禮賓客服，我們會先協助檢測並安排換貨或退款流程。',
                         ],
+                        'payment' => [
+                            'question' => '支援哪些付款方式？',
+                            'answer'   => '接受所有主流信用卡與金融卡（Visa、Mastercard、Amex、Discover）、PayPal 及 Apple Pay，透過安全結帳頁面完成付款。不接受電匯或加密貨幣。',
+                        ],
+                        'invoice' => [
+                            'question' => '可以索取發票或收據供商業使用嗎？',
+                            'answer'   => '付款完成後系統會自動寄送 PDF 收據。若需要附有公司名稱與地址的正式發票，請提供訂單編號及公司資訊聯繫禮賓客服。',
+                        ],
                     ],
                 ],
                 'setup' => [
@@ -990,6 +1017,27 @@ return [
                             'question' => '可以用繁體中文協助我完成安裝嗎？',
                             'answer'   => '可以，禮賓客服提供英文／繁體中文遠端指導，陪你完成介面設定、Kids Mode、安全權限、卡拉 OK 與 App 更新等問題。',
                         ],
+                        'preloaded' => [
+                            'question' => '盒子出廠預裝了哪些應用程式與頻道？',
+                            'answer'   => '裝置搭載標準 Android TV 啟動器，並預裝兒童模式與卡拉 OK 等雙語工具。禮賓客服可協助引導你安全安裝所需的串流服務。',
+                        ],
+                        'vpn' => [
+                            'question' => '使用小雲電視盒需要 VPN 嗎？',
+                            'answer'   => '裝置本身無需 VPN 即可正常運作。是否需要 VPN 取決於你選擇使用的應用程式或服務，而非盒子本身。請遵守當地法規，使用合法授權的服務。',
+                        ],
+                    ],
+                ],
+                'models' => [
+                    'title' => '機型與比較',
+                    'items' => [
+                        'vs_competitors' => [
+                            'question' => '小雲電視盒與 EVPAD、UnblockTech 或 UBOX 有何不同？',
+                            'answer'   => '小雲電視盒 10P+ 與 10S 是在美國倉儲、附一年美國硬體保固，並提供中英雙語禮賓客服的正版設備。相較之下，平行進口灰市產品通常不提供本地保固或安裝協助。',
+                        ],
+                        'after_warranty' => [
+                            'question' => '一年保固到期後怎麼辦？',
+                            'answer'   => '硬體本身不會過期，保固到期後仍可正常使用。往後若需要技術支援或設定協助，仍可透過禮賓客服預約付費服務。',
+                        ],
                     ],
                 ],
             ],
@@ -997,7 +1045,9 @@ return [
         'pricing' => [
             'title'    => '選擇適合您的小雲電視盒設備',
             'subtitle' => '挑選最適合家庭的硬體。無需綁約或額外訂閱，純正小雲電視盒設備由美國直送。',
+            'stock_note'           => '現貨 — 48 小時內由內華達州出貨',
             'sr_sale_announcement' => '特價 %2$s，原價 %1$s',
+            'savings_label'        => '省下 %1$s（%2$s%% OFF）',
             'cards'    => [
                 '10p' => [
                     'badge'    => '最受歡迎',
@@ -1009,7 +1059,8 @@ return [
                         'apps'   => '內含兒童與卡拉 OK 應用',
                         'wifi'   => 'AI 語音遙控 + 雙頻 Wi-Fi',
                     ],
-                    'cta'  => '查看 10P+',
+                    'cta'       => '查看 10P+',
+                    'buy_cta'   => '購買 10P+',
                     'cta_style' => 'primary',
                     'meta' => [
                         'shipping'  => '✔ 美國配送',
@@ -1026,13 +1077,42 @@ return [
                         'remote' => 'AI 語音遙控',
                         'bundle' => '附 HDMI 與電源配件',
                     ],
-                    'cta'  => '查看 10S',
+                    'cta'       => '查看 10S',
+                    'buy_cta'   => '購買 10S',
                     'cta_style' => 'primary',
                     'meta' => [
                         'shipping' => '✔ 美國配送',
                         'warranty' => '✔ 一年美國保固',
                         'fees'     => '✔ 無設備月費',
                     ],
+                ],
+            ],
+        ],
+        'testimonials' => [
+            'badge'    => '真實用戶',
+            'title'    => '美國家庭怎麼說小雲電視盒',
+            'subtitle' => '來自全美用戶的真實心得，因為熟悉的中文頻道而選擇小雲電視盒。',
+            // TODO: 在啟用 SVIC_TESTIMONIALS_ENABLED 之前，請以真實顧客留言取代
+            // 以下佔位文字（FTC 規定不可造假，可使用 email、FB、WhatsApp 或 Google
+            // 評論的真實留言）。
+            'quotes' => [
+                [
+                    'quote'  => '[佔位文字] 這裡放真實顧客留言，1-3 句描述設定經驗、客服或頻道內容。',
+                    'name'   => '名 L.',
+                    'city'   => '城市, ST',
+                    'source' => '已驗證買家',
+                ],
+                [
+                    'quote'  => '[佔位文字] 第二則留言，建議聚焦雙語禮賓或快速出貨。',
+                    'name'   => '名 L.',
+                    'city'   => '城市, ST',
+                    'source' => '已驗證買家',
+                ],
+                [
+                    'quote'  => '[佔位文字] 第三則留言，建議來自華人家庭談中文客服或頻道體驗。',
+                    'name'   => '名 L.',
+                    'city'   => '城市, ST',
+                    'source' => '已驗證買家',
                 ],
             ],
         ],

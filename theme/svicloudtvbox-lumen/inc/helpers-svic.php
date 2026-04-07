@@ -678,6 +678,42 @@ if (!function_exists('svic_translate')) {
     }
 }
 
+if (!function_exists('svic_translate_array')) {
+    /**
+     * Resolve a translation key that points at an array (e.g. a list of items).
+     * Falls back to en_US if the current locale is missing the key.
+     * Returns [] if the key doesn't exist or doesn't resolve to an array.
+     */
+    function svic_translate_array(string $key, ?string $locale = null): array {
+        $translator = SVIC_Translator::instance();
+        $locale     = $locale ?: get_locale();
+        $registry   = $translator->registry($locale);
+
+        $walk = function (array $registry, string $key) {
+            if (array_key_exists($key, $registry)) {
+                return $registry[$key];
+            }
+            $cursor = $registry;
+            foreach (explode('.', $key) as $segment) {
+                if (!is_array($cursor) || !array_key_exists($segment, $cursor)) {
+                    return null;
+                }
+                $cursor = $cursor[$segment];
+            }
+            return $cursor;
+        };
+
+        $value = $walk($registry, $key);
+        if (!is_array($value)) {
+            // Fallback to en_US for missing keys.
+            $fallback = $translator->registry('en_US');
+            $value    = $walk($fallback, $key);
+        }
+
+        return is_array($value) ? $value : [];
+    }
+}
+
 if (!function_exists('svic_translate_html')) {
     function svic_translate_html(string $key, array $replacements = [], ?string $locale = null): string {
         return esc_html(svic_translate($key, $replacements, $locale));
@@ -1053,7 +1089,7 @@ if (!function_exists('svic_price_html')) {
         $current_html = $current_price !== '' ? wc_price($current_price) : '';
 
         if ($product->is_on_sale() && $sale_price !== '' && $regular_html && $current_html && $current_html !== $regular_html) {
-            $sr_template = svic_translate('pricing.sr_sale_announcement');
+            $sr_template = svic_translate('frontpage.pricing.sr_sale_announcement');
             if (!is_string($sr_template) || $sr_template === '') {
                 $sr_template = __('Sale price %2$s, original price %1$s', svic_text_domain());
             }

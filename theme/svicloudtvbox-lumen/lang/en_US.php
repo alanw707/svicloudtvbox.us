@@ -705,10 +705,10 @@ return [
     'frontpage' => [
         'hero' => [
             'badge'   => 'Authorized U.S. Dealer',
-            'title'   => 'Best Android TV box, global entertainment ready for any TV',
-            'title_lead' => 'Best Android TV Box',
-            'title_separator' => ', ',
-            'title_tail' => 'global entertainment ready for any TV',
+            'title'   => 'The Streaming Box for U.S. Chinese Families — 1000+ Channels in 4K, Ships from Nevada in 48 Hours',
+            'title_lead' => 'The Streaming Box for U.S. Chinese Families',
+            'title_separator' => ' — ',
+            'title_tail' => '1000+ Channels in 4K, Ships from Nevada in 48 Hours',
             'copy'    => 'SVICLOUD packs premium Chinese and international channels, karaoke, and kids favorites into one flagship box—ships fast from the USA with bilingual concierge support.',
             'bullets' => [
                 'shipping' => 'Ships from USA',
@@ -718,29 +718,33 @@ return [
             'cta' => [
                 'primary' => 'Shop 10P+',
                 'bundles' => 'View Bundles',
-                'compare' => 'Compare Models',
+                'compare' => 'See Pricing',
             ],
             'card' => [
                 'badge'     => 'Live',
                 'headline'  => 'SVICLOUD 10P+ hardware snapshot',
-                'timestamp' => 'Latest U.S. batch · July 2024',
+                'timestamp' => 'Latest U.S. batch · 2026',
                 'stat'      => '4GB RAM · 64GB storage',
                 'specs'     => [
                     'processor'    => [
-                        'label' => 'Processor',
-                        'value' => 'Amlogic S928X · Octa-core',
+                        'benefit' => 'Plays 4K live sports without buffering',
+                        'label'   => 'Processor',
+                        'value'   => 'Amlogic S928X · Octa-core',
                     ],
                     'connectivity' => [
-                        'label' => 'Connectivity',
-                        'value' => 'Wi-Fi 6 dual-band + Gigabit LAN',
+                        'benefit' => 'Stable streams on crowded family Wi-Fi',
+                        'label'   => 'Connectivity',
+                        'value'   => 'Wi-Fi 6 dual-band + Gigabit LAN',
                     ],
                     'video'        => [
-                        'label' => 'High Quality Video Decoding',
-                        'value' => 'AV1 decode · 4K HDR',
+                        'benefit' => 'Movie-theater picture on any 4K TV',
+                        'label'   => 'High Quality Video Decoding',
+                        'value'   => 'AV1 decode · 4K HDR',
                     ],
                     'extras'       => [
-                        'label' => 'Remote & extras',
-                        'value' => 'Bluetooth voice remote · USB 3.0 expansion',
+                        'benefit' => 'Talk to your remote in English or 中文',
+                        'label'   => 'Remote & extras',
+                        'value'   => 'Bluetooth voice remote · USB 3.0 expansion',
                     ],
                 ],
                 'footer' => [
@@ -749,9 +753,24 @@ return [
                 ],
             ],
         ],
+        'sticky_buy' => [
+            'label' => 'SVICLOUD 10P+',
+            'cta'   => 'Buy Now',
+        ],
+        'inbox' => [
+            'title' => "What's in the Box",
+            'items' => [
+                'box'      => 'SVICLOUD TV box',
+                'power'    => 'U.S. power adapter',
+                'hdmi'     => 'HDMI cable',
+                'remote'   => 'Bluetooth AI voice remote + batteries',
+                'batteries'=> 'Extra batteries',
+                'guide'    => 'Quick-start guide (EN/中文)',
+            ],
+        ],
         'traffic' => [
             'badge' => 'SVICLOUD 10P+ for U.S. Chinese/Asian homes',
-            'title' => 'Bilingual, U.S.-stock 10P+ with concierge and warranty',
+            'title' => 'Skip the import hassle. Get your SVICLOUD set up in 中文 or English, shipped from Nevada in 48 hours.',
             'lead'  => 'Serve U.S.-based Chinese/Asian families with fast Nevada fulfillment, 中文/English setup help, and hardware ready for 4K sports, drama marathons, karaoke, and kids profiles.',
             'bullets' => [
                 'shipping'  => '48-hour U.S. shipping with localized power, HDMI, and tracking',
@@ -860,6 +879,14 @@ return [
                             'question' => 'Do SVICLOUD boxes include a U.S. warranty and returns?',
                             'answer'   => 'Every device sold on SVICLOUDTVBOX.US includes a 1-year U.S. hardware warranty plus a 30-day return window. Contact the concierge team with your order number and we will arrange troubleshooting, exchanges, or returns.',
                         ],
+                        'payment' => [
+                            'question' => 'What payment methods do you accept?',
+                            'answer'   => 'We accept all major credit and debit cards (Visa, Mastercard, Amex, Discover), PayPal, and Apple Pay through our secure checkout. No wire transfers or cryptocurrency.',
+                        ],
+                        'invoice' => [
+                            'question' => 'Can I get an invoice or receipt for business or resale purposes?',
+                            'answer'   => 'A PDF receipt is emailed automatically after payment. For a formal invoice with your business name and address, contact the concierge team with your order number and company details.',
+                        ],
                     ],
                 ],
                 'setup' => [
@@ -873,6 +900,27 @@ return [
                             'question' => 'Can you help me set it up in Traditional Chinese?',
                             'answer'   => 'Absolutely. Our bilingual concierge can schedule a remote session, walk you through the interface entirely in 繁體中文, and answer questions about Kids Mode, karaoke, or app updates.',
                         ],
+                        'preloaded' => [
+                            'question' => 'What apps and channels come pre-installed on the box?',
+                            'answer'   => 'The box ships with the standard Android TV launcher and a curated set of bilingual tools, including Kids Mode and karaoke. Our concierge can guide you through safely installing the streaming services you want.',
+                        ],
+                        'vpn' => [
+                            'question' => 'Do I need a VPN to use SVICLOUD?',
+                            'answer'   => 'No VPN is needed to operate the device itself. Whether a VPN is useful depends on the specific apps or services you choose to run—not the box. Use legal, licensed services only.',
+                        ],
+                    ],
+                ],
+                'models' => [
+                    'title' => 'Models & comparisons',
+                    'items' => [
+                        'vs_competitors' => [
+                            'question' => 'How is SVICLOUD different from EVPAD, UnblockTech, or UBOX?',
+                            'answer'   => 'SVICLOUD 10P+ and 10S are genuine Android TV boxes warehoused in the U.S.A. and sold with a 1-year U.S. hardware warranty and English/Chinese bilingual concierge support—versus grey-market units with no local warranty or setup help.',
+                        ],
+                        'after_warranty' => [
+                            'question' => 'What happens after the 1-year warranty expires?',
+                            'answer'   => 'The hardware keeps working normally—nothing expires. Paid support sessions remain available through the concierge team for troubleshooting or setup help in future years.',
+                        ],
                     ],
                 ],
             ],
@@ -880,7 +928,9 @@ return [
         'pricing' => [
             'title'    => 'Choose Your SVICLOUD Device',
             'subtitle' => 'Pick the hardware that fits your home. No mandatory bundles—just authentic SVICLOUD boxes shipping from the USA.',
+            'stock_note'           => 'In stock — ships from Nevada within 48 hours',
             'sr_sale_announcement' => 'Sale price %2$s, original price %1$s',
+            'savings_label'        => 'Save %1$s (%2$s%% off)',
             'cards'    => [
                 '10p' => [
                     'badge'    => 'Most Popular',
@@ -892,7 +942,8 @@ return [
                         'apps'   => 'Kids & Karaoke apps included',
                         'wifi'   => 'AI voice remote + dual-band Wi-Fi',
                     ],
-                    'cta'  => 'View 10P+',
+                    'cta'      => 'View 10P+',
+                    'buy_cta'  => 'Buy 10P+',
                     'meta' => [
                         'shipping'  => '✔ Ships from USA',
                         'warranty'  => '✔ 1-Year U.S. Warranty',
@@ -908,13 +959,43 @@ return [
                         'remote' => 'AI voice remote',
                         'bundle' => 'Includes HDMI & power accessories',
                     ],
-                    'cta'  => 'View 10S',
+                    'cta'       => 'View 10S',
+                    'buy_cta'   => 'Buy 10S',
                     'cta_style' => 'primary',
                     'meta' => [
                         'shipping' => '✔ Ships from USA',
                         'warranty' => '✔ 1-Year U.S. Warranty',
                         'fees'     => '✔ No monthly device fees',
                     ],
+                ],
+            ],
+        ],
+        'testimonials' => [
+            'badge'    => 'Real Customers',
+            'title'    => 'What U.S. Families Say About SVICLOUD',
+            'subtitle' => 'Quotes from buyers across the U.S. who picked SVICLOUD for the channels they grew up with.',
+            // TODO: Replace these placeholders with real customer quotes before
+            // flipping SVIC_TESTIMONIALS_ENABLED to true. Quotes must be real
+            // (FTC compliance) — short messages from email, FB, WhatsApp, or
+            // Google reviews are all fair game.
+            'quotes' => [
+                [
+                    'quote'  => '[PLACEHOLDER] Real customer quote goes here. Should be 1-3 sentences about their experience with the box, setup help, or channels.',
+                    'name'   => 'First Name L.',
+                    'city'   => 'City, ST',
+                    'source' => 'Verified buyer',
+                ],
+                [
+                    'quote'  => '[PLACEHOLDER] Second customer quote — ideally about the bilingual concierge or shipping speed.',
+                    'name'   => 'First Name L.',
+                    'city'   => 'City, ST',
+                    'source' => 'Verified buyer',
+                ],
+                [
+                    'quote'  => '[PLACEHOLDER] Third customer quote — ideally a Chinese-speaking family talking about the 中文 support or the channels.',
+                    'name'   => 'First Name L.',
+                    'city'   => 'City, ST',
+                    'source' => 'Verified buyer',
                 ],
             ],
         ],

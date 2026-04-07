@@ -123,6 +123,11 @@
   box-shadow: 0 26px 58px rgba(94, 230, 208, 0.5);
 }
 
+.lumen-pill--primary:focus-visible {
+  outline: 2px solid rgba(94, 230, 208, 0.9);
+  outline-offset: 3px;
+}
+
 .lumen-pill--outline {
   color: rgba(224, 240, 255, 0.9);
   background: rgba(10, 28, 60, 0.35);

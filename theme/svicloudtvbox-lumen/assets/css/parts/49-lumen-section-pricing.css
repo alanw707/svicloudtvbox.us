@@ -148,3 +148,54 @@
   margin-right: 8px;
   color: rgba(94, 230, 208, 0.6);
 }
+
+.lumen-pricing-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.lumen-pricing-card__actions .lumen-pill {
+  flex: 1 1 auto;
+  text-align: center;
+  min-width: 130px;
+}
+
+.lumen-pricing-card__actions .lumen-pill--secondary {
+  background: transparent;
+  color: rgba(226, 242, 255, 0.92);
+  border: 1px solid rgba(226, 242, 255, 0.32);
+  opacity: 0.72;
+  font-size: 0.88rem;
+  transition: opacity 0.2s ease;
+}
+
+.lumen-pricing-card__actions .lumen-pill--secondary:hover,
+.lumen-pricing-card__actions .lumen-pill--secondary:focus-visible {
+  background: rgba(226, 242, 255, 0.08);
+  border-color: rgba(226, 242, 255, 0.55);
+  opacity: 1;
+}
+
+.lumen-pricing-card__savings {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 99, 99, 0.18);
+  color: #ffb4a8;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(255, 99, 99, 0.35);
+}
+
+.lumen-pricing__stock-note {
+  text-align: center;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(94, 230, 208, 0.9);
+  letter-spacing: 0.06em;
+  margin: -0.5rem 0 2rem;
+}

@@ -1,0 +1,94 @@
+/* ============================================================
+   Lumen — Homepage testimonials section
+   Gated by SVIC_TESTIMONIALS_ENABLED constant.
+   ============================================================ */
+
+.lumen-testimonials {
+  padding: clamp(72px, 9vw, 128px) 0;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(94, 230, 208, 0.06), transparent 60%),
+    var(--lumen-bg-deep, #060d1c);
+  color: var(--lumen-text-primary, #f4f8ff);
+}
+
+.lumen-testimonials__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+}
+
+.lumen-testimonials__badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(94, 230, 208, 0.12);
+  border: 1px solid rgba(94, 230, 208, 0.35);
+  color: rgba(180, 240, 220, 0.95);
+  margin-bottom: 16px;
+}
+
+.lumen-testimonials__grid {
+  margin-top: clamp(36px, 5vw, 56px);
+  display: grid;
+  gap: clamp(20px, 2.4vw, 28px);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.lumen-testimonial-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 28px;
+  margin: 0;
+  border-radius: 22px;
+  background: rgba(8, 20, 38, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.lumen-testimonial-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(94, 230, 208, 0.4);
+}
+
+.lumen-testimonial-card__quote {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(232, 244, 255, 0.94);
+}
+
+.lumen-testimonial-card__quote p {
+  margin: 0;
+}
+
+.lumen-testimonial-card__attribution {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.lumen-testimonial-card__name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--lumen-text-primary, #f4f8ff);
+}
+
+.lumen-testimonial-card__city {
+  font-size: 0.82rem;
+  color: rgba(200, 215, 235, 0.78);
+}
+
+.lumen-testimonial-card__source {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(94, 230, 208, 0.85);
+  margin-top: 4px;
+}

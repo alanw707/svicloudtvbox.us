@@ -15,10 +15,16 @@
   transition: transform var(--transition-fast), border-color var(--transition-fast);
 }
 
-.lumen-header__toggle:hover,
+.lumen-header__toggle:hover {
+  transform: translateY(-2px);
+  border-color: rgba(234, 240, 255, 0.48);
+}
+
 .lumen-header__toggle:focus-visible {
   transform: translateY(-2px);
   border-color: rgba(234, 240, 255, 0.48);
+  outline: 2px solid rgba(94, 230, 208, 0.7);
+  outline-offset: 3px;
 }
 
 .lumen-header__toggle-line,
@@ -96,6 +102,13 @@
   border: 1px solid rgba(94, 230, 208, 0.18);
   letter-spacing: 0.1em;
   font-size: 0.95rem;
+}
+
+.lumen-mobile-nav__list a:focus-visible {
+  outline: 2px solid rgba(94, 230, 208, 0.7);
+  outline-offset: 2px;
+  background: rgba(20, 44, 90, 0.9);
+  border-color: rgba(94, 230, 208, 0.42);
 }
 
 .lumen-mobile-nav__list a span:last-child {
@@ -178,11 +191,16 @@
   transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
 }
 
-.lumen-mobile-nav__submenu-toggle:hover,
+.lumen-mobile-nav__submenu-toggle:hover {
+  background: rgba(94, 230, 208, 0.2);
+  border-color: rgba(94, 230, 208, 0.42);
+}
+
 .lumen-mobile-nav__submenu-toggle:focus-visible {
   background: rgba(94, 230, 208, 0.2);
   border-color: rgba(94, 230, 208, 0.42);
-  outline: none;
+  outline: 2px solid rgba(94, 230, 208, 0.7);
+  outline-offset: 3px;
 }
 
 .lumen-mobile-nav__submenu-toggle::before {
