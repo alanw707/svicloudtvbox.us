@@ -2616,15 +2616,8 @@ if (!function_exists('svic_register_faq_schema_for_request')) {
         $canonical = esc_url_raw($canonical);
 
         if (function_exists('is_front_page') && is_front_page()) {
-            $entities = svic_build_faq_entities_from_items(svic_front_page_faq_schema_items());
-            if ($entities) {
-                svic_schema_register_once('faqpage_front', [
-                    '@type'      => 'FAQPage',
-                    '@id'        => untrailingslashit($canonical) . '#faqpage',
-                    'url'        => $canonical,
-                    'mainEntity' => $entities,
-                ]);
-            }
+            // front-page.php emits its own @graph block with FAQPage — skip registration here
+            // to avoid the "Duplicate field FAQPage" error in Google Search Console.
             return;
         }
 
