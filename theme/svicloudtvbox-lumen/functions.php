@@ -104,7 +104,7 @@ add_filter('woocommerce_add_to_cart_redirect', function (string $url): string {
     return wc_get_checkout_url();
 });
 
-const SVIC_LITESPEED_PURGE_MARK = 'svic-litespeed-nav-20251127a';
+const SVIC_LITESPEED_PURGE_MARK = 'svic-litespeed-cro-fixes-20260407';
 const SVIC_REWRITE_FLUSH_MARK   = 'svic-rewrite-flush-20251130b';
 
 add_action('init', function () {

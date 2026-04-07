@@ -79,6 +79,19 @@ jobs:
             echo "✅ All files uploaded"
           fi
 
+      - name: 🧹 Purge LiteSpeed Cache
+        env:
+          WP_LSCACHE_PURGE_URL: ${{ secrets.WP_LSCACHE_PURGE_URL }}
+        run: |
+          if [[ -z "${WP_LSCACHE_PURGE_URL}" ]]; then
+            echo "⚠️ WP_LSCACHE_PURGE_URL not set — skipping LiteSpeed purge"
+          else
+            echo "Purging LiteSpeed server cache..."
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "${WP_LSCACHE_PURGE_URL}")
+            echo "LiteSpeed purge status: $STATUS"
+            echo "✅ LiteSpeed purge request sent"
+          fi
+
       - name: 🧹 Purge Cloudflare Cache
         env:
           CF_EMAIL: ${{ secrets.CF_EMAIL }}
