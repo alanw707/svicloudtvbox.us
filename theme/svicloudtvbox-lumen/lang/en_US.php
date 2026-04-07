@@ -716,9 +716,10 @@ return [
                 'fees'     => 'No Monthly Fees',
             ],
             'cta' => [
-                'primary' => 'Shop 10P+',
-                'bundles' => 'View Bundles',
-                'compare' => 'See Pricing',
+                'primary'   => 'Shop 10P+',
+                'bundles'   => 'View Bundles',
+                'compare'   => 'See Pricing',
+                'secondary' => 'See Pricing',
             ],
             'card' => [
                 'badge'     => 'Live',

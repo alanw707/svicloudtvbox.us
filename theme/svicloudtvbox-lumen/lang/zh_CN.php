@@ -384,9 +384,10 @@ $overrides = [
                 'fees'     => '无月租费',
             ],
             'cta' => [
-                'primary' => '选购 10P+',
-                'bundles' => '查看优惠组合',
-                'compare' => '查看价格',
+                'primary'   => '选购 10P+',
+                'bundles'   => '查看优惠组合',
+                'compare'   => '查看价格',
+                'secondary' => '查看价格',
             ],
             'card' => [
                 'badge'     => '直播',
@@ -622,7 +623,17 @@ $overrides = [
             ],
         ],
         'pricing' => [
-            'stock_note' => '现货 — 48 小时内由内华达州发货',
+            'stock_note'           => '现货 — 48 小时内由内华达州发货',
+            'sr_sale_announcement' => '特价 %2$s，原价 %1$s',
+            'savings_label'        => '节省 %1$s（%2$s%% 折扣）',
+            'cards'                => [
+                '10p' => [
+                    'buy_cta' => '立即购买 10P+',
+                ],
+                '10s' => [
+                    'buy_cta' => '立即购买 10S',
+                ],
+            ],
         ],
     ],
     'product' => [

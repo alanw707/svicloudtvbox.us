@@ -833,9 +833,10 @@ return [
                 'fees'     => '無月租費',
             ],
             'cta' => [
-                'primary' => '選購 10P+',
-                'bundles' => '查看優惠組合',
-                'compare' => '查看定價',
+                'primary'   => '選購 10P+',
+                'bundles'   => '查看優惠組合',
+                'compare'   => '查看定價',
+                'secondary' => '查看定價',
             ],
             'card' => [
                 'badge'     => '直播',

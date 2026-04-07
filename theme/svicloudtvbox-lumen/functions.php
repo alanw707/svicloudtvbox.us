@@ -78,8 +78,31 @@ add_filter('woocommerce_price_format', function ($format, $currency_pos) {
     if ($currency_pos === 'left_space') {
         return '%1$s%2$s';
     }
+    if ($currency_pos === 'right_space') {
+        return '%2$s%1$s';
+    }
     return $format;
 }, 10, 2);
+
+// Buy-Now flow: when ?svic_buynow=1 is present, isolate the cart to just the
+// newly added item and redirect straight to checkout, bypassing the cart page.
+add_action('woocommerce_add_to_cart', function (string $cart_item_key): void {
+    if (empty($_GET['svic_buynow'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        return;
+    }
+    foreach (array_keys(WC()->cart->get_cart()) as $key) {
+        if ($key !== $cart_item_key) {
+            WC()->cart->remove_cart_item($key);
+        }
+    }
+}, 10, 1);
+
+add_filter('woocommerce_add_to_cart_redirect', function (string $url): string {
+    if (empty($_GET['svic_buynow'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        return $url;
+    }
+    return wc_get_checkout_url();
+});
 
 const SVIC_LITESPEED_PURGE_MARK = 'svic-litespeed-nav-20251127a';
 const SVIC_REWRITE_FLUSH_MARK   = 'svic-rewrite-flush-20251130b';
@@ -2454,34 +2477,6 @@ if (!function_exists('svic_build_faq_entities_from_items')) {
     }
 }
 
-if (!function_exists('svic_front_page_faq_schema_items')) {
-    /**
-     * Keep keys in sync with `theme/svicloudtvbox-lumen/front-page.php`.
-     *
-     * @return array<int, array{question_key:string,answer_key:string}>
-     */
-    function svic_front_page_faq_schema_items(): array
-    {
-        return [
-            [
-                'question_key' => 'frontpage.faq.groups.orders.items.fulfillment.question',
-                'answer_key'   => 'frontpage.faq.groups.orders.items.fulfillment.answer',
-            ],
-            [
-                'question_key' => 'frontpage.faq.groups.orders.items.warranty.question',
-                'answer_key'   => 'frontpage.faq.groups.orders.items.warranty.answer',
-            ],
-            [
-                'question_key' => 'frontpage.faq.groups.setup.items.compatibility.question',
-                'answer_key'   => 'frontpage.faq.groups.setup.items.compatibility.answer',
-            ],
-            [
-                'question_key' => 'frontpage.faq.groups.setup.items.concierge.question',
-                'answer_key'   => 'frontpage.faq.groups.setup.items.concierge.answer',
-            ],
-        ];
-    }
-}
 
 if (!function_exists('svic_product_faq_schema_items')) {
     /**

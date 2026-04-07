@@ -234,7 +234,11 @@ foreach ($pricing_cards as $slug => $card) {
         $pricing_cards[$slug]['price_html'] = svic_price_html($product);
         $pricing_cards[$slug]['cta_url']    = svic_url_with_lang(get_permalink($product->get_id()));
         $pricing_cards[$slug]['buy_url']    = svic_url_with_lang(
-            add_query_arg('add-to-cart', $product->get_id(), wc_get_checkout_url())
+            add_query_arg([
+                'add-to-cart' => $product->get_id(),
+                'quantity'    => 1,
+                'svic_buynow' => 1,
+            ], wc_get_checkout_url())
         );
 
         $pricing_cards[$slug]['savings_html'] = '';
@@ -456,7 +460,7 @@ if (!$blog_posts_query instanceof WP_Query) {
         <div class="hero-dashboard__cta">
           <a class="hero-dashboard__button hero-dashboard__button--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.primary'); ?></a>
           <a class="hero-dashboard__button hero-dashboard__button--secondary" href="#pricing">
-            <span><?php echo svic_translate_html('frontpage.hero.cta.compare'); ?></span>
+            <span><?php echo svic_translate_html('frontpage.hero.cta.secondary'); ?></span>
           </a>
         </div>
       </div>
@@ -508,7 +512,10 @@ if (!$blog_posts_query instanceof WP_Query) {
           <div class="hero-dashboard__spec-grid" role="list">
             <?php foreach ($hero_spec_rows as $row) : ?>
               <div class="hero-dashboard__spec-pill" role="listitem">
-                <span class="hero-dashboard__spec-benefit"><?php echo svic_translate_html($row['benefit_key']); ?></span>
+                <?php $spec_benefit = svic_translate($row['benefit_key']); ?>
+                <?php if ($spec_benefit !== '') : ?>
+                  <span class="hero-dashboard__spec-benefit"><?php echo esc_html($spec_benefit); ?></span>
+                <?php endif; ?>
                 <span class="hero-dashboard__spec-label"><?php echo svic_translate_html($row['label_key']); ?></span>
                 <span class="hero-dashboard__spec-value"><?php echo svic_translate_html($row['value_key']); ?></span>
               </div>
@@ -740,7 +747,19 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
         <h2 class="lumen-section-header__title"><?php echo svic_translate_html('frontpage.pricing.title'); ?></h2>
         <p class="lumen-section-header__subtitle"><?php echo svic_translate_html('frontpage.pricing.subtitle'); ?></p>
       </header>
-      <p class="lumen-pricing__stock-note"><?php echo svic_translate_html('frontpage.pricing.stock_note'); ?></p>
+      <?php
+$svic_all_in_stock = true;
+foreach ($pricing_cards as $_svic_card) {
+    $_svic_p = $_svic_card['product'] ?? null;
+    if ($_svic_p instanceof WC_Product && ! $_svic_p->is_in_stock()) {
+        $svic_all_in_stock = false;
+        break;
+    }
+}
+?>
+      <?php if ($svic_all_in_stock) : ?>
+        <p class="lumen-pricing__stock-note"><?php echo svic_translate_html('frontpage.pricing.stock_note'); ?></p>
+      <?php endif; ?>
       <div class="lumen-pricing__grid">
         <?php foreach ($pricing_cards as $slug => $card) : ?>
           <article class="lumen-pricing-card<?php echo !empty($card['highlight']) ? ' lumen-pricing-card--featured' : ''; ?>">
@@ -850,7 +869,7 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
   if (!empty($faq_schema_entries)) {
       $graph_nodes[] = [
           '@type'      => 'FAQPage',
-          '@id'        => esc_url_raw(svic_get_localized_canonical_url()) . '#faq',
+          '@id'        => esc_url_raw(svic_get_localized_canonical_url()) . '#faqpage',
           'mainEntity' => $faq_schema_entries,
       ];
   }
@@ -866,7 +885,9 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
 <?php
 $sticky_10p_url = $hero_10p_url; // already computed earlier in the file
 ?>
-<!-- Mobile sticky buy bar -->
+</main>
+
+<!-- Mobile sticky buy bar — outside <main> to preserve landmark semantics -->
 <div class="lumen-sticky-buy" id="lumen-sticky-buy" aria-hidden="true">
   <div class="lumen-sticky-buy__inner">
     <span class="lumen-sticky-buy__label"><?php echo svic_translate_html('frontpage.sticky_buy.label'); ?></span>
@@ -894,6 +915,5 @@ $sticky_10p_url = $hero_10p_url; // already computed earlier in the file
   update();
 })();
 </script>
-</main>
 
 <?php get_footer(); ?>
