@@ -1,0 +1,92 @@
+name: Purge CDN Caches
+description: Purge LiteSpeed server cache and Cloudflare CDN after a deploy.
+
+inputs:
+  wp_lscache_purge_url:
+    description: LiteSpeed purge URL (optional — skip if not set)
+    required: false
+    default: ''
+  cf_zone_id:
+    description: Cloudflare zone ID
+    required: true
+  cf_api_token:
+    description: Scoped Cloudflare API token (preferred — Zone.Cache Purge only)
+    required: false
+    default: ''
+  cf_email:
+    description: Legacy Cloudflare account email (used only if cf_api_token is empty)
+    required: false
+    default: ''
+  cf_api_key:
+    description: Legacy Cloudflare Global API Key (used only if cf_api_token is empty)
+    required: false
+    default: ''
+  site_url:
+    description: Site base URL used for targeted cache purge (e.g. https://svicloudtvbox.us)
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: 🧹 Purge LiteSpeed Cache
+      shell: bash
+      env:
+        WP_LSCACHE_PURGE_URL: ${{ inputs.wp_lscache_purge_url }}
+      run: |
+        if [[ -z "${WP_LSCACHE_PURGE_URL}" ]]; then
+          echo "⚠️ wp_lscache_purge_url not set — skipping LiteSpeed purge"
+        else
+          echo "Purging LiteSpeed server cache..."
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "${WP_LSCACHE_PURGE_URL}")
+          if [[ "$STATUS" == "200" || "$STATUS" == "204" ]]; then
+            echo "✅ LiteSpeed cache purged ($STATUS)"
+          else
+            echo "⚠️ LiteSpeed purge returned HTTP $STATUS — verify manually"
+          fi
+        fi
+
+    - name: 🧹 Purge Cloudflare Cache
+      shell: bash
+      env:
+        CF_ZONE_ID: ${{ inputs.cf_zone_id }}
+        CF_API_TOKEN: ${{ inputs.cf_api_token }}
+        CF_EMAIL: ${{ inputs.cf_email }}
+        CF_API_KEY: ${{ inputs.cf_api_key }}
+        SITE_URL: ${{ inputs.site_url }}
+      run: |
+        # Prefer scoped API token; fall back to legacy Global API Key.
+        if [[ -n "${CF_API_TOKEN}" ]]; then
+          AUTH_HEADERS=(-H "Authorization: Bearer ${CF_API_TOKEN}")
+          echo "Using scoped API token auth"
+        elif [[ -n "${CF_API_KEY}" && -n "${CF_EMAIL}" ]]; then
+          AUTH_HEADERS=(-H "X-Auth-Email: ${CF_EMAIL}" -H "X-Auth-Key: ${CF_API_KEY}")
+          echo "Using legacy Global API Key auth (consider switching to a scoped API token)"
+        else
+          echo "⚠️ No Cloudflare credentials provided — skipping purge"
+          exit 0
+        fi
+
+        # Purge targeted URLs when site_url is provided (theme deploys affect known pages).
+        # Falls back to purge_everything when site_url is absent.
+        if [[ -n "${SITE_URL}" ]]; then
+          SITE="${SITE_URL%/}"
+          PAYLOAD=$(python3 -c "import json; s='${SITE}'; urls=[s+'/',s+'/zh/',s+'/zh-cn/',s+'/shop/',s+'/zh/shop/',s+'/zh-cn/shop/',s+'/cart/',s+'/zh/cart/',s+'/zh-cn/cart/',s+'/checkout/',s+'/zh/checkout/',s+'/zh-cn/checkout/',s+'/compare/',s+'/zh/compare/',s+'/zh-cn/compare/']; print(json.dumps({'files':urls}))")
+          echo "Purging ${#PAYLOAD} chars of targeted URLs..."
+        else
+          PAYLOAD='{"purge_everything":true}'
+          echo "Purging entire zone (site_url not set)..."
+        fi
+
+        RESULT=$(curl -s -X POST \
+          "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
+          "${AUTH_HEADERS[@]}" \
+          -H "Content-Type: application/json" \
+          -d "${PAYLOAD}")
+        echo "Purge result: $RESULT"
+        SUCCESS=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('success', False))")
+        if [[ "$SUCCESS" != "True" ]]; then
+          echo "⚠️ Cloudflare purge may have failed — check above"
+        else
+          echo "✅ Cloudflare cache purged"
+        fi

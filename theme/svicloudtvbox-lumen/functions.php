@@ -133,7 +133,7 @@ add_filter('woocommerce_add_to_cart_redirect', function (string $url): string {
 });
 
 const SVIC_LITESPEED_PURGE_MARK = 'svic-litespeed-cro-fixes-20260407';
-const SVIC_REWRITE_FLUSH_MARK   = 'svic-rewrite-flush-20251130b';
+const SVIC_REWRITE_FLUSH_MARK   = 'svic-rewrite-flush-20260407';
 
 add_action('init', function () {
     if (get_option('svic_litespeed_last_purge') === SVIC_LITESPEED_PURGE_MARK) {
