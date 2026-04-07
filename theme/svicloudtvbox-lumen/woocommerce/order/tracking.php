@@ -21,6 +21,7 @@ if ($payment_method_value !== '') {
     $summary_payment_meta = svic_translate('order_tracking.summary.total', [
         'order_total'     => '<span class="lumen-order-summary__meta-value">' . esc_html($order_total_value) . '</span>',
         'payment_method'  => '<span class="lumen-order-summary__meta-value">' . esc_html($payment_method_value) . '</span>',
+        'dot'             => ' · ',
     ]);
 }
 

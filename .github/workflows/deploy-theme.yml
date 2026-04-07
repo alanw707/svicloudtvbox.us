@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'theme/svicloudtvbox-lumen/**'
+      - '.github/workflows/deploy-theme.yml'
 
   workflow_dispatch:  # allow manual trigger from GitHub UI
 
@@ -42,36 +43,12 @@ jobs:
             --local-dir "$LOCAL_THEME_DIR" \
             --remote-root "$REMOTE_THEME_DIR"
 
-      - name: 🧹 Purge LiteSpeed Cache
-        env:
-          WP_LSCACHE_PURGE_URL: ${{ secrets.WP_LSCACHE_PURGE_URL }}
-        run: |
-          if [[ -z "${WP_LSCACHE_PURGE_URL}" ]]; then
-            echo "⚠️ WP_LSCACHE_PURGE_URL not set — skipping LiteSpeed purge"
-          else
-            echo "Purging LiteSpeed server cache..."
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 "${WP_LSCACHE_PURGE_URL}")
-            echo "LiteSpeed purge status: $STATUS"
-            echo "✅ LiteSpeed purge request sent"
-          fi
-
-      - name: 🧹 Purge Cloudflare Cache
-        env:
-          CF_EMAIL: ${{ secrets.CF_EMAIL }}
-          CF_API_KEY: ${{ secrets.CF_API_KEY }}
-          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
-        run: |
-          echo "Purging Cloudflare cache..."
-          RESULT=$(curl -s -X POST \
-            "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
-            -H "X-Auth-Email: ${CF_EMAIL}" \
-            -H "X-Auth-Key: ${CF_API_KEY}" \
-            -H "Content-Type: application/json" \
-            -d '{"purge_everything":true}')
-          echo "Purge result: $RESULT"
-          SUCCESS=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('success', False))")
-          if [[ "$SUCCESS" != "True" ]]; then
-            echo "⚠️ Cache purge may have failed — check above"
-          else
-            echo "✅ Cloudflare cache purged"
-          fi
+      - name: 🧹 Purge CDN Caches
+        uses: ./.github/actions/purge-caches
+        with:
+          wp_lscache_purge_url: ${{ secrets.WP_LSCACHE_PURGE_URL }}
+          cf_zone_id: ${{ secrets.CF_ZONE_ID }}
+          cf_api_token: ${{ secrets.CF_API_TOKEN }}
+          cf_email: ${{ secrets.CF_EMAIL }}
+          cf_api_key: ${{ secrets.CF_API_KEY }}
+          site_url: ${{ secrets.SITE_URL }}
