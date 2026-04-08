@@ -9,6 +9,7 @@
 
 .lumen-pricing__inner {
   width: var(--max-width-hero);
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -20,6 +21,7 @@
 
 .lumen-pricing-card {
   position: relative;
+  min-width: 0;
   padding: clamp(26px, 4vw, 32px);
   border-radius: var(--radius-2xl);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -198,4 +200,12 @@
   color: rgba(94, 230, 208, 0.9);
   letter-spacing: 0.06em;
   margin: -0.5rem 0 2rem;
+}
+
+/* Narrow mobile: scale down price row so it stays within card bounds */
+@media (max-width: 430px) {
+  .lumen-pricing-card__price {
+    font-size: 1.75rem;
+    flex-wrap: wrap;
+  }
 }
