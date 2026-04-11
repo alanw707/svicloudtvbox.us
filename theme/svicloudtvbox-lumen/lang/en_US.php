@@ -1067,8 +1067,18 @@ return [
             'description' => '<p>SVICLOUD 10P+ is our flagship streaming box for families who want voice control, karaoke nights, and the fastest hardware we ship.</p><ul><li>4GB RAM and 64GB storage with AV1 decode keep 4K live sports and dramas smooth.</li><li>Kids Mode and Karaoke apps come preinstalled with English / 中文 concierge walkthroughs.</li><li>Wi-Fi 6, Gigabit Ethernet, Bluetooth voice remote, USB 3.0, and expandable storage cover every installation.</li><li>Ships from Nevada with a 1-year U.S. warranty, free returns within 30 days, and live concierge setup help.</li></ul><p>The box includes HDMI cable, power adapter, voice remote, and supports dual wireless microphones for karaoke.</p>',
         ],
         'svicloud-10s' => [
-            'short_description' => 'Essential 4K streamer with 2GB RAM / 32GB storage, voice remote, and plug-and-play setup for bedrooms or guest TVs.',
-            'description' => '<p>SVICLOUD 10S is the best value for secondary rooms and budget-friendly homes that still want authentic SVICLOUD streaming.</p><ul><li>2GB RAM and 32GB storage with AV1 decode deliver crisp 4K playback for live channels and VOD.</li><li>Ships with the same AI voice remote and bilingual concierge onboarding as the flagship model.</li><li>Includes HDMI, Ethernet, and USB ports so you can hardwire or add storage in minutes.</li><li>U.S. inventory, 1-year warranty, and responsive English / 中文 support keep the experience worry-free.</li></ul><p>Ideal for bedrooms, dorms, or guest suites where you want quick plug-and-play access to the SVICLOUD ecosystem.</p>',
+            'short_description' => 'Affordable 4K streaming box with 2GB RAM / 32GB storage and easy plug-and-play setup for bedrooms, guest rooms, and second TVs.',
+            'description' => '<p>SVICLOUD 10S is our budget-friendly 4K streaming box for shoppers who want reliable SVICLOUD access without paying for flagship extras.</p><ul><li>2GB RAM and 32GB storage with AV1 decode handle live TV, dramas, and on-demand playback smoothly.</li><li>A compact design makes it a strong fit for bedrooms, guest rooms, dorms, and secondary TVs.</li><li>HDMI, Ethernet, and USB ports make setup quick whether you prefer Wi-Fi or a hardwired connection.</li><li>Ships from U.S. inventory with a 1-year warranty, bilingual English / 中文 support, and concierge onboarding.</li></ul><p>Choose the 10S when you want the best value in the lineup. Choose the 10P+ if you want higher-end performance, karaoke features, and voice control.</p>',
+            'traffic' => [
+                'badge' => 'Why 10S for U.S.-based Chinese/Asian homes',
+                'title' => 'Best-value SVICLOUD for bedrooms, guest rooms, and second TVs',
+                'lead'  => 'The 10S is built for shoppers who want dependable SVICLOUD streaming, U.S. shipping, and bilingual support in a lower-cost package.',
+                'bullets' => [
+                    'shipping'  => '48-hour U.S. shipping with tracking and localized power/HDMI accessories',
+                    'concierge' => 'Bilingual concierge for setup, Wi-Fi tuning, and app onboarding in English or 中文',
+                    'warranty'  => '1-year U.S. warranty + 30-day returns with concierge support',
+                ],
+            ],
         ],
     ],
     'compare' => [
