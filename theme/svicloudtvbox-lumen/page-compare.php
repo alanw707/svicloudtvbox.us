@@ -151,24 +151,41 @@ $compare_cta_links = [
         </div>
 
         <div class="compare-hero__devices" aria-hidden="true">
-          <img
-            class="compare-hero__device compare-hero__device--10p"
-            src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-10p-plus.webp')); ?>"
-            alt=""
-            loading="lazy"
-            decoding="async"
-            width="800"
-            height="600"
-          />
-          <img
-            class="compare-hero__device compare-hero__device--10s"
-            src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-tvbox-10s.webp')); ?>"
-            alt=""
-            loading="lazy"
-            decoding="async"
-            width="800"
-            height="600"
-          />
+          <?php
+          $hero_img_10p = svic_product_primary_image($hero_product_10p, 'large');
+          if ($hero_img_10p) {
+              echo str_replace('<img ', '<img class="compare-hero__device compare-hero__device--10p" ', $hero_img_10p); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+          } else {
+              ?>
+              <img
+                class="compare-hero__device compare-hero__device--10p"
+                src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-10p-plus-lifestyle-1.webp')); ?>"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="600"
+              />
+              <?php
+          }
+
+          $hero_img_10s = svic_product_primary_image($hero_product_10s, 'large');
+          if ($hero_img_10s) {
+              echo str_replace('<img ', '<img class="compare-hero__device compare-hero__device--10s" ', $hero_img_10s); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+          } else {
+              ?>
+              <img
+                class="compare-hero__device compare-hero__device--10s"
+                src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-10s-lifestyle-1.webp')); ?>"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="600"
+              />
+              <?php
+          }
+          ?>
         </div>
 
         <?php if (!empty($hero_highlights)) : ?>
@@ -284,7 +301,14 @@ $compare_cta_links = [
 
       <article class="compare-product-card">
         <figure class="compare-product-card__media">
-          <img src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-tvbox-10s.webp')); ?>" alt="<?php echo esc_attr__('SVICLOUD 10S', 'svicloudtvbox-lumen'); ?>" loading="lazy" decoding="async" />
+          <?php
+          $img_10s = svic_product_primary_image($hero_product_10s, 'large');
+          if ($img_10s) {
+              echo $img_10s; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+          } else {
+              echo '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-10s-lifestyle-1.webp')) . '" alt="' . esc_attr__('SVICLOUD 10S', 'svicloudtvbox-lumen') . '" loading="lazy" decoding="async" />';
+          }
+          ?>
         </figure>
         <div class="compare-product-card__header">
           <h2 class="compare-product-card__title"><?php echo svic_translate_html('shop.cards.10s.title'); ?></h2>
