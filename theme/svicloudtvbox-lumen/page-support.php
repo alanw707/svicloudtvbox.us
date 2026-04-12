@@ -149,6 +149,11 @@ get_header();
             <?php echo svic_translate_html('support.help.faq.cta'); ?>
           </a>
         </article>
+        <article class="support-help__card">
+          <h3 class="support-help__title"><?php echo svic_translate_html('support.review.title'); ?></h3>
+          <p class="support-help__copy"><?php echo svic_translate_html('support.review.copy'); ?></p>
+          <p class="support-help__copy"><?php echo svic_translate_html('support.review.note'); ?></p>
+        </article>
       </aside>
     </div>
   </section>

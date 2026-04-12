@@ -471,6 +471,10 @@ return [
             'track'    => 'Track order',
             'continue' => 'Continue shopping',
         ],
+        'review' => [
+            'badge' => 'Google review invite',
+            'copy'  => 'If Google Customer Reviews is available for your order, Google may email a short survey after delivery. Those reviews help strengthen our seller reputation across Google.',
+        ],
         'failed' => [
             'title'      => 'Order failed',
             'copy'       => 'Unfortunately your order cannot be processed as the originating bank/merchant has declined your transaction. Please attempt your purchase again.',
@@ -585,6 +589,11 @@ return [
             'badge'    => 'Support form',
             'title'    => 'Submit a concierge support request',
             'subtitle' => 'Share your device details and issue below. Our bilingual team replies within one business day.',
+        ],
+        'review' => [
+            'title' => 'Happy with your order?',
+            'copy'  => 'Google Customer Reviews is now wired into checkout. After delivery, Google may invite eligible buyers to leave a short store review.',
+            'note'  => 'We only want real customer feedback, so this page explains the process instead of showing fake stars or placeholder quotes.',
         ],
         'form' => [
             'title'        => 'Tell us what’s happening',

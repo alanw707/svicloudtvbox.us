@@ -95,6 +95,10 @@ if ($order instanceof WC_Order && $order->has_status('failed')) : ?>
                 <a class="lumen-order-thankyou__btn lumen-order-thankyou__btn--primary" href="<?php echo esc_url($order_tracking); ?>"><?php echo svic_translate_html('order_thankyou.cta.track'); ?></a>
                 <a class="lumen-order-thankyou__btn" href="<?php echo esc_url($shop_url); ?>"><?php echo svic_translate_html('order_thankyou.cta.continue'); ?></a>
               </div>
+              <div class="lumen-order-summary__meta-group" style="margin-top:14px;">
+                <span class="lumen-order-summary__eyebrow"><?php echo svic_translate_html('order_thankyou.review.badge'); ?></span>
+                <p class="lumen-order-summary__meta"><?php echo svic_translate_html('order_thankyou.review.copy'); ?></p>
+              </div>
             </div>
           </div>
         </div>
