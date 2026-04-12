@@ -96,15 +96,24 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
 
     function initSmoothScrolling() {
         $('a[href*="#"]:not([href="#"])').on('click', function(e) {
-            const target = $(this.hash);
+            const hash = this.hash;
+            const target = hash ? document.querySelector(hash) : null;
 
-            if (target.length) {
+            if (target) {
                 e.preventDefault();
                 const offset = getStickyScrollOffset();
+                const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - offset);
 
-                $('html, body').animate({
-                    scrollTop: target.offset().top - offset
-                }, 600, 'easeInOutCubic');
+                window.scrollTo({
+                    top,
+                    behavior: 'smooth'
+                });
+
+                if (window.history && typeof window.history.replaceState === 'function') {
+                    window.history.replaceState(null, '', hash);
+                } else {
+                    window.location.hash = hash;
+                }
             }
         });
     }
