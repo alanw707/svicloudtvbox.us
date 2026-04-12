@@ -1548,17 +1548,17 @@ if (!function_exists('svic_homepage_meta_definitions')) {
         $definitions = [
             'zh_tw' => [
                 'title'       => 'SVICLOUD TV Box US | 小雲盒子 美國授權經銷',
-                'description' => 'Buy SVICLOUD TV Box in the U.S. Authorized dealer with fast US shipping and 1-year warranty. 小雲盒子 美國現貨保固，English/中文 支援。',
+                'description' => '選購 2026 最新 SVICLOUD 小雲盒子美國版。美國授權經銷，最新機型、快速美國出貨、1 年保固，提供 English/中文 支援。',
                 'image_alt'   => 'SVICLOUD 10P+ streaming box with concierge support badge, 小雲盒子',
             ],
             'zh_cn' => [
                 'title'       => 'SVICLOUD TV Box US | 小雲盒子 美國授權經銷',
-                'description' => 'Buy SVICLOUD TV Box in the U.S. Authorized dealer with fast US shipping and 1-year warranty. 小雲盒子 美國現貨保固，English/中文 支援。',
+                'description' => '选购 2026 最新 SVICLOUD 小云盒子美国版。美国授权经销，最新机型、美国快速发货、1 年保固，并提供 English/中文 支持。',
                 'image_alt'   => 'SVICLOUD 10P+ streaming box with concierge support badge, 小雲盒子',
             ],
             'en_us' => [
                 'title'       => 'SVICLOUD TV Box US | 小雲盒子 美國授權經銷',
-                'description' => 'Buy SVICLOUD TV Box in the U.S. Authorized dealer with fast US shipping and 1-year warranty. 小雲盒子 美國現貨保固，English/中文 支援。',
+                'description' => 'Shop the best 2026 SVICLOUD TV Box in the USA. Latest models, fast U.S. shipping, 1-year warranty, and English/中文 support from an authorized dealer.',
                 'image_alt'   => 'SVICLOUD 10P+ streaming box with concierge support badge, 小雲盒子',
             ],
         ];
