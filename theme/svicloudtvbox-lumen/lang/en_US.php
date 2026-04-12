@@ -705,8 +705,8 @@ return [
     'frontpage' => [
         'hero' => [
             'badge'   => 'Authorized U.S. Dealer',
-            'title'   => 'The Streaming Box for U.S. Chinese Families — 1000+ Channels in 4K, Ships from Nevada in 48 Hours',
-            'title_lead' => 'The Streaming Box for U.S. Chinese Families',
+            'title'   => 'The Best Streaming Box for U.S. Chinese Families — 1000+ Channels in 4K, Ships from Nevada in 48 Hours',
+            'title_lead' => 'The Best Streaming Box for U.S. Chinese Families',
             'title_separator' => ' — ',
             'title_tail' => '1000+ Channels in 4K, Ships from Nevada in 48 Hours',
             'copy'    => 'SVICLOUD packs premium Chinese and international channels, karaoke, and kids favorites into one flagship box—ships fast from the USA with bilingual concierge support.',
