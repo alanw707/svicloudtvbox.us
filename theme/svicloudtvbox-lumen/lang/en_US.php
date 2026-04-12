@@ -1726,12 +1726,12 @@ return [
             'no_fees'   => 'No monthly fees or hidden renewals',
         ],
         'traffic' => [
-            'badge' => 'Why 10P+ for U.S.-based Chinese/Asian homes',
-            'title' => 'U.S. stock, bilingual concierge, and warranty-backed 10P+',
-            'lead'  => 'Serve U.S. Chinese/Asian families with Nevada fulfillment, 中文/English setup help, and hardware ready for 4K sports, dramas, karaoke, and kids profiles.',
+            'badge' => 'Built for U.S.-based Chinese/Asian homes',
+            'title' => 'U.S. stock, bilingual concierge, and warranty-backed support',
+            'lead'  => 'Serve U.S. Chinese/Asian families with Nevada fulfillment, 中文/English setup help, and authentic SVICLOUD hardware ready for 4K sports, dramas, and everyday streaming.',
             'bullets' => [
                 'shipping'  => '48-hour U.S. shipping with localized power/HDMI and tracking',
-                'concierge' => 'Bilingual concierge: remote setup, Wi-Fi tuning, karaoke mic pairing, Kids Mode guidance',
+                'concierge' => 'Bilingual concierge: remote setup, Wi-Fi tuning, and device guidance',
                 'warranty'  => '1-year U.S. warranty + 30-day returns handled by concierge',
             ],
             'links' => [
