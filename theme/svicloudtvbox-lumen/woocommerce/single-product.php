@@ -197,13 +197,21 @@ while (have_posts()) :
       <section class="product-traffic">
         <div class="product-traffic__inner">
           <div class="product-traffic__copy">
-            <span class="product-traffic__badge"><?php echo svic_translate_html('product.traffic.badge'); ?></span>
-            <h2 class="product-traffic__title"><?php echo svic_translate_html('product.traffic.title'); ?></h2>
-            <p class="product-traffic__lead"><?php echo svic_translate_html('product.traffic.lead'); ?></p>
+            <?php
+            $traffic_key_base = 'products.' . $slug . '.traffic';
+            $traffic_badge = svic_translate($traffic_key_base . '.badge');
+            if (!is_string($traffic_badge) || $traffic_badge === '' || $traffic_badge === 'badge') {
+                $traffic_key_base = 'product.traffic';
+                $traffic_badge = svic_translate($traffic_key_base . '.badge');
+            }
+            ?>
+            <span class="product-traffic__badge"><?php echo esc_html($traffic_badge); ?></span>
+            <h2 class="product-traffic__title"><?php echo svic_translate_html($traffic_key_base . '.title'); ?></h2>
+            <p class="product-traffic__lead"><?php echo svic_translate_html($traffic_key_base . '.lead'); ?></p>
             <ul class="product-traffic__list" role="list">
-              <li><?php echo svic_translate_html('product.traffic.bullets.shipping'); ?></li>
-              <li><?php echo svic_translate_html('product.traffic.bullets.concierge'); ?></li>
-              <li><?php echo svic_translate_html('product.traffic.bullets.warranty'); ?></li>
+              <li><?php echo svic_translate_html($traffic_key_base . '.bullets.shipping'); ?></li>
+              <li><?php echo svic_translate_html($traffic_key_base . '.bullets.concierge'); ?></li>
+              <li><?php echo svic_translate_html($traffic_key_base . '.bullets.warranty'); ?></li>
             </ul>
           </div>
           <div class="product-traffic__links lumen-action-group" role="group" aria-label="<?php esc_attr_e('Key SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
