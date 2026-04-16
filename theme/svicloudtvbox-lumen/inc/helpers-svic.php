@@ -793,7 +793,7 @@ if (!function_exists('svic_post_card_image')) {
             }
         }
 
-        $fallback_relative = apply_filters('svic_blog_fallback_image', '/assets/images/svicloud-10p-plus-lifestyle-1.webp', $post_id, $size, $attr);
+        $fallback_relative = apply_filters('svic_blog_fallback_image', '/assets/images/svicloud-hero-product.webp', $post_id, $size, $attr);
         $meta = function_exists('svic_get_theme_image_meta') ? svic_get_theme_image_meta($fallback_relative) : [
             'url' => get_template_directory_uri() . '/' . ltrim((string) $fallback_relative, '/'),
             'width' => null,
@@ -1113,6 +1113,53 @@ if (!function_exists('svic_price_html')) {
         }
 
         return '';
+    }
+}
+
+if (!function_exists('svic_get_product_image_meta')) {
+    function svic_get_product_image_meta($product, int $index = 0, string $size = 'full'): array {
+        $fallback = function_exists('svic_get_theme_image_meta')
+            ? svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp')
+            : [
+                'url' => esc_url_raw(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')),
+                'width' => null,
+                'height' => null,
+            ];
+
+        if (!($product instanceof WC_Product)) {
+            return $fallback;
+        }
+
+        $attachment_ids = [];
+        $primary_id = (int) $product->get_image_id();
+        if ($primary_id > 0) {
+            $attachment_ids[] = $primary_id;
+        }
+
+        if (method_exists($product, 'get_gallery_image_ids')) {
+            foreach ((array) $product->get_gallery_image_ids() as $gallery_id) {
+                $gallery_id = (int) $gallery_id;
+                if ($gallery_id > 0 && !in_array($gallery_id, $attachment_ids, true)) {
+                    $attachment_ids[] = $gallery_id;
+                }
+            }
+        }
+
+        if (!$attachment_ids) {
+            return $fallback;
+        }
+
+        $selected_id = $attachment_ids[$index] ?? $attachment_ids[0];
+        $image_src = wp_get_attachment_image_src($selected_id, $size);
+        if (!is_array($image_src) || empty($image_src[0])) {
+            return $fallback;
+        }
+
+        return [
+            'url' => esc_url_raw($image_src[0]),
+            'width' => isset($image_src[1]) ? (int) $image_src[1] : null,
+            'height' => isset($image_src[2]) ? (int) $image_src[2] : null,
+        ];
     }
 }
 

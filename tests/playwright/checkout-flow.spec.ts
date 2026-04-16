@@ -208,5 +208,18 @@ test.describe('Checkout purchase flow', () => {
     await expect(page).toHaveURL(/\/checkout\/order-received\//);
     expect(bodyClass).toContain('woocommerce-order-received');
     await expect(orderSummary).toContainText(/Order|Total/i);
+
+    const thankyouTracking = await page.evaluate(() => {
+      const dataLayer = Array.isArray((window as any).dataLayer) ? (window as any).dataLayer : [];
+      return dataLayer.find((entry: any) => entry && entry.event === 'svic_order_received') || null;
+    });
+
+    expect(thankyouTracking).toBeTruthy();
+    expect(thankyouTracking?.svic_location).toBe('thankyou');
+    expect(thankyouTracking?.svic_order_number).toBeTruthy();
+    expect(thankyouTracking?.svic_order_total).toBeTruthy();
+
+    const thankyouNextCtas = page.locator('[data-svic-location="thankyou_next"]');
+    await expect(thankyouNextCtas).toHaveCount(3);
   });
 });

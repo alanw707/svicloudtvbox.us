@@ -25,6 +25,7 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
     function initTheme() {
         initLanguageSwitcher();
         initSmoothScrolling();
+        initConversionTracking();
         initProductImageEnhancements();
         initAnimationOnScroll();
         initPerformanceOptimizations();
@@ -118,6 +119,122 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         });
     }
 
+
+    function initConversionTracking() {
+        const trackedSelector = '[data-svic-event]';
+        if (!document.querySelector(trackedSelector) && !document.querySelector('form.cart')) {
+            return;
+        }
+
+        const pushTrackingEvent = (payload) => {
+            if (!payload || !payload.event) {
+                return;
+            }
+
+            if (!Array.isArray(window.dataLayer)) {
+                window.dataLayer = [];
+            }
+
+            const dataLayerPayload = Object.assign({}, payload, {
+                svic_location: payload.location || '',
+                svic_label: payload.label || '',
+                svic_model: payload.model || '',
+                svic_href: payload.href || '',
+            });
+
+            window.dataLayer.push(dataLayerPayload);
+
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', payload.event, {
+                    event_category: 'conversion_path',
+                    event_label: payload.label || '',
+                    location: payload.location || '',
+                    model: payload.model || '',
+                    href: payload.href || '',
+                });
+            }
+
+            try {
+                window.dispatchEvent(new CustomEvent('svic:track', { detail: payload }));
+            } catch (e) {
+                // no-op
+            }
+        };
+
+        $(document).on('click', trackedSelector, function() {
+            const element = this;
+            const dataset = element.dataset || {};
+            pushTrackingEvent({
+                event: dataset.svicEvent || 'svic_cta_click',
+                location: dataset.svicLocation || '',
+                label: dataset.svicLabel || element.textContent.trim(),
+                model: dataset.svicModel || '',
+                href: element.getAttribute('href') || '',
+                interaction: 'click'
+            });
+        });
+
+        $(document).on('submit', 'form.cart', function() {
+            const $form = $(this);
+            const $button = $form.find('.single_add_to_cart_button');
+            const label = ($button.text() || '').trim();
+            const productTitle = ($('.product-hero-title').first().text() || $('.product_title').first().text() || '').trim();
+            const pathParts = window.location.pathname.split('/').filter(Boolean);
+            const model = pathParts.length ? pathParts[pathParts.length - 1] : '';
+            pushTrackingEvent({
+                event: 'svic_cta_add_to_cart',
+                location: 'pdp_hero',
+                label: label || productTitle || 'add_to_cart',
+                model,
+                href: window.location.href,
+                interaction: 'submit'
+            });
+        });
+
+        $(document).on('click', '.lumen-cart-update', function() {
+            pushTrackingEvent({
+                event: 'svic_cart_update',
+                location: 'cart_actions',
+                label: 'update_cart',
+                href: window.location.href,
+                interaction: 'click'
+            });
+        });
+
+        $(document).on('click', '.wc-proceed-to-checkout .checkout-button', function() {
+            pushTrackingEvent({
+                event: 'svic_begin_checkout',
+                location: 'cart_totals',
+                label: 'checkout_button',
+                href: this.getAttribute('href') || window.location.href,
+                interaction: 'click'
+            });
+        });
+
+        $(document).on('click', '#place_order', function() {
+            const paymentMethod = ($('input[name="payment_method"]:checked').val() || '').toString();
+            pushTrackingEvent({
+                event: 'svic_place_order_attempt',
+                location: 'checkout_payment',
+                label: 'place_order',
+                model: paymentMethod,
+                href: window.location.href,
+                interaction: 'click'
+            });
+        });
+
+        $(document).on('submit', 'form.checkout.woocommerce-checkout', function() {
+            const paymentMethod = ($('input[name="payment_method"]:checked').val() || '').toString();
+            pushTrackingEvent({
+                event: 'svic_checkout_submit',
+                location: 'checkout_form',
+                label: 'checkout_submit',
+                model: paymentMethod,
+                href: window.location.href,
+                interaction: 'submit'
+            });
+        });
+    }
 
     /**
      * Product image enhancements

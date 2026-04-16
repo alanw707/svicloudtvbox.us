@@ -76,6 +76,15 @@ body.admin-bar .lumen-checkout__summary {
   line-height: 1.65;
 }
 
+.lumen-checkout-summary__links {
+  margin-top: -0.25rem;
+}
+
+.lumen-checkout-summary__links .lumen-pill {
+  width: 100%;
+  justify-content: center;
+}
+
 .lumen-checkout-summary__heading {
   margin: 0;
   font-size: 1.1rem;

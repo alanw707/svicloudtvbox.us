@@ -102,6 +102,21 @@
     width: min(100%, 520px);
   }
 
+  .lumen-product .product-hero-best-for__badge,
+  .lumen-product .product-hero-best-for__link {
+    margin-inline: auto;
+  }
+
+  .lumen-product .product-hero-best-for__list li,
+  .lumen-product .product-hero-reassurance__list li {
+    text-align: left;
+  }
+
+  .lumen-product .product-hero-reassurance__badge,
+  .lumen-product .product-hero-reassurance__links {
+    margin-inline: auto;
+  }
+
   .lumen-product .product-hero-cta .cart {
     justify-content: center;
   }
@@ -435,6 +450,81 @@
   line-height: 1.75;
 }
 
+.lumen-product .product-hero-best-for {
+  display: grid;
+  gap: 0.8rem;
+  padding: clamp(1rem, 2.8vw, 1.25rem) clamp(1rem, 3vw, 1.35rem);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(126, 246, 227, 0.18);
+  background: linear-gradient(145deg, rgba(8, 22, 50, 0.88), rgba(6, 16, 34, 0.92));
+  box-shadow: 0 18px 42px rgba(4, 12, 30, 0.38);
+}
+
+.lumen-product .product-hero-best-for__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(126, 246, 227, 0.24);
+  background: rgba(94, 230, 208, 0.1);
+  color: rgba(226, 240, 255, 0.84);
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lumen-product .product-hero-best-for__title {
+  margin: 0;
+  color: var(--lumen-text-primary);
+  font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+}
+
+.lumen-product .product-hero-best-for__copy {
+  margin: 0;
+  color: rgba(223, 232, 255, 0.88);
+  line-height: 1.68;
+}
+
+.lumen-product .product-hero-best-for__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.lumen-product .product-hero-best-for__list li {
+  position: relative;
+  padding-left: 1.3rem;
+  color: rgba(234, 242, 255, 0.92);
+  line-height: 1.55;
+}
+
+.lumen-product .product-hero-best-for__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(126, 246, 227, 0.96), rgba(91, 139, 255, 0.92));
+  box-shadow: 0 0 0 5px rgba(94, 230, 208, 0.14);
+}
+
+.lumen-product .product-hero-best-for__link {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  color: var(--link-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--link-primary-underline);
+  text-underline-offset: 4px;
+}
+
 .lumen-product .product-hero-price {
   font-size: 2.4rem;
   font-weight: 600;
@@ -508,6 +598,90 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.lumen-product .product-hero-reassurance {
+  display: grid;
+  gap: 0.8rem;
+  padding: clamp(0.95rem, 2.6vw, 1.2rem) clamp(1rem, 2.8vw, 1.3rem);
+  border-radius: 20px;
+  border: 1px solid rgba(126, 246, 227, 0.16);
+  background: linear-gradient(145deg, rgba(8, 20, 45, 0.82), rgba(5, 14, 30, 0.88));
+  box-shadow: 0 16px 38px rgba(4, 12, 30, 0.32);
+}
+
+.lumen-product .product-hero-reassurance__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.34rem 0.78rem;
+  border-radius: 999px;
+  border: 1px solid rgba(126, 246, 227, 0.22);
+  background: rgba(94, 230, 208, 0.08);
+  color: rgba(226, 240, 255, 0.84);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.lumen-product .product-hero-reassurance__title {
+  margin: 0;
+  color: var(--lumen-text-primary);
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+}
+
+.lumen-product .product-hero-reassurance__copy {
+  margin: 0;
+  color: rgba(223, 232, 255, 0.84);
+  line-height: 1.65;
+}
+
+.lumen-product .product-hero-reassurance__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.lumen-product .product-hero-reassurance__list li {
+  position: relative;
+  padding-left: 1.2rem;
+  color: rgba(233, 241, 255, 0.9);
+  line-height: 1.55;
+}
+
+.lumen-product .product-hero-reassurance__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(126, 246, 227, 0.96), rgba(91, 139, 255, 0.92));
+  box-shadow: 0 0 0 4px rgba(94, 230, 208, 0.12);
+}
+
+.lumen-product .product-hero-reassurance__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 1rem;
+}
+
+.lumen-product .product-hero-reassurance__links a {
+  color: var(--link-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--link-primary-underline);
+  text-underline-offset: 4px;
+}
+
+.lumen-product .product-hero-reassurance__links a:hover,
+.lumen-product .product-hero-reassurance__links a:focus-visible {
+  color: var(--link-primary-hover);
+  text-decoration-color: var(--link-primary-underline-hover);
 }
 
 .lumen-product .product-hero-detail {

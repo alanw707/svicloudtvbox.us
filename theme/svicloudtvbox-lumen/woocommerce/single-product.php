@@ -38,19 +38,6 @@ while (have_posts()) :
     $slug = method_exists($product, 'get_slug') ? $product->get_slug() : '';
 
     $fallback_gallery_files = [];
-    if ($slug === 'svicloud-10p-plus') {
-        $fallback_gallery_files = [
-            'svicloud-10p-plus-lifestyle-1.webp',
-            'svicloud-10p-plus-lifestyle-2.webp',
-            'svicloud-10p-plus-lifestyle-3.webp',
-        ];
-    } elseif ($slug === 'svicloud-10s') {
-        $fallback_gallery_files = [
-            'svicloud-10s-lifestyle-1.webp',
-            'svicloud-10s-lifestyle-2.webp',
-            'svicloud-10s-lifestyle-3.webp',
-        ];
-    }
 
     $gallery_entries = [];
     if ($gallery) {
@@ -99,9 +86,34 @@ while (have_posts()) :
         'product.highlights.no_fees',
     ];
 
-    $compare_url  = svic_url_with_lang(home_url('/compare/'));
-    $faq_url      = svic_url_with_lang(home_url('/faq/'));
-    $contact_url  = svic_url_with_lang(home_url('/contact/'));
+    $compare_url     = svic_url_with_lang(home_url('/compare/'));
+    $faq_url         = svic_url_with_lang(home_url('/faq/'));
+    $contact_url     = svic_url_with_lang(home_url('/contact/'));
+    $setup_guide_url = svic_url_with_lang(home_url('/guides-setup/'));
+
+    $product_box_item_keys = [
+        'frontpage.inbox.items.box',
+        'frontpage.inbox.items.power',
+        'frontpage.inbox.items.hdmi',
+        'frontpage.inbox.items.remote',
+        'frontpage.inbox.items.batteries',
+        'frontpage.inbox.items.guide',
+    ];
+
+    $product_best_for_key_base = 'products.' . $slug . '.best_for';
+    $product_best_for_title = svic_translate($product_best_for_key_base . '.title');
+    $product_best_for_items = [
+        $product_best_for_key_base . '.bullets.primary',
+        $product_best_for_key_base . '.bullets.secondary',
+        $product_best_for_key_base . '.bullets.tertiary',
+    ];
+
+    $product_reassurance_title = svic_translate('product.hero.reassurance.title');
+    $product_reassurance_items = [
+        'product.hero.reassurance.bullets.shipping',
+        'product.hero.reassurance.bullets.warranty',
+        'product.hero.reassurance.bullets.concierge',
+    ];
 
     $product_faq_items = [
         [
@@ -115,6 +127,28 @@ while (have_posts()) :
         [
             'question_key' => 'product.faq.items.concierge.q',
             'answer_key'   => 'product.faq.items.concierge.a',
+        ],
+        [
+            'question_key' => 'product.faq.sections.device_models.items.model_choice.question',
+            'answer_key'   => 'product.faq.sections.device_models.items.model_choice.answer',
+            'replacements' => [
+                'compare_url' => esc_url($compare_url),
+            ],
+        ],
+        [
+            'question_key' => 'product.faq.sections.device_models.items.box_contents.question',
+            'answer_key'   => 'product.faq.sections.device_models.items.box_contents.answer',
+        ],
+        [
+            'question_key' => 'product.faq.sections.models.items.after_warranty.question',
+            'answer_key'   => 'product.faq.sections.models.items.after_warranty.answer',
+        ],
+        [
+            'question_key' => 'product.faq.sections.troubleshooting_support.items.buffering.question',
+            'answer_key'   => 'product.faq.sections.troubleshooting_support.items.buffering.answer',
+            'replacements' => [
+                'setup_guide_url' => esc_url($setup_guide_url),
+            ],
         ],
     ];
     ?>
@@ -158,10 +192,39 @@ while (have_posts()) :
             <p class="product-hero-subtitle">
               <?php echo svic_translate_html('product.hero.subtitle'); ?>
             </p>
+            <?php if (is_string($product_best_for_title) && $product_best_for_title !== '' && $product_best_for_title !== 'title') : ?>
+              <section class="product-hero-best-for" aria-labelledby="product-best-for-heading">
+                <span class="product-hero-best-for__badge"><?php echo svic_translate_html($product_best_for_key_base . '.badge'); ?></span>
+                <h2 class="product-hero-best-for__title" id="product-best-for-heading"><?php echo esc_html($product_best_for_title); ?></h2>
+                <p class="product-hero-best-for__copy"><?php echo svic_translate_html($product_best_for_key_base . '.copy'); ?></p>
+                <ul class="product-hero-best-for__list" role="list">
+                  <?php foreach ($product_best_for_items as $best_for_item_key) : ?>
+                    <li><?php echo svic_translate_html($best_for_item_key); ?></li>
+                  <?php endforeach; ?>
+                </ul>
+                <a class="product-hero-best-for__link" href="<?php echo esc_url($compare_url); ?>"><?php echo svic_translate_html('product.traffic.links.compare'); ?></a>
+              </section>
+            <?php endif; ?>
             <div class="product-hero-price"><?php echo $product->get_price_html(); ?></div>
             <div class="product-hero-cta">
               <?php woocommerce_template_single_add_to_cart(); ?>
             </div>
+            <?php if (is_string($product_reassurance_title) && $product_reassurance_title !== '' && $product_reassurance_title !== 'title') : ?>
+              <section class="product-hero-reassurance" aria-labelledby="product-hero-reassurance-heading">
+                <span class="product-hero-reassurance__badge"><?php echo svic_translate_html('product.hero.reassurance.badge'); ?></span>
+                <h2 class="product-hero-reassurance__title" id="product-hero-reassurance-heading"><?php echo esc_html($product_reassurance_title); ?></h2>
+                <p class="product-hero-reassurance__copy"><?php echo svic_translate_html('product.hero.reassurance.copy'); ?></p>
+                <ul class="product-hero-reassurance__list" role="list">
+                  <?php foreach ($product_reassurance_items as $product_reassurance_item_key) : ?>
+                    <li><?php echo svic_translate_html($product_reassurance_item_key); ?></li>
+                  <?php endforeach; ?>
+                </ul>
+                <div class="product-hero-reassurance__links">
+                  <a href="<?php echo esc_url($faq_url); ?>"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
+                  <a href="<?php echo esc_url($contact_url); ?>"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
+                </div>
+              </section>
+            <?php endif; ?>
             <div class="product-hero-detail text-small">
               <?php echo svic_translate_html('product.hero.detail'); ?>
             </div>
@@ -194,6 +257,17 @@ while (have_posts()) :
         </div>
       </section>
 
+      <section class="product-description product-description--inbox">
+        <h2 class="h3 spacing-normal"><?php echo svic_translate_html('frontpage.inbox.title'); ?></h2>
+        <div class="entry-content">
+          <ul>
+            <?php foreach ($product_box_item_keys as $box_item_key) : ?>
+              <li><?php echo svic_translate_html($box_item_key); ?></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      </section>
+
       <section class="product-traffic">
         <div class="product-traffic__inner">
           <div class="product-traffic__copy">
@@ -214,7 +288,7 @@ while (have_posts()) :
               <li><?php echo svic_translate_html($traffic_key_base . '.bullets.warranty'); ?></li>
             </ul>
           </div>
-          <div class="product-traffic__links lumen-action-group" role="group" aria-label="<?php esc_attr_e('Key SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
+          <div class="product-traffic__links lumen-action-group" role="group" aria-label="<?php echo svic_translate_attr('product.aria.traffic_actions'); ?>">
             <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($compare_url); ?>"><?php echo svic_translate_html('product.traffic.links.compare'); ?></a>
             <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($faq_url); ?>"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
             <a class="product-traffic__textlink" href="<?php echo esc_url($contact_url); ?>"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
@@ -231,9 +305,10 @@ while (have_posts()) :
           </header>
           <div class="product-faq__grid">
             <?php foreach ($product_faq_items as $idx => $item) : ?>
+              <?php $answer = svic_translate_rich($item['answer_key'], $item['replacements'] ?? []); ?>
               <details class="product-faq__item"<?php echo $idx === 0 ? ' open' : ''; ?>>
                 <summary class="product-faq__question"><?php echo svic_translate_html($item['question_key']); ?></summary>
-                <div class="product-faq__answer"><?php echo wp_kses_post(svic_translate($item['answer_key'])); ?></div>
+                <div class="product-faq__answer"><?php echo wp_kses_post($answer); ?></div>
               </details>
             <?php endforeach; ?>
           </div>
