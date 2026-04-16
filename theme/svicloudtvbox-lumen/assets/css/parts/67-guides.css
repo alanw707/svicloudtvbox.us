@@ -239,6 +239,54 @@
 .guides-detail__content .guides-card { background: var(--base-strong, rgba(250, 252, 255, 0.96)); }
 .guides-detail__content .guides-card:hover { transform: translateY(-6px); }
 
+.guides-inline-cta {
+  display: grid;
+  gap: 0.85rem;
+  padding: clamp(1.25rem, 3.2vw, 1.7rem);
+  border-radius: 22px;
+  border: 1px solid rgba(94, 230, 208, 0.26);
+  background: linear-gradient(145deg, rgba(7, 22, 48, 0.96), rgba(4, 12, 30, 0.96));
+  box-shadow: 0 24px 54px rgba(4, 12, 30, 0.4);
+  color: var(--lumen-text-primary);
+}
+
+.guides-inline-cta__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.38rem 0.82rem;
+  border-radius: 999px;
+  border: 1px solid rgba(126, 246, 227, 0.26);
+  background: rgba(94, 230, 208, 0.1);
+  color: rgba(226, 240, 255, 0.84);
+  font-size: 0.73rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.guides-inline-cta__title {
+  margin: 0;
+  color: var(--lumen-text-primary);
+  font-size: clamp(1.3rem, 2.4vw, 1.65rem);
+}
+
+.guides-inline-cta__copy {
+  margin: 0;
+  color: var(--lumen-text-secondary);
+  line-height: 1.7;
+}
+
+.guides-inline-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.guides-resource-item--cta {
+  list-style: none;
+}
+
 .guides-support--detail,
 .guides-support--detail-cta { margin-top: clamp(2.2rem, 5vw, 3.2rem); }
 
@@ -263,6 +311,9 @@
   .guides-detail__hero-actions { justify-content: center; }
   .guides-detail__hero-callouts-label { justify-self: center; }
   .guides-detail__callouts-list { justify-content: center; }
+  .guides-inline-cta__badge { margin-inline: auto; }
+  .guides-inline-cta { text-align: center; }
+  .guides-inline-cta__actions { justify-content: center; }
   .guides-detail__hero-nav { width: 100%; max-width: 420px; margin: 0 auto; justify-self: center; padding: clamp(1.1rem, 5vw, 1.45rem); }
   .guides-detail__hero-nav-link { padding: clamp(0.68rem, 4.5vw, 0.9rem) clamp(0.9rem, 5.5vw, 1.2rem); }
   .guides-detail__sidebar { padding: 1.2rem 1.4rem; }

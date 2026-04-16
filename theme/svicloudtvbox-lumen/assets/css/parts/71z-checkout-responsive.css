@@ -39,11 +39,6 @@
     padding-right: clamp(1.9rem, 4.8vw, 2.4rem);
   }
 
-  #payment .wc-stripe-card-icons-container {
-    float: none !important;
-    max-width: clamp(10rem, 32vw, 14rem);
-  }
-
   .place-order {
     padding: clamp(1rem, 4vw, 1.25rem);
   }
@@ -69,10 +64,6 @@
     width: 100%;
   }
 
-  .lumen-checkout__panel--payment .lumen-checkout__panel-inner {
-    padding: clamp(1.5rem, 4vw, 2rem) 1.1rem;
-  }
-
   #payment ul.payment_methods > li {
     padding: clamp(0.15rem, 1.6vw, 0.35rem) clamp(0.45rem, 3.6vw, 0.95rem);
     gap: clamp(0.6rem, 3vw, 0.9rem);
@@ -85,22 +76,12 @@
   #payment ul.payment_methods > li > label {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: flex-start;
     gap: clamp(0.5rem, 4vw, 0.8rem);
     padding: clamp(0.6rem, 3.4vw, 0.9rem) clamp(1.1rem, 6vw, 1.6rem);
     padding-left: clamp(2.35rem, 6.2vw, 2.85rem);
     padding-right: clamp(1.7rem, 6vw, 2.3rem);
     min-height: auto;
-  }
-
-  #payment ul.payment_methods > li > label::before {
-    top: clamp(1rem, 3.5vw, 1.3rem);
-    transform: none;
-  }
-
-  #payment ul.payment_methods > li > label::after {
-    top: clamp(1.07rem, 3.7vw, 1.37rem);
-    transform: none;
   }
 
   #payment .wc-saved-payment-methods input[type="radio"] + label {
@@ -134,7 +115,6 @@
     background: transparent;
     border: none;
     box-shadow: none;
-    overflow: visible;
     display: grid;
     gap: 0.85rem;
   }
@@ -181,16 +161,6 @@
     margin-top: 0.45rem;
   }
 
-  #payment .payment_box .StripeElement {
-    min-height: 52px;
-    padding: clamp(0.85rem, 3vw, 1.1rem);
-  }
-
-  #payment .wc-stripe_cc-new-method-container,
-  #payment .wc-stripe_cc-container {
-    gap: 0.85rem;
-  }
-
   #payment .wc-stripe-save-source {
     padding: 0.55rem 0;
     background: transparent;
@@ -202,24 +172,10 @@
   }
 
   #payment .wc-stripe-card-icons-container {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(28px, 38px));
-    float: none !important;
-    width: 100%;
-    gap: 0.35rem;
+    justify-content: flex-start;
     max-width: none;
     padding-right: 0;
     padding-left: 0;
-  }
-
-  #payment .wc-stripe-card-icons-container img,
-  li.payment_method_stripe_cc .wc-stripe-card-icons-container img.wc-stripe-card-icon {
-    height: 18px !important;
-    max-height: 18px !important;
-    width: 100% !important;
-    max-width: 38px !important;
-    display: block !important;
-    object-fit: contain;
   }
 
   .lumen-checkout-summary__order th,

@@ -106,6 +106,10 @@ if ($has_translator) {
 
                     <?php if ($has_translator) : ?>
                         <p class="lumen-checkout-summary__reassurance"><?php echo svic_translate_html('checkout_page.summary.reassurance'); ?></p>
+                        <div class="lumen-checkout-summary__links lumen-action-group">
+                            <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/faq/'))); ?>" data-svic-event="svic_cta_click" data-svic-location="checkout_summary" data-svic-label="faq_before_order"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
+                            <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact/'))); ?>" data-svic-event="svic_cta_click" data-svic-location="checkout_summary" data-svic-label="contact_concierge"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
+                        </div>
                     <?php endif; ?>
 
                     <?php do_action('woocommerce_checkout_before_order_review_heading'); ?>

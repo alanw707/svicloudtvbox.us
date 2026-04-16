@@ -34,6 +34,7 @@
       "48b-lumen-section-testimonials.css",
       "49-lumen-section-pricing.css",
       "49a-lumen-inline-cta.css",
+      "49b-lumen-section-confidence.css",
       "50-lumen-section-utilities.css",
       "51-frontpage-blog.css",
       "41-frontpage-helpers.css",
@@ -108,7 +109,9 @@
       "61-compare-hero.css",
       "62-compare-differences.css",
       "63-compare-products.css",
-      "64-compare-final-cta.css"
+      "63b-compare-confidence.css",
+      "64-compare-final-cta.css",
+      "64b-compare-sticky-buy.css"
     ]
   },
   "woocommerce": {

@@ -156,14 +156,35 @@ $faq_groups = [
     ],
 ];
 
+$frontpage_compare_url = svic_url_with_lang(home_url('/compare'));
+$frontpage_contact_url = svic_url_with_lang(home_url('/contact'));
+
+$frontpage_confidence_cards = [
+    'frontpage.confidence.cards.official',
+    'frontpage.confidence.cards.shipping',
+    'frontpage.confidence.cards.concierge',
+    'frontpage.confidence.cards.warranty',
+];
+
+$frontpage_confidence_steps = [
+    'frontpage.confidence.timeline.steps.order',
+    'frontpage.confidence.timeline.steps.dispatch',
+    'frontpage.confidence.timeline.steps.setup',
+    'frontpage.confidence.timeline.steps.support',
+];
+
 $pricing_card_images = [
     '10p' => array_merge(
-        ['alt' => esc_html__('SVICLOUD 10P+ flagship streaming device and remote', 'svicloudtvbox-lumen')],
-        svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.webp')
+        ['alt' => svic_translate('frontpage.pricing.cards.10p.image_alt')],
+        function_exists('svic_get_product_image_meta')
+            ? svic_get_product_image_meta($hero_product_10p, 0, 'large')
+            : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp')
     ),
     '10s' => array_merge(
-        ['alt' => esc_html__('SVICLOUD 10S compact streaming device with HDMI and power accessories', 'svicloudtvbox-lumen')],
-        svic_get_theme_image_meta('/assets/images/svicloud-tvbox-10s.webp')
+        ['alt' => svic_translate('frontpage.pricing.cards.10s.image_alt')],
+        function_exists('svic_get_product_image_meta')
+            ? svic_get_product_image_meta($hero_product_10s, 0, 'large')
+            : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp')
     ),
 ];
 
@@ -458,7 +479,7 @@ if (!$blog_posts_query instanceof WP_Query) {
           <?php endforeach; ?>
         </ul>
         <div class="hero-dashboard__cta">
-          <a class="hero-dashboard__button hero-dashboard__button--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.hero.cta.primary'); ?></a>
+          <a class="hero-dashboard__button hero-dashboard__button--primary" href="<?php echo esc_url($hero_10p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="homepage_hero" data-svic-label="10p_primary" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('frontpage.hero.cta.primary'); ?></a>
           <a class="hero-dashboard__button hero-dashboard__button--secondary" href="#pricing">
             <span><?php echo svic_translate_html('frontpage.hero.cta.secondary'); ?></span>
           </a>
@@ -494,7 +515,7 @@ if (!$blog_posts_query instanceof WP_Query) {
                 src="<?php echo esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant-1200.png')); ?>"
                 srcset="<?php echo $hero_png_srcset; ?>"
                 sizes="<?php echo esc_attr($hero_image_sizes); ?>"
-                alt="<?php esc_attr_e('SVICLOUD voice assistant interface with Google Play, movies, and YouTube apps', 'svicloudtvbox-lumen'); ?>"
+                alt="<?php echo svic_translate_attr('frontpage.aria.hero_visual'); ?>"
                 decoding="async"
                 fetchpriority="high"
                 width="1601"
@@ -544,7 +565,7 @@ if (!$blog_posts_query instanceof WP_Query) {
           <li><?php echo svic_translate_html('frontpage.traffic.bullets.warranty'); ?></li>
         </ul>
       </div>
-      <div class="frontpage-traffic__links lumen-action-group" role="group" aria-label="<?php esc_attr_e('Key SVICLOUD actions', 'svicloudtvbox-lumen'); ?>">
+      <div class="frontpage-traffic__links lumen-action-group" role="group" aria-label="<?php echo svic_translate_attr('frontpage.aria.traffic_actions'); ?>">
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.traffic.links.pdp'); ?></a>
         <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url(svic_url_with_lang(home_url('/compare'))); ?>"><?php echo svic_translate_html('frontpage.traffic.links.compare'); ?></a>
         <a class="frontpage-traffic__textlink" href="<?php echo esc_url(svic_url_with_lang(home_url('/faq'))); ?>"><?php echo svic_translate_html('frontpage.traffic.links.faq'); ?></a>
@@ -616,7 +637,7 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
   </section>
 
   <!-- Inline CTA: post-certification -->
-  <div class="lumen-inline-cta" aria-label="<?php esc_attr_e('Shop now', 'svicloudtvbox-lumen'); ?>">
+  <div class="lumen-inline-cta" aria-label="<?php echo svic_translate_attr('frontpage.aria.shop_now'); ?>">
     <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.inline_cta.button'); ?></a>
     <ul class="lumen-inline-cta__trust" role="list">
       <li><?php echo svic_translate_html('frontpage.inline_cta.trust.shipping'); ?></li>
@@ -626,7 +647,7 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
   </div>
 
   <!-- Credibility Bar -->
-  <section class="lumen-metrics" aria-label="<?php esc_attr_e('Key SVICLOUD advantages', 'svicloudtvbox-lumen'); ?>" data-bg>
+  <section class="lumen-metrics" aria-label="<?php echo svic_translate_attr('frontpage.aria.metrics'); ?>" data-bg>
     <div class="lumen-metrics__inner">
       <?php foreach ($metrics as $metric) : ?>
         <?php $icon_path = get_template_directory_uri() . '/assets/svg/' . $metric['icon']; ?>
@@ -666,7 +687,7 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
   </section>
 
   <!-- Inline CTA: post-features -->
-  <div class="lumen-inline-cta" aria-label="<?php esc_attr_e('Shop now', 'svicloudtvbox-lumen'); ?>">
+  <div class="lumen-inline-cta" aria-label="<?php echo svic_translate_attr('frontpage.aria.shop_now'); ?>">
     <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.inline_cta.button'); ?></a>
     <ul class="lumen-inline-cta__trust" role="list">
       <li><?php echo svic_translate_html('frontpage.inline_cta.trust.shipping'); ?></li>
@@ -786,8 +807,8 @@ foreach ($pricing_cards as $_svic_card) {
               <?php endforeach; ?>
             </ul>
             <div class="lumen-pricing-card__actions">
-              <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($card['buy_url']); ?>" rel="nofollow"><?php echo svic_translate_html($card['buy_cta_key']); ?></a>
-              <a class="lumen-pill lumen-pill--secondary" href="<?php echo esc_url($card['cta_url']); ?>"><?php echo svic_translate_html($card['cta_key']); ?></a>
+              <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($card['buy_url']); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="homepage_pricing_buy" data-svic-label="<?php echo esc_attr($slug); ?>_buy" data-svic-model="<?php echo esc_attr($slug === '10p' ? 'svicloud-10p-plus' : 'svicloud-10s'); ?>"><?php echo svic_translate_html($card['buy_cta_key']); ?></a>
+              <a class="lumen-pill lumen-pill--secondary" href="<?php echo esc_url($card['cta_url']); ?>" data-svic-event="svic_cta_click" data-svic-location="homepage_pricing_detail" data-svic-label="<?php echo esc_attr($slug); ?>_details" data-svic-model="<?php echo esc_attr($slug === '10p' ? 'svicloud-10p-plus' : 'svicloud-10s'); ?>"><?php echo svic_translate_html($card['cta_key']); ?></a>
             </div>
             <div class="lumen-pricing-card__meta">
               <?php foreach ($card['meta_keys'] as $mk) : ?>
@@ -796,6 +817,51 @@ foreach ($pricing_cards as $_svic_card) {
             </div>
           </article>
         <?php endforeach; ?>
+      </div>
+    </div>
+  </section>
+
+  <section class="lumen-confidence" id="buy-confidence" aria-labelledby="buy-confidence-title">
+    <div class="lumen-confidence__inner">
+      <header class="lumen-section-header lumen-confidence__header">
+        <span class="lumen-confidence__badge"><?php echo svic_translate_html('frontpage.confidence.badge'); ?></span>
+        <h2 class="lumen-section-header__title" id="buy-confidence-title"><?php echo svic_translate_html('frontpage.confidence.title'); ?></h2>
+        <p class="lumen-section-header__subtitle"><?php echo svic_translate_html('frontpage.confidence.subtitle'); ?></p>
+      </header>
+
+      <div class="lumen-confidence__layout">
+        <div class="lumen-confidence__grid">
+          <?php foreach ($frontpage_confidence_cards as $confidence_base_key) : ?>
+            <article class="lumen-confidence-card">
+              <h3 class="lumen-confidence-card__title"><?php echo svic_translate_html($confidence_base_key . '.title'); ?></h3>
+              <p class="lumen-confidence-card__copy"><?php echo svic_translate_html($confidence_base_key . '.copy'); ?></p>
+            </article>
+          <?php endforeach; ?>
+        </div>
+
+        <aside class="lumen-confidence__timeline" aria-label="<?php echo svic_translate_attr('frontpage.confidence.timeline.aria_label'); ?>">
+          <div class="lumen-confidence__timeline-header">
+            <span class="lumen-confidence__timeline-badge"><?php echo svic_translate_html('frontpage.confidence.timeline.badge'); ?></span>
+            <h3 class="lumen-confidence__timeline-title"><?php echo svic_translate_html('frontpage.confidence.timeline.title'); ?></h3>
+            <p class="lumen-confidence__timeline-lead"><?php echo svic_translate_html('frontpage.confidence.timeline.lead'); ?></p>
+          </div>
+          <ol class="lumen-confidence__steps">
+            <?php foreach ($frontpage_confidence_steps as $index => $step_base_key) : ?>
+              <li class="lumen-confidence__step">
+                <span class="lumen-confidence__step-count"><?php echo esc_html(sprintf('%02d', $index + 1)); ?></span>
+                <div class="lumen-confidence__step-copy">
+                  <strong><?php echo svic_translate_html($step_base_key . '.title'); ?></strong>
+                  <p><?php echo svic_translate_html($step_base_key . '.copy'); ?></p>
+                </div>
+              </li>
+            <?php endforeach; ?>
+          </ol>
+          <div class="lumen-confidence__actions lumen-action-group">
+            <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="homepage_confidence" data-svic-label="buy_10p" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('frontpage.pricing.cards.10p.buy_cta'); ?></a>
+            <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($frontpage_compare_url); ?>" data-svic-event="svic_cta_click" data-svic-location="homepage_confidence" data-svic-label="compare_models"><?php echo svic_translate_html('frontpage.traffic.links.compare'); ?></a>
+            <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($frontpage_contact_url); ?>" data-svic-event="svic_cta_click" data-svic-location="homepage_confidence" data-svic-label="contact_concierge"><?php echo svic_translate_html('frontpage.traffic.links.contact'); ?></a>
+          </div>
+        </aside>
       </div>
     </div>
   </section>
@@ -837,7 +903,7 @@ foreach ($pricing_cards as $_svic_card) {
           $graph_nodes[] = [
               '@type'            => 'ItemList',
               '@id'              => svic_url_with_lang(home_url('/compare')) . '#product-list',
-              'name'             => esc_html__('SVICLOUD streaming devices available in North America', 'svicloudtvbox-lumen'),
+              'name'             => svic_translate('frontpage.schema.item_list_name'),
               'url'              => esc_url_raw($pricing_section_url),
               'numberOfItems'    => count($item_list_elements),
               'itemListOrder'    => 'https://schema.org/ItemListOrderAscending',
@@ -891,7 +957,7 @@ $sticky_10p_url = $hero_10p_url; // already computed earlier in the file
 <div class="lumen-sticky-buy" id="lumen-sticky-buy" aria-hidden="true">
   <div class="lumen-sticky-buy__inner">
     <span class="lumen-sticky-buy__label"><?php echo svic_translate_html('frontpage.sticky_buy.label'); ?></span>
-    <a class="lumen-sticky-buy__cta lumen-pill lumen-pill--primary" href="<?php echo esc_url($sticky_10p_url); ?>" rel="nofollow">
+    <a class="lumen-sticky-buy__cta lumen-pill lumen-pill--primary" href="<?php echo esc_url($sticky_10p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="homepage_sticky_buy" data-svic-label="sticky_buy_10p" data-svic-model="svicloud-10p-plus">
       <?php echo svic_translate_html('frontpage.sticky_buy.cta'); ?>
     </a>
   </div>

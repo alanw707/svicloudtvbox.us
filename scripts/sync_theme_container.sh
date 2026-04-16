@@ -62,6 +62,17 @@ fi
 EOF
 }
 
+container_path_is_mountpoint() {
+  local target="$1"
+  docker exec "${CONTAINER_NAME}" bash -s -- "${target}" <<'EOF' >/dev/null 2>&1
+target="$1"
+if command -v mountpoint >/dev/null 2>&1 && mountpoint -q "$target"; then
+  exit 0
+fi
+exit 1
+EOF
+}
+
 if [[ -z "${CONTAINER_NAME}" ]]; then
   echo "[sync-theme] Unable to find a running WordPress container. Pass a container fragment, e.g. ./scripts/sync_theme_container.sh svicloud10p" >&2
   exit 1
@@ -86,15 +97,20 @@ docker exec "${CONTAINER_NAME}" bash -c "
 remove_container_path "/var/www/html/wp-content/themes/shared"
 remove_container_path "/var/www/html/wp-content/themes/svicloudtvbox"
 
-# Stream the theme contents into the container, replacing the existing files.
-tar -C "${LOCAL_THEME_DIR}" -cf - . | \
-  docker exec -i "${CONTAINER_NAME}" bash -c "rm -rf '${CONTAINER_THEME_DIR}'/* && tar -C '${CONTAINER_THEME_DIR}' -xf -"
+# Avoid destructive resync when the theme is already bind-mounted into the container.
+if container_path_is_mountpoint "${CONTAINER_THEME_DIR}"; then
+  echo "[sync-theme] Theme directory is bind-mounted; local edits are already live in the container. Skipping archive sync." >&2
+else
+  # Stream the theme contents into the container, replacing the existing files.
+  tar -C "${LOCAL_THEME_DIR}" -cf - . | \
+    docker exec -i "${CONTAINER_NAME}" bash -c "rm -rf '${CONTAINER_THEME_DIR}'/* && tar -C '${CONTAINER_THEME_DIR}' -xf -"
 
-# Ensure correct ownership (ignore failure if user does not exist).
-docker exec "${CONTAINER_NAME}" bash -c "chown -R ${DEFAULT_USER} '${CONTAINER_THEME_DIR}'" >/dev/null 2>&1 || true
+  # Ensure correct ownership (ignore failure if user does not exist).
+  docker exec "${CONTAINER_NAME}" bash -c "chown -R ${DEFAULT_USER} '${CONTAINER_THEME_DIR}'" >/dev/null 2>&1 || true
 
-# Bump deploy version and flush WP cache if possible.
-docker exec "${CONTAINER_NAME}" bash -c "date +%s > '${CONTAINER_THEME_DIR}/.deploy-version'" || true
+  # Bump deploy version when performing a copied sync.
+  docker exec "${CONTAINER_NAME}" bash -c "date +%s > '${CONTAINER_THEME_DIR}/.deploy-version'" || true
+fi
 
 docker exec "${CONTAINER_NAME}" bash -c "if command -v wp >/dev/null 2>&1; then wp cache flush; fi" || true
 

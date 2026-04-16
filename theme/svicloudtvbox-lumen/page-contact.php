@@ -12,9 +12,6 @@ $phone_digits  = preg_replace('/[^0-9+]/', '', $phone_display);
 $phone_digits  = ltrim($phone_digits ?? '', '+');
 $phone_href    = $phone_digits ? 'tel:+' . $phone_digits : '';
 
-$whatsapp_number = preg_replace('/[^0-9]/', '', $phone_display);
-$whatsapp_href   = $whatsapp_number ? 'https://wa.me/' . $whatsapp_number : '';
-
 $email_address = svic_translate('contact.channels.items.email.value');
 $email_href    = filter_var($email_address, FILTER_VALIDATE_EMAIL) ? 'mailto:' . $email_address : '';
 
@@ -24,7 +21,7 @@ $guides_url       = svic_url_with_lang(home_url('/guides-setup/'));
 $compare_url      = svic_url_with_lang(home_url('/compare/'));
 $pdp_url          = svic_url_with_lang(home_url('/product/svicloud-10p-plus/'));
 
-$hero_primary_href   = $whatsapp_href ?: ($phone_href ?: $email_href);
+$hero_primary_href   = $phone_href ?: $email_href;
 $hero_secondary_href = $support_form_url;
 
 $channel_cards = [
@@ -34,13 +31,6 @@ $channel_cards = [
         'value_key' => 'contact.channels.items.phone.value',
         'cta_key'   => 'contact.channels.items.phone.cta',
         'href'      => $phone_href,
-    ],
-    [
-        'icon_class' => 'contact-card__icon--chat',
-        'label_key' => 'contact.channels.items.whatsapp.label',
-        'value_key' => 'contact.channels.items.whatsapp.value',
-        'cta_key'   => 'contact.channels.items.whatsapp.cta',
-        'href'      => $whatsapp_href ?: $hero_primary_href,
     ],
     [
         'icon_class' => 'contact-card__icon--mail',

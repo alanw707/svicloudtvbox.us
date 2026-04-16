@@ -116,11 +116,45 @@ $compare_cta_links = [
     'contact' => svic_url_with_lang(home_url('/contact/')),
 ];
 
+$compare_confidence_cards = [
+    'compare.confidence.cards.official',
+    'compare.confidence.cards.shipping',
+    'compare.confidence.cards.concierge',
+    'compare.confidence.cards.warranty',
+];
+
+$compare_confidence_steps = [
+    'compare.confidence.timeline.steps.choose',
+    'compare.confidence.timeline.steps.order',
+    'compare.confidence.timeline.steps.dispatch',
+    'compare.confidence.timeline.steps.setup',
+];
+
+$compare_hero_10p_image = function_exists('svic_get_product_image_meta')
+    ? svic_get_product_image_meta($hero_product_10p, 0, 'large')
+    : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
+$compare_hero_10s_image = function_exists('svic_get_product_image_meta')
+    ? svic_get_product_image_meta($hero_product_10s, 0, 'large')
+    : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
+$compare_hero_10p_background = function_exists('svic_get_product_image_meta')
+    ? svic_get_product_image_meta($hero_product_10p, 1, 'large')
+    : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
+$compare_hero_10s_background = function_exists('svic_get_product_image_meta')
+    ? svic_get_product_image_meta($hero_product_10s, 1, 'large')
+    : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
+$compare_hero_background_style = [];
+if (!empty($compare_hero_10p_background['url'])) {
+    $compare_hero_background_style[] = "--compare-hero-photo-primary:url('" . esc_url_raw($compare_hero_10p_background['url']) . "')";
+}
+if (!empty($compare_hero_10s_background['url'])) {
+    $compare_hero_background_style[] = "--compare-hero-photo-secondary:url('" . esc_url_raw($compare_hero_10s_background['url']) . "')";
+}
+
 ?>
 
 <main class="compare-page">
   <section class="compare-hero">
-    <div class="compare-hero__background" aria-hidden="true">
+    <div class="compare-hero__background" aria-hidden="true"<?php if (!empty($compare_hero_background_style)) : ?> style="<?php echo esc_attr(implode('; ', $compare_hero_background_style)); ?>"<?php endif; ?>>
       <div class="compare-hero__photo compare-hero__photo--primary"></div>
       <div class="compare-hero__photo compare-hero__photo--secondary"></div>
       <div class="compare-hero__gradient compare-hero__gradient--teal"></div>
@@ -140,11 +174,11 @@ $compare_cta_links = [
             <span class="page-subtitle-text"><?php echo svic_translate_html('compare.hero.subtitle'); ?></span>
           </p>
 
-          <div class="compare-hero__actions lumen-action-group" role="group" aria-label="<?php echo esc_attr__('Primary product actions', 'svicloudtvbox-lumen'); ?>">
-            <a class="lumen-pill lumen-pill--primary compare-hero__action" href="<?php echo esc_url($hero_10p_url); ?>">
+          <div class="compare-hero__actions lumen-action-group" role="group" aria-label="<?php echo svic_translate_attr('compare.aria.hero_actions'); ?>">
+            <a class="lumen-pill lumen-pill--primary compare-hero__action" href="<?php echo esc_url($hero_10p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_hero" data-svic-label="buy_10p" data-svic-model="svicloud-10p-plus">
               <?php echo svic_translate_html('compare.products.10p.cta'); ?>
             </a>
-            <a class="lumen-pill lumen-pill--ghost compare-hero__action" href="<?php echo esc_url($hero_10s_url); ?>">
+            <a class="lumen-pill lumen-pill--ghost compare-hero__action" href="<?php echo esc_url($hero_10s_url); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_hero" data-svic-label="buy_10s" data-svic-model="svicloud-10s">
               <?php echo svic_translate_html('compare.products.10s.cta'); ?>
             </a>
           </div>
@@ -153,7 +187,7 @@ $compare_cta_links = [
         <div class="compare-hero__devices" aria-hidden="true">
           <img
             class="compare-hero__device compare-hero__device--10p"
-            src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-10p-plus.webp')); ?>"
+            src="<?php echo esc_url($compare_hero_10p_image['url'] ?? svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')); ?>"
             alt=""
             loading="lazy"
             decoding="async"
@@ -162,7 +196,7 @@ $compare_cta_links = [
           />
           <img
             class="compare-hero__device compare-hero__device--10s"
-            src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-tvbox-10s.webp')); ?>"
+            src="<?php echo esc_url($compare_hero_10s_image['url'] ?? svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')); ?>"
             alt=""
             loading="lazy"
             decoding="async"
@@ -172,7 +206,7 @@ $compare_cta_links = [
         </div>
 
         <?php if (!empty($hero_highlights)) : ?>
-          <ul class="compare-hero__highlights" aria-label="<?php echo esc_attr__('Why customers choose SVICLOUD', 'svicloudtvbox-lumen'); ?>">
+          <ul class="compare-hero__highlights" aria-label="<?php echo svic_translate_attr('compare.aria.hero_highlights'); ?>">
             <?php foreach ($hero_highlights as $highlight) : ?>
               <li class="compare-hero__highlight">
                 <span class="compare-hero__highlight-model"><?php echo esc_html($highlight['model']); ?></span>
@@ -197,16 +231,16 @@ $compare_cta_links = [
           <li><?php echo svic_translate_html('compare.traffic.bullets.warranty'); ?></li>
         </ul>
       </div>
-      <div class="compare-traffic__links lumen-action-group" role="group" aria-label="<?php echo esc_attr__('Primary compare actions', 'svicloudtvbox-lumen'); ?>">
-        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($compare_cta_links['p10p']); ?>"><?php echo svic_translate_html('compare.traffic.links.p10p'); ?></a>
-        <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($compare_cta_links['p10s']); ?>"><?php echo svic_translate_html('compare.traffic.links.p10s'); ?></a>
+      <div class="compare-traffic__links lumen-action-group" role="group" aria-label="<?php echo svic_translate_attr('compare.aria.traffic_actions'); ?>">
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($compare_cta_links['p10p']); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_traffic" data-svic-label="buy_10p" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('compare.traffic.links.p10p'); ?></a>
+        <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($compare_cta_links['p10s']); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_traffic" data-svic-label="buy_10s" data-svic-model="svicloud-10s"><?php echo svic_translate_html('compare.traffic.links.p10s'); ?></a>
         <a class="compare-traffic__textlink" href="<?php echo esc_url($compare_cta_links['faq']); ?>"><?php echo svic_translate_html('compare.traffic.links.faq'); ?></a>
         <a class="compare-traffic__textlink" href="<?php echo esc_url($compare_cta_links['contact']); ?>"><?php echo svic_translate_html('compare.traffic.links.contact'); ?></a>
       </div>
     </div>
   </section>
 
-  <section class="compare-differences" aria-label="<?php echo esc_attr__('Key differences between models', 'svicloudtvbox-lumen'); ?>">
+  <section class="compare-differences" aria-label="<?php echo svic_translate_attr('compare.aria.differences'); ?>">
     <div class="compare-differences__grid">
       <?php foreach ($key_differences as $difference) : ?>
         <article class="compare-difference-card compare-difference-card--<?php echo esc_attr(strtolower($difference['model'])); ?>">
@@ -240,7 +274,7 @@ $compare_cta_links = [
     </div>
   </section>
 
-  <section class="compare-products" id="product-list" aria-label="<?php echo esc_attr__('Product spotlight cards', 'svicloudtvbox-lumen'); ?>">
+  <section class="compare-products" id="product-list" aria-label="<?php echo svic_translate_attr('compare.aria.product_list'); ?>">
     <div class="compare-products__grid">
       <article class="compare-product-card compare-product-card--highlight">
         <figure class="compare-product-card__media">
@@ -250,7 +284,7 @@ $compare_cta_links = [
           if ($img_10p) {
               echo $img_10p; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
           } else {
-              echo '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-10p-plus.webp')) . '" alt="' . esc_attr__('SVICLOUD 10P+', 'svicloudtvbox-lumen') . '" loading="lazy" decoding="async" />';
+              echo '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10p') . '" loading="lazy" decoding="async" />';
           }
           ?>
         </figure>
@@ -258,7 +292,11 @@ $compare_cta_links = [
           <h2 class="compare-product-card__title"><?php echo svic_translate_html('shop.cards.10p.title'); ?></h2>
           <p class="compare-product-card__price"><?php echo $price_10p_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
           <p class="compare-product-card__lead"><?php echo svic_translate_html('compare.products.10p.lead'); ?></p>
-          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('compare.products.10p.cta'); ?></a>
+          <div class="compare-product-card__fit">
+            <span class="compare-product-card__fit-label"><?php echo svic_translate_html('compare.products.10p.fit_label'); ?></span>
+            <p class="compare-product-card__fit-copy"><?php echo svic_translate_html('compare.products.10p.fit_copy'); ?></p>
+          </div>
+          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_product_card" data-svic-label="10p_card_cta" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('compare.products.10p.cta'); ?></a>
         </div>
         <ul class="compare-product-card__list">
           <?php foreach ($compare_product_bullets['10p'] as $bullet_key) : ?>
@@ -266,7 +304,7 @@ $compare_cta_links = [
           <?php endforeach; ?>
         </ul>
         <div class="compare-product-card__divider" aria-hidden="true"></div>
-        <section class="compare-product-card__comparison" aria-label="<?php echo esc_attr__('Feature comparison for SVICLOUD 10P+', 'svicloudtvbox-lumen'); ?>">
+        <section class="compare-product-card__comparison" aria-label="<?php echo svic_translate_attr('compare.aria.comparison_10p'); ?>">
           <h3 class="compare-product-card__comparison-title"><?php echo svic_translate_html('compare.comparison.title'); ?></h3>
           <dl class="compare-product-card__comparison-list">
             <?php foreach ($comparison_rows as $row) :
@@ -284,13 +322,24 @@ $compare_cta_links = [
 
       <article class="compare-product-card">
         <figure class="compare-product-card__media">
-          <img src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-tvbox-10s.webp')); ?>" alt="<?php echo esc_attr__('SVICLOUD 10S', 'svicloudtvbox-lumen'); ?>" loading="lazy" decoding="async" />
+          <?php
+          $img_10s = svic_product_primary_image($hero_product_10s, 'large');
+          if ($img_10s) {
+              echo $img_10s; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+          } else {
+              echo '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10s') . '" loading="lazy" decoding="async" />';
+          }
+          ?>
         </figure>
         <div class="compare-product-card__header">
           <h2 class="compare-product-card__title"><?php echo svic_translate_html('shop.cards.10s.title'); ?></h2>
           <p class="compare-product-card__price"><?php echo $price_10s_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
           <p class="compare-product-card__lead"><?php echo svic_translate_html('compare.products.10s.lead'); ?></p>
-          <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>"><?php echo svic_translate_html('compare.products.10s.cta'); ?></a>
+          <div class="compare-product-card__fit">
+            <span class="compare-product-card__fit-label"><?php echo svic_translate_html('compare.products.10s.fit_label'); ?></span>
+            <p class="compare-product-card__fit-copy"><?php echo svic_translate_html('compare.products.10s.fit_copy'); ?></p>
+          </div>
+          <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_product_card" data-svic-label="10s_card_cta" data-svic-model="svicloud-10s"><?php echo svic_translate_html('compare.products.10s.cta'); ?></a>
         </div>
         <ul class="compare-product-card__list">
           <?php foreach ($compare_product_bullets['10s'] as $bullet_key) : ?>
@@ -298,7 +347,7 @@ $compare_cta_links = [
           <?php endforeach; ?>
         </ul>
         <div class="compare-product-card__divider" aria-hidden="true"></div>
-        <section class="compare-product-card__comparison" aria-label="<?php echo esc_attr__('Feature comparison for SVICLOUD 10S', 'svicloudtvbox-lumen'); ?>">
+        <section class="compare-product-card__comparison" aria-label="<?php echo svic_translate_attr('compare.aria.comparison_10s'); ?>">
           <h3 class="compare-product-card__comparison-title"><?php echo svic_translate_html('compare.comparison.title'); ?></h3>
           <dl class="compare-product-card__comparison-list">
             <?php foreach ($comparison_rows as $row) :
@@ -317,19 +366,88 @@ $compare_cta_links = [
   </section>
 
 
+  <section class="compare-confidence" id="compare-confidence" aria-labelledby="compare-confidence-title">
+    <div class="compare-confidence__inner">
+      <header class="compare-confidence__header">
+        <span class="compare-confidence__badge"><?php echo svic_translate_html('compare.confidence.badge'); ?></span>
+        <h2 class="compare-confidence__title" id="compare-confidence-title"><?php echo svic_translate_html('compare.confidence.title'); ?></h2>
+        <p class="compare-confidence__lead"><?php echo svic_translate_html('compare.confidence.lead'); ?></p>
+      </header>
 
-  <section class="compare-final-cta" aria-label="<?php echo esc_attr__('Final call to action', 'svicloudtvbox-lumen'); ?>">
-    <div class="compare-final-cta__inner">
+      <div class="compare-confidence__grid">
+        <?php foreach ($compare_confidence_cards as $confidence_base_key) : ?>
+          <article class="compare-confidence-card">
+            <h3 class="compare-confidence-card__title"><?php echo svic_translate_html($confidence_base_key . '.title'); ?></h3>
+            <p class="compare-confidence-card__copy"><?php echo svic_translate_html($confidence_base_key . '.copy'); ?></p>
+          </article>
+        <?php endforeach; ?>
+      </div>
+
+      <div class="compare-confidence__timeline">
+        <div class="compare-confidence__timeline-header">
+          <span class="compare-confidence__timeline-badge"><?php echo svic_translate_html('compare.confidence.timeline.badge'); ?></span>
+          <h3 class="compare-confidence__timeline-title"><?php echo svic_translate_html('compare.confidence.timeline.title'); ?></h3>
+          <p class="compare-confidence__timeline-lead"><?php echo svic_translate_html('compare.confidence.timeline.lead'); ?></p>
+        </div>
+        <ol class="compare-confidence__steps">
+          <?php foreach ($compare_confidence_steps as $index => $step_base_key) : ?>
+            <li class="compare-confidence__step">
+              <span class="compare-confidence__step-count"><?php echo esc_html(sprintf('%02d', $index + 1)); ?></span>
+              <div class="compare-confidence__step-copy">
+                <strong><?php echo svic_translate_html($step_base_key . '.title'); ?></strong>
+                <p><?php echo svic_translate_html($step_base_key . '.copy'); ?></p>
+              </div>
+            </li>
+          <?php endforeach; ?>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare-final-cta" aria-label="<?php echo svic_translate_attr('compare.aria.final_cta'); ?>">
+    <div class="compare-final-cta__inner" id="compare-final-cta">
       <span class="compare-final-cta__badge"><?php echo svic_translate_html('compare.final_cta.badge'); ?></span>
       <h2 class="compare-final-cta__title"><?php echo svic_translate_html('compare.final_cta.title'); ?></h2>
       <p class="compare-final-cta__copy"><?php echo svic_translate_html('compare.final_cta.copy'); ?></p>
       <div class="compare-final-cta__actions lumen-action-group">
-        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('compare.final_cta.cta_10p'); ?></a>
-        <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>"><?php echo svic_translate_html('compare.final_cta.cta_10s'); ?></a>
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_final_cta" data-svic-label="buy_10p" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('compare.final_cta.cta_10p'); ?></a>
+        <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_final_cta" data-svic-label="buy_10s" data-svic-model="svicloud-10s"><?php echo svic_translate_html('compare.final_cta.cta_10s'); ?></a>
       </div>
     </div>
   </section>
 </main>
+
+<div class="compare-sticky-buy" id="compare-sticky-buy" aria-hidden="true" aria-label="<?php echo svic_translate_attr('compare.sticky_buy.aria_label'); ?>">
+  <div class="compare-sticky-buy__inner">
+    <span class="compare-sticky-buy__label"><?php echo svic_translate_html('compare.sticky_buy.label'); ?></span>
+    <div class="compare-sticky-buy__actions">
+      <a class="compare-sticky-buy__cta lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="compare_sticky_buy" data-svic-label="sticky_buy_10p" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('compare.sticky_buy.cta_10p'); ?></a>
+      <a class="compare-sticky-buy__cta lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="compare_sticky_buy" data-svic-label="sticky_buy_10s" data-svic-model="svicloud-10s"><?php echo svic_translate_html('compare.sticky_buy.cta_10s'); ?></a>
+    </div>
+  </div>
+</div>
+<script>
+(function() {
+  var bar = document.getElementById('compare-sticky-buy');
+  if (!bar) return;
+  var hero = document.querySelector('.compare-hero');
+  var finalCta = document.getElementById('compare-final-cta');
+  function update() {
+    var afterHero = hero ? window.scrollY > (hero.offsetTop + hero.offsetHeight) : window.scrollY > 400;
+    var beforeFinalCta = finalCta ? window.scrollY + window.innerHeight < (finalCta.offsetTop + 120) : true;
+    if (afterHero && beforeFinalCta) {
+      bar.classList.add('is-visible');
+      bar.removeAttribute('aria-hidden');
+    } else {
+      bar.classList.remove('is-visible');
+      bar.setAttribute('aria-hidden', 'true');
+    }
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
 
 <?php
 $compare_schema_products = [];
@@ -376,7 +494,7 @@ if (!empty($compare_schema_products)) {
         $graph_nodes[] = [
             '@type'           => 'ItemList',
             '@id'             => untrailingslashit($compare_page_url) . '#compare-itemlist',
-            'name'            => esc_html__('SVICLOUD comparison lineup', 'svicloudtvbox-lumen'),
+            'name'            => svic_translate('compare.schema.item_list_name'),
             'url'             => $compare_page_url,
             'numberOfItems'   => count($compare_item_list),
             'itemListOrder'   => 'https://schema.org/ItemListOrderAscending',

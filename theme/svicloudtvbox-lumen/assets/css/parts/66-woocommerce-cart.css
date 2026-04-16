@@ -221,6 +221,8 @@ body.woocommerce-cart .woocommerce-notices-wrapper a:focus-visible {
 .lumen-cart-summary__notices .woocommerce-info { border-radius: var(--radius-md); padding: 0.75rem 1rem; border: 1px solid rgba(126, 246, 227, 0.25); background: rgba(6, 22, 52, 0.65); color: var(--lumen-text-primary); font-size: 0.9rem; }
 .lumen-cart-summary__coupon-hint { margin: 0.35rem 0 0; font-size: 0.8rem; color: rgba(223, 229, 255, 0.65); }
 .lumen-cart-summary__reassurance { margin: 0.5rem 0 0; font-size: 0.85rem; color: rgba(223, 229, 255, 0.78); letter-spacing: 0.03em; }
+.lumen-cart-summary__links { margin-top: 0.4rem; }
+.lumen-cart-summary__links .lumen-pill { width: 100%; justify-content: center; }
 .lumen-cart-qty__single { display: inline-flex; align-items: center; justify-content: center; min-width: 56px; height: 40px; border-radius: 999px; background: rgba(6, 22, 52, 0.75); border: 1px solid rgba(126, 246, 227, 0.28); font-weight: 600; }
 
 .lumen-cart-remove { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 999px; border: 1px solid rgba(126, 246, 227, 0.24); background: rgba(6, 22, 52, 0.6); color: rgba(223, 229, 255, 0.82); text-decoration: none; transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast); cursor: pointer; }

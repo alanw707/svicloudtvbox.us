@@ -187,7 +187,7 @@ if (is_object($cart)) {
 
                 <?php if ($has_items): ?>
                     <div class="lumen-cart__actions">
-                        <a class="lumen-cart-actions__continue" href="<?php echo esc_url($shop_url); ?>">
+                        <a class="lumen-cart-actions__continue" href="<?php echo esc_url($shop_url); ?>" data-svic-event="svic_cta_click" data-svic-location="cart_actions" data-svic-label="continue_shopping">
                             <span class="lumen-cart-actions__continue-icon" aria-hidden="true">&#8592;</span>
                             <span><?php echo svic_translate_html('cart_page.continue_shopping'); ?></span>
                         </a>
@@ -220,7 +220,7 @@ if (is_object($cart)) {
                                 <label class="lumen-cart-summary__coupon-label" for="coupon_code"><?php echo svic_translate_html('cart_page.coupon.label'); ?></label>
                                 <div class="lumen-cart-summary__coupon-controls">
                                     <input type="text" name="coupon_code" class="input-text lumen-cart-summary__coupon-input" id="coupon_code" value="" placeholder="<?php echo esc_attr(svic_translate('cart_page.coupon.placeholder')); ?>" aria-describedby="coupon_help" />
-                                    <button type="submit" class="button lumen-cart-summary__coupon-button" name="apply_coupon" value="<?php echo esc_attr(svic_translate('cart_page.coupon.apply')); ?>">
+                                    <button type="submit" class="button lumen-cart-summary__coupon-button" name="apply_coupon" value="<?php echo esc_attr(svic_translate('cart_page.coupon.apply')); ?>" data-svic-event="svic_cart_apply_coupon" data-svic-location="cart_summary" data-svic-label="apply_coupon">
                                         <?php echo svic_translate_html('cart_page.coupon.apply'); ?>
                                     </button>
                                 </div>
@@ -234,6 +234,12 @@ if (is_object($cart)) {
                         </div>
 
                         <p class="lumen-cart-summary__reassurance"><?php echo svic_translate_html('cart_page.summary.reassurance'); ?></p>
+
+                        <div class="lumen-cart-summary__links lumen-action-group">
+                            <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url(wc_get_checkout_url()); ?>" data-svic-event="svic_begin_checkout" data-svic-location="cart_summary" data-svic-label="proceed_to_checkout"><?php echo svic_translate_html('checkout_page.title'); ?></a>
+                            <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/faq/'))); ?>" data-svic-event="svic_cta_click" data-svic-location="cart_summary" data-svic-label="faq_before_checkout"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
+                            <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact/'))); ?>" data-svic-event="svic_cta_click" data-svic-location="cart_summary" data-svic-label="contact_concierge"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
+                        </div>
 
                         <ul class="lumen-cart-summary__benefits">
                             <li>

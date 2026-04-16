@@ -32,7 +32,7 @@ return [
             'badge'      => 'Concierge support',
             'title'      => 'Talk to the SviCloud concierge team',
             'subtitle'   => 'English & 中文 experts help with orders, setup, Wi-Fi fixes, and app updates. Real humans reply within one business day.',
-            'primary_cta'=> 'Chat with concierge',
+            'primary_cta'=> 'Call concierge',
             'secondary_cta' => 'Submit a support form',
         ],
         'hours' => [
@@ -47,11 +47,6 @@ return [
                     'label' => 'SMS / Phone',
                     'value' => '702-398-3416',
                     'cta'   => 'Text or call now',
-                ],
-                'whatsapp' => [
-                    'label' => 'WhatsApp',
-                    'value' => '+85363403380',
-                    'cta'   => 'Open WhatsApp',
                 ],
                 'email' => [
                     'label' => 'Email',
@@ -475,6 +470,28 @@ return [
             'badge' => 'Google review invite',
             'copy'  => 'If Google Customer Reviews is available for your order, Google may email a short survey after delivery. Those reviews help strengthen our seller reputation across Google.',
         ],
+        'next' => [
+            'badge' => 'Helpful next steps',
+            'title' => 'Set up fast, share with family, and keep support handy',
+            'copy'  => 'Most customers do the same three things after ordering: bookmark the setup guide, send the compare page to family, and keep concierge support one click away.',
+            'cards' => [
+                'setup' => [
+                    'title' => 'Open the setup guide',
+                    'copy'  => 'Save the bilingual quick-start guide now so setup is easier when the box arrives.',
+                    'cta'   => 'View setup guide',
+                ],
+                'share' => [
+                    'title' => 'Need a second-room box later?',
+                    'copy'  => 'Share the compare page with a family member so they can pick between 10P+ and 10S without guessing.',
+                    'cta'   => 'Open compare page',
+                ],
+                'support' => [
+                    'title' => 'Keep concierge support nearby',
+                    'copy'  => 'Questions about shipping, setup, or accessories? Our English & 中文 team is ready to help.',
+                    'cta'   => 'Contact concierge',
+                ],
+            ],
+        ],
         'failed' => [
             'title'      => 'Order failed',
             'copy'       => 'Unfortunately your order cannot be processed as the originating bank/merchant has declined your transaction. Please attempt your purchase again.',
@@ -609,7 +626,7 @@ return [
                     'placeholder' => 'you@example.com',
                 ],
                 'phone' => [
-                    'label'       => 'Phone / WhatsApp',
+                    'label'       => 'Phone',
                     'placeholder' => '702-398-3416',
                 ],
                 'order' => [
@@ -651,7 +668,7 @@ return [
         'help' => [
             'contact' => [
                 'title' => 'Need live concierge?',
-                'copy'  => 'Call, text, WhatsApp, or email our bilingual team for real-time assistance.',
+                'copy'  => 'Call, text, or email our bilingual team for real-time assistance.',
                 'cta'   => 'Go to contact page',
             ],
             'faq' => [
@@ -945,6 +962,7 @@ return [
                 '10p' => [
                     'badge'    => 'Most Popular',
                     'title'    => 'SVICLOUD 10P+',
+                    'image_alt'=> 'SVICLOUD 10P+ product image',
                     'interval' => 'device',
                     'copy'     => 'Flagship 4GB RAM / 64GB storage with Kids & Karaoke apps included.',
                     'features' => [
@@ -962,6 +980,7 @@ return [
                 ],
                 '10s' => [
                     'title'    => 'SVICLOUD 10S',
+                    'image_alt'=> 'SVICLOUD 10S product image',
                     'interval' => 'device',
                     'copy'     => 'Best value with 2GB RAM / 32GB storage—ideal for bedrooms or secondary TVs.',
                     'features' => [
@@ -980,13 +999,69 @@ return [
                 ],
             ],
         ],
+        'aria' => [
+            'hero_visual'    => 'SVICLOUD voice assistant interface with Google Play, movies, and YouTube apps',
+            'traffic_actions'=> 'Key SVICLOUD actions',
+            'shop_now'       => 'Shop now',
+            'metrics'        => 'Key SVICLOUD advantages',
+        ],
+        'schema' => [
+            'item_list_name' => 'SVICLOUD streaming devices available in North America',
+        ],
+        'confidence' => [
+            'badge' => 'Buy with confidence',
+            'title' => 'Why order direct from SVICLOUDTVBOX.US',
+            'subtitle' => 'No fake stars, no marketplace guesswork—just official U.S. inventory, bilingual help, and clear after-order support.',
+            'cards' => [
+                'official' => [
+                    'title' => 'Official U.S. dealer',
+                    'copy'  => 'Manufacturer-authorized storefront for genuine SVICLOUD hardware and warranty-backed sales.',
+                ],
+                'shipping' => [
+                    'title' => 'Nevada fulfillment',
+                    'copy'  => 'Orders ship from U.S. stock with tracking and the right power/HDMI accessories in the box.',
+                ],
+                'concierge' => [
+                    'title' => 'English & 中文 help',
+                    'copy'  => 'Our bilingual concierge can help with setup, Wi-Fi tuning, and first-time onboarding questions.',
+                ],
+                'warranty' => [
+                    'title' => 'Warranty + returns clarity',
+                    'copy'  => 'Every device includes a 1-year U.S. hardware warranty and a 30-day return window.',
+                ],
+            ],
+            'timeline' => [
+                'badge' => 'After you order',
+                'aria_label' => 'What happens after you order',
+                'title' => 'What happens next',
+                'lead'  => 'The path is simple: secure checkout, Nevada dispatch, email tracking, and setup help if you want it.',
+                'steps' => [
+                    'order' => [
+                        'title' => 'Place your order securely',
+                        'copy'  => 'Checkout with major cards, PayPal, and available express-wallet options through our secure checkout.',
+                    ],
+                    'dispatch' => [
+                        'title' => 'We dispatch from Nevada',
+                        'copy'  => 'U.S. inventory is packed locally and usually leaves within 48 hours with tracking sent by email.',
+                    ],
+                    'setup' => [
+                        'title' => 'Unbox and get guided setup',
+                        'copy'  => 'Use the included quick-start guide or contact concierge for help in English or 中文.',
+                    ],
+                    'support' => [
+                        'title' => 'Keep support within reach',
+                        'copy'  => 'If you need hardware support later, the warranty and return process stays clear and local.',
+                    ],
+                ],
+            ],
+        ],
         'testimonials' => [
             'badge'    => 'Real Customers',
             'title'    => 'What U.S. Families Say About SVICLOUD',
             'subtitle' => 'Quotes from buyers across the U.S. who picked SVICLOUD for the channels they grew up with.',
             // TODO: Replace these placeholders with real customer quotes before
             // flipping SVIC_TESTIMONIALS_ENABLED to true. Quotes must be real
-            // (FTC compliance) — short messages from email, FB, WhatsApp, or
+            // (FTC compliance) — short messages from email, FB, or
             // Google reviews are all fair game.
             'quotes' => [
                 [
@@ -1074,10 +1149,30 @@ return [
         'svicloud-10p-plus' => [
             'short_description' => 'Flagship 4K streaming box with 4GB RAM / 64GB storage, karaoke apps, and bilingual concierge support.',
             'description' => '<p>SVICLOUD 10P+ is our flagship streaming box for families who want voice control, karaoke nights, and the fastest hardware we ship.</p><ul><li>4GB RAM and 64GB storage with AV1 decode keep 4K live sports and dramas smooth.</li><li>Kids Mode and Karaoke apps come preinstalled with English / 中文 concierge walkthroughs.</li><li>Wi-Fi 6, Gigabit Ethernet, Bluetooth voice remote, USB 3.0, and expandable storage cover every installation.</li><li>Ships from Nevada with a 1-year U.S. warranty, free returns within 30 days, and live concierge setup help.</li></ul><p>The box includes HDMI cable, power adapter, voice remote, and supports dual wireless microphones for karaoke.</p>',
+            'best_for' => [
+                'badge' => 'Best for',
+                'title' => 'Main family TVs, karaoke nights, and buyers who want the fastest box',
+                'copy'  => 'Choose 10P+ when you want the strongest living-room setup, flagship performance, and family-friendly extras built in from day one.',
+                'bullets' => [
+                    'primary'   => '4GB RAM / 64GB storage for heavier app use, smoother multitasking, and more headroom',
+                    'secondary' => 'Kids Mode, karaoke apps, and voice remote support already included',
+                    'tertiary'  => 'Best match for sports-heavy homes, family rooms, and buyers who do not want to second-guess the upgrade',
+                ],
+            ],
         ],
         'svicloud-10s' => [
             'short_description' => 'Affordable 4K streaming box with 2GB RAM / 32GB storage and easy plug-and-play setup for bedrooms, guest rooms, and second TVs.',
             'description' => '<p>SVICLOUD 10S is our budget-friendly 4K streaming box for shoppers who want reliable SVICLOUD access without paying for flagship extras.</p><ul><li>2GB RAM and 32GB storage with AV1 decode handle live TV, dramas, and on-demand playback smoothly.</li><li>A compact design makes it a strong fit for bedrooms, guest rooms, dorms, and secondary TVs.</li><li>HDMI, Ethernet, and USB ports make setup quick whether you prefer Wi-Fi or a hardwired connection.</li><li>Ships from U.S. inventory with a 1-year warranty, bilingual English / 中文 support, and concierge onboarding.</li></ul><p>Choose the 10S when you want the best value in the lineup. Choose the 10P+ if you want higher-end performance, karaoke features, and voice control.</p>',
+            'best_for' => [
+                'badge' => 'Best for',
+                'title' => 'Bedrooms, guest rooms, second TVs, and value-first buyers',
+                'copy'  => 'Choose 10S when you want dependable 4K SVICLOUD playback, U.S. shipping, and bilingual support without paying for flagship-only extras.',
+                'bullets' => [
+                    'primary'   => 'Lower-cost entry into the SVICLOUD lineup while keeping core 4K streaming and AV1 decode',
+                    'secondary' => 'Great fit for secondary rooms, guest setups, apartments, and lighter daily use',
+                    'tertiary'  => 'Step up to 10P+ only if you want karaoke, Kids Mode, or the fastest hardware in the lineup',
+                ],
+            ],
             'traffic' => [
                 'badge' => 'Why 10S for U.S.-based Chinese/Asian homes',
                 'title' => 'Best-value SVICLOUD for bedrooms, guest rooms, and second TVs',
@@ -1134,6 +1229,8 @@ return [
         'products' => [
             '10p' => [
                 'lead'    => 'Premium hardware, exclusive family features, and the fastest performance available.',
+                'fit_label'=> 'Best for',
+                'fit_copy' => 'Main family TVs, karaoke nights, sports-heavy homes, and buyers who want the fastest hardware.',
                 'bullets' => [
                     'ram_storage' => '4GB RAM / 64GB storage with AV1 decode',
                     'apps'        => 'Kids Mode and Karaoke apps included',
@@ -1143,12 +1240,75 @@ return [
             ],
             '10s' => [
                 'lead'    => 'Essential 4K streaming with streamlined hardware for value-conscious homes.',
+                'fit_label'=> 'Best for',
+                'fit_copy' => 'Bedrooms, guest rooms, secondary TVs, and buyers who want solid 4K playback at a lower price.',
                 'bullets' => [
                     'ram_storage' => '2GB RAM / 32GB storage for everyday streaming',
                     'remote'      => '4K HDR + AV1 decode with voice remote',
                     'ports'       => 'HDMI, USB 3.0, and wired Ethernet included',
                 ],
                 'cta'     => 'Buy 10S',
+            ],
+        ],
+        'aria' => [
+            'hero_actions'   => 'Primary product actions',
+            'hero_highlights'=> 'Why customers choose SVICLOUD',
+            'traffic_actions'=> 'Primary compare actions',
+            'differences'    => 'Key differences between models',
+            'product_list'   => 'Product spotlight cards',
+            'product_alt_10p'=> 'SVICLOUD 10P+',
+            'product_alt_10s'=> 'SVICLOUD 10S',
+            'comparison_10p' => 'Feature comparison for SVICLOUD 10P+',
+            'comparison_10s' => 'Feature comparison for SVICLOUD 10S',
+            'final_cta'      => 'Final call to action',
+        ],
+        'schema' => [
+            'item_list_name' => 'SVICLOUD comparison lineup',
+        ],
+        'confidence' => [
+            'badge' => 'Order with clarity',
+            'title' => 'Pick your model, then order with local support',
+            'lead'  => 'Whichever box fits your room, the process stays the same: U.S. stock, bilingual concierge, tracked shipping, and warranty-backed support.',
+            'cards' => [
+                'official' => [
+                    'title' => 'Official U.S. storefront',
+                    'copy'  => 'Buy genuine SVICLOUD hardware from the manufacturer-authorized U.S. dealer.',
+                ],
+                'shipping' => [
+                    'title' => 'Tracked Nevada shipping',
+                    'copy'  => 'Orders leave from U.S. inventory with tracking and the correct accessories for local setup.',
+                ],
+                'concierge' => [
+                    'title' => 'Bilingual setup help',
+                    'copy'  => 'Get help in English or 中文 for onboarding, Wi-Fi tuning, and remote pairing.',
+                ],
+                'warranty' => [
+                    'title' => 'Warranty-backed purchase',
+                    'copy'  => 'Both models include a 1-year U.S. warranty and a 30-day return window.',
+                ],
+            ],
+            'timeline' => [
+                'badge' => 'How the order flows',
+                'title' => 'From model choice to living-room setup',
+                'lead'  => 'The compare page should make the next step feel obvious—not risky.',
+                'steps' => [
+                    'choose' => [
+                        'title' => 'Choose the room and budget fit',
+                        'copy'  => 'Use the comparison table and “best for” guidance to pick the model that matches your home.',
+                    ],
+                    'order' => [
+                        'title' => 'Order from U.S. inventory',
+                        'copy'  => 'Checkout on the official U.S. storefront instead of gambling on grey-market listings.',
+                    ],
+                    'dispatch' => [
+                        'title' => 'Receive tracking and dispatch updates',
+                        'copy'  => 'Nevada fulfillment keeps shipping local, trackable, and easier to support if anything goes wrong.',
+                    ],
+                    'setup' => [
+                        'title' => 'Get setup help if you want it',
+                        'copy'  => 'Concierge support remains available for first-time setup, Wi-Fi tuning, and basic onboarding questions.',
+                    ],
+                ],
             ],
         ],
         'comparison' => [
@@ -1192,6 +1352,12 @@ return [
             'copy'    => 'Pick the SVICLOUD model that fits your needs and budget.',
             'cta_10p' => 'Buy SVICLOUD 10P+',
             'cta_10s' => 'Buy SVICLOUD 10S',
+        ],
+        'sticky_buy' => [
+            'aria_label' => 'Sticky compare actions',
+            'label'      => 'Ready to choose? Buy direct from U.S. stock',
+            'cta_10p'    => 'Buy 10P+',
+            'cta_10s'    => 'Buy 10S',
         ],
     ],
     'about' => [
@@ -1738,6 +1904,16 @@ return [
         'hero' => [
             'subtitle' => 'Shipped from the U.S. with concierge onboarding in English & Chinese.',
             'detail'   => 'Secure checkout • Free U.S. shipping • English/中文 support',
+            'reassurance' => [
+                'badge' => 'Order with confidence',
+                'title' => 'Clear next steps after checkout',
+                'copy'  => 'Place your order today and we will handle the practical details: secure payment, tracked shipping, and bilingual setup help if you want it.',
+                'bullets' => [
+                    'shipping'  => 'Free U.S. shipping from Nevada inventory with tracking emailed after dispatch',
+                    'warranty'  => '1-year U.S. warranty plus a 30-day return window handled by our concierge team',
+                    'concierge' => 'English & 中文 setup help available for first-time install, Wi-Fi tuning, and remote pairing',
+                ],
+            ],
         ],
         'highlights' => [
             'inventory' => 'Certified U.S. inventory & warranty',
@@ -1758,6 +1934,9 @@ return [
                 'faq'     => 'Read FAQ',
                 'contact' => 'Talk to concierge',
             ],
+        ],
+        'aria' => [
+            'traffic_actions' => 'Key SVICLOUD product actions',
         ],
         'faq' => [
             'badge' => 'FAQ',

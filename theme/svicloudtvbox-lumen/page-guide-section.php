@@ -10,6 +10,11 @@ get_header();
 $guides_url = svic_url_with_lang(home_url('/guides/'));
 $contact_url = svic_url_with_lang(home_url('/contact/'));
 $faq_url = svic_url_with_lang(home_url('/faq/'));
+$compare_url = svic_url_with_lang(home_url('/compare/'));
+$product_10p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
+$product_10s = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null;
+$product_10p_url = $product_10p ? svic_url_with_lang(get_permalink($product_10p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10p-plus/'));
+$product_10s_url = $product_10s ? svic_url_with_lang(get_permalink($product_10s->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10s/'));
 
 $forced_section_key = isset($svic_guides_detail_key) ? $svic_guides_detail_key : null;
 
@@ -137,6 +142,22 @@ foreach ($other_sections as $item) {
     ];
 }
 
+$render_inline_cro_cta = static function () use ($product_10p_url, $product_10s_url, $compare_url, $contact_url) {
+    ?>
+    <section class="guides-inline-cta" aria-label="<?php echo esc_attr(svic_translate('compare.final_cta.badge')); ?>">
+      <span class="guides-inline-cta__badge"><?php echo svic_translate_html('compare.final_cta.badge'); ?></span>
+      <h2 class="guides-inline-cta__title"><?php echo svic_translate_html('compare.final_cta.title'); ?></h2>
+      <p class="guides-inline-cta__copy"><?php echo svic_translate_html('compare.final_cta.copy'); ?></p>
+      <div class="guides-inline-cta__actions lumen-action-group">
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($product_10p_url); ?>"><?php echo svic_translate_html('compare.final_cta.cta_10p'); ?></a>
+        <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($product_10s_url); ?>"><?php echo svic_translate_html('compare.final_cta.cta_10s'); ?></a>
+        <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($compare_url); ?>"><?php echo svic_translate_html('product.traffic.links.compare'); ?></a>
+        <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($contact_url); ?>"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
+      </div>
+    </section>
+    <?php
+};
+
 ?>
 <main class="guides-detail guides-detail--<?php echo esc_attr($section_key); ?> surface--dark">
   <header class="guides-detail__hero">
@@ -226,7 +247,7 @@ foreach ($other_sections as $item) {
     <article class="guides-detail__content">
       <?php if ($section_key === 'setup') : ?>
         <ol class="guides-steps guides-detail__steps surface--light">
-          <?php foreach ($content_items as $step) :
+          <?php foreach ($content_items as $index => $step) :
             $title_key = $step['title_key'] ?? '';
             $copy_key  = $step['copy_key'] ?? '';
           ?>
@@ -236,6 +257,11 @@ foreach ($other_sections as $item) {
                 <p class="guides-step__copy"><?php echo $translate_rich($copy_key); ?></p>
               </div>
             </li>
+            <?php if ($index === 0) : ?>
+              <li class="guides-step guides-step--cta">
+                <?php $render_inline_cro_cta(); ?>
+              </li>
+            <?php endif; ?>
           <?php endforeach; ?>
         </ol>
         <?php
@@ -254,7 +280,7 @@ foreach ($other_sections as $item) {
         <?php endif; ?>
       <?php elseif ($section_key === 'apps' || $section_key === 'post_setup') : ?>
         <div class="guides-grid guides-grid--detail surface--light">
-          <?php foreach ($content_items as $card) :
+          <?php foreach ($content_items as $index => $card) :
             $title_key = $card['title_key'] ?? '';
             $copy_key  = $card['copy_key'] ?? '';
           ?>
@@ -262,11 +288,14 @@ foreach ($other_sections as $item) {
               <h2 class="guides-card__title"><?php echo $translate_html($title_key); ?></h2>
               <p class="guides-card__copy"><?php echo $translate_html($copy_key); ?></p>
             </article>
+            <?php if ($index === 0) : ?>
+              <?php $render_inline_cro_cta(); ?>
+            <?php endif; ?>
           <?php endforeach; ?>
         </div>
       <?php elseif ($section_key === 'troubleshooting') : ?>
         <div class="guides-grid guides-grid--troubleshooting surface--light">
-          <?php foreach ($content_items as $card) :
+          <?php foreach ($content_items as $index => $card) :
             $title_key = $card['title_key'] ?? '';
             $copy_key  = $card['copy_key'] ?? '';
           ?>
@@ -274,11 +303,14 @@ foreach ($other_sections as $item) {
               <h2 class="guides-card__title"><?php echo $translate_html($title_key); ?></h2>
               <p class="guides-card__copy"><?php echo $translate_rich($copy_key); ?></p>
             </article>
+            <?php if ($index === 0) : ?>
+              <?php $render_inline_cro_cta(); ?>
+            <?php endif; ?>
           <?php endforeach; ?>
         </div>
       <?php elseif ($section_key === 'resources') : ?>
         <ul class="guides-resource-list surface--light">
-          <?php foreach ($content_items as $resource) :
+          <?php foreach ($content_items as $index => $resource) :
             $title_key = $resource['title_key'] ?? '';
             $copy_key  = $resource['copy_key'] ?? '';
             $link      = svic_guides_get_resource_link($resource);
@@ -295,6 +327,11 @@ foreach ($other_sections as $item) {
                 <span class="guides-resource__copy"><?php echo $translate_html($copy_key); ?></span>
               </a>
             </li>
+            <?php if ($index === 0) : ?>
+              <li class="guides-resource-item guides-resource-item--cta">
+                <?php $render_inline_cro_cta(); ?>
+              </li>
+            <?php endif; ?>
           <?php endforeach; ?>
         </ul>
       <?php elseif ($section_key === 'support') : ?>
@@ -313,7 +350,7 @@ foreach ($other_sections as $item) {
         </section>
       <?php else : ?>
         <div class="guides-grid guides-grid--detail surface--light">
-          <?php foreach ($content_items as $card) :
+          <?php foreach ($content_items as $index => $card) :
             $title_key = $card['title_key'] ?? '';
             $copy_key  = $card['copy_key'] ?? '';
           ?>
@@ -321,6 +358,9 @@ foreach ($other_sections as $item) {
               <h2 class="guides-card__title"><?php echo $translate_html($title_key); ?></h2>
               <p class="guides-card__copy"><?php echo $translate_html($copy_key); ?></p>
             </article>
+            <?php if ($index === 0) : ?>
+              <?php $render_inline_cro_cta(); ?>
+            <?php endif; ?>
           <?php endforeach; ?>
         </div>
       <?php endif; ?>
@@ -357,14 +397,14 @@ foreach ($other_sections as $item) {
   <?php if ($section_key !== 'support') : ?>
     <section class="guides-support guides-support--detail-cta">
       <div class="guides-support__inner">
-        <?php if ($translate_html('guides.support.badge')) : ?>
-          <span class="guides-badge guides-badge--on-dark"><?php echo $translate_html('guides.support.badge'); ?></span>
-        <?php endif; ?>
-        <h2 class="guides-support__title"><?php echo $translate_html('guides.support.title'); ?></h2>
-        <p class="guides-support__copy"><?php echo $translate_html('guides.support.copy'); ?></p>
+        <span class="guides-badge guides-badge--on-dark"><?php echo svic_translate_html('compare.final_cta.badge'); ?></span>
+        <h2 class="guides-support__title"><?php echo svic_translate_html('compare.final_cta.title'); ?></h2>
+        <p class="guides-support__copy"><?php echo svic_translate_html('compare.final_cta.copy'); ?></p>
         <div class="guides-support__actions lumen-action-group">
-          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($contact_url); ?>"><?php echo $translate_html('guides.support.primary_label'); ?></a>
-          <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($faq_url); ?>"><?php echo $translate_html('guides.support.secondary_label'); ?></a>
+          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($product_10p_url); ?>"><?php echo svic_translate_html('compare.final_cta.cta_10p'); ?></a>
+          <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($product_10s_url); ?>"><?php echo svic_translate_html('compare.final_cta.cta_10s'); ?></a>
+          <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($compare_url); ?>"><?php echo svic_translate_html('product.traffic.links.compare'); ?></a>
+          <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($contact_url); ?>"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
         </div>
       </div>
     </section>
