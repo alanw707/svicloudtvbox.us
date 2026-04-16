@@ -5,6 +5,7 @@
     "parts": [
       "00-tokens.css",
       "05-announcement-bar.css",
+      "06-recent-shipments-strip.css",
       "12-header-base.css",
       "13-header-actions.css",
       "14-header-mobile.css",

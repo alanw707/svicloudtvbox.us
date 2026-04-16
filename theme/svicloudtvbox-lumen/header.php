@@ -177,4 +177,5 @@
       </div>
     </div>
   </header>
+  <?php svic_render_recent_shipments_strip(); ?>
   <?php svic_render_breadcrumbs(); ?>

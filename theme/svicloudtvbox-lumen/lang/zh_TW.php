@@ -10,6 +10,16 @@ return [
         'cta_url' => '',
     ],
 
+    'recent_shipments' => [
+        'badge'                  => '近期美國出貨',
+        'aria_label'             => '近期美國出貨與預估送達時程',
+        'disclaimer'             => '依近期美國出貨標籤與承運商預估時程整理。實際送達仍會因目的地、週末與假期而有所不同。',
+        'item'                   => '{{state}} · 預估 {{time}}',
+        'item_title'             => '近期承運服務：{{service}}',
+        'estimated_day_singular' => '1 天',
+        'estimated_day_plural'   => '{{count}} 天',
+    ],
+
     'core' => [
         'locale' => '繁體中文',
         'cart'   => [

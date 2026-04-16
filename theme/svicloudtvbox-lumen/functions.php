@@ -21,6 +21,14 @@ if (!defined('SVIC_ANNOUNCEMENT_ENABLED')) {
 }
 
 /**
+ * Recent U.S. shipments strip toggle.
+ * Uses WooCommerce Shipping metadata to display recent shipment estimates below the header.
+ */
+if (!defined('SVIC_RECENT_SHIPMENTS_ENABLED')) {
+    define('SVIC_RECENT_SHIPMENTS_ENABLED', true);
+}
+
+/**
  * Render the site-wide announcement bar.
  * Called from header.php just before <header>.
  */
@@ -210,9 +218,22 @@ require_once get_template_directory() . '/inc/class-svic-locale-resolver.php';
 require_once get_template_directory() . '/inc/guides-data.php';
 require_once get_template_directory() . '/inc/theme-maintenance.php';
 require_once get_template_directory() . '/inc/helpers-svic.php';
+require_once get_template_directory() . '/inc/class-svic-recent-shipments.php';
 require_once get_template_directory() . '/inc/class-svic-zh-sitemap.php';
 
 SVIC_Locale_Resolver::bootstrap();
+SVIC_Recent_Shipments::bootstrap();
+
+if (!function_exists('svic_render_recent_shipments_strip')) {
+    function svic_render_recent_shipments_strip(): void
+    {
+        if (!class_exists('SVIC_Recent_Shipments')) {
+            return;
+        }
+
+        SVIC_Recent_Shipments::render();
+    }
+}
 
 if (!function_exists('svic_get_localized_canonical_url')) {
     function svic_get_localized_canonical_url(): ?string

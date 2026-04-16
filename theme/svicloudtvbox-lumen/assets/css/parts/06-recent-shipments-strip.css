@@ -1,0 +1,200 @@
+/* ============================================================
+   Recent U.S. Shipments Strip
+   Powered by WooCommerce Shipping estimates.
+   Renders below the header and above breadcrumbs.
+   ============================================================ */
+
+.svic-recent-shipments {
+  --svic-recent-shipments-group-gap: clamp(0.85rem, 2vw, 1.15rem);
+  background:
+    linear-gradient(135deg, rgba(4, 16, 38, 0.96) 0%, rgba(8, 28, 60, 0.92) 60%, rgba(10, 44, 84, 0.9) 100%);
+  border-bottom: 1px solid rgba(94, 230, 208, 0.14);
+  color: rgba(245, 248, 255, 0.94);
+}
+
+.svic-recent-shipments__inner {
+  width: var(--max-width-hero);
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0.8rem clamp(1rem, 4vw, 2.5rem) 0.9rem;
+  display: grid;
+  gap: 0.65rem;
+  box-sizing: border-box;
+}
+
+.svic-recent-shipments__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.9rem;
+}
+
+.svic-recent-shipments__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.38rem 0.78rem;
+  border-radius: 999px;
+  background: rgba(94, 128, 255, 0.18);
+  border: 1px solid rgba(94, 230, 208, 0.22);
+  color: rgba(214, 245, 255, 0.96);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.svic-recent-shipments__disclaimer {
+  margin: 0;
+  color: rgba(222, 232, 255, 0.76);
+  font-size: clamp(0.78rem, 0.72rem + 0.18vw, 0.88rem);
+  line-height: 1.45;
+  max-width: 76ch;
+}
+
+.svic-recent-shipments__marquee {
+  position: relative;
+  overflow: visible;
+}
+
+.svic-recent-shipments__marquee.is-animated {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+}
+
+.svic-recent-shipments__track {
+  display: flex;
+  align-items: center;
+  gap: var(--svic-recent-shipments-group-gap);
+  width: max-content;
+}
+
+.svic-recent-shipments__marquee.is-animated .svic-recent-shipments__track {
+  animation: svic-recent-shipments-scroll var(--svic-recent-shipments-duration, 42s) linear infinite;
+  will-change: transform;
+}
+
+.svic-recent-shipments:hover .svic-recent-shipments__track,
+.svic-recent-shipments:focus-within .svic-recent-shipments__track {
+  animation-play-state: paused;
+}
+
+.svic-recent-shipments__group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.svic-recent-shipments__marquee.is-animated .svic-recent-shipments__group {
+  flex-wrap: nowrap;
+}
+
+.svic-recent-shipments__item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-height: 2.25rem;
+  padding: 0.54rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(8, 20, 48, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 14px 28px rgba(3, 10, 26, 0.28);
+  color: rgba(245, 248, 255, 0.94);
+  white-space: nowrap;
+}
+
+.svic-recent-shipments__item::before {
+  content: '';
+  display: inline-flex;
+  width: 0.48rem;
+  height: 0.48rem;
+  margin-right: 0.55rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(94, 230, 208, 0.98) 0%, rgba(66, 194, 255, 0.92) 100%);
+  box-shadow: 0 0 0 0.24rem rgba(94, 230, 208, 0.12);
+  flex-shrink: 0;
+}
+
+.svic-recent-shipments__item-text {
+  display: inline-flex;
+  align-items: center;
+  font-size: clamp(0.86rem, 0.82rem + 0.18vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+@keyframes svic-recent-shipments-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(calc(-50% - (var(--svic-recent-shipments-group-gap) / 2)), 0, 0);
+  }
+}
+
+@media (max-width: 860px) {
+  .svic-recent-shipments__inner {
+    gap: 0.7rem;
+  }
+
+  .svic-recent-shipments__header {
+    align-items: flex-start;
+  }
+
+  .svic-recent-shipments__disclaimer {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .svic-recent-shipments__inner {
+    padding: 0.75rem 1rem 0.8rem;
+  }
+
+  .svic-recent-shipments__badge {
+    font-size: 0.7rem;
+    letter-spacing: 0.07em;
+  }
+
+  .svic-recent-shipments__item {
+    min-height: 2.1rem;
+    padding: 0.5rem 0.82rem;
+  }
+
+  .svic-recent-shipments__item-text {
+    font-size: 0.84rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svic-recent-shipments__marquee,
+  .svic-recent-shipments__marquee.is-animated {
+    overflow: visible;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .svic-recent-shipments__track {
+    width: 100%;
+    display: block;
+    animation: none !important;
+  }
+
+  .svic-recent-shipments__group,
+  .svic-recent-shipments__marquee.is-animated .svic-recent-shipments__group {
+    flex-wrap: wrap;
+  }
+
+  .svic-recent-shipments__group[aria-hidden='true'] {
+    display: none;
+  }
+}

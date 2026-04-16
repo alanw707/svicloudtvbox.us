@@ -10,6 +10,16 @@ return [
         'cta_url' => '',
     ],
 
+    'recent_shipments' => [
+        'badge'                  => 'Recent U.S. shipments',
+        'aria_label'             => 'Recent U.S. shipments and estimated delivery windows',
+        'disclaimer'             => 'Based on recent U.S. shipment labels and carrier estimates. Delivery timing may vary by destination, weekends, and holidays.',
+        'item'                   => '{{state}} · estimated {{time}}',
+        'item_title'             => 'Recent carrier service: {{service}}',
+        'estimated_day_singular' => '1 day',
+        'estimated_day_plural'   => '{{count}} days',
+    ],
+
     'core' => [
         'locale' => 'English (US)',
         'cart'   => [
