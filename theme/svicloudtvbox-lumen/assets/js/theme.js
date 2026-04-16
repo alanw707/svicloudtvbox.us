@@ -161,8 +161,12 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
             }
         };
 
-        $(document).on('click', trackedSelector, function() {
-            const element = this;
+        $(document).on('click', trackedSelector, function(event) {
+            const element = event.currentTarget;
+            if (!(element instanceof HTMLElement)) {
+                return;
+            }
+
             const dataset = element.dataset || {};
             pushTrackingEvent({
                 event: dataset.svicEvent || 'svic_cta_click',

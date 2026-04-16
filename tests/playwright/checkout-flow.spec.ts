@@ -180,12 +180,17 @@ test.describe('Checkout purchase flow', () => {
       placeOrderButton.click(),
     ]);
 
+    type CheckoutResponsePayload = {
+      result?: string;
+      redirect?: string;
+    } | null;
+
     const responseStatus = checkoutResponse.status();
-    let checkoutResult: any = null;
+    let checkoutResult: CheckoutResponsePayload = null;
 
     try {
-      checkoutResult = await checkoutResponse.json();
-    } catch (err) {
+      checkoutResult = (await checkoutResponse.json()) as CheckoutResponsePayload;
+    } catch {
       // eslint-disable-next-line no-console
       console.log('Failed to parse checkout response as JSON', { status: responseStatus });
     }
@@ -210,8 +215,16 @@ test.describe('Checkout purchase flow', () => {
     await expect(orderSummary).toContainText(/Order|Total/i);
 
     const thankyouTracking = await page.evaluate(() => {
-      const dataLayer = Array.isArray((window as any).dataLayer) ? (window as any).dataLayer : [];
-      return dataLayer.find((entry: any) => entry && entry.event === 'svic_order_received') || null;
+      type TrackEntry = {
+        event?: string;
+        svic_location?: string;
+        svic_order_number?: string;
+        svic_order_total?: string;
+      };
+
+      const pageWindow = window as Window & { dataLayer?: TrackEntry[] };
+      const dataLayer = Array.isArray(pageWindow.dataLayer) ? pageWindow.dataLayer : [];
+      return dataLayer.find((entry) => entry && entry.event === 'svic_order_received') || null;
     });
 
     expect(thankyouTracking).toBeTruthy();
