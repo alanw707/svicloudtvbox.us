@@ -130,12 +130,19 @@ $compare_confidence_steps = [
     'compare.confidence.timeline.steps.setup',
 ];
 
-$compare_hero_10p_image = function_exists('svic_get_product_image_meta')
-    ? svic_get_product_image_meta($hero_product_10p, 0, 'large')
-    : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
-$compare_hero_10s_image = function_exists('svic_get_product_image_meta')
-    ? svic_get_product_image_meta($hero_product_10s, 0, 'large')
-    : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
+$compare_card_10p_image_html = $hero_product_10p ? svic_product_primary_image($hero_product_10p, 'large') : '';
+$compare_card_10s_image_html = $hero_product_10s ? svic_product_primary_image($hero_product_10s, 'large') : '';
+
+if ($compare_card_10p_image_html === '') {
+    $compare_card_10p_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10p') . '" loading="lazy" decoding="async" />';
+}
+
+if ($compare_card_10s_image_html === '') {
+    $compare_card_10s_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10s') . '" loading="lazy" decoding="async" />';
+}
+
+$compare_hero_10p_image = svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.webp');
+$compare_hero_10s_image = svic_get_theme_image_meta('/assets/images/svicloud-tvbox-10s.webp');
 $compare_hero_10p_background = function_exists('svic_get_product_image_meta')
     ? svic_get_product_image_meta($hero_product_10p, 1, 'large')
     : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
@@ -277,9 +284,7 @@ if (!empty($compare_hero_10s_background['url'])) {
   <section class="compare-products" id="product-list" aria-label="<?php echo svic_translate_attr('compare.aria.product_list'); ?>">
     <div class="compare-products__grid">
       <article class="compare-product-card compare-product-card--highlight">
-        <figure class="compare-product-card__media">
-          <img src="<?php echo esc_url($compare_hero_10p_image['url'] ?? svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')); ?>" alt="<?php echo svic_translate_attr('compare.aria.product_alt_10p'); ?>" loading="lazy" decoding="async" />
-        </figure>
+        <figure class="compare-product-card__media"><?php echo $compare_card_10p_image_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
         <div class="compare-product-card__header">
           <h2 class="compare-product-card__title"><?php echo svic_translate_html('shop.cards.10p.title'); ?></h2>
           <p class="compare-product-card__price"><?php echo $price_10p_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
@@ -313,9 +318,7 @@ if (!empty($compare_hero_10s_background['url'])) {
       </article>
 
       <article class="compare-product-card">
-        <figure class="compare-product-card__media">
-          <img src="<?php echo esc_url($compare_hero_10s_image['url'] ?? svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')); ?>" alt="<?php echo svic_translate_attr('compare.aria.product_alt_10s'); ?>" loading="lazy" decoding="async" />
-        </figure>
+        <figure class="compare-product-card__media"><?php echo $compare_card_10s_image_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
         <div class="compare-product-card__header">
           <h2 class="compare-product-card__title"><?php echo svic_translate_html('shop.cards.10s.title'); ?></h2>
           <p class="compare-product-card__price"><?php echo $price_10s_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
