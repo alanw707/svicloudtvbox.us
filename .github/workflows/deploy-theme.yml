@@ -10,6 +10,9 @@ on:
 
   workflow_dispatch:  # allow manual trigger from GitHub UI
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     name: Deploy via FTPS
