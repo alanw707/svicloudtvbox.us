@@ -1,0 +1,61 @@
+/* ==========================================
+   Compare Mobile Sticky CTA
+   ========================================== */
+
+.compare-sticky-buy {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 920;
+  background: rgba(6, 13, 28, 0.96);
+  border-top: 1px solid rgba(94, 230, 208, 0.25);
+  backdrop-filter: blur(12px);
+  padding: 0.75rem 0.9rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.compare-sticky-buy.is-visible {
+  transform: translateY(0);
+}
+
+.compare-sticky-buy__inner {
+  max-width: 560px;
+  margin: 0 auto;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.compare-sticky-buy__label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--lumen-text-primary, #f4f8ff);
+  text-align: center;
+}
+
+.compare-sticky-buy__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.compare-sticky-buy__cta {
+  min-width: 0;
+  justify-content: center;
+  padding-inline: 0.85rem;
+  font-size: 0.82rem;
+}
+
+@media (min-width: 768px) {
+  .compare-sticky-buy {
+    display: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .compare-sticky-buy {
+    display: block;
+  }
+}
