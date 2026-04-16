@@ -163,7 +163,39 @@ def _connect(cfg: DeployConfig):
 
 
 def _remote_join(*parts: str) -> str:
-    return posixpath.join(*[p.strip("/") for p in parts if p is not None])
+    filtered = [p for p in parts if p is not None and p != ""]
+    if not filtered:
+        return ""
+
+    is_absolute = bool(filtered[0].startswith("/"))
+    joined = posixpath.join(*[p.strip("/") for p in filtered if p.strip("/")])
+    if not joined:
+        return "/" if is_absolute else ""
+    return f"/{joined}" if is_absolute else joined
+
+
+
+def resolve_remote_root(ftp, remote_root: str) -> str:
+    """Normalize remote_root to an absolute FTP path.
+
+    Supports both styles of configuration:
+    - root-relative: public_html/wp-content/themes/...
+    - login-relative: wp-content/themes/...
+    """
+    remote_clean = remote_root.strip("/")
+    if remote_root.startswith("/"):
+        return _with_leading_slash(remote_clean)
+
+    login_dir = _with_leading_slash(ftp.pwd())
+    login_leaf = posixpath.basename(login_dir.rstrip("/"))
+
+    if not remote_clean:
+        return login_dir
+
+    if login_leaf and (remote_clean == login_leaf or remote_clean.startswith(login_leaf + "/")):
+        return _with_leading_slash(remote_clean)
+
+    return posixpath.join(login_dir.rstrip("/"), remote_clean)
 
 
 def ensure_remote_dir(ftp, remote_dir: str, verbose: bool = False) -> None:
@@ -367,22 +399,23 @@ def main() -> int:
     print("== Theme Deploy ==")
     print(f"Host: {cfg.host}:{cfg.port}  Protocol: {cfg.protocol.upper()}  PASV: yes")
     print(f"Local: {cfg.local_dir}")
-    print(f"Remote: /{cfg.remote_root}")
     if cfg.dry_run:
         print("[DRY RUN] No changes will be made")
 
     ftp = _connect(cfg)
+    absolute_remote_root = resolve_remote_root(ftp, cfg.remote_root)
+    print(f"Remote: {absolute_remote_root}")
     uploaded = 0
     try:
         for lf in walk_local_files(cfg.local_dir):
             rel_dir = str(lf.parent.relative_to(cfg.local_dir)).replace(os.sep, "/")
-            remote_dir = _remote_join(cfg.remote_root, rel_dir)
+            remote_dir = _remote_join(absolute_remote_root, rel_dir)
             if upload_file(ftp, lf, remote_dir, dry_run=cfg.dry_run):
                 uploaded += 1
 
         deleted = 0
         if cfg.delete_remote:
-            deleted = delete_remote_extraneous(ftp, cfg.remote_root, cfg.local_dir, dry_run=cfg.dry_run)
+            deleted = delete_remote_extraneous(ftp, absolute_remote_root, cfg.local_dir, dry_run=cfg.dry_run)
 
         print(f"Done. Uploaded: {uploaded} file(s). Deleted: {deleted} file(s).")
         return 0

@@ -7,6 +7,9 @@ global $post;
 
 get_header();
 
+$guides_hero_product_10p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
+$guides_hero_product_10s = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null;
+
 $contact_url  = svic_url_with_lang(home_url('/contact'));
 $faq_url      = svic_url_with_lang(home_url('/faq'));
 $guides_url   = svic_url_with_lang(home_url('/guides'));
@@ -22,6 +25,12 @@ $guides_content  = svic_guides_get_content();
 $hero_callouts   = svic_guides_get_content_item('hero_callouts');
 $highlight_cards = svic_guides_get_content_item('highlight_cards');
 $anchor_items    = svic_guides_get_anchor_items();
+$guides_hero_10p_image = function_exists('svic_get_product_image_meta')
+    ? svic_get_product_image_meta($guides_hero_product_10p, 0, 'large')
+    : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
+$guides_hero_10s_image = function_exists('svic_get_product_image_meta')
+    ? svic_get_product_image_meta($guides_hero_product_10s, 0, 'large')
+    : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
 ?>
 <main class="guides-page surface--dark">
   <section class="guides-hero" id="guides-hero">
@@ -54,10 +63,10 @@ $anchor_items    = svic_guides_get_anchor_items();
       <figure class="guides-hero__media" aria-hidden="true">
         <span class="guides-hero__blur"></span>
         <span class="guides-hero__device">
-          <img src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-10p-plus.png')); ?>" alt="" loading="lazy" width="360" height="240" />
+          <img src="<?php echo esc_url($guides_hero_10p_image['url'] ?? svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')); ?>" alt="" loading="eager" decoding="async" fetchpriority="high" width="<?php echo esc_attr((string) ($guides_hero_10p_image['width'] ?? 1024)); ?>" height="<?php echo esc_attr((string) ($guides_hero_10p_image['height'] ?? 1024)); ?>" />
         </span>
         <span class="guides-hero__remote">
-          <img src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-tvbox-10s.jpg')); ?>" alt="" loading="lazy" width="220" height="220" />
+          <img src="<?php echo esc_url($guides_hero_10s_image['url'] ?? svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')); ?>" alt="" loading="eager" decoding="async" width="<?php echo esc_attr((string) ($guides_hero_10s_image['width'] ?? 750)); ?>" height="<?php echo esc_attr((string) ($guides_hero_10s_image['height'] ?? 470)); ?>" />
         </span>
       </figure>
     </div>

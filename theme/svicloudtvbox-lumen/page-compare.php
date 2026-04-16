@@ -141,8 +141,12 @@ if ($compare_card_10s_image_html === '') {
     $compare_card_10s_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10s') . '" loading="lazy" decoding="async" />';
 }
 
-$compare_hero_10p_image = svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.png');
-$compare_hero_10s_image = svic_get_theme_image_meta('/assets/images/svicloud-tvbox-10s.jpg');
+$compare_hero_10p_image = function_exists('svic_get_product_image_meta')
+    ? svic_get_product_image_meta($hero_product_10p, 0, 'large')
+    : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
+$compare_hero_10s_image = function_exists('svic_get_product_image_meta')
+    ? svic_get_product_image_meta($hero_product_10s, 0, 'large')
+    : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
 $compare_hero_10p_background = function_exists('svic_get_product_image_meta')
     ? svic_get_product_image_meta($hero_product_10p, 1, 'large')
     : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
@@ -196,19 +200,20 @@ if (!empty($compare_hero_10s_background['url'])) {
             class="compare-hero__device compare-hero__device--10p"
             src="<?php echo esc_url($compare_hero_10p_image['url'] ?? svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')); ?>"
             alt=""
-            loading="lazy"
+            loading="eager"
             decoding="async"
-            width="800"
-            height="600"
+            fetchpriority="high"
+            width="<?php echo esc_attr((string) ($compare_hero_10p_image['width'] ?? 1024)); ?>"
+            height="<?php echo esc_attr((string) ($compare_hero_10p_image['height'] ?? 1024)); ?>"
           />
           <img
             class="compare-hero__device compare-hero__device--10s"
             src="<?php echo esc_url($compare_hero_10s_image['url'] ?? svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')); ?>"
             alt=""
-            loading="lazy"
+            loading="eager"
             decoding="async"
-            width="800"
-            height="600"
+            width="<?php echo esc_attr((string) ($compare_hero_10s_image['width'] ?? 750)); ?>"
+            height="<?php echo esc_attr((string) ($compare_hero_10s_image['height'] ?? 470)); ?>"
           />
         </div>
 

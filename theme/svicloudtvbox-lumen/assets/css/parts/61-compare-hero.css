@@ -234,8 +234,8 @@
   grid-auto-flow: column;
   align-items: end;
   justify-content: center;
-  gap: clamp(10px, 3vw, 24px);
-  padding: 6px 0;
+  gap: clamp(8px, 2.2vw, 18px);
+  padding: 10px 0 0;
 }
 
 @media (min-width: 960px) {
@@ -245,28 +245,33 @@
 }
 
 .compare-hero__device {
-  width: clamp(240px, 36vw, 420px);
-  height: auto;
-  filter: drop-shadow(0 18px 46px rgba(5, 14, 34, 0.55));
+  display: block;
+  width: auto;
+  max-width: min(100%, 460px);
+  height: clamp(230px, 29vw, 360px);
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 20px 52px rgba(5, 14, 34, 0.58));
   transition: transform var(--transition-normal), filter var(--transition-normal);
 }
 
 .compare-hero__device--10p {
-  transform: translateY(6px) rotate(-4deg);
+  height: clamp(250px, 31vw, 390px);
+  transform: translate(10px, 10px) rotate(-4deg);
 }
 
 .compare-hero__device--10s {
-  transform: translateY(0) rotate(5deg);
+  transform: translate(-12px, -4px) rotate(4deg);
 }
 
 .compare-hero__devices:hover .compare-hero__device--10p,
 .compare-hero__devices:focus-within .compare-hero__device--10p {
-  transform: translateY(2px) rotate(-2.5deg) scale(1.015);
+  transform: translate(10px, 4px) rotate(-2.8deg) scale(1.015);
 }
 
 .compare-hero__devices:hover .compare-hero__device--10s,
 .compare-hero__devices:focus-within .compare-hero__device--10s {
-  transform: translateY(-2px) rotate(3deg) scale(1.02);
+  transform: translate(-12px, -8px) rotate(2.8deg) scale(1.02);
 }
 
 .compare-hero__background {
@@ -429,7 +434,7 @@
     grid-auto-flow: row;
     justify-content: center;
     justify-items: center;
-    gap: 6px;
+    gap: 10px;
   }
 
   .compare-hero__device--10p,
@@ -438,7 +443,13 @@
   }
 
   .compare-hero__device {
-    width: clamp(160px, 88vw, 320px);
+    width: auto;
+    max-width: min(100%, 320px);
+    height: clamp(170px, 46vw, 250px);
+  }
+
+  .compare-hero__device--10p {
+    height: clamp(190px, 52vw, 280px);
   }
 
   /* Safer wrapping for headline on small screens */
