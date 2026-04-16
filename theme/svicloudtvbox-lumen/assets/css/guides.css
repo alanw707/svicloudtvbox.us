@@ -31,12 +31,12 @@
 .guides-hero__actions .lumen-pill{font-weight:600}
 .guides-hero__secondary{color:var(--lumen-text-primary);border-color:rgba(255,255,255,0.45)}
 .guides-hero__secondary:hover,.guides-hero__secondary:focus-visible{color:var(--lumen-text-primary);border-color:rgba(255,255,255,0.7);box-shadow:0 0 0 3px rgba(255,255,255,0.16)}
-.guides-hero__media{position:relative;display:grid;place-items:center;padding:clamp(2rem,5vw,3rem);border-radius:var(--radius-hero);min-height:clamp(260px,36vw,340px);overflow:hidden;pointer-events:none}
+.guides-hero__media{position:relative;display:flex;align-items:flex-end;justify-content:center;flex-wrap:nowrap;gap:clamp(0.95rem,2vw,1.9rem);padding:clamp(2rem,5vw,3rem);border-radius:var(--radius-hero);min-height:clamp(260px,36vw,340px);overflow:hidden;pointer-events:none}
 .guides-hero__blur{position:absolute;inset:-20% -30% -10% -10%;background:radial-gradient(circle at 30% 20%,rgba(126,246,227,0.38),transparent 62%),radial-gradient(circle at 70% 70%,rgba(27,92,255,0.32),transparent 65%);filter:blur(0);opacity:0.9;pointer-events:none}
 .guides-hero__device,.guides-hero__remote{position:relative;display:inline-flex;filter:drop-shadow(0 28px 60px rgba(6,12,28,0.55))}
-.guides-hero__device img{width:auto;max-width:min(100%,420px);height:clamp(230px,30vw,360px);object-fit:contain;object-position:center bottom}
-.guides-hero__remote{position:absolute;right:clamp(4%,7vw,13%);bottom:clamp(4%,7vw,11%);transform:rotate(-7deg)}
-.guides-hero__remote img{width:auto;max-width:min(100%,250px);height:clamp(150px,20vw,220px);object-fit:contain;object-position:center bottom}
+.guides-hero__device img{width:min(100%,clamp(280px,31vw,420px));height:auto;max-height:clamp(230px,30vw,360px);object-fit:contain;object-position:center bottom}
+.guides-hero__remote{position:static;right:auto;bottom:auto;margin-left:clamp(0.45rem,1.4vw,1.15rem);margin-bottom:clamp(-0.15rem,0.15vw,0.25rem);transform:rotate(-7deg);align-self:flex-end}
+.guides-hero__remote img{width:min(100%,clamp(150px,17vw,250px));height:auto;max-height:clamp(135px,19vw,220px);object-fit:contain;object-position:center bottom}
 .guides-hero__pill{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.4rem;margin:0 auto;align-self:center;padding:0.7rem 1rem;width:min(280px,100%);border-radius:999px;background:rgba(9,26,56,0.92);border:1px solid rgba(126,246,227,0.45);color:rgba(244,248,255,0.9);font-size:0.82rem;font-weight:500;text-align:center;box-shadow:var(--glass-pill-shadow,0 14px 32px rgba(4,12,30,0.3))}
 .guides-hero__pill-badge{background:var(--glass-pill-base,#4fd8ed);color:#041226;font-weight:700;font-size:0.75rem;letter-spacing:0.08em;padding:0.35rem 0.65rem;border-radius:999px;text-transform:uppercase;box-shadow:var(--glass-pill-shadow,0 16px 38px rgba(4,12,30,0.32))}
 .guides-hero__pill-text{display:inline-flex;flex-direction:column;gap:0.1rem}
@@ -54,17 +54,18 @@
 .guides-hero__copy{text-align:center;justify-items:center}
 .guides-hero__actions{justify-content:center}
 .guides-hero__lead{max-width:min(46ch,100%)}
-.guides-hero__media{margin:0 auto;max-width:clamp(260px,80vw,380px)}
-.guides-hero__remote{position:absolute;right:14%;bottom:10%}
+.guides-hero__media{margin:0 auto;max-width:min(760px,100%)}
+.guides-hero__remote{margin-left:0;margin-bottom:0}
 .guides-hero__pill{justify-content:center}
 .guides-hero__highlights{justify-content:center}
 }
 @media(max-width:540px){.guides-hero{padding-top:clamp(2.5rem,6vw,3rem)}
 .guides-hero__inner{width:min(100%,calc(100% - 40px))}
 .guides-hero__media{padding:2rem}
-.guides-hero__device img{width:auto;max-width:min(100%,280px);height:clamp(180px,52vw,250px)}
-.guides-hero__remote{right:8%;bottom:14%}
-.guides-hero__remote img{max-width:min(100%,180px);height:clamp(115px,34vw,170px)}
+.guides-hero__device img{width:min(100%,clamp(220px,68vw,320px));height:auto;max-height:clamp(180px,52vw,250px)}
+.guides-hero__media{flex-wrap:wrap}
+.guides-hero__remote{margin-top:clamp(0.1rem,0.8vw,0.6rem);margin-left:auto;margin-right:clamp(0.35rem,3vw,1.15rem)}
+.guides-hero__remote img{width:min(100%,clamp(120px,34vw,185px));height:auto;max-height:clamp(115px,34vw,170px)}
 .guides-hero__pill{padding:0.85rem 1.1rem}
 .guides-hero__pill-badge{margin-bottom:0.15rem}
 .guides-hero__pill-text{align-items:center}

@@ -72,6 +72,10 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
 $certificate_asset_path     = get_template_directory() . $certificate_asset_relative;
 $certificate_asset_url      = file_exists($certificate_asset_path) ? svic_theme_image_uri($certificate_asset_relative) : '';
 
+$story_warehouse_asset_relative = '/assets/images/nevada-warehouse.png';
+$story_warehouse_asset_path     = get_template_directory() . $story_warehouse_asset_relative;
+$story_warehouse_asset_url      = file_exists($story_warehouse_asset_path) ? svic_theme_image_uri($story_warehouse_asset_relative) : '';
+
 $concierge_car_asset_relative = '/assets/svg/illustration-concierge-car.svg';
 $concierge_car_asset_path     = get_template_directory() . $concierge_car_asset_relative;
 $concierge_car_asset_url      = file_exists($concierge_car_asset_path) ? get_template_directory_uri() . $concierge_car_asset_relative : '';
@@ -100,13 +104,23 @@ $concierge_car_asset_url      = file_exists($concierge_car_asset_path) ? get_tem
         <p class="about-section-lead"><?php echo svic_translate_html('about.story.lead'); ?></p>
         <div class="about-section-body"><?php echo wp_kses_post(svic_translate_rich('about.story.body')); ?></div>
       </div>
-      <div class="about-story__stats" role="list">
-        <?php foreach ($stats as $stat) : ?>
-          <div class="about-stat" role="listitem">
-            <span class="about-stat__value"><?php echo svic_translate_html($stat['value_key']); ?></span>
-            <span class="about-stat__label"><?php echo svic_translate_html($stat['label_key']); ?></span>
-          </div>
-        <?php endforeach; ?>
+      <div class="about-story__media-stats">
+        <?php if (!empty($story_warehouse_asset_url)) : ?>
+          <figure class="about-story__media">
+            <img src="<?php echo esc_url($story_warehouse_asset_url); ?>" alt="<?php echo esc_attr(svic_translate('about.story.warehouse_alt')); ?>" loading="lazy" width="1104" height="976" />
+          </figure>
+        <?php endif; ?>
+        <?php if (!empty($story_warehouse_asset_url)) : ?>
+          <p class="about-story__caption"><?php echo svic_translate_html('about.story.warehouse_caption'); ?></p>
+        <?php endif; ?>
+        <div class="about-story__stats" role="list">
+          <?php foreach ($stats as $stat) : ?>
+            <div class="about-stat" role="listitem">
+              <span class="about-stat__value"><?php echo svic_translate_html($stat['value_key']); ?></span>
+              <span class="about-stat__label"><?php echo svic_translate_html($stat['label_key']); ?></span>
+            </div>
+          <?php endforeach; ?>
+        </div>
       </div>
     </div>
   </section>
