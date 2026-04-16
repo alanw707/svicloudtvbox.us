@@ -335,7 +335,7 @@ def list_remote_paths(ftp, base_remote: str) -> set[str] | None:
                     try:
                         ftp.cwd(remote_abs)
                     except error_perm:
-                        files.add(remote_entry.strip("/"))
+                        files.add(remote_abs)
                     else:
                         stack.append(_with_leading_slash(ftp.pwd()))
                     finally:
@@ -347,17 +347,15 @@ def list_remote_paths(ftp, base_remote: str) -> set[str] | None:
             except Exception:
                 pass
 
-    root_clean = base_remote.strip("/")
-    if not root_clean:
-        root_clean = base_remote
+    root_path = _with_leading_slash(base_remote)
 
     # First attempt MLSD
-    paths = _list_with_mlsd(root_clean)
+    paths = _list_with_mlsd(root_path)
     if paths is not None:
         return paths
 
     # Fallback to NLST traversal
-    return _list_with_nlst(root_clean)
+    return _list_with_nlst(root_path)
 
 
 def delete_remote_extraneous(ftp, base_remote: str, local_base: Path, dry_run: bool = False) -> int:
