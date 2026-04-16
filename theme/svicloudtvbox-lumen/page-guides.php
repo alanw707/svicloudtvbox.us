@@ -61,8 +61,8 @@ $anchor_items    = svic_guides_get_anchor_items();
         </span>
         <span class="guides-hero__remote">
           <picture>
-            <source type="image/webp" srcset="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')); ?>" />
-            <img src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.png')); ?>" alt="" loading="lazy" width="220" height="160" />
+            <source type="image/webp" srcset="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-tvbox-10s.webp')); ?>" />
+            <img src="<?php echo esc_url(svic_theme_image_uri('/assets/images/svicloud-tvbox-10s.jpg')); ?>" alt="" loading="lazy" width="220" height="220" />
           </picture>
         </span>
       </figure>
