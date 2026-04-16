@@ -7,8 +7,7 @@
     font-size: 0.98rem;
   }
 
-  .lumen-feature-card,
-  .lumen-pricing-card {
+  .lumen-feature-card {
     padding: 24px;
   }
 
@@ -39,7 +38,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .lumen-feature-card,
-  .lumen-pricing-card,
+  .lumen-pricing .shop-product-card,
+  .lumen-pricing .shop-product-card__media img,
+  .lumen-pricing__details-link,
   .lumen-metric,
   .lumen-feature-card__icon,
   .lumen-feature-card__icon img,

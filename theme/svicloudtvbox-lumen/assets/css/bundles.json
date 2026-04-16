@@ -26,6 +26,7 @@
       "33-hero-dashboard-visuals.css",
       "34-hero-dashboard-animations.css",
       "40-cards.css",
+      "43-shop-product-card.css",
       "44-lumen-section-header.css",
       "45-lumen-section-certification.css",
       "46-lumen-section-metrics.css",
@@ -108,6 +109,7 @@
       "60-compare-base.css",
       "61-compare-hero.css",
       "62-compare-differences.css",
+      "43-shop-product-card.css",
       "63-compare-products.css",
       "63b-compare-confidence.css",
       "64-compare-final-cta.css",
@@ -119,6 +121,7 @@
     "output": "woocommerce.css",
     "parts": [
       "50-woocommerce.css",
+      "43-shop-product-card.css",
       "65-shop.css",
       "66-woocommerce-cart.css",
       "70-lumen-woocommerce.css",

@@ -141,6 +141,47 @@ if ($compare_card_10s_image_html === '') {
     $compare_card_10s_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10s') . '" loading="lazy" decoding="async" />';
 }
 
+$compare_cards = [
+    '10p' => [
+        'badge_key'             => 'shop.cards.10p.badge',
+        'title_key'             => 'shop.cards.10p.title',
+        'lead_key'              => 'compare.products.10p.lead',
+        'fit_label_key'         => 'compare.products.10p.fit_label',
+        'fit_copy_key'          => 'compare.products.10p.fit_copy',
+        'cta_key'               => 'compare.products.10p.cta',
+        'cta_url'               => $hero_10p_url,
+        'image_html'            => $compare_card_10p_image_html,
+        'price_markup'          => $price_10p_markup,
+        'price_note_key'        => 'shop.cards.price_note',
+        'feature_keys'          => $compare_product_bullets['10p'],
+        'highlight'             => true,
+        'modifier'              => '',
+        'comparison_aria_key'   => 'compare.aria.comparison_10p',
+        'comparison_value_key'  => 'p10p',
+        'comparison_highlight'  => 'p10p',
+        'model'                 => 'svicloud-10p-plus',
+    ],
+    '10s' => [
+        'badge_key'             => 'shop.cards.10s.badge',
+        'title_key'             => 'shop.cards.10s.title',
+        'lead_key'              => 'compare.products.10s.lead',
+        'fit_label_key'         => 'compare.products.10s.fit_label',
+        'fit_copy_key'          => 'compare.products.10s.fit_copy',
+        'cta_key'               => 'compare.products.10s.cta',
+        'cta_url'               => $hero_10s_url,
+        'image_html'            => $compare_card_10s_image_html,
+        'price_markup'          => $price_10s_markup,
+        'price_note_key'        => 'shop.cards.price_note',
+        'feature_keys'          => $compare_product_bullets['10s'],
+        'highlight'             => false,
+        'modifier'              => 'shop-product-card--best-value',
+        'comparison_aria_key'   => 'compare.aria.comparison_10s',
+        'comparison_value_key'  => 'p10s',
+        'comparison_highlight'  => 'p10s',
+        'model'                 => 'svicloud-10s',
+    ],
+];
+
 $compare_hero_10p_image = function_exists('svic_get_product_image_meta')
     ? svic_get_product_image_meta($hero_product_10p, 0, 'large')
     : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
@@ -288,73 +329,61 @@ if (!empty($compare_hero_10s_background['url'])) {
 
   <section class="compare-products" id="product-list" aria-label="<?php echo svic_translate_attr('compare.aria.product_list'); ?>">
     <div class="compare-products__grid">
-      <article class="compare-product-card compare-product-card--highlight">
-        <figure class="compare-product-card__media"><?php echo $compare_card_10p_image_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
-        <div class="compare-product-card__header">
-          <h2 class="compare-product-card__title"><?php echo svic_translate_html('shop.cards.10p.title'); ?></h2>
-          <p class="compare-product-card__price"><?php echo $price_10p_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-          <p class="compare-product-card__lead"><?php echo svic_translate_html('compare.products.10p.lead'); ?></p>
-          <div class="compare-product-card__fit">
-            <span class="compare-product-card__fit-label"><?php echo svic_translate_html('compare.products.10p.fit_label'); ?></span>
-            <p class="compare-product-card__fit-copy"><?php echo svic_translate_html('compare.products.10p.fit_copy'); ?></p>
+      <?php foreach ($compare_cards as $slug => $card) : ?>
+        <?php
+          $card_classes = 'shop-product-card compare-product-card';
+          if (!empty($card['highlight'])) {
+              $card_classes .= ' shop-product-card--highlight compare-product-card--highlight';
+          }
+          if (!empty($card['modifier'])) {
+              $card_classes .= ' ' . sanitize_html_class($card['modifier']);
+          }
+        ?>
+        <article class="<?php echo esc_attr($card_classes); ?>">
+          <div class="shop-product-card__header">
+            <?php if (!empty($card['badge_key'])) : ?>
+              <span class="shop-product-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></span>
+            <?php endif; ?>
+            <figure class="shop-product-card__media"><?php echo $card['image_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
+            <div class="shop-product-card__price-line">
+              <span class="shop-product-card__price-label"><?php echo svic_translate_html('shop.cards.price_label'); ?></span>
+              <span class="shop-product-card__price-amount"><?php echo $card['price_markup']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+            </div>
+            <?php if (!empty($card['price_note_key'])) : ?>
+              <span class="shop-product-card__price-note"><?php echo svic_translate_html($card['price_note_key']); ?></span>
+            <?php endif; ?>
+            <h2 class="shop-product-card__title"><?php echo svic_translate_html($card['title_key']); ?></h2>
+            <p class="shop-product-card__lead"><?php echo svic_translate_html($card['lead_key']); ?></p>
+            <a class="lumen-pill <?php echo !empty($card['highlight']) ? 'lumen-pill--primary' : 'lumen-pill--ghost'; ?> shop-product-card__cta" href="<?php echo esc_url($card['cta_url']); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_product_card" data-svic-label="<?php echo esc_attr($slug); ?>_card_cta" data-svic-model="<?php echo esc_attr($card['model']); ?>"><?php echo svic_translate_html($card['cta_key']); ?></a>
           </div>
-          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_product_card" data-svic-label="10p_card_cta" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('compare.products.10p.cta'); ?></a>
-        </div>
-        <ul class="compare-product-card__list">
-          <?php foreach ($compare_product_bullets['10p'] as $bullet_key) : ?>
-            <li><?php echo svic_translate_html($bullet_key); ?></li>
-          <?php endforeach; ?>
-        </ul>
-        <div class="compare-product-card__divider" aria-hidden="true"></div>
-        <section class="compare-product-card__comparison" aria-label="<?php echo svic_translate_attr('compare.aria.comparison_10p'); ?>">
-          <h3 class="compare-product-card__comparison-title"><?php echo svic_translate_html('compare.comparison.title'); ?></h3>
-          <dl class="compare-product-card__comparison-list">
-            <?php foreach ($comparison_rows as $row) :
-                $is_highlight = isset($row['highlight']) && $row['highlight'] === 'p10p';
-                $base_key = 'compare.comparison.rows.' . $row['key'];
-            ?>
-              <div class="compare-product-card__comparison-item <?php echo $is_highlight ? 'is-highlight' : ''; ?>">
-                <dt><?php echo svic_translate_html($base_key . '.label'); ?></dt>
-                <dd><?php echo svic_translate_html($base_key . '.p10p'); ?></dd>
-              </div>
-            <?php endforeach; ?>
-          </dl>
-        </section>
-      </article>
-
-      <article class="compare-product-card">
-        <figure class="compare-product-card__media"><?php echo $compare_card_10s_image_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
-        <div class="compare-product-card__header">
-          <h2 class="compare-product-card__title"><?php echo svic_translate_html('shop.cards.10s.title'); ?></h2>
-          <p class="compare-product-card__price"><?php echo $price_10s_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-          <p class="compare-product-card__lead"><?php echo svic_translate_html('compare.products.10s.lead'); ?></p>
-          <div class="compare-product-card__fit">
-            <span class="compare-product-card__fit-label"><?php echo svic_translate_html('compare.products.10s.fit_label'); ?></span>
-            <p class="compare-product-card__fit-copy"><?php echo svic_translate_html('compare.products.10s.fit_copy'); ?></p>
+          <div class="shop-product-card__divider" aria-hidden="true"></div>
+          <div class="shop-product-card__body compare-product-card__body">
+            <div class="shop-product-card__best-for compare-product-card__fit">
+              <span class="shop-product-card__best-for-label"><?php echo svic_translate_html($card['fit_label_key']); ?></span>
+              <p class="shop-product-card__best-for-value"><?php echo svic_translate_html($card['fit_copy_key']); ?></p>
+            </div>
+            <ul class="shop-product-card__features">
+              <?php foreach ($card['feature_keys'] as $feature_key) : ?>
+                <li><?php echo svic_translate_html($feature_key); ?></li>
+              <?php endforeach; ?>
+            </ul>
           </div>
-          <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_product_card" data-svic-label="10s_card_cta" data-svic-model="svicloud-10s"><?php echo svic_translate_html('compare.products.10s.cta'); ?></a>
-        </div>
-        <ul class="compare-product-card__list">
-          <?php foreach ($compare_product_bullets['10s'] as $bullet_key) : ?>
-            <li><?php echo svic_translate_html($bullet_key); ?></li>
-          <?php endforeach; ?>
-        </ul>
-        <div class="compare-product-card__divider" aria-hidden="true"></div>
-        <section class="compare-product-card__comparison" aria-label="<?php echo svic_translate_attr('compare.aria.comparison_10s'); ?>">
-          <h3 class="compare-product-card__comparison-title"><?php echo svic_translate_html('compare.comparison.title'); ?></h3>
-          <dl class="compare-product-card__comparison-list">
-            <?php foreach ($comparison_rows as $row) :
-                $is_highlight = isset($row['highlight']) && $row['highlight'] === 'p10s';
-                $base_key = 'compare.comparison.rows.' . $row['key'];
-            ?>
-              <div class="compare-product-card__comparison-item <?php echo $is_highlight ? 'is-highlight' : ''; ?>">
-                <dt><?php echo svic_translate_html($base_key . '.label'); ?></dt>
-                <dd><?php echo svic_translate_html($base_key . '.p10s'); ?></dd>
-              </div>
-            <?php endforeach; ?>
-          </dl>
-        </section>
-      </article>
+          <section class="compare-product-card__comparison" aria-label="<?php echo svic_translate_attr($card['comparison_aria_key']); ?>">
+            <h3 class="compare-product-card__comparison-title"><?php echo svic_translate_html('compare.comparison.title'); ?></h3>
+            <dl class="compare-product-card__comparison-list">
+              <?php foreach ($comparison_rows as $row) :
+                  $is_highlight = isset($row['highlight']) && $row['highlight'] === $card['comparison_highlight'];
+                  $base_key = 'compare.comparison.rows.' . $row['key'];
+              ?>
+                <div class="compare-product-card__comparison-item <?php echo $is_highlight ? 'is-highlight' : ''; ?>">
+                  <dt><?php echo svic_translate_html($base_key . '.label'); ?></dt>
+                  <dd><?php echo svic_translate_html($base_key . '.' . $card['comparison_value_key']); ?></dd>
+                </div>
+              <?php endforeach; ?>
+            </dl>
+          </section>
+        </article>
+      <?php endforeach; ?>
     </div>
   </section>
 
