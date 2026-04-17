@@ -1,6 +1,6 @@
 <?php
 /**
- * Recent U.S. shipments strip powered by WooCommerce Shipping metadata.
+ * Recent shipments strip powered by WooCommerce Shipping metadata.
  */
 
 declare(strict_types=1);

@@ -13,9 +13,9 @@ $overrides = [
     ],
 
     'recent_shipments' => [
-        'badge'                  => '近期美国出货',
-        'aria_label'             => '近期美国出货与预估送达时程',
-        'disclaimer'             => '依据近期美国出货标签与承运商预估时程整理。时效仍会因目的地、周末与假期而不同。',
+        'badge'                  => '近期出货',
+        'aria_label'             => '近期出货与预估送达时程',
+        'disclaimer'             => '依据近期出货标签与承运商预估时程整理。时效仍会因目的地、周末与假期而不同。',
         'item'                   => '{{location}} · 约 {{time}}',
         'item_title'             => '承运服务：{{service}}',
         'location_city_state'    => '{{city}}，{{state}}',

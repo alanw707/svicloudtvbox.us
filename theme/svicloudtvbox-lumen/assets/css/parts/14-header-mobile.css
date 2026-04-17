@@ -66,10 +66,22 @@
 }
 
 .lumen-mobile-nav {
+  position: absolute;
+  top: calc(100% + 1px);
+  left: 0;
+  right: 0;
+  z-index: 90;
   display: none;
-  padding: 20px clamp(18px, 6vw, 36px) 32px;
+  width: 100%;
+  max-height: calc(100vh - var(--lumen-admin-bar-offset, 0px) - 5.75rem);
+  max-height: calc(100dvh - var(--lumen-admin-bar-offset, 0px) - 5.75rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px clamp(18px, 6vw, 36px) calc(32px + env(safe-area-inset-bottom));
   background: rgba(8, 18, 42, 0.95);
   border-top: 1px solid rgba(94, 230, 208, 0.18);
+  box-shadow: 0 26px 56px rgba(4, 12, 30, 0.45);
   backdrop-filter: var(--glass-blur-strong);
 }
 

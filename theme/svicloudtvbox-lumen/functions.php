@@ -21,7 +21,7 @@ if (!defined('SVIC_ANNOUNCEMENT_ENABLED')) {
 }
 
 /**
- * Recent U.S. shipments strip toggle.
+ * Recent shipments strip toggle.
  * Uses WooCommerce Shipping metadata to display recent shipment estimates below the header.
  */
 if (!defined('SVIC_RECENT_SHIPMENTS_ENABLED')) {

@@ -2,10 +2,21 @@
    HEADER BASE LAYOUT
    ========================================== */
 
+body.admin-bar {
+  --lumen-admin-bar-offset: 32px;
+}
+
+@media (max-width: 782px) {
+  body.admin-bar {
+    --lumen-admin-bar-offset: 46px;
+  }
+}
+
 .lumen-header {
+  position: -webkit-sticky;
   position: sticky;
-  top: 0;
-  z-index: 40;
+  top: var(--lumen-admin-bar-offset, 0px);
+  z-index: 120;
   width: 100%;
   color: var(--lumen-text-primary);
   background: linear-gradient(135deg, rgba(6, 19, 46, 0.96) 0%, rgba(7, 30, 64, 0.88) 55%, rgba(12, 52, 98, 0.8) 100%);

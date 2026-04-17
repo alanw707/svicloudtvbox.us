@@ -11,9 +11,9 @@ return [
     ],
 
     'recent_shipments' => [
-        'badge'                  => 'Recent U.S. shipments',
-        'aria_label'             => 'Recent U.S. shipments and estimated delivery windows',
-        'disclaimer'             => 'From recent U.S. shipment labels and carrier estimates. Timing varies by destination, weekends, and holidays.',
+        'badge'                  => 'Recent Shipments',
+        'aria_label'             => 'Recent shipments and estimated delivery windows',
+        'disclaimer'             => 'From recent shipment labels and carrier estimates. Timing varies by destination, weekends, and holidays.',
         'item'                   => '{{location}} · est. {{time}}',
         'item_title'             => 'Carrier service: {{service}}',
         'location_city_state'    => '{{city}}, {{state}}',
