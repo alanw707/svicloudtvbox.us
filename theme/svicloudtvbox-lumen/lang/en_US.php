@@ -801,8 +801,7 @@ return [
                 'box'      => 'SVICLOUD TV box',
                 'power'    => 'U.S. power adapter',
                 'hdmi'     => 'HDMI cable',
-                'remote'   => 'Bluetooth AI voice remote + batteries',
-                'batteries'=> 'Extra batteries',
+                'remote'   => 'Bluetooth AI voice remote',
                 'guide'    => 'Quick-start guide (EN/中文)',
             ],
         ],
@@ -1981,7 +1980,7 @@ return [
                         ],
                         'box_contents' => [
                             'question' => 'What comes in the box?',
-                            'answer'   => 'SVICLOUD box, U.S. power adapter, HDMI cable, Bluetooth voice remote, batteries, and quick-start guide.',
+                            'answer'   => 'SVICLOUD box, U.S. power adapter, HDMI cable, Bluetooth voice remote, and quick-start guide.',
                         ],
                     ],
                 ],
@@ -2084,7 +2083,7 @@ return [
                     ],
                     'box_contents' => [
                         'question' => 'What comes in the box?',
-                        'answer'   => 'SVICLOUD box, U.S. power adapter, HDMI cable, Bluetooth voice remote, batteries, and a quick-start guide.',
+                        'answer'   => 'SVICLOUD box, U.S. power adapter, HDMI cable, Bluetooth voice remote, and a quick-start guide.',
                     ],
                 ],
             ],

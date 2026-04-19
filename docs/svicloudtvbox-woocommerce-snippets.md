@@ -42,7 +42,7 @@
 <h3>What’s in the Box</h3>
 <ul>
   <li>SVICLOUD 10P+ TV Box</li>
-  <li>Voice Remote + Batteries</li>
+  <li>Voice Remote</li>
   <li>HDMI Cable</li>
   <li>Power Adapter</li>
   <li>Quick Start Guide</li>
@@ -121,7 +121,7 @@
 <h3>What’s in the Box</h3>
 <ul>
   <li>SVICLOUD 10S TV Box</li>
-  <li>Voice Remote + Batteries</li>
+  <li>Voice Remote</li>
   <li>HDMI Cable</li>
   <li>Power Adapter</li>
   <li>Quick Start Guide</li>

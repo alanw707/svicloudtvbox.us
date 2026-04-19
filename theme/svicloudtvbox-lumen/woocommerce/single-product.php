@@ -96,7 +96,6 @@ while (have_posts()) :
         'frontpage.inbox.items.power',
         'frontpage.inbox.items.hdmi',
         'frontpage.inbox.items.remote',
-        'frontpage.inbox.items.batteries',
         'frontpage.inbox.items.guide',
     ];
 
