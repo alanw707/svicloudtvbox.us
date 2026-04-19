@@ -14,13 +14,13 @@
 }
 
 .svic-recent-shipments__inner {
-  width: var(--max-width-hero);
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 0.66rem clamp(1rem, 4vw, 2.5rem);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0.62rem clamp(0.75rem, 1.5vw, 1.5rem);
   display: flex;
   align-items: center;
-  gap: 0.95rem;
+  gap: clamp(0.65rem, 0.85vw, 0.95rem);
   min-width: 0;
   box-sizing: border-box;
 }
@@ -28,34 +28,49 @@
 .svic-recent-shipments__label {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  flex: 0 0 auto;
-  min-width: max-content;
-  color: rgba(210, 242, 255, 0.92);
-  font-size: 0.72rem;
+  gap: 0.45rem;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: clamp(11.25rem, 14vw, 13rem);
+  color: rgba(210, 242, 255, 0.9);
+  font-size: clamp(0.62rem, 0.6rem + 0.12vw, 0.7rem);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.075em;
   text-transform: uppercase;
+}
+
+.svic-recent-shipments__label-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .svic-recent-shipments__label::before {
   content: '';
   display: inline-flex;
-  width: 0.46rem;
-  height: 0.46rem;
-  border-radius: 999px;
-  background: linear-gradient(135deg, rgba(94, 230, 208, 0.98) 0%, rgba(66, 194, 255, 0.92) 100%);
-  box-shadow: 0 0 0 0.25rem rgba(94, 230, 208, 0.12);
+  width: 1.08rem;
+  height: 1.08rem;
+  background: linear-gradient(135deg, rgba(110, 238, 219, 1) 0%, rgba(77, 201, 255, 0.96) 100%);
+  mask-image: url('../svg/icon-truck.svg');
+  -webkit-mask-image: url('../svg/icon-truck.svg');
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  filter: drop-shadow(0 0 0.38rem rgba(94, 230, 208, 0.3));
+  transform: translateY(0.02rem);
   flex-shrink: 0;
 }
 
 .svic-recent-shipments__marquee {
-  flex: 1 1 auto;
+  flex: 1 1 0%;
   min-width: 0;
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+  mask-image: linear-gradient(to right, transparent 0, #000 0.75rem, #000 calc(100% - 0.75rem), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 0.75rem, #000 calc(100% - 0.75rem), transparent 100%);
 }
 
 .svic-recent-shipments__track {
@@ -63,6 +78,9 @@
   align-items: center;
   gap: 0;
   width: max-content;
+}
+
+.svic-recent-shipments__marquee:not(.is-animated) .svic-recent-shipments__track {
   min-width: 100%;
 }
 
@@ -92,8 +110,8 @@
   display: inline-flex;
   align-items: center;
   flex: 0 0 auto;
-  color: rgba(236, 242, 255, 0.92);
-  font-size: clamp(0.84rem, 0.8rem + 0.16vw, 0.93rem);
+  color: rgba(236, 242, 255, 0.94);
+  font-size: clamp(0.86rem, 0.82rem + 0.14vw, 0.94rem);
   font-weight: 600;
   line-height: 1.35;
   white-space: nowrap;
@@ -132,13 +150,19 @@
 
 @media (max-width: 1024px) {
   .svic-recent-shipments__inner {
-    gap: 0.8rem;
-    padding-block: 0.6rem;
+    gap: 0.72rem;
+    padding: 0.58rem 1rem;
   }
 
   .svic-recent-shipments__label {
-    font-size: 0.68rem;
+    max-width: 8.75rem;
+    font-size: 0.64rem;
     letter-spacing: 0.07em;
+  }
+
+  .svic-recent-shipments__label::before {
+    width: 1.02rem;
+    height: 1.02rem;
   }
 
   .svic-recent-shipments__item {
@@ -148,14 +172,24 @@
 
 @media (max-width: 680px) {
   .svic-recent-shipments__inner {
-    padding: 0.58rem 1rem;
-    gap: 0.7rem;
+    padding: 0.56rem 0.9rem;
+    gap: 0.56rem;
   }
 
   .svic-recent-shipments__label {
-    max-width: 40vw;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    flex: 0 0 auto;
+    max-width: none;
+    gap: 0;
+  }
+
+  .svic-recent-shipments__label-text {
+    display: none;
+  }
+
+  .svic-recent-shipments__label::before {
+    width: 1.18rem;
+    height: 1.18rem;
+    transform: translateY(0.03rem);
   }
 
   .svic-recent-shipments__track {

@@ -159,7 +159,7 @@ if (!class_exists('SVIC_Recent_Shipments')) {
             ?>
             <section class="svic-recent-shipments" aria-label="<?php echo svic_translate_attr('recent_shipments.aria_label'); ?>">
                 <div class="svic-recent-shipments__inner">
-                    <span class="svic-recent-shipments__label"><?php echo svic_translate_html('recent_shipments.badge'); ?></span>
+                    <span class="svic-recent-shipments__label"><span class="svic-recent-shipments__label-text"><?php echo svic_translate_html('recent_shipments.badge'); ?></span></span>
                     <span class="screen-reader-text"><?php echo svic_translate_html('recent_shipments.disclaimer'); ?></span>
                     <div class="svic-recent-shipments__marquee<?php echo $is_animated ? ' is-animated' : ''; ?>">
                         <?php if ($is_animated) : ?>
