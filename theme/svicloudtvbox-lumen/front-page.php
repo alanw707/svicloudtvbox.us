@@ -6,6 +6,7 @@ get_header();
 
 $hero_product_10p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
 $hero_product_10s = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null;
+$hero_product_remote = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-bluetooth-remote-10p-plus') : null;
 $hero_10p_url = $hero_product_10p ? svic_url_with_lang(get_permalink($hero_product_10p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10p-plus'));
 $hero_10s_url = $hero_product_10s ? svic_url_with_lang(get_permalink($hero_product_10s->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10s'));
 
@@ -838,6 +839,55 @@ foreach ($pricing_cards as $_svic_card) {
           </article>
         <?php endforeach; ?>
       </div>
+    </div>
+  </section>
+
+  <?php
+  // Accessories strip — Bluetooth Remote
+  $remote_url     = $hero_product_remote ? svic_url_with_lang(get_permalink($hero_product_remote->get_id())) : svic_url_with_lang(home_url('/product/svicloud-bluetooth-remote-10p-plus'));
+  $remote_price   = ($hero_product_remote && method_exists($hero_product_remote, 'get_price_html')) ? $hero_product_remote->get_price_html() : '<span class="lumen-price"><span class="lumen-price__current">$34.99</span></span>';
+  $remote_img_id  = $hero_product_remote ? $hero_product_remote->get_image_id() : 0;
+  ?>
+  <section class="lumen-accessories" id="accessories" aria-labelledby="accessories-heading">
+    <div class="lumen-accessories__inner">
+      <header class="lumen-accessories__header">
+        <span class="lumen-accessories__badge"><?php echo svic_translate_html('frontpage.accessories.badge'); ?></span>
+        <h2 class="lumen-accessories__title" id="accessories-heading"><?php echo svic_translate_html('frontpage.accessories.title'); ?></h2>
+        <p class="lumen-accessories__subtitle"><?php echo svic_translate_html('frontpage.accessories.subtitle'); ?></p>
+      </header>
+      <article class="lumen-accessory-card">
+        <div class="lumen-accessory-card__media">
+          <?php if ($remote_img_id) : ?>
+            <?php echo wp_get_attachment_image($remote_img_id, 'medium', false, ['class' => 'lumen-accessory-card__img', 'alt' => svic_translate('frontpage.accessories.product.title'), 'loading' => 'lazy']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+          <?php else : ?>
+            <div class="lumen-accessory-card__placeholder" role="img" aria-label="<?php echo svic_translate_attr('frontpage.accessories.product.title'); ?>">📱</div>
+          <?php endif; ?>
+        </div>
+        <div class="lumen-accessory-card__body">
+          <span class="lumen-accessory-card__badge"><?php echo svic_translate_html('frontpage.accessories.product.badge'); ?></span>
+          <h3 class="lumen-accessory-card__title"><?php echo svic_translate_html('frontpage.accessories.product.title'); ?></h3>
+          <p class="lumen-accessory-card__copy"><?php echo svic_translate_html('frontpage.accessories.product.copy'); ?></p>
+          <div class="lumen-accessory-card__price">
+            <span class="lumen-accessory-card__price-amount"><?php echo $remote_price; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+          </div>
+          <ul class="lumen-accessory-card__features" role="list">
+            <li><?php echo svic_translate_html('frontpage.accessories.product.features.bt'); ?></li>
+            <li><?php echo svic_translate_html('frontpage.accessories.product.features.voice'); ?></li>
+            <li><?php echo svic_translate_html('frontpage.accessories.product.features.compat'); ?></li>
+          </ul>
+          <p class="lumen-accessory-card__price-note"><?php echo svic_translate_html('frontpage.accessories.product.price_note'); ?></p>
+          <div class="lumen-accessory-card__actions lumen-action-group">
+            <?php if ($hero_product_remote && method_exists($hero_product_remote, 'get_id')) :
+              $remote_buy_url = svic_url_with_lang(add_query_arg(['add-to-cart' => $hero_product_remote->get_id(), 'quantity' => 1, 'svic_buynow' => 1], wc_get_checkout_url()));
+            ?>
+              <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($remote_buy_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="homepage_accessories" data-svic-label="buy_remote"><?php echo svic_translate_html('frontpage.accessories.product.cta'); ?></a>
+            <?php else : ?>
+              <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($remote_url); ?>" data-svic-event="svic_cta_click" data-svic-location="homepage_accessories" data-svic-label="view_remote"><?php echo svic_translate_html('frontpage.accessories.product.cta'); ?></a>
+            <?php endif; ?>
+            <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($remote_url); ?>" data-svic-event="svic_cta_click" data-svic-location="homepage_accessories" data-svic-label="details_remote"><?php echo svic_translate_html('frontpage.accessories.product.details_cta'); ?></a>
+          </div>
+        </div>
+      </article>
     </div>
   </section>
 

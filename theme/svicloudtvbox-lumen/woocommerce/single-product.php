@@ -267,6 +267,58 @@ while (have_posts()) :
         </div>
       </section>
 
+      <?php
+      // Cross-sell: show Bluetooth remote add-on when on 10P+ product page
+      if ($slug === 'svicloud-10p-plus') :
+          $remote_product = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-bluetooth-remote-10p-plus') : null;
+          $remote_url     = $remote_product ? svic_url_with_lang(get_permalink($remote_product->get_id())) : svic_url_with_lang(home_url('/product/svicloud-bluetooth-remote-10p-plus'));
+          $remote_price   = ($remote_product && method_exists($remote_product, 'get_price_html')) ? $remote_product->get_price_html() : '<span class="lumen-price"><span class="lumen-price__current">$34.99</span></span>';
+          $remote_img_id  = $remote_product ? $remote_product->get_image_id() : 0;
+      ?>
+      <section class="lumen-accessories" id="accessories" aria-labelledby="pdp-accessories-heading">
+        <div class="lumen-accessories__inner">
+          <header class="lumen-accessories__header">
+            <span class="lumen-accessories__badge"><?php echo svic_translate_html('frontpage.accessories.badge'); ?></span>
+            <h2 class="lumen-accessories__title" id="pdp-accessories-heading"><?php echo svic_translate_html('frontpage.accessories.title'); ?></h2>
+            <p class="lumen-accessories__subtitle"><?php echo svic_translate_html('frontpage.accessories.subtitle'); ?></p>
+          </header>
+          <article class="lumen-accessory-card">
+            <div class="lumen-accessory-card__media">
+              <?php if ($remote_img_id) : ?>
+                <?php echo wp_get_attachment_image($remote_img_id, 'medium', false, ['class' => 'lumen-accessory-card__img', 'alt' => svic_translate('frontpage.accessories.product.title'), 'loading' => 'lazy']); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+              <?php else : ?>
+                <div class="lumen-accessory-card__placeholder" role="img" aria-label="<?php echo svic_translate_attr('frontpage.accessories.product.title'); ?>">📱</div>
+              <?php endif; ?>
+            </div>
+            <div class="lumen-accessory-card__body">
+              <span class="lumen-accessory-card__badge"><?php echo svic_translate_html('frontpage.accessories.product.badge'); ?></span>
+              <h3 class="lumen-accessory-card__title"><?php echo svic_translate_html('frontpage.accessories.product.title'); ?></h3>
+              <p class="lumen-accessory-card__copy"><?php echo svic_translate_html('frontpage.accessories.product.copy'); ?></p>
+              <div class="lumen-accessory-card__price">
+                <span class="lumen-accessory-card__price-amount"><?php echo $remote_price; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+              </div>
+              <ul class="lumen-accessory-card__features" role="list">
+                <li><?php echo svic_translate_html('frontpage.accessories.product.features.bt'); ?></li>
+                <li><?php echo svic_translate_html('frontpage.accessories.product.features.voice'); ?></li>
+                <li><?php echo svic_translate_html('frontpage.accessories.product.features.compat'); ?></li>
+              </ul>
+              <p class="lumen-accessory-card__price-note"><?php echo svic_translate_html('frontpage.accessories.product.price_note'); ?></p>
+              <div class="lumen-accessory-card__actions lumen-action-group">
+                <?php if ($remote_product && method_exists($remote_product, 'get_id')) :
+                  $remote_buy_url = svic_url_with_lang(add_query_arg(['add-to-cart' => $remote_product->get_id(), 'quantity' => 1, 'svic_buynow' => 1], wc_get_checkout_url()));
+                ?>
+                  <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($remote_buy_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="pdp_accessories" data-svic-label="buy_remote"><?php echo svic_translate_html('frontpage.accessories.product.cta'); ?></a>
+                <?php else : ?>
+                  <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($remote_url); ?>" data-svic-event="svic_cta_click" data-svic-location="pdp_accessories" data-svic-label="view_remote"><?php echo svic_translate_html('frontpage.accessories.product.cta'); ?></a>
+                <?php endif; ?>
+                <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($remote_url); ?>" data-svic-event="svic_cta_click" data-svic-location="pdp_accessories" data-svic-label="details_remote"><?php echo svic_translate_html('frontpage.accessories.product.details_cta'); ?></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+      <?php endif; ?>
+
       <section class="product-traffic">
         <div class="product-traffic__inner">
           <div class="product-traffic__copy">

@@ -1107,6 +1107,24 @@ return [
                 'returns'  => '30-day returns',
             ],
         ],
+        'accessories' => [
+            'badge'    => 'Accessories',
+            'title'    => 'Complete Your Setup',
+            'subtitle' => 'Upgrade your 10P+ experience with the official Bluetooth remote — sold separately, ships from Nevada.',
+            'product'  => [
+                'badge'   => 'New',
+                'title'   => 'Bluetooth TV Remote Control for SVICLOUD 10P+',
+                'copy'    => 'Replacement or second Bluetooth voice remote designed for the SVICLOUD 10P+. Pairs in seconds, supports voice search, and controls your TV volume and power.',
+                'features' => [
+                    'bt'     => 'Bluetooth 5.0 — fast, reliable pairing',
+                    'voice'  => 'Built-in mic for voice search & assistant commands',
+                    'compat' => 'Universal TV power & volume keys included',
+                ],
+                'cta'         => 'Shop Remote',
+                'details_cta' => 'View Details',
+                'price_note'  => 'Ships from Nevada • Free U.S. shipping',
+            ],
+        ],
     ],
     'shop' => [
         'hero' => [
@@ -1167,6 +1185,20 @@ return [
                     'primary'   => '4GB RAM / 64GB storage for heavier app use, smoother multitasking, and more headroom',
                     'secondary' => 'Kids Mode, karaoke apps, and voice remote support already included',
                     'tertiary'  => 'Best match for sports-heavy homes, family rooms, and buyers who do not want to second-guess the upgrade',
+                ],
+            ],
+        ],
+        'svicloud-bluetooth-remote-10p-plus' => [
+            'short_description' => 'Official Bluetooth TV remote for SVICLOUD 10P+. Bluetooth 5.0 pairing, voice search mic, and universal TV power/volume keys. Ships from U.S. inventory.',
+            'description' => '<p>The official Bluetooth TV Remote Control for SVICLOUD 10P+ is designed as a direct replacement or second remote for households sharing the main TV. Pairs with the 10P+ in seconds using the VOL- and VOL+ buttons — no extra apps or setup screens required.</p><ul><li>Bluetooth 5.0 delivers fast, responsive pairing with a range up to 10 meters.</li><li>Built-in microphone supports voice search commands and assistant shortcuts.</li><li>Universal TV keys let you control power, volume, and input directly from the remote.</li><li>Backlit number pad and media keys make nighttime navigation comfortable.</li><li>Compatible exclusively with SVICLOUD 10P+. Ships from Nevada with free U.S. delivery.</li></ul>',
+            'best_for' => [
+                'badge' => 'Best for',
+                'title' => '10P+ households needing a replacement or second remote',
+                'copy'  => 'Pair a backup remote for a shared TV, or replace a lost one with the exact same Bluetooth voice remote that ships with every 10P+ box.',
+                'bullets' => [
+                    'primary'   => 'Exact replacement for the included 10P+ Bluetooth remote',
+                    'secondary' => 'Great for households with multiple users sharing one TV',
+                    'tertiary'  => 'Free U.S. shipping and covered by our standard return window',
                 ],
             ],
         ],

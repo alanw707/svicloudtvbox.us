@@ -383,6 +383,38 @@ to{opacity:1;transform:translateY(0)}
 @media(max-width:640px){.lumen-product .product-hero{padding:var(--space-xl) 20px}
 .lumen-product .product-thumb-img{width:48px;height:48px}
 }
+.lumen-accessories{margin-top:clamp(2.5rem,6vw,4rem);padding:clamp(2rem,5vw,3.5rem) clamp(1.5rem,5vw,3rem);background:linear-gradient(135deg,rgba(6,16,38,0.92) 0%,rgba(10,24,50,0.88) 100%);border:1px solid rgba(92,132,212,0.22);border-radius:var(--radius-2xl);box-shadow:var(--shadow-lg)}
+.lumen-accessories__inner{max-width:1100px;margin:0 auto}
+.lumen-accessories__header{margin-bottom:clamp(1.5rem,4vw,2.5rem);text-align:center}
+.lumen-accessories__badge{display:inline-flex;align-items:center;padding:0.35rem 0.9rem;border-radius:999px;background:rgba(94,141,255,0.14);border:1px solid rgba(94,141,255,0.28);color:rgba(210,225,255,0.9);font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.6rem}
+.lumen-accessories__title{margin:0 0 0.4rem;font-size:clamp(1.5rem,3vw,2rem);font-family:var(--font-accent);color:var(--lumen-text-primary);letter-spacing:-0.02em}
+.lumen-accessories__subtitle{margin:0;color:var(--lumen-text-secondary);font-size:1rem;line-height:1.65;max-width:640px;margin-inline:auto}
+.lumen-accessory-card{display:grid;grid-template-columns:260px 1fr;gap:clamp(1.5rem,4vw,2.5rem);align-items:center;padding:clamp(1.5rem,3.5vw,2rem) clamp(1.5rem,4vw,2.5rem);background:linear-gradient(145deg,rgba(4,12,30,0.88),rgba(8,20,46,0.92));border:1px solid rgba(126,246,227,0.14);border-radius:var(--radius-2xl);box-shadow:0 20px 50px rgba(3,10,26,0.4);transition:border-color 0.25s ease,transform 0.25s ease,box-shadow 0.25s ease}
+.lumen-accessory-card:hover{border-color:rgba(126,246,227,0.3);transform:translateY(-3px);box-shadow:0 28px 64px rgba(3,10,26,0.52)}
+.lumen-accessory-card__media{display:flex;align-items:center;justify-content:center;background:rgba(6,17,38,0.7);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-xl);padding:clamp(1rem,2.5vw,1.5rem);aspect-ratio:1 / 1;position:relative;overflow:hidden}
+.lumen-accessory-card__media::after{content:'';position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:200px;height:200px;border-radius:50%;background:var(--gradient-lumen-glow);filter:blur(28px);opacity:0.3;pointer-events:none}
+.lumen-accessory-card__img{width:100%;height:auto;max-width:220px;object-fit:contain;border-radius:var(--radius-lg);position:relative;z-index:1}
+.lumen-accessory-card__placeholder{display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:1 / 1;font-size:5rem;opacity:0.4;position:relative;z-index:1}
+.lumen-accessory-card__body{display:grid;gap:0.9rem}
+.lumen-accessory-card__badge{display:inline-flex;align-items:center;width:fit-content;padding:0.3rem 0.75rem;border-radius:999px;background:rgba(94,230,208,0.12);border:1px solid rgba(126,246,227,0.3);color:var(--lumen-accent-teal);font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase}
+.lumen-accessory-card__title{margin:0;font-size:clamp(1.2rem,2.5vw,1.55rem);font-family:var(--font-accent);color:var(--lumen-text-primary);letter-spacing:-0.01em;line-height:1.3}
+.lumen-accessory-card__copy{margin:0;color:var(--lumen-text-secondary);line-height:1.68}
+.lumen-accessory-card__price{display:flex;align-items:baseline;gap:0.5rem;flex-wrap:wrap}
+.lumen-accessory-card__price-amount{font-size:2rem;font-weight:700;color:var(--lumen-accent-teal);line-height:1}
+.lumen-accessory-card__price-note{font-size:0.85rem;color:var(--lumen-text-muted);letter-spacing:0.02em}
+.lumen-accessory-card__features{list-style:none;margin:0;padding:0;display:grid;gap:0.45rem}
+.lumen-accessory-card__features li{position:relative;padding-left:1.4rem;color:rgba(220,232,255,0.9);font-size:0.96rem;line-height:1.5}
+.lumen-accessory-card__features li::before{content:'';position:absolute;left:0;top:0.56rem;width:0.46rem;height:0.46rem;border-radius:50%;background:linear-gradient(135deg,rgba(126,246,227,0.96),rgba(91,139,255,0.9));box-shadow:0 0 0 5px rgba(94,230,208,0.12)}
+.lumen-accessory-card__actions{display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center;padding-top:0.25rem}
+@media(max-width:860px){.lumen-accessory-card{grid-template-columns:200px 1fr}
+}
+@media(max-width:640px){.lumen-accessories{padding:var(--space-xl) var(--space-md)}
+.lumen-accessory-card{grid-template-columns:1fr;text-align:center}
+.lumen-accessory-card__media{max-width:240px;margin-inline:auto}
+.lumen-accessory-card__badge,.lumen-accessory-card__price{margin-inline:auto}
+.lumen-accessory-card__features li{text-align:left}
+.lumen-accessory-card__actions{justify-content:center}
+}
 body.woocommerce-checkout .page-shell{background:linear-gradient(160deg,rgba(10,28,58,0.85) 10%,rgba(4,14,32,0.9) 60%,rgba(2,8,20,0.94) 100%)}
 .lumen-checkout{padding:clamp(2.5rem,6vw,4rem) clamp(1.5rem,4.5vw,3.5rem);color:rgba(240,246,255,0.95);display:grid;gap:clamp(1.75rem,4vw,2.75rem);max-width:1180px;margin:0 auto;line-height:1.7}
 .lumen-checkout__header{display:grid;gap:0.85rem;text-align:left;max-width:780px}
