@@ -845,7 +845,7 @@ foreach ($pricing_cards as $_svic_card) {
   <?php
   // Accessories strip — Bluetooth Remote
   $remote_url     = $hero_product_remote ? svic_url_with_lang(get_permalink($hero_product_remote->get_id())) : svic_url_with_lang(home_url('/product/svicloud-bluetooth-remote-10p-plus'));
-  $remote_price   = ($hero_product_remote && method_exists($hero_product_remote, 'get_price_html')) ? $hero_product_remote->get_price_html() : '<span class="lumen-price"><span class="lumen-price__current">$34.99</span></span>';
+  $remote_price   = ($hero_product_remote && method_exists($hero_product_remote, 'get_price_html')) ? $hero_product_remote->get_price_html() : '<span class="lumen-price"><span class="lumen-price__current">$20.00</span></span>';
   $remote_img_id  = $hero_product_remote ? $hero_product_remote->get_image_id() : 0;
   ?>
   <section class="lumen-accessories" id="accessories" aria-labelledby="accessories-heading">

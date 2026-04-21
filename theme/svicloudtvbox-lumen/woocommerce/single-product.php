@@ -272,7 +272,7 @@ while (have_posts()) :
       if ($slug === 'svicloud-10p-plus') :
           $remote_product = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-bluetooth-remote-10p-plus') : null;
           $remote_url     = $remote_product ? svic_url_with_lang(get_permalink($remote_product->get_id())) : svic_url_with_lang(home_url('/product/svicloud-bluetooth-remote-10p-plus'));
-          $remote_price   = ($remote_product && method_exists($remote_product, 'get_price_html')) ? $remote_product->get_price_html() : '<span class="lumen-price"><span class="lumen-price__current">$34.99</span></span>';
+          $remote_price   = ($remote_product && method_exists($remote_product, 'get_price_html')) ? $remote_product->get_price_html() : '<span class="lumen-price"><span class="lumen-price__current">$20.00</span></span>';
           $remote_img_id  = $remote_product ? $remote_product->get_image_id() : 0;
       ?>
       <section class="lumen-accessories" id="accessories" aria-labelledby="pdp-accessories-heading">
