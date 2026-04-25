@@ -28,6 +28,7 @@ import os
 import posixpath
 import socket
 import sys
+import time
 from dataclasses import dataclass
 from pathlib import Path
 import subprocess
@@ -78,6 +79,8 @@ class DeployConfig:
     delete_remote: bool = True
     dry_run: bool = False
     verify_tls: bool = False  # Hostinger often uses self-signed; set True if valid cert
+    connect_retries: int = 5
+    connect_timeout: int = 45
 
 
 def parse_args() -> DeployConfig:
@@ -95,6 +98,8 @@ def parse_args() -> DeployConfig:
     p.add_argument("--dry-run", action="store_true", help="Preview actions without uploading")
     p.add_argument("--bust-cache", action="store_true", help="Write .deploy-version (epoch) before upload")
     p.add_argument("--verify-tls", action="store_true", help="Verify TLS cert when using FTPS")
+    p.add_argument("--connect-retries", type=int, default=int(env.get("FTP_CONNECT_RETRIES", 5)), help="FTP/FTPS connect/login retry count")
+    p.add_argument("--connect-timeout", type=int, default=int(env.get("FTP_CONNECT_TIMEOUT", 45)), help="FTP/FTPS connect timeout in seconds")
 
     p.set_defaults(delete_remote=True)
 
@@ -117,6 +122,8 @@ def parse_args() -> DeployConfig:
         delete_remote=bool(a.delete_remote),
         dry_run=bool(a.dry_run),
         verify_tls=bool(a.verify_tls),
+        connect_retries=max(1, int(a.connect_retries)),
+        connect_timeout=max(10, int(a.connect_timeout)),
     )
 
     # Side-effect: if requested, create/update .deploy-version locally (unless dry run)
@@ -143,23 +150,39 @@ def should_exclude(path: Path) -> bool:
 
 
 def _connect(cfg: DeployConfig):
-    try:
-        if cfg.protocol == "ftps":
-            ftp = FTP_TLS()
-            # Note: certificate verification is off by default for FTP_TLS in many environments
-            # We expose a flag to enforce verification if desired.
-            ftp.connect(host=cfg.host, port=cfg.port, timeout=30)
-            ftp.login(cfg.user, cfg.password)
-            ftp.prot_p()  # Secure data connection
-        else:
-            ftp = FTP()
-            ftp.connect(host=cfg.host, port=cfg.port, timeout=30)
-            ftp.login(cfg.user, cfg.password)
-        ftp.set_pasv(True)
-        return ftp
-    except (socket.error, error_perm) as e:
-        print(f"Connection/login failed: {e}")
-        sys.exit(2)
+    last_error = None
+    for attempt in range(1, cfg.connect_retries + 1):
+        ftp = None
+        try:
+            print(f"Connecting to FTP server (attempt {attempt}/{cfg.connect_retries}, timeout {cfg.connect_timeout}s)...")
+            if cfg.protocol == "ftps":
+                ftp = FTP_TLS()
+                # Note: certificate verification is off by default for FTP_TLS in many environments
+                # We expose a flag to enforce verification if desired.
+                ftp.connect(host=cfg.host, port=cfg.port, timeout=cfg.connect_timeout)
+                ftp.login(cfg.user, cfg.password)
+                ftp.prot_p()  # Secure data connection
+            else:
+                ftp = FTP()
+                ftp.connect(host=cfg.host, port=cfg.port, timeout=cfg.connect_timeout)
+                ftp.login(cfg.user, cfg.password)
+            ftp.set_pasv(True)
+            return ftp
+        except (socket.timeout, socket.error, TimeoutError, error_perm) as e:
+            last_error = e
+            try:
+                if ftp is not None:
+                    ftp.close()
+            except Exception:
+                pass
+            if attempt < cfg.connect_retries:
+                delay = min(30, 5 * attempt)
+                print(f"WARN: connection/login attempt {attempt} failed: {e}; retrying in {delay}s...")
+                time.sleep(delay)
+            else:
+                break
+    print(f"Connection/login failed after {cfg.connect_retries} attempt(s): {last_error}")
+    sys.exit(2)
 
 
 def _remote_join(*parts: str) -> str:

@@ -1,0 +1,174 @@
+name: 🚨 Deployment Monitor
+
+on:
+  workflow_run:
+    workflows:
+      - Deploy Theme to Hostinger
+      - 🚀 Deploy to Production
+    types:
+      - completed
+  schedule:
+    # Backstop check every 15 minutes in case a workflow_run event is missed.
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  issues: write
+
+jobs:
+  notify-failure:
+    name: Notify on failed deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check latest deploy status
+        id: status
+        uses: actions/github-script@v8.2.1
+        with:
+          script: |
+            const workflows = ['deploy-theme.yml', 'deploy.yml'];
+            const failures = [];
+            const now = Date.now();
+            const maxAgeMs = context.eventName === 'schedule' ? 20 * 60 * 1000 : 7 * 24 * 60 * 60 * 1000;
+
+            if (context.eventName === 'workflow_run') {
+              const run = context.payload.workflow_run;
+              if (run && run.conclusion && run.conclusion !== 'success' && run.conclusion !== 'skipped') {
+                failures.push({
+                  id: run.id,
+                  name: run.name,
+                  conclusion: run.conclusion,
+                  html_url: run.html_url,
+                  created_at: run.created_at,
+                  updated_at: run.updated_at,
+                  head_branch: run.head_branch,
+                  head_sha: run.head_sha,
+                });
+              }
+            } else {
+              for (const workflow_id of workflows) {
+                const { data } = await github.rest.actions.listWorkflowRuns({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  workflow_id,
+                  per_page: 5,
+                  status: 'completed',
+                });
+                for (const run of data.workflow_runs) {
+                  const updated = new Date(run.updated_at).getTime();
+                  if (now - updated > maxAgeMs) continue;
+                  if (run.conclusion && run.conclusion !== 'success' && run.conclusion !== 'skipped') {
+                    failures.push({
+                      id: run.id,
+                      name: run.name,
+                      conclusion: run.conclusion,
+                      html_url: run.html_url,
+                      created_at: run.created_at,
+                      updated_at: run.updated_at,
+                      head_branch: run.head_branch,
+                      head_sha: run.head_sha,
+                    });
+                  }
+                }
+              }
+            }
+
+            const seen = new Set();
+            const unique = failures.filter((run) => {
+              if (seen.has(run.id)) return false;
+              seen.add(run.id);
+              return true;
+            });
+
+            core.setOutput('has_failure', unique.length ? 'true' : 'false');
+            core.setOutput('failures', JSON.stringify(unique));
+            if (unique.length) core.setFailed(`Deploy failure detected: ${unique.map(r => `${r.name} #${r.id}`).join(', ')}`);
+
+      - name: Create/update GitHub issue
+        if: always() && steps.status.outputs.has_failure == 'true'
+        uses: actions/github-script@v8.2.1
+        env:
+          FAILURES: ${{ steps.status.outputs.failures }}
+        with:
+          script: |
+            const failures = JSON.parse(process.env.FAILURES || '[]');
+            const title = '🚨 svicloudtvbox.us deploy failure needs attention';
+            const body = [
+              'A deploy workflow failed and needs immediate review.',
+              '',
+              ...failures.flatMap((run) => [
+                `- **${run.name}**: ${run.conclusion}`,
+                `  - Run: ${run.html_url}`,
+                `  - Branch: ${run.head_branch || 'unknown'}`,
+                `  - SHA: ${run.head_sha || 'unknown'}`,
+                `  - Updated: ${run.updated_at}`,
+              ]),
+              '',
+              'This issue was created by `.github/workflows/deploy-monitor.yml`.',
+            ].join('\n');
+
+            try {
+              await github.rest.issues.getLabel({ owner: context.repo.owner, repo: context.repo.repo, name: 'deploy-monitor' });
+            } catch (error) {
+              if (error.status === 404) {
+                await github.rest.issues.createLabel({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  name: 'deploy-monitor',
+                  color: 'd73a4a',
+                  description: 'Automated deploy failure monitor',
+                });
+              } else {
+                throw error;
+              }
+            }
+
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'deploy-monitor',
+              per_page: 10,
+            });
+            const existing = issues.find((issue) => issue.title === title);
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['deploy-monitor'],
+              });
+            }
+
+      - name: Send webhook alert
+        if: always() && steps.status.outputs.has_failure == 'true'
+        env:
+          DEPLOY_ALERT_WEBHOOK_URL: ${{ secrets.DEPLOY_ALERT_WEBHOOK_URL }}
+          FAILURES: ${{ steps.status.outputs.failures }}
+        run: |
+          if [[ -z "${DEPLOY_ALERT_WEBHOOK_URL}" ]]; then
+            echo "DEPLOY_ALERT_WEBHOOK_URL not set — webhook alert skipped"
+            exit 0
+          fi
+          python3 - <<'PY'
+          import json, os, urllib.request
+          failures = json.loads(os.environ.get('FAILURES', '[]'))
+          lines = ['🚨 svicloudtvbox.us deploy failed']
+          for run in failures:
+              lines.append(f"• {run['name']}: {run['conclusion']} — {run['html_url']}")
+          payload = json.dumps({'content': '\n'.join(lines)}).encode()
+          req = urllib.request.Request(
+              os.environ['DEPLOY_ALERT_WEBHOOK_URL'],
+              data=payload,
+              headers={'Content-Type': 'application/json'},
+          )
+          urllib.request.urlopen(req, timeout=15).read()
+          PY
