@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Check latest deploy status
         id: status
-        uses: actions/github-script@v8.2.1
+        uses: actions/github-script@v7.0.1
         with:
           script: |
             const workflows = ['deploy-theme.yml', 'deploy.yml'];
@@ -86,7 +86,7 @@ jobs:
 
       - name: Create/update GitHub issue
         if: always() && steps.status.outputs.has_failure == 'true'
-        uses: actions/github-script@v8.2.1
+        uses: actions/github-script@v7.0.1
         env:
           FAILURES: ${{ steps.status.outputs.failures }}
         with:
