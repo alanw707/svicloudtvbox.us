@@ -682,6 +682,11 @@ return [
                 'copy'  => 'Call, text, or email our bilingual team for real-time assistance.',
                 'cta'   => 'Go to contact page',
             ],
+            'install' => [
+                'title' => 'App installation guide',
+                'copy'  => 'Step-by-step help for installing or updating apps before requesting a return.',
+                'cta'   => 'Open app guide',
+            ],
             'faq' => [
                 'title' => 'Browse quick answers',
                 'copy'  => 'Our FAQ covers installation basics, remote pairing, and streaming tips.',
@@ -1514,7 +1519,7 @@ return [
         'nav' => [
             'overview'        => 'Highlights',
             'setup'           => 'Setup guide',
-            'apps'            => 'Content & compliance',
+            'apps'            => 'App install guide',
             'post_setup'      => 'After setup',
             'troubleshooting' => 'Troubleshooting',
             'resources'       => 'Resources',
@@ -1524,7 +1529,7 @@ return [
         'nav_summaries' => [
             'overview'        => 'See the concierge overview and why these guides matter.',
             'setup'           => 'Connect hardware, choose language, and pair the voice remote.',
-            'apps'            => 'Understand how to choose licensed streaming services responsibly.',
+            'apps'            => 'Install apps from trusted sources and open them for the first time.',
             'post_setup'      => 'Personalize settings and keep your SVICLOUD running smoothly.',
             'troubleshooting' => 'Fix remote pairing, buffering, and network hiccups.',
             'resources'       => 'Bookmark channel guides, buying advice, and the latest 10-series highlights.',
@@ -1568,29 +1573,33 @@ return [
             'note_copy'  => 'We are capturing HDMI hookup, language selection, remote pairing, and Wi-Fi onboarding screenshots to embed here.',
         ],
         'apps' => [
-            'badge' => 'Content compliance',
-            'title' => 'Choosing streaming services responsibly',
-            'lead'  => 'Only add services that you are authorized to access. The examples below explain how to evaluate common categories.',
+            'badge' => 'App installation',
+            'title' => 'How to install apps on your SVICLOUD TV Box',
+            'lead'  => 'Use this checklist when a new app is missing, will not open, or needs to be installed after first setup. Install only apps from trusted official sources.',
             'items' => [
-                'live' => [
-                    'title' => 'Live TV providers',
-                    'copy'  => 'Subscribe to reputable live TV or IPTV services that clearly publish their licensing status and terms of use.',
+                'internet' => [
+                    'title' => '1. Confirm the box is online',
+                    'copy'  => 'Open Settings → Network and confirm Wi-Fi or Ethernet says Connected. If the connection is unstable, restart your router or use Ethernet before installing apps.',
                 ],
-                'kids' => [
-                    'title' => 'Family-friendly libraries',
-                    'copy'  => 'Select kid-safe apps that include parental controls, verified ratings, and documented rights to distribute programming.',
+                'installer' => [
+                    'title' => '2. Open the App Market or installer',
+                    'copy'  => 'From the home screen, open the built-in app market, app center, or the official installer provided with your SVICLOUD box.',
                 ],
-                'karaoke' => [
-                    'title' => 'Music & karaoke',
-                    'copy'  => 'Use karaoke services that license their catalogs and respect performance rights in your country.',
+                'search' => [
+                    'title' => '3. Search for the app name',
+                    'copy'  => 'Use the on-screen keyboard or voice remote to search. Check the app icon and publisher so you do not install the wrong app.',
                 ],
-                'regional' => [
-                    'title' => 'Regional content',
-                    'copy'  => 'When exploring regional packs, verify that the provider has permission to stream the listed channels internationally.',
+                'install' => [
+                    'title' => '4. Install or update the app',
+                    'copy'  => 'Select Install or Update, wait until the progress finishes, then return to the home screen. Do not unplug the box during installation.',
                 ],
-                'cherry' => [
-                    'title' => 'Adult-only services',
-                    'copy'  => 'Adult programming is subject to local law. Enable such services only if they are legal where you live and you meet all age requirements.',
+                'open' => [
+                    'title' => '5. Open the app and sign in if needed',
+                    'copy'  => 'Launch the app once, accept any required permissions, and sign in with your own account if the service requires one.',
+                ],
+                'support' => [
+                    'title' => '6. Still stuck? Send us a photo',
+                    'copy'  => 'If the app cannot install or you see an error message, send our concierge team a photo of the screen and your order number so we can guide you quickly.',
                 ],
             ],
         ],

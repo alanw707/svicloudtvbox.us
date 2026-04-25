@@ -17,6 +17,7 @@ $issue_options  = $registry['support']['form']['issue_options'] ?? ($fallbackReg
 
 $contact_url = svic_url_with_lang(home_url('/contact/'));
 $faq_url     = svic_url_with_lang(home_url('/faq/'));
+$apps_url    = svic_url_with_lang(home_url('/guides-apps/'));
 $pdp_url     = svic_url_with_lang(home_url('/product/svicloud-10p-plus/'));
 $compare_url = svic_url_with_lang(home_url('/compare/'));
 
@@ -140,6 +141,13 @@ get_header();
           <p class="support-help__copy"><?php echo svic_translate_html('support.help.contact.copy'); ?></p>
           <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($contact_url); ?>">
             <?php echo svic_translate_html('support.help.contact.cta'); ?>
+          </a>
+        </article>
+        <article class="support-help__card">
+          <h3 class="support-help__title"><?php echo svic_translate_html('support.help.install.title'); ?></h3>
+          <p class="support-help__copy"><?php echo svic_translate_html('support.help.install.copy'); ?></p>
+          <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($apps_url); ?>">
+            <?php echo svic_translate_html('support.help.install.cta'); ?>
           </a>
         </article>
         <article class="support-help__card">

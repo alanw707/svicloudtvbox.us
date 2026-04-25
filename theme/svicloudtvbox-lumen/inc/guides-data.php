@@ -59,24 +59,28 @@ if (!function_exists('svic_guides_get_content')) {
             ],
             'app_cards' => [
                 [
-                    'title_key' => 'guides.apps.items.live.title',
-                    'copy_key'  => 'guides.apps.items.live.copy',
+                    'title_key' => 'guides.apps.items.internet.title',
+                    'copy_key'  => 'guides.apps.items.internet.copy',
                 ],
                 [
-                    'title_key' => 'guides.apps.items.kids.title',
-                    'copy_key'  => 'guides.apps.items.kids.copy',
+                    'title_key' => 'guides.apps.items.installer.title',
+                    'copy_key'  => 'guides.apps.items.installer.copy',
                 ],
                 [
-                    'title_key' => 'guides.apps.items.karaoke.title',
-                    'copy_key'  => 'guides.apps.items.karaoke.copy',
+                    'title_key' => 'guides.apps.items.search.title',
+                    'copy_key'  => 'guides.apps.items.search.copy',
                 ],
                 [
-                    'title_key' => 'guides.apps.items.regional.title',
-                    'copy_key'  => 'guides.apps.items.regional.copy',
+                    'title_key' => 'guides.apps.items.install.title',
+                    'copy_key'  => 'guides.apps.items.install.copy',
                 ],
                 [
-                    'title_key' => 'guides.apps.items.cherry.title',
-                    'copy_key'  => 'guides.apps.items.cherry.copy',
+                    'title_key' => 'guides.apps.items.open.title',
+                    'copy_key'  => 'guides.apps.items.open.copy',
+                ],
+                [
+                    'title_key' => 'guides.apps.items.support.title',
+                    'copy_key'  => 'guides.apps.items.support.copy',
                 ],
             ],
             'post_setup_cards' => [

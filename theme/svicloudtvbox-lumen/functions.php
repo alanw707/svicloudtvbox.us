@@ -485,20 +485,20 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'guides-apps' => [
                 'title'       => [
-                    'en' => 'SVICLOUD Apps & Channels | 小雲盒子 應用指南',
-                    'zh' => 'SVICLOUD Apps & Channels | 小雲盒子 應用指南',
-                    'zh-cn' => 'SVICLOUD Apps & Channels | 小雲盒子 應用指南',
+                    'en' => 'SVICLOUD App Installation Guide | 小雲盒子 App 安裝教學',
+                    'zh' => 'SVICLOUD App Installation Guide | 小雲盒子 App 安裝教學',
+                    'zh-cn' => 'SVICLOUD App Installation Guide | 小雲盒子 App 安装教学',
                 ],
                 'description' => [
-                    'en' => 'Recommended apps and channels for your SVICLOUD box. 小雲盒子 應用與頻道指南。',
-                    'zh' => 'Recommended apps and channels for your SVICLOUD box. 小雲盒子 應用與頻道指南。',
-                    'zh-cn' => 'Recommended apps and channels for your SVICLOUD box. 小雲盒子 應用與頻道指南。',
+                    'en' => 'Step-by-step app installation and update help for SVICLOUD TV boxes. 小雲盒子 App 安裝與更新教學。',
+                    'zh' => 'Step-by-step app installation and update help for SVICLOUD TV boxes. 小雲盒子 App 安裝與更新教學。',
+                    'zh-cn' => 'Step-by-step app installation and update help for SVICLOUD TV boxes. 小云盒子 App 安装与更新教学。',
                 ],
                 'image'       => '/assets/images/svicloud-hero-product.webp',
                 'image_alt'   => [
-                    'en' => 'SVICLOUD apps and channels collage',
-                    'zh' => '小雲應用與頻道拼貼圖',
-                    'zh-cn' => '小云应用与频道拼贴图',
+                    'en' => 'SVICLOUD app installation guide illustration',
+                    'zh' => '小雲 App 安裝教學示意圖',
+                    'zh-cn' => '小云 App 安装教学示意图',
                 ],
             ],
             'return-policy' => [
