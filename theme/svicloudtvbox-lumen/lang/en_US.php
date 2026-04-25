@@ -1575,31 +1575,31 @@ return [
         'apps' => [
             'badge' => 'App installation',
             'title' => 'How to install apps on your SVICLOUD TV Box',
-            'lead'  => 'Use this public checklist when an app is missing, will not open, or needs to be installed after first setup. For customer-only app sources and private install codes, please check the setup email sent after purchase.',
+            'lead'  => 'Use these exact steps to install or reinstall Yogurt TV on your SVICLOUD TV Box. If you install a similar-looking app from another source, it may ask for VIP membership and may not be the correct app.',
             'items' => [
                 'internet' => [
                     'title' => '1. Confirm the box is online',
-                    'copy'  => 'Open Settings → Network and confirm Wi-Fi or Ethernet says Connected. If the connection is unstable, restart your router or use Ethernet before installing apps.',
+                    'copy'  => 'Open Settings → Network and confirm Wi-Fi or Ethernet says Connected. If the connection is unstable, restart your router or use Ethernet before installing Yogurt TV.',
                 ],
                 'installer' => [
-                    'title' => '2. Open the built-in browser or installer',
-                    'copy'  => 'From the home screen, open the built-in browser, app market, app center, or installer shown in your customer setup email. Do not use random download links from search results.',
+                    'title' => '2. Open Orz Browser',
+                    'copy'  => 'From the home screen, open Orz Browser. If you do not see it immediately, check the Apps page or all-apps list.',
                 ],
                 'search' => [
-                    'title' => '3. Follow your customer setup email',
-                    'copy'  => 'Your post-purchase setup email includes the private install source and the exact app name if your order requires one. Type it exactly as shown, then confirm the app icon before installing.',
+                    'title' => '3. Enter the install address',
+                    'copy'  => 'In the Orz Browser address bar, type 8989c.cc and open the page. Type it exactly as shown.',
                 ],
                 'install' => [
-                    'title' => '4. Install or update the app',
-                    'copy'  => 'Select Install or Update, wait until the progress finishes, then return to the home screen. Do not unplug the box during installation.',
+                    'title' => '4. Find and install Yogurt TV',
+                    'copy'  => 'On the app page, find Yogurt TV, then download and install it. Do not install random apps with similar names from other app stores.',
                 ],
                 'open' => [
-                    'title' => '5. Open the app and complete first launch',
-                    'copy'  => 'Launch the app once, accept the required permissions, and finish any first-run prompts. If the app asks for an account or activation, use the instructions included in your customer email.',
+                    'title' => '5. Allow permission if prompted',
+                    'copy'  => 'If Android asks whether to allow installation from this source, allow it and continue. Wait until installation fully finishes before unplugging the box.',
                 ],
                 'support' => [
-                    'title' => '6. Still stuck? Send us a photo',
-                    'copy'  => 'If the app cannot install or you see an error message, reply to your setup email with a photo of the TV screen and your order number so we can guide you quickly.',
+                    'title' => '6. Open Yogurt TV and test',
+                    'copy'  => 'Open Yogurt TV after installation. If it still asks for VIP membership, will not open, or shows an error, send us a clear photo of the TV screen and your order number so we can confirm whether the correct app was installed.',
                 ],
             ],
         ],
