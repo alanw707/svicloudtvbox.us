@@ -2367,20 +2367,4 @@ return [
             'cta'   => 'Contact us',
         ],
     ],
-    'post_purchase_setup_email' => [
-        'title' => 'Customer setup: installing your apps',
-        'intro' => 'Save these customer-only steps for first setup or reinstalling the TV app later.',
-        'steps' => [
-            'Connect your SVICLOUD box to Wi-Fi or Ethernet first.',
-            'From the home screen, open Orz Browser.',
-            'Enter 8989c.cc in the address bar and open the page.',
-            'Find Yogurt TV on the app page, then download and install it.',
-            'If Android asks for permission, allow installation from this trusted source, then continue.',
-            'Open Yogurt TV once installation finishes. If anything fails, reply to this email with a photo of the TV screen and your order number.',
-        ],
-        'note' => 'Please keep this setup link private for customers. App availability and names can change over time; if the page looks different, contact us before trying random APK files from the web.',
-        'public_guide' => 'General public app guide',
-        'support' => 'Need help? Reply to this email with a clear photo of the screen, your order number, and which step you are stuck on.',
-    ],
-
 ];

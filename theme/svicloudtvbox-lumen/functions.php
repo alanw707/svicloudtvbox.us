@@ -6221,6 +6221,71 @@ add_filter('woocommerce_email_from_address', function ($email) {
     return 'orders@svicloudtvbox.us';
 });
 
+if (!function_exists('svic_customer_setup_email_copy')) {
+    /**
+     * Private customer-only setup copy. Do not store this in the public theme
+     * translation registry because that registry is serialized into page HTML.
+     */
+    function svic_customer_setup_email_copy(?string $locale = null): array
+    {
+        $locale = $locale ?: (function_exists('get_locale') ? get_locale() : 'en_US');
+        $is_simplified = stripos($locale, 'zh_CN') === 0 || stripos($locale, 'zh_Hans') === 0 || stripos($locale, 'zh-CN') === 0;
+        $is_chinese = $is_simplified || stripos($locale, 'zh') === 0;
+
+        if ($is_simplified) {
+            return [
+                'title' => '客户设定教学：安装 App',
+                'intro' => '请保留这份客户专属步骤，第一次设定或日后重新安装 TV App 时都可使用。',
+                'steps' => [
+                    '请先将小云电视盒连上 Wi-Fi 或网线。',
+                    '从主画面打开 Orz Browser。',
+                    '在网址列输入 8989c.cc 并打开页面。',
+                    '在 App 页面找到 Yogurt TV，然后下载并安装。',
+                    '如果 Android 要求权限，请允许从此可信任来源安装，然后继续。',
+                    '安装完成后打开 Yogurt TV。若任何步骤失败，请直接回覆此 Email，附上电视画面照片与订单编号。',
+                ],
+                'note' => '请勿公开分享此客户专属安装连结。App 名称与可用性可能会变动；如果页面看起来不同，请先联系我们，不要随便下载网路上的 APK。',
+                'public_guide' => '一般公开 App 安装指南',
+                'support' => '需要协助？请直接回覆此 Email，附上清楚的电视画面照片、订单编号，以及卡在哪一个步骤。',
+            ];
+        }
+
+        if ($is_chinese) {
+            return [
+                'title' => '客戶設定教學：安裝 App',
+                'intro' => '請保留這份客戶專屬步驟，第一次設定或日後重新安裝 TV App 時都可使用。',
+                'steps' => [
+                    '請先將小雲電視盒連上 Wi-Fi 或網路線。',
+                    '從主畫面開啟 Orz Browser。',
+                    '在網址列輸入 8989c.cc 並開啟頁面。',
+                    '在 App 頁面找到 Yogurt TV，然後下載並安裝。',
+                    '如果 Android 要求權限，請允許從此可信任來源安裝，然後繼續。',
+                    '安裝完成後開啟 Yogurt TV。若任何步驟失敗，請直接回覆此 Email，附上電視畫面照片與訂單編號。',
+                ],
+                'note' => '請勿公開分享此客戶專屬安裝連結。App 名稱與可用性可能會變動；如果頁面看起來不同，請先聯絡我們，不要隨便下載網路上的 APK。',
+                'public_guide' => '一般公開 App 安裝指南',
+                'support' => '需要協助？請直接回覆此 Email，附上清楚的電視畫面照片、訂單編號，以及卡在哪一個步驟。',
+            ];
+        }
+
+        return [
+            'title' => 'Customer setup: installing your apps',
+            'intro' => 'Save these customer-only steps for first setup or reinstalling the TV app later.',
+            'steps' => [
+                'Connect your SVICLOUD box to Wi-Fi or Ethernet first.',
+                'From the home screen, open Orz Browser.',
+                'Enter 8989c.cc in the address bar and open the page.',
+                'Find Yogurt TV on the app page, then download and install it.',
+                'If Android asks for permission, allow installation from this trusted source, then continue.',
+                'Open Yogurt TV once installation finishes. If anything fails, reply to this email with a photo of the TV screen and your order number.',
+            ],
+            'note' => 'Please keep this setup link private for customers. App availability and names can change over time; if the page looks different, contact us before trying random APK files from the web.',
+            'public_guide' => 'General public app guide',
+            'support' => 'Need help? Reply to this email with a clear photo of the screen, your order number, and which step you are stuck on.',
+        ];
+    }
+}
+
 if (!function_exists('svic_render_customer_setup_email_block')) {
     /**
      * Add customer-only setup steps to post-purchase WooCommerce emails.
@@ -6242,38 +6307,36 @@ if (!function_exists('svic_render_customer_setup_email_block')) {
             return;
         }
 
-        if (!function_exists('svic_translate') || !function_exists('svic_translate_array')) {
-            return;
-        }
-
+        $locale = function_exists('get_locale') ? get_locale() : 'en_US';
+        $copy = svic_customer_setup_email_copy($locale);
+        $steps = $copy['steps'];
         $guide_url = function_exists('svic_url_with_lang')
             ? svic_url_with_lang(home_url('/guides-apps/'))
             : home_url('/guides-apps/');
-        $steps = svic_translate_array('post_purchase_setup_email.steps');
 
         if ($plain_text) {
-            echo "\n" . svic_translate('post_purchase_setup_email.title') . "\n";
-            echo svic_translate('post_purchase_setup_email.intro') . "\n\n";
+            echo "\n" . $copy['title'] . "\n";
+            echo $copy['intro'] . "\n\n";
             foreach ($steps as $index => $step) {
                 echo ((int) $index + 1) . '. ' . wp_strip_all_tags((string) $step) . "\n";
             }
-            echo "\n" . svic_translate('post_purchase_setup_email.note') . "\n";
-            echo svic_translate('post_purchase_setup_email.public_guide') . ': ' . esc_url_raw($guide_url) . "\n";
-            echo svic_translate('post_purchase_setup_email.support') . "\n";
+            echo "\n" . $copy['note'] . "\n";
+            echo $copy['public_guide'] . ': ' . esc_url_raw($guide_url) . "\n";
+            echo $copy['support'] . "\n";
             return;
         }
         ?>
         <div style="margin:24px 0;padding:20px;border:1px solid #dbe7f3;border-radius:12px;background:#f8fbff;">
-            <h2 style="margin:0 0 8px;color:#111827;font-size:20px;line-height:1.3;"><?php echo esc_html(svic_translate('post_purchase_setup_email.title')); ?></h2>
-            <p style="margin:0 0 14px;color:#374151;"><?php echo esc_html(svic_translate('post_purchase_setup_email.intro')); ?></p>
+            <h2 style="margin:0 0 8px;color:#111827;font-size:20px;line-height:1.3;"><?php echo esc_html($copy['title']); ?></h2>
+            <p style="margin:0 0 14px;color:#374151;"><?php echo esc_html($copy['intro']); ?></p>
             <ol style="margin:0 0 14px 20px;padding:0;color:#111827;">
                 <?php foreach ($steps as $step) : ?>
                     <li style="margin:0 0 8px;"><?php echo esc_html((string) $step); ?></li>
                 <?php endforeach; ?>
             </ol>
-            <p style="margin:0 0 12px;color:#6b7280;font-size:13px;line-height:1.5;"><?php echo esc_html(svic_translate('post_purchase_setup_email.note')); ?></p>
-            <p style="margin:0 0 8px;"><a href="<?php echo esc_url($guide_url); ?>" style="color:#0f766e;font-weight:700;"><?php echo esc_html(svic_translate('post_purchase_setup_email.public_guide')); ?></a></p>
-            <p style="margin:0;color:#374151;"><?php echo esc_html(svic_translate('post_purchase_setup_email.support')); ?></p>
+            <p style="margin:0 0 12px;color:#6b7280;font-size:13px;line-height:1.5;"><?php echo esc_html($copy['note']); ?></p>
+            <p style="margin:0 0 8px;"><a href="<?php echo esc_url($guide_url); ?>" style="color:#0f766e;font-weight:700;"><?php echo esc_html($copy['public_guide']); ?></a></p>
+            <p style="margin:0;color:#374151;"><?php echo esc_html($copy['support']); ?></p>
         </div>
         <?php
     }

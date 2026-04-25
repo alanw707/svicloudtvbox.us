@@ -1352,22 +1352,6 @@ $overrides = [
             'warehouse_caption' => '我们的内华达州仓库：本地库存，美国配送更迅速',
         ],
     ],
-    'post_purchase_setup_email' => [
-        'title' => '客户设定教学：安装 App',
-        'intro' => '请保留这份客户专属步骤，第一次设定或日后重新安装 TV App 时都可使用。',
-        'steps' => [
-            '请先将小云电视盒连上 Wi-Fi 或网线。',
-            '从主画面打开 Orz Browser。',
-            '在网址列输入 8989c.cc 并打开页面。',
-            '在 App 页面找到 Yogurt TV，然后下载并安装。',
-            '如果 Android 要求权限，请允许从此可信任来源安装，然后继续。',
-            '安装完成后打开 Yogurt TV。若任何步骤失败，请直接回覆此 Email，附上电视画面照片与订单编号。',
-        ],
-        'note' => '请勿公开分享此客户专属安装连结。App 名称与可用性可能会变动；如果页面看起来不同，请先联系我们，不要随便下载网路上的 APK。',
-        'public_guide' => '一般公开 App 安装指南',
-        'support' => '需要协助？请直接回覆此 Email，附上清楚的电视画面照片、订单编号，以及卡在哪一个步骤。',
-    ],
-
 ];
 
 return array_replace_recursive($base, $overrides);
