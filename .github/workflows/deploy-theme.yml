@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - 'theme/svicloudtvbox-lumen/**'
+      - 'scripts/deploy_theme.py'
+      - 'scripts/build_css.py'
       - '.github/workflows/deploy-theme.yml'
 
   workflow_dispatch:  # allow manual trigger from GitHub UI
