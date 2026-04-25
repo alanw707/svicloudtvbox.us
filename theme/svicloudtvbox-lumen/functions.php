@@ -6221,6 +6221,66 @@ add_filter('woocommerce_email_from_address', function ($email) {
     return 'orders@svicloudtvbox.us';
 });
 
+if (!function_exists('svic_render_customer_setup_email_block')) {
+    /**
+     * Add customer-only setup steps to post-purchase WooCommerce emails.
+     * Kept out of public pages so ad/compliance surfaces stay clean while
+     * customers still receive the exact app install path they need.
+     */
+    function svic_render_customer_setup_email_block($order, $sent_to_admin, $plain_text, $email): void
+    {
+        if ($sent_to_admin || !is_a($order, 'WC_Order') || !is_object($email) || empty($email->id)) {
+            return;
+        }
+
+        $allowed_email_ids = [
+            'customer_processing_order',
+            'customer_on_hold_order',
+        ];
+
+        if (!in_array((string) $email->id, $allowed_email_ids, true)) {
+            return;
+        }
+
+        if (!function_exists('svic_translate') || !function_exists('svic_translate_array')) {
+            return;
+        }
+
+        $guide_url = function_exists('svic_url_with_lang')
+            ? svic_url_with_lang(home_url('/guides-apps/'))
+            : home_url('/guides-apps/');
+        $steps = svic_translate_array('post_purchase_setup_email.steps');
+
+        if ($plain_text) {
+            echo "\n" . svic_translate('post_purchase_setup_email.title') . "\n";
+            echo svic_translate('post_purchase_setup_email.intro') . "\n\n";
+            foreach ($steps as $index => $step) {
+                echo ((int) $index + 1) . '. ' . wp_strip_all_tags((string) $step) . "\n";
+            }
+            echo "\n" . svic_translate('post_purchase_setup_email.note') . "\n";
+            echo svic_translate('post_purchase_setup_email.public_guide') . ': ' . esc_url_raw($guide_url) . "\n";
+            echo svic_translate('post_purchase_setup_email.support') . "\n";
+            return;
+        }
+        ?>
+        <div style="margin:24px 0;padding:20px;border:1px solid #dbe7f3;border-radius:12px;background:#f8fbff;">
+            <h2 style="margin:0 0 8px;color:#111827;font-size:20px;line-height:1.3;"><?php echo esc_html(svic_translate('post_purchase_setup_email.title')); ?></h2>
+            <p style="margin:0 0 14px;color:#374151;"><?php echo esc_html(svic_translate('post_purchase_setup_email.intro')); ?></p>
+            <ol style="margin:0 0 14px 20px;padding:0;color:#111827;">
+                <?php foreach ($steps as $step) : ?>
+                    <li style="margin:0 0 8px;"><?php echo esc_html((string) $step); ?></li>
+                <?php endforeach; ?>
+            </ol>
+            <p style="margin:0 0 12px;color:#6b7280;font-size:13px;line-height:1.5;"><?php echo esc_html(svic_translate('post_purchase_setup_email.note')); ?></p>
+            <p style="margin:0 0 8px;"><a href="<?php echo esc_url($guide_url); ?>" style="color:#0f766e;font-weight:700;"><?php echo esc_html(svic_translate('post_purchase_setup_email.public_guide')); ?></a></p>
+            <p style="margin:0;color:#374151;"><?php echo esc_html(svic_translate('post_purchase_setup_email.support')); ?></p>
+        </div>
+        <?php
+    }
+}
+
+add_action('woocommerce_email_after_order_table', 'svic_render_customer_setup_email_block', 20, 4);
+
 // =============================================================================
 // Epic D — WooCommerce: cleanup / reduce bloat
 // =============================================================================

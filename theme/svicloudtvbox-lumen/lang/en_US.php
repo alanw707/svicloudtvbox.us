@@ -1575,31 +1575,31 @@ return [
         'apps' => [
             'badge' => 'App installation',
             'title' => 'How to install apps on your SVICLOUD TV Box',
-            'lead'  => 'Use this checklist when a new app is missing, will not open, or needs to be installed after first setup. Install only apps from trusted official sources.',
+            'lead'  => 'Use this public checklist when an app is missing, will not open, or needs to be installed after first setup. For customer-only app sources and private install codes, please check the setup email sent after purchase.',
             'items' => [
                 'internet' => [
                     'title' => '1. Confirm the box is online',
                     'copy'  => 'Open Settings → Network and confirm Wi-Fi or Ethernet says Connected. If the connection is unstable, restart your router or use Ethernet before installing apps.',
                 ],
                 'installer' => [
-                    'title' => '2. Open the App Market or installer',
-                    'copy'  => 'From the home screen, open the built-in app market, app center, or the official installer provided with your SVICLOUD box.',
+                    'title' => '2. Open the built-in browser or installer',
+                    'copy'  => 'From the home screen, open the built-in browser, app market, app center, or installer shown in your customer setup email. Do not use random download links from search results.',
                 ],
                 'search' => [
-                    'title' => '3. Search for the app name',
-                    'copy'  => 'Use the on-screen keyboard or voice remote to search. Check the app icon and publisher so you do not install the wrong app.',
+                    'title' => '3. Follow your customer setup email',
+                    'copy'  => 'Your post-purchase setup email includes the private install source and the exact app name if your order requires one. Type it exactly as shown, then confirm the app icon before installing.',
                 ],
                 'install' => [
                     'title' => '4. Install or update the app',
                     'copy'  => 'Select Install or Update, wait until the progress finishes, then return to the home screen. Do not unplug the box during installation.',
                 ],
                 'open' => [
-                    'title' => '5. Open the app and sign in if needed',
-                    'copy'  => 'Launch the app once, accept any required permissions, and sign in with your own account if the service requires one.',
+                    'title' => '5. Open the app and complete first launch',
+                    'copy'  => 'Launch the app once, accept the required permissions, and finish any first-run prompts. If the app asks for an account or activation, use the instructions included in your customer email.',
                 ],
                 'support' => [
                     'title' => '6. Still stuck? Send us a photo',
-                    'copy'  => 'If the app cannot install or you see an error message, send our concierge team a photo of the screen and your order number so we can guide you quickly.',
+                    'copy'  => 'If the app cannot install or you see an error message, reply to your setup email with a photo of the TV screen and your order number so we can guide you quickly.',
                 ],
             ],
         ],
@@ -2367,4 +2367,20 @@ return [
             'cta'   => 'Contact us',
         ],
     ],
+    'post_purchase_setup_email' => [
+        'title' => 'Customer setup: installing your apps',
+        'intro' => 'Save these customer-only steps for first setup or reinstalling the TV app later.',
+        'steps' => [
+            'Connect your SVICLOUD box to Wi-Fi or Ethernet first.',
+            'From the home screen, open Orz Browser.',
+            'Enter 8989c.cc in the address bar and open the page.',
+            'Find Yogurt TV on the app page, then download and install it.',
+            'If Android asks for permission, allow installation from this trusted source, then continue.',
+            'Open Yogurt TV once installation finishes. If anything fails, reply to this email with a photo of the TV screen and your order number.',
+        ],
+        'note' => 'Please keep this setup link private for customers. App availability and names can change over time; if the page looks different, contact us before trying random APK files from the web.',
+        'public_guide' => 'General public app guide',
+        'support' => 'Need help? Reply to this email with a clear photo of the screen, your order number, and which step you are stuck on.',
+    ],
+
 ];
