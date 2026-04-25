@@ -6242,4 +6242,76 @@ add_action('wp', function () {
     }
 });
 
+// =============================================================================
+// Google Merchant Center: ensure AdTribes product feed carries shipping data
+// =============================================================================
+
+if (!function_exists('svic_ensure_google_feed_shipping')) {
+    /**
+     * AdTribes can generate a valid Google feed without item-level shipping.
+     * Merchant Center usually accepts account-level shipping, but diagnostics can
+     * suddenly mark products ineligible when neither source carries shipping.
+     * Keep the feed self-healing by adding free US/CA shipping blocks to each item.
+     */
+    function svic_ensure_google_feed_shipping(): void
+    {
+        if (!function_exists('wp_upload_dir')) {
+            return;
+        }
+
+        $uploads = wp_upload_dir(null, false);
+        if (empty($uploads['basedir'])) {
+            return;
+        }
+
+        $feed_path = trailingslashit($uploads['basedir']) . 'woo-product-feed-pro/xml/i34nvs0glefyr7skadxvsz8ip8xur3bo.xml';
+        if (!is_readable($feed_path) || !is_writable($feed_path)) {
+            return;
+        }
+
+        $last_checked = (int) get_transient('svic_google_feed_shipping_checked');
+        $mtime        = (int) filemtime($feed_path);
+        if ($last_checked >= $mtime) {
+            return;
+        }
+
+        $xml = file_get_contents($feed_path);
+        if (!is_string($xml) || $xml === '' || strpos($xml, '<item>') === false) {
+            return;
+        }
+
+        $shipping_block = "      <g:shipping>\n"
+            . "        <g:country>US</g:country>\n"
+            . "        <g:service>Free Shipping</g:service>\n"
+            . "        <g:price>USD 0.00</g:price>\n"
+            . "      </g:shipping>\n"
+            . "      <g:shipping>\n"
+            . "        <g:country>CA</g:country>\n"
+            . "        <g:service>Free Shipping</g:service>\n"
+            . "        <g:price>USD 0.00</g:price>\n"
+            . "      </g:shipping>\n";
+
+        $patched = preg_replace_callback('/<item>(.*?)<\/item>/s', function ($matches) use ($shipping_block) {
+            $item = $matches[0];
+            if (strpos($item, '<g:shipping>') !== false) {
+                return $item;
+            }
+
+            if (strpos($item, '<g:condition>') !== false) {
+                return str_replace('      <g:condition>', $shipping_block . '      <g:condition>', $item);
+            }
+
+            return str_replace('    </item>', $shipping_block . '    </item>', $item);
+        }, $xml);
+
+        if (is_string($patched) && $patched !== $xml) {
+            file_put_contents($feed_path, $patched, LOCK_EX);
+        }
+
+        set_transient('svic_google_feed_shipping_checked', max($mtime, time()), HOUR_IN_SECONDS);
+    }
+}
+
+add_action('init', 'svic_ensure_google_feed_shipping', 30);
+
 // Cache bust: 1769987003
