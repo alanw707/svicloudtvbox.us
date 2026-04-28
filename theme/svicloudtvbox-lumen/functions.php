@@ -6494,6 +6494,15 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 }
             }
 
+            if (strpos($patched_item, '<g:return_policy_label>') === false) {
+                $return_policy_block = "      <g:return_policy_label>Standard for United States</g:return_policy_label>\n";
+                if (strpos($patched_item, '<g:condition>') !== false) {
+                    $patched_item = str_replace('      <g:condition>', $return_policy_block . '      <g:condition>', $patched_item);
+                } else {
+                    $patched_item = str_replace('    </item>', $return_policy_block . '    </item>', $patched_item);
+                }
+            }
+
             if ($offer_id !== '' && isset($offer_images[$offer_id]) && strpos($patched_item, '<g:additional_image_link>') === false) {
                 $additional_images = '';
                 foreach ($offer_images[$offer_id] as $image_url) {
