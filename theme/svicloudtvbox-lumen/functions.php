@@ -6366,15 +6366,15 @@ add_action('wp', function () {
 });
 
 // =============================================================================
-// Google Merchant Center: ensure AdTribes product feed carries shipping data
+// Google Merchant Center: ensure AdTribes product feed carries rich offer data
 // =============================================================================
 
 if (!function_exists('svic_ensure_google_feed_shipping')) {
     /**
-     * AdTribes can generate a valid Google feed without item-level shipping.
-     * Merchant Center usually accepts account-level shipping, but diagnostics can
-     * suddenly mark products ineligible when neither source carries shipping.
-     * Keep the feed self-healing by adding free US/CA shipping blocks to each item.
+     * AdTribes can generate a valid Google feed without item-level shipping,
+     * handling time, or offer images. Merchant Center may approve products while
+     * still lowering the shopping experience score for those missing attributes.
+     * Keep the feed self-healing by adding the account-critical offer data.
      */
     function svic_ensure_google_feed_shipping(): void
     {
@@ -6392,7 +6392,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             return;
         }
 
-        $last_checked = (int) get_transient('svic_google_feed_shipping_checked');
+        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked');
         $mtime        = (int) filemtime($feed_path);
         if ($last_checked >= $mtime) {
             return;
@@ -6407,31 +6407,116 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             . "        <g:country>US</g:country>\n"
             . "        <g:service>Free Shipping</g:service>\n"
             . "        <g:price>USD 0.00</g:price>\n"
+            . "        <g:min_transit_time>2</g:min_transit_time>\n"
+            . "        <g:max_transit_time>5</g:max_transit_time>\n"
             . "      </g:shipping>\n"
             . "      <g:shipping>\n"
             . "        <g:country>CA</g:country>\n"
             . "        <g:service>Free Shipping</g:service>\n"
             . "        <g:price>USD 0.00</g:price>\n"
+            . "        <g:min_transit_time>5</g:min_transit_time>\n"
+            . "        <g:max_transit_time>10</g:max_transit_time>\n"
             . "      </g:shipping>\n";
 
-        $patched = preg_replace_callback('/<item>(.*?)<\/item>/s', function ($matches) use ($shipping_block) {
-            $item = $matches[0];
+        $offer_images = [
+            '12' => [
+                'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10p-plus-lifestyle-1.png',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10p-plus-lifestyle-2.png',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10p-plus-lifestyle-3.png',
+            ],
+            '14' => [
+                'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-1.jpg',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-2.jpg',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-3.jpg',
+            ],
+            '840' => [
+                'https://svicloudtvbox.us/wp-content/uploads/2026/04/remote-control-white-1536x1536.png',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/04/remote-control-white-1024x1024.png',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/04/remote-control-white-600x600.png',
+            ],
+        ];
+
+        $image_link_overrides = [
+            // The original 10S packshot is 750x470; Merchant Center warns when a
+            // dimension is under 500px. Use the high-resolution lifestyle image.
+            '14' => 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-1.jpg',
+        ];
+
+        $patched = preg_replace_callback('/<item>(.*?)<\/item>/s', function ($matches) use ($shipping_block, $offer_images, $image_link_overrides) {
+            $item     = $matches[0];
+            $offer_id = '';
+            if (preg_match('/<g:id>(.*?)<\/g:id>/', $item, $id_matches)) {
+                $offer_id = trim(html_entity_decode($id_matches[1], ENT_QUOTES | ENT_XML1, 'UTF-8'));
+            }
+
             if (strpos($item, '<g:shipping>') !== false) {
-                return $item;
+                $patched_item = $item;
+            } elseif (strpos($item, '<g:condition>') !== false) {
+                $patched_item = str_replace('      <g:condition>', $shipping_block . '      <g:condition>', $item);
+            } else {
+                $patched_item = str_replace('    </item>', $shipping_block . '    </item>', $item);
             }
 
-            if (strpos($item, '<g:condition>') !== false) {
-                return str_replace('      <g:condition>', $shipping_block . '      <g:condition>', $item);
+            if (isset($image_link_overrides[$offer_id]) && strpos($patched_item, '<g:image_link>') !== false) {
+                $replacement = '      <g:image_link>' . esc_url($image_link_overrides[$offer_id]) . '</g:image_link>';
+                $patched_item = preg_replace('/\s*<g:image_link>.*?<\/g:image_link>\s*/s', "\n" . $replacement . "\n", $patched_item, 1) ?: $patched_item;
             }
 
-            return str_replace('    </item>', $shipping_block . '    </item>', $item);
+            $patched_item = preg_replace_callback('/<g:shipping>(.*?)<\/g:shipping>/s', function ($shipping_matches) {
+                $shipping = $shipping_matches[0];
+                if (strpos($shipping, '<g:min_transit_time>') !== false) {
+                    return $shipping;
+                }
+
+                $country = '';
+                if (preg_match('/<g:country>(.*?)<\/g:country>/', $shipping, $country_matches)) {
+                    $country = strtoupper(trim($country_matches[1]));
+                }
+
+                $transit_block = $country === 'CA'
+                    ? "        <g:min_transit_time>5</g:min_transit_time>\n        <g:max_transit_time>10</g:max_transit_time>\n"
+                    : "        <g:min_transit_time>2</g:min_transit_time>\n        <g:max_transit_time>5</g:max_transit_time>\n";
+
+                if (strpos($shipping, '<g:price>') !== false) {
+                    return preg_replace('/(\s*<g:price>.*?<\/g:price>\s*)/s', '$1' . $transit_block, $shipping, 1) ?: $shipping;
+                }
+
+                return str_replace('</g:shipping>', $transit_block . '      </g:shipping>', $shipping);
+            }, $patched_item) ?: $patched_item;
+
+            if (strpos($patched_item, '<g:min_handling_time>') === false) {
+                $handling_block = "      <g:min_handling_time>0</g:min_handling_time>\n"
+                    . "      <g:max_handling_time>2</g:max_handling_time>\n";
+                if (strpos($patched_item, '<g:condition>') !== false) {
+                    $patched_item = str_replace('      <g:condition>', $handling_block . '      <g:condition>', $patched_item);
+                } else {
+                    $patched_item = str_replace('    </item>', $handling_block . '    </item>', $patched_item);
+                }
+            }
+
+            if ($offer_id !== '' && isset($offer_images[$offer_id]) && strpos($patched_item, '<g:additional_image_link>') === false) {
+                $additional_images = '';
+                foreach ($offer_images[$offer_id] as $image_url) {
+                    $additional_images .= '      <g:additional_image_link>' . esc_url($image_url) . "</g:additional_image_link>\n";
+                }
+
+                if (strpos($patched_item, '<g:checkout_link_template>') !== false) {
+                    $patched_item = str_replace('      <g:checkout_link_template>', $additional_images . '      <g:checkout_link_template>', $patched_item);
+                } elseif (strpos($patched_item, '<g:availability>') !== false) {
+                    $patched_item = str_replace('      <g:availability>', $additional_images . '      <g:availability>', $patched_item);
+                } else {
+                    $patched_item = str_replace('    </item>', $additional_images . '    </item>', $patched_item);
+                }
+            }
+
+            return $patched_item;
         }, $xml);
 
         if (is_string($patched) && $patched !== $xml) {
             file_put_contents($feed_path, $patched, LOCK_EX);
         }
 
-        set_transient('svic_google_feed_shipping_checked', max($mtime, time()), HOUR_IN_SECONDS);
+        set_transient('svic_google_feed_rich_offer_checked', max($mtime, time()), HOUR_IN_SECONDS);
     }
 }
 
