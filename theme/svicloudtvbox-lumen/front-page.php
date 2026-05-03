@@ -573,6 +573,7 @@ if (!$blog_posts_query instanceof WP_Query) {
       <div class="frontpage-traffic__links lumen-action-group" role="group" aria-label="<?php echo svic_translate_attr('frontpage.aria.traffic_actions'); ?>">
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.traffic.links.pdp'); ?></a>
         <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url(svic_url_with_lang(home_url('/compare'))); ?>"><?php echo svic_translate_html('frontpage.traffic.links.compare'); ?></a>
+        <a class="frontpage-traffic__textlink" href="<?php echo esc_url(svic_url_with_lang(home_url('/svicloud-tv-box-usa-guide-2026/'))); ?>"><?php echo svic_translate_html('frontpage.traffic.links.guide_2026'); ?></a>
         <a class="frontpage-traffic__textlink" href="<?php echo esc_url(svic_url_with_lang(home_url('/faq'))); ?>"><?php echo svic_translate_html('frontpage.traffic.links.faq'); ?></a>
         <a class="frontpage-traffic__textlink" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact'))); ?>"><?php echo svic_translate_html('frontpage.traffic.links.contact'); ?></a>
       </div>
