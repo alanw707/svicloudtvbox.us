@@ -747,11 +747,11 @@ return [
     'frontpage' => [
         'hero' => [
             'badge'   => 'Authorized U.S. Dealer',
-            'title'   => 'The Best Streaming Box for U.S. Chinese Families — 1000+ Channels in 4K, Ships from Nevada in 48 Hours',
-            'title_lead' => 'The Best Streaming Box for U.S. Chinese Families',
+            'title'   => 'Best SVICLOUD TV Box for U.S. Chinese Families in 2026 — 1000+ Channels in 4K, Ships from Nevada in 48 Hours',
+            'title_lead' => 'Best SVICLOUD TV Box for U.S. Chinese Families in 2026',
             'title_separator' => ' — ',
             'title_tail' => '1000+ Channels in 4K, Ships from Nevada in 48 Hours',
-            'copy'    => 'SVICLOUD packs premium Chinese and international channels, karaoke, and kids favorites into one flagship box—ships fast from the USA with bilingual concierge support.',
+            'copy'    => 'SVICLOUD 10P+ and 10S give U.S. Chinese families a 2026-ready 4K streaming box with premium Chinese and international channels, karaoke, kids favorites, fast U.S. shipping, and bilingual concierge support.',
             'bullets' => [
                 'shipping' => 'Ships from USA',
                 'warranty' => '1-Year U.S. Warranty',
@@ -811,9 +811,9 @@ return [
             ],
         ],
         'traffic' => [
-            'badge' => 'SVICLOUD 10P+ for U.S. Chinese/Asian homes',
+            'badge' => '2026 SVICLOUD 10P+ for U.S. Chinese/Asian homes',
             'title' => 'Skip the import hassle. Get your SVICLOUD set up in 中文 or English, shipped from Nevada in 48 hours.',
-            'lead'  => 'Serve U.S.-based Chinese/Asian families with fast Nevada fulfillment, 中文/English setup help, and hardware ready for 4K sports, drama marathons, karaoke, and kids profiles.',
+            'lead'  => 'Serve U.S.-based Chinese/Asian families in 2026 with fast Nevada fulfillment, 中文/English setup help, and hardware ready for 4K sports, drama marathons, karaoke, and kids profiles.',
             'bullets' => [
                 'shipping'  => '48-hour U.S. shipping with localized power, HDMI, and tracking',
                 'concierge' => 'Bilingual concierge: setup calls, Wi-Fi tuning, karaoke mic pairing, Kids Mode',
@@ -824,6 +824,7 @@ return [
                 'compare' => 'Compare 10P+ vs 10S',
                 'faq'     => 'Read FAQ',
                 'contact' => 'Talk to concierge',
+                'guide_2026' => 'Read the 2026 buying guide',
             ],
         ],
         'certification' => [
@@ -868,7 +869,7 @@ return [
         ],
         'feature_grid' => [
             'title'    => 'Why SVICLOUD Beats Generic Streaming Boxes',
-            'subtitle' => 'Engineered for crystal-clear 4K sports, drama marathons, and karaoke nights without buffering.',
+            'subtitle' => 'Engineered for 2026 family streaming: crystal-clear 4K sports, drama marathons, and karaoke nights without buffering.',
             'cards'    => [
                 'entertainment' => [
                     'title' => 'Complete Entertainment',
@@ -1202,13 +1203,13 @@ return [
     ],
     'compare' => [
         'meta' => [
-            'title'       => 'SVICLOUD 10P+ vs 10S | Compare 小雲盒子 Models in the USA',
-            'description' => 'Compare SVICLOUD 10P+ and 10S side-by-side for U.S. buyers. Review specs, storage, karaoke features, and pricing to choose the best 小雲盒子 for your home.',
+            'title'       => 'SVICLOUD 10P+ vs 10S 2026 | Compare 小雲盒子 Models in the USA',
+            'description' => 'Compare SVICLOUD 10P+ and 10S side-by-side for U.S. buyers in 2026. Review specs, storage, karaoke features, and pricing to choose the best 小雲盒子 for your home.',
             'image_alt'   => 'SVICLOUD 10P+ and 10S streaming boxes with the voice remote',
         ],
         'hero' => [
             'badge'    => 'Compare Models',
-            'title'    => 'SVICLOUD 10P+ vs 10S',
+            'title'    => 'SVICLOUD 10P+ vs 10S — 2026 Model Comparison',
             'subtitle' => 'See the hardware, features, and best-use scenarios side-by-side to pick the perfect SVICLOUD for your home.',
         ],
         'traffic' => [
