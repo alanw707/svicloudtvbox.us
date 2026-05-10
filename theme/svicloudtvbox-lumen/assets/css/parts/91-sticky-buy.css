@@ -73,6 +73,10 @@
     pointer-events: none;
   }
 
+  .lumen-sticky-buy.is-visible {
+    transform: translate(-50%, 0);
+  }
+
   .lumen-sticky-buy__inner {
     width: 100%;
     max-width: none;
