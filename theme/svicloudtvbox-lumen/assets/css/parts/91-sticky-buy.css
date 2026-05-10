@@ -55,23 +55,38 @@
   .lumen-sticky-buy {
     display: block;
     /*
-      Keep the store CTA above the persistent Google/cart badge and chat
-      bubble instead of competing for the same bottom edge.
+      Mobile has persistent Google/cart and chat widgets at the bottom.
+      Show the store CTA as a compact floating pill above them so it stays
+      visible without hiding either widget.
     */
-    bottom: calc(5.6rem + env(safe-area-inset-bottom, 0px));
-    left: 0.75rem;
-    right: 0.75rem;
-    border: 1px solid rgba(94, 230, 208, 0.25);
-    border-radius: 22px;
-    padding: 0.7rem 0.85rem;
-    box-shadow: 0 24px 54px rgba(3, 10, 28, 0.48);
+    left: 50%;
+    right: auto;
+    bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px));
+    width: min(22rem, calc(100vw - 2rem));
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    transform: translate(-50%, 0);
+    z-index: 2147483000;
+    pointer-events: none;
   }
 
   .lumen-sticky-buy__inner {
-    max-width: 520px;
+    width: 100%;
+    max-width: none;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: 0.75rem;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.58rem 0.68rem 0.58rem 0.85rem;
+    border: 1px solid rgba(94, 230, 208, 0.28);
+    border-radius: 999px;
+    background: rgba(6, 13, 28, 0.96);
+    box-shadow: 0 18px 42px rgba(3, 10, 28, 0.56);
+    backdrop-filter: blur(12px);
+    pointer-events: auto;
   }
 
   .lumen-sticky-buy__label {
@@ -82,8 +97,9 @@
 
   .lumen-sticky-buy__cta {
     min-width: 0;
-    min-height: 44px;
-    padding: 0.62rem 1rem;
+    min-height: 42px;
+    padding: 0.58rem 1rem;
     font-size: 0.86rem;
+    white-space: nowrap;
   }
 }
