@@ -63,6 +63,18 @@ if (!defined('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID')) {
     define('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID', 5317978135);
 }
 
+// Official Google Customer Reviews rating badge. Google only shows a rating
+// once Merchant Center has enough eligible survey responses.
+if (!defined('SVIC_GOOGLE_CUSTOMER_REVIEWS_BADGE_ENABLED')) {
+    define('SVIC_GOOGLE_CUSTOMER_REVIEWS_BADGE_ENABLED', true);
+}
+
+// Direct Google Business Profile "write a review" link. Set in wp-config.php
+// or via `svic_google_business_review_url` filter once the GBP Place ID link is known.
+if (!defined('SVIC_GOOGLE_BUSINESS_REVIEW_URL')) {
+    define('SVIC_GOOGLE_BUSINESS_REVIEW_URL', '');
+}
+
 if (!defined('SVIC_GA4_MEASUREMENT_ID')) {
     define('SVIC_GA4_MEASUREMENT_ID', '');
 }
@@ -79,6 +91,16 @@ if (!defined('SVIC_META_PIXEL_ID')) {
 // have been added to the `frontpage.testimonials.quotes` translation block.
 if (!defined('SVIC_TESTIMONIALS_ENABLED')) {
     define('SVIC_TESTIMONIALS_ENABLED', false);
+}
+
+// Floating WhatsApp support chat entrypoint.
+// Use international format digits only, e.g. 15551234567.
+if (!defined('SVIC_SUPPORT_CHAT_ENABLED')) {
+    define('SVIC_SUPPORT_CHAT_ENABLED', true);
+}
+
+if (!defined('SVIC_SUPPORT_CHAT_WHATSAPP_NUMBER')) {
+    define('SVIC_SUPPORT_CHAT_WHATSAPP_NUMBER', '');
 }
 
 // Force US state names to English regardless of UI locale.
@@ -149,6 +171,17 @@ function svic_fix_fulfillment_tracking_url( $fulfillment ) {
 add_filter( 'woocommerce_fulfillment_before_create', 'svic_fix_fulfillment_tracking_url' );
 add_filter( 'woocommerce_fulfillment_before_update', 'svic_fix_fulfillment_tracking_url' );
 
+// Keep product reviews open for guest buyers, but require manual approval before publishing.
+// WooCommerce still adds a "verified owner" label when a review matches a real order.
+add_filter('pre_comment_approved', function ($approved, $commentdata) {
+    $post_id = isset($commentdata['comment_post_ID']) ? (int) $commentdata['comment_post_ID'] : 0;
+    if ($post_id <= 0 || get_post_type($post_id) !== 'product') {
+        return $approved;
+    }
+
+    return 0;
+}, 10, 2);
+
 // Force currency display as "$269.00" (no space) regardless of WC currency-position setting.
 add_filter('woocommerce_price_format', function ($format, $currency_pos) {
     if ($currency_pos === 'left_space') {
@@ -180,7 +213,7 @@ add_filter('woocommerce_add_to_cart_redirect', function (string $url): string {
     return wc_get_checkout_url();
 });
 
-const SVIC_LITESPEED_PURGE_MARK = 'svic-remove-legacy-product-photos-20260414-1';
+const SVIC_LITESPEED_PURGE_MARK = 'svic-hero-rating-pill-20260510-11';
 const SVIC_REWRITE_FLUSH_MARK   = 'svic-rewrite-flush-20260407';
 
 add_action('init', function () {

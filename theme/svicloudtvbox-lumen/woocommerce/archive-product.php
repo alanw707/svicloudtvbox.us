@@ -104,6 +104,8 @@ foreach ($card_data as $key => $card) {
     $card_data[$key]['price_markup'] = $price_markup;
     $card_data[$key]['url'] = $url;
     $card_data[$key]['image_html'] = $image_html;
+    $card_data[$key]['average_rating'] = $product instanceof WC_Product ? (float) $product->get_average_rating() : 0.0;
+    $card_data[$key]['rating_count'] = $product instanceof WC_Product ? (int) $product->get_rating_count() : 0;
 }
 ?>
 
@@ -138,6 +140,14 @@ foreach ($card_data as $key => $card) {
             <?php endif; ?>
             <?php if ($image_html) : ?>
               <figure class="shop-product-card__media"><?php echo $image_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
+            <?php endif; ?>
+            <?php if (!empty($card['rating_count']) && !empty($card['average_rating'])) : ?>
+              <div class="shop-product-card__product-rating" aria-label="<?php echo esc_attr(svic_translate('shop.cards.product_rating_aria', [ 'rating' => number_format((float) $card['average_rating'], 1), 'count' => (string) (int) $card['rating_count'] ])); ?>">
+                <span class="shop-product-card__product-rating-label"><?php echo svic_translate_html('shop.cards.product_rating_label'); ?></span>
+                <span class="shop-product-card__product-rating-score"><?php echo esc_html(number_format((float) $card['average_rating'], 1)); ?></span>
+                <span class="shop-product-card__product-rating-stars" aria-hidden="true">★★★★★</span>
+                <span class="shop-product-card__product-rating-count"><?php echo esc_html(sprintf(svic_translate('shop.cards.product_rating_count'), (int) $card['rating_count'])); ?></span>
+              </div>
             <?php endif; ?>
             <div class="shop-product-card__price-line">
               <span class="shop-product-card__price-label"><?php echo svic_translate_html('shop.cards.price_label'); ?></span>

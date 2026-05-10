@@ -23,6 +23,7 @@ $shop_url         = function_exists('wc_get_page_permalink') ? wc_get_page_perma
 $compare_url      = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/compare/')) : home_url('/compare/');
 $guides_url       = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/guides-setup/')) : home_url('/guides-setup/');
 $contact_url      = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/contact/')) : home_url('/contact/');
+$google_business_review_url = function_exists('svic_google_business_review_url') ? svic_google_business_review_url() : '';
 if (!$shop_url) { $shop_url = $home_url; }
 
 if ($order instanceof WC_Order && $order->has_status('failed')) : ?>
@@ -128,6 +129,13 @@ if ($order instanceof WC_Order && $order->has_status('failed')) : ?>
               <p class="lumen-order-thankyou-card__copy"><?php echo svic_translate_html('order_thankyou.next.cards.support.copy'); ?></p>
               <a class="lumen-order-thankyou-card__link" href="<?php echo esc_url($contact_url); ?>" data-svic-event="svic_cta_click" data-svic-location="thankyou_next" data-svic-label="contact_support_after_order"><?php echo svic_translate_html('order_thankyou.next.cards.support.cta'); ?></a>
             </article>
+            <?php if ($google_business_review_url !== '') : ?>
+              <article class="lumen-order-thankyou-card">
+                <h4 class="lumen-order-thankyou-card__title"><?php echo svic_translate_html('order_thankyou.next.cards.review.title'); ?></h4>
+                <p class="lumen-order-thankyou-card__copy"><?php echo svic_translate_html('order_thankyou.next.cards.review.copy'); ?></p>
+                <a class="lumen-order-thankyou-card__link" href="<?php echo esc_url($google_business_review_url); ?>" target="_blank" rel="noopener noreferrer" data-svic-event="svic_cta_click" data-svic-location="thankyou_next" data-svic-label="google_business_review"><?php echo svic_translate_html('order_thankyou.next.cards.review.cta'); ?></a>
+              </article>
+            <?php endif; ?>
           </div>
         </section>
 

@@ -1548,6 +1548,53 @@ if (!function_exists('svic_get_google_customer_reviews_optin_payload')) {
     }
 }
 
+if (!function_exists('svic_render_google_platform_loader')) {
+    /**
+     * Load Google's platform script once and queue callbacks until gapi is ready.
+     *
+     * @return void
+     */
+    function svic_render_google_platform_loader(): void
+    {
+        static $rendered = false;
+
+        if ($rendered) {
+            return;
+        }
+
+        $rendered = true;
+        ?>
+        <script>
+          (function(w) {
+            w.svicGooglePlatformCallbacks = w.svicGooglePlatformCallbacks || [];
+            w.svicGooglePlatformReady = w.svicGooglePlatformReady || function() {
+              w.svicGooglePlatformLoaded = true;
+              var pending = w.svicGooglePlatformCallbacks.splice(0, w.svicGooglePlatformCallbacks.length);
+              for (var i = 0; i < pending.length; i += 1) {
+                try {
+                  pending[i]();
+                } catch (error) {
+                  setTimeout(function() { throw error; }, 0);
+                }
+              }
+            };
+            w.svicRunGooglePlatformCallback = w.svicRunGooglePlatformCallback || function(callback) {
+              if (typeof callback !== 'function') {
+                return;
+              }
+              if (w.gapi && w.gapi.load) {
+                callback();
+                return;
+              }
+              w.svicGooglePlatformCallbacks.push(callback);
+            };
+          })(window);
+        </script>
+        <script src="https://apis.google.com/js/platform.js?onload=svicGooglePlatformReady" async defer></script>
+        <?php
+    }
+}
+
 if (!function_exists('svic_render_google_customer_reviews_optin')) {
     /**
      * Output the Google Customer Reviews opt-in script block.
@@ -1575,23 +1622,192 @@ if (!function_exists('svic_render_google_customer_reviews_optin')) {
         }
 
         $rendered = true;
+        svic_render_google_platform_loader();
 
         ?>
-        <script src="https://apis.google.com/js/platform.js?onload=svicRenderGoogleCustomerReviews" async defer></script>
         <script>
-          window.svicGoogleCustomerReviewsConfig = <?php echo $json_payload; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>;
-          window.svicRenderGoogleCustomerReviews = function() {
-            var config = window.svicGoogleCustomerReviewsConfig || null;
-            if (!config || !window.gapi || !window.gapi.load) {
-              return;
-            }
-            window.gapi.load('surveyoptin', function() {
-              if (!window.gapi || !window.gapi.surveyoptin || !window.gapi.surveyoptin.render) {
+          (function(w) {
+            w.svicGoogleCustomerReviewsConfig = <?php echo $json_payload; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>;
+            w.svicRunGooglePlatformCallback(function() {
+              var config = w.svicGoogleCustomerReviewsConfig || null;
+              if (!config || !w.gapi || !w.gapi.load) {
                 return;
               }
-              window.gapi.surveyoptin.render(config);
+              w.gapi.load('surveyoptin', function() {
+                if (!w.gapi || !w.gapi.surveyoptin || !w.gapi.surveyoptin.render) {
+                  return;
+                }
+                w.gapi.surveyoptin.render(config);
+              });
             });
-          };
+          })(window);
+        </script>
+        <?php
+    }
+}
+
+if (!function_exists('svic_google_business_review_url')) {
+    /**
+     * Return the configured Google Business Profile write-review URL.
+     *
+     * @return string
+     */
+    function svic_google_business_review_url(): string
+    {
+        $url = defined('SVIC_GOOGLE_BUSINESS_REVIEW_URL') ? (string) SVIC_GOOGLE_BUSINESS_REVIEW_URL : '';
+        $url = apply_filters('svic_google_business_review_url', trim($url));
+
+        if (!is_string($url)) {
+            return '';
+        }
+
+        $url = trim($url);
+        if ($url === '') {
+            return '';
+        }
+
+        $scheme = wp_parse_url($url, PHP_URL_SCHEME);
+        if (!in_array($scheme, ['http', 'https'], true)) {
+            return '';
+        }
+
+        return esc_url_raw($url);
+    }
+}
+
+if (!function_exists('svic_render_google_customer_reviews_badge')) {
+    /**
+     * Output the official Google Customer Reviews rating badge.
+     *
+     * @return void
+     */
+    function svic_render_google_customer_reviews_badge(): void
+    {
+        static $rendered = false;
+
+        if ($rendered || is_admin()) {
+            return;
+        }
+
+        $enabled = defined('SVIC_GOOGLE_CUSTOMER_REVIEWS_BADGE_ENABLED') && SVIC_GOOGLE_CUSTOMER_REVIEWS_BADGE_ENABLED;
+        $enabled = (bool) apply_filters('svic_google_customer_reviews_badge_enabled', $enabled);
+        if (!$enabled) {
+            return;
+        }
+
+        $merchant_id = (int) apply_filters(
+            'svic_google_customer_reviews_merchant_id',
+            defined('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID') ? SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID : 0,
+            null
+        );
+
+        if ($merchant_id <= 0) {
+            return;
+        }
+
+        $position = (string) apply_filters('svic_google_customer_reviews_badge_position', 'BOTTOM_LEFT');
+        $allowed_positions = ['BOTTOM_LEFT', 'BOTTOM_RIGHT', 'INLINE'];
+        if (!in_array($position, $allowed_positions, true)) {
+            $position = 'BOTTOM_LEFT';
+        }
+
+        $config = [
+            'merchant_id' => $merchant_id,
+            'position'    => $position,
+        ];
+        $json_config = wp_json_encode($config, JSON_UNESCAPED_SLASHES);
+        if (!is_string($json_config) || $json_config === '') {
+            return;
+        }
+
+        $rendered = true;
+        svic_render_google_platform_loader();
+        ?>
+        <div id="svic-google-customer-reviews-badge" aria-hidden="true"></div>
+        <script>
+          (function(w, d) {
+            var badgeConfig = <?php echo $json_config; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>;
+            w.svicRunGooglePlatformCallback(function() {
+              if (!w.gapi || !w.gapi.load) {
+                return;
+              }
+              w.gapi.load('ratingbadge', function() {
+                var container = d.getElementById('svic-google-customer-reviews-badge');
+                if (!container || !w.gapi || !w.gapi.ratingbadge || !w.gapi.ratingbadge.render) {
+                  return;
+                }
+                w.gapi.ratingbadge.render(container, badgeConfig);
+              });
+            });
+          })(window, document);
+        </script>
+        <?php
+    }
+}
+
+if (!function_exists('svic_render_google_customer_reviews_inline_badge')) {
+    /**
+     * Output an inline official Google Customer Reviews badge.
+     *
+     * @param string $element_id DOM id for the inline badge container.
+     *
+     * @return void
+     */
+    function svic_render_google_customer_reviews_inline_badge(string $element_id = 'svic-google-customer-reviews-inline-badge'): void
+    {
+        static $rendered_ids = [];
+
+        $element_id = sanitize_key($element_id);
+        if ($element_id === '' || isset($rendered_ids[$element_id])) {
+            return;
+        }
+
+        $enabled = defined('SVIC_GOOGLE_CUSTOMER_REVIEWS_BADGE_ENABLED') && SVIC_GOOGLE_CUSTOMER_REVIEWS_BADGE_ENABLED;
+        $enabled = (bool) apply_filters('svic_google_customer_reviews_badge_enabled', $enabled);
+        if (!$enabled) {
+            return;
+        }
+
+        $merchant_id = (int) apply_filters(
+            'svic_google_customer_reviews_merchant_id',
+            defined('SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID') ? SVIC_GOOGLE_CUSTOMER_REVIEWS_MERCHANT_ID : 0,
+            null
+        );
+
+        if ($merchant_id <= 0) {
+            return;
+        }
+
+        $config = [
+            'merchant_id' => $merchant_id,
+            'position'    => 'INLINE',
+        ];
+        $json_config = wp_json_encode($config, JSON_UNESCAPED_SLASHES);
+        if (!is_string($json_config) || $json_config === '') {
+            return;
+        }
+
+        $rendered_ids[$element_id] = true;
+        svic_render_google_platform_loader();
+        ?>
+        <div id="<?php echo esc_attr($element_id); ?>" class="svic-google-customer-reviews-inline-badge" aria-label="<?php echo esc_attr__('Google store rating badge', 'svicloudtvbox-lumen'); ?>"></div>
+        <script>
+          (function(w, d) {
+            var badgeConfig = <?php echo $json_config; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>;
+            var elementId = <?php echo wp_json_encode($element_id); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>;
+            w.svicRunGooglePlatformCallback(function() {
+              if (!w.gapi || !w.gapi.load) {
+                return;
+              }
+              w.gapi.load('ratingbadge', function() {
+                var container = d.getElementById(elementId);
+                if (!container || !w.gapi || !w.gapi.ratingbadge || !w.gapi.ratingbadge.render) {
+                  return;
+                }
+                w.gapi.ratingbadge.render(container, badgeConfig);
+              });
+            });
+          })(window, document);
         </script>
         <?php
     }
@@ -1751,5 +1967,199 @@ if (!function_exists('svic_generate_default_image_alt')) {
         }
 
         return esc_html__('SVICLOUD TV Box illustration', 'svicloudtvbox-lumen');
+    }
+}
+
+if (!function_exists('svic_support_chat_number')) {
+    function svic_support_chat_number(): string
+    {
+        if (!defined('SVIC_SUPPORT_CHAT_WHATSAPP_NUMBER')) {
+            return '';
+        }
+
+        $digits = preg_replace('/\D+/', '', (string) SVIC_SUPPORT_CHAT_WHATSAPP_NUMBER);
+
+        return is_string($digits) ? $digits : '';
+    }
+}
+
+if (!function_exists('svic_support_chat_is_enabled')) {
+    function svic_support_chat_is_enabled(): bool
+    {
+        if (!defined('SVIC_SUPPORT_CHAT_ENABLED') || !SVIC_SUPPORT_CHAT_ENABLED) {
+            return false;
+        }
+
+        return svic_support_chat_number() !== '';
+    }
+}
+
+if (!function_exists('svic_support_chat_context')) {
+    function svic_support_chat_context(): string
+    {
+        if (function_exists('is_front_page') && is_front_page()) {
+            return 'home';
+        }
+
+        if ((function_exists('is_page_template') && is_page_template('page-compare.php')) || (function_exists('is_page') && is_page('compare'))) {
+            return 'compare';
+        }
+
+        if (function_exists('is_product') && is_product()) {
+            return 'product';
+        }
+
+        if (function_exists('is_cart') && is_cart()) {
+            return 'cart';
+        }
+
+        return '';
+    }
+}
+
+if (!function_exists('svic_support_chat_should_render')) {
+    function svic_support_chat_should_render(): bool
+    {
+        if (is_admin() || !svic_support_chat_is_enabled()) {
+            return false;
+        }
+
+        if (function_exists('is_checkout') && is_checkout()) {
+            return false;
+        }
+
+        if (function_exists('is_account_page') && is_account_page()) {
+            return false;
+        }
+
+        return svic_support_chat_context() !== '';
+    }
+}
+
+if (!function_exists('svic_support_chat_product_name')) {
+    function svic_support_chat_product_name(): string
+    {
+        $product_name = '';
+        $product_id   = function_exists('get_queried_object_id') ? (int) get_queried_object_id() : 0;
+
+        if ($product_id > 0) {
+            $product_name = get_the_title($product_id);
+        }
+
+        if (!is_string($product_name)) {
+            $product_name = '';
+        }
+
+        $product_name = trim(wp_strip_all_tags($product_name));
+
+        if ($product_name === '') {
+            return '';
+        }
+
+        return svic_localize_brand_in_text($product_name);
+    }
+}
+
+if (!function_exists('svic_support_chat_message')) {
+    function svic_support_chat_message(?string $context = null): string
+    {
+        $context = $context ?: svic_support_chat_context();
+
+        if ($context === 'product') {
+            $product_name = svic_support_chat_product_name();
+            if ($product_name !== '') {
+                return svic_translate('support_chat.messages.product', [
+                    'product' => $product_name,
+                ]);
+            }
+
+            return svic_translate('support_chat.messages.product_generic');
+        }
+
+        $supported_contexts = ['home', 'compare', 'cart'];
+        if (in_array($context, $supported_contexts, true)) {
+            return svic_translate('support_chat.messages.' . $context);
+        }
+
+        return svic_translate('support_chat.messages.default');
+    }
+}
+
+if (!function_exists('svic_support_chat_url')) {
+    function svic_support_chat_url(?string $context = null): string
+    {
+        $number = svic_support_chat_number();
+        if ($number === '') {
+            return '';
+        }
+
+        $url     = 'https://wa.me/' . $number;
+        $message = trim(svic_support_chat_message($context));
+
+        if ($message !== '') {
+            $url .= '?text=' . rawurlencode($message);
+        }
+
+        return $url;
+    }
+}
+
+if (!function_exists('svic_get_support_chat_payload')) {
+    function svic_get_support_chat_payload(): array
+    {
+        if (!svic_support_chat_should_render()) {
+            return [];
+        }
+
+        $context = svic_support_chat_context();
+        $url     = svic_support_chat_url($context);
+
+        if ($context === '' || $url === '') {
+            return [];
+        }
+
+        return [
+            'context'    => $context,
+            'url'        => $url,
+            'channel'    => svic_translate('support_chat.channel'),
+            'label'      => svic_translate('support_chat.label'),
+            'title'      => svic_translate('support_chat.title'),
+            'aria_label' => svic_translate('support_chat.aria_label'),
+        ];
+    }
+}
+
+if (!function_exists('svic_render_support_chat')) {
+    function svic_render_support_chat(): void
+    {
+        $payload = svic_get_support_chat_payload();
+        if ($payload === []) {
+            return;
+        }
+        ?>
+        <a
+            class="svic-support-chat"
+            href="<?php echo esc_url($payload['url']); ?>"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="<?php echo esc_attr($payload['aria_label']); ?>"
+            title="<?php echo esc_attr($payload['title']); ?>"
+            data-svic-event="svic_support_chat_click"
+            data-svic-location="floating_support_chat"
+            data-svic-label="<?php echo esc_attr($payload['context']); ?>"
+            data-svic-model="whatsapp"
+        >
+            <span class="svic-support-chat__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                    <path d="M12 3.5C7.30558 3.5 3.5 7.03902 3.5 11.4054C3.5 13.4053 4.30174 15.2337 5.6268 16.6164L5 20.5L8.99635 19.2215C9.94103 19.554 10.9506 19.7311 12 19.7311C16.6944 19.7311 20.5 16.1921 20.5 11.8257C20.5 7.45929 16.6944 3.5 12 3.5Z" fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                    <path d="M9.30354 8.55273C9.49759 8.17882 9.69409 8 9.94845 8C10.0641 8 10.1797 8.00389 10.2918 8.00973C10.4737 8.01945 10.5868 8.05058 10.7119 8.3501C10.8615 8.70605 11.2141 9.54572 11.2566 9.63091C11.2991 9.71609 11.3271 9.81587 11.2701 9.91467C11.2131 10.0135 11.1841 10.0709 11.1002 10.1706C11.0162 10.2704 10.9243 10.3936 10.8443 10.4837C10.7604 10.5786 10.6734 10.6813 10.7683 10.8369C10.8632 10.9926 11.1916 11.5107 11.6621 11.9301C12.2673 12.4705 12.7785 12.6388 12.9458 12.7087C13.1131 12.7787 13.2109 12.767 13.3077 12.6721C13.4044 12.5773 13.7202 12.2402 13.8342 12.0807C13.9482 11.9213 14.0622 11.9485 14.2014 12.0086C14.3407 12.0688 15.0864 12.4237 15.2421 12.5015C15.3977 12.5793 15.5005 12.6172 15.5355 12.6721C15.5704 12.727 15.5704 12.9833 15.4727 13.2522C15.3749 13.5211 14.9006 13.7647 14.6896 13.8386C14.4787 13.9125 14.2126 13.9446 13.3233 13.576C12.2402 13.1261 11.5376 12.5482 10.9171 11.8922C10.4711 11.4208 10.0758 10.8069 9.95232 10.5806C9.82889 10.3544 9.37608 9.62605 9.37608 8.87245C9.37608 8.74806 9.34708 8.65802 9.30354 8.55273Z" fill="currentColor"/>
+                </svg>
+            </span>
+            <span class="svic-support-chat__text">
+                <span class="svic-support-chat__channel"><?php echo esc_html($payload['channel']); ?></span>
+                <span class="svic-support-chat__label"><?php echo esc_html($payload['label']); ?></span>
+            </span>
+        </a>
+        <?php
     }
 }

@@ -467,7 +467,7 @@ if (!$blog_posts_query instanceof WP_Query) {
 }
 ?>
 <main class="main-content">
-  <!-- Hero Section -->
+  <!-- Hero Section: store rating above headline -->
   <section class="hero-dashboard" id="hero">
     <div class="hero-dashboard__background" aria-hidden="true">
       <span class="hero-dashboard__globe hero-dashboard__globe--left"></span>
@@ -476,6 +476,12 @@ if (!$blog_posts_query instanceof WP_Query) {
     <div class="hero-dashboard__inner">
       <div class="hero-dashboard__content">
         <span class="hero-dashboard__eyebrow"><?php echo svic_translate_html('frontpage.hero.badge'); ?></span>
+        <div class="hero-dashboard__store-rating" aria-label="<?php echo esc_attr(svic_translate('frontpage.hero.store_rating.aria')); ?>">
+          <span class="hero-dashboard__store-rating-label"><?php echo svic_translate_html('frontpage.hero.store_rating.label'); ?></span>
+          <span class="hero-dashboard__store-rating-score"><?php echo esc_html(svic_translate('product.reviews.average_score')); ?></span>
+          <span class="hero-dashboard__store-rating-stars" aria-hidden="true">★★★★★</span>
+          <span class="hero-dashboard__store-rating-note"><?php echo svic_translate_html('frontpage.hero.store_rating.note'); ?></span>
+        </div>
         <h1 class="hero-dashboard__title"><?php echo svic_translate_html('frontpage.hero.title'); ?></h1>
         <p class="hero-dashboard__copy"><?php echo svic_translate_html('frontpage.hero.copy'); ?></p>
         <ul class="hero-dashboard__list" role="list">

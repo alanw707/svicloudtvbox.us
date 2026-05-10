@@ -501,6 +501,16 @@ return [
                     'copy'  => 'Questions about shipping, setup, or accessories? Our English & 中文 team is ready to help.',
                     'cta'   => 'Contact concierge',
                 ],
+                'product_review' => [
+                    'title' => 'Review your product after delivery',
+                    'copy'  => 'Once the box arrives and you have tried it, leave a verified product review for future buyers.',
+                    'cta'   => 'Review product',
+                ],
+                'review' => [
+                    'title' => 'Share your Google review',
+                    'copy'  => 'If everything went smoothly, your public Google review helps other U.S. families buy with confidence.',
+                    'cta'   => 'Leave a Google review',
+                ],
             ],
         ],
         'failed' => [
@@ -622,6 +632,7 @@ return [
             'title' => 'Happy with your order?',
             'copy'  => 'Google Customer Reviews is now wired into checkout. After delivery, Google may invite eligible buyers to leave a short store review.',
             'note'  => 'We only want real customer feedback, so this page explains the process instead of showing fake stars or placeholder quotes.',
+            'cta'   => 'Leave a Google review',
         ],
         'form' => [
             'title'        => 'Tell us what’s happening',
@@ -747,11 +758,11 @@ return [
     'frontpage' => [
         'hero' => [
             'badge'   => 'Authorized U.S. Dealer',
-            'title'   => 'Best SVICLOUD TV Box for U.S. Chinese Families in 2026 — 1000+ Channels in 4K, Ships from Nevada in 48 Hours',
-            'title_lead' => 'Best SVICLOUD TV Box for U.S. Chinese Families in 2026',
+            'title'   => 'Best SVICLOUD TV Boxes for U.S. Chinese Families in 2026 — Fast U.S. Shipping, Warranty, and Bilingual Setup Help',
+            'title_lead' => 'Best SVICLOUD TV Boxes for U.S. Chinese Families in 2026',
             'title_separator' => ' — ',
-            'title_tail' => '1000+ Channels in 4K, Ships from Nevada in 48 Hours',
-            'copy'    => 'SVICLOUD 10P+ and 10S give U.S. Chinese families a 2026-ready 4K streaming box with premium Chinese and international channels, karaoke, kids favorites, fast U.S. shipping, and bilingual concierge support.',
+            'title_tail' => 'Fast U.S. Shipping, Warranty, and Bilingual Setup Help',
+            'copy'    => 'SVICLOUD 10P+ and 10S bring Chinese and international entertainment, karaoke, and kids favorites into one easy family streaming setup—ships fast from the USA with bilingual concierge support.',
             'bullets' => [
                 'shipping' => 'Ships from USA',
                 'warranty' => '1-Year U.S. Warranty',
@@ -762,6 +773,11 @@ return [
                 'bundles'   => 'View Bundles',
                 'compare'   => 'See Pricing',
                 'secondary' => 'See Pricing',
+            ],
+            'store_rating' => [
+                'label' => 'Google store rating',
+                'note'  => 'Verified Google store feedback',
+                'aria'  => 'Google store rating 5.0 out of 5 for SVICLOUDTVBOX.US',
             ],
             'card' => [
                 'badge'     => 'Live',
@@ -1130,6 +1146,12 @@ return [
             'price_label'    => 'One-time purchase',
             'price_note'     => 'All prices in USD · No monthly device fees',
             'best_for_label' => 'Best for',
+            'rating_label'   => 'Google average rating',
+            'rating_aria'    => 'Google average store rating for SVICLOUDTVBOX.US',
+            'rating_note'    => 'Verified Google store feedback',
+            'product_rating_label' => 'Product rating',
+            'product_rating_count' => '%d product review(s)',
+            'product_rating_aria'  => 'Product rating {{rating}} out of 5 from {{count}} review(s)',
             'assurance'      => [
                 'shipping' => 'Ships from Nevada warehouse',
                 'warranty' => 'Includes 1-year U.S. warranty',
@@ -1957,6 +1979,36 @@ return [
         ],
         'aria' => [
             'traffic_actions' => 'Key SVICLOUD product actions',
+        ],
+        'reviews' => [
+            'badge'           => 'Google store feedback',
+            'title'           => 'Store reviews from Google',
+            'lead'            => 'This rating reflects store-level feedback collected through Google Customer Reviews and Merchant Center.',
+            'badge_title'     => 'Official Google rating',
+            'average_label'   => 'Google average rating',
+            'average_score'   => '5.0',
+            'average_scale'   => 'out of 5',
+            'average_note'    => 'Store-level average from Google Customer Reviews and Merchant Center feedback.',
+            'average_aria'    => 'Google average store rating 5.0 out of 5',
+            'quotes_label'    => 'Google store review highlights',
+            'five_star_label' => '5 out of 5 stars',
+            'items' => [
+                [
+                    'quote'  => 'High quality videos and fast shipping.',
+                    'name'   => 'Google reviewer',
+                    'source' => 'Google store review',
+                ],
+                [
+                    'quote'  => 'Fast shipping, good product quality and seller is very responsive.',
+                    'name'   => 'Alan Wang',
+                    'source' => 'Google store review',
+                ],
+                [
+                    'quote'  => 'Great product. High quality videos and fast shipping. Would recommend to anyone.',
+                    'name'   => 'Alan Wang',
+                    'source' => 'Google store review',
+                ],
+            ],
         ],
         'faq' => [
             'badge' => 'FAQ',

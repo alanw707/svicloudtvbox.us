@@ -94,6 +94,12 @@
       </div>
     </div>
   </footer>
+  <?php if (function_exists('svic_render_google_customer_reviews_badge')) : ?>
+    <?php svic_render_google_customer_reviews_badge(); ?>
+  <?php endif; ?>
+  <?php if (function_exists('svic_render_support_chat')) : ?>
+    <?php svic_render_support_chat(); ?>
+  <?php endif; ?>
   <?php wp_footer(); ?>
 </body>
 </html>

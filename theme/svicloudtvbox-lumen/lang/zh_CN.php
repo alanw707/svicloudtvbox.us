@@ -46,6 +46,25 @@ $overrides = [
             'submenu_collapse' => '收合次选单',
         ],
     ],
+    'frontpage' => [
+        'hero' => [
+            'store_rating' => [
+                'label' => 'Google 商店评分',
+                'note'  => 'Google 验证商店反馈',
+                'aria'  => 'SVICLOUDTVBOX.US 的 Google 商店评分 5.0 满分 5 分',
+            ],
+        ],
+    ],
+    'shop' => [
+        'cards' => [
+            'rating_label' => 'Google 平均评分',
+            'rating_aria'  => 'SVICLOUDTVBOX.US 的 Google 商店平均评分',
+            'rating_note'  => 'Google 验证商店反馈',
+            'product_rating_label' => '产品评分',
+            'product_rating_count' => '%d 条产品评价',
+            'product_rating_aria'  => '产品评分 {{rating}} 满分 5 分，来自 {{count}} 条评价',
+        ],
+    ],
     'order_thankyou' => [
         'review' => [
             'badge' => 'Google 评价邀请',
@@ -70,6 +89,16 @@ $overrides = [
                     'title' => '保留礼宾客服链接',
                     'copy'  => '如果对发货、安装或配件有问题，英文与中文客服都能协助你。',
                     'cta'   => '联系礼宾客服',
+                ],
+                'product_review' => [
+                    'title' => '收到后为产品留下评价',
+                    'copy'  => '收到并实际使用后，欢迎留下已购买产品评价，帮助之后的买家参考。',
+                    'cta'   => '评价产品',
+                ],
+                'review' => [
+                    'title' => '分享您的 Google 评价',
+                    'copy'  => '如果整体体验顺利，您的公开 Google 评价能帮助其他美国家庭安心选购。',
+                    'cta'   => '留下 Google 评价',
                 ],
             ],
         ],
@@ -775,6 +804,36 @@ $overrides = [
         'aria' => [
             'traffic_actions' => '小云电视盒产品主要操作',
         ],
+        'reviews' => [
+            'badge'           => 'Google 商店反馈',
+            'title'           => 'Google 商店评价',
+            'lead'            => '此评分来自 Google Customer Reviews 与 Merchant Center 收集的商店层级反馈。',
+            'badge_title'     => 'Google 官方评分',
+            'average_label'   => 'Google 平均评分',
+            'average_score'   => '5.0',
+            'average_scale'   => '满分 5 分',
+            'average_note'    => '来自 Google Customer Reviews 与 Merchant Center 的商店层级反馈平均。',
+            'average_aria'    => 'Google 商店平均评分 5.0 满分 5 分',
+            'quotes_label'    => 'Google 商店评价摘录',
+            'five_star_label' => '5 星评价',
+            'items' => [
+                [
+                    'quote'  => '视频品质很高，发货也很快。',
+                    'name'   => 'Google 评论者',
+                    'source' => 'Google 商店评价',
+                ],
+                [
+                    'quote'  => '发货快速，产品质量好，卖家回复也很积极。',
+                    'name'   => 'Alan Wang',
+                    'source' => 'Google 商店评价',
+                ],
+                [
+                    'quote'  => '产品很棒。视频品质高且发货快速，会推荐给其他人。',
+                    'name'   => 'Alan Wang',
+                    'source' => 'Google 商店评价',
+                ],
+            ],
+        ],
         'faq' => [
             'badge' => '常见问题',
             'title' => '购买前最常问的 3 个问题',
@@ -1328,6 +1387,7 @@ $overrides = [
             'title' => '对购买体验满意吗？',
             'copy'  => 'Google 顾客评论已整合至结账流程。商品送达后，Google 可能会邀请符合资格的买家填写简短问卷，为我们留下商店评分。',
             'note'  => '我们只希望收集真实的顾客反馈，因此本页说明评论流程，不显示虚假星级或占位文字。',
+            'cta'   => '留下 Google 评价',
         ],
         'help' => [
             'contact' => [

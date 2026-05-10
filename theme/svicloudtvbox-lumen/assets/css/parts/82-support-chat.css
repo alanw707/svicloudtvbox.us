@@ -1,0 +1,109 @@
+/* ============================================================
+   Lumen — Floating WhatsApp support chat button
+   ============================================================ */
+
+.svic-support-chat {
+  position: fixed;
+  right: clamp(16px, 4vw, 28px);
+  bottom: calc(22px + env(safe-area-inset-bottom, 0px));
+  z-index: 930;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-height: 60px;
+  padding: 0.8rem 1rem 0.8rem 0.82rem;
+  border-radius: 999px;
+  border: 1px solid rgba(126, 246, 227, 0.34);
+  background:
+    radial-gradient(circle at top left, rgba(126, 246, 227, 0.18), transparent 58%),
+    linear-gradient(135deg, rgba(6, 24, 56, 0.96), rgba(8, 34, 72, 0.94));
+  color: var(--lumen-text-primary, #f4f8ff);
+  text-decoration: none;
+  box-shadow: 0 24px 56px rgba(3, 10, 26, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.svic-support-chat:hover,
+.svic-support-chat:focus-visible {
+  color: var(--lumen-text-primary, #f4f8ff);
+  border-color: rgba(126, 246, 227, 0.56);
+  box-shadow: 0 30px 70px rgba(3, 12, 30, 0.62);
+  transform: translateY(-2px);
+}
+
+.svic-support-chat:active {
+  transform: translateY(0);
+}
+
+.svic-support-chat__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(94, 230, 208, 0.96), rgba(66, 194, 255, 0.9));
+  color: rgba(4, 18, 38, 0.95);
+  box-shadow: 0 14px 26px rgba(15, 72, 92, 0.35);
+  flex-shrink: 0;
+}
+
+.svic-support-chat__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.svic-support-chat__text {
+  display: grid;
+  gap: 0.08rem;
+  min-width: 0;
+}
+
+.svic-support-chat__channel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(223, 247, 241, 0.72);
+}
+
+.svic-support-chat__label {
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--lumen-text-primary, #f4f8ff);
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .svic-support-chat {
+    right: clamp(12px, 4vw, 18px);
+    bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 480px) {
+  .svic-support-chat {
+    width: 58px;
+    min-height: 58px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .svic-support-chat__text {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svic-support-chat {
+    transition: none;
+  }
+}

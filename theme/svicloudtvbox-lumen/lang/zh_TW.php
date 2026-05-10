@@ -204,6 +204,7 @@ return [
             'title' => '對訂購體驗滿意嗎？',
             'copy'  => 'Google 顧客評論已整合至結賬流程。商品送達後，Google 可能會邀請符合資格的買家填寫簡短問卷，為我們留下商店評價。',
             'note'  => '我們只希望收集真實的顧客回饋，因此本頁說明評論流程，不顯示虛假星等或佔位文字。',
+            'cta'   => '留下 Google 評價',
         ],
         'form' => [
             'title'        => '告訴我們目前的情況',
@@ -701,6 +702,16 @@ return [
                     'copy'  => '若對出貨、安裝或配件有問題，英文與中文客服都能協助你。',
                     'cta'   => '聯絡禮賓客服',
                 ],
+                'product_review' => [
+                    'title' => '收到後為產品留下評價',
+                    'copy'  => '收到並實際使用後，歡迎留下已購買產品評價，幫助之後的買家參考。',
+                    'cta'   => '評價產品',
+                ],
+                'review' => [
+                    'title' => '分享您的 Google 評價',
+                    'copy'  => '若整體體驗順利，您的公開 Google 評價能幫助其他美國家庭安心選購。',
+                    'cta'   => '留下 Google 評價',
+                ],
             ],
         ],
         'failed' => [
@@ -864,11 +875,11 @@ return [
     'frontpage' => [
         'hero' => [
             'badge'   => '美國授權經銷商',
-            'title'   => '2026 美國華人家庭的 SVICLOUD 中文電視盒首選 — 1000+ 頻道 4K 直播，內華達 48 小時出貨',
-            'title_lead' => '2026 美國華人家庭的 SVICLOUD 中文電視盒首選',
+            'title'   => '2026 美國華人家庭的高階小雲電視盒 — 美國快速出貨、保固與中英雙語設定協助',
+            'title_lead' => '2026 美國華人家庭的高階小雲電視盒',
             'title_separator' => ' — ',
-            'title_tail' => '1000+ 頻道 4K 直播，內華達 48 小時出貨',
-            'copy'    => '小雲電視盒美國代理，提供 2026 適用的 SVICLOUD 10P+ 與 10S 現貨，一次打包 4K 體育、亞洲戲劇、卡拉 OK 與兒童內容，中英雙語禮賓服務與一年保固，無月費。',
+            'title_tail' => '美國快速出貨、保固與中英雙語設定協助',
+            'copy'    => '小雲電視盒美國代理，提供 SVICLOUD 10P+ 與 10S 現貨，整合華語與國際娛樂、卡拉 OK 與兒童內容，中英雙語禮賓服務與一年保固，無月費。',
             'bullets' => [
                 'shipping' => '美國現貨配送',
                 'warranty' => '一年美國保固',
@@ -879,6 +890,11 @@ return [
                 'bundles'   => '查看優惠組合',
                 'compare'   => '查看定價',
                 'secondary' => '查看定價',
+            ],
+            'store_rating' => [
+                'label' => 'Google 商店評分',
+                'note'  => 'Google 驗證商店回饋',
+                'aria'  => 'SVICLOUDTVBOX.US 的 Google 商店評分 5.0 滿分 5 分',
             ],
             'card' => [
                 'badge'     => '直播',
@@ -1247,6 +1263,12 @@ return [
             'price_label'    => '一次購買',
             'price_note'     => '價格以美元計價 · 無月費',
             'best_for_label' => '適合族群',
+            'rating_label'   => 'Google 平均評分',
+            'rating_aria'    => 'SVICLOUDTVBOX.US 的 Google 商店平均評分',
+            'rating_note'    => 'Google 驗證商店回饋',
+            'product_rating_label' => '產品評分',
+            'product_rating_count' => '%d 則產品評價',
+            'product_rating_aria'  => '產品評分 {{rating}} 滿分 5 分，來自 {{count}} 則評價',
             'assurance'      => [
                 'shipping' => '美國內華達州倉庫配送',
                 'warranty' => '提供一年美國保固',
@@ -2073,6 +2095,36 @@ return [
         ],
         'aria' => [
             'traffic_actions' => '小雲電視盒產品主要操作',
+        ],
+        'reviews' => [
+            'badge'           => 'Google 商店回饋',
+            'title'           => 'Google 商店評價',
+            'lead'            => '此評分來自 Google Customer Reviews 與 Merchant Center 收集的商店層級回饋。',
+            'badge_title'     => 'Google 官方評分',
+            'average_label'   => 'Google 平均評分',
+            'average_score'   => '5.0',
+            'average_scale'   => '滿分 5 分',
+            'average_note'    => '來自 Google Customer Reviews 與 Merchant Center 的商店層級回饋平均。',
+            'average_aria'    => 'Google 商店平均評分 5.0 滿分 5 分',
+            'quotes_label'    => 'Google 商店評價摘錄',
+            'five_star_label' => '5 顆星評價',
+            'items' => [
+                [
+                    'quote'  => '影片品質很高，出貨也很快。',
+                    'name'   => 'Google 評論者',
+                    'source' => 'Google 商店評價',
+                ],
+                [
+                    'quote'  => '出貨快速，產品品質好，賣家回覆也很積極。',
+                    'name'   => 'Alan Wang',
+                    'source' => 'Google 商店評價',
+                ],
+                [
+                    'quote'  => '產品很棒。影片品質高且出貨快速，會推薦給其他人。',
+                    'name'   => 'Alan Wang',
+                    'source' => 'Google 商店評價',
+                ],
+            ],
         ],
         'faq' => [
             'badge' => '常見問題',

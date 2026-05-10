@@ -317,6 +317,25 @@ while (have_posts()) :
           </div>
         </div>
       </section>
+
+      <section class="product-reviews product-reviews--google-store" id="store-reviews" aria-labelledby="product-reviews-title">
+        <header class="product-reviews__header">
+          <span class="product-reviews__badge"><?php echo svic_translate_html('product.reviews.badge'); ?></span>
+          <h2 class="product-reviews__title" id="product-reviews-title"><?php echo svic_translate_html('product.reviews.title'); ?></h2>
+          <p class="product-reviews__lead"><?php echo svic_translate_html('product.reviews.lead'); ?></p>
+        </header>
+        <div class="product-reviews__panel product-reviews__panel--store">
+          <div class="product-reviews__average-card" aria-label="<?php echo esc_attr(svic_translate('product.reviews.average_aria')); ?>">
+            <span class="product-reviews__source-label"><?php echo svic_translate_html('product.reviews.average_label'); ?></span>
+            <div class="product-reviews__average-score">
+              <span class="product-reviews__score-value"><?php echo esc_html(svic_translate('product.reviews.average_score')); ?></span>
+              <span class="product-reviews__score-scale"><?php echo svic_translate_html('product.reviews.average_scale'); ?></span>
+            </div>
+            <div class="product-reviews__stars" aria-hidden="true">★★★★★</div>
+            <p class="product-reviews__average-note"><?php echo svic_translate_html('product.reviews.average_note'); ?></p>
+          </div>
+        </div>
+      </section>
     </main>
 
     <?php

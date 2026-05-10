@@ -232,7 +232,16 @@ test.describe('Checkout purchase flow', () => {
     expect(thankyouTracking?.svic_order_number).toBeTruthy();
     expect(thankyouTracking?.svic_order_total).toBeTruthy();
 
+    const googleReviewsMarkup = await page.evaluate(() => document.documentElement.innerHTML);
+    expect(googleReviewsMarkup).toContain('svicGoogleCustomerReviewsConfig');
+    expect(googleReviewsMarkup).toContain('surveyoptin');
+    expect(googleReviewsMarkup).toContain('5317978135');
+
+    const productReviewCta = page.locator('[data-svic-location="thankyou_next"][data-svic-label="product_review"]');
+    await expect(productReviewCta).toHaveCount(0);
+
     const thankyouNextCtas = page.locator('[data-svic-location="thankyou_next"]');
-    await expect(thankyouNextCtas).toHaveCount(3);
+    const thankyouNextCount = await thankyouNextCtas.count();
+    expect([3, 4]).toContain(thankyouNextCount);
   });
 });

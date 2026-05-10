@@ -20,6 +20,7 @@ $faq_url     = svic_url_with_lang(home_url('/faq/'));
 $apps_url    = svic_url_with_lang(home_url('/guides-apps/'));
 $pdp_url     = svic_url_with_lang(home_url('/product/svicloud-10p-plus/'));
 $compare_url = svic_url_with_lang(home_url('/compare/'));
+$google_business_review_url = function_exists('svic_google_business_review_url') ? svic_google_business_review_url() : '';
 
 $form_action = esc_url(admin_url('admin-post.php'));
 $locale_query = svic_language_query_value($current_locale);
@@ -161,6 +162,11 @@ get_header();
           <h3 class="support-help__title"><?php echo svic_translate_html('support.review.title'); ?></h3>
           <p class="support-help__copy"><?php echo svic_translate_html('support.review.copy'); ?></p>
           <p class="support-help__copy"><?php echo svic_translate_html('support.review.note'); ?></p>
+          <?php if ($google_business_review_url !== '') : ?>
+            <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($google_business_review_url); ?>" target="_blank" rel="noopener noreferrer" data-svic-event="svic_cta_click" data-svic-location="support_review" data-svic-label="google_business_review">
+              <?php echo svic_translate_html('support.review.cta'); ?>
+            </a>
+          <?php endif; ?>
         </article>
       </aside>
     </div>
