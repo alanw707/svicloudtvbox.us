@@ -778,6 +778,12 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
       <header class="lumen-section-header">
         <h2 class="lumen-section-header__title"><?php echo svic_translate_html('frontpage.pricing.title'); ?></h2>
         <p class="lumen-section-header__subtitle"><?php echo svic_translate_html('frontpage.pricing.subtitle'); ?></p>
+        <div class="lumen-pricing__quick-buy" aria-label="<?php echo esc_attr(svic_translate('frontpage.pricing.cards.10p.buy_cta')); ?>">
+          <a class="lumen-pill lumen-pill--primary lumen-pricing__quick-buy-cta" href="<?php echo esc_url($hero_10p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="homepage_pricing_header" data-svic-label="pricing_header_buy_10p" data-svic-model="svicloud-10p-plus">
+            <?php echo svic_translate_html('frontpage.pricing.cards.10p.buy_cta'); ?>
+          </a>
+          <span class="lumen-pricing__quick-buy-note"><?php echo svic_translate_html('frontpage.pricing.stock_note'); ?></span>
+        </div>
       </header>
       <?php
 $svic_all_in_stock = true;
