@@ -12,7 +12,7 @@
   background: rgba(6, 13, 28, 0.96);
   border-top: 1px solid rgba(94, 230, 208, 0.25);
   backdrop-filter: blur(12px);
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
   transform: translateY(100%);
   transition: transform 0.3s ease;
 }
@@ -54,5 +54,30 @@
 @media (max-width: 767px) {
   .lumen-sticky-buy {
     display: block;
+    /*
+      Mobile has two external floating widgets: cart on the lower-left and
+      chat on the lower-right. Reserve tap-safe gutters so the sticky CTA
+      never sits underneath either widget on narrow phones.
+    */
+    padding-left: max(5rem, calc(1rem + env(safe-area-inset-left, 0px)));
+    padding-right: max(5.75rem, calc(1rem + env(safe-area-inset-right, 0px)));
+  }
+
+  .lumen-sticky-buy__inner {
+    justify-content: center;
+    gap: 0;
+  }
+
+  .lumen-sticky-buy__label {
+    display: none;
+  }
+
+  .lumen-sticky-buy__cta {
+    width: 100%;
+    max-width: 220px;
+    min-width: 0;
+    min-height: 48px;
+    padding: 0.68rem 0.9rem;
+    font-size: 0.9rem;
   }
 }
