@@ -55,29 +55,35 @@
   .lumen-sticky-buy {
     display: block;
     /*
-      Mobile has two external floating widgets: cart on the lower-left and
-      chat on the lower-right. Reserve tap-safe gutters so the sticky CTA
-      never sits underneath either widget on narrow phones.
+      Keep the store CTA above the persistent Google/cart badge and chat
+      bubble instead of competing for the same bottom edge.
     */
-    padding-left: max(5rem, calc(1rem + env(safe-area-inset-left, 0px)));
-    padding-right: max(5.75rem, calc(1rem + env(safe-area-inset-right, 0px)));
+    bottom: calc(5.6rem + env(safe-area-inset-bottom, 0px));
+    left: 0.75rem;
+    right: 0.75rem;
+    border: 1px solid rgba(94, 230, 208, 0.25);
+    border-radius: 22px;
+    padding: 0.7rem 0.85rem;
+    box-shadow: 0 24px 54px rgba(3, 10, 28, 0.48);
   }
 
   .lumen-sticky-buy__inner {
-    justify-content: center;
-    gap: 0;
+    max-width: 520px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.75rem;
   }
 
   .lumen-sticky-buy__label {
-    display: none;
+    display: block;
+    min-width: 0;
+    font-size: 0.82rem;
   }
 
   .lumen-sticky-buy__cta {
-    width: 100%;
-    max-width: 220px;
     min-width: 0;
-    min-height: 48px;
-    padding: 0.68rem 0.9rem;
-    font-size: 0.9rem;
+    min-height: 44px;
+    padding: 0.62rem 1rem;
+    font-size: 0.86rem;
   }
 }
