@@ -46,7 +46,8 @@ jobs:
           python3 scripts/deploy_theme.py \
             --protocol ftps \
             --local-dir "$LOCAL_THEME_DIR" \
-            --remote-root "$REMOTE_THEME_DIR"
+            --remote-root "$REMOTE_THEME_DIR" \
+            --bust-cache
 
       - name: 🧹 Purge CDN Caches
         uses: ./.github/actions/purge-caches
