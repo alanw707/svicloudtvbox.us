@@ -994,7 +994,14 @@ $sticky_10p_url = $hero_10p_url; // already computed earlier in the file
   var bar = document.getElementById('lumen-sticky-buy');
   if (!bar) return;
   var hero = document.getElementById('hero');
+  var mobileQuery = window.matchMedia('(max-width: 767px)');
   function update() {
+    if (mobileQuery.matches) {
+      bar.classList.add('is-visible');
+      bar.removeAttribute('aria-hidden');
+      return;
+    }
+
     var threshold = hero ? (hero.offsetTop + hero.offsetHeight) : 400;
     if (window.scrollY > threshold) {
       bar.classList.add('is-visible');
@@ -1005,6 +1012,11 @@ $sticky_10p_url = $hero_10p_url; // already computed earlier in the file
     }
   }
   window.addEventListener('scroll', update, { passive: true });
+  if (mobileQuery.addEventListener) {
+    mobileQuery.addEventListener('change', update);
+  } else if (mobileQuery.addListener) {
+    mobileQuery.addListener(update);
+  }
   update();
 })();
 </script>

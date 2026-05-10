@@ -55,40 +55,42 @@
   .lumen-sticky-buy {
     display: block;
     /*
-      Mobile has persistent Google/cart and chat widgets at the bottom.
-      Show the store CTA as a compact floating pill above them so it stays
-      visible without hiding either widget.
+      Bottom-floating CTAs collide with the Google/cart badge and chat widget.
+      On mobile, use a compact fixed mini-bar below the sticky header instead.
     */
-    left: 50%;
-    right: auto;
-    bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px));
-    width: min(22rem, calc(100vw - 2rem));
+    top: calc(var(--lumen-admin-bar-offset, 0px) + 5.75rem);
+    bottom: auto;
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
     padding: 0;
     background: transparent;
     border: 0;
     box-shadow: none;
     backdrop-filter: none;
-    transform: translate(-50%, 0);
-    z-index: 2147483000;
+    transform: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 119;
     pointer-events: none;
   }
 
   .lumen-sticky-buy.is-visible {
-    transform: translate(-50%, 0);
+    transform: none;
   }
 
   .lumen-sticky-buy__inner {
-    width: 100%;
+    width: min(100%, 30rem);
     max-width: none;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    gap: 0.7rem;
-    padding: 0.58rem 0.68rem 0.58rem 0.85rem;
-    border: 1px solid rgba(94, 230, 208, 0.28);
-    border-radius: 999px;
+    gap: 0.65rem;
+    padding: 0.55rem 0.62rem 0.55rem 0.8rem;
+    border: 1px solid rgba(94, 230, 208, 0.32);
+    border-radius: 18px;
     background: rgba(6, 13, 28, 0.96);
-    box-shadow: 0 18px 42px rgba(3, 10, 28, 0.56);
+    box-shadow: 0 16px 36px rgba(3, 10, 28, 0.42);
     backdrop-filter: blur(12px);
     pointer-events: auto;
   }
@@ -96,14 +98,14 @@
   .lumen-sticky-buy__label {
     display: block;
     min-width: 0;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
   }
 
   .lumen-sticky-buy__cta {
     min-width: 0;
-    min-height: 42px;
-    padding: 0.58rem 1rem;
-    font-size: 0.86rem;
+    min-height: 40px;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.84rem;
     white-space: nowrap;
   }
 }
