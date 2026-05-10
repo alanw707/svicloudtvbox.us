@@ -29,6 +29,39 @@ test.describe('Google reviews integrations', () => {
     await expect(cta).toHaveCount(0);
   });
 
+  test('keeps mobile sticky buy CTA unobstructed by floating widgets', async ({ page, baseURL }) => {
+    await page.setViewportSize({ width: 360, height: 780 });
+    const url = new URL('/', baseURL);
+    url.searchParams.set('_pwcachebust', Date.now().toString());
+    await page.goto(url.toString(), { waitUntil: 'domcontentloaded' });
+
+    await page.evaluate(() => window.scrollTo(0, 3200));
+    await expect(page.locator('.lumen-sticky-buy')).toHaveClass(/is-visible/);
+    await expect(page.locator('body')).toHaveClass(/has-lumen-sticky-buy/);
+
+    const stickyBox = await page.locator('.lumen-sticky-buy').boundingBox();
+    const ctaBox = await page.locator('.lumen-sticky-buy__cta').boundingBox();
+    expect(stickyBox).not.toBeNull();
+    expect(ctaBox).not.toBeNull();
+    expect(ctaBox!.x + ctaBox!.width).toBeLessThanOrEqual(page.viewportSize()!.width - 8);
+    expect(ctaBox!.y + ctaBox!.height).toBeLessThanOrEqual(page.viewportSize()!.height - 8);
+
+    const googleBadge = page.locator('#svic-google-customer-reviews-badge');
+    if ((await googleBadge.count()) > 0) {
+      await expect(googleBadge).toBeVisible();
+      const googleBox = await googleBadge.boundingBox();
+      expect(googleBox).not.toBeNull();
+      expect(googleBox!.y + googleBox!.height).toBeLessThanOrEqual(stickyBox!.y + 1);
+    }
+
+    const supportChat = page.locator('.svic-support-chat');
+    if ((await supportChat.count()) > 0) {
+      const chatBox = await supportChat.boundingBox();
+      expect(chatBox).not.toBeNull();
+      expect(chatBox!.y + chatBox!.height).toBeLessThanOrEqual(stickyBox!.y + 1);
+    }
+  });
+
   test('shows store-level Google rating in homepage hero, not shop cards', async ({ page, baseURL }) => {
     await page.goto(new URL('/', baseURL).toString(), { waitUntil: 'domcontentloaded' });
     await expect(page.locator('.hero-dashboard__store-rating')).toBeVisible();

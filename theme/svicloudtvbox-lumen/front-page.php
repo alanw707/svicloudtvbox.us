@@ -996,11 +996,12 @@ $sticky_10p_url = $hero_10p_url; // already computed earlier in the file
   var hero = document.getElementById('hero');
   function update() {
     var threshold = hero ? (hero.offsetTop + hero.offsetHeight) : 400;
-    if (window.scrollY > threshold) {
-      bar.classList.add('is-visible');
+    var visible = window.scrollY > threshold;
+    bar.classList.toggle('is-visible', visible);
+    document.body.classList.toggle('has-lumen-sticky-buy', visible);
+    if (visible) {
       bar.removeAttribute('aria-hidden');
     } else {
-      bar.classList.remove('is-visible');
       bar.setAttribute('aria-hidden', 'true');
     }
   }

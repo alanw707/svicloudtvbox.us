@@ -457,11 +457,12 @@ if (!empty($compare_hero_10s_background['url'])) {
   function update() {
     var afterHero = hero ? window.scrollY > (hero.offsetTop + hero.offsetHeight) : window.scrollY > 400;
     var beforeFinalCta = finalCta ? window.scrollY + window.innerHeight < (finalCta.offsetTop + 120) : true;
-    if (afterHero && beforeFinalCta) {
-      bar.classList.add('is-visible');
+    var visible = afterHero && beforeFinalCta;
+    bar.classList.toggle('is-visible', visible);
+    document.body.classList.toggle('has-compare-sticky-buy', visible);
+    if (visible) {
       bar.removeAttribute('aria-hidden');
     } else {
-      bar.classList.remove('is-visible');
       bar.setAttribute('aria-hidden', 'true');
     }
   }

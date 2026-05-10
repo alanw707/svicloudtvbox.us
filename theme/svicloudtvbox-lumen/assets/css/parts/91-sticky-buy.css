@@ -2,13 +2,21 @@
    Lumen — Mobile sticky buy bar
    ============================================================ */
 
+:root {
+  --lumen-sticky-buy-height: 72px;
+  --lumen-sticky-buy-gap: 14px;
+  --lumen-floating-stack-bottom: 86px;
+}
+
 .lumen-sticky-buy {
   display: none;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 900;
+  z-index: 940;
+  box-sizing: border-box;
+  min-height: var(--lumen-sticky-buy-height);
   background: rgba(6, 13, 28, 0.96);
   border-top: 1px solid rgba(94, 230, 208, 0.25);
   backdrop-filter: blur(12px);
@@ -54,5 +62,16 @@
 @media (max-width: 767px) {
   .lumen-sticky-buy {
     display: block;
+  }
+
+  body.has-lumen-sticky-buy .svic-support-chat,
+  body.has-compare-sticky-buy .svic-support-chat {
+    bottom: var(--lumen-floating-stack-bottom);
+  }
+
+  body.has-lumen-sticky-buy #svic-google-customer-reviews-badge,
+  body.has-compare-sticky-buy #svic-google-customer-reviews-badge {
+    bottom: var(--lumen-floating-stack-bottom) !important;
+    left: 12px !important;
   }
 }
