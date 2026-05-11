@@ -1008,11 +1008,28 @@ $sticky_10p_url = $hero_10p_url; // already computed earlier in the file
   var bar = document.getElementById('lumen-sticky-buy');
   if (!bar) return;
   var hero = document.getElementById('hero');
+  var header = document.querySelector('[data-lumen-header]');
   var mobileQuery = window.matchMedia('(max-width: 767px)');
+  var ticking = false;
+
+  function setMobileTopOffset() {
+    if (!mobileQuery.matches || !header) {
+      return;
+    }
+
+    var rect = header.getBoundingClientRect();
+    var top = Math.max(0, Math.round(rect.bottom + 6));
+    document.documentElement.style.setProperty('--lumen-sticky-buy-top', top + 'px');
+  }
+
   function update() {
+    ticking = false;
+
     if (mobileQuery.matches) {
+      setMobileTopOffset();
       bar.classList.add('is-visible');
       bar.removeAttribute('aria-hidden');
+      document.body.classList.add('has-lumen-sticky-buy');
       return;
     }
 
@@ -1026,13 +1043,24 @@ $sticky_10p_url = $hero_10p_url; // already computed earlier in the file
       bar.setAttribute('aria-hidden', 'true');
     }
   }
-  window.addEventListener('scroll', update, { passive: true });
-  if (mobileQuery.addEventListener) {
-    mobileQuery.addEventListener('change', update);
-  } else if (mobileQuery.addListener) {
-    mobileQuery.addListener(update);
+
+  function requestUpdate() {
+    if (ticking) {
+      return;
+    }
+    ticking = true;
+    window.requestAnimationFrame ? window.requestAnimationFrame(update) : window.setTimeout(update, 16);
   }
-  update();
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+  window.addEventListener('orientationchange', requestUpdate);
+  if (mobileQuery.addEventListener) {
+    mobileQuery.addEventListener('change', requestUpdate);
+  } else if (mobileQuery.addListener) {
+    mobileQuery.addListener(requestUpdate);
+  }
+  requestUpdate();
 })();
 </script>
 

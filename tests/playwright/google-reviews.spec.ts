@@ -29,37 +29,65 @@ test.describe('Google reviews integrations', () => {
     await expect(cta).toHaveCount(0);
   });
 
-  test('keeps mobile sticky buy CTA unobstructed by floating widgets', async ({ page, baseURL }) => {
+  test('keeps mobile sticky buy CTA below sticky header and away from bottom widgets', async ({ page, baseURL }) => {
     await page.setViewportSize({ width: 360, height: 780 });
     const url = new URL('/', baseURL);
     url.searchParams.set('_pwcachebust', Date.now().toString());
     await page.goto(url.toString(), { waitUntil: 'domcontentloaded' });
 
-    await page.evaluate(() => window.scrollTo(0, 3200));
-    await expect(page.locator('.lumen-sticky-buy')).toHaveClass(/is-visible/);
-    await expect(page.locator('body')).toHaveClass(/has-lumen-sticky-buy/);
+    for (const scrollY of [0, 900, 3200]) {
+      await page.evaluate((value) => window.scrollTo(0, value), scrollY);
+      await page.waitForTimeout(150);
 
-    const stickyBox = await page.locator('.lumen-sticky-buy').boundingBox();
-    const ctaBox = await page.locator('.lumen-sticky-buy__cta').boundingBox();
-    expect(stickyBox).not.toBeNull();
-    expect(ctaBox).not.toBeNull();
-    expect(ctaBox!.x + ctaBox!.width).toBeLessThanOrEqual(page.viewportSize()!.width - 8);
-    expect(ctaBox!.y + ctaBox!.height).toBeLessThanOrEqual(page.viewportSize()!.height - 8);
+      await expect(page.locator('.lumen-sticky-buy')).toHaveClass(/is-visible/);
+      await expect(page.locator('body')).toHaveClass(/has-lumen-sticky-buy/);
 
-    const googleBadge = page.locator('#svic-google-customer-reviews-badge');
-    if ((await googleBadge.count()) > 0) {
-      await expect(googleBadge).toBeVisible();
-      const googleBox = await googleBadge.boundingBox();
-      expect(googleBox).not.toBeNull();
-      expect(googleBox!.y + googleBox!.height).toBeLessThanOrEqual(stickyBox!.y + 1);
+      const metrics = await page.evaluate(() => {
+        const rectFor = (selector: string) => {
+          const element = document.querySelector(selector);
+          if (!element) {
+            return null;
+          }
+          const rect = element.getBoundingClientRect();
+          return {
+            top: rect.top,
+            right: rect.right,
+            bottom: rect.bottom,
+            left: rect.left,
+            width: rect.width,
+            height: rect.height,
+          };
+        };
+
+        return {
+          viewport: { width: window.innerWidth, height: window.innerHeight },
+          header: rectFor('[data-lumen-header]'),
+          sticky: rectFor('.lumen-sticky-buy'),
+          google: rectFor('#svic-google-customer-reviews-badge'),
+          chat: rectFor('.svic-support-chat'),
+        };
+      });
+
+      expect(metrics.header).not.toBeNull();
+      expect(metrics.sticky).not.toBeNull();
+      expect(metrics.sticky!.top).toBeGreaterThanOrEqual(metrics.header!.bottom + 6);
+      expect(metrics.sticky!.left).toBeGreaterThanOrEqual(8);
+      expect(metrics.sticky!.right).toBeLessThanOrEqual(metrics.viewport.width - 8);
+      expect(metrics.sticky!.bottom).toBeLessThanOrEqual(metrics.viewport.height / 2);
+
+      if (metrics.google && metrics.google.width > 1 && metrics.google.height > 1) {
+        expect(metrics.google.top).toBeGreaterThan(metrics.sticky!.bottom + 16);
+      }
+
+      if (metrics.chat && metrics.chat.width > 1 && metrics.chat.height > 1) {
+        expect(metrics.chat.top).toBeGreaterThan(metrics.sticky!.bottom + 16);
+      }
     }
 
-    const supportChat = page.locator('.svic-support-chat');
-    if ((await supportChat.count()) > 0) {
-      const chatBox = await supportChat.boundingBox();
-      expect(chatBox).not.toBeNull();
-      expect(chatBox!.y + chatBox!.height).toBeLessThanOrEqual(stickyBox!.y + 1);
-    }
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.locator('[data-lumen-toggle]').click();
+    await expect(page.locator('body')).toHaveClass(/lumen-nav-open/);
+    await expect(page.locator('.lumen-sticky-buy')).toBeHidden();
   });
 
   test('shows store-level Google rating in homepage hero, not shop cards', async ({ page, baseURL }) => {

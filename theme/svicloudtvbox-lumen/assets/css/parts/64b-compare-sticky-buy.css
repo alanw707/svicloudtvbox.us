@@ -60,7 +60,7 @@
   .compare-sticky-buy {
     display: block;
     /* Lift the two-button compare CTA above persistent cart/chat bubbles. */
-    bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+    bottom: 5.5rem;
     left: 0.75rem;
     right: 0.75rem;
     border: 1px solid rgba(94, 230, 208, 0.25);

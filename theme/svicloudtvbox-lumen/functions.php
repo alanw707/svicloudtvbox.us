@@ -3550,7 +3550,11 @@ add_action('wp_head', 'svic_output_single_product_schema_fallback', 999);
 if (!function_exists('svic_output_rank_math_meta_fallback')) {
     function svic_output_rank_math_meta_fallback(): void
     {
-        if (is_admin() || !defined('RANK_MATH_VERSION') || !empty($GLOBALS['svic_rank_math_meta_seen'])) {
+        if (is_admin() || !defined('RANK_MATH_VERSION')) {
+            return;
+        }
+
+        if (!empty($GLOBALS['svic_rank_math_meta_seen'])) {
             return;
         }
 
@@ -3607,7 +3611,7 @@ if (!function_exists('svic_output_rank_math_meta_fallback')) {
             echo '<meta property="og:description" content="' . esc_attr($description) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta property="og:url" content="' . esc_attr($canonical) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta property="og:site_name" content="' . esc_attr(get_bloginfo('name')) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo '<meta name="twitter:card" content="summary_large_image" />\n'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<meta name="twitter:card" content="summary_large_image" />' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta name="twitter:title" content="' . esc_attr($title) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta name="twitter:description" content="' . esc_attr($description) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             if ($image_url !== '') {

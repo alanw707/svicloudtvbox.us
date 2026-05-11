@@ -3,9 +3,10 @@
    ============================================================ */
 
 :root {
-  --lumen-sticky-buy-height: 72px;
+  --lumen-sticky-buy-height: 54px;
   --lumen-sticky-buy-gap: 14px;
   --lumen-floating-stack-bottom: 86px;
+  --lumen-sticky-buy-top: 104px;
 }
 
 .lumen-sticky-buy {
@@ -66,7 +67,7 @@
       Bottom-floating CTAs collide with the Google/cart badge and chat widget.
       On mobile, use a compact fixed mini-bar below the sticky header instead.
     */
-    top: calc(var(--lumen-admin-bar-offset, 0px) + 5.75rem);
+    top: var(--lumen-sticky-buy-top, 104px);
     bottom: auto;
     left: 0.75rem;
     right: 0.75rem;
@@ -93,10 +94,10 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    gap: 0.65rem;
-    padding: 0.55rem 0.62rem 0.55rem 0.8rem;
+    gap: 0.55rem;
+    padding: 0.42rem 0.55rem 0.42rem 0.72rem;
     border: 1px solid rgba(94, 230, 208, 0.32);
-    border-radius: 18px;
+    border-radius: 16px;
     background: rgba(6, 13, 28, 0.96);
     box-shadow: 0 16px 36px rgba(3, 10, 28, 0.42);
     backdrop-filter: blur(12px);
@@ -111,20 +112,16 @@
 
   .lumen-sticky-buy__cta {
     min-width: 0;
-    min-height: 40px;
-    padding: 0.55rem 0.9rem;
+    min-height: 36px;
+    padding: 0.46rem 0.82rem;
     font-size: 0.84rem;
     white-space: nowrap;
   }
 
-  body.has-lumen-sticky-buy .svic-support-chat,
-  body.has-compare-sticky-buy .svic-support-chat {
-    bottom: var(--lumen-floating-stack-bottom);
-  }
-
-  body.has-lumen-sticky-buy #svic-google-customer-reviews-badge,
-  body.has-compare-sticky-buy #svic-google-customer-reviews-badge {
-    bottom: var(--lumen-floating-stack-bottom) !important;
-    left: 12px !important;
+  body.lumen-nav-open .lumen-sticky-buy,
+  body.lumen-nav-open .lumen-sticky-buy__inner {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
   }
 }
