@@ -59,5 +59,13 @@
 @media (max-width: 767px) {
   .compare-sticky-buy {
     display: block;
+    /* Lift the two-button compare CTA above persistent cart/chat bubbles. */
+    bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+    left: 0.75rem;
+    right: 0.75rem;
+    border: 1px solid rgba(94, 230, 208, 0.25);
+    border-radius: 22px;
+    padding: 0.75rem 0.9rem;
+    box-shadow: 0 24px 54px rgba(3, 10, 28, 0.48);
   }
 }

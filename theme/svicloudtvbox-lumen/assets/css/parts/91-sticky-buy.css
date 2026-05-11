@@ -20,7 +20,7 @@
   background: rgba(6, 13, 28, 0.96);
   border-top: 1px solid rgba(94, 230, 208, 0.25);
   backdrop-filter: blur(12px);
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
   transform: translateY(100%);
   transition: transform 0.3s ease;
 }
@@ -62,6 +62,59 @@
 @media (max-width: 767px) {
   .lumen-sticky-buy {
     display: block;
+    /*
+      Bottom-floating CTAs collide with the Google/cart badge and chat widget.
+      On mobile, use a compact fixed mini-bar below the sticky header instead.
+    */
+    top: calc(var(--lumen-admin-bar-offset, 0px) + 5.75rem);
+    bottom: auto;
+    left: 0.75rem;
+    right: 0.75rem;
+    width: auto;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    transform: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 119;
+    pointer-events: none;
+  }
+
+  .lumen-sticky-buy.is-visible {
+    transform: none;
+  }
+
+  .lumen-sticky-buy__inner {
+    width: min(100%, 30rem);
+    max-width: none;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.55rem 0.62rem 0.55rem 0.8rem;
+    border: 1px solid rgba(94, 230, 208, 0.32);
+    border-radius: 18px;
+    background: rgba(6, 13, 28, 0.96);
+    box-shadow: 0 16px 36px rgba(3, 10, 28, 0.42);
+    backdrop-filter: blur(12px);
+    pointer-events: auto;
+  }
+
+  .lumen-sticky-buy__label {
+    display: block;
+    min-width: 0;
+    font-size: 0.8rem;
+  }
+
+  .lumen-sticky-buy__cta {
+    min-width: 0;
+    min-height: 40px;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.84rem;
+    white-space: nowrap;
   }
 
   body.has-lumen-sticky-buy .svic-support-chat,
