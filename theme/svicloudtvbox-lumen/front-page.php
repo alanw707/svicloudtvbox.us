@@ -1012,6 +1012,10 @@ $sticky_10p_url = $hero_10p_url; // already computed earlier in the file
   var mobileQuery = window.matchMedia('(max-width: 767px)');
   var ticking = false;
 
+  function heroThreshold() {
+    return hero ? (hero.offsetTop + hero.offsetHeight) : 400;
+  }
+
   function setMobileTopOffset() {
     if (!mobileQuery.matches || !header) {
       return;
@@ -1027,14 +1031,9 @@ $sticky_10p_url = $hero_10p_url; // already computed earlier in the file
 
     if (mobileQuery.matches) {
       setMobileTopOffset();
-      bar.classList.add('is-visible');
-      bar.removeAttribute('aria-hidden');
-      document.body.classList.add('has-lumen-sticky-buy');
-      return;
     }
 
-    var threshold = hero ? (hero.offsetTop + hero.offsetHeight) : 400;
-    var visible = window.scrollY > threshold;
+    var visible = window.scrollY > heroThreshold();
     bar.classList.toggle('is-visible', visible);
     document.body.classList.toggle('has-lumen-sticky-buy', visible);
     if (visible) {
@@ -1055,6 +1054,9 @@ $sticky_10p_url = $hero_10p_url; // already computed earlier in the file
   window.addEventListener('scroll', requestUpdate, { passive: true });
   window.addEventListener('resize', requestUpdate);
   window.addEventListener('orientationchange', requestUpdate);
+  window.addEventListener('load', requestUpdate);
+  window.setTimeout(requestUpdate, 250);
+  window.setTimeout(requestUpdate, 1000);
   if (mobileQuery.addEventListener) {
     mobileQuery.addEventListener('change', requestUpdate);
   } else if (mobileQuery.addListener) {
