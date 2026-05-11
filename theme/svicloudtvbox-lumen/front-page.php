@@ -798,6 +798,14 @@ foreach ($pricing_cards as $_svic_card) {
       <?php if ($svic_all_in_stock) : ?>
         <p class="lumen-pricing__stock-note"><?php echo svic_translate_html('frontpage.pricing.stock_note'); ?></p>
       <?php endif; ?>
+      <!-- SVIC_CTA_20260511_INLINE: intentionally inline-styled so CDN/CSS cache cannot hide the primary mobile CTA. -->
+      <div class="lumen-pricing__inline-buy-banner" style="display:flex!important;align-items:center!important;justify-content:center!important;gap:12px!important;flex-wrap:wrap!important;width:100%!important;max-width:680px!important;margin:0 auto 22px!important;padding:14px 16px!important;border:1px solid rgba(94,230,208,.42)!important;border-radius:18px!important;background:linear-gradient(135deg,rgba(94,230,208,.22),rgba(56,189,248,.12))!important;box-shadow:0 18px 42px rgba(3,10,28,.38)!important;text-align:center!important;box-sizing:border-box!important;">
+        <span style="display:block!important;color:#f4f8ff!important;font-weight:700!important;font-size:15px!important;line-height:1.35!important;"><?php echo svic_translate_html('frontpage.pricing.cards.10p.title'); ?></span>
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="homepage_pricing_inline_banner" data-svic-label="inline_banner_buy_10p" data-svic-model="svicloud-10p-plus" style="display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:46px!important;min-width:190px!important;padding:12px 22px!important;border-radius:999px!important;background:#5ee6d0!important;color:#03101f!important;font-weight:800!important;text-decoration:none!important;box-shadow:0 14px 32px rgba(94,230,208,.32)!important;">
+          <?php echo svic_translate_html('frontpage.pricing.cards.10p.buy_cta'); ?>
+        </a>
+        <span style="display:block!important;width:100%!important;color:rgba(220,236,255,.86)!important;font-size:13px!important;font-weight:600!important;line-height:1.35!important;"><?php echo svic_translate_html('frontpage.pricing.stock_note'); ?></span>
+      </div>
       <div class="lumen-pricing__grid">
         <?php foreach ($pricing_cards as $slug => $card) : ?>
           <?php
