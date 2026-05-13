@@ -505,9 +505,9 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh-cn' => 'Troubleshooting Guide | SVICLOUD | 小雲盒子 故障排除',
                 ],
                 'description' => [
-                    'en' => 'Fix common issues with streaming, remote, and network tips. 小雲盒子 常見問題排除。',
-                    'zh' => 'Fix common issues with streaming, remote, and network tips. 小雲盒子 常見問題排除。',
-                    'zh-cn' => 'Fix common issues with streaming, remote, and network tips. 小雲盒子 常見問題排除。',
+                    'en' => 'Fix SVICLOUD TV Box remote pairing, buffering, Wi-Fi, app, and setup issues with bilingual troubleshooting help for 10P+ and 10S owners.',
+                    'zh' => 'Fix SVICLOUD TV Box remote pairing, buffering, Wi-Fi, app, and setup issues with bilingual troubleshooting help for 10P+ and 10S owners.',
+                    'zh-cn' => 'Fix SVICLOUD TV Box remote pairing, buffering, Wi-Fi, app, and setup issues with bilingual troubleshooting help for 10P+ and 10S owners.',
                 ],
                 'image'       => '/assets/images/svicloud-hero-product.webp',
                 'image_alt'   => [
@@ -523,9 +523,9 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh-cn' => 'SVICLOUD App Installation Guide | 小雲盒子 App 安装教学',
                 ],
                 'description' => [
-                    'en' => 'Step-by-step app installation and update help for SVICLOUD TV boxes. 小雲盒子 App 安裝與更新教學。',
-                    'zh' => 'Step-by-step app installation and update help for SVICLOUD TV boxes. 小雲盒子 App 安裝與更新教學。',
-                    'zh-cn' => 'Step-by-step app installation and update help for SVICLOUD TV boxes. 小云盒子 App 安装与更新教学。',
+                    'en' => 'Step-by-step SVICLOUD TV Box app installation and update help for 10P+ and 10S, with bilingual tips for U.S. customers and support links.',
+                    'zh' => 'Step-by-step SVICLOUD TV Box app installation and update help for 10P+ and 10S, with bilingual tips for U.S. customers and support links.',
+                    'zh-cn' => 'Step-by-step SVICLOUD TV Box app installation and update help for 10P+ and 10S, with bilingual tips for U.S. customers and support links.',
                 ],
                 'image'       => '/assets/images/svicloud-hero-product.webp',
                 'image_alt'   => [
@@ -4241,6 +4241,89 @@ add_filter('robots_txt', function ($output, $public) {
     return $output;
 }, 10, 2);
 
+if (!function_exists('svic_current_request_path')) {
+    /**
+     * Return the raw request path without query parameters.
+     */
+    function svic_current_request_path(): string
+    {
+        $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+        if (!is_string($request_uri) || $request_uri === '') {
+            return '';
+        }
+
+        $parsed = wp_parse_url($request_uri);
+        if (!is_array($parsed) || empty($parsed['path']) || !is_string($parsed['path'])) {
+            return '';
+        }
+
+        $path = '/' . ltrim($parsed['path'], '/');
+        return $path === '/' ? '/' : rtrim($path, '/');
+    }
+}
+
+add_action('template_redirect', function () {
+    $path = strtolower(svic_current_request_path());
+    if ($path !== '/sitemap.xml' && $path !== '/zh/sitemap.xml' && $path !== '/zh-cn/sitemap.xml') {
+        return;
+    }
+
+    wp_safe_redirect(home_url('/sitemap_index.xml'), 301);
+    exit;
+}, -20);
+
+if (!function_exists('svic_rank_math_sitemap_excluded_page_slugs')) {
+    function svic_rank_math_sitemap_excluded_page_slugs(): array
+    {
+        return ['my-account', 'cart', 'checkout', 'order-tracking'];
+    }
+}
+
+if (!function_exists('svic_should_exclude_from_sitemap')) {
+    function svic_should_exclude_from_sitemap(int $post_id): bool
+    {
+        if ($post_id <= 0 || get_post_type($post_id) !== 'page') {
+            return false;
+        }
+
+        $slug = get_post_field('post_name', $post_id);
+        return is_string($slug) && in_array($slug, svic_rank_math_sitemap_excluded_page_slugs(), true);
+    }
+}
+
+// Keep utility / transactional pages out of Rank Math XML sitemaps.
+add_filter('rank_math/sitemap/exclude_post', function ($exclude, $post_id) {
+    return $exclude || svic_should_exclude_from_sitemap((int) $post_id);
+}, 10, 2);
+
+// Refresh visible sitemap lastmod values after theme deployments so Search Console sees meaningful content updates.
+add_filter('rank_math/sitemap/entry', function ($url, $type, $object) {
+    if (!is_array($url) || !isset($object->ID)) {
+        return $url;
+    }
+
+    $post_id = (int) $object->ID;
+    if ($post_id <= 0 || !in_array(get_post_type($post_id), ['page', 'post', 'product'], true)) {
+        return $url;
+    }
+
+    if (svic_should_exclude_from_sitemap($post_id)) {
+        return false;
+    }
+
+    $post_modified = get_post_modified_time('c', true, $post_id);
+    $deploy_marker = svic_get_theme_deploy_marker();
+    $deploy_time   = is_numeric($deploy_marker) ? gmdate('c', (int) $deploy_marker) : '';
+
+    if ($post_modified && $deploy_time) {
+        $url['mod'] = strtotime($deploy_time) > strtotime($post_modified) ? $deploy_time : $post_modified;
+    } elseif ($post_modified) {
+        $url['mod'] = $post_modified;
+    }
+
+    return $url;
+}, 20, 3);
+
 // Exclude sensitive or utility pages from the core sitemap
 add_filter('wp_sitemaps_posts_query_args', function ($args, $postType) {
     if ($postType !== 'page') {
@@ -4248,7 +4331,7 @@ add_filter('wp_sitemaps_posts_query_args', function ($args, $postType) {
     }
 
     // Keep utility/transactional pages out of sitemaps to avoid 3xx/robots conflicts.
-    $slugsToExclude = ['my-account', 'cart', 'checkout', 'order-tracking'];
+    $slugsToExclude = svic_rank_math_sitemap_excluded_page_slugs();
     $idsToExclude   = [];
 
     foreach ($slugsToExclude as $slug) {
@@ -5644,7 +5727,12 @@ if (!function_exists('svic_render_deferred_tracking_loader')) {
                     function gtag(){ dataLayer.push(arguments); }
                     window.gtag = window.gtag || gtag;
                     gtag('js', new Date());
-                    gtag('config', cfg.ga4Id, { send_page_view: true });
+                    gtag('config', cfg.ga4Id, {
+                        send_page_view: true,
+                        page_location: window.location.href,
+                        page_path: window.location.pathname + window.location.search,
+                        page_title: document.title
+                    });
                 }
 
                 if (cfg.metaPixelId) {

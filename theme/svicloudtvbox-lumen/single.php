@@ -100,11 +100,23 @@ get_header();
 
       <footer class="blog-article__footer">
         <div class="blog-article__cta">
+          <?php
+            $cta_product_10p = class_exists('WooCommerce') && function_exists('svic_get_product_by_slug') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
+            $cta_product_10s = class_exists('WooCommerce') && function_exists('svic_get_product_by_slug') ? svic_get_product_by_slug('svicloud-10s') : null;
+            $cta_product_10p_url = $cta_product_10p ? get_permalink($cta_product_10p->get_id()) : home_url('/product/svicloud-10p-plus/');
+            $cta_product_10s_url = $cta_product_10s ? get_permalink($cta_product_10s->get_id()) : home_url('/product/svicloud-10s/');
+          ?>
           <h2 class="blog-article__cta-title"><?php echo svic_translate_html('blog.cta.title'); ?></h2>
           <p class="blog-article__cta-copy">
             <?php echo svic_translate_html('blog.cta.copy'); ?>
           </p>
           <div class="blog-article__cta-actions">
+            <a class="btn btn-primary" href="<?php echo esc_url(svic_url_with_lang($cta_product_10p_url)); ?>">
+              <?php echo svic_translate_html('compare.final_cta.cta_10p'); ?>
+            </a>
+            <a class="btn btn-outline" href="<?php echo esc_url(svic_url_with_lang($cta_product_10s_url)); ?>">
+              <?php echo svic_translate_html('compare.final_cta.cta_10s'); ?>
+            </a>
             <a class="btn btn-primary" href="<?php echo esc_url(svic_url_with_lang(home_url('/compare/'))); ?>">
               <?php echo svic_translate_html('blog.cta.primary_label'); ?>
             </a>
