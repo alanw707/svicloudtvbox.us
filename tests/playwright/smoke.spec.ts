@@ -9,12 +9,23 @@ const paths = [
   '/my-account/',
 ];
 
+const ignoredConsoleErrorPatterns = [
+  // Third-party wallet iframes can emit CSP report/noise from their own frames.
+  // These are outside theme control and do not indicate a page regression.
+  /\[Report Only\] Refused to frame 'https:\/\/pay\.google\.com\/' because an ancestor violates the following Content Security Policy directive: "frame-ancestors 'self'"\./,
+  /Refused to execute inline script because it violates the following Content Security Policy directive: .*https:\/\/\*\.paypal\.com.*https:\/\/\*\.paypalobjects\.com/,
+];
+
+function isIgnoredConsoleError(text: string): boolean {
+  return ignoredConsoleErrorPatterns.some((pattern) => pattern.test(text));
+}
+
 test.describe('SVICLOUD site smoke', () => {
   for (const path of paths) {
     test(`loads ${path} without console errors`, async ({ page, baseURL }) => {
       const errors: string[] = [];
       page.on('console', (msg) => {
-        if (msg.type() === 'error') errors.push(msg.text());
+        if (msg.type() === 'error' && !isIgnoredConsoleError(msg.text())) errors.push(msg.text());
       });
 
       const urlObj = new URL(path, baseURL);
