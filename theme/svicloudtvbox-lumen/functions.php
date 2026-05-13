@@ -4312,15 +4312,29 @@ if (!function_exists('svic_current_request_path')) {
     }
 }
 
-add_action('template_redirect', function () {
-    $path = strtolower(svic_current_request_path());
-    if ($path !== '/sitemap.xml' && $path !== '/zh/sitemap.xml' && $path !== '/zh-cn/sitemap.xml') {
-        return;
-    }
+if (!function_exists('svic_redirect_legacy_sitemap_request')) {
+    /**
+     * Redirect legacy sitemap URLs before Rank Math's redirection module can
+     * canonicalize them to the homepage.
+     */
+    function svic_redirect_legacy_sitemap_request(): void
+    {
+        if (is_admin()) {
+            return;
+        }
 
-    wp_safe_redirect(svic_preferred_sitemap_url(), 301);
-    exit;
-}, -20);
+        $path = strtolower(svic_current_request_path());
+        if (!in_array($path, ['/sitemap.xml', '/zh/sitemap.xml', '/zh-cn/sitemap.xml'], true)) {
+            return;
+        }
+
+        wp_safe_redirect(svic_preferred_sitemap_url(), 301);
+        exit;
+    }
+}
+
+add_action('parse_request', 'svic_redirect_legacy_sitemap_request', 0);
+add_action('template_redirect', 'svic_redirect_legacy_sitemap_request', -20);
 
 if (!function_exists('svic_rank_math_sitemap_excluded_page_slugs')) {
     function svic_rank_math_sitemap_excluded_page_slugs(): array
