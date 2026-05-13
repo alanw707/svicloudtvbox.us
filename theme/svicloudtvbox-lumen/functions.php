@@ -4260,20 +4260,28 @@ add_filter('nav_menu_link_attributes', function ($atts, $item, $args, $depth) {
     return $atts;
 }, 10, 4);
 
-// Ensure robots.txt advertises the WordPress sitemap
+if (!function_exists('svic_preferred_sitemap_url')) {
+    /**
+     * Return the canonical sitemap endpoint for the active sitemap adapter.
+     */
+    function svic_preferred_sitemap_url(): string
+    {
+        if (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION')) {
+            return home_url('/sitemap_index.xml');
+        }
+
+        return home_url('/wp-sitemap.xml');
+    }
+}
+
+// Ensure robots.txt advertises the canonical sitemap endpoint.
 add_filter('robots_txt', function ($output, $public) {
     // Respect site visibility setting; only append when public
     if ((int) get_option('blog_public', 1) !== 1) {
         return $output;
     }
 
-    // Prefer plugin sitemaps when available to avoid redirects.
-    if (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION')) {
-        $sitemapUrl = home_url('/sitemap_index.xml');
-    } else {
-        $sitemapUrl = home_url('/wp-sitemap.xml');
-    }
-    $line = 'Sitemap: ' . esc_url_raw($sitemapUrl);
+    $line = 'Sitemap: ' . esc_url_raw(svic_preferred_sitemap_url());
 
     // Avoid duplicate lines if a plugin already added it
     if (stripos($output, 'Sitemap:') === false) {
@@ -4310,7 +4318,7 @@ add_action('template_redirect', function () {
         return;
     }
 
-    wp_safe_redirect(home_url('/sitemap_index.xml'), 301);
+    wp_safe_redirect(svic_preferred_sitemap_url(), 301);
     exit;
 }, -20);
 
@@ -5625,6 +5633,10 @@ if (!function_exists('svic_rank_math_sitemap_rules_missing')) {
 if (!function_exists('svic_is_legacy_sitemap_request')) {
     function svic_is_legacy_sitemap_request(): bool
     {
+        if (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION')) {
+            return false;
+        }
+
         $candidates = [];
 
         if (class_exists('SVIC_Locale_Resolver')) {
@@ -5657,7 +5669,7 @@ if (!function_exists('svic_is_legacy_sitemap_request')) {
             $normalized = strtolower($path);
             $normalized = $normalized === '/' ? '/' : rtrim($normalized, '/');
 
-            if ($normalized === '/sitemap_index.xml' || $normalized === '/zh/sitemap_index.xml') {
+            if (in_array($normalized, ['/sitemap_index.xml', '/zh/sitemap_index.xml', '/zh-cn/sitemap_index.xml'], true)) {
                 return true;
             }
         }

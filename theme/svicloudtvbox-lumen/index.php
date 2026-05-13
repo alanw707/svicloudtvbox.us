@@ -8,7 +8,7 @@
           if (is_search()) {
               printf(
                   /* translators: %s: search query */
-                  esc_html__('Search results for “%s”', 'svicloudtvbox'),
+                  esc_html__('Search results for “%s”', 'svicloudtvbox-lumen'),
                   esc_html(get_search_query())
               );
           } else {
@@ -42,12 +42,12 @@
     <?php endwhile; ?>
   <?php else: ?>
     <section class="page-hero">
-      <span class="badge badge-muted"><?php esc_html_e('Oops!', 'svicloudtvbox'); ?></span>
-      <h1 class="page-title"><?php esc_html_e("We couldn't find that page.", 'svicloudtvbox'); ?></h1>
-      <p class="page-subtitle"><?php esc_html_e('The link might be outdated or the page is still being built. Try browsing the links below.', 'svicloudtvbox'); ?></p>
+      <span class="badge badge-muted"><?php esc_html_e('Oops!', 'svicloudtvbox-lumen'); ?></span>
+      <h1 class="page-title"><?php esc_html_e("We couldn't find that page.", 'svicloudtvbox-lumen'); ?></h1>
+      <p class="page-subtitle"><?php esc_html_e('The link might be outdated or the page is still being built. Try browsing the links below.', 'svicloudtvbox-lumen'); ?></p>
       <div class="comparison-cta">
-        <a class="btn btn-primary" href="<?php echo esc_url( svic_url_with_lang( home_url('/') ) ); ?>"><?php esc_html_e('Go Home', 'svicloudtvbox'); ?></a>
-        <a class="btn btn-outline" href="<?php echo esc_url( svic_url_with_lang( home_url('/shop') ) ); ?>"><?php esc_html_e('Browse Shop', 'svicloudtvbox'); ?></a>
+        <a class="btn btn-primary" href="<?php echo esc_url( svic_url_with_lang( home_url('/') ) ); ?>"><?php esc_html_e('Go Home', 'svicloudtvbox-lumen'); ?></a>
+        <a class="btn btn-outline" href="<?php echo esc_url( svic_url_with_lang( home_url('/shop') ) ); ?>"><?php esc_html_e('Browse Shop', 'svicloudtvbox-lumen'); ?></a>
       </div>
     </section>
   <?php endif; ?>
