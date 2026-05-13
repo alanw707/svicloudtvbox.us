@@ -335,6 +335,7 @@ while (have_posts()) :
             <p class="product-reviews__average-note"><?php echo svic_translate_html('product.reviews.average_note'); ?></p>
           </div>
         </div>
+        <?php comments_template(); ?>
       </section>
     </main>
 

@@ -173,14 +173,42 @@ add_filter( 'woocommerce_fulfillment_before_update', 'svic_fix_fulfillment_track
 
 // Keep product reviews open for guest buyers, but require manual approval before publishing.
 // WooCommerce still adds a "verified owner" label when a review matches a real order.
-add_filter('pre_comment_approved', function ($approved, $commentdata) {
-    $post_id = isset($commentdata['comment_post_ID']) ? (int) $commentdata['comment_post_ID'] : 0;
-    if ($post_id <= 0 || get_post_type($post_id) !== 'product') {
-        return $approved;
-    }
+add_filter('woocommerce_review_rating_verification_required', '__return_false');
+add_filter('option_woocommerce_review_rating_verification_required', static function () {
+    return 'no';
+});
 
-    return 0;
-}, 10, 2);
+if (!function_exists('svic_make_guest_product_review_form_complete')) {
+    function svic_make_guest_product_review_form_complete(array $comment_form): array
+    {
+        if (!empty($comment_form['fields']) && is_array($comment_form['fields'])) {
+            $comment_form['comment_field'] = '<div class="svic-review-identity-fields">' . implode('', $comment_form['fields']) . '</div>' . ($comment_form['comment_field'] ?? '');
+            $comment_form['fields'] = [];
+        }
+
+        if (!empty($comment_form['comment_field'])) {
+            $comment_form['comment_field'] = str_replace('rows="8"', 'rows="5"', $comment_form['comment_field']);
+        }
+
+        $comment_form['label_submit'] = esc_html__('Submit review', 'svicloudtvbox-lumen');
+
+        return $comment_form;
+    }
+}
+add_filter('woocommerce_product_review_comment_form_args', 'svic_make_guest_product_review_form_complete', 20);
+
+if (!function_exists('svic_hold_product_reviews_for_manual_approval')) {
+    function svic_hold_product_reviews_for_manual_approval($approved, array $commentdata)
+    {
+        $post_id = isset($commentdata['comment_post_ID']) ? (int) $commentdata['comment_post_ID'] : 0;
+        if ($post_id <= 0 || get_post_type($post_id) !== 'product') {
+            return $approved;
+        }
+
+        return 0;
+    }
+}
+add_filter('pre_comment_approved', 'svic_hold_product_reviews_for_manual_approval', 10, 2);
 
 // Force currency display as "$269.00" (no space) regardless of WC currency-position setting.
 add_filter('woocommerce_price_format', function ($format, $currency_pos) {

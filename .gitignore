@@ -53,3 +53,7 @@ tmp/wp-config*.php
 
 # Local AI assistant state
 .claude/
+.pi/
+
+# Local draft content
+/drafts/
