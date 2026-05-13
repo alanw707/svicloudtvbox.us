@@ -43,6 +43,11 @@ get_header();
       if ($article_body === '' && $rendered_content !== '' && empty($hero_highlights)) {
           $article_body = $rendered_content;
       }
+      // Blog content imported from automation can include its own H1. The
+      // template already outputs the canonical article H1 above the body, so
+      // downgrade body H1s to H2s to keep a single primary heading per post.
+      $article_body = preg_replace('/<h1(\s[^>]*)?>/i', '<h2$1>', (string) $article_body);
+      $article_body = preg_replace('/<\/h1>/i', '</h2>', (string) $article_body);
     ?>
     <article id="post-<?php the_ID(); ?>" <?php post_class('blog-article'); ?>>
       <header class="blog-hero">

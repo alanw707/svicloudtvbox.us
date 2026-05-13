@@ -570,6 +570,42 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh-cn' => '小云法律政策示意图',
                 ],
             ],
+            'privacy-policy' => [
+                'title'       => [
+                    'en' => 'Privacy Policy | SVICLOUD | 小雲盒子 隱私權政策',
+                    'zh' => 'Privacy Policy | SVICLOUD | 小雲盒子 隱私權政策',
+                    'zh-cn' => 'Privacy Policy | SVICLOUD | 小雲盒子 隐私权政策',
+                ],
+                'description' => [
+                    'en' => 'Privacy policy for SVICLOUD TV Box US. Learn how we handle your data. 小雲盒子 隱私權說明。',
+                    'zh' => 'Privacy policy for SVICLOUD TV Box US. Learn how we handle your data. 小雲盒子 隱私權說明。',
+                    'zh-cn' => 'Privacy policy for SVICLOUD TV Box US. Learn how we handle your data. 小雲盒子 隐私权说明。',
+                ],
+                'image'       => $default_image,
+                'image_alt'   => [
+                    'en' => 'SVICLOUD privacy policy illustration',
+                    'zh' => '小雲隱私政策示意圖',
+                    'zh-cn' => '小云隐私政策示意图',
+                ],
+            ],
+            'shipping-policy' => [
+                'title'       => [
+                    'en' => 'Shipping Policy | SVICLOUD | 小雲盒子 運送政策',
+                    'zh' => 'Shipping Policy | SVICLOUD | 小雲盒子 運送政策',
+                    'zh-cn' => 'Shipping Policy | SVICLOUD | 小雲盒子 运送政策',
+                ],
+                'description' => [
+                    'en' => 'Shipping policy for SVICLOUD TV Box US. Delivery times, coverage, and tracking. 小雲盒子 運送說明。',
+                    'zh' => 'Shipping policy for SVICLOUD TV Box US. Delivery times, coverage, and tracking. 小雲盒子 運送說明。',
+                    'zh-cn' => 'Shipping policy for SVICLOUD TV Box US. Delivery times, coverage, and tracking. 小雲盒子 运送说明。',
+                ],
+                'image'       => $default_image,
+                'image_alt'   => [
+                    'en' => 'SVICLOUD shipping policy illustration',
+                    'zh' => '小雲運送政策示意圖',
+                    'zh-cn' => '小云运送政策示意图',
+                ],
+            ],
             'order-tracking' => [
                 'title'       => [
                     'en' => 'Order Tracking | SVICLOUD | 小雲盒子 訂單查詢',
@@ -1860,11 +1896,17 @@ if (!function_exists('svic_filter_rank_math_static_page_title')) {
 if (!function_exists('svic_filter_rank_math_static_page_description')) {
     function svic_filter_rank_math_static_page_description($description)
     {
-        if (!svic_rank_math_should_override_static_page_meta()) {
+        if (function_exists('is_front_page') && is_front_page()) {
             return $description;
         }
 
-        if (function_exists('is_front_page') && is_front_page()) {
+        $current_description = trim(wp_strip_all_tags((string) $description));
+        $should_override     = svic_rank_math_should_override_static_page_meta();
+
+        // Keep Rank Math-authored English descriptions when present. Use the
+        // theme registry as a fallback for static pages with empty Rank Math
+        // descriptions, and as the source of truth for localized zh pages.
+        if (!$should_override && $current_description !== '') {
             return $description;
         }
 
@@ -4218,20 +4260,28 @@ add_filter('nav_menu_link_attributes', function ($atts, $item, $args, $depth) {
     return $atts;
 }, 10, 4);
 
-// Ensure robots.txt advertises the WordPress sitemap
+if (!function_exists('svic_preferred_sitemap_url')) {
+    /**
+     * Return the canonical sitemap endpoint for the active sitemap adapter.
+     */
+    function svic_preferred_sitemap_url(): string
+    {
+        if (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION')) {
+            return home_url('/sitemap_index.xml');
+        }
+
+        return home_url('/wp-sitemap.xml');
+    }
+}
+
+// Ensure robots.txt advertises the canonical sitemap endpoint.
 add_filter('robots_txt', function ($output, $public) {
     // Respect site visibility setting; only append when public
     if ((int) get_option('blog_public', 1) !== 1) {
         return $output;
     }
 
-    // Prefer plugin sitemaps when available to avoid redirects.
-    if (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION')) {
-        $sitemapUrl = home_url('/sitemap_index.xml');
-    } else {
-        $sitemapUrl = home_url('/wp-sitemap.xml');
-    }
-    $line = 'Sitemap: ' . esc_url_raw($sitemapUrl);
+    $line = 'Sitemap: ' . esc_url_raw(svic_preferred_sitemap_url());
 
     // Avoid duplicate lines if a plugin already added it
     if (stripos($output, 'Sitemap:') === false) {
@@ -4262,15 +4312,29 @@ if (!function_exists('svic_current_request_path')) {
     }
 }
 
-add_action('template_redirect', function () {
-    $path = strtolower(svic_current_request_path());
-    if ($path !== '/sitemap.xml' && $path !== '/zh/sitemap.xml' && $path !== '/zh-cn/sitemap.xml') {
-        return;
-    }
+if (!function_exists('svic_redirect_legacy_sitemap_request')) {
+    /**
+     * Redirect legacy sitemap URLs before Rank Math's redirection module can
+     * canonicalize them to the homepage.
+     */
+    function svic_redirect_legacy_sitemap_request(): void
+    {
+        if (is_admin()) {
+            return;
+        }
 
-    wp_safe_redirect(home_url('/sitemap_index.xml'), 301);
-    exit;
-}, -20);
+        $path = strtolower(svic_current_request_path());
+        if (!in_array($path, ['/sitemap.xml', '/zh/sitemap.xml', '/zh-cn/sitemap.xml'], true)) {
+            return;
+        }
+
+        wp_safe_redirect(svic_preferred_sitemap_url(), 301);
+        exit;
+    }
+}
+
+add_action('parse_request', 'svic_redirect_legacy_sitemap_request', 0);
+add_action('template_redirect', 'svic_redirect_legacy_sitemap_request', -20);
 
 if (!function_exists('svic_rank_math_sitemap_excluded_page_slugs')) {
     function svic_rank_math_sitemap_excluded_page_slugs(): array
@@ -4359,6 +4423,73 @@ add_filter('wp_sitemaps_add_provider', function ($provider, $name) {
 
     return $provider;
 }, 10, 2);
+
+if (!function_exists('svic_seo_trim_text')) {
+    /**
+     * Keep generated SEO strings inside practical SERP limits without breaking
+     * multibyte Chinese copy.
+     */
+    function svic_seo_trim_text($value, int $max_length): string
+    {
+        $text = trim(wp_strip_all_tags((string) $value));
+        $text = preg_replace('/\s+/u', ' ', $text) ?: $text;
+
+        $length = function_exists('mb_strlen') ? mb_strlen($text, 'UTF-8') : strlen($text);
+        if ($length <= $max_length) {
+            return $text;
+        }
+
+        $slice_length = max(1, $max_length - 1);
+        $slice = function_exists('mb_substr') ? mb_substr($text, 0, $slice_length, 'UTF-8') : substr($text, 0, $slice_length);
+        $slice = rtrim((string) $slice, " \t\n\r\0\x0B,.;:，。；：、-");
+
+        return $slice . '…';
+    }
+}
+
+if (!function_exists('svic_filter_rank_math_serp_title_length')) {
+    function svic_filter_rank_math_serp_title_length($title)
+    {
+        $clean = trim(wp_strip_all_tags((string) $title));
+        if ($clean === '') {
+            return $title;
+        }
+
+        $length = function_exists('mb_strlen') ? mb_strlen($clean, 'UTF-8') : strlen($clean);
+        if ($length <= 70) {
+            return $clean;
+        }
+
+        // Rank Math commonly appends the site name with a pipe. Drop that first
+        // before truncating the actual post/page title.
+        $parts = preg_split('/\s+[|｜]\s+/u', $clean);
+        if (is_array($parts) && isset($parts[0]) && trim($parts[0]) !== '') {
+            $clean = trim($parts[0]);
+        }
+
+        return svic_seo_trim_text($clean, 70);
+    }
+
+    add_filter('rank_math/frontend/title', 'svic_filter_rank_math_serp_title_length', 95);
+    add_filter('rank_math/opengraph/facebook/og_title', 'svic_filter_rank_math_serp_title_length', 95);
+    add_filter('rank_math/opengraph/twitter/twitter_title', 'svic_filter_rank_math_serp_title_length', 95);
+}
+
+if (!function_exists('svic_filter_rank_math_serp_description_length')) {
+    function svic_filter_rank_math_serp_description_length($description)
+    {
+        if (trim(wp_strip_all_tags((string) $description)) === '') {
+            return $description;
+        }
+
+        return svic_seo_trim_text($description, 160);
+    }
+
+    add_filter('rank_math/frontend/description', 'svic_filter_rank_math_serp_description_length', 95);
+    add_filter('rank_math/frontend/snippet_description', 'svic_filter_rank_math_serp_description_length', 95);
+    add_filter('rank_math/opengraph/facebook/og_description', 'svic_filter_rank_math_serp_description_length', 95);
+    add_filter('rank_math/opengraph/twitter/twitter_description', 'svic_filter_rank_math_serp_description_length', 95);
+}
 
 // Theme setup
 add_action('after_setup_theme', function () {
@@ -5516,6 +5647,10 @@ if (!function_exists('svic_rank_math_sitemap_rules_missing')) {
 if (!function_exists('svic_is_legacy_sitemap_request')) {
     function svic_is_legacy_sitemap_request(): bool
     {
+        if (defined('WPSEO_VERSION') || defined('RANK_MATH_VERSION')) {
+            return false;
+        }
+
         $candidates = [];
 
         if (class_exists('SVIC_Locale_Resolver')) {
@@ -5548,7 +5683,7 @@ if (!function_exists('svic_is_legacy_sitemap_request')) {
             $normalized = strtolower($path);
             $normalized = $normalized === '/' ? '/' : rtrim($normalized, '/');
 
-            if ($normalized === '/sitemap_index.xml' || $normalized === '/zh/sitemap_index.xml') {
+            if (in_array($normalized, ['/sitemap_index.xml', '/zh/sitemap_index.xml', '/zh-cn/sitemap_index.xml'], true)) {
                 return true;
             }
         }
