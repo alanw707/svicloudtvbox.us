@@ -570,6 +570,42 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh-cn' => '小云法律政策示意图',
                 ],
             ],
+            'privacy-policy' => [
+                'title'       => [
+                    'en' => 'Privacy Policy | SVICLOUD | 小雲盒子 隱私權政策',
+                    'zh' => 'Privacy Policy | SVICLOUD | 小雲盒子 隱私權政策',
+                    'zh-cn' => 'Privacy Policy | SVICLOUD | 小雲盒子 隐私权政策',
+                ],
+                'description' => [
+                    'en' => 'Privacy policy for SVICLOUD TV Box US. Learn how we handle your data. 小雲盒子 隱私權說明。',
+                    'zh' => 'Privacy policy for SVICLOUD TV Box US. Learn how we handle your data. 小雲盒子 隱私權說明。',
+                    'zh-cn' => 'Privacy policy for SVICLOUD TV Box US. Learn how we handle your data. 小雲盒子 隐私权说明。',
+                ],
+                'image'       => $default_image,
+                'image_alt'   => [
+                    'en' => 'SVICLOUD privacy policy illustration',
+                    'zh' => '小雲隱私政策示意圖',
+                    'zh-cn' => '小云隐私政策示意图',
+                ],
+            ],
+            'shipping-policy' => [
+                'title'       => [
+                    'en' => 'Shipping Policy | SVICLOUD | 小雲盒子 運送政策',
+                    'zh' => 'Shipping Policy | SVICLOUD | 小雲盒子 運送政策',
+                    'zh-cn' => 'Shipping Policy | SVICLOUD | 小雲盒子 运送政策',
+                ],
+                'description' => [
+                    'en' => 'Shipping policy for SVICLOUD TV Box US. Delivery times, coverage, and tracking. 小雲盒子 運送說明。',
+                    'zh' => 'Shipping policy for SVICLOUD TV Box US. Delivery times, coverage, and tracking. 小雲盒子 運送說明。',
+                    'zh-cn' => 'Shipping policy for SVICLOUD TV Box US. Delivery times, coverage, and tracking. 小雲盒子 运送说明。',
+                ],
+                'image'       => $default_image,
+                'image_alt'   => [
+                    'en' => 'SVICLOUD shipping policy illustration',
+                    'zh' => '小雲運送政策示意圖',
+                    'zh-cn' => '小云运送政策示意图',
+                ],
+            ],
             'order-tracking' => [
                 'title'       => [
                     'en' => 'Order Tracking | SVICLOUD | 小雲盒子 訂單查詢',
@@ -1860,11 +1896,17 @@ if (!function_exists('svic_filter_rank_math_static_page_title')) {
 if (!function_exists('svic_filter_rank_math_static_page_description')) {
     function svic_filter_rank_math_static_page_description($description)
     {
-        if (!svic_rank_math_should_override_static_page_meta()) {
+        if (function_exists('is_front_page') && is_front_page()) {
             return $description;
         }
 
-        if (function_exists('is_front_page') && is_front_page()) {
+        $current_description = trim(wp_strip_all_tags((string) $description));
+        $should_override     = svic_rank_math_should_override_static_page_meta();
+
+        // Keep Rank Math-authored English descriptions when present. Use the
+        // theme registry as a fallback for static pages with empty Rank Math
+        // descriptions, and as the source of truth for localized zh pages.
+        if (!$should_override && $current_description !== '') {
             return $description;
         }
 
@@ -4359,6 +4401,73 @@ add_filter('wp_sitemaps_add_provider', function ($provider, $name) {
 
     return $provider;
 }, 10, 2);
+
+if (!function_exists('svic_seo_trim_text')) {
+    /**
+     * Keep generated SEO strings inside practical SERP limits without breaking
+     * multibyte Chinese copy.
+     */
+    function svic_seo_trim_text($value, int $max_length): string
+    {
+        $text = trim(wp_strip_all_tags((string) $value));
+        $text = preg_replace('/\s+/u', ' ', $text) ?: $text;
+
+        $length = function_exists('mb_strlen') ? mb_strlen($text, 'UTF-8') : strlen($text);
+        if ($length <= $max_length) {
+            return $text;
+        }
+
+        $slice_length = max(1, $max_length - 1);
+        $slice = function_exists('mb_substr') ? mb_substr($text, 0, $slice_length, 'UTF-8') : substr($text, 0, $slice_length);
+        $slice = rtrim((string) $slice, " \t\n\r\0\x0B,.;:，。；：、-");
+
+        return $slice . '…';
+    }
+}
+
+if (!function_exists('svic_filter_rank_math_serp_title_length')) {
+    function svic_filter_rank_math_serp_title_length($title)
+    {
+        $clean = trim(wp_strip_all_tags((string) $title));
+        if ($clean === '') {
+            return $title;
+        }
+
+        $length = function_exists('mb_strlen') ? mb_strlen($clean, 'UTF-8') : strlen($clean);
+        if ($length <= 70) {
+            return $clean;
+        }
+
+        // Rank Math commonly appends the site name with a pipe. Drop that first
+        // before truncating the actual post/page title.
+        $parts = preg_split('/\s+[|｜]\s+/u', $clean);
+        if (is_array($parts) && isset($parts[0]) && trim($parts[0]) !== '') {
+            $clean = trim($parts[0]);
+        }
+
+        return svic_seo_trim_text($clean, 70);
+    }
+
+    add_filter('rank_math/frontend/title', 'svic_filter_rank_math_serp_title_length', 95);
+    add_filter('rank_math/opengraph/facebook/og_title', 'svic_filter_rank_math_serp_title_length', 95);
+    add_filter('rank_math/opengraph/twitter/twitter_title', 'svic_filter_rank_math_serp_title_length', 95);
+}
+
+if (!function_exists('svic_filter_rank_math_serp_description_length')) {
+    function svic_filter_rank_math_serp_description_length($description)
+    {
+        if (trim(wp_strip_all_tags((string) $description)) === '') {
+            return $description;
+        }
+
+        return svic_seo_trim_text($description, 160);
+    }
+
+    add_filter('rank_math/frontend/description', 'svic_filter_rank_math_serp_description_length', 95);
+    add_filter('rank_math/frontend/snippet_description', 'svic_filter_rank_math_serp_description_length', 95);
+    add_filter('rank_math/opengraph/facebook/og_description', 'svic_filter_rank_math_serp_description_length', 95);
+    add_filter('rank_math/opengraph/twitter/twitter_description', 'svic_filter_rank_math_serp_description_length', 95);
+}
 
 // Theme setup
 add_action('after_setup_theme', function () {
