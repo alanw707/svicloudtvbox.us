@@ -1053,6 +1053,20 @@
   margin: 1rem 0;
 }
 
+.lumen-product .svic-review-restriction-notice {
+  margin: 1rem 0 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(126, 246, 227, 0.22);
+  border-radius: var(--radius-lg);
+  background: rgba(126, 246, 227, 0.08);
+  color: var(--lumen-text-secondary);
+}
+
+.lumen-product .svic-review-restriction-notice a {
+  color: var(--lumen-accent-teal);
+  font-weight: 700;
+}
+
 .lumen-product .woocommerce-Reviews .comment-form-author,
 .lumen-product .woocommerce-Reviews .comment-form-email,
 .lumen-product .woocommerce-Reviews .comment-form-comment,
