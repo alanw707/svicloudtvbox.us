@@ -171,19 +171,59 @@ function svic_fix_fulfillment_tracking_url( $fulfillment ) {
 add_filter( 'woocommerce_fulfillment_before_create', 'svic_fix_fulfillment_tracking_url' );
 add_filter( 'woocommerce_fulfillment_before_update', 'svic_fix_fulfillment_tracking_url' );
 
-// Keep product reviews open for guest buyers, but require manual approval before publishing.
-// WooCommerce still adds a "verified owner" label when a review matches a real order.
-add_filter('woocommerce_review_rating_verification_required', '__return_false');
+// Product reviews are visible to everyone, but submission is limited to logged-in verified buyers.
+add_filter('woocommerce_review_rating_verification_required', '__return_true');
 add_filter('option_woocommerce_review_rating_verification_required', static function () {
-    return 'no';
+    return 'yes';
 });
 
-if (!function_exists('svic_make_guest_product_review_form_complete')) {
-    function svic_make_guest_product_review_form_complete(array $comment_form): array
+if (!function_exists('svic_user_can_review_product')) {
+    function svic_user_can_review_product(int $product_id): bool
     {
-        if (!empty($comment_form['fields']) && is_array($comment_form['fields'])) {
-            $comment_form['comment_field'] = '<div class="svic-review-identity-fields">' . implode('', $comment_form['fields']) . '</div>' . ($comment_form['comment_field'] ?? '');
+        if ($product_id <= 0 || !is_user_logged_in() || !function_exists('wc_customer_bought_product')) {
+            return false;
+        }
+
+        $user = wp_get_current_user();
+        if (!$user instanceof WP_User || $user->ID <= 0) {
+            return false;
+        }
+
+        return wc_customer_bought_product((string) $user->user_email, $user->ID, $product_id);
+    }
+}
+
+if (!function_exists('svic_product_review_restriction_message')) {
+    function svic_product_review_restriction_message(int $product_id = 0): string
+    {
+        if (!is_user_logged_in()) {
+            $login_url = $product_id > 0 ? wp_login_url(get_permalink($product_id)) : wp_login_url();
+            return sprintf(
+                /* translators: %s: login URL. */
+                wp_kses_post(__('Only logged-in customers who purchased this product can write a review. <a href="%s">Log in to your account</a> to continue.', 'svicloudtvbox-lumen')),
+                esc_url($login_url)
+            );
+        }
+
+        return esc_html__('Only customers with a verified purchase of this product can write a review.', 'svicloudtvbox-lumen');
+    }
+}
+
+if (!function_exists('svic_restrict_product_review_form_to_verified_buyers')) {
+    function svic_restrict_product_review_form_to_verified_buyers(array $comment_form): array
+    {
+        $product_id = get_the_ID();
+        if ($product_id > 0 && !svic_user_can_review_product((int) $product_id)) {
+            $message = '<p class="svic-review-restriction-notice">' . svic_product_review_restriction_message((int) $product_id) . '</p>';
+
             $comment_form['fields'] = [];
+            $comment_form['comment_field'] = $message;
+            $comment_form['submit_button'] = '';
+            $comment_form['submit_field'] = '';
+            $comment_form['title_reply'] = esc_html__('Reviews are limited to verified buyers', 'svicloudtvbox-lumen');
+            $comment_form['label_submit'] = esc_html__('Submit review', 'svicloudtvbox-lumen');
+
+            return $comment_form;
         }
 
         if (!empty($comment_form['comment_field'])) {
@@ -195,20 +235,28 @@ if (!function_exists('svic_make_guest_product_review_form_complete')) {
         return $comment_form;
     }
 }
-add_filter('woocommerce_product_review_comment_form_args', 'svic_make_guest_product_review_form_complete', 20);
+add_filter('woocommerce_product_review_comment_form_args', 'svic_restrict_product_review_form_to_verified_buyers', 20);
 
-if (!function_exists('svic_hold_product_reviews_for_manual_approval')) {
-    function svic_hold_product_reviews_for_manual_approval($approved, array $commentdata)
+if (!function_exists('svic_block_unverified_product_review_submission')) {
+    function svic_block_unverified_product_review_submission(array $commentdata): array
     {
         $post_id = isset($commentdata['comment_post_ID']) ? (int) $commentdata['comment_post_ID'] : 0;
         if ($post_id <= 0 || get_post_type($post_id) !== 'product') {
-            return $approved;
+            return $commentdata;
         }
 
-        return 0;
+        if (!svic_user_can_review_product($post_id)) {
+            wp_die(
+                wp_kses_post(svic_product_review_restriction_message($post_id)),
+                esc_html__('Review not accepted', 'svicloudtvbox-lumen'),
+                ['response' => is_user_logged_in() ? 403 : 401]
+            );
+        }
+
+        return $commentdata;
     }
 }
-add_filter('pre_comment_approved', 'svic_hold_product_reviews_for_manual_approval', 10, 2);
+add_filter('preprocess_comment', 'svic_block_unverified_product_review_submission', 10, 1);
 
 // Force currency display as "$269.00" (no space) regardless of WC currency-position setting.
 add_filter('woocommerce_price_format', function ($format, $currency_pos) {
