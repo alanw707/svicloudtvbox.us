@@ -131,45 +131,108 @@ add_filter('woocommerce_states', function (array $states): array {
     return $states;
 });
 
-// Fix fulfillment tracking URLs that point to AfterShip without the tracking number embedded.
-// Root cause: AfterShip integration may store `_tracking_url` as `https://track.aftership.com/`
-// without appending the tracking number. This filter corrects it at write time.
+// Fix fulfillment tracking URLs that point to AfterShip pages that do not preserve the tracking number.
+// Root cause: AfterShip branded paths such as `*.aftership.com/<tracking>` can redirect to
+// `https://www.aftership.com/track` without carrying the tracking number forward.
+if ( ! function_exists( 'svic_is_usps_tracking_number' ) ) {
+    function svic_is_usps_tracking_number( string $tracking_number ): bool {
+        // USPS GS1-128 / IMpb tracking numbers commonly start with 94/93/92/95/96.
+        return preg_match( '/^(94|93|92|95|96)\d{18,22}$/', $tracking_number ) === 1;
+    }
+}
+
+if ( ! function_exists( 'svic_normalize_fulfillment_tracking_url' ) ) {
+    function svic_normalize_fulfillment_tracking_url( string $tracking_url, string $tracking_number, string $provider = '' ): string {
+        $tracking_url    = trim( $tracking_url );
+        $tracking_number = trim( $tracking_number );
+        $provider        = strtolower( trim( $provider ) );
+
+        if ( $tracking_url === '' || $tracking_number === '' || strpos( $tracking_url, 'aftership.com' ) === false ) {
+            return $tracking_url;
+        }
+
+        if ( $provider === 'usps' || svic_is_usps_tracking_number( $tracking_number ) ) {
+            return 'https://tools.usps.com/go/TrackConfirmAction?tLabels=' . rawurlencode( $tracking_number );
+        }
+
+        if ( strpos( $tracking_url, $tracking_number ) !== false && strpos( $tracking_url, 'www.aftership.com/track/' ) !== false ) {
+            return $tracking_url;
+        }
+
+        return 'https://www.aftership.com/track/' . rawurlencode( $tracking_number );
+    }
+}
+
 function svic_fix_fulfillment_tracking_url( $fulfillment ) {
     if ( ! is_object( $fulfillment ) || ! method_exists( $fulfillment, 'get_meta' ) ) {
         return $fulfillment;
     }
 
-    $tracking_url    = $fulfillment->get_meta( '_tracking_url', true );
-    $tracking_number = $fulfillment->get_meta( '_tracking_number', true );
+    $tracking_url    = (string) $fulfillment->get_meta( '_tracking_url', true );
+    $tracking_number = (string) $fulfillment->get_meta( '_tracking_number', true );
+    $provider        = (string) ( $fulfillment->get_meta( '_shipping_provider', true ) ?: $fulfillment->get_meta( '_shipment_provider', true ) );
+    $fixed_url       = svic_normalize_fulfillment_tracking_url( $tracking_url, $tracking_number, $provider );
 
-    if ( empty( $tracking_url ) || empty( $tracking_number ) ) {
-        return $fulfillment;
+    if ( $fixed_url !== '' && $fixed_url !== $tracking_url ) {
+        $fulfillment->update_meta_data( '_tracking_url', $fixed_url );
     }
-
-    // Only intervene when the URL goes to AfterShip but the tracking number is absent from it.
-    if ( strpos( $tracking_url, 'aftership.com' ) === false ) {
-        return $fulfillment;
-    }
-
-    if ( strpos( $tracking_url, $tracking_number ) !== false ) {
-        return $fulfillment; // Already correct — tracking number is already in the URL.
-    }
-
-    // USPS GS1-128 / IMpb tracking numbers start with 94/93/92/95/96.
-    $provider = $fulfillment->get_meta( '_shipment_provider', true );
-    if ( $provider === 'usps' || preg_match( '/^(94|93|92|95|96)\d{18,22}$/', (string) $tracking_number ) ) {
-        $fixed_url = 'https://tools.usps.com/go/TrackConfirmAction?tLabels=' . rawurlencode( $tracking_number );
-    } else {
-        // Non-USPS: keep AfterShip but append the tracking number to the path.
-        $fixed_url = rtrim( $tracking_url, '/' ) . '/' . rawurlencode( $tracking_number );
-    }
-
-    $fulfillment->update_meta_data( '_tracking_url', $fixed_url );
 
     return $fulfillment;
 }
 add_filter( 'woocommerce_fulfillment_before_create', 'svic_fix_fulfillment_tracking_url' );
 add_filter( 'woocommerce_fulfillment_before_update', 'svic_fix_fulfillment_tracking_url' );
+
+if ( ! function_exists( 'svic_repair_existing_aftership_tracking_urls' ) ) {
+    function svic_repair_existing_aftership_tracking_urls(): void {
+        if ( ! is_admin() || get_transient( 'svic_repaired_aftership_tracking_urls' ) ) {
+            return;
+        }
+
+        global $wpdb;
+
+        $meta_table = $wpdb->prefix . 'wc_order_fulfillment_meta';
+        $exists     = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $meta_table ) );
+        if ( $exists !== $meta_table ) {
+            return;
+        }
+
+        $rows = $wpdb->get_results(
+            "SELECT url.fulfillment_id, url.meta_value AS tracking_url, number.meta_value AS tracking_number, provider.meta_value AS provider
+             FROM {$meta_table} url
+             INNER JOIN {$meta_table} number ON number.fulfillment_id = url.fulfillment_id AND number.meta_key = '_tracking_number'
+             LEFT JOIN {$meta_table} provider ON provider.fulfillment_id = url.fulfillment_id AND provider.meta_key IN ('_shipping_provider', '_shipment_provider')
+             WHERE url.meta_key = '_tracking_url'
+               AND url.meta_value LIKE '%aftership.com%'
+             LIMIT 50"
+        );
+
+        if ( ! is_array( $rows ) || $rows === [] ) {
+            set_transient( 'svic_repaired_aftership_tracking_urls', 1, HOUR_IN_SECONDS );
+            return;
+        }
+
+        foreach ( $rows as $row ) {
+            $fixed_url = svic_normalize_fulfillment_tracking_url( (string) $row->tracking_url, (string) $row->tracking_number, (string) $row->provider );
+            if ( $fixed_url === '' || $fixed_url === (string) $row->tracking_url ) {
+                continue;
+            }
+
+            $wpdb->update(
+                $meta_table,
+                [ 'meta_value' => esc_url_raw( $fixed_url ) ],
+                [
+                    'fulfillment_id' => (int) $row->fulfillment_id,
+                    'meta_key'       => '_tracking_url',
+                ],
+                [ '%s' ],
+                [ '%d', '%s' ]
+            );
+        }
+
+        set_transient( 'svic_repaired_aftership_tracking_urls', 1, HOUR_IN_SECONDS );
+    }
+}
+add_action( 'admin_init', 'svic_repair_existing_aftership_tracking_urls' );
 
 // Product reviews are visible to everyone, but submission is limited to logged-in verified buyers.
 add_filter('woocommerce_review_rating_verification_required', '__return_true');
