@@ -234,6 +234,84 @@ if ( ! function_exists( 'svic_repair_existing_aftership_tracking_urls' ) ) {
 }
 add_action( 'admin_init', 'svic_repair_existing_aftership_tracking_urls' );
 
+if ( ! function_exists( 'svic_rewrite_aftership_admin_tracking_links' ) ) {
+    function svic_rewrite_aftership_admin_tracking_links(): void {
+        if ( ! is_admin() ) {
+            return;
+        }
+        ?>
+        <script>
+        (function() {
+            'use strict';
+
+            function isUspsTrackingNumber(value) {
+                return /^(94|93|92|95|96)\d{18,22}$/.test(value);
+            }
+
+            function trackingNumberFromUrl(href) {
+                try {
+                    var url = new URL(href, window.location.href);
+                    if (!/aftership\.com$/i.test(url.hostname) && !/\.aftership\.com$/i.test(url.hostname)) {
+                        return '';
+                    }
+
+                    var pathParts = url.pathname.split('/').filter(Boolean);
+                    for (var i = pathParts.length - 1; i >= 0; i--) {
+                        var candidate = decodeURIComponent(pathParts[i]).trim();
+                        if (/^[A-Z0-9]{10,40}$/i.test(candidate)) {
+                            return candidate;
+                        }
+                    }
+
+                    var searchParams = ['tracking_number', 'trackingNumber', 'tracking-number', 'tracking'];
+                    for (var j = 0; j < searchParams.length; j++) {
+                        var value = url.searchParams.get(searchParams[j]);
+                        if (value && /^[A-Z0-9]{10,40}$/i.test(value)) {
+                            return value.trim();
+                        }
+                    }
+                } catch (error) {
+                    return '';
+                }
+
+                return '';
+            }
+
+            function rewriteLinks(root) {
+                var scope = root && root.querySelectorAll ? root : document;
+                var links = scope.querySelectorAll('a[href*="aftership.com"]');
+                links.forEach(function(link) {
+                    var trackingNumber = trackingNumberFromUrl(link.href);
+                    if (!trackingNumber || !isUspsTrackingNumber(trackingNumber)) {
+                        return;
+                    }
+
+                    link.href = 'https://tools.usps.com/go/TrackConfirmAction?tLabels=' + encodeURIComponent(trackingNumber);
+                    link.dataset.svicTrackingRewritten = 'usps';
+                });
+            }
+
+            rewriteLinks(document);
+
+            if (window.MutationObserver) {
+                var observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        mutation.addedNodes.forEach(function(node) {
+                            if (node.nodeType === 1) {
+                                rewriteLinks(node);
+                            }
+                        });
+                    });
+                });
+                observer.observe(document.documentElement, { childList: true, subtree: true });
+            }
+        }());
+        </script>
+        <?php
+    }
+}
+add_action( 'admin_footer', 'svic_rewrite_aftership_admin_tracking_links', 100 );
+
 // Product reviews are visible to everyone, but submission is limited to logged-in verified buyers.
 add_filter('woocommerce_review_rating_verification_required', '__return_true');
 add_filter('option_woocommerce_review_rating_verification_required', static function () {
