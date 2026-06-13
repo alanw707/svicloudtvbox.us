@@ -81,6 +81,7 @@ class DeployConfig:
     verify_tls: bool = False  # Hostinger often uses self-signed; set True if valid cert
     connect_retries: int = 5
     connect_timeout: int = 45
+    skip_same_size: bool = False
 
 
 def parse_args() -> DeployConfig:
@@ -100,6 +101,7 @@ def parse_args() -> DeployConfig:
     p.add_argument("--verify-tls", action="store_true", help="Verify TLS cert when using FTPS")
     p.add_argument("--connect-retries", type=int, default=int(env.get("FTP_CONNECT_RETRIES", 5)), help="FTP/FTPS connect/login retry count")
     p.add_argument("--connect-timeout", type=int, default=int(env.get("FTP_CONNECT_TIMEOUT", 45)), help="FTP/FTPS connect timeout in seconds")
+    p.add_argument("--skip-same-size", action="store_true", default=env.get("FTP_SKIP_SAME_SIZE", "").lower() in {"1", "true", "yes"}, help="Skip remote files only when byte sizes match")
 
     p.set_defaults(delete_remote=True)
 
@@ -124,6 +126,7 @@ def parse_args() -> DeployConfig:
         verify_tls=bool(a.verify_tls),
         connect_retries=max(1, int(a.connect_retries)),
         connect_timeout=max(10, int(a.connect_timeout)),
+        skip_same_size=bool(a.skip_same_size),
     )
 
     # Side-effect: if requested, create/update .deploy-version locally (unless dry run)
@@ -250,12 +253,12 @@ def remote_size(ftp, remote_path: str) -> int | None:
         return None
 
 
-def upload_file(ftp, local_file: Path, remote_dir: str, dry_run: bool = False, verbose: bool = True) -> bool:
+def upload_file(ftp, local_file: Path, remote_dir: str, dry_run: bool = False, verbose: bool = True, skip_same_size: bool = False) -> bool:
     """Upload a single file, returns True if uploaded (not skipped)."""
     remote_path = _remote_join(remote_dir, local_file.name)
     rsize = remote_size(ftp, remote_path)
     lsize = local_file.stat().st_size
-    if rsize is not None and rsize == lsize:
+    if skip_same_size and rsize is not None and rsize == lsize:
         if verbose:
             print(f"SKIP same-size: {remote_path}")
         return False
@@ -431,7 +434,7 @@ def main() -> int:
         for lf in walk_local_files(cfg.local_dir):
             rel_dir = str(lf.parent.relative_to(cfg.local_dir)).replace(os.sep, "/")
             remote_dir = _remote_join(absolute_remote_root, rel_dir)
-            if upload_file(ftp, lf, remote_dir, dry_run=cfg.dry_run):
+            if upload_file(ftp, lf, remote_dir, dry_run=cfg.dry_run, skip_same_size=cfg.skip_same_size):
                 uploaded += 1
 
         deleted = 0
