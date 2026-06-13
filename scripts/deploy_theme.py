@@ -82,7 +82,7 @@ class DeployConfig:
     verify_tls: bool = False  # Hostinger often uses self-signed; set True if valid cert
     connect_retries: int = 5
     connect_timeout: int = 45
-    skip_same_size: bool = False
+    skip_same_size: bool = True
 
 
 def parse_args() -> DeployConfig:
@@ -102,7 +102,7 @@ def parse_args() -> DeployConfig:
     p.add_argument("--verify-tls", action="store_true", help="Verify TLS cert when using FTPS")
     p.add_argument("--connect-retries", type=int, default=int(env.get("FTP_CONNECT_RETRIES", 5)), help="FTP/FTPS connect/login retry count")
     p.add_argument("--connect-timeout", type=int, default=int(env.get("FTP_CONNECT_TIMEOUT", 45)), help="FTP/FTPS connect timeout in seconds")
-    p.add_argument("--skip-same-size", action="store_true", default=env.get("FTP_SKIP_SAME_SIZE", "").lower() in {"1", "true", "yes"}, help="Skip remote files only when byte sizes match")
+    p.add_argument("--skip-same-size", action="store_true", default=env.get("FTP_SKIP_SAME_SIZE", "1").lower() in {"1", "true", "yes"}, help="Skip remote files only when byte sizes match")
 
     p.set_defaults(delete_remote=True)
 

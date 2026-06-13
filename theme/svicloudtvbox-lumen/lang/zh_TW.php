@@ -1,6 +1,7 @@
 <?php
 /**
  * SVICLOUD Lumen Theme translations (Traditional Chinese)
+ * Support phone updated 2026-06-13.
  */
 
 return [
