@@ -181,7 +181,7 @@ Some Chinese enterprises install Chinese TV boxes in offices or conference rooms
 <li>Schedule 4K HDR + Dolby Audio demonstration, experience cinema-level audio and video</li>
 <li>Inquire about Wi-Fi 6 placement and Mesh configuration to resolve buffering and delays</li>
 <li>Have specialists remotely configure apps, language, and parental PIN
-Fill out the form or call 702-398-3416 for one-on-one advice from SVICLOUD US product consultants.</li>
-<li>Phone: 702-398-3416</li>
+Fill out the form or call 702-389-3416 for one-on-one advice from SVICLOUD US product consultants.</li>
+<li>Phone: 702-389-3416</li>
 <li>Email: support@svicloudtvbox.us</li>
 <li><a href="https://svicloudtvbox.us/zh/

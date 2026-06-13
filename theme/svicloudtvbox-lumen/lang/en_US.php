@@ -56,7 +56,7 @@ return [
             'items' => [
                 'phone' => [
                     'label' => 'SMS / Phone',
-                    'value' => '702-398-3416',
+                    'value' => '702-389-3416',
                     'cta'   => 'Text or call now',
                 ],
                 'email' => [
@@ -649,7 +649,7 @@ return [
                 ],
                 'phone' => [
                     'label'       => 'Phone',
-                    'placeholder' => '702-398-3416',
+                    'placeholder' => '702-389-3416',
                 ],
                 'order' => [
                     'label'       => 'Order number',

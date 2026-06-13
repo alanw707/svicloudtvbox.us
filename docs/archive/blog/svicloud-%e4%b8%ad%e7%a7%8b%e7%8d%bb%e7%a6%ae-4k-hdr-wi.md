@@ -87,8 +87,8 @@ A: 是的，我們完全相容Netflix、Amazon Prime Video、Disney+、Hulu等�
 <li>預約 4K HDR + Dolby Audio 示範，體驗戲院等級聲畫</li>
 <li>詢問 Wi-Fi 6 擺位與 Mesh 配置，解決卡頓延遲</li>
 <li>請專人遠端設定 App、語言與家長 PIN<br />
-填寫表單或致電 702-398-3416，由 SVICLOUD 美國產品顧問提供一對一建議。</li>
-<li>電話：702-398-3416</li>
+填寫表單或致電 702-389-3416，由 SVICLOUD 美國產品顧問提供一對一建議。</li>
+<li>電話：702-389-3416</li>
 <li>Email：support@svicloudtvbox.us</li>
 <li><a href="https://svicloudtvbox.us/zh/contact/">線上表單</a></li>
 </ul>
