@@ -29,6 +29,7 @@ import posixpath
 import socket
 import sys
 import time
+from io import BytesIO
 from dataclasses import dataclass
 from pathlib import Path
 import subprocess
@@ -253,15 +254,30 @@ def remote_size(ftp, remote_path: str) -> int | None:
         return None
 
 
+def remote_file_matches_local(ftp, remote_path: str, local_file: Path) -> bool:
+    """Return True when the remote file bytes exactly match local_file."""
+    remote_bytes = BytesIO()
+    try:
+        ftp.retrbinary(f"RETR {remote_path}", remote_bytes.write)
+    except Exception:
+        return False
+    return remote_bytes.getvalue() == local_file.read_bytes()
+
+
 def upload_file(ftp, local_file: Path, remote_dir: str, dry_run: bool = False, verbose: bool = True, skip_same_size: bool = False) -> bool:
     """Upload a single file, returns True if uploaded (not skipped)."""
     remote_path = _remote_join(remote_dir, local_file.name)
     rsize = remote_size(ftp, remote_path)
     lsize = local_file.stat().st_size
-    if skip_same_size and rsize is not None and rsize == lsize:
-        if verbose:
-            print(f"SKIP same-size: {remote_path}")
-        return False
+    if rsize is not None and rsize == lsize:
+        if skip_same_size:
+            if verbose:
+                print(f"SKIP same-size: {remote_path}")
+            return False
+        if remote_file_matches_local(ftp, remote_path, local_file):
+            if verbose:
+                print(f"SKIP identical: {remote_path}")
+            return False
     if verbose:
         print(("DRY-RUN " if dry_run else "") + f"PUT {local_file} -> {remote_path}")
     if dry_run:
