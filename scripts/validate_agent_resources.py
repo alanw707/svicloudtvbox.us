@@ -131,6 +131,8 @@ def main() -> None:
     workflow = WORKFLOW.read_text(encoding="utf-8")
     if "agent-root/**" not in workflow or "--no-delete-remote" not in workflow or "Deploy root agent files" not in workflow:
         fail("deploy workflow does not safely publish root llms files")
+    if 'FTP_SKIP_SAME_SIZE: "0"' not in workflow:
+        fail("deploy workflow can skip changed PHP files with matching byte sizes")
 
     print("OK: agent resources, answer hubs, schema, phone guards")
 
