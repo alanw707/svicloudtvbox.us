@@ -77,7 +77,7 @@ add_filter('robots_txt', function ($output, $public) {
 }, 30, 2);
 
 add_filter('rank_math/sitemap/index', function ($xml) {
-    $entry = '<sitemap><loc>' . esc_url(home_url('/agent-friendly-sitemap.xml')) . '</loc><lastmod>' . esc_html(gmdate('c')) . '</lastmod></sitemap>';
+    $entry = '<sitemap><loc>' . esc_url(home_url('/agent-friendly-sitemap.xml')) . '</loc><lastmod>' . esc_html(svic_agent_friendly_sitemap_lastmod()) . '</lastmod></sitemap>';
     if (is_string($xml) && strpos($xml, 'agent-friendly-sitemap.xml') === false) {
         return str_replace('</sitemapindex>', $entry . '</sitemapindex>', $xml);
     }

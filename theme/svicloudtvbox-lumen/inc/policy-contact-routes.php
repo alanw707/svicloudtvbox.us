@@ -1,13 +1,11 @@
 <?php
-/** Local fallback routes for canonical contact and policy pages when DB pages are absent. */
+/** Local fallback route for canonical contact page when the DB page is absent. */
 if (!defined('ABSPATH')) { exit; }
 
 if (!function_exists('svic_policy_contact_routes')) {
     function svic_policy_contact_routes(): array {
         return [
             'contact' => ['title' => 'Contact SVICLOUD TV Box US', 'copy' => 'For setup, app, remote, product-choice, warranty, authenticity, or order support, contact the official US support team.', 'primary' => '702-389-3416'],
-            'shipping-policy' => ['title' => 'Shipping policy', 'copy' => 'Use this canonical page for current SVICLOUD TV Box US shipping guidance. Contact support before relying on any third-party shipping promise.', 'primary' => 'Contact support'],
-            'return-policy' => ['title' => 'Return policy', 'copy' => 'Use this canonical page for current SVICLOUD TV Box US return and warranty guidance. Do not invent return promises beyond the published policy.', 'primary' => 'Contact support'],
         ];
     }
 }

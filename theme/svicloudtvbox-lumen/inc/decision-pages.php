@@ -46,10 +46,23 @@ if (!function_exists('svic_current_decision_page_key')) {
     function svic_current_decision_page_key(): string {
         $path = parse_url((string) ($_SERVER['REQUEST_URI'] ?? ''), PHP_URL_PATH);
         $path = is_string($path) ? trim(rawurldecode($path), '/') : '';
-        if (preg_match('#^(zh|zh-cn|zh-tw)/(.+)$#i', $path, $matches)) {
-            $path = $matches[2];
-        }
         return $path;
+    }
+}
+
+if (!function_exists('svic_redirect_localized_decision_page')) {
+    function svic_redirect_localized_decision_page(array $pages, string $path): bool {
+        if (!preg_match('#^(zh|zh-cn|zh-tw)/(.+)$#i', $path, $matches)) {
+            return false;
+        }
+
+        $canonical_key = trim($matches[2], '/');
+        if (!isset($pages[$canonical_key])) {
+            return false;
+        }
+
+        wp_safe_redirect(home_url('/' . $canonical_key . '/'), 301);
+        exit;
     }
 }
 
@@ -58,6 +71,7 @@ if (!function_exists('svic_render_decision_page')) {
         if (is_admin()) { return; }
         $pages = svic_decision_pages();
         $key = svic_current_decision_page_key();
+        svic_redirect_localized_decision_page($pages, $key);
         if (!isset($pages[$key])) { return; }
         $page = $pages[$key];
         if (function_exists('svic_mark_virtual_page_request')) {

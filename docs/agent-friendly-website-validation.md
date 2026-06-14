@@ -16,7 +16,8 @@ Date: 2026-06-13
   - Serves `/agent-friendly-sitemap.xml` listing agent endpoints, guide fallback routes, remote issue route, and decision pages.
   - Appends the sitemap to `robots.txt` and Rank Math sitemap index output when available.
 - `theme/svicloudtvbox-lumen/inc/policy-contact-routes.php`
-  - Provides local fallback 200 routes for `/contact/`, `/shipping-policy/`, and `/return-policy/` so canonical CTA/policy links validate even when DB page rows are missing.
+  - Provides a local fallback 200 route for `/contact/` so the canonical support CTA validates when the DB page row is missing.
+  - Does not provide placeholder fallbacks for `/shipping-policy/` or `/return-policy/`; those ecommerce/legal URLs should be real published WordPress pages.
 - `theme/svicloudtvbox-lumen/inc/decision-pages.php`
   - Serves indexable product-decision pages:
     - `/svicloud-10p-vs-10s/`
@@ -75,7 +76,7 @@ Date: 2026-06-13
 
 ## Edge-case review
 
-- Localized prefixes: `/zh/...` paths are normalized for agent and decision resources.
+- Localized prefixes: `/zh/...` paths are normalized for agent resources; localized decision-page requests redirect to the canonical English decision URLs unless real translated content is added later.
 - Unsupported claims: decision content avoids legal overclaims and app guarantees.
 - Hidden FAQ risk: schema uses the same `$answer_hubs` FAQ content rendered as visible `<details>` elements.
 - Duplicate schema risk: no fake reviews or aggregate ratings added; setup `HowTo` remains scoped to setup only.
