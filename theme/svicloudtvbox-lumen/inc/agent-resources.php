@@ -66,4 +66,5 @@ if (!function_exists('svic_serve_agent_resource')) {
         exit;
     }
 }
-add_action('template_redirect', 'svic_serve_agent_resource', -100);
+add_action('parse_request', 'svic_serve_agent_resource', 0);
+add_action('template_redirect', 'svic_serve_agent_resource', -1000000);

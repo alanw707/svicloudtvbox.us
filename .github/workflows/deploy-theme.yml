@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'theme/svicloudtvbox-lumen/**'
+      - 'agent-root/**'
       - 'scripts/deploy_theme.py'
       - 'scripts/build_css.py'
       - '.github/workflows/deploy-theme.yml'
@@ -48,6 +49,21 @@ jobs:
             --local-dir "$LOCAL_THEME_DIR" \
             --remote-root "$REMOTE_THEME_DIR" \
             --bust-cache
+
+      - name: Deploy root agent files to Hostinger
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+          FTP_PROTOCOL: ftps
+          LOCAL_AGENT_ROOT: agent-root
+          REMOTE_AGENT_ROOT: public_html
+        run: |
+          python3 scripts/deploy_theme.py \
+            --protocol ftps \
+            --local-dir "$LOCAL_AGENT_ROOT" \
+            --remote-root "$REMOTE_AGENT_ROOT" \
+            --no-delete-remote
 
       - name: 🧹 Purge CDN Caches
         uses: ./.github/actions/purge-caches

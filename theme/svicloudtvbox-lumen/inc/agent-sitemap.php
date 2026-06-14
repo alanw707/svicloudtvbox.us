@@ -66,7 +66,8 @@ if (!function_exists('svic_output_agent_friendly_sitemap')) {
         exit;
     }
 }
-add_action('template_redirect', 'svic_output_agent_friendly_sitemap', -110);
+add_action('parse_request', 'svic_output_agent_friendly_sitemap', 0);
+add_action('template_redirect', 'svic_output_agent_friendly_sitemap', -1000000);
 
 add_filter('robots_txt', function ($output, $public) {
     $line = 'Sitemap: ' . esc_url_raw(home_url('/agent-friendly-sitemap.xml'));

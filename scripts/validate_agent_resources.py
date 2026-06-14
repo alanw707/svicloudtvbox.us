@@ -11,6 +11,7 @@ CSS = ROOT / "theme/svicloudtvbox-lumen/assets/css/guides.css"
 DECISION = ROOT / "theme/svicloudtvbox-lumen/inc/decision-pages.php"
 GUIDE_ROUTES = ROOT / "theme/svicloudtvbox-lumen/inc/guide-routes.php"
 SITEMAP = ROOT / "theme/svicloudtvbox-lumen/inc/agent-sitemap.php"
+WORKFLOW = ROOT / ".github/workflows/deploy-theme.yml"
 
 REQUIRED_ENDPOINTS = [
     "llms.txt",
@@ -49,6 +50,12 @@ def main() -> None:
     for endpoint in REQUIRED_ENDPOINTS:
         if endpoint not in agent:
             fail(f"missing endpoint {endpoint}")
+
+    for root_file in ["agent-root/llms.txt", "agent-root/llms-full.txt"]:
+        root_content = ROOT.joinpath(root_file).read_text(encoding="utf-8")
+        for term in REQUIRED_TERMS:
+            if term not in root_content:
+                fail(f"{root_file} missing required term {term}")
 
     for term in REQUIRED_TERMS:
         if term not in agent:
@@ -99,8 +106,12 @@ def main() -> None:
         if bad in combined:
             fail(f"forbidden phone pattern present: {bad}")
 
-    if "svic_serve_agent_resource" not in agent or "template_redirect" not in agent:
+    if "svic_serve_agent_resource" not in agent or "parse_request" not in agent or "-1000000" not in agent:
         fail("agent resource route hook missing")
+    if "svic_output_agent_friendly_sitemap" not in sitemap or "parse_request" not in sitemap or "-1000000" not in sitemap:
+        fail("agent sitemap route hook must run before canonical redirects")
+    if "svic_render_decision_page" not in decision or "-1000000" not in decision:
+        fail("decision page route hook must run before Rank Math 404 redirects")
 
     if "guides-answer-hub" not in guide or "FAQPage" not in guide:
         fail("guide answer hub or FAQ schema missing")
@@ -116,6 +127,10 @@ def main() -> None:
     live_validator = ROOT.joinpath("scripts/validate_live_agent_friendly.py").read_text(encoding="utf-8")
     if "import ssl" not in live_validator or "wrap_socket" not in live_validator:
         fail("live validator does not support HTTPS bases")
+
+    workflow = WORKFLOW.read_text(encoding="utf-8")
+    if "agent-root/**" not in workflow or "--no-delete-remote" not in workflow or "Deploy root agent files" not in workflow:
+        fail("deploy workflow does not safely publish root llms files")
 
     print("OK: agent resources, answer hubs, schema, phone guards")
 
