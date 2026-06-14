@@ -11,6 +11,10 @@ $guides_url = svic_url_with_lang(home_url('/guides/'));
 $contact_url = svic_url_with_lang(home_url('/contact/'));
 $faq_url = svic_url_with_lang(home_url('/faq/'));
 $compare_url = svic_url_with_lang(home_url('/compare/'));
+$decision_compare_url = svic_url_with_lang(home_url('/svicloud-10p-vs-10s/'));
+$decision_best_url = svic_url_with_lang(home_url('/best-svicloud-box-for-chinese-tv-usa/'));
+$decision_yogurt_url = svic_url_with_lang(home_url('/yogurt-tv-not-working-upgrade-guide/'));
+$decision_authenticity_url = svic_url_with_lang(home_url('/svicloud-box-authenticity-guide/'));
 $product_10p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
 $product_10s = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null;
 $product_10p_url = $product_10p ? svic_url_with_lang(get_permalink($product_10p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10p-plus/'));
@@ -142,6 +146,105 @@ foreach ($other_sections as $item) {
     ];
 }
 
+$answer_hubs = [
+    'apps' => [
+        'quick' => [
+            'title' => strpos(svic_current_locale(), 'zh') === 0 ? '快速答案：Yogurt TV 下載與 8989c' : 'Quick answer: Yogurt TV download and 8989c',
+            'copy'  => strpos(svic_current_locale(), 'zh') === 0 ? '先確認網路可用，再依照本頁步驟開啟安裝入口、搜尋 Yogurt TV 或 8989c。若無法下載、無法開啟或顯示錯誤，請改走疑難排解頁或聯絡官方美國客服 702-389-3416。' : 'Confirm the network first, then use this guide to open the installer, search for Yogurt TV or 8989c, and install safely. If download, launch, or playback still fails, use troubleshooting or contact official US support at 702-389-3416.',
+        ],
+        'faqs' => [
+            [strpos(svic_current_locale(), 'zh') === 0 ? 'Yogurt TV 怎麼下載？' : 'How do I download Yogurt TV?', strpos(svic_current_locale(), 'zh') === 0 ? '依序檢查網路、安裝入口與搜尋字詞；避免使用來路不明的第三方連結。' : 'Check network, installer entry, and search terms in order; avoid unknown third-party links.'],
+            [strpos(svic_current_locale(), 'zh') === 0 ? '8989c 或 8989c.cc 無法開怎麼辦？' : 'What if 8989c or 8989c.cc does not open?', strpos(svic_current_locale(), 'zh') === 0 ? '先重啟網路與盒子，再確認網址輸入正確；仍失敗時請走疑難排解或聯絡客服。' : 'Restart the network and box, confirm the address, then use troubleshooting or support if it still fails.'],
+            [strpos(svic_current_locale(), 'zh') === 0 ? 'App 啟動失敗是否代表盒子壞了？' : 'Does an app launch failure mean the box is broken?', strpos(svic_current_locale(), 'zh') === 0 ? '不一定。常見原因包含網路、App 版本、安裝來源或暫時服務異常；先排除後再考慮升級。' : 'Not always. Network, app version, installer source, or temporary service issues are common; troubleshoot before considering an upgrade.'],
+        ],
+    ],
+    'troubleshooting' => [
+        'quick' => [
+            'title' => strpos(svic_current_locale(), 'zh') === 0 ? '快速答案：先症狀、再修復、最後客服' : 'Quick answer: symptom first, fix second, support last',
+            'copy'  => strpos(svic_current_locale(), 'zh') === 0 ? '遙控器沒反應、Yogurt TV 不能看、無訊號、Wi-Fi 斷線或畫面卡住時，請先比對下方症狀並逐步排除。不要立刻恢復出廠設定；不確定時請撥 702-389-3416 或使用聯絡頁。' : 'For remote, Yogurt TV, no signal, Wi-Fi, or frozen-screen issues, match the symptom below and follow the visible fixes. Do not jump to factory reset; call 702-389-3416 or use contact if unsure.',
+        ],
+        'faqs' => [
+            [strpos(svic_current_locale(), 'zh') === 0 ? '小雲遙控器沒反應怎麼辦？' : 'What if the SVICLOUD remote does not respond?', strpos(svic_current_locale(), 'zh') === 0 ? '先換電池、靠近盒子、重新配對，再檢查是否有遮擋或干擾。' : 'Replace batteries, move closer, re-pair, and check for obstruction or interference.'],
+            [strpos(svic_current_locale(), 'zh') === 0 ? 'Yogurt TV 不能看 2026 怎麼處理？' : 'How should Yogurt TV not working be handled?', strpos(svic_current_locale(), 'zh') === 0 ? '先檢查網路、重開 App、確認安裝來源；仍失敗時聯絡客服，不要相信非官方保證。' : 'Check network, restart the app, verify installer source, then contact support; avoid unofficial guarantees.'],
+            [strpos(svic_current_locale(), 'zh') === 0 ? '什麼時候該考慮升級？' : 'When should I consider upgrading?', strpos(svic_current_locale(), 'zh') === 0 ? '只有在網路、App、遙控器與設定都排除後，或舊機效能明顯不足時，再比較 10P+ 與 10S。' : 'Compare 10P+ and 10S only after network, app, remote, and setup causes are ruled out or an old box is clearly too slow.'],
+        ],
+    ],
+    'setup' => [
+        'quick' => [
+            'title' => strpos(svic_current_locale(), 'zh') === 0 ? '快速答案：首次安裝順序' : 'Quick answer: first setup order',
+            'copy'  => strpos(svic_current_locale(), 'zh') === 0 ? '先接 HDMI 與電源，再設定語言、遙控器、時間與網路，最後依 App 指南安裝常用 App。卡關時請看疑難排解或聯絡 702-389-3416。' : 'Connect HDMI and power, set language, remote, time, and network, then use the app guide for apps. If blocked, use troubleshooting or call 702-389-3416.',
+        ],
+        'faqs' => [],
+    ],
+];
+
+$render_answer_hub = static function () use ($section_key, $answer_hubs, $compare_url, $decision_compare_url, $decision_best_url, $decision_yogurt_url, $decision_authenticity_url, $contact_url, $guides_url) {
+    if (empty($answer_hubs[$section_key])) {
+        return;
+    }
+    $hub = $answer_hubs[$section_key];
+    ?>
+    <section class="guides-answer-hub surface--light" aria-labelledby="guides-answer-hub-title">
+      <div class="guides-answer-hub__quick">
+        <h2 id="guides-answer-hub-title"><?php echo esc_html($hub['quick']['title']); ?></h2>
+        <p><?php echo esc_html($hub['quick']['copy']); ?></p>
+      </div>
+      <div class="guides-answer-hub__links">
+        <a href="<?php echo esc_url($guides_url); ?>"><?php echo esc_html(svic_translate('guides.detail.back_to_hub')); ?></a>
+        <a href="<?php echo esc_url($compare_url); ?>"><?php echo esc_html(svic_translate('product.traffic.links.compare')); ?></a>
+        <a href="<?php echo esc_url($decision_compare_url); ?>">10P+ vs 10S guide</a>
+        <?php if ($section_key === 'apps') : ?>
+          <a href="<?php echo esc_url($decision_yogurt_url); ?>">Yogurt TV upgrade guide</a>
+        <?php elseif ($section_key === 'troubleshooting') : ?>
+          <a href="<?php echo esc_url($decision_authenticity_url); ?>">Authenticity guide</a>
+        <?php else : ?>
+          <a href="<?php echo esc_url($decision_best_url); ?>">Best SVICLOUD box in USA</a>
+        <?php endif; ?>
+        <a href="<?php echo esc_url($contact_url); ?>"><?php echo esc_html(svic_translate('product.traffic.links.contact')); ?></a>
+      </div>
+      <?php if (!empty($hub['faqs'])) : ?>
+        <?php
+        $faq_entities_inline = [];
+        foreach ($hub['faqs'] as $faq_inline) {
+            if (!is_array($faq_inline) || count($faq_inline) < 2) {
+                continue;
+            }
+            $faq_question_inline = trim(wp_strip_all_tags((string) $faq_inline[0]));
+            $faq_answer_inline   = trim(wp_strip_all_tags((string) $faq_inline[1]));
+            if ($faq_question_inline === '' || $faq_answer_inline === '') {
+                continue;
+            }
+            $faq_entities_inline[] = [
+                '@type' => 'Question',
+                'name'  => $faq_question_inline,
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text'  => $faq_answer_inline,
+                ],
+            ];
+        }
+        if ($faq_entities_inline) {
+            echo '<script type="application/ld+json">' . wp_json_encode([
+                '@context' => 'https://schema.org',
+                '@type' => 'FAQPage',
+                'mainEntity' => $faq_entities_inline,
+            ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        }
+        ?>
+        <div class="guides-answer-hub__faq">
+          <h3><?php echo esc_html(strpos(svic_current_locale(), 'zh') === 0 ? '常見問題' : 'FAQ'); ?></h3>
+          <?php foreach ($hub['faqs'] as $faq) : ?>
+            <details>
+              <summary><?php echo esc_html($faq[0]); ?></summary>
+              <p><?php echo esc_html($faq[1]); ?></p>
+            </details>
+          <?php endforeach; ?>
+        </div>
+      <?php endif; ?>
+    </section>
+    <?php
+};
+
 $render_inline_cro_cta = static function () use ($product_10p_url, $product_10s_url, $compare_url, $contact_url) {
     ?>
     <section class="guides-inline-cta" aria-label="<?php echo esc_attr(svic_translate('compare.final_cta.badge')); ?>">
@@ -245,6 +348,7 @@ $render_inline_cro_cta = static function () use ($product_10p_url, $product_10s_
 
   <div class="guides-detail__layout">
     <article class="guides-detail__content">
+      <?php $render_answer_hub(); ?>
       <?php if ($section_key === 'setup') : ?>
         <ol class="guides-steps guides-detail__steps surface--light">
           <?php foreach ($content_items as $index => $step) :
@@ -443,6 +547,7 @@ if ($section_key === 'setup' && !empty($content_items) && is_array($content_item
 
         $copy_value = $copy_key ? svic_translate_rich($copy_key) : '';
         $step_text  = trim(wp_strip_all_tags((string) $copy_value));
+        $step_text  = preg_replace('/[\x00-\x1F\x7F]/u', ' ', $step_text) ?: $step_text;
 
         if ($step_title === '' && $step_text === '') {
             continue;
