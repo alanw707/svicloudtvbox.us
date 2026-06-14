@@ -468,6 +468,12 @@ require_once get_template_directory() . '/inc/class-svic-locale-resolver.php';
 require_once get_template_directory() . '/inc/guides-data.php';
 require_once get_template_directory() . '/inc/theme-maintenance.php';
 require_once get_template_directory() . '/inc/helpers-svic.php';
+require_once get_template_directory() . '/inc/virtual-page-state.php';
+require_once get_template_directory() . '/inc/agent-resources.php';
+require_once get_template_directory() . '/inc/guide-routes.php';
+require_once get_template_directory() . '/inc/decision-pages.php';
+require_once get_template_directory() . '/inc/agent-sitemap.php';
+require_once get_template_directory() . '/inc/policy-contact-routes.php';
 require_once get_template_directory() . '/inc/class-svic-recent-shipments.php';
 require_once get_template_directory() . '/inc/class-svic-zh-sitemap.php';
 
