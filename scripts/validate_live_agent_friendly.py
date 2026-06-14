@@ -8,7 +8,7 @@ import socket
 import ssl
 import sys
 from html.parser import HTMLParser
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, quote, urlparse
 
 AGENT_PATHS = [
     "/llms.txt", "/llms-full.txt", "/agent/products.md", "/agent/compare-10p-vs-10s.md",
@@ -64,7 +64,8 @@ def fetch(base: str, path: str) -> tuple[int, str, str]:
         s = ssl.create_default_context().wrap_socket(raw, server_hostname=host)
     else:
         s = raw
-    request = f"GET {path} HTTP/1.1\r\nHost: {header_host}\r\nConnection: close\r\n\r\n"
+    request_path = quote(path, safe="/:?&=%-._~")
+    request = f"GET {request_path} HTTP/1.1\r\nHost: {header_host}\r\nConnection: close\r\n\r\n"
     s.sendall(request.encode("utf-8"))
     data = b""
     while True:
