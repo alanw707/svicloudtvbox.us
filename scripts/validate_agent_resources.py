@@ -65,7 +65,7 @@ def main() -> None:
         if slug not in decision:
             fail(f"missing decision page slug {slug}")
 
-    if "svic_render_decision_page" not in decision or "template_redirect" not in decision:
+    if "svic_render_decision_page" not in decision or "template_redirect" not in decision or "parse_request" not in decision:
         fail("decision page route hook missing")
     if "get_page_by_path($key" not in decision or "post_status === 'publish'" not in decision:
         fail("decision page fallback route can hijack published pages")
@@ -110,7 +110,7 @@ def main() -> None:
         fail("agent resource route hook missing")
     if "svic_output_agent_friendly_sitemap" not in sitemap or "parse_request" not in sitemap or "-1000000" not in sitemap:
         fail("agent sitemap route hook must run before canonical redirects")
-    if "svic_render_decision_page" not in decision or "-1000000" not in decision:
+    if "svic_render_decision_page" not in decision or "-1000000" not in decision or "'parse_request', 'svic_render_decision_page', 0" not in decision:
         fail("decision page route hook must run before Rank Math 404 redirects")
 
     if "guides-answer-hub" not in guide or "FAQPage" not in guide:

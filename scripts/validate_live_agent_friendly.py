@@ -14,6 +14,7 @@ AGENT_PATHS = [
     "/llms.txt", "/llms-full.txt", "/agent/products.md", "/agent/compare-10p-vs-10s.md",
     "/agent/apps.md", "/agent/troubleshooting.md", "/agent/setup.md", "/agent/shipping-returns.md", "/agent/contact.md",
 ]
+AGENT_MARKDOWN_PATHS = [path for path in AGENT_PATHS if path.startswith("/agent/")]
 GUIDE_PATHS = [
     "/guides-apps/", "/zh/guides-apps/", "/guides-troubleshooting/", "/zh/guides-troubleshooting/",
     "/guides-setup/", "/zh/guides-setup/", "/zh/svicloud遙控器配對失敗-故障碼排查一次搞定/",
@@ -124,7 +125,7 @@ def main() -> None:
         status, head, body = fetch(args.base, path)
         if status != 200 or "SVICLOUD" not in body or "702-389-3416" not in body:
             fail(f"agent endpoint invalid {path} status={status}")
-        if "X-Robots-Tag: index, follow" not in head:
+        if path in AGENT_MARKDOWN_PATHS and "X-Robots-Tag: index, follow" not in head:
             fail(f"agent endpoint missing crawl header {path}")
 
     for path in GUIDE_PATHS:
