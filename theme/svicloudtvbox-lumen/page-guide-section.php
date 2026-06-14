@@ -108,6 +108,20 @@ $other_sections = array_filter(
     }
 );
 
+$resolve_guide_section_url = static function (string $slug_candidate) use ($guides_url): string {
+    $slug_candidate = trim($slug_candidate, '/');
+    if ($slug_candidate === '') {
+        return $guides_url;
+    }
+
+    $detail_link = get_page_by_path($slug_candidate);
+    if ($detail_link instanceof WP_Post && $detail_link->post_status === 'publish') {
+        return get_permalink($detail_link);
+    }
+
+    return home_url('/' . $slug_candidate . '/');
+};
+
 $hero_callouts = svic_guides_get_content_item('hero_callouts', []);
 $hero_callouts = is_array($hero_callouts) ? array_values(array_filter($hero_callouts)) : [];
 
@@ -137,8 +151,7 @@ foreach ($other_sections as $item) {
 
     $slug_hint     = $item['slug'] ?? '';
     $slug_candidate = $slug_hint ?: ('guides-' . str_replace('_', '-', $key));
-    $detail_link   = get_page_by_path($slug_candidate);
-    $href          = $detail_link instanceof WP_Post ? get_permalink($detail_link) : $guides_url;
+    $href          = $resolve_guide_section_url($slug_candidate);
 
     $hero_nav_links[] = [
         'label' => $label,
@@ -483,8 +496,7 @@ $render_inline_cro_cta = static function () use ($product_10p_url, $product_10s_
             }
 
             $slug_candidate = $slug_hint ?: ('guides-' . str_replace('_', '-', $key));
-            $detail_link = get_page_by_path($slug_candidate);
-            $href = $detail_link instanceof WP_Post ? get_permalink($detail_link) : $guides_url;
+            $href = $resolve_guide_section_url($slug_candidate);
           ?>
             <li>
               <a class="guides-detail__sidebar-link" href="<?php echo esc_url(svic_url_with_lang($href)); ?>">

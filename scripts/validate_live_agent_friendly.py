@@ -5,9 +5,10 @@ import argparse
 import json
 import re
 import socket
+import ssl
 import sys
 from html.parser import HTMLParser
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 AGENT_PATHS = [
     "/llms.txt", "/llms-full.txt", "/agent/products.md", "/agent/compare-10p-vs-10s.md",
@@ -54,9 +55,14 @@ def fetch(base: str, path: str) -> tuple[int, str, str]:
     host = u.hostname or "127.0.0.1"
     port = u.port or (443 if u.scheme == "https" else 80)
     header_host = host if u.port is None else f"{host}:{port}"
-    if host in {"127.0.0.1", "localhost"} and "host=" in (u.query or ""):
-        header_host = u.query.split("host=", 1)[1]
-    s = socket.create_connection((host, port), timeout=10)
+    query = parse_qs(u.query or "")
+    if host in {"127.0.0.1", "localhost"} and query.get("host"):
+        header_host = query["host"][0]
+    raw = socket.create_connection((host, port), timeout=10)
+    if u.scheme == "https":
+        s = ssl.create_default_context().wrap_socket(raw, server_hostname=host)
+    else:
+        s = raw
     request = f"GET {path} HTTP/1.1\r\nHost: {header_host}\r\nConnection: close\r\n\r\n"
     s.sendall(request.encode("utf-8"))
     data = b""
@@ -85,7 +91,7 @@ def fetch(base: str, path: str) -> tuple[int, str, str]:
             rest = after_size[size + 2:]
         body_bytes = b"".join(decoded)
     body = body_bytes.decode("utf-8", "replace")
-    m = re.search(r"HTTP/1\.1 (\d+)", head)
+    m = re.search(r"HTTP/\d(?:\.\d)?\s+(\d+)", head)
     return (int(m.group(1)) if m else 0), head, body
 
 

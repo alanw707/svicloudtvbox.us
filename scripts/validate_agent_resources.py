@@ -60,6 +60,8 @@ def main() -> None:
 
     if "svic_render_decision_page" not in decision or "template_redirect" not in decision:
         fail("decision page route hook missing")
+    if "get_page_by_path($key" not in decision or "post_status === 'publish'" not in decision:
+        fail("decision page fallback route can hijack published pages")
 
     for route_source, route_name in [(guide_routes, "guide"), (ROOT.joinpath("theme/svicloudtvbox-lumen/inc/policy-contact-routes.php").read_text(encoding="utf-8"), "policy/contact")]:
         if "get_page_by_path" not in route_source or "post_status === 'publish'" not in route_source:
@@ -102,12 +104,18 @@ def main() -> None:
 
     if "guides-answer-hub" not in guide or "FAQPage" not in guide:
         fail("guide answer hub or FAQ schema missing")
+    if "$resolve_guide_section_url" not in guide or "home_url('/' . $slug_candidate . '/')" not in guide:
+        fail("guide detail navigation does not link virtual fallback guide routes")
 
     if not re.search(r"Yogurt TV|8989c", guide):
         fail("app intent answers missing")
 
     if "guides-answer-hub" not in css:
         fail("answer hub CSS missing from generated guides.css")
+
+    live_validator = ROOT.joinpath("scripts/validate_live_agent_friendly.py").read_text(encoding="utf-8")
+    if "import ssl" not in live_validator or "wrap_socket" not in live_validator:
+        fail("live validator does not support HTTPS bases")
 
     print("OK: agent resources, answer hubs, schema, phone guards")
 

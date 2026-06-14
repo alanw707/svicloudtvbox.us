@@ -73,6 +73,10 @@ if (!function_exists('svic_render_decision_page')) {
         $key = svic_current_decision_page_key();
         svic_redirect_localized_decision_page($pages, $key);
         if (!isset($pages[$key])) { return; }
+        $existing_page = get_page_by_path($key, OBJECT, 'page');
+        if ($existing_page instanceof WP_Post && $existing_page->post_status === 'publish') {
+            return;
+        }
         $page = $pages[$key];
         if (function_exists('svic_mark_virtual_page_request')) {
             svic_mark_virtual_page_request($page['title']);
