@@ -430,7 +430,7 @@ add_filter('woocommerce_add_to_cart_redirect', function (string $url): string {
     return wc_get_checkout_url();
 });
 
-const SVIC_LITESPEED_PURGE_MARK = 'svic-hero-rating-pill-20260510-11';
+const SVIC_LITESPEED_PURGE_MARK = 'svic-agent-friendly-routes-20260613-01';
 const SVIC_REWRITE_FLUSH_MARK   = 'svic-rewrite-flush-20260407';
 
 add_action('init', function () {

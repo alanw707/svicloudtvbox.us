@@ -71,7 +71,7 @@ runs:
         # Falls back to purge_everything when site_url is absent.
         if [[ -n "${SITE_URL}" ]]; then
           SITE="${SITE_URL%/}"
-          PAYLOAD=$(python3 -c "import json; s='${SITE}'; urls=[s+'/',s+'/zh/',s+'/zh-cn/',s+'/shop/',s+'/zh/shop/',s+'/zh-cn/shop/',s+'/cart/',s+'/zh/cart/',s+'/zh-cn/cart/',s+'/checkout/',s+'/zh/checkout/',s+'/zh-cn/checkout/',s+'/compare/',s+'/zh/compare/',s+'/zh-cn/compare/']; print(json.dumps({'files':urls}))")
+          PAYLOAD=$(python3 -c "import json; s='${SITE}'; paths=['/','/zh/','/zh-cn/','/shop/','/zh/shop/','/zh-cn/shop/','/cart/','/zh/cart/','/zh-cn/cart/','/checkout/','/zh/checkout/','/zh-cn/checkout/','/compare/','/zh/compare/','/zh-cn/compare/','/llms.txt','/llms-full.txt','/agent/products.md','/agent/compare-10p-vs-10s.md','/agent/apps.md','/agent/troubleshooting.md','/agent/setup.md','/agent/shipping-returns.md','/agent/contact.md','/agent-friendly-sitemap.xml','/svicloud-10p-vs-10s/','/best-svicloud-box-for-chinese-tv-usa/','/yogurt-tv-not-working-upgrade-guide/','/svicloud-box-authenticity-guide/']; print(json.dumps({'files':[s+p for p in paths]}))")
           echo "Purging ${#PAYLOAD} chars of targeted URLs..."
         else
           PAYLOAD='{"purge_everything":true}'
