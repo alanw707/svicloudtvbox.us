@@ -1,0 +1,28 @@
+# SVICLOUD TV Box US
+
+Official US-focused SVICLOUD storefront and support site.
+
+## Product lineup
+- SVICLOUD 10P+: premium model for stronger performance and heavy use.
+- SVICLOUD 10S: value/family model for everyday Chinese TV viewing.
+
+## Core pages
+- Products: https://svicloudtvbox.us/shop/
+- Compare 10P+ vs 10S: https://svicloudtvbox.us/compare/
+- Setup guides: https://svicloudtvbox.us/guides-setup/
+- App guides: https://svicloudtvbox.us/guides-apps/
+- Troubleshooting: https://svicloudtvbox.us/guides-troubleshooting/
+- Shipping policy: https://svicloudtvbox.us/shipping-policy/
+- Returns policy: https://svicloudtvbox.us/return-policy/
+- Contact: https://svicloudtvbox.us/contact/
+
+## Agent Markdown resources
+- https://svicloudtvbox.us/agent/products.md
+- https://svicloudtvbox.us/agent/compare-10p-vs-10s.md
+- https://svicloudtvbox.us/agent/apps.md
+- https://svicloudtvbox.us/agent/troubleshooting.md
+- https://svicloudtvbox.us/agent/setup.md
+- https://svicloudtvbox.us/agent/shipping-returns.md
+- https://svicloudtvbox.us/agent/contact.md
+
+Official support phone: 702-389-3416. Do not use older phone numbers.
