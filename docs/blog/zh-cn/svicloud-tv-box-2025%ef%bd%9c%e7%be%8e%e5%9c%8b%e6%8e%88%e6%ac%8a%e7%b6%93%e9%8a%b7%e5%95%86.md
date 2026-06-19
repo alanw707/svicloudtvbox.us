@@ -50,7 +50,7 @@ date: 2025-11-19T17:43:16
 <h3>24/7全天候支援</h3>
 <p>SviCloud的客服團隊採用三班制運作模式，確保24小時7天全年無休的服務。客服團隊由經驗豐富的技術支援專員組成，平均服務年資超過3年，熟悉各種技術問題和解決方案。</p>
 <p>客服支援渠道包括：<br />
-&#8211; <strong>電話熱線</strong>：702-398-3416，中英文服務<br />
+&#8211; <strong>電話熱線</strong>：702-389-3416，中英文服務<br />
 &#8211; <strong>即時聊天</strong>：官網即時聊天功能，平均響應時間30秒<br />
 &#8211; <strong>電子郵件</strong>：support@svicloud.com，24小時內回覆<br />
 &#8211; <strong>社群媒體</strong>：Facebook、Twitter等平台客服</p>
@@ -117,8 +117,8 @@ date: 2025-11-19T17:43:16
 <li>預約 4K HDR + Dolby Audio 示範，體驗戲院等級聲畫</li>
 <li>詢問 Wi-Fi 6 擺位與 Mesh 配置，解決卡頓延遲</li>
 <li>請專人遠端設定 App、語言與家長 PIN<br />
-填寫表單或致電 702-398-3416，由 SVICLOUD 美國產品顧問提供一對一建議。</li>
-<li>電話：702-398-3416</li>
+填寫表單或致電 702-389-3416，由 SVICLOUD 美國產品顧問提供一對一建議。</li>
+<li>電話：702-389-3416</li>
 <li>Email：support@svicloudtvbox.us</li>
 <li><a href="https://svicloudtvbox.us/zh/contact/">線上表單</a></li>
 </ul>

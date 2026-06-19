@@ -2,6 +2,45 @@
    HOMEPAGE SECTION UTILITIES & RESPONSIVE
    ========================================== */
 
+@supports (content-visibility: auto) {
+  body.home .frontpage-traffic,
+  body.home .lumen-inbox,
+  body.home .lumen-certification,
+  body.home .lumen-inline-cta,
+  body.home .lumen-metrics,
+  body.home .lumen-feature-grid,
+  body.home .lumen-experience,
+  body.home .lumen-pricing,
+  body.home .lumen-confidence,
+  body.home .frontpage-blog,
+  body.home .lumen-faq {
+    content-visibility: auto;
+  }
+
+  body.home .frontpage-traffic,
+  body.home .lumen-inbox,
+  body.home .lumen-inline-cta {
+    contain-intrinsic-size: 360px;
+  }
+
+  body.home .lumen-metrics,
+  body.home .lumen-feature-grid,
+  body.home .frontpage-blog {
+    contain-intrinsic-size: 620px;
+  }
+
+  body.home .lumen-certification,
+  body.home .lumen-experience,
+  body.home .lumen-confidence {
+    contain-intrinsic-size: 760px;
+  }
+
+  body.home .lumen-pricing,
+  body.home .lumen-faq {
+    contain-intrinsic-size: 900px;
+  }
+}
+
 @media (max-width: 720px) {
   .lumen-section-header__subtitle {
     font-size: 0.98rem;

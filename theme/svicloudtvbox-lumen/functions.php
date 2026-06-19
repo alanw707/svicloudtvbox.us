@@ -252,6 +252,7 @@ require_once get_template_directory() . '/inc/guides-data.php';
 require_once get_template_directory() . '/inc/theme-maintenance.php';
 require_once get_template_directory() . '/inc/helpers-svic.php';
 require_once get_template_directory() . '/inc/class-svic-recent-shipments.php';
+require_once get_template_directory() . '/inc/class-svic-tracking-notifier.php';
 require_once get_template_directory() . '/inc/class-svic-zh-sitemap.php';
 
 SVIC_Locale_Resolver::bootstrap();

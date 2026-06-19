@@ -105,6 +105,6 @@ date: 2025-12-11T09:02:37
 <li>Schedule 4K HDR + Dolby Audio demonstration, experience theater-level audio and video</li>
 <li>Inquire about Wi-Fi 6 placement and Mesh configuration, solve lag and delay issues</li>
 <li>Have specialists remotely configure Apps, language, and parental PIN
-Fill out the form or call 702-398-3416 for one-on-one advice from SVICLOUD US product consultants.</li>
-<li>Phone: 702-398-3416</li>
+Fill out the form or call 702-389-3416 for one-on-one advice from SVICLOUD US product consultants.</li>
+<li>Phone: 702-389-3416</li>
 <li>Email: support@svi

@@ -221,7 +221,7 @@ return [
                 ],
                 'phone' => [
                     'label'       => '電話',
-                    'placeholder' => '702-398-3416',
+                    'placeholder' => '702-389-3416',
                 ],
                 'order' => [
                     'label'       => '訂單編號',
@@ -296,7 +296,7 @@ return [
             'items' => [
                 'phone' => [
                     'label' => '電話／簡訊',
-                    'value' => '702-398-3416',
+                    'value' => '702-389-3416',
                     'cta'   => '撥打或傳送簡訊',
                 ],
                 'email' => [
