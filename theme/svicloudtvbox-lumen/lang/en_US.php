@@ -11,6 +11,21 @@ return [
         'cta_url' => '',
     ],
 
+    'promotion' => [
+        'fathers_day' => [
+            'aria_label'          => 'Father\'s Day promotion',
+            'eyebrow'             => 'Father\'s Day Weekend',
+            'message'             => 'Celebrate Dad with a better way to stream.',
+            'offers_label'        => 'Father\'s Day eligible offers',
+            'offer_10p'           => '10P+ saves 5%',
+            'offer_10s'           => '10S saves 10%',
+            'code_label'          => 'Code {{code}}',
+            'cta'                 => 'Shop the offer',
+            'coupon_not_active'   => 'DAD2026 is valid from June 19 through June 22, 2026.',
+            'coupon_not_eligible' => 'DAD2026 applies to SVICLOUD 10P+ and SVICLOUD 10S only.',
+        ],
+    ],
+
     'recent_shipments' => [
         'badge'                  => 'Recent Shipments',
         'aria_label'             => 'Recent shipments and estimated delivery windows',

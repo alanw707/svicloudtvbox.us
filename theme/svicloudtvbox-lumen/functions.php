@@ -33,6 +33,11 @@ if (!defined('SVIC_RECENT_SHIPMENTS_ENABLED')) {
  * Called from header.php just before <header>.
  */
 function svic_render_announcement_bar(): void {
+    if (function_exists('svic_render_fathers_day_promotion_bar') && svic_is_fathers_day_promotion_visible()) {
+        svic_render_fathers_day_promotion_bar();
+        return;
+    }
+
     if (!SVIC_ANNOUNCEMENT_ENABLED) {
         return;
     }
@@ -468,6 +473,7 @@ require_once get_template_directory() . '/inc/class-svic-locale-resolver.php';
 require_once get_template_directory() . '/inc/guides-data.php';
 require_once get_template_directory() . '/inc/theme-maintenance.php';
 require_once get_template_directory() . '/inc/helpers-svic.php';
+require_once get_template_directory() . '/inc/fathers-day-promotion.php';
 require_once get_template_directory() . '/inc/virtual-page-state.php';
 require_once get_template_directory() . '/inc/agent-resources.php';
 require_once get_template_directory() . '/inc/guide-routes.php';
