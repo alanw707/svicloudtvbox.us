@@ -30,8 +30,8 @@ SCOPE = "https://www.googleapis.com/auth/content"
 ACCOUNT_ID = "5317978135"
 PROMOTION_ID = "dad2026-svic-10s"
 PROMOTION_CODE = "DAD2026"
-TITLE = "Father's Day: 10% off SVICLOUD 10S"
-DESCRIPTION = "Celebrate Dad with a better way to stream. Save 10% on SVICLOUD 10S with code DAD2026."
+TITLE = "Father's Day: 5% off SVICLOUD"
+DESCRIPTION = "Celebrate Dad with a better way to stream. Save 5% on SVICLOUD products with code DAD2026."
 DEFAULT_KEY_PATH = "secrets/google-merchant-service-account.json"
 DEFAULT_TIMEZONE = "America/Los_Angeles"
 
@@ -135,32 +135,33 @@ def product_search_text(product: dict[str, Any]) -> str:
     return " ".join(str(piece) for piece in pieces if piece).lower()
 
 
-def find_10s_offer_id(session: AuthorizedSession, account_id: str) -> str | None:
+def find_svic_offer_ids(session: AuthorizedSession, account_id: str) -> list[str]:
     products = list_products(session, account_id)
+    offer_ids: list[str] = []
     for product in products:
         text = product_search_text(product)
-        if "10s" in text or "svicloud-10s" in text:
+        if "svicloud" in text:
             offer_id = product.get("offerId")
             if offer_id:
-                return str(offer_id)
-    return None
+                offer_ids.append(str(offer_id))
+    return sorted(set(offer_ids))
 
 
 def promotion_body(
     account_id: str,
     data_source: str,
     *,
-    offer_id: str | None,
+    offer_ids: list[str],
     start_time: str,
     end_time: str,
 ) -> dict[str, Any]:
     attributes: dict[str, Any] = {
-        "productApplicability": "SPECIFIC_PRODUCTS" if offer_id else "ALL_PRODUCTS",
+        "productApplicability": "ALL_PRODUCTS",
         "offerType": "GENERIC_CODE",
         "genericRedemptionCode": PROMOTION_CODE,
         "longTitle": TITLE,
         "couponValueType": "PERCENT_OFF",
-        "percentOff": "10",
+        "percentOff": "5",
         "promotionDestinations": ["SHOPPING_ADS", "FREE_LISTINGS"],
         "promotionEffectiveTimePeriod": {
             "startTime": start_time,
@@ -172,9 +173,6 @@ def promotion_body(
         },
         "promotionUrl": "https://svicloudtvbox.us/shop/",
     }
-    if offer_id:
-        attributes["itemIdInclusion"] = [offer_id]
-
     return {
         "dataSource": data_source,
         "promotion": {
@@ -224,14 +222,14 @@ def main() -> int:
         explicit_data_source_id=args.data_source_id,
         create_if_missing=not args.no_create_data_source,
     )
-    offer_id = find_10s_offer_id(session, args.account_id)
+    offer_ids = find_svic_offer_ids(session, args.account_id)
     start_time = rfc3339_local(args.start, args.timezone)
     end_time = rfc3339_local(args.end, args.timezone)
-    body = promotion_body(args.account_id, data_source, offer_id=offer_id, start_time=start_time, end_time=end_time)
+    body = promotion_body(args.account_id, data_source, offer_ids=offer_ids, start_time=start_time, end_time=end_time)
 
     if args.dry_run:
         safe_body = json.loads(json.dumps(body))
-        print(json.dumps({"dataSource": data_source, "matched10sOfferId": offer_id, "request": safe_body}, indent=2))
+        print(json.dumps({"dataSource": data_source, "matchedOfferIdsForAudit": offer_ids, "request": safe_body}, indent=2))
         return 0
 
     response = insert_promotion(session, args.account_id, body)
@@ -239,7 +237,7 @@ def main() -> int:
         "status": "submitted",
         "accountId": args.account_id,
         "dataSource": data_source,
-        "matched10sOfferId": offer_id,
+        "matchedOfferIdsForAudit": offer_ids,
         "promotionId": PROMOTION_ID,
         "promotionName": response.get("name"),
     }, indent=2))

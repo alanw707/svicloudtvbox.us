@@ -22,7 +22,7 @@ if (!defined('SVIC_FATHERS_DAY_PROMO_END')) {
 }
 
 if (!defined('SVIC_FATHERS_DAY_PROMO_SYNC_MARK')) {
-    define('SVIC_FATHERS_DAY_PROMO_SYNC_MARK', '20260618-01');
+    define('SVIC_FATHERS_DAY_PROMO_SYNC_MARK', '20260619-01');
 }
 
 if (!function_exists('svic_fathers_day_promotion_code')) {
@@ -36,13 +36,9 @@ if (!function_exists('svic_fathers_day_promotion_products')) {
     function svic_fathers_day_promotion_products(): array
     {
         return [
-            'svicloud-10p-plus' => [
-                'model' => 'SVICLOUD 10P+',
+            'all' => [
+                'model' => 'SVICLOUD',
                 'rate'  => 5.0,
-            ],
-            'svicloud-10s' => [
-                'model' => 'SVICLOUD 10S',
-                'rate'  => 10.0,
             ],
         ];
     }
@@ -108,20 +104,7 @@ if (!function_exists('svic_is_fathers_day_promotion_visible')) {
 if (!function_exists('svic_fathers_day_promotion_product_ids')) {
     function svic_fathers_day_promotion_product_ids(): array
     {
-        $ids = [];
-
-        if (!class_exists('WooCommerce')) {
-            return $ids;
-        }
-
-        foreach (array_keys(svic_fathers_day_promotion_products()) as $slug) {
-            $post = get_page_by_path($slug, OBJECT, 'product');
-            if ($post instanceof WP_Post) {
-                $ids[$slug] = (int) $post->ID;
-            }
-        }
-
-        return $ids;
+        return [];
     }
 }
 
@@ -132,18 +115,7 @@ if (!function_exists('svic_fathers_day_promotion_rate_for_product')) {
             return 0.0;
         }
 
-        $product_ids = svic_fathers_day_promotion_product_ids();
-        $product_id  = (int) $product->get_id();
-        $parent_id   = method_exists($product, 'get_parent_id') ? (int) $product->get_parent_id() : 0;
-
-        foreach (svic_fathers_day_promotion_products() as $slug => $config) {
-            $eligible_id = (int) ($product_ids[$slug] ?? 0);
-            if ($eligible_id > 0 && ($product_id === $eligible_id || $parent_id === $eligible_id)) {
-                return (float) ($config['rate'] ?? 0.0);
-            }
-        }
-
-        return 0.0;
+        return 5.0;
     }
 }
 
@@ -184,14 +156,14 @@ if (!function_exists('svic_sync_fathers_day_promotion_coupon')) {
         $window = svic_fathers_day_promotion_window();
 
         $coupon->set_code($code);
-        $coupon->set_description('Father\'s Day 2026: 5% off SVICLOUD 10P+ and 10% off SVICLOUD 10S.');
+        $coupon->set_description('Father\'s Day 2026: 5% off all SVICLOUD products.');
         $coupon->set_discount_type('percent');
-        $coupon->set_amount(10);
+        $coupon->set_amount(5);
         $coupon->set_individual_use(true);
         $coupon->set_usage_limit(0);
         $coupon->set_usage_limit_per_user(1);
         $coupon->set_minimum_amount('');
-        $coupon->set_product_ids(array_values(svic_fathers_day_promotion_product_ids()));
+        $coupon->set_product_ids([]);
         $coupon->set_exclude_sale_items(false);
         $coupon->set_free_shipping(false);
 
@@ -264,8 +236,7 @@ if (!function_exists('svic_render_fathers_day_promotion_bar')) {
                 <span class="svic-promo-bar__eyebrow"><?php echo svic_translate_html('promotion.fathers_day.eyebrow'); ?></span>
                 <span class="svic-promo-bar__message"><?php echo svic_translate_html('promotion.fathers_day.message'); ?></span>
                 <span class="svic-promo-bar__offers" aria-label="<?php echo svic_translate_attr('promotion.fathers_day.offers_label'); ?>">
-                    <span class="svic-promo-bar__chip"><?php echo svic_translate_html('promotion.fathers_day.offer_10p'); ?></span>
-                    <span class="svic-promo-bar__chip svic-promo-bar__chip--strong"><?php echo svic_translate_html('promotion.fathers_day.offer_10s'); ?></span>
+                    <span class="svic-promo-bar__chip svic-promo-bar__chip--strong"><?php echo svic_translate_html('promotion.fathers_day.offer_10p'); ?></span>
                 </span>
                 <span class="svic-promo-bar__code"><?php echo svic_translate_html('promotion.fathers_day.code_label', ['code' => $code]); ?></span>
                 <a class="svic-promo-bar__cta" href="<?php echo esc_url($shopUrl); ?>"><?php echo svic_translate_html('promotion.fathers_day.cta'); ?></a>
