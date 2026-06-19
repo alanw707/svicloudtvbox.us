@@ -36,14 +36,30 @@ jobs:
           FTP_PASS: ${{ secrets.FTP_PASS }}
           FTP_PROTOCOL: ftps
           FTP_SKIP_SAME_SIZE: "0"
+          FTP_CONNECT_RETRIES: "6"
+          FTP_CONNECT_TIMEOUT: "60"
           LOCAL_THEME_DIR: theme/svicloudtvbox-lumen
           REMOTE_THEME_DIR: public_html/wp-content/themes/svicloudtvbox-lumen
         run: |
-          python3 scripts/deploy_theme.py \
-            --protocol ftps \
-            --local-dir "$LOCAL_THEME_DIR" \
-            --remote-root "$REMOTE_THEME_DIR" \
-            --bust-cache
+          for attempt in 1 2 3; do
+            echo "Deploy attempt ${attempt}/3"
+            if python3 scripts/deploy_theme.py \
+              --protocol ftps \
+              --local-dir "$LOCAL_THEME_DIR" \
+              --remote-root "$REMOTE_THEME_DIR" \
+              --bust-cache; then
+              exit 0
+            fi
+
+            if [[ "$attempt" == "3" ]]; then
+              echo "Deploy failed after ${attempt} attempt(s)."
+              exit 1
+            fi
+
+            sleep_seconds=$((attempt * 60))
+            echo "Deploy attempt ${attempt} failed; retrying in ${sleep_seconds}s..."
+            sleep "$sleep_seconds"
+          done
 
       - name: 🧹 Purge CDN Caches
         uses: ./.github/actions/purge-caches
