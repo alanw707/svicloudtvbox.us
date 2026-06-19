@@ -12,6 +12,21 @@ $overrides = [
         'cta_url' => '',
     ],
 
+    'promotion' => [
+        'fathers_day' => [
+            'aria_label'          => '父亲节优惠',
+            'eyebrow'             => '父亲节周末',
+            'message'             => '用更好的流媒体体验庆祝父亲节。',
+            'offers_label'        => '父亲节适用优惠',
+            'offer_10p'           => '10P+ 省 5%',
+            'offer_10s'           => '10S 省 10%',
+            'code_label'          => '代码 {{code}}',
+            'cta'                 => '选购优惠',
+            'coupon_not_active'   => 'DAD2026 适用日期为 2026 年 6 月 19 日至 6 月 22 日。',
+            'coupon_not_eligible' => 'DAD2026 仅适用于 SVICLOUD 10P+ 与 SVICLOUD 10S。',
+        ],
+    ],
+
     'recent_shipments' => [
         'badge'                  => '近期出货',
         'aria_label'             => '近期出货与预估送达时程',
