@@ -234,11 +234,10 @@ if (!function_exists('svic_render_fathers_day_promotion_bar')) {
         <div class="svic-promo-bar svic-promo-bar--fathers-day" role="region" aria-label="<?php echo svic_translate_attr('promotion.fathers_day.aria_label'); ?>">
             <div class="svic-promo-bar__inner">
                 <span class="svic-promo-bar__eyebrow"><?php echo svic_translate_html('promotion.fathers_day.eyebrow'); ?></span>
-                <span class="svic-promo-bar__message"><?php echo svic_translate_html('promotion.fathers_day.message'); ?></span>
-                <span class="svic-promo-bar__offers" aria-label="<?php echo svic_translate_attr('promotion.fathers_day.offers_label'); ?>">
-                    <span class="svic-promo-bar__chip svic-promo-bar__chip--strong"><?php echo svic_translate_html('promotion.fathers_day.offer_10p'); ?></span>
+                <span class="svic-promo-bar__message">
+                    <span class="svic-promo-bar__offer"><?php echo svic_translate_html('promotion.fathers_day.offer_10p'); ?></span>
+                    <span class="svic-promo-bar__code"><?php echo svic_translate_html('promotion.fathers_day.code_label', ['code' => $code]); ?></span>
                 </span>
-                <span class="svic-promo-bar__code"><?php echo svic_translate_html('promotion.fathers_day.code_label', ['code' => $code]); ?></span>
                 <a class="svic-promo-bar__cta" href="<?php echo esc_url($shopUrl); ?>"><?php echo svic_translate_html('promotion.fathers_day.cta'); ?></a>
             </div>
         </div>
