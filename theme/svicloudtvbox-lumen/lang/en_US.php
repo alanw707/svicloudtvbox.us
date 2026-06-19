@@ -2239,7 +2239,7 @@ return [
                 'title' => 'Order processing',
                 'items' => [
                     'cutoff'   => 'Orders placed before 2:00 PM Pacific time (Monday–Friday) are processed the same business day.',
-                    'dispatch' => 'Most orders ship within 24–48 hours of payment confirmation.',
+                    'dispatch' => 'Most orders ship within 0–2 business days of payment confirmation.',
                     'tracking' => 'You will receive a shipping confirmation email with tracking information once your order ships.',
                 ],
             ],
@@ -2252,11 +2252,11 @@ return [
                 ],
             ],
             'canada' => [
-                'title' => 'Canada shipping',
+                'title' => 'International shipping',
                 'items' => [
-                    'timeframe' => 'Canadian orders typically arrive within 5–7 business days, including customs processing.',
-                    'customs'   => 'Packages are shipped with accurate customs declarations for smooth border clearance.',
-                    'duties'    => 'Import duties, taxes, and customs fees are the responsibility of the recipient and are not included in the product price.',
+                    'timeframe' => 'We currently publish shipping rates and delivery promises for U.S. orders only.',
+                    'customs'   => 'If international checkout becomes available, any customs duties, taxes, or import fees are the responsibility of the recipient.',
+                    'duties'    => 'Contact our concierge team before placing a non-U.S. order so we can confirm availability and timing.',
                 ],
             ],
             'issues' => [

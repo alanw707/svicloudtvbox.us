@@ -27,16 +27,6 @@ $policy_sections = [
         ],
     ],
     [
-        'title'  => svic_translate_html('shipping_policy.sections.canada.title'),
-        'anchor' => 'canada',
-        'type'   => 'list',
-        'items'  => [
-            svic_translate_rich('shipping_policy.sections.canada.items.timeframe'),
-            svic_translate_rich('shipping_policy.sections.canada.items.customs'),
-            svic_translate_rich('shipping_policy.sections.canada.items.duties'),
-        ],
-    ],
-    [
         'title'  => svic_translate_html('shipping_policy.sections.issues.title'),
         'anchor' => 'issues',
         'type'   => 'list',
