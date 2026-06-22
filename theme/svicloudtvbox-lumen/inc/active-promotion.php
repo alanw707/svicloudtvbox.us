@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('SVIC_PROMOTION_ENABLED')) {
-    define('SVIC_PROMOTION_ENABLED', true);
+    define('SVIC_PROMOTION_ENABLED', false);
 }
 
 if (!defined('SVIC_PROMOTION_KEY')) {
