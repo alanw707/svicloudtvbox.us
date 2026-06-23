@@ -117,6 +117,46 @@ def schema_types(html: str) -> list[str]:
     return found
 
 
+def validate_breadcrumb_schema(html: str, path: str) -> None:
+    parser = JsonLdParser()
+    parser.feed(html)
+
+    def walk(node):
+        if isinstance(node, dict):
+            yield node
+            for value in node.values():
+                yield from walk(value)
+        elif isinstance(node, list):
+            for item in node:
+                yield from walk(item)
+
+    for block in parser.blocks:
+        try:
+            data = json.loads(block)
+        except json.JSONDecodeError:
+            fail("invalid JSON-LD block")
+
+        for node in walk(data):
+            node_type = node.get("@type")
+            types = node_type if isinstance(node_type, list) else [node_type]
+            if "BreadcrumbList" not in types:
+                continue
+
+            elements = node.get("itemListElement")
+            if not isinstance(elements, list):
+                fail(f"breadcrumb schema missing itemListElement {path}")
+
+            for index, element in enumerate(elements, start=1):
+                if not isinstance(element, dict):
+                    fail(f"breadcrumb item invalid {path} item={index}")
+
+                name = element.get("name")
+                item = element.get("item")
+                item_name = item.get("name") if isinstance(item, dict) else None
+                if not str(name or item_name or "").strip():
+                    fail(f"breadcrumb item missing name/item.name {path} item={index}")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--base", default="http://127.0.0.1?host=svicloud10p.svic.local", help="Base URL. For local Traefik use query host=domain to set Host header.")
@@ -133,6 +173,7 @@ def main() -> None:
         status, _, body = fetch(args.base, path)
         if status != 200 or "guides-answer-hub" not in body or "702-389-3416" not in body:
             fail(f"guide endpoint invalid {path} status={status}")
+        validate_breadcrumb_schema(body, path)
         if "error404" in body or "Page not found" in body:
             fail(f"guide endpoint is internally 404 {path}")
         if path in {"/guides-apps/", "/zh/guides-apps/", "/guides-troubleshooting/", "/zh/guides-troubleshooting/"} and "FAQPage" not in schema_types(body):
@@ -150,11 +191,13 @@ def main() -> None:
         status, _, body = fetch(args.base, path)
         if status != 200 or "702-389-3416" not in body:
             fail(f"policy/contact endpoint invalid {path} status={status}")
+        validate_breadcrumb_schema(body, path)
         if "error404" in body or "Page not found" in body:
             fail(f"policy/contact endpoint is internally 404 {path}")
 
     for path in PRODUCT_SCHEMA_PATHS:
         status, _, body = fetch(args.base, path)
+        validate_breadcrumb_schema(body, path)
         types = schema_types(body)
         if status != 200 or "Product" not in types or "Offer" not in types or "Organization" not in types:
             fail(f"product schema invalid {path} status={status} types={types}")
@@ -167,6 +210,7 @@ def main() -> None:
         status, _, body = fetch(args.base, path)
         if status != 200 or "svic_decision_cta_click" not in body or "702-389-3416" not in body:
             fail(f"decision endpoint invalid {path} status={status}")
+        validate_breadcrumb_schema(body, path)
         if "error404" in body or "Page not found" in body:
             fail(f"decision endpoint is internally 404 {path}")
         for href in ["/compare/", "/contact/", "/guides-apps/", "/guides-troubleshooting/", "/guides-setup/", "/product/svicloud-10p-plus/", "/product/svicloud-10s/", "/shipping-policy/", "/return-policy/"]:

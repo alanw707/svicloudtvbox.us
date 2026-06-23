@@ -4100,6 +4100,34 @@ if (!function_exists('svic_get_breadcrumb_items')) {
     }
 }
 
+if (!function_exists('svic_normalize_breadcrumb_items')) {
+    function svic_normalize_breadcrumb_items(array $items): array
+    {
+        $normalized_items = [];
+
+        foreach ($items as $item) {
+            if (!is_array($item)) {
+                continue;
+            }
+
+            $label = isset($item['label']) ? trim(wp_strip_all_tags((string) $item['label'])) : '';
+            if ($label === '' && empty($item['url']) && !empty($GLOBALS['svic_virtual_page_title'])) {
+                $label = trim(wp_strip_all_tags((string) $GLOBALS['svic_virtual_page_title']));
+            }
+            if ($label === '') {
+                continue;
+            }
+
+            $normalized_items[] = [
+                'label' => $label,
+                'url'   => !empty($item['url']) ? (string) $item['url'] : null,
+            ];
+        }
+
+        return $normalized_items;
+    }
+}
+
 if (!function_exists('svic_render_breadcrumbs')) {
     function svic_render_breadcrumbs(): void
     {
@@ -4107,7 +4135,7 @@ if (!function_exists('svic_render_breadcrumbs')) {
             return;
         }
 
-        $items = svic_get_breadcrumb_items();
+        $items = svic_normalize_breadcrumb_items(svic_get_breadcrumb_items());
         if (count($items) < 2) {
             return;
         }
@@ -4145,7 +4173,7 @@ if (!function_exists('svic_output_breadcrumb_schema')) {
             return;
         }
 
-        $items = svic_get_breadcrumb_items();
+        $items = svic_normalize_breadcrumb_items(svic_get_breadcrumb_items());
         if (count($items) < 2) {
             return;
         }
