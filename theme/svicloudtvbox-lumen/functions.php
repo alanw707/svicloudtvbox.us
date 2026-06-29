@@ -6177,6 +6177,87 @@ add_filter('svic_tracking_enabled', function (bool $enabled): bool {
     return $enabled;
 });
 
+if (!function_exists('svic_dequeue_duplicate_google_tags')) {
+    /**
+     * Keep Site Kit as the single GA4 owner when it is active.
+     *
+     * A second GA4 plugin can enqueue the `google_gtagjs` handle alongside Site Kit's
+     * `google_gtagjs-js` handle. That double config pollutes GA4 attribution with
+     * `(not set)` / Unassigned sessions, especially when consent plugins also run.
+     */
+    function svic_dequeue_duplicate_google_tags(): void
+    {
+        if (is_admin() || !defined('GOOGLESITEKIT_VERSION')) {
+            return;
+        }
+
+        foreach (['ga-google-analytics', 'gap-google-analytics'] as $handle) {
+            wp_dequeue_script($handle);
+            wp_deregister_script($handle);
+        }
+    }
+}
+add_action('wp_enqueue_scripts', 'svic_dequeue_duplicate_google_tags', PHP_INT_MAX);
+add_action('wp_print_scripts', 'svic_dequeue_duplicate_google_tags', PHP_INT_MAX);
+
+if (!function_exists('svic_filter_duplicate_google_tag_output')) {
+    /**
+     * Strips duplicate GA4 output from plugins that bypass normal script enqueueing.
+     *
+     * The live duplicate is emitted as `id="google_gtagjs"` plus an inline config
+     * for `G-25RK4LK4DH`. Site Kit's owned tag uses `id="google_gtagjs-js"`, so this
+     * filter leaves Site Kit intact.
+     */
+    function svic_filter_duplicate_google_tag_output(string $html): string
+    {
+        if (is_admin() || !defined('GOOGLESITEKIT_VERSION')) {
+            return $html;
+        }
+
+        $pattern = '#\s*<script\s+async\s+id="google_gtagjs"\s+src="https://www\.googletagmanager\.com/gtag/js\?id=G-25RK4LK4DH"></script>\s*<script\s+id="google_gtagjs-inline">\s*window\.dataLayer\s*=\s*window\.dataLayer\s*\|\|\s*\[\];function gtag\(\)\{dataLayer\.push\(arguments\);\}gtag\(\'js\',\s*new Date\(\)\);gtag\(\'config\',\s*\'G-25RK4LK4DH\',\s*\{\}\s*\);\s*</script>#s';
+
+        return (string) preg_replace($pattern, '', $html);
+    }
+}
+
+add_action('template_redirect', function (): void {
+    if (is_admin() || wp_doing_ajax() || !defined('GOOGLESITEKIT_VERSION')) {
+        return;
+    }
+
+    ob_start('svic_filter_duplicate_google_tag_output');
+}, 0);
+
+if (!function_exists('svic_render_google_consent_stabilizer')) {
+    /**
+     * Reassert analytics consent after ad plugins add their own default state.
+     *
+     * Google for WooCommerce and consent plugins can load after Site Kit and push a
+     * broad denied default. We only touch analytics-related storage; ad consent stays
+     * controlled by the ad/consent plugins.
+     */
+    function svic_render_google_consent_stabilizer(): void
+    {
+        if (is_admin() || !defined('GOOGLESITEKIT_VERSION')) {
+            return;
+        }
+        ?>
+        <script id="svic-google-consent-stabilizer">
+        window.dataLayer = window.dataLayer || [];
+        if (typeof window.gtag !== 'function') {
+            window.gtag = function(){ window.dataLayer.push(arguments); };
+        }
+        window.gtag('consent', 'update', {
+            analytics_storage: 'granted',
+            functionality_storage: 'granted',
+            security_storage: 'granted'
+        });
+        </script>
+        <?php
+    }
+}
+add_action('wp_footer', 'svic_render_google_consent_stabilizer', 999);
+
 /**
  * Drop jQuery Migrate to reduce legacy JS on modern browsers.
  */
