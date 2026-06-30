@@ -2549,6 +2549,113 @@ if (!function_exists('svic_build_product_schema_from_wc_product')) {
     }
 }
 
+if (!function_exists('svic_google_merchant_shipping_details_schema')) {
+    function svic_google_merchant_shipping_details_schema(): array
+    {
+        $currency            = strtoupper(get_option('woocommerce_currency', 'USD'));
+        $shipping_policy_url = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/shipping-policy/')) : home_url('/shipping-policy/');
+
+        return [
+            '@type' => 'OfferShippingDetails',
+            'shippingDestination' => [
+                '@type' => 'DefinedRegion',
+                'addressCountry' => 'US',
+            ],
+            'shippingRate' => [
+                '@type' => 'MonetaryAmount',
+                'value' => '0',
+                'currency' => $currency,
+            ],
+            'deliveryTime' => [
+                '@type' => 'ShippingDeliveryTime',
+                'handlingTime' => [
+                    '@type' => 'QuantitativeValue',
+                    'minValue' => 0,
+                    'maxValue' => 2,
+                    'unitCode' => 'd',
+                ],
+                'transitTime' => [
+                    '@type' => 'QuantitativeValue',
+                    'minValue' => 2,
+                    'maxValue' => 5,
+                    'unitCode' => 'd',
+                ],
+            ],
+            'url' => esc_url_raw($shipping_policy_url),
+        ];
+    }
+}
+
+if (!function_exists('svic_google_merchant_return_policy_schema')) {
+    function svic_google_merchant_return_policy_schema(): array
+    {
+        $return_policy_url = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/return-policy/')) : home_url('/return-policy/');
+
+        return [
+            '@type' => 'MerchantReturnPolicy',
+            'applicableCountry' => 'US',
+            'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
+            'merchantReturnDays' => 30,
+            'returnMethod' => 'https://schema.org/ReturnByMail',
+            'returnFees' => 'https://schema.org/ReturnShippingFees',
+            'url' => esc_url_raw($return_policy_url),
+        ];
+    }
+}
+
+if (!function_exists('svic_enrich_offer_schema_for_google_merchant')) {
+    /**
+     * Merchant Center's store-quality crawler reads page JSON-LD in addition
+     * to feed settings, so keep shipping and return promises on every Offer.
+     *
+     * @param array<mixed> $offer
+     * @return array<mixed>
+     */
+    function svic_enrich_offer_schema_for_google_merchant(array $offer): array
+    {
+        if (empty($offer['shippingDetails'])) {
+            $offer['shippingDetails'] = svic_google_merchant_shipping_details_schema();
+        }
+
+        if (empty($offer['hasMerchantReturnPolicy'])) {
+            $offer['hasMerchantReturnPolicy'] = svic_google_merchant_return_policy_schema();
+        }
+
+        return $offer;
+    }
+}
+
+if (!function_exists('svic_enrich_product_schema_for_google_merchant')) {
+    /**
+     * Enrich Rank Math/WooCommerce Product schema without emitting duplicate
+     * Product nodes.
+     *
+     * @param array<mixed> $node
+     * @return array<mixed>
+     */
+    function svic_enrich_product_schema_for_google_merchant(array $node): array
+    {
+        if (empty($node['offers'])) {
+            return $node;
+        }
+
+        if (is_array($node['offers']) && isset($node['offers']['@type'])) {
+            $node['offers'] = svic_enrich_offer_schema_for_google_merchant($node['offers']);
+            return $node;
+        }
+
+        if (is_array($node['offers'])) {
+            foreach ($node['offers'] as $offer_key => $offer) {
+                if (is_array($offer)) {
+                    $node['offers'][$offer_key] = svic_enrich_offer_schema_for_google_merchant($offer);
+                }
+            }
+        }
+
+        return $node;
+    }
+}
+
 if (!function_exists('svic_get_organization_schema_enhancements')) {
     /**
      * Shared Organization fields reused between our custom schema and Rank Math's output.
@@ -2784,6 +2891,19 @@ if (!function_exists('svic_filter_rank_math_schema_graph')) {
                     $is_organization = true;
                     break;
                 }
+            }
+
+            $is_product = false;
+            foreach ($types as $type) {
+                if (is_string($type) && strcasecmp($type, 'Product') === 0) {
+                    $is_product = true;
+                    break;
+                }
+            }
+
+            if ($is_product) {
+                $schema_graph[$key] = svic_enrich_product_schema_for_google_merchant($node);
+                continue;
             }
 
             if ($is_organization) {
@@ -6991,7 +7111,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             return;
         }
 
-        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked');
+        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v3');
         $mtime        = (int) filemtime($feed_path);
         if ($last_checked >= $mtime) {
             return;
@@ -7008,13 +7128,6 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             . "        <g:price>USD 0.00</g:price>\n"
             . "        <g:min_transit_time>2</g:min_transit_time>\n"
             . "        <g:max_transit_time>5</g:max_transit_time>\n"
-            . "      </g:shipping>\n"
-            . "      <g:shipping>\n"
-            . "        <g:country>CA</g:country>\n"
-            . "        <g:service>Free Shipping</g:service>\n"
-            . "        <g:price>USD 0.00</g:price>\n"
-            . "        <g:min_transit_time>5</g:min_transit_time>\n"
-            . "        <g:max_transit_time>10</g:max_transit_time>\n"
             . "      </g:shipping>\n";
 
         $offer_images = [
@@ -7056,6 +7169,15 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 $patched_item = str_replace('    </item>', $shipping_block . '    </item>', $item);
             }
 
+            $patched_item = preg_replace_callback('/\s*<g:shipping>(.*?)<\/g:shipping>\s*/s', function ($shipping_matches) {
+                $country = '';
+                if (preg_match('/<g:country>(.*?)<\/g:country>/', $shipping_matches[0], $country_matches)) {
+                    $country = strtoupper(trim($country_matches[1]));
+                }
+
+                return $country === 'CA' ? "\n" : $shipping_matches[0];
+            }, $patched_item) ?: $patched_item;
+
             if (isset($image_link_overrides[$offer_id]) && strpos($patched_item, '<g:image_link>') !== false) {
                 $replacement = '      <g:image_link>' . esc_url($image_link_overrides[$offer_id]) . '</g:image_link>';
                 $patched_item = preg_replace('/\s*<g:image_link>.*?<\/g:image_link>\s*/s', "\n" . $replacement . "\n", $patched_item, 1) ?: $patched_item;
@@ -7072,9 +7194,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                     $country = strtoupper(trim($country_matches[1]));
                 }
 
-                $transit_block = $country === 'CA'
-                    ? "        <g:min_transit_time>5</g:min_transit_time>\n        <g:max_transit_time>10</g:max_transit_time>\n"
-                    : "        <g:min_transit_time>2</g:min_transit_time>\n        <g:max_transit_time>5</g:max_transit_time>\n";
+                $transit_block = "        <g:min_transit_time>2</g:min_transit_time>\n        <g:max_transit_time>5</g:max_transit_time>\n";
 
                 if (strpos($shipping, '<g:price>') !== false) {
                     return preg_replace('/(\s*<g:price>.*?<\/g:price>\s*)/s', '$1' . $transit_block, $shipping, 1) ?: $shipping;
@@ -7102,16 +7222,23 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 }
             }
 
-            if ($offer_id !== '' && isset($offer_images[$offer_id]) && strpos($patched_item, '<g:additional_image_link>') === false) {
+            if ($offer_id !== '' && isset($offer_images[$offer_id])) {
                 $additional_images = '';
                 foreach ($offer_images[$offer_id] as $image_url) {
-                    $additional_images .= '      <g:additional_image_link>' . esc_url($image_url) . "</g:additional_image_link>\n";
+                    $image_tag = '<g:additional_image_link>' . esc_url($image_url) . '</g:additional_image_link>';
+                    if (strpos($patched_item, $image_tag) === false) {
+                        $additional_images .= '      ' . $image_tag . "\n";
+                    }
                 }
 
-                if (strpos($patched_item, '<g:checkout_link_template>') !== false) {
-                    $patched_item = str_replace('      <g:checkout_link_template>', $additional_images . '      <g:checkout_link_template>', $patched_item);
-                } elseif (strpos($patched_item, '<g:availability>') !== false) {
-                    $patched_item = str_replace('      <g:availability>', $additional_images . '      <g:availability>', $patched_item);
+                if ($additional_images === '') {
+                    return $patched_item;
+                }
+
+                if (preg_match('/\s*<g:checkout_link_template>/', $patched_item)) {
+                    $patched_item = preg_replace('/\s*(<g:checkout_link_template>)/', "\n" . $additional_images . '      $1', $patched_item, 1) ?: $patched_item;
+                } elseif (preg_match('/\s*<g:availability>/', $patched_item)) {
+                    $patched_item = preg_replace('/\s*(<g:availability>)/', "\n" . $additional_images . '      $1', $patched_item, 1) ?: $patched_item;
                 } else {
                     $patched_item = str_replace('    </item>', $additional_images . '    </item>', $patched_item);
                 }
@@ -7124,7 +7251,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             file_put_contents($feed_path, $patched, LOCK_EX);
         }
 
-        set_transient('svic_google_feed_rich_offer_checked', max($mtime, time()), HOUR_IN_SECONDS);
+        set_transient('svic_google_feed_rich_offer_checked_v3', max($mtime, time()), HOUR_IN_SECONDS);
     }
 }
 
