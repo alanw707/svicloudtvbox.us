@@ -1807,6 +1807,10 @@ return [
                     'title' => '機器當機或無回應',
                     'copy'  => '按住機身電源鍵 8 秒強制重啟。若遙控器也無反應，請拔除電源適配器，等待 30 秒後重新插上。若頻繁當機，可能需要更新韌體，或機器過熱 — 請確保機器四周保持良好散熱空間。',
                 ],
+                'stuck_loading' => [
+                    'title' => '停在載入畫面或小雲 Logo',
+                    'copy'  => '先拔掉電源 2-3 分鐘，移除 USB、外接硬碟或其他配件，只保留電源線和 HDMI 線。重新插上電源後，馬上對著盒子連續按遙控器紅色電源鍵約 5-20 次，直到 Recovery 或系統選單出現。請先選擇 <strong>Reboot system now</strong>。如果仍停在載入畫面，請再次進入 Recovery，選擇 <strong>Factory reset</strong> 或 <strong>Wipe data/factory data reset</strong>。恢復出廠設定會清除設定與已安裝 App，重置後第一次開機可能需要 5-10 分鐘。',
+                ],
                 'firmware' => [
                     'title' => '如何更新韌體',
                     'copy'  => '前往 <strong>設定 &gt; 關於 &gt; 系統更新</strong>，點選「檢查更新」。機器須連線至網路，更新約需 3 至 5 分鐘。更新期間請<strong>切勿</strong>拔除電源。若未顯示更新，表示韌體已是最新版本。遇到錯誤訊息請聯繫禮賓服務。',
@@ -2243,6 +2247,10 @@ return [
                         'orz_installer' => [
                             'question' => '某串流 App 或安裝程式無法開啟怎麼辦？',
                             'answer'   => '請從官方來源重新安裝、清除 App 快取並重啟。避免非官方 APK。如仍有問題，提供 App 名稱與錯誤訊息給客服。',
+                        ],
+                        'stuck_loading' => [
+                            'question' => '小雲盒子停在載入畫面或 Logo 怎麼辦？',
+                            'answer'   => '請先拔掉電源 2-3 分鐘，移除 USB 或其他配件，只保留電源與 HDMI。重新插電後，馬上對著盒子連續按遙控器紅色電源鍵約 5-20 次，直到 Recovery 出現。請先選 <strong>Reboot system now</strong>；若仍卡住，再次進入 Recovery 後選 <strong>Factory reset</strong> 或 <strong>Wipe data/factory data reset</strong>。恢復出廠設定會清除設定與已安裝 App。',
                         ],
                         'contact_support' => [
                             'question' => '怎麼聯絡客服？',

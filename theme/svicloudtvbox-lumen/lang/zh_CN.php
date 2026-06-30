@@ -292,6 +292,10 @@ $overrides = [
                     'title' => '机器卡死或无响应',
                     'copy'  => '按住机身电源键 8 秒强制重启。若遥控器也无反应，请拔除电源适配器，等待 30 秒后重新插上。若频繁卡死，可能需要更新固件，或机器过热 — 请确保机器四周保持良好散热空间。',
                 ],
+                'stuck_loading' => [
+                    'title' => '停在加载画面或小云 Logo',
+                    'copy'  => '先拔掉电源 2-3 分钟，移除 USB、外接硬盘或其他配件，只保留电源线和 HDMI 线。重新插上电源后，马上对着盒子连续按遥控器红色电源键约 5-20 次，直到 Recovery 或系统菜单出现。请先选择 <strong>Reboot system now</strong>。如果仍停在加载画面，请再次进入 Recovery，选择 <strong>Factory reset</strong> 或 <strong>Wipe data/factory data reset</strong>。恢复出厂设置会清除设置与已安装 App，重置后第一次开机可能需要 5-10 分钟。',
+                ],
                 'firmware' => [
                     'title' => '如何更新固件',
                     'copy'  => '前往 <strong>设置 &gt; 关于 &gt; 系统更新</strong>，点选「检查更新」。机器须连接至网络，更新约需 3 至 5 分钟。更新期间请<strong>切勿</strong>拔除电源。若未显示更新，表示固件已是最新版本。遇到错误信息请联系礼宾服务。',
@@ -1270,6 +1274,10 @@ $overrides = [
                     'orz_installer' => [
                         'question' => '某串流 App 或安装程序无法开启怎么办？',
                         'answer'   => '请从官方来源重新安装、清除 App 缓存并重启。避免非官方 APK。如仍有问题，提供 App 名称与错误信息给客服。',
+                    ],
+                    'stuck_loading' => [
+                        'question' => '小云盒子停在加载画面或 Logo 怎么办？',
+                        'answer'   => '请先拔掉电源 2-3 分钟，移除 USB 或其他配件，只保留电源与 HDMI。重新插电后，马上对着盒子连续按遥控器红色电源键约 5-20 次，直到 Recovery 出现。请先选 <strong>Reboot system now</strong>；若仍卡住，再次进入 Recovery 后选 <strong>Factory reset</strong> 或 <strong>Wipe data/factory data reset</strong>。恢复出厂设置会清除设置与已安装 App。',
                     ],
                     'contact_support' => [
                         'question' => '怎么联系客服？',

@@ -3157,6 +3157,10 @@ if (!function_exists('svic_faq_page_schema_items')) {
                 'answer_key'   => 'faq.sections.troubleshooting_support.items.orz_installer.answer',
             ],
             [
+                'question_key' => 'faq.sections.troubleshooting_support.items.stuck_loading.question',
+                'answer_key'   => 'faq.sections.troubleshooting_support.items.stuck_loading.answer',
+            ],
+            [
                 'question_key' => 'faq.sections.troubleshooting_support.items.contact_support.question',
                 'answer_key'   => 'faq.sections.troubleshooting_support.items.contact_support.answer',
                 'replacements' => [

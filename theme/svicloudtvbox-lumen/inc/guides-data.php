@@ -123,6 +123,10 @@ if (!function_exists('svic_guides_get_content')) {
                     'copy_key'  => 'guides.troubleshooting.items.frozen.copy',
                 ],
                 [
+                    'title_key' => 'guides.troubleshooting.items.stuck_loading.title',
+                    'copy_key'  => 'guides.troubleshooting.items.stuck_loading.copy',
+                ],
+                [
                     'title_key' => 'guides.troubleshooting.items.firmware.title',
                     'copy_key'  => 'guides.troubleshooting.items.firmware.copy',
                 ],

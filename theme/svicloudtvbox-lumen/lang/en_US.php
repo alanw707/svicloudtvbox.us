@@ -1690,6 +1690,10 @@ return [
                     'title' => 'Box frozen or unresponsive',
                     'copy'  => 'Hold the power button on the box for 8 seconds to force a restart. If the remote is also unresponsive, unplug the power adapter, wait 30 seconds, then plug it back in. Frequent freezes may indicate a firmware update is needed or the box is overheating — ensure proper ventilation around the device.',
                 ],
+                'stuck_loading' => [
+                    'title' => 'Stuck on loading or SVICloud logo',
+                    'copy'  => 'Unplug power for 2-3 minutes, remove USB drives or accessories, then reconnect only power and HDMI. As soon as the box powers on, point the remote at the box and press the red power button repeatedly about 5-20 times until the recovery menu appears. Choose <strong>Reboot system now</strong> first. If it still gets stuck, enter recovery again and choose <strong>Factory reset</strong> or <strong>Wipe data/factory data reset</strong>. Factory reset erases settings and installed apps, and the first boot may take 5-10 minutes.',
+                ],
                 'firmware' => [
                     'title' => 'How to update firmware',
                     'copy'  => 'Navigate to <strong>Settings &gt; About &gt; System Update</strong> and tap “Check for updates.” The box must be connected to the internet. Updates typically take 3–5 minutes. Do <strong>not</strong> unplug the box during an update. If no update appears, your firmware is already current. Contact concierge if you see an error.',
@@ -2230,6 +2234,10 @@ return [
                     'orz_installer' => [
                         'question' => 'A streaming app or installer will not load. What now?',
                         'answer'   => 'Reinstall from the official source, clear app cache, and reboot. Avoid unofficial APKs. If it persists, share the exact app name and error with concierge.',
+                    ],
+                    'stuck_loading' => [
+                        'question' => 'What should I do if my SviCloud box is stuck on the loading screen or logo?',
+                        'answer'   => 'Unplug power for 2-3 minutes, remove USB drives/accessories, then reconnect only power and HDMI. When the box powers on, point the remote at it and press the red power button repeatedly about 5-20 times until recovery appears. Choose <strong>Reboot system now</strong> first. If it still gets stuck, repeat the steps and choose <strong>Factory reset</strong> or <strong>Wipe data/factory data reset</strong>. Factory reset erases settings and installed apps.',
                     ],
                     'contact_support' => [
                         'question' => 'How do I reach support?',
