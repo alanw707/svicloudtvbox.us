@@ -2250,8 +2250,6 @@ if (!function_exists('svic_get_store_postal_address_schema')) {
      */
     function svic_get_store_postal_address_schema(): ?array
     {
-        // Street address intentionally omitted — home-based business.
-        // Only city / state / country are emitted for Google location signals.
         $city      = trim((string) get_option('woocommerce_store_city', ''));
         $postcode  = trim((string) get_option('woocommerce_store_postcode', ''));
 
@@ -2266,7 +2264,8 @@ if (!function_exists('svic_get_store_postal_address_schema')) {
         }
 
         $address = [
-            '@type' => 'PostalAddress',
+            '@type'              => 'PostalAddress',
+            'postOfficeBoxNumber' => 'PO Box 335064',
         ];
 
         if ($city !== '') {
@@ -2282,10 +2281,10 @@ if (!function_exists('svic_get_store_postal_address_schema')) {
             $address['addressCountry'] = $country;
         }
 
-        if (count($address) === 1) {
-            // Provide a sensible fallback tied to the Nevada warehouse.
-            $address['addressLocality'] = 'Las Vegas';
+        if (empty($address['addressLocality'])) {
+            $address['addressLocality'] = 'North Las Vegas';
             $address['addressRegion']   = 'NV';
+            $address['postalCode']      = '89033';
             $address['addressCountry']  = 'US';
         }
 

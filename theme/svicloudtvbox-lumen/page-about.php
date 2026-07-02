@@ -203,6 +203,23 @@ $concierge_car_asset_url      = file_exists($concierge_car_asset_path) ? get_tem
     </div>
   </section>
 
+  <section class="about-location">
+    <div class="about-location__inner">
+      <div class="about-location__copy">
+        <span class="about-location__badge"><?php echo svic_translate_html('about.location.badge'); ?></span>
+        <h2 class="about-section-title"><?php echo svic_translate_html('about.location.title'); ?></h2>
+        <p class="about-section-lead"><?php echo svic_translate_html('about.location.lead'); ?></p>
+        <address class="about-location__address" itemscope itemtype="https://schema.org/PostalAddress">
+          <meta itemprop="addressCountry" content="US" />
+          <span itemprop="postOfficeBoxNumber"><?php echo svic_translate_html('about.location.po_box'); ?></span><br />
+          <span itemprop="addressLocality"><?php echo svic_translate_html('about.location.city'); ?></span><br />
+          <span itemprop="addressCountry"><?php echo svic_translate_html('about.location.country'); ?></span>
+        </address>
+        <p class="about-location__note"><?php echo svic_translate_html('about.location.note'); ?></p>
+      </div>
+    </div>
+  </section>
+
   <section class="about-concierge">
     <div class="about-concierge__inner">
       <div class="about-concierge__copy">
