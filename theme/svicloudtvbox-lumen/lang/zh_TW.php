@@ -237,7 +237,8 @@ return [
                 ],
                 'phone' => [
                     'label'       => '電話',
-                    'placeholder' => '702-389-3416',
+                    'placeholder' => '152-064-17021',
+
                 ],
                 'order' => [
                     'label'       => '訂單編號',
@@ -311,9 +312,10 @@ return [
             'title' => '聯絡方式',
             'items' => [
                 'phone' => [
-                    'label' => '電話／簡訊',
-                    'value' => '702-389-3416',
-                    'cta'   => '撥打或傳送簡訊',
+                    'label' => '',
+                    'value' => '152-064-17021',
+                    'cta'   => '',
+
                 ],
                 'email' => [
                     'label' => 'Email',

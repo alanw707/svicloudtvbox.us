@@ -71,9 +71,10 @@ return [
             'title' => 'Contact methods',
             'items' => [
                 'phone' => [
-                    'label' => 'SMS / Phone',
-                    'value' => '702-389-3416',
-                    'cta'   => 'Text or call now',
+                    'label' => '',
+                    'value' => '152-064-17021',
+                    'cta'   => '',
+
                 ],
                 'email' => [
                     'label' => 'Email',
@@ -665,7 +666,8 @@ return [
                 ],
                 'phone' => [
                     'label'       => 'Phone',
-                    'placeholder' => '702-389-3416',
+                    'placeholder' => '152-064-17021',
+
                 ],
                 'order' => [
                     'label'       => 'Order number',
