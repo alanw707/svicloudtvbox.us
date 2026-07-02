@@ -1504,6 +1504,15 @@ return [
                 'copy'  => 'We host seasonal watch parties, karaoke playlists, and community updates so the fun never stops.',
             ],
         ],
+        'location' => [
+            'badge'    => 'US Location',
+            'title'    => 'Nevada-based fulfillment & support',
+            'lead'     => 'All SVICLOUD orders ship from our North Las Vegas facility. Returns, warranty claims, and concierge operations run from the same location — no overseas handoffs.',
+            'po_box'   => 'PO Box 335064',
+            'city'     => 'North Las Vegas, NV 89033',
+            'country'  => 'United States',
+            'note'     => 'Mailing address only — not a retail location.',
+        ],
         'concierge' => [
             'badge'          => 'Concierge program',
             'title'          => 'Your streaming concierge is a message away',
