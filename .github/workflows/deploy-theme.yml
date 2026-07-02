@@ -11,7 +11,7 @@ on:
       - 'scripts/build_css.py'
       - '.github/workflows/deploy-theme.yml'
 
-  workflow_dispatch:  # allow manual trigger from GitHub UI
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -37,6 +37,8 @@ jobs:
 
       - name: Deploy theme to Hostinger
         env:
+          FTP_CONNECT_RETRIES: "3"
+          FTP_CONNECT_TIMEOUT: "60"
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASS: ${{ secrets.FTP_PASS }}
@@ -45,14 +47,30 @@ jobs:
           LOCAL_THEME_DIR: theme/svicloudtvbox-lumen
           REMOTE_THEME_DIR: public_html/wp-content/themes/svicloudtvbox-lumen
         run: |
-          python3 scripts/deploy_theme.py \
-            --protocol ftps \
-            --local-dir "$LOCAL_THEME_DIR" \
-            --remote-root "$REMOTE_THEME_DIR" \
-            --bust-cache
+          for attempt in 1 2; do
+            echo "::group::FTPS theme deploy attempt ${attempt}/2"
+            if python3 scripts/deploy_theme.py \
+              --protocol ftps \
+              --local-dir "$LOCAL_THEME_DIR" \
+              --remote-root "$REMOTE_THEME_DIR" \
+              --bust-cache; then
+              echo "::endgroup::"
+              break
+            fi
+            echo "::endgroup::"
+            if [ "$attempt" -lt 2 ]; then
+              echo "FTPS deploy failed, retrying in 30s..."
+              sleep 30
+            else
+              echo "All FTPS deploy attempts failed"
+              exit 1
+            fi
+          done
 
       - name: Deploy root agent files to Hostinger
         env:
+          FTP_CONNECT_RETRIES: "3"
+          FTP_CONNECT_TIMEOUT: "60"
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASS: ${{ secrets.FTP_PASS }}
@@ -61,11 +79,25 @@ jobs:
           LOCAL_AGENT_ROOT: agent-root
           REMOTE_AGENT_ROOT: public_html
         run: |
-          python3 scripts/deploy_theme.py \
-            --protocol ftps \
-            --local-dir "$LOCAL_AGENT_ROOT" \
-            --remote-root "$REMOTE_AGENT_ROOT" \
-            --no-delete-remote
+          for attempt in 1 2; do
+            echo "::group::FTPS agent deploy attempt ${attempt}/2"
+            if python3 scripts/deploy_theme.py \
+              --protocol ftps \
+              --local-dir "$LOCAL_AGENT_ROOT" \
+              --remote-root "$REMOTE_AGENT_ROOT" \
+              --no-delete-remote; then
+              echo "::endgroup::"
+              break
+            fi
+            echo "::endgroup::"
+            if [ "$attempt" -lt 2 ]; then
+              echo "FTPS deploy failed, retrying in 30s..."
+              sleep 30
+            else
+              echo "All FTPS deploy attempts failed"
+              exit 1
+            fi
+          done
 
       - name: 🧹 Purge CDN Caches
         uses: ./.github/actions/purge-caches
