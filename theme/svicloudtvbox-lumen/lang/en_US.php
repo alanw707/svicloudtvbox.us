@@ -72,7 +72,7 @@ return [
             'items' => [
                 'phone' => [
                     'label' => 'Phone',
-                    'value' => '152-064-17021',
+                    'value' => '+1 (520) 641-7021',
                     'cta'   => '',
 
                 ],
@@ -666,7 +666,7 @@ return [
                 ],
                 'phone' => [
                     'label'       => 'Phone',
-                    'placeholder' => '152-064-17021',
+                    'placeholder' => '+1 (520) 641-7021',
 
                 ],
                 'order' => [

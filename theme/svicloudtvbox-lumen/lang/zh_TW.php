@@ -237,7 +237,7 @@ return [
                 ],
                 'phone' => [
                     'label'       => '電話',
-                    'placeholder' => '152-064-17021',
+                    'placeholder' => '+1 (520) 641-7021',
 
                 ],
                 'order' => [
@@ -313,7 +313,7 @@ return [
             'items' => [
                 'phone' => [
                     'label' => '電話',
-                    'value' => '152-064-17021',
+                    'value' => '+1 (520) 641-7021',
                     'cta'   => '',
 
                 ],
