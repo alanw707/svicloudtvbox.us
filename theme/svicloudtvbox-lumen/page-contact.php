@@ -110,7 +110,7 @@ $faq_copy = svic_translate_rich('contact.faq.copy', [
           </div>
           <div class="contact-card__content">
             <?php if ($label) : ?><span class="contact-card__label"><?php echo $label; ?></span><?php endif; ?>
-            <span class="contact-card__value"><?php echo $value; ?></span>
+            <?php if ($href) : ?><a class="contact-card__value" href="<?php echo esc_url($href); ?>"><?php echo $value; ?></a><?php else : ?><span class="contact-card__value"><?php echo $value; ?></span><?php endif; ?>
             <?php if ($cta) : ?><a class="contact-card__cta" href="<?php echo esc_url($href); ?>"><?php echo $cta; ?></a><?php endif; ?>
           </div>
         </article>
