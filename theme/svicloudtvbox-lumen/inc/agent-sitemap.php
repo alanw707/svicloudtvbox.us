@@ -21,7 +21,7 @@ if (!function_exists('svic_agent_friendly_sitemap_paths')) {
             '/guides-setup/',
             '/zh/guides-setup/',
             '/zh/svicloud遙控器配對失敗-故障碼排查一次搞定/',
-            '/svicloud-10p-vs-10s/',
+            
             '/best-svicloud-box-for-chinese-tv-usa/',
             '/yogurt-tv-not-working-upgrade-guide/',
             '/svicloud-box-authenticity-guide/',
