@@ -312,7 +312,7 @@ return [
             'title' => '聯絡方式',
             'items' => [
                 'phone' => [
-                    'label' => '',
+                    'label' => '電話',
                     'value' => '152-064-17021',
                     'cta'   => '',
 

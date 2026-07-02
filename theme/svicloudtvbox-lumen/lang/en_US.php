@@ -71,7 +71,7 @@ return [
             'title' => 'Contact methods',
             'items' => [
                 'phone' => [
-                    'label' => '',
+                    'label' => 'Phone',
                     'value' => '152-064-17021',
                     'cta'   => '',
 
