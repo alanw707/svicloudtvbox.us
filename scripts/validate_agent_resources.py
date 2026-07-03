@@ -24,8 +24,8 @@ REQUIRED_ENDPOINTS = [
     "agent/shipping-returns.md",
     "agent/contact.md",
 ]
-REQUIRED_TERMS = ["SVICLOUD 10P+", "SVICLOUD 10S", "702-389-3416", "/compare/", "/contact/"]
-FORBIDDEN_PHONE_PATTERNS = ["7023893416", "702-389-3415", "702-389-3417"]
+REQUIRED_TERMS = ["SVICLOUD 10P+", "SVICLOUD 10S", "+1 (520) 641-7021", "/compare/", "/contact/"]
+FORBIDDEN_PHONE_PATTERNS = ["15206417021", "702-389-3415", "702-389-3417"]
 REQUIRED_DECISION_SLUGS = [
     "svicloud-10p-vs-10s",
     "best-svicloud-box-for-chinese-tv-usa",

@@ -164,7 +164,7 @@ Compared to traditional set-top box products, SVICLOUD 10P+ Cherry TV shows clea
 - Schedule 4K HDR + Dolby Audio demonstration, experience cinema-level audio and video
 - Inquire about Wi-Fi 6 placement and Mesh configuration to solve lag and delay issues
 - Have specialists remotely set up apps, language, and parental PIN
-Fill out the form or call 702-389-3416 for one-on-one advice from SVICLOUD US product consultants.
-- Phone: 702-389-3416
+Fill out the form or call +1 (520) 641-7021 for one-on-one advice from SVICLOUD US product consultants.
+- Phone: +1 (520) 641-7021
 - Email: support@svicloudtvbox.us
 - [Online Form](https://svicloudtvbox.us/zh/contact/)

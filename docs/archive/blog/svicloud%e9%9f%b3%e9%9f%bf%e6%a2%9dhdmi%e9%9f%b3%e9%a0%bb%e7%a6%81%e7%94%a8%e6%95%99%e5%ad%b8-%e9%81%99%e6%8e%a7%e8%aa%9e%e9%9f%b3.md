@@ -69,7 +69,7 @@ date: 2025-12-03T01:03:05
 <h3>專業技術支援服務</h3>
 <p>SVICLOUD 為美國用戶提供全方位的技術支援服務，確保每位用戶都能充分利用音響條的各項功能：</p>
 <p><strong>24/7 全天候客服支援</strong>：<br />
-&#8211; 免費技術諮詢熱線：702-389-3416<br />
+&#8211; 免費技術諮詢熱線：+1 (520) 641-7021<br />
 &#8211; 線上即時客服系統<br />
 &#8211; 電子郵件技術支援：support@svicloud.com</p>
 <p><strong>多語言服務團隊</strong>：<br />
@@ -133,8 +133,8 @@ date: 2025-12-03T01:03:05
 <li>預約 4K HDR + Dolby Audio 示範，體驗戲院等級聲畫</li>
 <li>詢問 Wi-Fi 6 擺位與 Mesh 配置，解決卡頓延遲</li>
 <li>請專人遠端設定 App、語言與家長 PIN<br />
-填寫表單或致電 702-389-3416，由 SVICLOUD 美國產品顧問提供一對一建議。</li>
-<li>電話：702-389-3416</li>
+填寫表單或致電 +1 (520) 641-7021，由 SVICLOUD 美國產品顧問提供一對一建議。</li>
+<li>電話：+1 (520) 641-7021</li>
 <li>Email：support@svicloudtvbox.us</li>
 <li><a href="https://svicloudtvbox.us/zh/contact/">線上表單</a></li>
 </ul>

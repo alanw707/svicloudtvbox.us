@@ -164,14 +164,14 @@ def main() -> None:
 
     for path in AGENT_PATHS:
         status, head, body = fetch(args.base, path)
-        if status != 200 or "SVICLOUD" not in body or "702-389-3416" not in body:
+        if status != 200 or "SVICLOUD" not in body or "+1 (520) 641-7021" not in body:
             fail(f"agent endpoint invalid {path} status={status}")
         if path in AGENT_MARKDOWN_PATHS and "X-Robots-Tag: index, follow" not in head:
             fail(f"agent endpoint missing crawl header {path}")
 
     for path in GUIDE_PATHS:
         status, _, body = fetch(args.base, path)
-        if status != 200 or "guides-answer-hub" not in body or "702-389-3416" not in body:
+        if status != 200 or "guides-answer-hub" not in body or "+1 (520) 641-7021" not in body:
             fail(f"guide endpoint invalid {path} status={status}")
         validate_breadcrumb_schema(body, path)
         if "error404" in body or "Page not found" in body:
@@ -189,7 +189,7 @@ def main() -> None:
 
     for path in POLICY_CONTACT_PATHS:
         status, _, body = fetch(args.base, path)
-        if status != 200 or "702-389-3416" not in body:
+        if status != 200 or "+1 (520) 641-7021" not in body:
             fail(f"policy/contact endpoint invalid {path} status={status}")
         validate_breadcrumb_schema(body, path)
         if "error404" in body or "Page not found" in body:
@@ -203,12 +203,12 @@ def main() -> None:
             fail(f"product schema invalid {path} status={status} types={types}")
         if "AggregateRating" in types or "Review" in types:
             fail(f"fake/unsupported rating or review schema present {path}")
-        if "702-389-3416" not in body:
+        if "+1 (520) 641-7021" not in body:
             fail(f"product page missing official support phone {path}")
 
     for path in DECISION_PATHS:
         status, _, body = fetch(args.base, path)
-        if status != 200 or "svic_decision_cta_click" not in body or "702-389-3416" not in body:
+        if status != 200 or "svic_decision_cta_click" not in body or "+1 (520) 641-7021" not in body:
             fail(f"decision endpoint invalid {path} status={status}")
         validate_breadcrumb_schema(body, path)
         if "error404" in body or "Page not found" in body:

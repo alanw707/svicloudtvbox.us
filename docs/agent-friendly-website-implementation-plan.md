@@ -119,7 +119,7 @@ Turn existing high-traffic support pages into the best answer pages for Google, 
 7. Validate the page experience.
    - Confirm mobile readability.
    - Confirm no sticky UI overlaps content.
-   - Confirm support phone is `702-389-3416`.
+   - Confirm support phone is `+1 (520) 641-7021`.
    - Confirm all CTA URLs work.
    - Confirm pages are indexable and present in sitemap.
 
@@ -188,7 +188,7 @@ Make Google and AI systems parse SVICLOUD pages cleanly, without duplicate or mi
    - Do not add `aggregateRating` unless real visible reviews exist.
    - Do not mark hidden text as FAQ content.
    - Product price and availability must match what the user sees.
-   - Phone number must remain `702-389-3416`.
+   - Phone number must remain `+1 (520) 641-7021`.
 
 5. Add automated checks.
    - Fetch important pages.

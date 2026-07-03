@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) { exit; }
 if (!function_exists('svic_policy_contact_routes')) {
     function svic_policy_contact_routes(): array {
         return [
-            'contact' => ['title' => 'Contact SVICLOUD TV Box US', 'copy' => 'For setup, app, remote, product-choice, warranty, authenticity, or order support, contact the official US support team.', 'primary' => '702-389-3416'],
+            'contact' => ['title' => 'Contact SVICLOUD TV Box US', 'copy' => 'For setup, app, remote, product-choice, warranty, authenticity, or order support, contact the official US support team.', 'primary' => '+1 (520) 641-7021'],
         ];
     }
 }
@@ -39,7 +39,7 @@ if (!function_exists('svic_render_policy_contact_route')) {
             <span class="guides-badge guides-badge--on-dark">Official US support</span>
             <h1 class="guides-detail__title"><?php echo esc_html($page['title']); ?></h1>
             <p class="guides-detail__lead"><?php echo esc_html($page['copy']); ?></p>
-            <div class="guides-detail__hero-actions"><a class="lumen-pill lumen-pill--primary" href="tel:+17023893416">702-389-3416</a><a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/compare/'))); ?>">Compare models</a></div>
+            <div class="guides-detail__hero-actions"><a class="lumen-pill lumen-pill--primary" href="tel:+15206417021">+1 (520) 641-7021</a><a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/compare/'))); ?>">Compare models</a></div>
           </div></div></header>
         </main>
         <?php

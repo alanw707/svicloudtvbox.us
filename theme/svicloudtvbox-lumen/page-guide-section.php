@@ -163,7 +163,7 @@ $answer_hubs = [
     'apps' => [
         'quick' => [
             'title' => strpos(svic_current_locale(), 'zh') === 0 ? '快速答案：Yogurt TV 下載與 8989c' : 'Quick answer: Yogurt TV download and 8989c',
-            'copy'  => strpos(svic_current_locale(), 'zh') === 0 ? '先確認網路可用，再依照本頁步驟開啟安裝入口、搜尋 Yogurt TV 或 8989c。若無法下載、無法開啟或顯示錯誤，請改走疑難排解頁或聯絡官方美國客服 702-389-3416。' : 'Confirm the network first, then use this guide to open the installer, search for Yogurt TV or 8989c, and install safely. If download, launch, or playback still fails, use troubleshooting or contact official US support at 702-389-3416.',
+            'copy'  => strpos(svic_current_locale(), 'zh') === 0 ? '先確認網路可用，再依照本頁步驟開啟安裝入口、搜尋 Yogurt TV 或 8989c。若無法下載、無法開啟或顯示錯誤，請改走疑難排解頁或聯絡官方美國客服 +1 (520) 641-7021。' : 'Confirm the network first, then use this guide to open the installer, search for Yogurt TV or 8989c, and install safely. If download, launch, or playback still fails, use troubleshooting or contact official US support at +1 (520) 641-7021.',
         ],
         'faqs' => [
             [strpos(svic_current_locale(), 'zh') === 0 ? 'Yogurt TV 怎麼下載？' : 'How do I download Yogurt TV?', strpos(svic_current_locale(), 'zh') === 0 ? '依序檢查網路、安裝入口與搜尋字詞；避免使用來路不明的第三方連結。' : 'Check network, installer entry, and search terms in order; avoid unknown third-party links.'],
@@ -174,7 +174,7 @@ $answer_hubs = [
     'troubleshooting' => [
         'quick' => [
             'title' => strpos(svic_current_locale(), 'zh') === 0 ? '快速答案：先症狀、再修復、最後客服' : 'Quick answer: symptom first, fix second, support last',
-            'copy'  => strpos(svic_current_locale(), 'zh') === 0 ? '遙控器沒反應、Yogurt TV 不能看、無訊號、Wi-Fi 斷線或畫面卡住時，請先比對下方症狀並逐步排除。不要立刻恢復出廠設定；不確定時請撥 702-389-3416 或使用聯絡頁。' : 'For remote, Yogurt TV, no signal, Wi-Fi, or frozen-screen issues, match the symptom below and follow the visible fixes. Do not jump to factory reset; call 702-389-3416 or use contact if unsure.',
+            'copy'  => strpos(svic_current_locale(), 'zh') === 0 ? '遙控器沒反應、Yogurt TV 不能看、無訊號、Wi-Fi 斷線或畫面卡住時，請先比對下方症狀並逐步排除。不要立刻恢復出廠設定；不確定時請撥 +1 (520) 641-7021 或使用聯絡頁。' : 'For remote, Yogurt TV, no signal, Wi-Fi, or frozen-screen issues, match the symptom below and follow the visible fixes. Do not jump to factory reset; call +1 (520) 641-7021 or use contact if unsure.',
         ],
         'faqs' => [
             [strpos(svic_current_locale(), 'zh') === 0 ? '小雲遙控器沒反應怎麼辦？' : 'What if the SVICLOUD remote does not respond?', strpos(svic_current_locale(), 'zh') === 0 ? '先換電池、靠近盒子、重新配對，再檢查是否有遮擋或干擾。' : 'Replace batteries, move closer, re-pair, and check for obstruction or interference.'],
@@ -185,7 +185,7 @@ $answer_hubs = [
     'setup' => [
         'quick' => [
             'title' => strpos(svic_current_locale(), 'zh') === 0 ? '快速答案：首次安裝順序' : 'Quick answer: first setup order',
-            'copy'  => strpos(svic_current_locale(), 'zh') === 0 ? '先接 HDMI 與電源，再設定語言、遙控器、時間與網路，最後依 App 指南安裝常用 App。卡關時請看疑難排解或聯絡 702-389-3416。' : 'Connect HDMI and power, set language, remote, time, and network, then use the app guide for apps. If blocked, use troubleshooting or call 702-389-3416.',
+            'copy'  => strpos(svic_current_locale(), 'zh') === 0 ? '先接 HDMI 與電源，再設定語言、遙控器、時間與網路，最後依 App 指南安裝常用 App。卡關時請看疑難排解或聯絡 +1 (520) 641-7021。' : 'Connect HDMI and power, set language, remote, time, and network, then use the app guide for apps. If blocked, use troubleshooting or call +1 (520) 641-7021.',
         ],
         'faqs' => [],
     ],

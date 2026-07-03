@@ -85,8 +85,8 @@ date: 2025-12-16T09:08:23
 <li>安排4K HDR + Dolby Audio演示，体验影院级音视频</li>
 <li>咨询Wi-Fi 6布置和Mesh配置，解决卡顿和延迟问题</li>
 <li>让专家远程配置应用、语言和家长PIN
-填写表格或拨打702-389-3416，获取SVICLOUD美国产品顾问的一对一建议。</li>
-<li>电话：702-389-3416</li>
+填写表格或拨打+1 (520) 641-7021，获取SVICLOUD美国产品顾问的一对一建议。</li>
+<li>电话：+1 (520) 641-7021</li>
 <li>电子邮件：support@svicloudtvbox.us</li>
 <li><a href="https://svicloudtvbox.us/zh/contact/">在线表单</a></li>
 </ul>

@@ -238,7 +238,6 @@ return [
                 'phone' => [
                     'label'       => '電話',
                     'placeholder' => '+1 (520) 641-7021',
-
                 ],
                 'order' => [
                     'label'       => '訂單編號',
@@ -315,7 +314,6 @@ return [
                     'label' => '電話',
                     'value' => '+1 (520) 641-7021',
                     'cta'   => '',
-
                 ],
                 'email' => [
                     'label' => 'Email',

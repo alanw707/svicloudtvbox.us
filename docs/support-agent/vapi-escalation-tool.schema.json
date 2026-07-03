@@ -1,0 +1,47 @@
+{
+  "type": "function",
+  "async": false,
+  "server": {
+    "url": "https://direct.svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/vapi-escalation.php?token=vapi-svic-pilot-escalation-2026"
+  },
+  "function": {
+    "name": "sendEscalation",
+    "description": "Send escalation details to the support team via email. Call this whenever you need to escalate an issue you cannot resolve.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "Escalation category",
+          "type": "string",
+          "enum": ["refund", "warranty", "shipping", "compatibility", "order_status", "unknown"]
+        },
+        "language": {
+          "description": "Language the caller used",
+          "type": "string",
+          "enum": ["en", "zh"]
+        },
+        "caller_name": {
+          "description": "Full name of the caller",
+          "type": "string"
+        },
+        "caller_phone": {
+          "description": "Phone number of the caller",
+          "type": "string"
+        },
+        "caller_email": {
+          "description": "Confirmed email address for follow-up if caller chooses email and confirms the spelling",
+          "type": "string"
+        },
+        "order_number": {
+          "description": "Order number if relevant to the escalation",
+          "type": "string"
+        },
+        "issue_summary": {
+          "description": "Brief summary of what the caller needs help with",
+          "type": "string"
+        }
+      },
+      "required": ["caller_name", "caller_phone", "issue_summary", "category"]
+    }
+  }
+}

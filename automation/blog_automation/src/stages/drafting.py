@@ -383,11 +383,11 @@ class PostDrafter:
         ])
         tagline = voice.get(
             "cta_tagline",
-            "填寫表單或致電 702-398-3416，由 SVICLOUD 美國顧問協助規劃。"
+            "填寫表單或致電 +1 (520) 641-7021，由 SVICLOUD 美國顧問協助規劃。"
         )
         points = "\n".join(f"- {line}" for line in point_lines)
         contact = (
-            "- 電話：702-398-3416\n"
+            "- 電話：+1 (520) 641-7021\n"
             "- Email：support@svicloudtvbox.us\n"
             "- [線上表單](https://svicloudtvbox.us/zh/contact/)"
         )

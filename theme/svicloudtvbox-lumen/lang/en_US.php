@@ -74,7 +74,6 @@ return [
                     'label' => 'Phone',
                     'value' => '+1 (520) 641-7021',
                     'cta'   => '',
-
                 ],
                 'email' => [
                     'label' => 'Email',
@@ -667,7 +666,6 @@ return [
                 'phone' => [
                     'label'       => 'Phone',
                     'placeholder' => '+1 (520) 641-7021',
-
                 ],
                 'order' => [
                     'label'       => 'Order number',

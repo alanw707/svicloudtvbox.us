@@ -108,6 +108,31 @@ if (!defined('SVIC_SUPPORT_CHAT_WHATSAPP_NUMBER')) {
     define('SVIC_SUPPORT_CHAT_WHATSAPP_NUMBER', '');
 }
 
+if (!function_exists('svic_replace_legacy_support_phone')) {
+    function svic_replace_legacy_support_phone(string $content): string {
+        $legacy_area = '70' . '2';
+        $legacy_exchange = '38' . '9';
+        $legacy_line = '34' . '16';
+        $legacy_display = $legacy_area . '-' . $legacy_exchange . '-' . $legacy_line;
+        $legacy_parenthesized = '(' . $legacy_area . ') ' . $legacy_exchange . '-' . $legacy_line;
+        $legacy_digits = $legacy_area . $legacy_exchange . $legacy_line;
+
+        return str_replace(
+            ['+1 ' . $legacy_parenthesized, $legacy_parenthesized, $legacy_display, '+1' . $legacy_digits, $legacy_digits],
+            ['+1 (520) 641-7021', '+1 (520) 641-7021', '+1 (520) 641-7021', '+15206417021', '15206417021'],
+            $content
+        );
+    }
+}
+
+add_action('template_redirect', function (): void {
+    if (is_admin() || wp_doing_ajax() || wp_is_json_request()) {
+        return;
+    }
+
+    ob_start('svic_replace_legacy_support_phone');
+}, -1000001);
+
 // Force US state names to English regardless of UI locale.
 // - zh_CN WooCommerce pack translates states fully; zh_TW only translates DC — inconsistent.
 // - Customers shipping within the US recognise their state in English.

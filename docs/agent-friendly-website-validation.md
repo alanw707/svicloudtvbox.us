@@ -45,7 +45,7 @@ Date: 2026-06-13
 - Quick-answer blocks: implemented for app, troubleshooting, and setup guide sections.
 - Traditional Chinese priority: answer copy switches to Chinese when current locale starts with `zh`.
 - Internal links: answer hubs link to guide hub, compare page, contact page, and the new decision/upgrade pages; existing guide sidebar and CTAs remain.
-- Support path: support phone `702-389-3416` and contact links are present.
+- Support path: support phone `+1 (520) 641-7021` and contact links are present.
 - Product/upgrade bridge: compare/product CTAs remain in guide sections and new decision pages.
 - Stale phone guard: validation script checks forbidden phone patterns.
 
@@ -54,7 +54,7 @@ Date: 2026-06-13
 - Product/Offer schema: live validation checks 10P+ and 10S product pages expose `Product`, nested `Offer`, and `Organization` schema, and do not expose `AggregateRating`/`Review` markup.
 - FAQPage schema: guide FAQ schema is generated from visible FAQ content only.
 - HowTo schema: setup page still emits `HowTo` only from visible setup steps.
-- Organization phone: existing schema helpers remain unchanged; validation guards new content for `702-389-3416`.
+- Organization phone: existing schema helpers remain unchanged; validation guards new content for `+1 (520) 641-7021`.
 - Fake reviews: no aggregate rating/review markup was added.
 - Repeatable checks: `scripts/validate_agent_resources.py` added.
 

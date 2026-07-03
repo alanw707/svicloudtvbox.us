@@ -85,8 +85,8 @@ date: 2025-12-16T09:08:23
 <li>Schedule 4K HDR + Dolby Audio demonstration, experience cinema-level audio and video</li>
 <li>Inquire about Wi-Fi 6 placement and Mesh configuration to resolve stuttering and latency</li>
 <li>Have specialists remotely configure apps, language, and parental PIN
-Fill out the form or call 702-389-3416 for one-on-one advice from SVICLOUD US product consultants.</li>
-<li>Phone: 702-389-3416</li>
+Fill out the form or call +1 (520) 641-7021 for one-on-one advice from SVICLOUD US product consultants.</li>
+<li>Phone: +1 (520) 641-7021</li>
 <li>Email: support@svicloudtvbox.us</li>
 <li><a href="https://svicloudtvbox.us/zh/contact/">Online Form</a></li>
 </ul>

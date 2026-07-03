@@ -5,7 +5,15 @@ if (!defined('ABSPATH')) { exit; }
 if (!function_exists('svic_decision_pages')) {
     function svic_decision_pages(): array {
         return [
-
+            'svicloud-10p-vs-10s' => [
+                'title' => 'SVICLOUD 10P+ vs 10S: Which model should you choose?',
+                'lead' => 'Choose 10P+ for the strongest performance and more headroom. Choose 10S for everyday family viewing and value. If you arrived from a support issue, troubleshoot first, then upgrade only when the old box is the bottleneck.',
+                'sections' => [
+                    ['Best for 10P+', ['Heavy app use and multitasking.', 'Buyers who want the premium model.', 'Users replacing an older slow box after troubleshooting.']],
+                    ['Best for 10S', ['Parents or family viewers who want a simpler value choice.', 'Everyday Chinese TV use.', 'Buyers who want official US support without overbuying.']],
+                    ['Trust and support', ['Official US support phone: +1 (520) 641-7021.', 'Use shipping, return, and warranty policy pages for current terms.', 'Contact support before assuming an app issue requires replacement.']],
+                ],
+            ],
             'best-svicloud-box-for-chinese-tv-usa' => [
                 'title' => 'Best SVICLOUD box for Chinese TV in the USA',
                 'lead' => 'For US Chinese-language buyers, compare 10P+ and 10S by performance needs, family setup, official US support, shipping, and warranty expectations.',
