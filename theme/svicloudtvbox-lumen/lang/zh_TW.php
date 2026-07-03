@@ -12,17 +12,17 @@ return [
     ],
 
     'promotion' => [
-        'fathers_day' => [
-            'aria_label'          => '父親節優惠',
-            'eyebrow'             => '父親節週末',
-            'message'             => '用更好的串流體驗慶祝父親節。',
-            'offers_label'        => '父親節適用優惠',
+        'july_4' => [
+            'aria_label'          => '美國國慶優惠',
+            'eyebrow'             => '7 月 4 日假期優惠',
+            'message'             => '慶祝假期，SVICLOUD 商品省 5%。',
+            'offers_label'        => '7 月 4 日適用優惠',
             'offer_10p'           => 'SVICLOUD 全線商品省 5%',
-            'offer_10s'           => '全店省 5%',
+            'offer_10s'           => 'SVICLOUD 全線商品省 5%',
             'code_label'          => '代碼 {{code}}',
             'cta'                 => '選購優惠',
-            'coupon_not_active'   => 'DAD2026 適用日期為 2026 年 6 月 19 日至 6 月 22 日。',
-            'coupon_not_eligible' => 'DAD2026 適用於 SVICLOUD 商品。',
+            'coupon_not_active'   => 'JULY4 適用日期為 2026 年 7 月 4 日。',
+            'coupon_not_eligible' => 'JULY4 適用於 SVICLOUD 商品。',
         ],
     ],
 

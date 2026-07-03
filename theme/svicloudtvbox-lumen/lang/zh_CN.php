@@ -13,17 +13,17 @@ $overrides = [
     ],
 
     'promotion' => [
-        'fathers_day' => [
-            'aria_label'          => '父亲节优惠',
-            'eyebrow'             => '父亲节周末',
-            'message'             => '用更好的流媒体体验庆祝父亲节。',
-            'offers_label'        => '父亲节适用优惠',
+        'july_4' => [
+            'aria_label'          => '美国国庆优惠',
+            'eyebrow'             => '7 月 4 日假期优惠',
+            'message'             => '庆祝假期，SVICLOUD 商品省 5%。',
+            'offers_label'        => '7 月 4 日适用优惠',
             'offer_10p'           => 'SVICLOUD 全线商品省 5%',
-            'offer_10s'           => '全店省 5%',
+            'offer_10s'           => 'SVICLOUD 全线商品省 5%',
             'code_label'          => '代码 {{code}}',
             'cta'                 => '选购优惠',
-            'coupon_not_active'   => 'DAD2026 适用日期为 2026 年 6 月 19 日至 6 月 22 日。',
-            'coupon_not_eligible' => 'DAD2026 适用于 SVICLOUD 商品。',
+            'coupon_not_active'   => 'JULY4 适用日期为 2026 年 7 月 4 日。',
+            'coupon_not_eligible' => 'JULY4 适用于 SVICLOUD 商品。',
         ],
     ],
 
