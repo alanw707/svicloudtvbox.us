@@ -14,23 +14,23 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('SVIC_PROMOTION_ENABLED')) {
-    define('SVIC_PROMOTION_ENABLED', false);
+    define('SVIC_PROMOTION_ENABLED', true);
 }
 
 if (!defined('SVIC_PROMOTION_KEY')) {
-    define('SVIC_PROMOTION_KEY', 'fathers_day');
+    define('SVIC_PROMOTION_KEY', 'july_4');
 }
 
 if (!defined('SVIC_PROMOTION_CODE')) {
-    define('SVIC_PROMOTION_CODE', 'DAD2026');
+    define('SVIC_PROMOTION_CODE', 'JULY4');
 }
 
 if (!defined('SVIC_PROMOTION_START')) {
-    define('SVIC_PROMOTION_START', '2026-06-19 00:00:00');
+    define('SVIC_PROMOTION_START', '2026-07-04 00:00:00');
 }
 
 if (!defined('SVIC_PROMOTION_END')) {
-    define('SVIC_PROMOTION_END', '2026-06-22 23:59:59');
+    define('SVIC_PROMOTION_END', '2026-07-04 23:59:59');
 }
 
 if (!defined('SVIC_PROMOTION_RATE')) {
@@ -42,11 +42,11 @@ if (!defined('SVIC_PROMOTION_PRODUCT_IDS')) {
 }
 
 if (!defined('SVIC_PROMOTION_DESCRIPTION')) {
-    define('SVIC_PROMOTION_DESCRIPTION', 'Father\'s Day 2026: 5% off all SVICLOUD products.');
+    define('SVIC_PROMOTION_DESCRIPTION', 'July 4th 2026: 5% off all SVICLOUD products.');
 }
 
 if (!defined('SVIC_PROMOTION_SYNC_MARK')) {
-    define('SVIC_PROMOTION_SYNC_MARK', '20260619-02');
+    define('SVIC_PROMOTION_SYNC_MARK', '20260704-01');
 }
 
 if (!function_exists('svic_active_promotion_config')) {

@@ -12,17 +12,17 @@ return [
     ],
 
     'promotion' => [
-        'fathers_day' => [
-            'aria_label'          => 'Father\'s Day promotion',
-            'eyebrow'             => 'Father\'s Day Weekend',
-            'message'             => 'Celebrate Dad with a better way to stream.',
-            'offers_label'        => 'Father\'s Day eligible offer',
+        'july_4' => [
+            'aria_label'          => 'July 4th promotion',
+            'eyebrow'             => 'July 4th Holiday Sale',
+            'message'             => 'Celebrate with 5% off SVICLOUD products.',
+            'offers_label'        => 'July 4th eligible offer',
             'offer_10p'           => 'All SVICLOUD products save 5%',
             'offer_10s'           => 'All SVICLOUD products save 5%',
             'code_label'          => 'Code {{code}}',
             'cta'                 => 'Shop the offer',
-            'coupon_not_active'   => 'DAD2026 is valid from June 19 through June 22, 2026.',
-            'coupon_not_eligible' => 'DAD2026 applies to SVICLOUD products only.',
+            'coupon_not_active'   => 'JULY4 is valid on July 4, 2026.',
+            'coupon_not_eligible' => 'JULY4 applies to SVICLOUD products only.',
         ],
     ],
 
