@@ -23,6 +23,56 @@ if (!function_exists('svic_mark_virtual_page_request')) {
     }
 }
 
+if (!function_exists('svic_virtual_route_slugs')) {
+    function svic_virtual_route_slugs(): array {
+        return [
+            'contact',
+            'guides-setup',
+            'guides-apps',
+            'guides-troubleshooting',
+            'guides-after-setup',
+            'guides-resources',
+            'guides-support',
+            'svicloud遙控器配對失敗-故障碼排查一次搞定',
+            'svicloud-10p-vs-10s',
+            'best-svicloud-box-for-chinese-tv-usa',
+            'yogurt-tv-not-working-upgrade-guide',
+            'svicloud-box-authenticity-guide',
+        ];
+    }
+}
+
+if (!function_exists('svic_current_virtual_route_slug')) {
+    function svic_current_virtual_route_slug(): string {
+        $path = parse_url((string) ($_SERVER['REQUEST_URI'] ?? ''), PHP_URL_PATH);
+        $path = is_string($path) ? trim(rawurldecode($path), '/') : '';
+        if (preg_match('#^(zh|zh-cn|zh-tw)/(.+)$#i', $path, $matches)) {
+            $path = trim($matches[2], '/');
+        }
+        return $path;
+    }
+}
+
+if (!function_exists('svic_is_virtual_route_request')) {
+    function svic_is_virtual_route_request(): bool {
+        return in_array(svic_current_virtual_route_slug(), svic_virtual_route_slugs(), true);
+    }
+}
+
+add_filter('redirect_canonical', function ($redirect_url) {
+    return svic_is_virtual_route_request() ? false : $redirect_url;
+}, 5);
+
+add_filter('rank_math/redirection/fallback_exclude_locations', function (array $locations): array {
+    foreach (svic_virtual_route_slugs() as $slug) {
+        $locations[] = $slug;
+        $locations[] = 'zh/' . $slug;
+        $locations[] = 'zh-cn/' . $slug;
+        $locations[] = 'zh-tw/' . $slug;
+    }
+    return array_values(array_unique($locations));
+});
+
 add_filter('document_title_parts', function (array $parts): array {
     $title = $GLOBALS['svic_virtual_page_title'] ?? '';
     if (is_string($title) && $title !== '') {
