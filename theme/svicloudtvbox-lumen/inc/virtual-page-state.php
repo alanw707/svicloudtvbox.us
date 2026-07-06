@@ -59,6 +59,17 @@ if (!function_exists('svic_is_virtual_route_request')) {
     }
 }
 
+if (!function_exists('svic_prepare_virtual_route_request')) {
+    function svic_prepare_virtual_route_request(): void {
+        if (is_admin() || !svic_is_virtual_route_request()) {
+            return;
+        }
+        svic_mark_virtual_page_request('', 'guides');
+    }
+}
+
+add_action('wp', 'svic_prepare_virtual_route_request', 0);
+
 add_filter('redirect_canonical', function ($redirect_url) {
     return svic_is_virtual_route_request() ? false : $redirect_url;
 }, 5);
