@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) { exit; }
 
 if (!function_exists('svic_mark_virtual_page_request')) {
-    function svic_mark_virtual_page_request(string $title = ''): void {
+    function svic_mark_virtual_page_request(string $title = '', string $style_key = ''): void {
         global $wp_query;
 
         status_header(200);
@@ -17,6 +17,9 @@ if (!function_exists('svic_mark_virtual_page_request')) {
         }
 
         $GLOBALS['svic_virtual_page_title'] = $title;
+        if ($style_key !== '') {
+            $GLOBALS['svic_virtual_page_style_key'] = sanitize_key($style_key);
+        }
     }
 }
 
@@ -40,4 +43,27 @@ add_filter('body_class', function (array $classes): array {
     $classes[] = 'page';
     $classes[] = 'svic-virtual-page';
     return array_values(array_unique($classes));
+}, 20);
+
+add_action('wp_enqueue_scripts', function (): void {
+    $style_key = isset($GLOBALS['svic_virtual_page_style_key'])
+        ? sanitize_key((string) $GLOBALS['svic_virtual_page_style_key'])
+        : '';
+
+    if ($style_key !== 'guides') {
+        return;
+    }
+
+    $relative_path = 'assets/css/guides.css';
+    $full_path = get_template_directory() . '/' . $relative_path;
+    if (!file_exists($full_path)) {
+        return;
+    }
+
+    wp_enqueue_style(
+        'svicloudtvbox-guides',
+        get_template_directory_uri() . '/' . $relative_path,
+        ['svicloudtvbox-style'],
+        (string) filemtime($full_path)
+    );
 }, 20);

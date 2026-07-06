@@ -54,4 +54,28 @@ test.describe('guide detail readability', () => {
     expect(contrastRatio(styles.paragraphColor, styles.hubBackground)).toBeGreaterThanOrEqual(4.5);
     expect(styles.faqBackground).not.toBe('rgba(0, 0, 0, 0)');
   });
+
+  test('decision page quick recommendation renders on a visible card surface', async ({ page, baseURL }) => {
+    await page.goto(new URL('/best-svicloud-box-for-chinese-tv-usa/', baseURL).toString(), { waitUntil: 'domcontentloaded' });
+
+    const answerHub = page.locator('.guides-answer-hub').first();
+    await expect(answerHub).toBeVisible();
+
+    const styles = await answerHub.evaluate((el) => {
+      const hub = window.getComputedStyle(el);
+      const heading = window.getComputedStyle(el.querySelector('h2') as HTMLElement);
+      const listItem = window.getComputedStyle(el.querySelector('li') as HTMLElement);
+
+      return {
+        hubBackground: hub.backgroundColor,
+        hubBackgroundImage: hub.backgroundImage,
+        headingColor: heading.color,
+        listItemColor: listItem.color,
+      };
+    });
+
+    expect(styles.hubBackground !== 'rgba(0, 0, 0, 0)' || styles.hubBackgroundImage !== 'none').toBeTruthy();
+    expect(contrastRatio(styles.headingColor, styles.hubBackground)).toBeGreaterThanOrEqual(4.5);
+    expect(contrastRatio(styles.listItemColor, styles.hubBackground)).toBeGreaterThanOrEqual(4.5);
+  });
 });

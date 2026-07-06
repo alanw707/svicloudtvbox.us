@@ -28,7 +28,7 @@ if (!function_exists('svic_render_policy_contact_route')) {
 
         $page = $routes[$path];
         if (function_exists('svic_mark_virtual_page_request')) {
-            svic_mark_virtual_page_request($page['title']);
+            svic_mark_virtual_page_request($page['title'], 'guides');
         } else {
             status_header(200);
         }

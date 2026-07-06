@@ -12,6 +12,31 @@ body.admin-bar {
   }
 }
 
+body.admin-bar .svic-recent-shipments {
+  margin-top: var(--lumen-admin-bar-offset, 0px);
+}
+
+body.admin-bar #wpadminbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 99999;
+}
+
+body.admin-bar #wpadminbar,
+body.admin-bar #wpadminbar .ab-item,
+body.admin-bar #wpadminbar a.ab-item,
+body.admin-bar #wpadminbar > #wp-toolbar span.ab-label,
+body.admin-bar #wpadminbar > #wp-toolbar span.noticon,
+body.admin-bar #wpadminbar .quicklinks .menupop ul li a {
+  color: #f0f0f1;
+}
+
+body.admin-bar #wpadminbar .ab-icon::before,
+body.admin-bar #wpadminbar .ab-item::before,
+body.admin-bar #wpadminbar .ab-empty-item::before {
+  color: #f0f0f1;
+}
+
 .lumen-header {
   position: -webkit-sticky;
   position: sticky;

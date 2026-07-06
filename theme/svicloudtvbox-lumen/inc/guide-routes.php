@@ -50,7 +50,7 @@ if (!function_exists('svic_render_guide_route')) {
             }
         }
         if (function_exists('svic_mark_virtual_page_request')) {
-            svic_mark_virtual_page_request($title_key);
+            svic_mark_virtual_page_request($title_key, 'guides');
         } else {
             status_header(200);
         }

@@ -86,7 +86,7 @@ if (!function_exists('svic_render_decision_page')) {
         }
         $page = $pages[$key];
         if (function_exists('svic_mark_virtual_page_request')) {
-            svic_mark_virtual_page_request($page['title']);
+            svic_mark_virtual_page_request($page['title'], 'guides');
         } else {
             status_header(200);
         }
