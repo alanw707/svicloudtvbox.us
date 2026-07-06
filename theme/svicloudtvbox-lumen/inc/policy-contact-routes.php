@@ -47,4 +47,4 @@ if (!function_exists('svic_render_policy_contact_route')) {
         exit;
     }
 }
-add_action('template_redirect', 'svic_render_policy_contact_route', -70);
+add_action('template_redirect', 'svic_render_policy_contact_route', 1);

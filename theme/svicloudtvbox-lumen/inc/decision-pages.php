@@ -144,5 +144,4 @@ if (!function_exists('svic_render_decision_page')) {
         exit;
     }
 }
-add_action('parse_request', 'svic_render_decision_page', 0);
-add_action('template_redirect', 'svic_render_decision_page', -1000000);
+add_action('template_redirect', 'svic_render_decision_page', 1);

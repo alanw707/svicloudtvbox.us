@@ -58,4 +58,4 @@ if (!function_exists('svic_render_guide_route')) {
         exit;
     }
 }
-add_action('template_redirect', 'svic_render_guide_route', -80);
+add_action('template_redirect', 'svic_render_guide_route', 1);
