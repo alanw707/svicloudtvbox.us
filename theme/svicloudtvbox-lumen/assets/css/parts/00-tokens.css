@@ -170,19 +170,17 @@
 /* Base sizing */
 html {
   font-size: 16px;
-  margin: 0;
+  margin-left: 0;
+  margin-right: 0;
   background: var(--lumen-page-background);
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  overflow-x: hidden;
-  overflow-x: clip;
 }
 
 
 body {
   margin: 0;
-  overflow-x: hidden;
-  overflow-x: clip;
+
   font-family: var(--font-primary);
   font-size: 1rem;
   line-height: 1.65;
