@@ -12,13 +12,11 @@ body.admin-bar {
   }
 }
 
-body.admin-bar .svic-recent-shipments {
-  margin-top: var(--lumen-admin-bar-offset, 0px);
-}
-
 body.admin-bar #wpadminbar {
   position: fixed;
-  inset: 0 0 auto 0;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 99999;
 }
 
