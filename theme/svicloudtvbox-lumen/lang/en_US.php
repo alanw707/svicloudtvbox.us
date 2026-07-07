@@ -251,12 +251,12 @@ return [
         'hero' => [
             'badge'    => 'Returns & exchanges',
             'title'    => 'Return & Refund Policy',
-            'subtitle' => 'We want you to love your SVICLOUD device. If something is not right, follow these steps to request a return or exchange within 30 days of delivery.',
+            'subtitle' => 'We want you to love your SVICLOUD device. If something is not right, follow these steps to request a return or exchange within 14 days of delivery.',
         ],
         'timeline' => [
             'title' => 'Return timeline at a glance',
             'items' => [
-                'request'  => 'Submit your return request within 30 days of the delivery date.',
+                'request'  => 'Submit your return request within 14 days of the delivery date.',
                 'approval' => 'We confirm eligibility within 1-2 business days.',
                 'ship'     => 'Ship devices back within 7 days of receiving approval.',
                 'refund'   => 'Refunds issue 3-5 business days after inspection.',
@@ -266,7 +266,7 @@ return [
             'eligibility' => [
                 'title' => 'Check eligibility before you start',
                 'items' => [
-                    'window'    => 'Return requests must be submitted within 30 days of the delivery date.',
+                    'window'    => 'Return requests must be submitted within 14 days of the delivery date.',
                     'condition' => 'Devices must be in like-new condition with original packaging, remote, and cables.',
                     'activation'=> 'Streaming subscriptions and renewals are non-refundable once activated.',
                     'proof'     => 'Damage or defect claims should include photos or video so we can fast-track support.',
@@ -849,7 +849,7 @@ return [
             'bullets' => [
                 'shipping'  => '48-hour U.S. shipping with localized power, HDMI, and tracking',
                 'concierge' => 'Bilingual concierge: setup calls, Wi-Fi tuning, karaoke mic pairing, Kids Mode',
-                'warranty'  => '1-year U.S. warranty + 30-day returns handled by the concierge team',
+                'warranty'  => '1-year U.S. warranty + 14-day returns handled by the concierge team',
             ],
             'links' => [
                 'pdp'     => 'Shop 10P+',
@@ -952,7 +952,7 @@ return [
                         ],
                         'warranty' => [
                             'question' => 'Do SVICLOUD boxes include a U.S. warranty and returns?',
-                            'answer'   => 'Every device sold on SVICLOUDTVBOX.US includes a 1-year U.S. hardware warranty plus a 30-day return window. Contact the concierge team with your order number and we will arrange troubleshooting, exchanges, or returns.',
+                            'answer'   => 'Every device sold on SVICLOUDTVBOX.US includes a 1-year U.S. hardware warranty plus a 14-day return window. Contact the concierge team with your order number and we will arrange troubleshooting, exchanges, or returns.',
                         ],
                         'payment' => [
                             'question' => 'What payment methods do you accept?',
@@ -1075,7 +1075,7 @@ return [
                 ],
                 'warranty' => [
                     'title' => 'Warranty + returns clarity',
-                    'copy'  => 'Every device includes a 1-year U.S. hardware warranty and a 30-day return window.',
+                    'copy'  => 'Every device includes a 1-year U.S. hardware warranty and a 14-day return window.',
                 ],
             ],
             'timeline' => [
@@ -1142,7 +1142,7 @@ return [
             'trust'   => [
                 'shipping' => 'Free U.S. shipping',
                 'speed'    => 'Ships within 48 hours',
-                'returns'  => '30-day returns',
+                'returns'  => '14-day returns',
             ],
         ],
     ],
@@ -1202,7 +1202,7 @@ return [
     'products' => [
         'svicloud-10p-plus' => [
             'short_description' => 'Flagship 4K streaming box with 4GB RAM / 64GB storage, karaoke apps, and bilingual concierge support.',
-            'description' => '<p>SVICLOUD 10P+ is our flagship streaming box for families who want voice control, karaoke nights, and the fastest hardware we ship.</p><ul><li>4GB RAM and 64GB storage with AV1 decode keep 4K live sports and dramas smooth.</li><li>Kids Mode and Karaoke apps come preinstalled with English / 中文 concierge walkthroughs.</li><li>Wi-Fi 6, Gigabit Ethernet, Bluetooth voice remote, USB 3.0, and expandable storage cover every installation.</li><li>Dolby surround sound support adds a stronger audio option for compatible TVs, soundbars, and receivers.</li><li>Ships from Nevada with a 1-year U.S. warranty, free returns within 30 days, and live concierge setup help.</li></ul><p>The box includes HDMI cable, power adapter, voice remote, and supports dual wireless microphones for karaoke.</p>',
+            'description' => '<p>SVICLOUD 10P+ is our flagship streaming box for families who want voice control, karaoke nights, and the fastest hardware we ship.</p><ul><li>4GB RAM and 64GB storage with AV1 decode keep 4K live sports and dramas smooth.</li><li>Kids Mode and Karaoke apps come preinstalled with English / 中文 concierge walkthroughs.</li><li>Wi-Fi 6, Gigabit Ethernet, Bluetooth voice remote, USB 3.0, and expandable storage cover every installation.</li><li>Dolby surround sound support adds a stronger audio option for compatible TVs, soundbars, and receivers.</li><li>Ships from Nevada with a 1-year U.S. warranty, free returns within 14 days, and live concierge setup help.</li></ul><p>The box includes HDMI cable, power adapter, voice remote, and supports dual wireless microphones for karaoke.</p>',
             'best_for' => [
                 'badge' => 'Best for',
                 'title' => 'Main family TVs, karaoke nights, and buyers who want the fastest box',
@@ -1234,7 +1234,7 @@ return [
                 'bullets' => [
                     'shipping'  => '48-hour U.S. shipping with tracking and localized power/HDMI accessories',
                     'concierge' => 'Bilingual concierge for setup, Wi-Fi tuning, and app onboarding in English or 中文',
-                    'warranty'  => '1-year U.S. warranty + 30-day returns with concierge support',
+                    'warranty'  => '1-year U.S. warranty + 14-day returns with concierge support',
                 ],
             ],
         ],
@@ -1257,7 +1257,7 @@ return [
             'bullets' => [
                 'shipping'  => '48-hour U.S. shipping with tracking and localized power/HDMI',
                 'concierge' => 'Bilingual concierge for setup, Wi-Fi tuning, karaoke mics, Kids Mode',
-                'warranty'  => '1-year U.S. warranty + 30-day returns with concierge handling',
+                'warranty'  => '1-year U.S. warranty + 14-day returns with concierge handling',
             ],
             'links' => [
                 'p10p'    => 'Shop 10P+',
@@ -1338,7 +1338,7 @@ return [
                 ],
                 'warranty' => [
                     'title' => 'Warranty-backed purchase',
-                    'copy'  => 'Both models include a 1-year U.S. warranty and a 30-day return window.',
+                    'copy'  => 'Both models include a 1-year U.S. warranty and a 14-day return window.',
                 ],
             ],
             'timeline' => [
@@ -1767,7 +1767,7 @@ return [
                             'heading' => '1-year U.S. warranty and hassle-free returns',
                             'body'    => '<p>Your purchase includes a 1-year U.S. warranty handled by our concierge team. If anything fails under normal use, we coordinate diagnostics, replacements, or parts from Nevada—no overseas shipping required.</p>
 <ul>
-  <li>30-day satisfaction window for returns or exchanges on unopened units.</li>
+  <li>14-day satisfaction window for returns or exchanges on unopened units.</li>
   <li>Hardware repairs or replacements processed domestically for faster turnaround.</li>
   <li>Firmware updates and troubleshooting support provided throughout the warranty period.</li>
 </ul>',
@@ -1981,7 +1981,7 @@ return [
                 'copy'  => 'Place your order today and we will handle the practical details: secure payment, tracked shipping, and bilingual setup help if you want it.',
                 'bullets' => [
                     'shipping'  => 'Free U.S. shipping from Nevada inventory with tracking emailed after dispatch',
-                    'warranty'  => '1-year U.S. warranty plus a 30-day return window handled by our concierge team',
+                    'warranty'  => '1-year U.S. warranty plus a 14-day return window handled by our concierge team',
                     'concierge' => 'English & 中文 setup help available for first-time install, Wi-Fi tuning, and remote pairing',
                 ],
             ],
@@ -1998,7 +1998,7 @@ return [
             'bullets' => [
                 'shipping'  => '48-hour U.S. shipping with localized power/HDMI and tracking',
                 'concierge' => 'Bilingual concierge: remote setup, Wi-Fi tuning, and device guidance',
-                'warranty'  => '1-year U.S. warranty + 30-day returns handled by concierge',
+                'warranty'  => '1-year U.S. warranty + 14-day returns handled by concierge',
             ],
             'links' => [
                 'compare' => 'Compare 10P+ vs 10S',
@@ -2050,7 +2050,7 @@ return [
                 ],
                 'warranty' => [
                     'q' => 'What warranty and returns are included?',
-                    'a' => 'Every device on SVICLOUDTVBOX.US includes a 1-year U.S. hardware warranty and 30-day returns. Contact the concierge team with your order number for troubleshooting, exchanges, or returns.',
+                    'a' => 'Every device on SVICLOUDTVBOX.US includes a 1-year U.S. hardware warranty and 14-day returns. Contact the concierge team with your order number for troubleshooting, exchanges, or returns.',
                 ],
                 'concierge' => [
                     'q' => 'Can you help me set it up in Chinese?',
