@@ -9,6 +9,7 @@ on:
       - 'agent-root/**'
       - 'scripts/deploy_theme.py'
       - 'scripts/build_css.py'
+      - '.github/actions/purge-caches/**'
       - '.github/workflows/deploy-theme.yml'
 
   workflow_dispatch:
