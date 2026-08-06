@@ -75,7 +75,7 @@ date: 2025-10-23T11:32:13
 </table>
 <h2 id="key-advantages-of-svicloud-10p-plus">Key Advantages of SVICLOUD 10P Plus</h2>
 <ul>
-<li><strong>Bilingual concierge + local fulfillment:</strong> Orders from svicloudtvbox.us include bilingual setup support, 30-day returns, and one-year U.S. warranty processing.</li>
+<li><strong>Bilingual concierge + local fulfillment:</strong> Orders from svicloudtvbox.us include bilingual setup support, 14-day returns, and one-year U.S. warranty processing.</li>
 <li><strong>Hands-free voice search:</strong> The included Bluetooth remote uses a dedicated mic button, helpful for kids and seniors. Voice pairing is quick—hold <code>VOL-</code> + <code>VOL+</code>.</li>
 <li><strong>Turnkey karaoke:</strong> WeFun/閤家歡 Karaoke ships pre-integrated. Add wireless microphones and a soundbar for a living-room karaoke night without sideloading.</li>
 <li><strong>Content for families:</strong> Yogurt Kids / LUCA Kids apps curate child-friendly programming with quick parental controls, easing concerns over inappropriate content.</li>
@@ -121,7 +121,7 @@ date: 2025-10-23T11:32:13
 <p>Need a refresher? Review the <a href="https://svicloudtvbox.us/guides-setup/">SVICLOUD installation guide</a> or the <a href="https://svicloudtvbox.us/compare/">compare page for 10P+ vs 10S</a>.</p>
 <h2 id="warranty-compliance-and-support">Warranty and Support</h2>
 <ul>
-<li><strong>SVICLOUD 10P+:</strong> Ships from a U.S.-based dealer with bilingual setup help, 30-day returns, and one-year warranty handling in Nevada.</li>
+<li><strong>SVICLOUD 10P+:</strong> Ships from a U.S.-based dealer with bilingual setup help, 14-day returns, and one-year warranty handling in Nevada.</li>
 <li><strong>UBOX 12:</strong> Warranty coverage and firmware support depend on the reseller. Expect communications and returns to route through overseas sellers, so response times may vary.</li>
 </ul>
 <h2 id="which-device-to-choose">Which Device to Choose?</h2>

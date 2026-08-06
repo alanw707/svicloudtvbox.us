@@ -1621,6 +1621,12 @@ if (!function_exists('svic_render_google_customer_reviews_optin')) {
             return;
         }
 
+        if ($order instanceof \WC_Order) {
+            $order->update_meta_data('_svic_gcr_optin_rendered_at', gmdate('c'));
+            $order->update_meta_data('_svic_gcr_optin_estimated_delivery_date', (string) $payload['estimated_delivery_date']);
+            $order->save();
+        }
+
         $rendered = true;
         svic_render_google_platform_loader();
 

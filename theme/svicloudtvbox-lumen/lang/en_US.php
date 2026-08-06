@@ -284,7 +284,7 @@ return [
                 'title' => 'Return shipping & restocking',
                 'items' => [
                     'responsibility' => 'Customers are responsible for all return shipping costs.',
-                    'restock'        => 'Returned items missing accessories may incur a restocking fee up to 15% of the device price.',
+                    'restock'        => 'Opened or used non-defective returns, and returns missing accessories, may incur a restocking fee up to 10% of the device price.',
                     'tracking'       => 'Keep the carrier tracking number until your refund is confirmed.',
                 ],
             ],
@@ -1764,7 +1764,7 @@ return [
 </ul>',
                         ],
                         'warranty' => [
-                            'heading' => '1-year U.S. warranty and hassle-free returns',
+                            'heading' => '1-year U.S. warranty and straightforward returns',
                             'body'    => '<p>Your purchase includes a 1-year U.S. warranty handled by our concierge team. If anything fails under normal use, we coordinate diagnostics, replacements, or parts from Nevada—no overseas shipping required.</p>
 <ul>
   <li>14-day satisfaction window for returns or exchanges on unopened units.</li>

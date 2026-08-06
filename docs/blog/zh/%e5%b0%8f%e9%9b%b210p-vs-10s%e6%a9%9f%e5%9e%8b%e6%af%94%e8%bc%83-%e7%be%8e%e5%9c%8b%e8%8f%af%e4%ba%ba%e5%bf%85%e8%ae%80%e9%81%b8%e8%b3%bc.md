@@ -1,5 +1,5 @@
 ---
-slug: %e5%b0%8f%e9%9b%b210p-vs-10s%e6%a9%9f%e5%9e%8b%e6%af%94%e8%bc%83-%e7%be%8e%e5%9c%8b%e8%8f%af%e4%ba%ba%e5%bf%85%e8%ae%80%e9%81%b8%e8%b3%bc
+slug: '%e5%b0%8f%e9%9b%b210p-vs-10s%e6%a9%9f%e5%9e%8b%e6%af%94%e8%bc%83-%e7%be%8e%e5%9c%8b%e8%8f%af%e4%ba%ba%e5%bf%85%e8%ae%80%e9%81%b8%e8%b3%bc'
 title: SVICLOUD 10P+ 與 10S 型號比較 | 中美人士必備購買指南
 description: 真實環境插圖供美國用戶 SVICLOUD 10P+ 與 10S 型號深入比較：為您選擇最佳 4K 串流體驗 在華裔美國市場，選擇合適的中國電視盒並非易事
 status: publish

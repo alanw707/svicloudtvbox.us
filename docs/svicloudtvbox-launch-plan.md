@@ -250,7 +250,7 @@ Add a “**Who should buy which**” section under the table with plain‑Englis
 
 ### Warranty & Returns
 - **1‑Year U.S. warranty** against defects.  
-- **30‑day returns** (unopened/full refund; opened/working may incur restock).  
+- **14-day returns** (unopened/full refund; opened or used non-defective returns may incur up to 10% restocking).  
 - RMA steps: contact → RMA # → send to U.S. address → inspect → refund/replace.
 
 ### Support
