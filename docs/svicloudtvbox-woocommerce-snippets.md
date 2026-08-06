@@ -56,7 +56,7 @@
 </ol>
 
 <h3>Warranty &amp; Support</h3>
-<p>Includes <strong>1‑Year U.S. Warranty</strong> against defects. 30‑day returns per store policy. Need help? Call/SMS/WhatsApp <strong>{{PHONE}}</strong> or email <a href="mailto:support@svicloudtvbox.us">support@svicloudtvbox.us</a>.</p>
+<p>Includes <strong>1‑Year U.S. Warranty</strong> against defects. 14-day returns per store policy; opened or used non-defective returns may incur a restocking fee. Need help? Call/SMS/WhatsApp <strong>{{PHONE}}</strong> or email <a href="mailto:support@svicloudtvbox.us">support@svicloudtvbox.us</a>.</p>
 
 <h3>Important Notes</h3>
 <ul>
@@ -128,7 +128,7 @@
 </ul>
 
 <h3>Warranty &amp; Support</h3>
-<p>Includes <strong>1‑Year U.S. Warranty</strong> against defects. 30‑day returns per store policy. Need help? Call/SMS/WhatsApp <strong>{{PHONE}}</strong> or email <a href="mailto:support@svicloudtvbox.us">support@svicloudtvbox.us</a>.</p>
+<p>Includes <strong>1‑Year U.S. Warranty</strong> against defects. 14-day returns per store policy; opened or used non-defective returns may incur a restocking fee. Need help? Call/SMS/WhatsApp <strong>{{PHONE}}</strong> or email <a href="mailto:support@svicloudtvbox.us">support@svicloudtvbox.us</a>.</p>
 
 <h3>Important Notes</h3>
 <ul>

@@ -6993,6 +6993,9 @@ if (!function_exists('svic_customer_setup_email_copy')) {
                 ],
                 'note' => '请勿公开分享此客户专属安装连结。App 名称与可用性可能会变动；如果页面看起来不同，请先联系我们，不要随便下载网路上的 APK。',
                 'public_guide' => '一般公开 App 安装指南',
+                'shipping_heading' => '接下来会发生什么',
+                'shipping_copy' => '订单打包后，您会另外收到含追踪信息的出货邮件。机器送达后，如果需要协助设置、Wi-Fi、App 或遥控器配对，直接回复这封邮件即可。',
+                'review_copy' => '如果一切顺利，您之后也可能会看到 Google 的评价邀请。真实评价能帮助其他家庭更安心地下单。',
                 'support' => '需要协助？请直接回覆此 Email，附上清楚的电视画面照片、订单编号，以及卡在哪一个步骤。',
             ];
         }
@@ -7011,6 +7014,9 @@ if (!function_exists('svic_customer_setup_email_copy')) {
                 ],
                 'note' => '請勿公開分享此客戶專屬安裝連結。App 名稱與可用性可能會變動；如果頁面看起來不同，請先聯絡我們，不要隨便下載網路上的 APK。',
                 'public_guide' => '一般公開 App 安裝指南',
+                'shipping_heading' => '接下來會發生什麼',
+                'shipping_copy' => '訂單打包後，您會另外收到含追蹤資訊的出貨 Email。機器送達後，如果需要協助設定、Wi-Fi、App 或遙控器配對，直接回覆這封 Email 即可。',
+                'review_copy' => '如果一切順利，您之後也可能會看到 Google 的評價邀請。真實評價能幫助其他家庭更安心地下單。',
                 'support' => '需要協助？請直接回覆此 Email，附上清楚的電視畫面照片、訂單編號，以及卡在哪一個步驟。',
             ];
         }
@@ -7028,6 +7034,9 @@ if (!function_exists('svic_customer_setup_email_copy')) {
             ],
             'note' => 'Please keep this setup link private for customers. App availability and names can change over time; if the page looks different, contact us before trying random APK files from the web.',
             'public_guide' => 'General public app guide',
+            'shipping_heading' => 'What happens next',
+            'shipping_copy' => 'You will get a separate shipping email with tracking as soon as your order is packed. Once the box arrives, reply here if you want help with setup, Wi-Fi, apps, or remote pairing.',
+            'review_copy' => 'If everything goes smoothly, you may also see a Google review survey after delivery. Honest reviews help other families buy with confidence.',
             'support' => 'Need help? Reply to this email with a clear photo of the screen, your order number, and which step you are stuck on.',
         ];
     }
@@ -7068,6 +7077,9 @@ if (!function_exists('svic_render_customer_setup_email_block')) {
                 echo ((int) $index + 1) . '. ' . wp_strip_all_tags((string) $step) . "\n";
             }
             echo "\n" . $copy['note'] . "\n";
+            echo "\n" . $copy['shipping_heading'] . "\n";
+            echo $copy['shipping_copy'] . "\n";
+            echo $copy['review_copy'] . "\n";
             echo $copy['public_guide'] . ': ' . esc_url_raw($guide_url) . "\n";
             echo $copy['support'] . "\n";
             return;
@@ -7082,6 +7094,9 @@ if (!function_exists('svic_render_customer_setup_email_block')) {
                 <?php endforeach; ?>
             </ol>
             <p style="margin:0 0 12px;color:#6b7280;font-size:13px;line-height:1.5;"><?php echo esc_html($copy['note']); ?></p>
+            <p style="margin:0 0 6px;color:#111827;font-weight:700;"><?php echo esc_html($copy['shipping_heading']); ?></p>
+            <p style="margin:0 0 12px;color:#374151;"><?php echo esc_html($copy['shipping_copy']); ?></p>
+            <p style="margin:0 0 12px;color:#374151;"><?php echo esc_html($copy['review_copy']); ?></p>
             <p style="margin:0 0 8px;"><a href="<?php echo esc_url($guide_url); ?>" style="color:#0f766e;font-weight:700;"><?php echo esc_html($copy['public_guide']); ?></a></p>
             <p style="margin:0;color:#374151;"><?php echo esc_html($copy['support']); ?></p>
         </div>
@@ -7090,6 +7105,226 @@ if (!function_exists('svic_render_customer_setup_email_block')) {
 }
 
 add_action('woocommerce_email_after_order_table', 'svic_render_customer_setup_email_block', 20, 4);
+
+if (!function_exists('svic_customer_followup_email_copy')) {
+    /**
+     * Private follow-up copy sent a few days after delivery/setup begins.
+     */
+    function svic_customer_followup_email_copy(?string $locale = null): array
+    {
+        $locale = $locale ?: (function_exists('get_locale') ? get_locale() : 'en_US');
+        $is_simplified = stripos($locale, 'zh_CN') === 0 || stripos($locale, 'zh_Hans') === 0 || stripos($locale, 'zh-CN') === 0;
+        $is_chinese = $is_simplified || stripos($locale, 'zh') === 0;
+
+        if ($is_simplified) {
+            return [
+                'subject' => '您的 SVICLOUD TV Box 安装还顺利吗？',
+                'heading' => '安装还顺利吗？',
+                'intro' => '想快速确认一下，您的 SVICLOUD TV Box 是否已经顺利开机、连网并开始观看。',
+                'bullets' => [
+                    '如果 Yogurt TV 无法安装或打不开，请直接回复这封邮件。',
+                    '如果遥控器、Wi-Fi、画面输出或登入步骤卡住，也可以直接回复。',
+                    '回复时附上订单编号和电视画面照片，通常能更快帮您处理。',
+                ],
+                'support_cta' => '需要协助就直接回复这封邮件，我们会继续跟进。',
+                'guide_cta' => '查看公开安装指南',
+                'contact_cta' => '联系客户支持',
+                'review_copy' => '如果一切顺利，欢迎留意 Google 的评价邀请。真实评价能帮助其他买家更安心地下单。',
+                'review_cta' => '留下 Google 评价',
+            ];
+        }
+
+        if ($is_chinese) {
+            return [
+                'subject' => '您的 SVICLOUD TV Box 安裝還順利嗎？',
+                'heading' => '安裝還順利嗎？',
+                'intro' => '想快速確認一下，您的 SVICLOUD TV Box 是否已經順利開機、連網並開始觀看。',
+                'bullets' => [
+                    '如果 Yogurt TV 無法安裝或打不開，請直接回覆這封 Email。',
+                    '如果遙控器、Wi-Fi、畫面輸出或登入步驟卡住，也可以直接回覆。',
+                    '回覆時附上訂單編號和電視畫面照片，通常能更快幫您處理。',
+                ],
+                'support_cta' => '需要協助就直接回覆這封 Email，我們會繼續跟進。',
+                'guide_cta' => '查看公開安裝指南',
+                'contact_cta' => '聯絡客戶支援',
+                'review_copy' => '如果一切順利，歡迎留意 Google 的評價邀請。真實評價能幫助其他買家更安心地下單。',
+                'review_cta' => '留下 Google 評價',
+            ];
+        }
+
+        return [
+            'subject' => 'Is your SVICLOUD TV Box setup going smoothly?',
+            'heading' => 'Is setup going smoothly?',
+            'intro' => 'Quick check-in: I wanted to make sure your SVICLOUD TV Box is powering on, connected to the internet, and ready to watch.',
+            'bullets' => [
+                'If Yogurt TV will not install or open, just reply to this email.',
+                'If the remote, Wi-Fi, picture output, or login steps are giving you trouble, reply here too.',
+                'Include your order number and a clear photo of the TV screen so support can diagnose it faster.',
+            ],
+            'support_cta' => 'If you need help, reply here and we will keep working with you.',
+            'guide_cta' => 'View the public setup guide',
+            'contact_cta' => 'Contact support',
+            'review_copy' => 'If everything is going well, keep an eye out for Google\'s review request. Honest reviews help other families buy with confidence.',
+            'review_cta' => 'Leave a Google review',
+        ];
+    }
+}
+
+if (!function_exists('svic_customer_followup_order_locale')) {
+    /**
+     * Infer the best locale available for order follow-up emails.
+     */
+    function svic_customer_followup_order_locale(WC_Order $order): string
+    {
+        $candidates = [
+            $order->get_meta('_pll_language', true),
+            $order->get_meta('pll_language', true),
+            $order->get_meta('_locale', true),
+            $order->get_meta('locale', true),
+            function_exists('get_locale') ? get_locale() : 'en_US',
+        ];
+
+        foreach ($candidates as $candidate) {
+            if (!is_string($candidate)) {
+                continue;
+            }
+
+            $candidate = trim($candidate);
+            if ($candidate !== '') {
+                return $candidate;
+            }
+        }
+
+        return 'en_US';
+    }
+}
+
+if (!function_exists('svic_schedule_customer_followup_email')) {
+    /**
+     * Schedule a one-time customer follow-up three days after completion.
+     */
+    function svic_schedule_customer_followup_email(int $order_id): void
+    {
+        if ($order_id <= 0 || !function_exists('wc_get_order')) {
+            return;
+        }
+
+        $order = wc_get_order($order_id);
+        if (!$order instanceof WC_Order || !$order->get_billing_email()) {
+            return;
+        }
+
+        if (in_array($order->get_status(), ['cancelled', 'refunded', 'failed'], true)) {
+            return;
+        }
+
+        if ((string) $order->get_meta('_svic_followup_email_sent_at', true) !== '') {
+            return;
+        }
+
+        if (wp_next_scheduled('svic_send_customer_followup_email', [$order_id])) {
+            return;
+        }
+
+        wp_schedule_single_event(time() + (3 * DAY_IN_SECONDS), 'svic_send_customer_followup_email', [$order_id]);
+        $order->update_meta_data('_svic_followup_email_scheduled_at', gmdate('c'));
+        $order->save();
+    }
+}
+
+add_action('woocommerce_order_status_completed', 'svic_schedule_customer_followup_email', 40, 1);
+
+if (!function_exists('svic_unschedule_customer_followup_email')) {
+    /**
+     * Stop pending follow-ups for orders that should not receive them.
+     */
+    function svic_unschedule_customer_followup_email(int $order_id): void
+    {
+        if ($order_id <= 0) {
+            return;
+        }
+
+        wp_clear_scheduled_hook('svic_send_customer_followup_email', [$order_id]);
+    }
+}
+
+add_action('woocommerce_order_status_cancelled', 'svic_unschedule_customer_followup_email', 10, 1);
+add_action('woocommerce_order_status_refunded', 'svic_unschedule_customer_followup_email', 10, 1);
+add_action('woocommerce_order_status_failed', 'svic_unschedule_customer_followup_email', 10, 1);
+
+if (!function_exists('svic_send_customer_followup_email')) {
+    /**
+     * Send the post-delivery setup check-in.
+     */
+    function svic_send_customer_followup_email(int $order_id): void
+    {
+        if ($order_id <= 0 || !function_exists('wc_get_order') || !function_exists('wc_mail')) {
+            return;
+        }
+
+        $order = wc_get_order($order_id);
+        if (!$order instanceof WC_Order) {
+            return;
+        }
+
+        if (in_array($order->get_status(), ['cancelled', 'refunded', 'failed'], true)) {
+            return;
+        }
+
+        if ((string) $order->get_meta('_svic_followup_email_sent_at', true) !== '') {
+            return;
+        }
+
+        $recipient = sanitize_email((string) $order->get_billing_email());
+        if ($recipient === '') {
+            return;
+        }
+
+        $locale = svic_customer_followup_order_locale($order);
+        $copy = svic_customer_followup_email_copy($locale);
+        $guide_url = function_exists('svic_url_with_lang')
+            ? svic_url_with_lang(home_url('/guides-setup/'))
+            : home_url('/guides-setup/');
+        $contact_url = function_exists('svic_url_with_lang')
+            ? svic_url_with_lang(home_url('/contact/'))
+            : home_url('/contact/');
+        $review_url = function_exists('svic_google_business_review_url') ? svic_google_business_review_url() : '';
+        $subject = trim((string) ($copy['subject'] ?? ''));
+
+        if ($subject === '') {
+            $subject = 'Is your SVICLOUD TV Box setup going smoothly?';
+        }
+
+        $message  = '<div style="font-family:Arial,sans-serif;color:#111827;line-height:1.6;">';
+        $message .= '<h2 style="margin:0 0 12px;">' . esc_html((string) $copy['heading']) . '</h2>';
+        $message .= '<p style="margin:0 0 14px;">' . esc_html((string) $copy['intro']) . '</p>';
+        $message .= '<ul style="margin:0 0 16px 20px;padding:0;">';
+        foreach ((array) ($copy['bullets'] ?? []) as $bullet) {
+            $message .= '<li style="margin:0 0 8px;">' . esc_html((string) $bullet) . '</li>';
+        }
+        $message .= '</ul>';
+        $message .= '<p style="margin:0 0 12px;">' . esc_html((string) $copy['support_cta']) . '</p>';
+        $message .= '<p style="margin:0 0 14px;"><a href="' . esc_url($guide_url) . '" style="color:#0f766e;font-weight:700;">' . esc_html((string) $copy['guide_cta']) . '</a></p>';
+        $message .= '<p style="margin:0 0 14px;"><a href="' . esc_url($contact_url) . '" style="color:#0f766e;font-weight:700;">' . esc_html((string) $copy['contact_cta']) . '</a></p>';
+        $message .= '<p style="margin:0;">' . esc_html((string) $copy['review_copy']) . '</p>';
+        if ($review_url !== '') {
+            $message .= '<p style="margin:12px 0 0;"><a href="' . esc_url($review_url) . '" style="color:#0f766e;font-weight:700;" target="_blank" rel="noopener noreferrer">' . esc_html((string) $copy['review_cta']) . '</a></p>';
+        }
+        $message .= '</div>';
+
+        $headers = ['Content-Type: text/html; charset=UTF-8'];
+        $sent = wc_mail($recipient, $subject, $message, $headers);
+        if (!$sent) {
+            return;
+        }
+
+        $order->update_meta_data('_svic_followup_email_sent_at', gmdate('c'));
+        $order->add_order_note('SVIC follow-up setup email sent to customer.', false, true);
+        $order->save();
+    }
+}
+
+add_action('svic_send_customer_followup_email', 'svic_send_customer_followup_email', 10, 1);
 
 // =============================================================================
 // Epic D — WooCommerce: cleanup / reduce bloat

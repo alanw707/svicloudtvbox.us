@@ -11,7 +11,7 @@ date: 2025-10-27T11:10:19
 <ul>
 <li><strong>48-hour Nevada fulfillment:</strong> Orders placed on <a href="https://svicloudtvbox.us/">svicloudtvbox.us</a> ship from Las Vegas within two business days, so there are no customs delays or surprise import fees.</li>
 <li><strong>Bilingual concierge:</strong> Every shipment includes English + 繁中 onboarding (chat, SMS, WhatsApp, and email). You can escalate directly through the <a href="https://svicloudtvbox.us/support/">support center</a>.</li>
-<li><strong>U.S. warranty + returns:</strong> Hardware carries a one-year domestic warranty plus a 30-day return window handled inside the United States—no need to mail units back to Hong Kong or Shenzhen.</li>
+<li><strong>U.S. warranty + returns:</strong> Hardware carries a one-year domestic warranty plus a 14-day return window handled inside the United States—no need to mail units back to Hong Kong or Shenzhen.</li>
 <li><strong>Pre-tested power + Wi-Fi:</strong> Power adapters are U.S.-certified, and the firmware images ship with the newest Wi-Fi 6/AV1 optimizations enabled.</li>
 </ul>
 <h2>10P+ vs 10S cheat sheet</h2>
@@ -65,7 +65,7 @@ No. All units leave the Nevada warehouse, so you’re only paying domestic shipp
 <p><strong>How fast will I get tracking?</strong><br />
 Tracking numbers hit your inbox in under 48 hours. You can self-serve status updates on the <a href="https://svicloudtvbox.us/order-tracking/">order tracking portal</a>.</p>
 <p><strong>What if I need to return or swap a unit?</strong><br />
-Start with the concierge team or read the <a href="https://svicloudtvbox.us/return-policy/">return policy</a>. As long as you’re within 30 days and the accessories are intact, they’ll email an RMA slip and ship from Nevada—not overseas.</p>
+Start with the concierge team or read the <a href="https://svicloudtvbox.us/return-policy/">return policy</a>. As long as you’re within 14 days and the accessories are intact, they’ll email an RMA slip and ship from Nevada—not overseas.</p>
 <h2>Setup checklist (English + 繁中)</h2>
 <ol>
 <li><strong>Pair the voice remote</strong>: Hold <code>VOL-</code> + <code>VOL+</code> for five seconds until the on-screen prompt confirms Bluetooth pairing.</li>

@@ -1,5 +1,5 @@
 ---
-slug: %e9%bb%91%e4%ba%94%e6%9c%80%e5%a4%a7%e5%84%aa%e6%83%a0%e9%96%8b%e8%b7%91-svicloud-4k-hdr-%e9%a0%82
+slug: '%e9%bb%91%e4%ba%94%e6%9c%80%e5%a4%a7%e5%84%aa%e6%83%a0%e9%96%8b%e8%b7%91-svicloud-4k-hdr-%e9%a0%82'
 title: 黑五最大優惠開跑！SviCloud 4K HDR 頂
 description: <p>小雲電視盒 年度最大促銷活動震撼來襲 Black Friday has officially begun, and this is the biggest 小雲電視盒 promotion of the entire year！我們的保固政策設計理念是讓用戶購買後完 Black Friday has officially begun, and this is the biggest 小雲電視盒 promotion of｜</p>
 
