@@ -2,7 +2,7 @@
 slug: best-chinese-tv-box-usa-2026
 title: "Best Chinese TV Box for the USA in 2026"
 description: "Compare the best Chinese TV box options for U.S. families in 2026, including SVICLOUD, EVPAD, UBOX, SuperBox, warranty, setup, support, and buying risks."
-status: draft
+status: publish
 date: 2026-08-06T15:55:00-07:00
 category: Buying Checklist
 category_slug: buying-checklist

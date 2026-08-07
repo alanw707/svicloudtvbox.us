@@ -2,7 +2,7 @@
 slug: yogurt-tv-not-working-svicloud-guide
 title: "Yogurt TV Not Working on SVICLOUD? Fixes to Try First"
 description: "Troubleshoot Yogurt TV on a SVICLOUD TV Box, including Wi-Fi, app loading, buffering, black screen, remote, and support steps."
-status: draft
+status: publish
 date: 2026-08-06T15:57:00-07:00
 category: Guides
 category_slug: guides

@@ -2,7 +2,7 @@
 slug: yogurt-tv-install-content-guide
 title: "Yogurt TV on SVICLOUD: Install, Setup, and Content Sections Guide"
 description: "Learn how to approach Yogurt TV setup on SVICLOUD, including safe installation steps, language sections, updates, and support guidance."
-status: draft
+status: publish
 date: 2026-08-06T15:58:00-07:00
 category: Guides
 category_slug: guides
