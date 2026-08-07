@@ -2,7 +2,7 @@
 slug: genuine-svicloud-box-usa-buying-guide
 title: "How to Buy a Genuine SVICLOUD Box in the USA"
 description: "Learn how U.S. buyers can check SVICLOUD model details, warranty, shipping, seller support, and authenticity signals before ordering."
-status: draft
+status: publish
 date: 2026-08-06T15:59:00-07:00
 category: Buying Checklist
 category_slug: buying-checklist

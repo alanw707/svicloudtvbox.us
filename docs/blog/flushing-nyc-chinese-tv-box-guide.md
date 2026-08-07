@@ -2,7 +2,7 @@
 slug: flushing-nyc-chinese-tv-box-guide
 title: "Chinese TV Box in Flushing and NYC: SVICLOUD Buying Guide"
 description: "A Flushing, Queens, and New York City buying guide for Chinese TV box shoppers comparing SVICLOUD models, setup, shipping, warranty, and support."
-status: draft
+status: publish
 date: 2026-08-06T16:02:00-07:00
 category: Buying Checklist
 category_slug: buying-checklist

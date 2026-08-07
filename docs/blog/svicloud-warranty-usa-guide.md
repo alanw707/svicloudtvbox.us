@@ -2,7 +2,7 @@
 slug: svicloud-warranty-usa-guide
 title: "SVICLOUD Warranty in the USA: What Buyers Should Check"
 description: "Understand SVICLOUD warranty, returns, support, and troubleshooting steps for U.S. buyers before and after ordering."
-status: draft
+status: publish
 date: 2026-08-06T16:00:00-07:00
 category: Buying Checklist
 category_slug: buying-checklist

@@ -2,7 +2,7 @@
 slug: los-angeles-chinese-tv-box-guide
 title: "Chinese TV Box in Los Angeles: SVICLOUD Buying Guide"
 description: "A Los Angeles and San Gabriel Valley buying guide for Chinese TV box shoppers comparing SVICLOUD models, shipping, setup, warranty, and support."
-status: draft
+status: publish
 date: 2026-08-06T16:01:00-07:00
 category: Buying Checklist
 category_slug: buying-checklist
