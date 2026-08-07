@@ -5739,6 +5739,7 @@ add_action('init', function () {
         '_svic_content_zh_cn',
         '_svic_title_zh_cn',
         '_svic_description_zh_cn',
+        '_svic_keywords_zh_cn',
         '_svic_content_en_us',
         '_svic_title_en_us',
         '_svic_description_en_us',
