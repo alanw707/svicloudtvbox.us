@@ -76,15 +76,17 @@ $card_data = [
         'badge_key'       => 'shop.cards.15p.badge',
         'best_for_key'    => 'shop.cards.15p.best_for',
         'highlight'       => true,
-        'modifier'        => 'shop-product-card--premium',
+        'modifier'        => 'shop-product-card--prelaunch',
+        'prelaunch'       => true,
         'assurance_keys'  => [
-            'shop.cards.assurance.shipping',
-            'shop.cards.assurance.warranty',
-            'shop.cards.assurance.support',
+            'shop.cards.15p.assurance.shipping',
+            'shop.cards.15p.assurance.warranty',
+            'shop.cards.15p.assurance.support',
         ],
-        'price_note_key'  => 'shop.cards.price_note',
+        'price_label_key' => 'shop.cards.15p.price_label',
+        'price_note_key'  => 'shop.cards.15p.price_note',
         'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-15p')),
-        'fallback_price'  => '$299.00',
+        'fallback_price'  => '',
         'image_fallback'  => svic_theme_image_uri('/assets/images/svicloud-hero-product.webp'),
     ],
     '10p' => [
@@ -144,7 +146,13 @@ foreach ($card_data as $key => $card) {
     $price_markup = '';
     $image_html = '';
 
-    if ($product) {
+    if (!empty($card['prelaunch'])) {
+        $price_markup = '<span class="lumen-price"><span class="lumen-price__current">' . svic_translate_html('shop.cards.15p.price_tbc') . '</span></span>';
+        if ($product) {
+            $url = svic_url_with_lang(get_permalink($product->get_id()));
+        }
+        $image_html = '<div class="shop-product-card__prelaunch-media" role="img" aria-label="' . svic_translate_attr('shop.cards.15p.image_alt') . '"><strong>15P</strong><span>' . svic_translate_html('shop.cards.15p.image_tbc') . '</span></div>';
+    } elseif ($product) {
         $price_markup = svic_price_html($product);
         if ($price_markup === '') {
             $price_markup = sprintf(
@@ -276,7 +284,7 @@ foreach ($card_data as $key => $card) {
               </div>
             <?php endif; ?>
             <div class="shop-product-card__price-line">
-              <span class="shop-product-card__price-label"><?php echo svic_translate_html('shop.cards.price_label'); ?></span>
+              <span class="shop-product-card__price-label"><?php echo svic_translate_html($card['price_label_key'] ?? 'shop.cards.price_label'); ?></span>
               <span class="shop-product-card__price-amount"><?php echo $price_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
             </div>
             <?php if (!empty($card['price_note_key'])) : ?>
@@ -325,7 +333,7 @@ $shop_item_list       = [];
 $shop_position        = 1;
 
 foreach ($card_data as $card) {
-    if (empty($card['product']) || !$card['product'] instanceof WC_Product) {
+    if (!empty($card['prelaunch']) || empty($card['product']) || !$card['product'] instanceof WC_Product) {
         continue;
     }
 
