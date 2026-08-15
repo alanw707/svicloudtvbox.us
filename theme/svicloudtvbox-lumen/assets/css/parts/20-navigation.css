@@ -59,3 +59,23 @@
 .trust-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; font-weight: 500; }
 .trust-item svg { color: var(--base); }
 
+
+/* "NEW" badge on the 15P nav item */
+.menu-item--new > a {
+  position: relative;
+}
+
+.menu-item--new > a::after {
+  content: "NEW";
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  vertical-align: super;
+  color: #041018;
+  background: var(--lumen-accent-teal, #5ee6d0);
+}

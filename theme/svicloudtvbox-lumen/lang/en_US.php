@@ -731,6 +731,7 @@ return [
             'blog'     => 'Blog',
             'shop'     => 'Shop',
             'faq'      => 'FAQ',
+            'fifteen_p' => 'SVICLOUD 15P',
             'ten_p'    => 'SVICLOUD 10P+',
             'ten_s'    => 'SVICLOUD 10S',
             'concierge'=> 'Concierge',
@@ -773,19 +774,37 @@ return [
     ],
     'frontpage' => [
         'hero' => [
-            'badge'   => 'Authorized U.S. Dealer',
-            'title'   => 'Best SVICLOUD TV Boxes for U.S. Chinese Families in 2026 — Fast U.S. Shipping, Warranty, and Bilingual Setup Help',
-            'title_lead' => 'Best SVICLOUD TV Boxes for U.S. Chinese Families in 2026',
-            'title_separator' => ' — ',
-            'title_tail' => 'Fast U.S. Shipping, Warranty, and Bilingual Setup Help',
-            'copy'    => 'SVICLOUD 10P+ and 10S bring Chinese and international entertainment, karaoke, and kids favorites into one easy family streaming setup—ships fast from the USA with bilingual concierge support.',
+            'badge'   => 'Authorized U.S. Dealer · Nevada',
+            'title'   => 'Meet the New SVICLOUD 15P.',
+            'title_lead' => 'Meet the New SVICLOUD 15P',
+            'title_separator' => '.',
+            'title_tail' => '',
+            'copy'    => 'Asian entertainment, reimagined. The new SVICLOUD 15P joins the 10P+ and 10S — Chinese, Korean, Japanese, and international entertainment in one easy family setup. Ships fast from the USA with bilingual concierge support.',
+            'launch'  => [
+                'badge' => 'New',
+                'text'  => 'SVICLOUD 15P arriving in the USA',
+            ],
+            'showcase' => [
+                'kicker'  => 'Next-generation flagship',
+                'release' => '2026 release',
+                'title'   => 'The new flagship is almost here.',
+                'copy'    => 'An upcoming SVICLOUD model preview. Final specifications, launch pricing, policies, and U.S. availability will be posted after supplier confirmation.',
+                'points'  => [
+                    'usa'     => 'U.S. inventory',
+                    'fees'    => 'No monthly fees',
+                    'support' => 'Bilingual support',
+                ],
+                'cta'     => 'Explore 15P',
+                'compare' => 'Compare the lineup',
+            ],
             'bullets' => [
                 'shipping' => 'Ships from USA',
                 'warranty' => '1-Year U.S. Warranty',
                 'fees'     => 'No Monthly Fees',
             ],
             'cta' => [
-                'primary'   => 'Shop 10P+',
+                'primary'   => 'Shop the New 15P',
+                'tenp'      => 'Shop 10P+',
                 'bundles'   => 'View Bundles',
                 'compare'   => 'See Pricing',
                 'secondary' => 'See Pricing',
@@ -1007,6 +1026,20 @@ return [
             'sr_sale_announcement' => 'Sale price %2$s, original price %1$s',
             'savings_label'        => 'Save %1$s (%2$s%% off)',
             'cards'    => [
+                '15p' => [
+                    'badge'     => 'Upcoming model',
+                    'title'     => 'SVICLOUD 15P',
+                    'image_alt' => 'SVICLOUD 15P TV box launch preview',
+                    'interval'  => 'device',
+                    'copy'      => 'Preview the upcoming model while specifications, price, availability, and policies remain pending.',
+                    'features'  => [
+                        'newest'  => '[SPEC TBC] Hardware and software',
+                        'no_fees' => '[POLICY TBC] Fee terms',
+                        'support' => '[POLICY TBC] U.S. shipping, warranty, and support',
+                    ],
+                    'cta'      => 'Explore 15P',
+                    'buy_cta'  => 'View the New 15P',
+                ],
                 '10p' => [
                     'badge'    => 'Most Popular',
                     'title'    => 'SVICLOUD 10P+',
@@ -1150,7 +1183,7 @@ return [
         'hero' => [
             'badge'     => 'Shop',
             'title'     => 'SVICLOUD TV Boxes',
-            'subtitle'  => 'Authorized U.S. dealer with fast domestic shipping, 1-year warranty, and English/中文 support.',
+            'subtitle'  => 'Authorized U.S. dealer — preview the upcoming SVICLOUD 15P, or shop current models with fast domestic shipping, 1-year warranty, and English/中文 support.',
             'highlights' => [
                 'shipping' => 'Free 2–4 day U.S. shipping',
                 'warranty' => '1-year U.S. warranty included',
@@ -1172,6 +1205,18 @@ return [
                 'shipping' => 'Ships from Nevada warehouse',
                 'warranty' => 'Includes 1-year U.S. warranty',
                 'support'  => 'Bilingual concierge onboarding',
+            ],
+            '15p' => [
+                'title'   => 'SVICLOUD 15P',
+                'lead'    => 'Upcoming model preview; specifications, features, fee terms, and U.S. policies remain unconfirmed.',
+                'button'  => 'Preview 15P',
+                'badge'   => 'Coming soon',
+                'best_for' => 'Buyers waiting for official 15P launch details',
+                'features' => [
+                    'hardware' => '[SPEC TBC] Hardware and software configuration',
+                    'apps'     => '[FEATURE TBC] Apps, content, and fee terms',
+                    'remote'   => '[SPEC TBC] Remote and wireless capabilities',
+                ],
             ],
             '10p' => [
                 'title'   => 'SVICLOUD 10P+',
@@ -1213,6 +1258,13 @@ return [
                     'tertiary'  => 'Best match for sports-heavy homes, family rooms, and buyers who do not want to second-guess the upgrade',
                 ],
             ],
+            'crosslink' => [
+                'badge'  => 'New model',
+                'title'  => 'The new SVICLOUD 15P is coming soon',
+                'lead'   => 'Want the newest flagship? Preview the 15P launch page now; final hardware details and U.S. availability will be confirmed at release.',
+                'cta'    => 'Preview the SVICLOUD 15P',
+                'target' => 'svicloud-15p',
+            ],
         ],
         'svicloud-10s' => [
             'short_description' => 'Affordable 4K streaming box with 2GB RAM / 32GB storage and easy plug-and-play setup for bedrooms, guest rooms, and second TVs.',
@@ -1235,6 +1287,140 @@ return [
                     'shipping'  => '48-hour U.S. shipping with tracking and localized power/HDMI accessories',
                     'concierge' => 'Bilingual concierge for setup, Wi-Fi tuning, and app onboarding in English or 中文',
                     'warranty'  => '1-year U.S. warranty + 14-day returns with concierge support',
+                ],
+            ],
+            'crosslink' => [
+                'badge'  => 'New model',
+                'title'  => 'Meet the upcoming SVICLOUD 15P',
+                'lead'   => 'Planning to step up from the value pick? Preview the new 15P flagship before final specifications and U.S. availability are confirmed.',
+                'cta'    => 'Preview the SVICLOUD 15P',
+                'target' => 'svicloud-15p',
+            ],
+        ],
+        'svicloud-9p' => [
+            'short_description' => 'Legacy SVICLOUD 9P model page for existing owners comparing supported replacement options.',
+            'description' => '<p>SVICLOUD 9P is a previous-generation model retained here for owners, support reference, and honest upgrade comparisons.</p><ul><li>This legacy page remains available instead of being removed or redirected.</li><li>Existing owners can continue using support resources and compare current models.</li><li>The upcoming 15P page lists the official details still awaiting launch confirmation.</li></ul>',
+            'best_for' => [
+                'badge' => 'Legacy model',
+                'title' => 'Existing 9P owners researching their next box',
+                'copy'  => 'Keep your 9P if it still meets your needs. Preview the 15P only if you are considering a future replacement after official specifications publish.',
+                'bullets' => [
+                    'primary'   => 'Legacy reference retained for search and customer support',
+                    'secondary' => 'No pressure to replace a working box',
+                    'tertiary'  => 'Compare confirmed launch specifications before upgrading',
+                ],
+            ],
+            'crosslink' => [
+                'badge'  => 'Upcoming model',
+                'title'  => 'Considering an upgrade from 9P?',
+                'lead'   => 'Preview the SVICLOUD 15P launch page. Processor, memory, wireless, warranty, and U.S. availability remain unconfirmed until release.',
+                'cta'    => 'Preview the SVICLOUD 15P',
+                'target' => 'svicloud-15p',
+            ],
+        ],
+        'svicloud-15p' => [
+            'short_description' => 'Upcoming SVICLOUD 15P flagship preview. Specifications, price, U.S. availability, warranty, and in-box contents remain unconfirmed until launch.',
+            'description' => '<p>SVICLOUD 15P is an upcoming model. This preview page is ready for launch, but no 15P hardware or fulfillment claim is final yet.</p><ul><li>[SPEC TBC] Processor, RAM, storage, operating system, video decoding, and wireless capabilities.</li><li>[FEATURE TBC] Karaoke, Kids Mode, voice remote, channel lineup, and no-monthly-fee terms.</li><li>[POLICY TBC] U.S. inventory, shipping window, warranty, returns, and bilingual concierge coverage.</li><li>[IN-BOX TBC] HDMI cable, power adapter, remote, and all other included accessories.</li></ul><p>We will replace every TBC item with supplier-confirmed information before launch publication.</p>',
+            'prelaunch' => [
+                'subtitle' => 'Prelaunch preview — specifications, price, inventory, and policies are not confirmed.',
+                'detail'   => 'Not for sale · Supplier confirmation pending',
+                'image_placeholder' => 'Official SVICLOUD 15P imagery TBC',
+                'badges' => [
+                    'specs'        => 'Specs TBC',
+                    'availability' => 'Availability TBC',
+                    'policy'       => 'Policy TBC',
+                ],
+                'highlights' => [
+                    'specs'        => '[SPEC TBC] Hardware and features',
+                    'availability' => '[AVAILABILITY TBC] U.S. inventory and ship date',
+                    'policy'       => '[POLICY TBC] Fees, warranty, returns, and support',
+                ],
+                'reassurance' => [
+                    'badge' => 'Before you order',
+                    'title' => 'Wait for written launch confirmation',
+                    'copy'  => 'The 15P is not available for purchase on this preview page. Confirm final product and seller terms before ordering.',
+                    'bullets' => [
+                        'shipping'  => '[POLICY TBC] Inventory location and shipping window',
+                        'warranty'  => '[POLICY TBC] Warranty and return terms',
+                        'concierge' => '[POLICY TBC] Support channels and setup coverage',
+                    ],
+                ],
+                'faq' => [
+                    'specs' => [
+                        'q' => 'Are the SVICloud 15P specifications confirmed?',
+                        'a' => 'No. Processor, memory, storage, video, Wi-Fi, operating system, remote, apps, and accessories remain TBC.',
+                    ],
+                    'availability' => [
+                        'q' => 'Can I buy the SVICloud 15P now?',
+                        'a' => 'No. This is a prelaunch preview; price, U.S. inventory, and ship date are not confirmed.',
+                    ],
+                    'policy' => [
+                        'q' => 'What warranty, returns, and support will the 15P include?',
+                        'a' => 'Those 15P-specific policy terms remain TBC and must be confirmed in writing before purchase.',
+                    ],
+                ],
+            ],
+            'best_for' => [
+                'badge' => 'Best for',
+                'title' => 'Buyers waiting for verified 15P launch details',
+                'copy'  => 'Use this preview to track the release. Do not choose the 15P over a current model until official specifications, price, and U.S. availability are confirmed.',
+                'bullets' => [
+                    'primary'   => '[SPEC TBC] Hardware and software configuration',
+                    'secondary' => '[FIT TBC] Recommended rooms and usage after performance is verified',
+                    'tertiary'  => '[POLICY TBC] Fees, U.S. shipping, warranty, and support terms',
+                ],
+            ],
+            'traffic' => [
+                'badge' => '15P U.S. launch plan',
+                'title' => 'Planned U.S. launch support — confirmation pending',
+                'lead'  => 'The seller intends to offer U.S. fulfillment and bilingual support, but all 15P-specific shipping, warranty, and availability terms must be confirmed at launch.',
+                'bullets' => [
+                    'shipping'  => '[POLICY TBC] U.S. inventory, shipping window, tracking, and accessories',
+                    'concierge' => '[POLICY TBC] English / 中文 setup and onboarding coverage',
+                    'warranty'  => '[POLICY TBC] Warranty length and return window',
+                ],
+            ],
+            'comparison' => [
+                'badge' => 'Compare models',
+                'title' => 'SVICLOUD 15P vs 10P+ vs 9P — launch checks still pending',
+                'lead'  => 'Official 15P specifications are not published. The comparisons below identify exactly what must be verified before making an upgrade claim.',
+                'cards' => [
+                    'vs_10p' => [
+                        'title'   => '15P vs 10P+',
+                        'summary' => 'The 10P+ has published specifications; no 15P hardware advantage is confirmed yet.',
+                        'bullets' => [
+                            'one'   => '[SPEC TBC] Compare chipset, RAM, and storage with the 10P+ (4GB/64GB)',
+                            'two'   => '[SPEC TBC] Compare wireless standard with the 10P+ Wi-Fi 6',
+                            'three' => '[FEATURE TBC] Verify whether karaoke, Kids Mode, voice remote, and fee terms carry over',
+                        ],
+                        'link_label' => 'See the SVICLOUD 10P+',
+                    ],
+                    'vs_9p' => [
+                        'title'   => '15P vs 9P',
+                        'summary' => 'No 15P performance advantage over 9P can be stated until official specifications and hands-on validation are available.',
+                        'bullets' => [
+                            'one'   => '[SPEC TBC] Compare processor, RAM, storage, and Android version with 9P',
+                            'two'   => '[SPEC TBC] Verify AV1, Wi-Fi generation, and supported video output',
+                            'three' => '[TEST TBC] Measure boot time, app switching, streaming stability, and support policy',
+                        ],
+                        'link_label' => 'See the legacy SVICLOUD 9P page',
+                    ],
+                ],
+                'upgrade' => [
+                    'title' => 'Who should upgrade',
+                    'items' => [
+                        'from_9p'   => 'From a 9P or older: wait for confirmed specifications and independent performance checks before deciding.',
+                        'from_10p'  => 'From a 10P/10P+: keep your current box unless verified 15P differences solve a specific need.',
+                        'new_buyer' => 'First SVICLOUD box: compare confirmed price, features, availability, and policy terms at launch.',
+                    ],
+                ],
+                'assurance' => [
+                    'title' => 'Planned U.S. fulfillment and support — terms TBC',
+                    'items' => [
+                        'shipping' => '[POLICY TBC] Inventory location, handling time, tracking, and service area',
+                        'support'  => '[POLICY TBC] English / 中文 support channels and coverage',
+                        'warranty' => '[POLICY TBC] Warranty length, returns, and U.S. handling',
+                    ],
                 ],
             ],
         ],

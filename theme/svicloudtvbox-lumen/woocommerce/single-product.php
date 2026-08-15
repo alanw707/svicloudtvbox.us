@@ -36,6 +36,7 @@ while (have_posts()) :
     $image_id = $product->get_image_id();
     $gallery = method_exists($product, 'get_gallery_image_ids') ? (array) $product->get_gallery_image_ids() : [];
     $slug = method_exists($product, 'get_slug') ? $product->get_slug() : '';
+    $is_prelaunch_product = $slug === 'svicloud-15p';
 
     $fallback_gallery_files = [];
 
@@ -76,15 +77,40 @@ while (have_posts()) :
         ]);
     } elseif (!empty($gallery_entries)) {
         $primary_image_html = '<img class="product-hero-image" src="' . esc_url($gallery_entries[0]['full']) . '" alt="' . esc_attr(get_the_title()) . '" loading="lazy" />';
+    } elseif ($is_prelaunch_product) {
+        $primary_image_html = '<div class="product-hero-placeholder" role="img" aria-label="' . svic_translate_attr('products.svicloud-15p.prelaunch.image_placeholder') . '"><strong>15P</strong><span>' . svic_translate_html('products.svicloud-15p.prelaunch.image_placeholder') . '</span></div>';
     } else {
         $primary_image_html = '<img class="product-hero-image" src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . esc_attr(get_the_title()) . '" />';
     }
 
-    $product_highlight_keys = [
-        'product.highlights.inventory',
-        'product.highlights.concierge',
-        'product.highlights.no_fees',
-    ];
+    $product_highlight_keys = $is_prelaunch_product
+        ? [
+            'products.svicloud-15p.prelaunch.highlights.specs',
+            'products.svicloud-15p.prelaunch.highlights.availability',
+            'products.svicloud-15p.prelaunch.highlights.policy',
+        ]
+        : [
+            'product.highlights.inventory',
+            'product.highlights.concierge',
+            'product.highlights.no_fees',
+        ];
+    $product_badge_keys = $is_prelaunch_product
+        ? [
+            'products.svicloud-15p.prelaunch.badges.specs',
+            'products.svicloud-15p.prelaunch.badges.availability',
+            'products.svicloud-15p.prelaunch.badges.policy',
+        ]
+        : [
+            'core.badges.authorized_dealer',
+            'core.badges.ships_from_usa',
+            'core.badges.one_year_warranty',
+        ];
+    $product_subtitle_key = $is_prelaunch_product
+        ? 'products.svicloud-15p.prelaunch.subtitle'
+        : 'product.hero.subtitle';
+    $product_detail_key = $is_prelaunch_product
+        ? 'products.svicloud-15p.prelaunch.detail'
+        : 'product.hero.detail';
 
     $compare_url     = svic_url_with_lang(home_url('/compare/'));
     $faq_url         = svic_url_with_lang(home_url('/faq/'));
@@ -107,14 +133,30 @@ while (have_posts()) :
         $product_best_for_key_base . '.bullets.tertiary',
     ];
 
-    $product_reassurance_title = svic_translate('product.hero.reassurance.title');
+    $product_reassurance_key_base = $is_prelaunch_product
+        ? 'products.svicloud-15p.prelaunch.reassurance'
+        : 'product.hero.reassurance';
+    $product_reassurance_title = svic_translate($product_reassurance_key_base . '.title');
     $product_reassurance_items = [
-        'product.hero.reassurance.bullets.shipping',
-        'product.hero.reassurance.bullets.warranty',
-        'product.hero.reassurance.bullets.concierge',
+        $product_reassurance_key_base . '.bullets.shipping',
+        $product_reassurance_key_base . '.bullets.warranty',
+        $product_reassurance_key_base . '.bullets.concierge',
     ];
 
-    $product_faq_items = [
+    $product_faq_items = $is_prelaunch_product ? [
+        [
+            'question_key' => 'products.svicloud-15p.prelaunch.faq.specs.q',
+            'answer_key'   => 'products.svicloud-15p.prelaunch.faq.specs.a',
+        ],
+        [
+            'question_key' => 'products.svicloud-15p.prelaunch.faq.availability.q',
+            'answer_key'   => 'products.svicloud-15p.prelaunch.faq.availability.a',
+        ],
+        [
+            'question_key' => 'products.svicloud-15p.prelaunch.faq.policy.q',
+            'answer_key'   => 'products.svicloud-15p.prelaunch.faq.policy.a',
+        ],
+    ] : [
         [
             'question_key' => 'product.faq.items.shipping.q',
             'answer_key'   => 'product.faq.items.shipping.a',
@@ -183,13 +225,13 @@ while (have_posts()) :
             }
             ?>
             <div class="badge-row">
-              <span class="badge"><?php echo svic_translate_html('core.badges.authorized_dealer'); ?></span>
-              <span class="badge"><?php echo svic_translate_html('core.badges.ships_from_usa'); ?></span>
-              <span class="badge"><?php echo svic_translate_html('core.badges.one_year_warranty'); ?></span>
+              <?php foreach ($product_badge_keys as $product_badge_key) : ?>
+                <span class="badge"><?php echo svic_translate_html($product_badge_key); ?></span>
+              <?php endforeach; ?>
             </div>
             <h1 class="product-hero-title"><?php the_title(); ?></h1>
             <p class="product-hero-subtitle">
-              <?php echo svic_translate_html('product.hero.subtitle'); ?>
+              <?php echo svic_translate_html($product_subtitle_key); ?>
             </p>
             <?php if (is_string($product_best_for_title) && $product_best_for_title !== '' && $product_best_for_title !== 'title') : ?>
               <section class="product-hero-best-for" aria-labelledby="product-best-for-heading">
@@ -210,9 +252,9 @@ while (have_posts()) :
             </div>
             <?php if (is_string($product_reassurance_title) && $product_reassurance_title !== '' && $product_reassurance_title !== 'title') : ?>
               <section class="product-hero-reassurance" aria-labelledby="product-hero-reassurance-heading">
-                <span class="product-hero-reassurance__badge"><?php echo svic_translate_html('product.hero.reassurance.badge'); ?></span>
+                <span class="product-hero-reassurance__badge"><?php echo svic_translate_html($product_reassurance_key_base . '.badge'); ?></span>
                 <h2 class="product-hero-reassurance__title" id="product-hero-reassurance-heading"><?php echo esc_html($product_reassurance_title); ?></h2>
-                <p class="product-hero-reassurance__copy"><?php echo svic_translate_html('product.hero.reassurance.copy'); ?></p>
+                <p class="product-hero-reassurance__copy"><?php echo svic_translate_html($product_reassurance_key_base . '.copy'); ?></p>
                 <ul class="product-hero-reassurance__list" role="list">
                   <?php foreach ($product_reassurance_items as $product_reassurance_item_key) : ?>
                     <li><?php echo svic_translate_html($product_reassurance_item_key); ?></li>
@@ -225,7 +267,7 @@ while (have_posts()) :
               </section>
             <?php endif; ?>
             <div class="product-hero-detail text-small">
-              <?php echo svic_translate_html('product.hero.detail'); ?>
+              <?php echo svic_translate_html($product_detail_key); ?>
             </div>
             <ul class="product-hero-points">
               <?php foreach ($product_highlight_keys as $highlight_key) : ?>
@@ -256,6 +298,24 @@ while (have_posts()) :
         </div>
       </section>
 
+      <?php
+      $crosslink_base  = 'products.' . $slug . '.crosslink';
+      $crosslink_title = svic_translate($crosslink_base . '.title');
+      if (is_string($crosslink_title) && $crosslink_title !== '' && $crosslink_title !== 'title') :
+          $crosslink_target = svic_translate($crosslink_base . '.target');
+          $crosslink_url = svic_url_with_lang(home_url('/product/' . sanitize_title($crosslink_target) . '/'));
+      ?>
+      <aside class="pdp-crosslink" aria-labelledby="pdp-crosslink-title">
+        <div class="pdp-crosslink__copy">
+          <span class="pdp-crosslink__badge"><?php echo svic_translate_html($crosslink_base . '.badge'); ?></span>
+          <h2 class="pdp-crosslink__title" id="pdp-crosslink-title"><?php echo esc_html($crosslink_title); ?></h2>
+          <p class="pdp-crosslink__lead"><?php echo svic_translate_html($crosslink_base . '.lead'); ?></p>
+        </div>
+        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($crosslink_url); ?>"><?php echo svic_translate_html($crosslink_base . '.cta'); ?></a>
+      </aside>
+      <?php endif; ?>
+
+      <?php if (!$is_prelaunch_product) : ?>
       <section class="product-description product-description--inbox">
         <h2 class="h3 spacing-normal"><?php echo svic_translate_html('frontpage.inbox.title'); ?></h2>
         <div class="entry-content">
@@ -266,6 +326,7 @@ while (have_posts()) :
           </ul>
         </div>
       </section>
+      <?php endif; ?>
 
       <section class="product-traffic">
         <div class="product-traffic__inner">
@@ -294,6 +355,63 @@ while (have_posts()) :
           </div>
         </div>
       </section>
+
+      <?php
+      $pdp_compare_base  = 'products.' . $slug . '.comparison';
+      $pdp_compare_title = svic_translate($pdp_compare_base . '.title');
+      if (is_string($pdp_compare_title) && $pdp_compare_title !== '' && $pdp_compare_title !== 'title') :
+          $product_10p_url = svic_url_with_lang(home_url('/product/svicloud-10p-plus/'));
+          $product_9p_url  = svic_url_with_lang(home_url('/product/svicloud-9p/'));
+          $pdp_compare_cards = [
+              'vs_10p' => ['bullets' => ['one', 'two', 'three'], 'link' => $product_10p_url],
+              'vs_9p'  => ['bullets' => ['one', 'two', 'three'], 'link' => $product_9p_url],
+          ];
+      ?>
+      <section class="pdp-compare" id="pdp-compare" aria-labelledby="pdp-compare-title">
+        <div class="pdp-compare__inner">
+          <header class="pdp-compare__header">
+            <span class="pdp-compare__badge"><?php echo svic_translate_html($pdp_compare_base . '.badge'); ?></span>
+            <h2 class="pdp-compare__title" id="pdp-compare-title"><?php echo esc_html($pdp_compare_title); ?></h2>
+            <p class="pdp-compare__lead"><?php echo svic_translate_html($pdp_compare_base . '.lead'); ?></p>
+          </header>
+          <div class="pdp-compare__grid">
+            <?php foreach ($pdp_compare_cards as $card_key => $card) :
+                $card_base = $pdp_compare_base . '.cards.' . $card_key; ?>
+              <article class="pdp-compare__card">
+                <h3 class="pdp-compare__card-title"><?php echo svic_translate_html($card_base . '.title'); ?></h3>
+                <p class="pdp-compare__card-summary"><?php echo svic_translate_html($card_base . '.summary'); ?></p>
+                <ul class="pdp-compare__card-list" role="list">
+                  <?php foreach ($card['bullets'] as $bullet_key) : ?>
+                    <li><?php echo svic_translate_html($card_base . '.bullets.' . $bullet_key); ?></li>
+                  <?php endforeach; ?>
+                </ul>
+                <?php if ($card['link'] !== '') : ?>
+                  <a class="pdp-compare__card-link" href="<?php echo esc_url($card['link']); ?>"><?php echo svic_translate_html($card_base . '.link_label'); ?></a>
+                <?php endif; ?>
+              </article>
+            <?php endforeach; ?>
+          </div>
+          <div class="pdp-compare__panels">
+            <section class="pdp-compare__panel" aria-labelledby="pdp-compare-upgrade-title">
+              <h3 class="pdp-compare__panel-title" id="pdp-compare-upgrade-title"><?php echo svic_translate_html($pdp_compare_base . '.upgrade.title'); ?></h3>
+              <ul class="pdp-compare__panel-list" role="list">
+                <li><?php echo svic_translate_html($pdp_compare_base . '.upgrade.items.from_9p'); ?></li>
+                <li><?php echo svic_translate_html($pdp_compare_base . '.upgrade.items.from_10p'); ?></li>
+                <li><?php echo svic_translate_html($pdp_compare_base . '.upgrade.items.new_buyer'); ?></li>
+              </ul>
+            </section>
+            <section class="pdp-compare__panel" aria-labelledby="pdp-compare-assurance-title">
+              <h3 class="pdp-compare__panel-title" id="pdp-compare-assurance-title"><?php echo svic_translate_html($pdp_compare_base . '.assurance.title'); ?></h3>
+              <ul class="pdp-compare__panel-list" role="list">
+                <li><?php echo svic_translate_html($pdp_compare_base . '.assurance.items.shipping'); ?></li>
+                <li><?php echo svic_translate_html($pdp_compare_base . '.assurance.items.support'); ?></li>
+                <li><?php echo svic_translate_html($pdp_compare_base . '.assurance.items.warranty'); ?></li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </section>
+      <?php endif; ?>
 
       <section class="product-faq" id="product-faq">
         <div class="product-faq__inner">

@@ -63,6 +63,30 @@ if (class_exists('WooCommerce') && function_exists('wc_get_products')) {
 }
 
 $card_data = [
+    '15p' => [
+        'product'         => class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-15p') : null,
+        'title_key'       => 'shop.cards.15p.title',
+        'lead_key'        => 'shop.cards.15p.lead',
+        'button_key'      => 'shop.cards.15p.button',
+        'feature_keys'    => [
+            'shop.cards.15p.features.hardware',
+            'shop.cards.15p.features.apps',
+            'shop.cards.15p.features.remote',
+        ],
+        'badge_key'       => 'shop.cards.15p.badge',
+        'best_for_key'    => 'shop.cards.15p.best_for',
+        'highlight'       => true,
+        'modifier'        => 'shop-product-card--premium',
+        'assurance_keys'  => [
+            'shop.cards.assurance.shipping',
+            'shop.cards.assurance.warranty',
+            'shop.cards.assurance.support',
+        ],
+        'price_note_key'  => 'shop.cards.price_note',
+        'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-15p')),
+        'fallback_price'  => '$299.00',
+        'image_fallback'  => svic_theme_image_uri('/assets/images/svicloud-hero-product.webp'),
+    ],
     '10p' => [
         'product'         => class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null,
         'title_key'       => 'shop.cards.10p.title',

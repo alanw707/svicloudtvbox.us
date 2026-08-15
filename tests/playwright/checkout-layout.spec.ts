@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const THEME_BASE = 'http://svicloud10p.svic.local';
+const STRIPE_E2E_ENABLED = process.env.PLAYWRIGHT_STRIPE_E2E === '1';
 
 async function seedCart(page: import("@playwright/test").Page) {
   await page.goto(`${THEME_BASE}/?add-to-cart=12`, { waitUntil: 'networkidle' });
@@ -125,6 +126,9 @@ test.describe('Checkout layout spacing', () => {
   });
 
   test('stripe payment widget fits mobile container styling', async ({ page }) => {
+    // Local Docker seeds omit Stripe credentials; run only against an explicit
+    // Stripe test-mode environment.
+    test.skip(!STRIPE_E2E_ENABLED, 'Set PLAYWRIGHT_STRIPE_E2E=1 in a Stripe test-mode environment.');
     await seedCart(page);
     await page.setViewportSize({ width: 412, height: 915 });
     await page.goto(`${THEME_BASE}/checkout/`, { waitUntil: 'domcontentloaded' });
