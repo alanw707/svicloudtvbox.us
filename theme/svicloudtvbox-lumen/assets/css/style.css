@@ -259,6 +259,15 @@ body.admin-bar #wpadminbar .ab-icon::before,body.admin-bar #wpadminbar .ab-item:
 .lumen-mobile-nav__submenu a:hover,.lumen-mobile-nav__submenu a:focus-visible{background:rgba(94,230,208,0.18);color:#ffffff}
 @media(prefers-reduced-motion:reduce){.lumen-header,.lumen-nav__list a,.lumen-pill,.lumen-header__toggle,.lumen-lang-toggle__link,.lumen-mobile-nav__list a{transition-duration:0ms !important}
 }
+.lumen-header{padding:12px clamp(12px,2vw,24px) 0;background:transparent;border-bottom:0;backdrop-filter:none}
+.lumen-header__inner{width:min(1320px,100%);padding:10px clamp(14px,2.2vw,24px);border:1px solid rgba(148,184,230,0.16);border-radius:22px;background:rgba(4,13,31,0.82);box-shadow:0 18px 52px rgba(0,4,18,0.38);backdrop-filter:saturate(160%) blur(24px)}
+.lumen-header--scrolled{padding-top:8px;background:transparent;border-bottom:0;box-shadow:none}
+.lumen-header--scrolled .lumen-header__inner{background:rgba(3,11,27,0.94);border-color:rgba(94,230,208,0.22);box-shadow:0 20px 60px rgba(0,4,18,0.56)}
+.lumen-header__logo-image{height:clamp(44px,4.5vw,54px);max-height:54px}
+.lumen-nav__list a{padding-block:9px;font-size:0.86rem}
+@media(max-width:960px){.lumen-header{padding:8px 8px 0}
+.lumen-header__inner{min-height:70px;border-radius:18px}
+}
 .main-navigation{display:flex !important;visibility:visible !important;opacity:1 !important}
 .main-navigation .wp-block-navigation__responsive-container-open{display:flex !important}
 .main-navigation .wp-block-navigation-item{display:block !important}
@@ -276,6 +285,8 @@ body.admin-bar #wpadminbar .ab-icon::before,body.admin-bar #wpadminbar .ab-item:
 .trust-bar{background:var(--primary);color:var(--base)}
 .trust-item{display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;font-weight:500}
 .trust-item svg{color:var(--base)}
+.menu-item--new>a{position:relative}
+.menu-item--new>a::after{content:"NEW";display:inline-block;margin-left:6px;padding:1px 6px;border-radius:999px;font-size:0.58rem;font-weight:700;letter-spacing:0.08em;line-height:1.6;vertical-align:super;color:#041018;background:var(--lumen-accent-teal,#5ee6d0)}
 .svic-breadcrumbs{background:rgba(6,19,40,0.82);border-bottom:1px solid var(--border-soft,rgba(255,255,255,0.08));padding:0.75rem clamp(1rem,3vw,2.5rem)}
 .svic-breadcrumbs__list{display:flex;flex-wrap:wrap;gap:0.35rem;margin:0;padding:0;list-style:none;font-size:0.85rem;color:var(--lumen-text-muted,rgba(226,235,255,0.86))}
 .svic-breadcrumbs__item{display:inline-flex;align-items:center;gap:0.35rem}

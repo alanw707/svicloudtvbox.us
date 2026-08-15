@@ -132,13 +132,18 @@ $compare_confidence_steps = [
 
 $compare_card_10p_image_html = $hero_product_10p ? svic_product_primary_image($hero_product_10p, 'large') : '';
 $compare_card_10s_image_html = $hero_product_10s ? svic_product_primary_image($hero_product_10s, 'large') : '';
+// These two decision cards must render their product media without a scroll
+// event; WebKit otherwise defers below-fold lazy images and leaves no visible
+// comparison cue.
+$compare_card_10p_image_html = str_replace('loading="lazy"', 'loading="eager"', $compare_card_10p_image_html);
+$compare_card_10s_image_html = str_replace('loading="lazy"', 'loading="eager"', $compare_card_10s_image_html);
 
 if ($compare_card_10p_image_html === '') {
-    $compare_card_10p_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10p') . '" loading="lazy" decoding="async" />';
+    $compare_card_10p_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10p') . '" loading="eager" decoding="async" />';
 }
 
 if ($compare_card_10s_image_html === '') {
-    $compare_card_10s_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10s') . '" loading="lazy" decoding="async" />';
+    $compare_card_10s_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10s') . '" loading="eager" decoding="async" />';
 }
 
 $compare_cards = [
@@ -344,7 +349,7 @@ if (!empty($compare_hero_10s_background['url'])) {
             <?php if (!empty($card['badge_key'])) : ?>
               <span class="shop-product-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></span>
             <?php endif; ?>
-            <figure class="shop-product-card__media"><?php echo $card['image_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
+            <figure class="shop-product-card__media compare-product-card__media"><?php echo $card['image_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
             <div class="shop-product-card__price-line">
               <span class="shop-product-card__price-label"><?php echo svic_translate_html('shop.cards.price_label'); ?></span>
               <span class="shop-product-card__price-amount"><?php echo $card['price_markup']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>

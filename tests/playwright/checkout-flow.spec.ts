@@ -7,6 +7,7 @@ const STRIPE_EXPIRY_MMYY = process.env.PLAYWRIGHT_STRIPE_TEST_EXPIRY || '12/34';
 const STRIPE_CVC = process.env.PLAYWRIGHT_STRIPE_TEST_CVC || '123';
 const STRIPE_ZIP = process.env.PLAYWRIGHT_STRIPE_TEST_ZIP || '89101';
 const TEST_CUSTOMER_EMAIL = process.env.PLAYWRIGHT_TEST_EMAIL || process.env.WP_MAIL_SMTP_TEST_EMAIL || 'support@svicloudtvbox.us';
+const STRIPE_E2E_ENABLED = process.env.PLAYWRIGHT_STRIPE_E2E === '1';
 
 const BASE_WITH_TRAILING = BASE_URL.replace(/\/$/, '') + '/';
 
@@ -143,6 +144,9 @@ async function acceptTerms(page: import('@playwright/test').Page) {
 
 test.describe('Checkout purchase flow', () => {
   test('submits Stripe payment and lands on order summary', async ({ page }) => {
+    // The local Docker seed intentionally has no Stripe credentials/gateway.
+    // Require explicit opt-in for a real Stripe test-mode transaction.
+    test.skip(!STRIPE_E2E_ENABLED, 'Set PLAYWRIGHT_STRIPE_E2E=1 in a Stripe test-mode environment.');
     const consoleLogs: Array<{ type: string; text: string }> = [];
     page.on('console', (msg) => {
       consoleLogs.push({ type: msg.type(), text: msg.text() });

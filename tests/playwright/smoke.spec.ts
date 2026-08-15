@@ -6,26 +6,16 @@ const paths = [
   '/shop/',
   '/product/svicloud-10p-plus/',
   '/product/svicloud-10s/',
+  '/product/svicloud-15p/',
   '/my-account/',
 ];
-
-const ignoredConsoleErrorPatterns = [
-  // Third-party wallet iframes can emit CSP report/noise from their own frames.
-  // These are outside theme control and do not indicate a page regression.
-  /\[Report Only\] Refused to frame 'https:\/\/pay\.google\.com\/' because an ancestor violates the following Content Security Policy directive: "frame-ancestors 'self'"\./,
-  /Refused to execute inline script because it violates the following Content Security Policy directive: .*https:\/\/\*\.paypal\.com.*https:\/\/\*\.paypalobjects\.com/,
-];
-
-function isIgnoredConsoleError(text: string): boolean {
-  return ignoredConsoleErrorPatterns.some((pattern) => pattern.test(text));
-}
 
 test.describe('SVICLOUD site smoke', () => {
   for (const path of paths) {
     test(`loads ${path} without console errors`, async ({ page, baseURL }) => {
       const errors: string[] = [];
       page.on('console', (msg) => {
-        if (msg.type() === 'error' && !isIgnoredConsoleError(msg.text())) errors.push(msg.text());
+        if (msg.type() === 'error') errors.push(msg.text());
       });
 
       const urlObj = new URL(path, baseURL);
@@ -41,7 +31,10 @@ test.describe('SVICLOUD site smoke', () => {
       if (path.startsWith('/product/')) {
         const hero = page.locator('.lumen-product .product-hero, .product-hero').first();
         await expect(hero).toBeVisible();
-        await expect(page.locator('.product-hero-price, .lumen-product .product-hero-price')).toBeVisible();
+        const isPrelaunch15p = path === '/product/svicloud-15p/';
+        if (!isPrelaunch15p) {
+          await expect(page.locator('.product-hero-price, .lumen-product .product-hero-price')).toBeVisible();
+        }
         const thumbCount = await page.locator('.product-thumb').count();
         if (thumbCount > 1) {
           const thumbLocator = page.locator('.product-thumb').nth(thumbCount - 1);
@@ -54,40 +47,45 @@ test.describe('SVICLOUD site smoke', () => {
           }
         }
         const addBtn = page.locator('.single_add_to_cart_button');
-        await expect(addBtn).toBeVisible();
-        await expect(addBtn).toHaveText(/add to cart/i);
-        await page.evaluate(() => {
-          const form = document.querySelector('form.cart');
-          if (!form) return;
-          form.addEventListener('submit', (event) => event.preventDefault(), { once: true });
-        });
-        await addBtn.click();
-        await page.waitForTimeout(150);
-        const { hasLoading, ariaBusy, disabled } = await addBtn.evaluate((btn) => ({
-          hasLoading: btn.classList.contains('is-loading'),
-          ariaBusy: btn.getAttribute('aria-busy'),
-          disabled: btn.hasAttribute('disabled'),
-        }));
-        if (hasLoading || ariaBusy === 'true' || disabled) {
-          await expect(addBtn).toHaveAttribute('aria-busy', 'true');
-          await page.evaluate(() => {
-            if (window.jQuery) {
-              const $btn = window.jQuery('.single_add_to_cart_button');
-              if ($btn && $btn.length) {
-                window.jQuery(document.body).trigger('added_to_cart', [$btn]);
-              }
-            }
-          });
-          await expect(addBtn).not.toHaveClass(/is-loading/, { timeout: 5000 });
-          await expect(addBtn).toHaveAttribute('aria-busy', 'false');
+        if (isPrelaunch15p) {
+          await expect(addBtn).toHaveCount(0);
+          await expect(page.locator('.pdp-compare')).toBeVisible();
         } else {
-          await expect(addBtn).toBeEnabled();
+          await expect(addBtn).toBeVisible();
+          await expect(addBtn).toHaveText(/add to cart/i);
+          await page.evaluate(() => {
+            const form = document.querySelector('form.cart');
+            if (!form) return;
+            form.addEventListener('submit', (event) => event.preventDefault(), { once: true });
+          });
+          await addBtn.click();
+          await page.waitForTimeout(150);
+          const { hasLoading, ariaBusy, disabled } = await addBtn.evaluate((btn) => ({
+            hasLoading: btn.classList.contains('is-loading'),
+            ariaBusy: btn.getAttribute('aria-busy'),
+            disabled: btn.hasAttribute('disabled'),
+          }));
+          if (hasLoading || ariaBusy === 'true' || disabled) {
+            await expect(addBtn).toHaveAttribute('aria-busy', 'true');
+            await page.evaluate(() => {
+              if (window.jQuery) {
+                const $btn = window.jQuery('.single_add_to_cart_button');
+                if ($btn && $btn.length) {
+                  window.jQuery(document.body).trigger('added_to_cart', [$btn]);
+                }
+              }
+            });
+            await expect(addBtn).not.toHaveClass(/is-loading/, { timeout: 5000 });
+            await expect(addBtn).toHaveAttribute('aria-busy', 'false');
+          } else {
+            await expect(addBtn).toBeEnabled();
+          }
         }
       }
 
       if (path === '/') {
         await expect(page.locator('.hero-dashboard')).toBeVisible();
-        await expect(page.locator('.hero-dashboard__card')).toBeVisible();
+        await expect(page.locator('.hero-15p')).toBeVisible();
         await expect(page.locator('.lumen-metric')).toHaveCount(4);
         await expect(page.locator('.lumen-feature-card')).toHaveCount(3);
 

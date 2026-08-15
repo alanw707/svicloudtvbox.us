@@ -4,6 +4,8 @@
  */
 get_header();
 
+$hero_product_15p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-15p') : null;
+$hero_15p_url = $hero_product_15p ? svic_url_with_lang(get_permalink($hero_product_15p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-15p'));
 $hero_product_10p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
 $hero_product_10s = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null;
 $hero_10p_url = $hero_product_10p ? svic_url_with_lang(get_permalink($hero_product_10p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10p-plus'));
@@ -13,29 +15,6 @@ $hero_bullet_keys = [
     'frontpage.hero.bullets.shipping',
     'frontpage.hero.bullets.warranty',
     'frontpage.hero.bullets.fees',
-];
-
-$hero_spec_rows = [
-    [
-        'label_key'   => 'frontpage.hero.card.specs.processor.label',
-        'value_key'   => 'frontpage.hero.card.specs.processor.value',
-        'benefit_key' => 'frontpage.hero.card.specs.processor.benefit',
-    ],
-    [
-        'label_key'   => 'frontpage.hero.card.specs.connectivity.label',
-        'value_key'   => 'frontpage.hero.card.specs.connectivity.value',
-        'benefit_key' => 'frontpage.hero.card.specs.connectivity.benefit',
-    ],
-    [
-        'label_key'   => 'frontpage.hero.card.specs.video.label',
-        'value_key'   => 'frontpage.hero.card.specs.video.value',
-        'benefit_key' => 'frontpage.hero.card.specs.video.benefit',
-    ],
-    [
-        'label_key'   => 'frontpage.hero.card.specs.extras.label',
-        'value_key'   => 'frontpage.hero.card.specs.extras.value',
-        'benefit_key' => 'frontpage.hero.card.specs.extras.benefit',
-    ],
 ];
 
 $metrics = [
@@ -174,6 +153,12 @@ $frontpage_confidence_steps = [
 ];
 
 $pricing_card_images = [
+    '15p' => [
+        'alt'    => svic_translate('frontpage.pricing.cards.15p.image_alt'),
+        'url'    => '',
+        'width'  => null,
+        'height' => null,
+    ],
     '10p' => array_merge(
         ['alt' => svic_translate('frontpage.pricing.cards.10p.image_alt')],
         function_exists('svic_get_product_image_meta')
@@ -189,12 +174,36 @@ $pricing_card_images = [
 ];
 
 $pricing_cards = [
+    '15p' => [
+        'product'         => $hero_product_15p,
+        'fallback_price'  => 'TBA',
+        'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-15p')),
+        'image'           => $pricing_card_images['15p'],
+        'highlight'       => true,
+        'modifier'        => 'shop-product-card--new',
+        'badge_key'       => 'frontpage.pricing.cards.15p.badge',
+        'price_note_key'  => 'shop.cards.price_note',
+        'title_key'       => 'frontpage.pricing.cards.15p.title',
+        'copy_key'        => 'frontpage.pricing.cards.15p.copy',
+        'feature_keys'    => [
+            'frontpage.pricing.cards.15p.features.newest',
+            'frontpage.pricing.cards.15p.features.no_fees',
+            'frontpage.pricing.cards.15p.features.support',
+        ],
+        'assurance_keys'  => [
+            'shop.cards.assurance.shipping',
+            'shop.cards.assurance.warranty',
+            'shop.cards.assurance.support',
+        ],
+        'cta_key'         => 'frontpage.pricing.cards.15p.cta',
+        'buy_cta_key'     => 'frontpage.pricing.cards.15p.buy_cta',
+    ],
     '10p' => [
         'product'         => $hero_product_10p,
         'fallback_price'  => '$248.99',
         'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-10p-plus')),
         'image'           => $pricing_card_images['10p'],
-        'highlight'       => true,
+        'highlight'       => false,
         'modifier'        => '',
         'badge_key'       => 'shop.cards.10p.badge',
         'price_note_key'  => 'shop.cards.price_note',
@@ -256,13 +265,15 @@ foreach ($pricing_cards as $slug => $card) {
     if ($has_wc_product) {
         $pricing_cards[$slug]['price_html'] = svic_price_html($product);
         $pricing_cards[$slug]['cta_url']    = svic_url_with_lang(get_permalink($product->get_id()));
-        $pricing_cards[$slug]['buy_url']    = svic_url_with_lang(
-            add_query_arg([
-                'add-to-cart' => $product->get_id(),
-                'quantity'    => 1,
-                'svic_buynow' => 1,
-            ], wc_get_checkout_url())
-        );
+        $pricing_cards[$slug]['buy_url'] = $product->is_purchasable() && $product->is_in_stock()
+            ? svic_url_with_lang(
+                add_query_arg([
+                    'add-to-cart' => $product->get_id(),
+                    'quantity'    => 1,
+                    'svic_buynow' => 1,
+                ], wc_get_checkout_url())
+            )
+            : svic_url_with_lang(get_permalink($product->get_id()));
 
         $pricing_cards[$slug]['savings_html'] = '';
         if ($product->is_on_sale()) {
@@ -476,6 +487,11 @@ if (!$blog_posts_query instanceof WP_Query) {
     <div class="hero-dashboard__inner">
       <div class="hero-dashboard__content">
         <span class="hero-dashboard__eyebrow"><?php echo svic_translate_html('frontpage.hero.badge'); ?></span>
+        <a class="hero-dashboard__launch" href="<?php echo esc_url($hero_15p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="homepage_hero" data-svic-label="15p_launch_pill" data-svic-model="svicloud-15p">
+          <span class="hero-dashboard__launch-badge"><?php echo svic_translate_html('frontpage.hero.launch.badge'); ?></span>
+          <span class="hero-dashboard__launch-text"><?php echo svic_translate_html('frontpage.hero.launch.text'); ?></span>
+          <span class="hero-dashboard__launch-arrow" aria-hidden="true">→</span>
+        </a>
         <div class="hero-dashboard__store-rating" aria-label="<?php echo esc_attr(svic_translate('frontpage.hero.store_rating.aria')); ?>">
           <span class="hero-dashboard__store-rating-label"><?php echo svic_translate_html('frontpage.hero.store_rating.label'); ?></span>
           <span class="hero-dashboard__store-rating-score"><?php echo esc_html(svic_translate('product.reviews.average_score')); ?></span>
@@ -490,75 +506,37 @@ if (!$blog_posts_query instanceof WP_Query) {
           <?php endforeach; ?>
         </ul>
         <div class="hero-dashboard__cta">
-          <a class="hero-dashboard__button hero-dashboard__button--primary" href="<?php echo esc_url($hero_10p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="homepage_hero" data-svic-label="10p_primary" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('frontpage.hero.cta.primary'); ?></a>
+          <a class="hero-dashboard__button hero-dashboard__button--primary" href="<?php echo esc_url($hero_15p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="homepage_hero" data-svic-label="15p_primary" data-svic-model="svicloud-15p"><?php echo svic_translate_html('frontpage.hero.cta.primary'); ?></a>
+          <a class="hero-dashboard__button hero-dashboard__button--ghost" href="<?php echo esc_url($hero_10p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="homepage_hero" data-svic-label="10p_secondary" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('frontpage.hero.cta.tenp'); ?></a>
           <a class="hero-dashboard__button hero-dashboard__button--secondary" href="#pricing">
             <span><?php echo svic_translate_html('frontpage.hero.cta.secondary'); ?></span>
           </a>
         </div>
       </div>
       <div class="hero-dashboard__visual">
-        <div class="hero-dashboard__badge"><?php echo svic_translate_html('frontpage.hero.card.badge'); ?></div>
-        <div class="hero-dashboard__card">
-          <div class="hero-dashboard__product">
-            <?php
-              $hero_image_sizes = '(max-width: 600px) 88vw, (max-width: 1024px) 62vw, 640px';
-              $hero_webp_srcset = sprintf(
-                  '%1$s 800w, %2$s 1200w, %3$s 1601w',
-                  esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant-800.webp')),
-                  esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant-1200.webp')),
-                  esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant.webp'))
-              );
-              $hero_png_srcset = sprintf(
-                  '%1$s 800w, %2$s 1200w, %3$s 1601w',
-                  esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant-800.png')),
-                  esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant-1200.png')),
-                  esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant.png'))
-              );
-            ?>
-            <picture>
-              <source
-                type="image/webp"
-                srcset="<?php echo $hero_webp_srcset; ?>"
-                sizes="<?php echo esc_attr($hero_image_sizes); ?>"
-              />
-              <img
-                class="hero-dashboard__product-main"
-                src="<?php echo esc_url(svic_theme_image_uri('/assets/images/hero-voice-assistant-1200.png')); ?>"
-                srcset="<?php echo $hero_png_srcset; ?>"
-                sizes="<?php echo esc_attr($hero_image_sizes); ?>"
-                alt="<?php echo svic_translate_attr('frontpage.aria.hero_visual'); ?>"
-                decoding="async"
-                fetchpriority="high"
-                width="1601"
-                height="898"
-              />
-            </picture>
+        <article class="hero-15p" aria-labelledby="hero-15p-title">
+          <div class="hero-15p__topline">
+            <span><?php echo svic_translate_html('frontpage.hero.showcase.kicker'); ?></span>
+            <span><?php echo svic_translate_html('frontpage.hero.showcase.release'); ?></span>
           </div>
-          <div class="hero-dashboard__card-header">
-            <span><?php echo svic_translate_html('frontpage.hero.card.headline'); ?></span>
-            <span><?php echo svic_translate_html('frontpage.hero.card.timestamp'); ?></span>
+          <div class="hero-15p__monogram" aria-hidden="true">15P</div>
+          <div class="hero-15p__content">
+            <span class="hero-15p__brand">SVICLOUD</span>
+            <h2 class="hero-15p__title" id="hero-15p-title"><?php echo svic_translate_html('frontpage.hero.showcase.title'); ?></h2>
+            <p class="hero-15p__copy"><?php echo svic_translate_html('frontpage.hero.showcase.copy'); ?></p>
+            <ul class="hero-15p__points" role="list">
+              <li><?php echo svic_translate_html('frontpage.hero.showcase.points.usa'); ?></li>
+              <li><?php echo svic_translate_html('frontpage.hero.showcase.points.fees'); ?></li>
+              <li><?php echo svic_translate_html('frontpage.hero.showcase.points.support'); ?></li>
+            </ul>
+            <div class="hero-15p__actions">
+              <a class="hero-15p__cta" href="<?php echo esc_url($hero_15p_url); ?>"><?php echo svic_translate_html('frontpage.hero.showcase.cta'); ?></a>
+              <a class="hero-15p__compare" href="#pricing"><?php echo svic_translate_html('frontpage.hero.showcase.compare'); ?></a>
+            </div>
           </div>
-          <div class="hero-dashboard__stat">
-            <strong><?php echo svic_translate_html('frontpage.hero.card.stat'); ?></strong>
-          </div>
-          <div class="hero-dashboard__spec-grid" role="list">
-            <?php foreach ($hero_spec_rows as $row) : ?>
-              <div class="hero-dashboard__spec-pill" role="listitem">
-                <?php $spec_benefit = svic_translate($row['benefit_key']); ?>
-                <?php if ($spec_benefit !== '') : ?>
-                  <span class="hero-dashboard__spec-benefit"><?php echo esc_html($spec_benefit); ?></span>
-                <?php endif; ?>
-                <span class="hero-dashboard__spec-label"><?php echo svic_translate_html($row['label_key']); ?></span>
-                <span class="hero-dashboard__spec-value"><?php echo svic_translate_html($row['value_key']); ?></span>
-              </div>
-            <?php endforeach; ?>
-          </div>
-          <div class="hero-dashboard__card-footer">
-            <span><?php echo svic_translate_html('frontpage.hero.card.footer.shipping'); ?></span>
-            <span><?php echo svic_translate_html('frontpage.hero.card.footer.support'); ?></span>
-          </div>
-        </div>
-        <span class="hero-dashboard__spark" aria-hidden="true"></span>
+          <span class="hero-15p__orbit hero-15p__orbit--one" aria-hidden="true"></span>
+          <span class="hero-15p__orbit hero-15p__orbit--two" aria-hidden="true"></span>
+        </article>
       </div>
     </div>
   </section>
@@ -779,8 +757,8 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
         <h2 class="lumen-section-header__title"><?php echo svic_translate_html('frontpage.pricing.title'); ?></h2>
         <p class="lumen-section-header__subtitle"><?php echo svic_translate_html('frontpage.pricing.subtitle'); ?></p>
         <div class="lumen-pricing__quick-buy" aria-label="<?php echo esc_attr(svic_translate('frontpage.pricing.cards.10p.buy_cta')); ?>">
-          <a class="lumen-pill lumen-pill--primary lumen-pricing__quick-buy-cta" href="<?php echo esc_url($hero_10p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="homepage_pricing_header" data-svic-label="pricing_header_buy_10p" data-svic-model="svicloud-10p-plus">
-            <?php echo svic_translate_html('frontpage.pricing.cards.10p.buy_cta'); ?>
+          <a class="lumen-pill lumen-pill--primary lumen-pricing__quick-buy-cta" href="<?php echo esc_url($hero_15p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="homepage_pricing_header" data-svic-label="pricing_header_buy_15p" data-svic-model="svicloud-15p">
+            <?php echo svic_translate_html('frontpage.pricing.cards.15p.buy_cta'); ?>
           </a>
           <span class="lumen-pricing__quick-buy-note"><?php echo svic_translate_html('frontpage.pricing.stock_note'); ?></span>
         </div>
@@ -798,13 +776,10 @@ foreach ($pricing_cards as $_svic_card) {
       <?php if ($svic_all_in_stock) : ?>
         <p class="lumen-pricing__stock-note"><?php echo svic_translate_html('frontpage.pricing.stock_note'); ?></p>
       <?php endif; ?>
-      <!-- SVIC_CTA_20260511_INLINE: intentionally inline-styled so CDN/CSS cache cannot hide the primary mobile CTA. -->
-      <div class="lumen-pricing__inline-buy-banner" style="display:flex!important;align-items:center!important;justify-content:center!important;gap:12px!important;flex-wrap:wrap!important;width:100%!important;max-width:680px!important;margin:0 auto 22px!important;padding:14px 16px!important;border:1px solid rgba(94,230,208,.42)!important;border-radius:18px!important;background:linear-gradient(135deg,rgba(94,230,208,.22),rgba(56,189,248,.12))!important;box-shadow:0 18px 42px rgba(3,10,28,.38)!important;text-align:center!important;box-sizing:border-box!important;">
-        <span style="display:block!important;color:#f4f8ff!important;font-weight:700!important;font-size:15px!important;line-height:1.35!important;"><?php echo svic_translate_html('frontpage.pricing.cards.10p.title'); ?></span>
-        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="homepage_pricing_inline_banner" data-svic-label="inline_banner_buy_10p" data-svic-model="svicloud-10p-plus" style="display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:46px!important;min-width:190px!important;padding:12px 22px!important;border-radius:999px!important;background:#5ee6d0!important;color:#03101f!important;font-weight:800!important;text-decoration:none!important;box-shadow:0 14px 32px rgba(94,230,208,.32)!important;">
-          <?php echo svic_translate_html('frontpage.pricing.cards.10p.buy_cta'); ?>
-        </a>
-        <span style="display:block!important;width:100%!important;color:rgba(220,236,255,.86)!important;font-size:13px!important;font-weight:600!important;line-height:1.35!important;"><?php echo svic_translate_html('frontpage.pricing.stock_note'); ?></span>
+      <div class="lumen-pricing__launch-banner">
+        <span class="lumen-pricing__launch-label"><?php echo svic_translate_html('frontpage.pricing.cards.15p.badge'); ?></span>
+        <strong><?php echo svic_translate_html('frontpage.pricing.cards.15p.title'); ?></strong>
+        <a href="<?php echo esc_url($hero_15p_url); ?>"><?php echo svic_translate_html('frontpage.pricing.cards.15p.cta'); ?> →</a>
       </div>
       <div class="lumen-pricing__grid">
         <?php foreach ($pricing_cards as $slug => $card) : ?>
@@ -816,7 +791,11 @@ foreach ($pricing_cards as $_svic_card) {
             if (!empty($card['modifier'])) {
                 $card_classes .= ' ' . sanitize_html_class($card['modifier']);
             }
-            $model_slug = $slug === '10p' ? 'svicloud-10p-plus' : 'svicloud-10s';
+            $model_slug = [
+                '15p' => 'svicloud-15p',
+                '10p' => 'svicloud-10p-plus',
+                '10s' => 'svicloud-10s',
+            ][$slug] ?? $slug;
           ?>
           <article class="<?php echo esc_attr($card_classes); ?>">
             <div class="shop-product-card__header">
@@ -827,6 +806,8 @@ foreach ($pricing_cards as $_svic_card) {
                 <figure class="shop-product-card__media">
                   <img src="<?php echo esc_url($card['image']['url']); ?>" alt="<?php echo esc_attr($card['image']['alt'] ?? ''); ?>" loading="lazy" width="520" height="520" />
                 </figure>
+              <?php elseif ($slug === '15p') : ?>
+                <figure class="shop-product-card__media" role="img" aria-label="<?php echo esc_attr($card['image']['alt'] ?? ''); ?>"></figure>
               <?php endif; ?>
               <div class="shop-product-card__price-line">
                 <span class="shop-product-card__price-label"><?php echo svic_translate_html('shop.cards.price_label'); ?></span>
