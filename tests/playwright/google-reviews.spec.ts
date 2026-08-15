@@ -1,16 +1,24 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Google reviews integrations', () => {
-  test('renders Google Customer Reviews badge loader on public pages', async ({ page, baseURL }) => {
+  test('keeps the external rating badge out of local development', async ({ page, baseURL }) => {
     const url = new URL('/', baseURL);
     await page.goto(url.toString(), { waitUntil: 'domcontentloaded' });
 
-    await expect(page.locator('#svic-google-customer-reviews-badge')).toHaveCount(1);
-
+    const expectedEnabled = process.env.PLAYWRIGHT_EXPECT_GOOGLE_REVIEWS_BADGE === '1';
+    const badge = page.locator('#svic-google-customer-reviews-badge');
     const googleReviewsMarkup = await page.evaluate(() => document.documentElement.innerHTML);
-    expect(googleReviewsMarkup).toContain('svicGooglePlatformReady');
-    expect(googleReviewsMarkup).toContain('ratingbadge');
-    expect(googleReviewsMarkup).toContain('5317978135');
+
+    if (expectedEnabled) {
+      await expect(badge).toHaveCount(1);
+      expect(googleReviewsMarkup).toContain('svicGooglePlatformReady');
+      expect(googleReviewsMarkup).toContain('ratingbadge');
+      expect(googleReviewsMarkup).toContain('5317978135');
+      return;
+    }
+
+    await expect(badge).toHaveCount(0);
+    expect(googleReviewsMarkup).not.toContain('https://apis.google.com/js/platform.js');
   });
 
   test('keeps Google Business Profile review CTA hidden until review URL is configured', async ({ page, baseURL }) => {

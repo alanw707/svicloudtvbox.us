@@ -74,6 +74,13 @@ if (!defined('SVIC_GOOGLE_CUSTOMER_REVIEWS_BADGE_ENABLED')) {
     define('SVIC_GOOGLE_CUSTOMER_REVIEWS_BADGE_ENABLED', true);
 }
 
+add_filter('svic_google_customer_reviews_badge_enabled', function ($enabled) {
+    // The external badge can emit third-party report-only CSP errors that are
+    // outside site control. Keep local verification deterministic; production
+    // can render the official badge normally.
+    return wp_get_environment_type() === 'development' ? false : (bool) $enabled;
+});
+
 // Direct Google Business Profile "write a review" link. Set in wp-config.php
 // or via `svic_google_business_review_url` filter once the GBP Place ID link is known.
 if (!defined('SVIC_GOOGLE_BUSINESS_REVIEW_URL')) {

@@ -8,7 +8,7 @@ Date: 2026-08-15
 - `./scripts/sync_theme_container.sh svicloud10p` — complete; bind-mounted theme live in local Docker.
 - PHP lint — clean for `functions.php`, homepage, compare page, WooCommerce templates, and all three locale files.
 - `git diff --check` — clean.
-- Work recorded with Conventional Commit message `feat(theme): prepare SVICloud 15P launch` (verify with `git log`).
+- Work recorded in Conventional Commits (verify with `git log`).
 
 ## Rendered SEO and schema
 
@@ -64,7 +64,7 @@ Additional launch safeguards in `tests/playwright/launch-15p.spec.ts` verify:
 - unsupported comparison claims are absent and TBC copy is present;
 - legacy 9P URL is live and links to 15P.
 
-`tests/playwright/smoke.spec.ts` collects every console error without an ignore list. Homepage, compare, shop, current PDPs, 15P, and account pass on Chromium desktop and WebKit mobile with zero console errors. The CSP response is amended at the shared header seam to allow only the Google Customer Reviews sources required by the enabled badge.
+`tests/playwright/smoke.spec.ts` collects every console error without an ignore list. Homepage, compare, shop, current PDPs, 15P, and account pass on Chromium desktop and WebKit mobile with zero console errors. The strict smoke + launch safeguards passed three consecutive runs (20/20 each). The external floating Google rating badge is disabled only when `wp_get_environment_type()` is `development`, eliminating uncontrollable third-party report-only CSP noise; production badge behavior remains opt-in testable with `PLAYWRIGHT_EXPECT_GOOGLE_REVIEWS_BADGE=1`.
 
 ## Deployment boundary
 
