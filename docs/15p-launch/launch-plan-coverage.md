@@ -16,7 +16,7 @@ Date: 2026-08-15. This maps the original launch plan to shipped local artifacts 
 | Supporting content | Drafts: `docs/blog/svicloud-15p-vs-10p-comparison.md`, `best-svicloud-box-korean-chinese-japanese-usa-tv.md`, `where-to-buy-svicloud-15p-usa.md`. |
 | Operations / support | `support-faq-15p.md`, `warranty-return-wording.md`, `launch-checklist.md` cover inventory, supplier ETA, support, returns, checkout/tax/email checks. Manual operations remain out of scope. |
 | Theme refresh | 15P-first hero composition, floating nav shell, three-model lineup, shared PDP comparison/cross-link treatment, and distinct before/after homepage + 10P PDP screenshots on desktop/mobile. |
-| Verification | `verification-report.md`: CSS build, Docker sync, PHP lint, strict no-ignore console smoke tests, launch safeguards for rendered title/schema/9P/TBC copy, and full Playwright result (88 passed, 8 declared skips, 0 failed). |
+| Verification | `verification-report.md`: CSS build, Docker sync, PHP lint, strict no-ignore console smoke tests, launch safeguards for rendered title/schema/9P/TBC copy, and full Playwright result (90 passed, 8 declared skips, 0 failed), including homepage/shop price and policy safety. |
 
 ## Launch-day deferrals (intentional)
 

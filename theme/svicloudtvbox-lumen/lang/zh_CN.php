@@ -73,6 +73,18 @@ $overrides = [
     ],
     'shop' => [
         'cards' => [
+            '15p' => [
+                'price_label' => '上市价格',
+                'price_tbc'   => '价格待确认',
+                'price_note'  => '尚未公布正式价格',
+                'image_alt'   => '小云 15P 官方图片待确认',
+                'image_tbc'   => '官方图片待确认',
+                'assurance' => [
+                    'shipping' => '【政策待确认】库存与发货',
+                    'warranty' => '【政策待确认】保修与退换货',
+                    'support'  => '【政策待确认】客服与安装协助',
+                ],
+            ],
             'rating_label' => 'Google 平均评分',
             'rating_aria'  => 'SVICLOUDTVBOX.US 的 Google 商店平均评分',
             'rating_note'  => 'Google 验证商店反馈',
@@ -570,10 +582,10 @@ $overrides = [
             'title_lead' => '全新小云 15P 即将登场',
             'title_separator' => '。',
             'title_tail' => '亚洲娱乐，重新想象。',
-            'copy'    => '全新小云 15P 即将登场；10P+ 与 10S 现货持续供应。整合华语、韩语、日语与国际娱乐，提供中英双语礼宾服务与一年保修。',
+            'copy'    => '小云 15P 上市预览。规格、内容、价格、美国到货、费用、保修与客服均待确认；10P+ 与 10S 现有资料可立即查看。',
             'launch'  => [
                 'badge' => '新品',
-                'text'  => '小云 15P 即将抵达美国',
+                'text'  => '小云 15P 上市资料待确认',
             ],
             'showcase' => [
                 'kicker'  => '新一代旗舰',
@@ -581,20 +593,20 @@ $overrides = [
                 'title'   => '全新旗舰，即将登场。',
                 'copy'    => '即将上市的小云机型预览。正式规格、价格、政策与美国到货信息将在供应商确认后公布。',
                 'points'  => [
-                    'usa'     => '美国现货',
-                    'fees'    => '免月费',
-                    'support' => '中英双语客服',
+                    'usa'     => '【待确认】美国库存',
+                    'fees'    => '【待确认】费用条款',
+                    'support' => '【待确认】客服范围',
                 ],
                 'cta'     => '探索 15P',
                 'compare' => '比较全系列',
             ],
             'bullets' => [
-                'shipping' => '美国现货配送',
-                'warranty' => '一年美国保固',
-                'fees'     => '无月租费',
+                'shipping' => '【到货待确认】美国库存与发货',
+                'warranty' => '【政策待确认】保修与退换货',
+                'fees'     => '【政策待确认】费用条款',
             ],
             'cta' => [
-                'primary'   => '选购全新 15P',
+                'primary'   => '预览 15P',
                 'tenp'      => '选购 10P+',
                 'bundles'   => '查看优惠组合',
                 'compare'   => '查看价格',
@@ -844,6 +856,7 @@ $overrides = [
                     'image_alt' => '小云电视盒 15P 上市预览',
                     'interval'  => '台',
                     'copy'      => '预览即将上市的机型；规格、价格、库存与政策仍待确认。',
+                    'stock_note' => '库存与发货日期待确认',
                     'features'  => [
                         'newest'  => '【规格待确认】硬件与软件',
                         'no_fees' => '【政策待确认】费用条款',

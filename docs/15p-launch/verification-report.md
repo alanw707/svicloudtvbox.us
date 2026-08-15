@@ -48,13 +48,15 @@ Genuine same-URL PDP evidence (`/product/svicloud-10p-plus/`):
 - `screenshots/before-pdp-10p-mobile.png` SHA-256 `9cb76d1c...`
 - `screenshots/after-pdp-10p-mobile.png` SHA-256 `43764117...`
 
-The corresponding before/after hashes differ. Final prelaunch PDP screenshots:
+The corresponding before/after hashes differ. Final prelaunch surface screenshots:
 - `screenshots/final-pdp-15p-desktop.png`
 - `screenshots/final-pdp-15p-mobile.png`
+- `screenshots/final-shop-desktop.png`
+- `screenshots/final-shop-mobile.png`
 
 ## Playwright
 
-`npm test`: **88 passed, 8 declared skips, 0 failed** (exit 0).
+`npm test`: **90 passed, 8 declared skips, 0 failed** (exit 0).
 
 Additional launch safeguards in `tests/playwright/launch-15p.spec.ts` verify:
 
@@ -62,6 +64,8 @@ Additional launch safeguards in `tests/playwright/launch-15p.spec.ts` verify:
 - exactly one Product schema node and no Offer;
 - no 15P add-to-cart control;
 - unsupported comparison claims are absent and TBC copy is present;
+- homepage hero visibly marks availability, fee, warranty, return, and support claims TBC;
+- homepage and shop 15P cards show `Price TBC`, never `$299.00`, and use 15P-specific POLICY TBC assurances;
 - legacy 9P URL is live and links to 15P.
 
 `tests/playwright/smoke.spec.ts` collects every console error without an ignore list. Homepage, compare, shop, current PDPs, 15P, and account pass on Chromium desktop and WebKit mobile with zero console errors. The strict smoke + launch safeguards passed three consecutive runs (20/20 each). The external floating Google rating badge is disabled only when `wp_get_environment_type()` is `development`, eliminating uncontrollable third-party report-only CSP noise; production badge behavior remains opt-in testable with `PLAYWRIGHT_EXPECT_GOOGLE_REVIEWS_BADGE=1`.

@@ -16,10 +16,34 @@ function collectProductNodes(jsonLdBlocks: string[]): Array<Record<string, unkno
 }
 
 test.describe('SVICLOUD 15P launch safeguards', () => {
-  test('homepage renders the 15P SEO title', async ({ page }) => {
+  test('homepage renders the 15P SEO title and TBC-safe launch claims', async ({ page }) => {
     const response = await page.goto('/', { waitUntil: 'domcontentloaded' });
     expect(response?.ok()).toBeTruthy();
     await expect(page).toHaveTitle(/SVICLOUD 15P/);
+
+    const heroText = await page.locator('.hero-dashboard').innerText();
+    expect(heroText).toContain('TBC');
+    expect(heroText).toContain('[TBC] U.S. inventory');
+    for (const claim of ['Ships fast from the USA', '1-Year U.S. Warranty', 'No Monthly Fees', 'Bilingual support']) {
+      expect(heroText).not.toContain(claim);
+    }
+
+    const pricingCardText = (await page.locator('.lumen-pricing .shop-product-card--new').textContent()) ?? '';
+    expect(pricingCardText).toContain('Price TBC');
+    expect(pricingCardText).toContain('[POLICY TBC]');
+    expect(pricingCardText).not.toContain('$299.00');
+  });
+
+  test('shop 15P card hides placeholder commerce data and marks policies TBC', async ({ page }) => {
+    const response = await page.goto('/shop/', { waitUntil: 'domcontentloaded' });
+    expect(response?.ok()).toBeTruthy();
+
+    const cardText = await page.locator('.shop-product-card--prelaunch').innerText();
+    expect(cardText).toContain('Price TBC');
+    expect(cardText).toContain('[POLICY TBC]');
+    for (const claim of ['$299.00', 'Ships from Nevada warehouse', 'Includes 1-year U.S. warranty', 'Bilingual concierge onboarding']) {
+      expect(cardText).not.toContain(claim);
+    }
   });
 
   test('15P emits one Product schema node and labels unconfirmed claims', async ({ page }) => {

@@ -176,13 +176,14 @@ $pricing_card_images = [
 $pricing_cards = [
     '15p' => [
         'product'         => $hero_product_15p,
-        'fallback_price'  => 'TBA',
+        'fallback_price'  => '',
         'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-15p')),
         'image'           => $pricing_card_images['15p'],
         'highlight'       => true,
         'modifier'        => 'shop-product-card--new',
+        'prelaunch'       => true,
         'badge_key'       => 'frontpage.pricing.cards.15p.badge',
-        'price_note_key'  => 'shop.cards.price_note',
+        'price_note_key'  => 'shop.cards.15p.price_note',
         'title_key'       => 'frontpage.pricing.cards.15p.title',
         'copy_key'        => 'frontpage.pricing.cards.15p.copy',
         'feature_keys'    => [
@@ -191,9 +192,9 @@ $pricing_cards = [
             'frontpage.pricing.cards.15p.features.support',
         ],
         'assurance_keys'  => [
-            'shop.cards.assurance.shipping',
-            'shop.cards.assurance.warranty',
-            'shop.cards.assurance.support',
+            'shop.cards.15p.assurance.shipping',
+            'shop.cards.15p.assurance.warranty',
+            'shop.cards.15p.assurance.support',
         ],
         'cta_key'         => 'frontpage.pricing.cards.15p.cta',
         'buy_cta_key'     => 'frontpage.pricing.cards.15p.buy_cta',
@@ -261,8 +262,9 @@ foreach ($pricing_cards as $slug => $card) {
     if ($product && class_exists('WC_Product')) {
         $has_wc_product = $product instanceof WC_Product;
     }
+    $is_prelaunch_card = !empty($card['prelaunch']);
 
-    if ($has_wc_product) {
+    if ($has_wc_product && !$is_prelaunch_card) {
         $pricing_cards[$slug]['price_html'] = svic_price_html($product);
         $pricing_cards[$slug]['cta_url']    = svic_url_with_lang(get_permalink($product->get_id()));
         $pricing_cards[$slug]['buy_url'] = $product->is_purchasable() && $product->is_in_stock()
@@ -290,9 +292,12 @@ foreach ($pricing_cards as $slug => $card) {
             }
         }
     } else {
+        $fallback_price = $is_prelaunch_card
+            ? svic_translate('shop.cards.15p.price_tbc')
+            : (string) $card['fallback_price'];
         $pricing_cards[$slug]['price_html'] = sprintf(
             '<span class="lumen-price"><span class="lumen-price__current">%s</span></span>',
-            esc_html($card['fallback_price'])
+            esc_html($fallback_price)
         );
         $pricing_cards[$slug]['cta_url']    = $card['fallback_url'];
         $pricing_cards[$slug]['buy_url']    = $card['fallback_url'];
@@ -338,7 +343,7 @@ foreach ($pricing_cards as $slug => $card) {
     }
 
     $price_value = null;
-    if ($has_wc_product) {
+    if ($has_wc_product && !$is_prelaunch_card) {
         $price_string = $product->get_price();
         if ($price_string === '') {
             $price_string = $product->get_regular_price();
@@ -760,7 +765,7 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
           <a class="lumen-pill lumen-pill--primary lumen-pricing__quick-buy-cta" href="<?php echo esc_url($hero_15p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="homepage_pricing_header" data-svic-label="pricing_header_buy_15p" data-svic-model="svicloud-15p">
             <?php echo svic_translate_html('frontpage.pricing.cards.15p.buy_cta'); ?>
           </a>
-          <span class="lumen-pricing__quick-buy-note"><?php echo svic_translate_html('frontpage.pricing.stock_note'); ?></span>
+          <span class="lumen-pricing__quick-buy-note"><?php echo svic_translate_html('frontpage.pricing.cards.15p.stock_note'); ?></span>
         </div>
       </header>
       <?php
