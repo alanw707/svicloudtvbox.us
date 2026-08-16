@@ -6,14 +6,15 @@ Also writes Markdown snapshots to docs/blog/zh and docs/blog/zh-cn.
 Requires env: WP_REST_ENDPOINT, WP_REST_USERNAME, WP_REST_PASSWORD, OPENAI_API_KEY
 
 Heuristics:
-- If content already contains significant CJK characters, reuse content for zh-TW and zh-CN.
-- Otherwise, translate title/description/content to target locale preserving HTML.
+- Translate title/description/content to each target locale preserving HTML.
+- Skip already-Chinese source posts unless --force is passed.
 """
 
 from __future__ import annotations
 
 import os
 import sys
+import argparse
 from pathlib import Path
 from typing import Dict
 from urllib.parse import urljoin
@@ -21,6 +22,22 @@ from urllib.parse import urljoin
 import requests
 
 OPENAI_MODEL = "gpt-4o-mini"
+
+
+def load_env_file(file_path: str = ".env") -> None:
+    env_path = Path(file_path)
+    if not env_path.exists():
+        return
+
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = value
 
 
 def get_env(name: str) -> str:
@@ -82,6 +99,14 @@ def write_md(path: Path, slug: str, title: str, description: str, content: str, 
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--slug", action="append", default=[], help="Only translate this slug. Repeatable.")
+    parser.add_argument("--force", action="store_true", help="Translate even if source content already contains substantial CJK.")
+    parser.add_argument("--env-file", default=".env", help="Optional env file to load before reading credentials.")
+    args = parser.parse_args()
+
+    load_env_file(args.env_file)
+
     endpoint = os.environ.get("WP_REST_ENDPOINT") or "https://svicloudtvbox.us/wp-json"
     username = get_env("WP_REST_USERNAME")
     password = get_env("WP_REST_PASSWORD")
@@ -118,6 +143,8 @@ def main() -> int:
         slug = post.get("slug", "").strip()
         if not pid or not slug:
             continue
+        if args.slug and slug not in set(args.slug):
+            continue
         status = post.get("status", "")
         date = post.get("date", "")
         meta: Dict = post.get("meta") or {}
@@ -126,18 +153,18 @@ def main() -> int:
         content_en = meta.get("_svic_content_en_us") or post.get("content", {}).get("rendered", "")
 
         cjk_count = count_cjk(content_en)
-        needs_translate = cjk_count < max(50, len(content_en) * 0.05)
+        needs_translate = args.force or cjk_count < max(50, len(content_en) * 0.05)
 
         if needs_translate:
-            print(f"Translating {slug} (titles/descriptions only) ...")
+            print(f"Translating {slug} (title, description, content) ...")
             title_tw = openai_translate(api_key, title_en, "Traditional Chinese (zh-TW)")
             desc_tw = openai_translate(api_key, desc_en, "Traditional Chinese (zh-TW)")
+            content_tw = openai_translate(api_key, content_en, "Traditional Chinese (zh-TW)")
             title_cn = openai_translate(api_key, title_en, "Simplified Chinese (zh-CN)")
             desc_cn = openai_translate(api_key, desc_en, "Simplified Chinese (zh-CN)")
-            content_tw = content_en
-            content_cn = content_en
+            content_cn = openai_translate(api_key, content_en, "Simplified Chinese (zh-CN)")
         else:
-            # Already Chinese; reuse for both locales
+            # Already Chinese; reuse source for both locales unless forced.
             title_tw = title_en
             desc_tw = desc_en
             content_tw = content_en
