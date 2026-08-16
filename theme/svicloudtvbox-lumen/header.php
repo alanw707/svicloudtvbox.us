@@ -21,7 +21,7 @@
 </head>
 <body <?php body_class(); ?>>
   <?php wp_body_open(); ?>
-  <a class="svic-skip-link" href="#main-content"><?php esc_html_e('Skip to main content', 'svicloudtvbox-lumen'); ?></a>
+  <a class="svic-skip-link" href="#main-content"><?php echo svic_translate_html('header.nav.skip_content'); ?></a>
   <?php
     $custom_logo_id  = get_theme_mod( 'custom_logo' );
     $has_custom_logo = function_exists( 'has_custom_logo' ) && has_custom_logo();
@@ -129,7 +129,7 @@
           ]);
         ?>
         <button class="lumen-header__toggle" type="button" aria-expanded="false" aria-controls="lumen-mobile-nav" data-lumen-toggle>
-          <span class="screen-reader-text"><?php esc_html_e('Toggle navigation', 'svicloudtvbox-lumen'); ?></span>
+          <span class="screen-reader-text"><?php echo svic_translate_html('header.nav.open_navigation'); ?></span>
           <span class="lumen-header__toggle-line" aria-hidden="true"></span>
         </button>
       </div>
@@ -141,11 +141,11 @@
       hidden
       role="dialog"
       aria-modal="true"
-      aria-label="<?php esc_attr_e('Mobile navigation', 'svicloudtvbox-lumen'); ?>"
+      aria-label="<?php echo svic_translate_attr('header.nav.mobile_navigation'); ?>"
       data-submenu-expand="<?php echo svic_translate_attr('header.nav.submenu_expand'); ?>"
       data-submenu-collapse="<?php echo svic_translate_attr('header.nav.submenu_collapse'); ?>"
-      data-nav-open="<?php esc_attr_e('Open navigation', 'svicloudtvbox-lumen'); ?>"
-      data-nav-close="<?php esc_attr_e('Close navigation', 'svicloudtvbox-lumen'); ?>"
+      data-nav-open="<?php echo svic_translate_attr('header.nav.open_navigation'); ?>"
+      data-nav-close="<?php echo svic_translate_attr('header.nav.close_navigation'); ?>"
     >
       <?php
         $mobile_menu = wp_nav_menu([

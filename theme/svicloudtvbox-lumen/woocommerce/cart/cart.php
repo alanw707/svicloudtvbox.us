@@ -115,7 +115,7 @@ if (is_object($cart)) {
                                             <?php else: ?>
                                                 <div class="lumen-cart-qty__inner" data-qty>
                                                     <button type="button" class="lumen-cart-qty__button lumen-cart-qty__button--decrease" data-qty-control="decrease">
-                                                        <span class="screen-reader-text"><?php echo esc_html__('Decrease quantity', svic_text_domain()); ?></span>
+                                                        <span class="screen-reader-text"><?php echo svic_translate_html('cart_page.quantity.decrease'); ?></span>
                                                     </button>
                                                     <div class="lumen-cart-qty__input">
                                                         <?php
@@ -137,7 +137,7 @@ if (is_object($cart)) {
                                                         ?>
                                                     </div>
                                                     <button type="button" class="lumen-cart-qty__button lumen-cart-qty__button--increase" data-qty-control="increase">
-                                                        <span class="screen-reader-text"><?php echo esc_html__('Increase quantity', svic_text_domain()); ?></span>
+                                                        <span class="screen-reader-text"><?php echo svic_translate_html('cart_page.quantity.increase'); ?></span>
                                                     </button>
                                                 </div>
                                             <?php endif; ?>

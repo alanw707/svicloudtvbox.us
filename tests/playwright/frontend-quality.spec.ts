@@ -149,6 +149,28 @@ test.describe('storefront frontend quality safeguards', () => {
     await expect(page.locator('#billing_first_name')).toHaveAttribute('aria-invalid', 'true');
   });
 
+  test('accessibility controls are localized in Traditional and Simplified Chinese', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+
+    for (const locale of [
+      { prefix: '/zh', skip: '跳至主要內容', open: '開啟導覽', close: '關閉導覽', dialog: '行動版導覽', increase: '增加數量' },
+      { prefix: '/zh-cn', skip: '跳至主要内容', open: '打开导航', close: '关闭导航', dialog: '移动版导航', increase: '增加数量' },
+    ]) {
+      await page.goto(`${locale.prefix}/`, { waitUntil: 'domcontentloaded' });
+      await expect(page.locator('.svic-skip-link')).toHaveText(locale.skip);
+      const toggle = page.locator('[data-lumen-toggle]');
+      await expect(toggle).toHaveAccessibleName(locale.open);
+      await expect(page.locator('#lumen-mobile-nav')).toHaveAttribute('aria-label', locale.dialog);
+      await toggle.click();
+      await expect(toggle).toHaveAccessibleName(locale.close);
+      await page.keyboard.press('Escape');
+
+      await page.goto(`${locale.prefix}/?add-to-cart=12`, { waitUntil: 'domcontentloaded' });
+      await page.goto(`${locale.prefix}/cart/`, { waitUntil: 'domcontentloaded' });
+      await expect(page.locator('[data-qty-control="increase"]')).toHaveAccessibleName(locale.increase);
+    }
+  });
+
   test('all scoped EN and zh discovery routes reflow at 320px', async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 844 });
     const routes = [

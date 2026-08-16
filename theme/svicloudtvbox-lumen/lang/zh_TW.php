@@ -583,6 +583,10 @@ return [
         ],
         'remove'            => '移除商品',
         'remove_aria'       => '從購物車移除 %s',
+        'quantity'          => [
+            'decrease' => '減少數量',
+            'increase' => '增加數量',
+        ],
         'update'            => '更新購物車',
         'coupon'            => [
             'label'       => '優惠代碼',
@@ -862,6 +866,10 @@ return [
             'my-account' => '會員中心',
             'submenu_expand'   => '展開次選單',
             'submenu_collapse' => '收合次選單',
+            'skip_content'      => '跳至主要內容',
+            'mobile_navigation' => '行動版導覽',
+            'open_navigation'   => '開啟導覽',
+            'close_navigation'  => '關閉導覽',
         ],
     ],
 

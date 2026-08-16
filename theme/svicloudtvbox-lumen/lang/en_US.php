@@ -382,6 +382,10 @@ return [
         ],
         'remove'            => 'Remove item',
         'remove_aria'       => 'Remove %s from cart',
+        'quantity'          => [
+            'decrease' => 'Decrease quantity',
+            'increase' => 'Increase quantity',
+        ],
         'update'            => 'Update cart',
         'coupon'            => [
             'label'       => 'Promo code',
@@ -745,6 +749,10 @@ return [
             'my-account' => 'Account',
             'submenu_expand'   => 'Expand submenu',
             'submenu_collapse' => 'Collapse submenu',
+            'skip_content'      => 'Skip to main content',
+            'mobile_navigation' => 'Mobile navigation',
+            'open_navigation'   => 'Open navigation',
+            'close_navigation'  => 'Close navigation',
         ],
     ],
 

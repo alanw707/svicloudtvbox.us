@@ -39,6 +39,8 @@ Final `accessibility-audit.json` covers eight routes at 1440, 390, and 320 CSS p
 
 `tests/playwright/frontend-quality.spec.ts` guards these results in Chromium and WebKit, including EN/zh reflow at 320 px.
 
+`/zh/`, `/zh-cn/`, and their cart routes expose localized skip-link, mobile-dialog, open/close, and quantity-control accessible names through `svic_translate`.
+
 ## Build and source checks
 
 - All 56 theme PHP files pass `php -l`.
@@ -53,7 +55,7 @@ Final `accessibility-audit.json` covers eight routes at 1440, 390, and 320 CSS p
 
 Final full command: `npm test`
 
-Expected final result after the last regression additions: **106 passed, 8 declared skips, 0 failed**.
+Final result after bilingual accessibility safeguards: **108 passed, 8 declared skips, 0 failed**.
 
 Declared skips are pre-existing environment/content gates:
 - Stripe purchase/widget checks require `PLAYWRIGHT_STRIPE_E2E=1` and configured Stripe test credentials.
@@ -74,4 +76,5 @@ Strict smoke coverage continues to collect console errors without an ignore list
 - `0ffa9ea fix(theme): establish accessible storefront foundations`
 - `c556687 fix(theme): streamline storefront discovery UX`
 - `251128c fix(woocommerce): repair cart and checkout UX`
-- Final verification/documentation commit follows this report.
+- `a554611 test(theme): verify storefront accessibility UX`
+- Bilingual accessibility correction commit follows this report.
