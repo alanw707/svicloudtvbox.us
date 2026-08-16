@@ -214,13 +214,24 @@ body.woocommerce-checkout .lumen-checkout-coupon__chip-remove:focus-visible {
   outline: none;
 }
 
+body.woocommerce-checkout .entry-content > .woocommerce-notices-wrapper {
+  width: min(1180px, calc(100% - 2rem));
+  margin: 1rem auto 0;
+}
+
 body.woocommerce-checkout .woocommerce-error,
 body.woocommerce-checkout .woocommerce-info,
 body.woocommerce-checkout .woocommerce-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0.9rem 1.1rem;
   border-radius: var(--radius-xl);
   border: 1px solid rgba(164, 237, 232, 0.32);
-  background: rgba(18, 42, 90, 0.66);
-  color: rgba(236, 246, 255, 0.9);
+  background: rgba(18, 42, 90, 0.88);
+  color: rgba(236, 246, 255, 0.96);
+  line-height: 1.5;
   box-shadow: 0 20px 50px rgba(3, 12, 32, 0.5);
 }
 

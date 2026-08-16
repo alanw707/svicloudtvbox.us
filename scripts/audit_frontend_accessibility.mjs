@@ -117,14 +117,18 @@ for (const width of [1440, 390, 320]) {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
   await prepare(page, 'checkout', '/checkout/');
-  await page.locator('#place_order').click();
-  await page.waitForTimeout(700);
+  const placeOrder = page.locator('#place_order');
+  if (await placeOrder.isEnabled()) {
+    await placeOrder.click();
+    await page.waitForTimeout(700);
+  }
   report.interactions.checkoutValidation = await page.evaluate(() => ({
     focused: document.activeElement?.id || document.activeElement?.getAttribute('name') || document.activeElement?.tagName,
     invalidFields: [...document.querySelectorAll('.woocommerce-invalid-required-field input, input[aria-invalid="true"]')].map((input) => input.id || input.getAttribute('name')),
     errors: [...document.querySelectorAll('.woocommerce-error li, .woocommerce-error')].map((error) => error.textContent?.trim()).filter(Boolean),
     errorRoles: [...document.querySelectorAll('.woocommerce-error')].map((error) => error.getAttribute('role')),
     placeOrderDisabled: document.querySelector('#place_order')?.hasAttribute('disabled') || false,
+    placeOrderText: document.querySelector('#place_order')?.textContent?.trim() || '',
   }));
   await context.close();
 }

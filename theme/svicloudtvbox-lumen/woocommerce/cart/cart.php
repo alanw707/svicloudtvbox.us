@@ -234,27 +234,6 @@ if (is_object($cart)) {
                         </div>
 
                         <p class="lumen-cart-summary__reassurance"><?php echo svic_translate_html('cart_page.summary.reassurance'); ?></p>
-
-                        <div class="lumen-cart-summary__links lumen-action-group">
-                            <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url(wc_get_checkout_url()); ?>" data-svic-event="svic_begin_checkout" data-svic-location="cart_summary" data-svic-label="proceed_to_checkout"><?php echo svic_translate_html('checkout_page.title'); ?></a>
-                            <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/faq/'))); ?>" data-svic-event="svic_cta_click" data-svic-location="cart_summary" data-svic-label="faq_before_checkout"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
-                            <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact/'))); ?>" data-svic-event="svic_cta_click" data-svic-location="cart_summary" data-svic-label="contact_concierge"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
-                        </div>
-
-                        <ul class="lumen-cart-summary__benefits">
-                            <li>
-                                <span class="lumen-cart-summary__benefit-title"><?php echo svic_translate_html('cart_page.benefits.shipping.title'); ?></span>
-                                <span class="lumen-cart-summary__benefit-copy"><?php echo svic_translate_html('cart_page.benefits.shipping.copy'); ?></span>
-                            </li>
-                            <li>
-                                <span class="lumen-cart-summary__benefit-title"><?php echo svic_translate_html('cart_page.benefits.warranty.title'); ?></span>
-                                <span class="lumen-cart-summary__benefit-copy"><?php echo svic_translate_html('cart_page.benefits.warranty.copy'); ?></span>
-                            </li>
-                            <li>
-                                <span class="lumen-cart-summary__benefit-title"><?php echo svic_translate_html('cart_page.benefits.concierge.title'); ?></span>
-                                <span class="lumen-cart-summary__benefit-copy"><?php echo svic_translate_html('cart_page.benefits.concierge.copy'); ?></span>
-                            </li>
-                        </ul>
                     <?php else: ?>
                         <p class="lumen-cart-summary__empty"><?php echo svic_translate_html('cart_page.summary.empty'); ?></p>
                     <?php endif; ?>

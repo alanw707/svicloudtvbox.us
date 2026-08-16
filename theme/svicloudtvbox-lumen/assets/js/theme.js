@@ -36,7 +36,9 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         initCartQuantityControls();
         $(document.body).on('updated_wc_div cart_page_refreshed updated_cart_totals', initCartQuantityControls);
         relocateCheckoutCoupon();
+        enhanceCheckoutAccessibility();
         $(document.body).on('updated_checkout applied_coupon_in_checkout removed_coupon_in_checkout', relocateCheckoutCoupon);
+        $(document.body).on('updated_checkout checkout_error', enhanceCheckoutAccessibility);
     }
 
     function initSkipLink() {
@@ -869,6 +871,16 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         });
     }
 
+    function enhanceCheckoutAccessibility() {
+        if (!document.body || !document.body.classList.contains('woocommerce-checkout')) {
+            return;
+        }
+        $('.woocommerce-error')
+            .attr({ role: 'alert', 'aria-live': 'assertive', tabindex: '-1' });
+        $('.woocommerce-invalid-required-field, .woocommerce-invalid').find('input, select, textarea')
+            .attr('aria-invalid', 'true');
+    }
+
     function relocateCheckoutCoupon() {
         if (!document.body || !document.body.classList.contains('woocommerce-checkout')) {
             return;
@@ -894,6 +906,14 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         displayBlock.classList.add('lumen-checkout-coupon-display');
         displayBlock.removeAttribute('data-lumen-coupon-original');
         displayBlock.removeAttribute('hidden');
+        const displayInput = displayBlock.querySelector('input[name="coupon_code"]');
+        const displayLabel = displayBlock.querySelector('label[for="coupon_code"]');
+        if (displayInput) {
+            displayInput.id = 'checkout_coupon_code';
+        }
+        if (displayLabel) {
+            displayLabel.setAttribute('for', 'checkout_coupon_code');
+        }
         summaryCard.insertBefore(displayBlock, target);
 
         originalBlock.setAttribute('hidden', 'hidden');
@@ -1172,15 +1192,16 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
                 return $(this).text().trim().length > 0;
             }).first();
             const pending = consumePendingToast();
-            if (!$notice.length && !pending) {
+            if ($notice.length) {
+                hasShownInitialNotice = true;
+                return;
+            }
+            if (!pending) {
                 return;
             }
             let message = '';
-            let variant = 'success';
-            if ($notice.length) {
-                message = stripMessage($notice.html());
-                variant = $notice.hasClass('woocommerce-error') ? 'error' : 'success';
-            } else if (pending) {
+            const variant = 'success';
+            if (pending) {
                 message = (svicTheme.i18n && svicTheme.i18n.addedToCart) ? svicTheme.i18n.addedToCart : 'Added to cart!';
             }
             if (!message) {

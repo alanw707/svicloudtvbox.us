@@ -634,6 +634,7 @@ return [
             'title' => '付款與確認',
             'intro' => '選擇已儲存的信用卡或新增付款方式，然後提交訂單完成安全結帳。',
             'cards_label' => '支援的信用卡：Visa、Mastercard、American Express、Discover。',
+            'unavailable_action' => '目前無可用付款方式',
         ],
         'coupon' => [
             'toggle_lead' => '有折扣碼嗎？',

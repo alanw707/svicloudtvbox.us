@@ -93,6 +93,11 @@ $overrides = [
             'product_rating_aria'  => '产品评分 {{rating}} 满分 5 分，来自 {{count}} 条评价',
         ],
     ],
+    'checkout_page' => [
+        'payment' => [
+            'unavailable_action' => '目前无可用付款方式',
+        ],
+    ],
     'order_thankyou' => [
         'review' => [
             'badge' => 'Google 评价邀请',

@@ -1,4 +1,8 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+async function seedCart(page: Page) {
+  await page.goto('/?add-to-cart=12', { waitUntil: 'domcontentloaded' });
+}
 
 test.describe('storefront frontend quality safeguards', () => {
   test('skip link is first and moves focus to main content', async ({ page }) => {
@@ -77,6 +81,57 @@ test.describe('storefront frontend quality safeguards', () => {
     for (let index = 0; index < await utilityLinks.count(); index += 1) {
       const box = await utilityLinks.nth(index).boundingBox();
       expect(box?.height ?? 0).toBeGreaterThanOrEqual(24);
+    }
+  });
+
+  test('cart uses the branded semantic template with one checkout action', async ({ page }) => {
+    await seedCart(page);
+    await page.goto('/cart/', { waitUntil: 'domcontentloaded' });
+
+    await expect(page.locator('[data-cart-page]')).toBeVisible();
+    await expect(page.locator('.wc-block-cart')).toHaveCount(0);
+    await expect(page.locator('h1.lumen-cart__title')).toHaveCount(1);
+    await expect(page.locator('.lumen-cart-summary__totals .checkout-button')).toHaveCount(1);
+    await expect(page.locator('.lumen-cart-summary__links')).toHaveCount(0);
+
+    const increase = page.locator('[data-qty-control="increase"]');
+    await expect(increase).toHaveAccessibleName(/increase quantity/i);
+    const target = await increase.boundingBox();
+    expect(target?.width ?? 0).toBeGreaterThanOrEqual(44);
+    expect(target?.height ?? 0).toBeGreaterThanOrEqual(44);
+    const quantity = page.locator('.lumen-cart-qty__field');
+    await expect(quantity).toHaveValue('1');
+    await increase.click();
+    await expect(quantity).toHaveValue('2');
+    await expect(page.locator('.lumen-cart-update')).toBeEnabled();
+
+    const noticePosition = await page.locator('.woocommerce-notices-wrapper').first().evaluate((element) => getComputedStyle(element).position);
+    expect(noticePosition).not.toBe('fixed');
+    await expect(page.locator('.svic-cart-feedback.is-visible')).toHaveCount(0);
+  });
+
+  test('checkout has unique controls, one notice, and reviews the order first on mobile', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await seedCart(page);
+    await page.goto('/checkout/', { waitUntil: 'domcontentloaded' });
+
+    await expect(page.locator('#coupon_code')).toHaveCount(1);
+    await expect(page.locator('#checkout_coupon_code')).toHaveCount(1);
+    await expect(page.locator('.svic-cart-feedback.is-visible')).toHaveCount(0);
+
+    const summaryBox = await page.locator('.lumen-checkout__summary').boundingBox();
+    const primaryBox = await page.locator('.lumen-checkout__primary').boundingBox();
+    expect(summaryBox).toBeTruthy();
+    expect(primaryBox).toBeTruthy();
+    expect(summaryBox!.y).toBeLessThan(primaryBox!.y);
+
+    const paymentMethods = await page.locator('input[name="payment_method"]').count();
+    const placeOrder = page.locator('#place_order');
+    if (paymentMethods === 0) {
+      await expect(placeOrder).toBeDisabled();
+      await expect(placeOrder).toHaveText(/payment unavailable/i);
+    } else {
+      await expect(placeOrder).toBeEnabled();
     }
   });
 

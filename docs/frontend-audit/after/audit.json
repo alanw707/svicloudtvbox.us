@@ -1,7 +1,7 @@
 {
   "phase": "after",
   "baseURL": "http://svicloud10p.svic.local",
-  "capturedAt": "2026-08-16T00:40:51.175Z",
+  "capturedAt": "2026-08-16T00:50:31.367Z",
   "pages": [
     {
       "routeName": "home",
@@ -55,12 +55,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/front-page.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/front-page.css?ver=1786841373",
           "media": "all",
           "loaded": true
         }
@@ -118,12 +118,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -199,12 +199,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/compare.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/compare.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -276,12 +276,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -350,12 +350,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -424,12 +424,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -460,14 +460,17 @@
       },
       "documentSize": {
         "width": 1440,
-        "height": 1172
+        "height": 2118
       },
       "horizontalOverflow": false,
       "bodyClasses": "wp-singular page-template-default page page-id-24 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-cart woocommerce-page woocommerce-js loaded animations-ready",
       "mainCount": 1,
       "navCount": 1,
-      "h1": [],
+      "h1": [
+        "Your cart"
+      ],
       "headingOrder": [
+        1,
         2,
         2
       ],
@@ -493,12 +496,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -506,50 +509,18 @@
           "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
           "media": "all",
           "loaded": true
-        },
-        {
-          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/all-products.css?ver=wc-10.3.8",
-          "media": "all",
-          "loaded": true
-        },
-        {
-          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/cart.css?ver=wc-10.3.8",
-          "media": "all",
-          "loaded": true
-        },
-        {
-          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/packages-style.css?ver=wc-10.3.8",
-          "media": "all",
-          "loaded": true
         }
       ],
       "duplicateIds": [],
-      "unnamedControls": [
-        {
-          "tag": "a",
-          "class": ""
-        }
-      ],
+      "unnamedControls": [],
       "unlabeledInputs": [],
       "imagesWithoutAlt": [],
       "smallTargets": [
         {
           "tag": "a",
-          "text": "",
-          "width": 84,
-          "height": 20
-        },
-        {
-          "tag": "a",
-          "text": "SviCloud TV Box 10P+",
-          "width": 167,
-          "height": 22
-        },
-        {
-          "tag": "button",
-          "text": "Remove SviCloud TV Box 10P+ from cart",
-          "width": 73,
-          "height": 20
+          "text": "View cart",
+          "width": 69,
+          "height": 23
         }
       ]
     },
@@ -568,7 +539,7 @@
       },
       "documentSize": {
         "width": 1440,
-        "height": 3186
+        "height": 3218
       },
       "horizontalOverflow": false,
       "bodyClasses": "wp-singular page-template-default page page-id-25 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-checkout woocommerce-page woocommerce-js loaded animations-ready",
@@ -608,12 +579,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -633,19 +604,11 @@
           "loaded": true
         }
       ],
-      "duplicateIds": [
-        "coupon_code"
-      ],
+      "duplicateIds": [],
       "unnamedControls": [],
       "unlabeledInputs": [],
       "imagesWithoutAlt": [],
       "smallTargets": [
-        {
-          "tag": "a",
-          "text": "View cart",
-          "width": 70,
-          "height": 20
-        },
         {
           "tag": "select",
           "text": "Select an option…AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawa",
@@ -712,12 +675,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/front-page.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/front-page.css?ver=1786841373",
           "media": "all",
           "loaded": true
         }
@@ -775,12 +738,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -856,12 +819,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/compare.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/compare.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -933,12 +896,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -1007,12 +970,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -1081,12 +1044,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -1117,14 +1080,17 @@
       },
       "documentSize": {
         "width": 390,
-        "height": 1734
+        "height": 3320
       },
       "horizontalOverflow": false,
       "bodyClasses": "wp-singular page-template-default page page-id-24 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-cart woocommerce-page woocommerce-js loaded animations-ready",
       "mainCount": 1,
       "navCount": 1,
-      "h1": [],
+      "h1": [
+        "Your cart"
+      ],
       "headingOrder": [
+        1,
         2,
         2
       ],
@@ -1150,12 +1116,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -1163,49 +1129,23 @@
           "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
           "media": "all",
           "loaded": true
-        },
-        {
-          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/all-products.css?ver=wc-10.3.8",
-          "media": "all",
-          "loaded": true
-        },
-        {
-          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/cart.css?ver=wc-10.3.8",
-          "media": "all",
-          "loaded": true
-        },
-        {
-          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/packages-style.css?ver=wc-10.3.8",
-          "media": "all",
-          "loaded": true
         }
       ],
       "duplicateIds": [],
-      "unnamedControls": [
-        {
-          "tag": "a",
-          "class": ""
-        }
-      ],
+      "unnamedControls": [],
       "unlabeledInputs": [],
       "imagesWithoutAlt": [],
       "smallTargets": [
         {
           "tag": "a",
-          "text": "",
-          "width": 64,
-          "height": 20
+          "text": "View cart",
+          "width": 69,
+          "height": 23
         },
         {
           "tag": "a",
           "text": "SviCloud TV Box 10P+",
-          "width": 167,
-          "height": 22
-        },
-        {
-          "tag": "button",
-          "text": "Remove SviCloud TV Box 10P+ from cart",
-          "width": 73,
+          "width": 174,
           "height": 20
         }
       ]
@@ -1225,7 +1165,7 @@
       },
       "documentSize": {
         "width": 390,
-        "height": 4776
+        "height": 4799
       },
       "horizontalOverflow": false,
       "bodyClasses": "wp-singular page-template-default page page-id-25 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-checkout woocommerce-page woocommerce-js loaded animations-ready",
@@ -1265,12 +1205,12 @@
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
         {
-          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786840826",
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841373",
           "media": "all",
           "loaded": true
         },
@@ -1290,19 +1230,11 @@
           "loaded": true
         }
       ],
-      "duplicateIds": [
-        "coupon_code"
-      ],
+      "duplicateIds": [],
       "unnamedControls": [],
       "unlabeledInputs": [],
       "imagesWithoutAlt": [],
       "smallTargets": [
-        {
-          "tag": "a",
-          "text": "View cart",
-          "width": 70,
-          "height": 20
-        },
         {
           "tag": "select",
           "text": "Select an option…AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawa",
