@@ -36,7 +36,7 @@
   border: 1px solid rgba(126, 246, 227, 0.28);
   background: rgba(10, 30, 64, 0.62);
   color: rgba(228, 240, 255, 0.86);
-  font-size: 0.75rem;
+  font-size: var(--lumen-font-size-label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
@@ -123,7 +123,7 @@
   border-radius: 50%;
   background: linear-gradient(135deg, rgba(126, 246, 227, 0.24), rgba(91, 139, 255, 0.28));
   color: rgba(240, 248, 255, 0.94);
-  font-size: 0.78rem;
+  font-size: var(--lumen-font-size-label);
   font-weight: 700;
   letter-spacing: 0.08em;
 }

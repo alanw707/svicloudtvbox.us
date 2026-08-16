@@ -17,66 +17,6 @@ $hero_bullet_keys = [
     'frontpage.hero.bullets.fees',
 ];
 
-$metrics = [
-    [
-        'icon'      => 'icon-truck.svg',
-        'title_key' => 'frontpage.metrics.shipping.title',
-        'copy_key'  => 'frontpage.metrics.shipping.copy',
-    ],
-    [
-        'icon'      => 'icon-tool.svg',
-        'title_key' => 'frontpage.metrics.concierge.title',
-        'copy_key'  => 'frontpage.metrics.concierge.copy',
-    ],
-    [
-        'icon'      => 'icon-lock.svg',
-        'title_key' => 'frontpage.metrics.security.title',
-        'copy_key'  => 'frontpage.metrics.security.copy',
-    ],
-    [
-        'icon'      => 'icon-star.svg',
-        'title_key' => 'frontpage.metrics.dealer.title',
-        'copy_key'  => 'frontpage.metrics.dealer.copy',
-    ],
-];
-
-$feature_cards = [
-    [
-        'icon'      => 'icon-box.svg',
-        'title_key' => 'frontpage.feature_grid.cards.entertainment.title',
-        'copy_key'  => 'frontpage.feature_grid.cards.entertainment.copy',
-    ],
-    [
-        'icon'      => 'icon-bolt.svg',
-        'title_key' => 'frontpage.feature_grid.cards.hardware.title',
-        'copy_key'  => 'frontpage.feature_grid.cards.hardware.copy',
-    ],
-    [
-        'icon'      => 'icon-handshake.svg',
-        'title_key' => 'frontpage.feature_grid.cards.support.title',
-        'copy_key'  => 'frontpage.feature_grid.cards.support.copy',
-    ],
-];
-
-$experience_services = [
-    [
-        'icon'     => 'icon-satellite.svg',
-        'text_key' => 'frontpage.experience.services.activation',
-    ],
-    [
-        'icon'     => 'icon-wifi.svg',
-        'text_key' => 'frontpage.experience.services.wifi',
-    ],
-    [
-        'icon'     => 'icon-mic.svg',
-        'text_key' => 'frontpage.experience.services.karaoke',
-    ],
-    [
-        'icon'     => 'icon-family.svg',
-        'text_key' => 'frontpage.experience.services.kids',
-    ],
-];
-
 $faq_groups = [
     [
         'title_key' => 'frontpage.faq.groups.orders.title',
@@ -513,9 +453,6 @@ if (!$blog_posts_query instanceof WP_Query) {
         <div class="hero-dashboard__cta">
           <a class="hero-dashboard__button hero-dashboard__button--primary" href="<?php echo esc_url($hero_15p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="homepage_hero" data-svic-label="15p_primary" data-svic-model="svicloud-15p"><?php echo svic_translate_html('frontpage.hero.cta.primary'); ?></a>
           <a class="hero-dashboard__button hero-dashboard__button--ghost" href="<?php echo esc_url($hero_10p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="homepage_hero" data-svic-label="10p_secondary" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('frontpage.hero.cta.tenp'); ?></a>
-          <a class="hero-dashboard__button hero-dashboard__button--secondary" href="#pricing">
-            <span><?php echo svic_translate_html('frontpage.hero.cta.secondary'); ?></span>
-          </a>
         </div>
       </div>
       <div class="hero-dashboard__visual">
@@ -627,94 +564,6 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
           <img src="<?php echo esc_url($certificate_asset_url); ?>" alt="<?php echo esc_attr(svic_translate('frontpage.certification.alt')); ?>" loading="lazy" width="800" height="594" />
         </figure>
       <?php endif; ?>
-    </div>
-  </section>
-
-  <!-- Inline CTA: post-certification -->
-  <div class="lumen-inline-cta" aria-label="<?php echo svic_translate_attr('frontpage.aria.shop_now'); ?>">
-    <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.inline_cta.button'); ?></a>
-    <ul class="lumen-inline-cta__trust" role="list">
-      <li><?php echo svic_translate_html('frontpage.inline_cta.trust.shipping'); ?></li>
-      <li><?php echo svic_translate_html('frontpage.inline_cta.trust.speed'); ?></li>
-      <li><?php echo svic_translate_html('frontpage.inline_cta.trust.returns'); ?></li>
-    </ul>
-  </div>
-
-  <!-- Credibility Bar -->
-  <section class="lumen-metrics" aria-label="<?php echo svic_translate_attr('frontpage.aria.metrics'); ?>" data-bg>
-    <div class="lumen-metrics__inner">
-      <?php foreach ($metrics as $metric) : ?>
-        <?php $icon_path = get_template_directory_uri() . '/assets/svg/' . $metric['icon']; ?>
-        <article class="lumen-metric">
-          <span class="lumen-metric__glow" aria-hidden="true"></span>
-          <span class="lumen-metric__icon">
-            <img src="<?php echo esc_url($icon_path); ?>" alt="<?php echo esc_attr(svic_icon_label($metric['icon'])); ?>" loading="lazy" />
-          </span>
-          <div class="lumen-metric__copy">
-            <strong><?php echo svic_translate_html($metric['title_key']); ?></strong>
-            <span><?php echo svic_translate_html($metric['copy_key']); ?></span>
-          </div>
-        </article>
-      <?php endforeach; ?>
-    </div>
-  </section>
-
-  <!-- Feature Highlights -->
-  <section class="lumen-feature-grid" id="experience" data-bg>
-    <div class="lumen-feature-grid__inner">
-      <header class="lumen-section-header">
-        <h2 class="lumen-section-header__title"><?php echo svic_translate_html('frontpage.feature_grid.title'); ?></h2>
-        <p class="lumen-section-header__subtitle"><?php echo svic_translate_html('frontpage.feature_grid.subtitle'); ?></p>
-      </header>
-      <div class="lumen-feature-grid__cards">
-        <?php foreach ($feature_cards as $card) : ?>
-          <article class="lumen-feature-card">
-            <span class="lumen-feature-card__icon">
-              <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/svg/' . $card['icon']); ?>" alt="<?php echo esc_attr(svic_icon_label($card['icon'])); ?>" loading="lazy" />
-            </span>
-            <h3 class="lumen-feature-card__title"><?php echo svic_translate_html($card['title_key']); ?></h3>
-            <p class="lumen-feature-card__copy"><?php echo svic_translate_html($card['copy_key']); ?></p>
-          </article>
-        <?php endforeach; ?>
-      </div>
-    </div>
-  </section>
-
-  <!-- Inline CTA: post-features -->
-  <div class="lumen-inline-cta" aria-label="<?php echo svic_translate_attr('frontpage.aria.shop_now'); ?>">
-    <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>"><?php echo svic_translate_html('frontpage.inline_cta.button'); ?></a>
-    <ul class="lumen-inline-cta__trust" role="list">
-      <li><?php echo svic_translate_html('frontpage.inline_cta.trust.shipping'); ?></li>
-      <li><?php echo svic_translate_html('frontpage.inline_cta.trust.speed'); ?></li>
-      <li><?php echo svic_translate_html('frontpage.inline_cta.trust.returns'); ?></li>
-    </ul>
-  </div>
-
-  <!-- Experience Section -->
-  <section class="lumen-experience" data-bg>
-    <div class="lumen-experience__inner">
-      <div class="lumen-experience__copy">
-        <span class="lumen-experience__badge"><?php echo svic_translate_html('frontpage.experience.badge'); ?></span>
-        <h2 class="lumen-experience__title"><?php echo svic_translate_html('frontpage.experience.title'); ?></h2>
-        <p class="lumen-experience__lead"><?php echo svic_translate_html('frontpage.experience.lead'); ?></p>
-        <ul class="lumen-experience__list">
-          <li><?php echo svic_translate_html('frontpage.concierge.personalized_walkthrough'); ?></li>
-          <li><?php echo svic_translate_html('frontpage.concierge.remote_updates'); ?></li>
-          <li><?php echo svic_translate_html('frontpage.concierge.community_access'); ?></li>
-        </ul>
-      </div>
-      <aside class="lumen-experience__card">
-        <h3 class="lumen-experience__card-title"><?php echo svic_translate_html('frontpage.experience.card_title'); ?></h3>
-        <ul class="lumen-experience__card-list">
-          <?php foreach ($experience_services as $service) : ?>
-            <li>
-              <span class="lumen-experience__icon"><img src="<?php echo esc_url(get_template_directory_uri() . '/assets/svg/' . $service['icon']); ?>" alt="<?php echo esc_attr(svic_icon_label($service['icon'])); ?>" loading="lazy" /></span>
-            <?php echo svic_translate_html($service['text_key']); ?>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-        <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact'))); ?>"><?php echo svic_translate_html('frontpage.experience.cta'); ?></a>
-      </aside>
     </div>
   </section>
 

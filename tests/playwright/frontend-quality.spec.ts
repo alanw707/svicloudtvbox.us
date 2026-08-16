@@ -43,6 +43,43 @@ test.describe('storefront frontend quality safeguards', () => {
     await expect(page.locator('#main-content')).not.toHaveAttribute('inert', '');
   });
 
+  test('discovery pages keep a concise, balanced responsive layout', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    await expect(page.locator('.lumen-metric, .lumen-feature-card, .lumen-experience')).toHaveCount(0);
+    const homepageSections = await page.locator('#main-content > section').count();
+    expect(homepageSections).toBeLessThanOrEqual(7);
+    await expect(page.locator('.lumen-pricing')).toHaveCSS('content-visibility', 'visible');
+
+    await page.goto('/shop/', { waitUntil: 'domcontentloaded' });
+    const desktopColumns = await page.locator('.shop-products__grid').evaluate((element) =>
+      getComputedStyle(element).gridTemplateColumns.split(' ').length,
+    );
+    expect(desktopColumns).toBe(3);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    const mobileColumns = await page.locator('.shop-products__grid').evaluate((element) =>
+      getComputedStyle(element).gridTemplateColumns.split(' ').length,
+    );
+    expect(mobileColumns).toBe(1);
+  });
+
+  test('product decision controls meet minimum target sizing', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/product/svicloud-10p-plus/', { waitUntil: 'domcontentloaded' });
+
+    const quantity = page.locator('.product-hero-cta input.qty');
+    await expect(quantity).toBeVisible();
+    const quantityBox = await quantity.boundingBox();
+    expect(quantityBox?.height ?? 0).toBeGreaterThanOrEqual(44);
+
+    const utilityLinks = page.locator('.product-faq__answer a:visible');
+    for (let index = 0; index < await utilityLinks.count(); index += 1) {
+      const box = await utilityLinks.nth(index).boundingBox();
+      expect(box?.height ?? 0).toBeGreaterThanOrEqual(24);
+    }
+  });
+
   test('reduced motion disables nonessential page animation and transitions', async ({ browser }) => {
     const context = await browser.newContext({ reducedMotion: 'reduce' });
     const page = await context.newPage();
