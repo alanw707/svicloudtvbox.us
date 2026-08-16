@@ -86,8 +86,14 @@ test.describe('SVICLOUD site smoke', () => {
       if (path === '/') {
         await expect(page.locator('.hero-dashboard')).toBeVisible();
         await expect(page.locator('.hero-15p')).toBeVisible();
-        await expect(page.locator('.lumen-metric')).toHaveCount(4);
-        await expect(page.locator('.lumen-feature-card')).toHaveCount(3);
+        await expect(page.locator('.lumen-metric')).toHaveCount(0);
+        await expect(page.locator('.lumen-feature-card')).toHaveCount(0);
+        await expect(page.locator('.frontpage-traffic')).toBeVisible();
+        await expect(page.locator('.lumen-inbox')).toBeVisible();
+        await expect(page.locator('.lumen-certification')).toBeVisible();
+        await expect(page.locator('.lumen-pricing')).toBeVisible();
+        await expect(page.locator('.lumen-confidence')).toBeVisible();
+        await expect(page.locator('.lumen-faq')).toBeVisible();
 
         await expect(page.locator('.footer-brand__badge')).toHaveCount(3);
 

@@ -25,15 +25,15 @@
 }
 
 .lumen-product .product-hero-placeholder span {
-  font-size: 0.75rem;
+  font-size: var(--lumen-font-size-label);
   font-weight: 750;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .lumen-product .pdp-compare {
-  margin-top: var(--space-2xl);
-  padding: var(--space-2xl) clamp(24px, 6vw, 64px);
+  margin-top: clamp(1.75rem, 4vw, 2.75rem);
+  padding: clamp(1.75rem, 4vw, 2.75rem) clamp(20px, 5vw, 56px);
   background: linear-gradient(150deg, rgba(5, 12, 27, 0.95) 0%, rgba(10, 26, 55, 0.85) 55%, rgba(13, 36, 72, 0.75) 100%);
   color: var(--lumen-text-primary);
   border-radius: var(--radius-2xl);
@@ -127,6 +127,9 @@
 
 .lumen-product .pdp-compare__card-link {
   justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
   color: var(--lumen-accent-azure);
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -192,7 +195,7 @@
   justify-self: start;
   padding: 4px 12px;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: var(--lumen-font-size-label);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--lumen-accent-teal);
