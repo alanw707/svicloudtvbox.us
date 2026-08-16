@@ -26,7 +26,7 @@ This is an implementation audit toward WCAG 2.2 AA expectations, not a certifica
 | A9 touch targets | Fixed for primary, language, menu, quantity, remove, checkout, and icon controls; inline prose links retain the WCAG inline exception. |
 | A10 functional type | Fixed on high-impact shop, compare, prelaunch, and checkout labels using the shared 0.8 rem functional token. |
 
-Final automated audit: 24 route/width combinations, zero horizontal overflow, zero missing/duplicate H1s, zero duplicate IDs, zero unlabeled inputs, and zero active motion under reduced-motion emulation. Conservative solid-background contrast scan reports zero candidates; rendered gradients were reviewed in final screenshots.
+Final automated audit: 24 route/width combinations, zero horizontal overflow, zero missing/duplicate H1s, zero duplicate IDs, zero unlabeled inputs, and zero active motion under reduced-motion emulation. Conservative solid-background contrast scan reports zero candidates; rendered gradients were reviewed in final screenshots. Skip, mobile-navigation, and cart quantity accessible names are verified through `svic_translate` in English, Traditional Chinese, and Simplified Chinese.
 
 ## Original critical issues
 

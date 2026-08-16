@@ -60,6 +60,10 @@ $overrides = [
             'my-account' => '会员中心',
             'submenu_expand'   => '展开次选单',
             'submenu_collapse' => '收合次选单',
+            'skip_content'      => '跳至主要内容',
+            'mobile_navigation' => '移动版导航',
+            'open_navigation'   => '打开导航',
+            'close_navigation'  => '关闭导航',
         ],
     ],
     'frontpage' => [
@@ -91,6 +95,12 @@ $overrides = [
             'product_rating_label' => '产品评分',
             'product_rating_count' => '%d 条产品评价',
             'product_rating_aria'  => '产品评分 {{rating}} 满分 5 分，来自 {{count}} 条评价',
+        ],
+    ],
+    'cart_page' => [
+        'quantity' => [
+            'decrease' => '减少数量',
+            'increase' => '增加数量',
         ],
     ],
     'checkout_page' => [
