@@ -27,7 +27,7 @@ while (have_posts()) :
     }
 
     if (!$product) {
-        echo '<main class="page-shell lumen-product"><p class="woocommerce-info">' . esc_html__('Product unavailable.', 'svicloudtvbox-lumen') . '</p></main>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo '<main id="main-content" class="page-shell lumen-product" tabindex="-1"><p class="woocommerce-info">' . esc_html__('Product unavailable.', 'svicloudtvbox-lumen') . '</p></main>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         do_action('woocommerce_after_single_product');
         continue;
     }
@@ -194,7 +194,7 @@ while (have_posts()) :
     ];
     ?>
 
-    <main class="page-shell lumen-product">
+    <main id="main-content" class="page-shell lumen-product" tabindex="-1">
       <section class="product-hero">
         <div class="product-hero-inner">
           <div class="product-hero-media">

@@ -122,7 +122,7 @@ $faq_sections = [
     ],
 ];
 ?>
-<main class="faq-page">
+<main id="main-content" class="faq-page" tabindex="-1">
   <section class="faq-hero">
     <div class="faq-hero__inner">
       <span class="faq-hero__badge"><?php echo svic_translate_html('faq.hero.badge'); ?></span>

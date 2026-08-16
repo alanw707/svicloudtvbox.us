@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<main class="page-shell">
+<main id="main-content" class="page-shell" tabindex="-1">
   <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     <article id="post-<?php the_ID(); ?>" <?php post_class('page-content'); ?>>
       <?php

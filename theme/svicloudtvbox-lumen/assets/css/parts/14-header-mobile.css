@@ -123,6 +123,14 @@
   border-color: rgba(94, 230, 208, 0.42);
 }
 
+.lumen-mobile-nav__list .current-menu-item > a,
+.lumen-mobile-nav__list a[aria-current="page"] {
+  color: #f8fbff;
+  background: rgba(35, 87, 124, 0.76);
+  border-color: rgba(143, 249, 232, 0.62);
+  box-shadow: inset 4px 0 0 #8ff9e8;
+}
+
 .lumen-mobile-nav__list a span:last-child {
   opacity: 0.4;
 }

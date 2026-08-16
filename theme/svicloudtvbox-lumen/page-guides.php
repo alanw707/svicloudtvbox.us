@@ -32,7 +32,7 @@ $guides_hero_10s_image = function_exists('svic_get_product_image_meta')
     ? svic_get_product_image_meta($guides_hero_product_10s, 0, 'large')
     : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
 ?>
-<main class="guides-page surface--dark">
+<main id="main-content" class="guides-page surface--dark" tabindex="-1">
   <section class="guides-hero" id="guides-hero">
     <div class="guides-hero__inner">
       <div class="guides-hero__copy">

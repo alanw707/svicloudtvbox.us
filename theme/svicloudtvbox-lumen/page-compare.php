@@ -209,7 +209,7 @@ if (!empty($compare_hero_10s_background['url'])) {
 
 ?>
 
-<main class="compare-page">
+<main id="main-content" class="compare-page" tabindex="-1">
   <section class="compare-hero">
     <div class="compare-hero__background" aria-hidden="true"<?php if (!empty($compare_hero_background_style)) : ?> style="<?php echo esc_attr(implode('; ', $compare_hero_background_style)); ?>"<?php endif; ?>>
       <div class="compare-hero__photo compare-hero__photo--primary"></div>

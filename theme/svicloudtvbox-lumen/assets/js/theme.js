@@ -30,12 +30,25 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         initAnimationOnScroll();
         initPerformanceOptimizations();
         initLumenNavigation();
+        initSkipLink();
         initProductHeroGallery();
         initStripeSavedCardPills();
         initCartQuantityControls();
         $(document.body).on('updated_wc_div cart_page_refreshed updated_cart_totals', initCartQuantityControls);
         relocateCheckoutCoupon();
         $(document.body).on('updated_checkout applied_coupon_in_checkout removed_coupon_in_checkout', relocateCheckoutCoupon);
+    }
+
+    function initSkipLink() {
+        $('.svic-skip-link').on('click', function() {
+            const target = document.getElementById('main-content');
+            if (!target) {
+                return;
+            }
+            window.setTimeout(function() {
+                target.focus({ preventScroll: true });
+            }, 0);
+        });
     }
 
     function getStickyScrollOffset() {
@@ -529,6 +542,9 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         const bodyClass = 'lumen-nav-open';
         const submenuExpandLabel = $mobileNav.data('submenu-expand') || 'Expand submenu';
         const submenuCollapseLabel = $mobileNav.data('submenu-collapse') || 'Collapse submenu';
+        const navOpenLabel = $mobileNav.data('nav-open') || 'Open navigation';
+        const navCloseLabel = $mobileNav.data('nav-close') || 'Close navigation';
+        const $background = $('body').children().not($header).not('script, style, link');
 
         const updateSubmenuToggle = ($toggle, expanded) => {
             $toggle.attr('aria-expanded', expanded ? 'true' : 'false');
@@ -585,32 +601,81 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
 
         enhanceMobileSubmenus();
 
-        function setNavState(open) {
+        function updateMainToggle(open) {
             $toggle.attr('aria-expanded', open ? 'true' : 'false');
+            $toggle.find('.screen-reader-text').text(open ? navCloseLabel : navOpenLabel);
+        }
+
+        function getNavFocusable() {
+            const selector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+            return $toggle.add($mobileNav.find(selector).filter(':visible'));
+        }
+
+        function setNavState(open, returnFocus) {
+            updateMainToggle(open);
             if (open) {
                 $mobileNav.addClass('is-open').removeAttr('hidden');
                 enhanceMobileSubmenus();
+                $background.attr('inert', '').attr('data-svic-nav-inert', 'true');
+                window.setTimeout(function() {
+                    const $firstNavLink = $mobileNav.find('a[href]:visible').first();
+                    if ($firstNavLink.length) {
+                        $firstNavLink.trigger('focus');
+                    }
+                }, 0);
             } else {
                 $mobileNav.removeClass('is-open').attr('hidden', 'hidden');
                 closeAllSubmenus();
+                $('[data-svic-nav-inert="true"]').removeAttr('inert data-svic-nav-inert');
+                if (returnFocus) {
+                    $toggle.trigger('focus');
+                }
             }
             $('body').toggleClass(bodyClass, open);
         }
 
+        updateMainToggle(false);
+
         $toggle.on('click', function() {
             const isOpen = $(this).attr('aria-expanded') === 'true';
-            setNavState(!isOpen);
+            setNavState(!isOpen, isOpen);
         });
 
         $(document).on('click', function(event) {
             if (!$(event.target).closest('#lumen-mobile-nav, [data-lumen-toggle]').length) {
-                setNavState(false);
+                setNavState(false, false);
             }
         });
 
         $(document).on('keydown', function(event) {
+            const isOpen = $toggle.attr('aria-expanded') === 'true';
+            if (!isOpen) {
+                return;
+            }
             if (event.key === 'Escape') {
-                setNavState(false);
+                event.preventDefault();
+                setNavState(false, true);
+                return;
+            }
+            if (event.key !== 'Tab') {
+                return;
+            }
+
+            const $focusable = getNavFocusable();
+            if (!$focusable.length) {
+                return;
+            }
+            const first = $focusable.get(0);
+            const last = $focusable.get($focusable.length - 1);
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            } else if (!$.contains($header.get(0), document.activeElement)) {
+                event.preventDefault();
+                first.focus();
             }
         });
 

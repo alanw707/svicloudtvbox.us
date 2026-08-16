@@ -55,7 +55,7 @@ if ($article) {
     }
 
     ?>
-    <main class="guides-article surface--dark">
+    <main id="main-content" class="guides-article surface--dark" tabindex="-1">
       <header class="guides-article__hero">
         <div class="guides-article__hero-inner">
           <a class="guides-detail__back" href="<?php echo esc_url($resources_base); ?>">

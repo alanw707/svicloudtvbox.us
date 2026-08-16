@@ -5,7 +5,7 @@
 get_header();
 ?>
 
-<main class="page-shell" style="text-align:center;">
+<main id="main-content" class="page-shell" style="text-align:center;" tabindex="-1">
   <span class="badge badge-muted">Oops!</span>
   <h1 class="page-title">We couldn't find that page.</h1>
   <p class="page-subtitle">The link might be outdated or the page is still being built. Explore our products or head back to the homepage.</p>
