@@ -1,6 +1,6 @@
 {
   "baseURL": "http://svicloud10p.svic.local",
-  "auditedAt": "2026-08-16T00:50:03.183Z",
+  "auditedAt": "2026-08-16T00:56:29.371Z",
   "pages": [
     {
       "name": "home",
@@ -22,73 +22,73 @@
         {
           "selector": "a.",
           "name": "Guides",
-          "width": 78,
+          "width": 81,
           "height": 41
         },
         {
           "selector": "a.",
           "name": "Reviews",
-          "width": 88,
+          "width": 90,
           "height": 41
         },
         {
           "selector": "a.",
           "name": "Compare",
-          "width": 93,
+          "width": 96,
           "height": 41
         },
         {
           "selector": "a.",
           "name": "Account",
-          "width": 88,
+          "width": 89,
           "height": 41
         },
         {
           "selector": "a.",
           "name": "Shop",
-          "width": 66,
+          "width": 68,
           "height": 41
         },
         {
           "selector": "a.",
           "name": "SVICLOUD 15P",
-          "width": 176,
+          "width": 180,
           "height": 41
         },
         {
           "selector": "a.",
           "name": "Blog",
-          "width": 61,
+          "width": 64,
           "height": 41
         },
         {
           "selector": "a.hero-15p__compare",
           "name": "Compare the lineup",
-          "width": 147,
+          "width": 175,
           "height": 26
         },
         {
           "selector": "a.",
           "name": "Explore 15P →",
-          "width": 104,
+          "width": 124,
           "height": 26
         },
         {
           "selector": "a.lumen-pricing__details-link",
           "name": "Explore 15P",
-          "width": 108,
+          "width": 124,
           "height": 24
         },
         {
           "selector": "a.lumen-pricing__details-link",
           "name": "View 10P+",
-          "width": 101,
+          "width": 113,
           "height": 24
         },
         {
           "selector": "a.lumen-pricing__details-link",
           "name": "View 10S",
-          "width": 90,
+          "width": 100,
           "height": 24
         }
       ],
@@ -186,49 +186,49 @@
         {
           "selector": "a.",
           "name": "Guides",
-          "width": 78,
+          "width": 81,
           "height": 41
         },
         {
           "selector": "a.",
           "name": "Reviews",
-          "width": 88,
+          "width": 90,
           "height": 41
         },
         {
           "selector": "a.",
           "name": "Compare",
-          "width": 94,
+          "width": 103,
           "height": 41
         },
         {
           "selector": "a.",
           "name": "Account",
-          "width": 88,
+          "width": 89,
           "height": 41
         },
         {
           "selector": "a.",
           "name": "Shop",
-          "width": 66,
+          "width": 68,
           "height": 41
         },
         {
           "selector": "a.",
           "name": "SVICLOUD 15P",
-          "width": 176,
+          "width": 180,
           "height": 41
         },
         {
           "selector": "a.",
           "name": "Blog",
-          "width": 61,
+          "width": 64,
           "height": 41
         },
         {
           "selector": "a.svic-breadcrumbs__link",
           "name": "Home",
-          "width": 44,
+          "width": 47,
           "height": 27
         }
       ],
@@ -458,7 +458,7 @@
       ],
       "focusWithoutVisualChange": [
         {
-          "selector": "#quantity_6a81093da893c",
+          "selector": "#quantity_6a810ac0dd73d",
           "name": "Product quantity",
           "changed": false,
           "focused": [
@@ -923,31 +923,31 @@
         {
           "selector": "a.hero-15p__compare",
           "name": "Compare the lineup",
-          "width": 147,
+          "width": 175,
           "height": 26
         },
         {
           "selector": "a.",
           "name": "Explore 15P →",
-          "width": 104,
+          "width": 124,
           "height": 26
         },
         {
           "selector": "a.lumen-pricing__details-link",
           "name": "Explore 15P",
-          "width": 108,
+          "width": 124,
           "height": 24
         },
         {
           "selector": "a.lumen-pricing__details-link",
           "name": "View 10P+",
-          "width": 101,
+          "width": 113,
           "height": 24
         },
         {
           "selector": "a.lumen-pricing__details-link",
           "name": "View 10S",
-          "width": 90,
+          "width": 100,
           "height": 24
         }
       ],
@@ -1003,7 +1003,7 @@
         {
           "selector": "a.svic-breadcrumbs__link",
           "name": "Home",
-          "width": 44,
+          "width": 47,
           "height": 27
         }
       ],
@@ -1149,7 +1149,7 @@
       ],
       "focusWithoutVisualChange": [
         {
-          "selector": "#quantity_6a8109441c797",
+          "selector": "#quantity_6a810ac873d16",
           "name": "Product quantity",
           "changed": false,
           "focused": [
@@ -1524,7 +1524,7 @@
       ],
       "focusWithoutVisualChange": [],
       "activeMotion": [],
-      "horizontalOverflow": true
+      "horizontalOverflow": false
     },
     {
       "name": "shop",
@@ -1714,7 +1714,7 @@
       ],
       "focusWithoutVisualChange": [
         {
-          "selector": "#quantity_6a810949d3f74",
+          "selector": "#quantity_6a810acf5acf3",
           "name": "Product quantity",
           "changed": false,
           "focused": [

@@ -2,7 +2,21 @@
 
 Reviewed from the local desktop/mobile captures in `docs/frontend-audit/before/` using the existing dark/teal brand direction.
 
-## Top issues
+## Resolution status
+
+| Finding | Resolution |
+|---|---|
+| D1 unfinished cart | Fixed with the maintained branded cart template, one clear checkout action, compact summary, responsive item card/table, and real product image fallback. |
+| D2 overlong homepage | Fixed by removing duplicate metrics/feature/experience/inline-CTA blocks, reducing hero choices, and removing fragile content containment. Height fell 27% desktop and 22% mobile. |
+| D3 checkout completion friction | Fixed: one inline notice, unique coupon UI, summary before billing/payment on mobile, themed Select2, and explicit no-payment state. |
+| D4 orphan shop card | Fixed: balanced three-column catalog at wide desktop, two-column tablet, one-column mobile; prelaunch remains visually distinct. |
+| D5 repetitive PDP controls/hierarchy | Improved with tighter traffic/FAQ/comparison rhythm, 44 px quantity control, readable functional labels, and consistent utility-link targets/focus. |
+| D6 dense comparison | Improved with reduced section gaps, tighter traffic/FAQ modules, and larger functional model labels while retaining all buyer facts. |
+| D7 inconsistent states/type | Fixed through shared 44 px controls, 0.8 rem label token, universal focus ring, reduced-motion state, current mobile-nav treatment, inline notices, and disabled payment state. |
+
+All 16 before/after route screenshots have different SHA-256 hashes. Final evidence is in `docs/frontend-audit/after/`.
+
+## Original top issues
 
 ### D1. Cart appears unfinished and breaks the brand/component system — critical
 
