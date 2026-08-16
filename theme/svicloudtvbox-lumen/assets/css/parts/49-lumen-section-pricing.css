@@ -111,6 +111,10 @@
 }
 
 @media (max-width: 720px) {
+  .lumen-pricing__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .lumen-pricing .shop-product-card__header,
   .lumen-pricing .shop-product-card__body {
     padding-inline: 24px;

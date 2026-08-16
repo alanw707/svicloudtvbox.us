@@ -133,6 +133,36 @@ test.describe('storefront frontend quality safeguards', () => {
     } else {
       await expect(placeOrder).toBeEnabled();
     }
+
+    await page.evaluate(() => {
+      const error = document.createElement('ul');
+      error.className = 'woocommerce-error';
+      error.innerHTML = '<li>Test validation error</li>';
+      document.querySelector('.lumen-checkout')?.prepend(error);
+      document.querySelector('#billing_first_name_field')?.classList.add('woocommerce-invalid-required-field');
+      const pageWindow = window as Window & {
+        jQuery?: (target: EventTarget) => { trigger: (eventName: string) => void };
+      };
+      pageWindow.jQuery?.(document.body).trigger('checkout_error');
+    });
+    await expect(page.locator('.woocommerce-error')).toHaveAttribute('role', 'alert');
+    await expect(page.locator('#billing_first_name')).toHaveAttribute('aria-invalid', 'true');
+  });
+
+  test('all scoped EN and zh discovery routes reflow at 320px', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 844 });
+    const routes = [
+      '/', '/shop/', '/compare/', '/product/svicloud-15p/', '/product/svicloud-10p-plus/', '/product/svicloud-9p/',
+      '/zh/', '/zh/shop/', '/zh/compare/', '/zh/product/svicloud-15p/',
+    ];
+
+    for (const route of routes) {
+      const response = await page.goto(route, { waitUntil: 'domcontentloaded' });
+      expect(response?.ok(), route).toBeTruthy();
+      await expect(page.locator('h1'), `${route} should have one H1`).toHaveCount(1);
+      const hasOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth + 1);
+      expect(hasOverflow, `${route} should reflow without horizontal scrolling`).toBe(false);
+    }
   });
 
   test('reduced motion disables nonessential page animation and transitions', async ({ browser }) => {

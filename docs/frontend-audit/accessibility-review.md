@@ -11,7 +11,24 @@ Evidence:
 
 This is an implementation audit toward WCAG 2.2 AA expectations, not a certification.
 
-## Critical issues
+## Resolution status
+
+| Finding | Resolution |
+|---|---|
+| A1 mobile menu focus/context | Fixed: scroll lock, inert background, focus loop, Escape close, focus return, and Open/Close accessible names; automated in `frontend-quality.spec.ts`. |
+| A2 cart semantics | Fixed: block-authored Cart pages now render the maintained classic template with one H1, named 44 px quantity/remove controls, and branded summary. |
+| A3 duplicate checkout feedback | Fixed: server notices remain inline; the JS toast is used only when no inline notice exists. |
+| A4 duplicate coupon IDs | Fixed: canonical `coupon_code` and display `checkout_coupon_code` have unique label relationships. |
+| A5 skip navigation | Fixed globally: first Tab exposes the translated skip link and activation focuses `#main-content`. |
+| A6 undersized PDP controls | Fixed: quantity is 44 px; utility/FAQ links have at least 24 px line boxes and global visible focus. |
+| A7 checkout errors/payment dead end | Fixed: generated errors receive alert semantics/invalid state; no-gateway checkout exposes a disabled “Payment unavailable” action. |
+| A8 reduced motion | Fixed globally: nonessential animations, transitions, delays, and smooth scrolling become 0 under reduced motion. |
+| A9 touch targets | Fixed for primary, language, menu, quantity, remove, checkout, and icon controls; inline prose links retain the WCAG inline exception. |
+| A10 functional type | Fixed on high-impact shop, compare, prelaunch, and checkout labels using the shared 0.8 rem functional token. |
+
+Final automated audit: 24 route/width combinations, zero horizontal overflow, zero missing/duplicate H1s, zero duplicate IDs, zero unlabeled inputs, and zero active motion under reduced-motion emulation. Conservative solid-background contrast scan reports zero candidates; rendered gradients were reviewed in final screenshots.
+
+## Original critical issues
 
 ### A1. Mobile navigation is not modal when expanded
 
