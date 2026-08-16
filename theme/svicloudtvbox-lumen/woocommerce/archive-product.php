@@ -7,6 +7,61 @@ defined('ABSPATH') || exit;
 
 get_header('shop');
 
+if (is_product_taxonomy()) :
+    $archive_description = term_description();
+    ?>
+    <main class="page-shell shop-page shop-page--taxonomy">
+      <header class="page-hero shop-hero">
+        <span class="shop-hero__badge"><?php echo esc_html__('Shop', 'svicloudtvbox-lumen'); ?></span>
+        <h1 class="shop-hero__title"><?php woocommerce_page_title(); ?></h1>
+        <?php if (!empty($archive_description)) : ?>
+          <div class="shop-hero__subtitle"><?php echo wp_kses_post($archive_description); ?></div>
+        <?php else : ?>
+          <p class="shop-hero__subtitle"><?php echo esc_html__('Browse available SVICLOUD products in this category.', 'svicloudtvbox-lumen'); ?></p>
+        <?php endif; ?>
+      </header>
+
+      <section class="shop-category-products">
+        <?php if (woocommerce_product_loop()) : ?>
+          <?php do_action('woocommerce_before_shop_loop'); ?>
+
+          <?php woocommerce_product_loop_start(); ?>
+
+          <?php if (wc_get_loop_prop('total')) : ?>
+            <?php while (have_posts()) : ?>
+              <?php the_post(); ?>
+              <?php do_action('woocommerce_shop_loop'); ?>
+              <?php wc_get_template_part('content', 'product'); ?>
+            <?php endwhile; ?>
+          <?php endif; ?>
+
+          <?php woocommerce_product_loop_end(); ?>
+
+          <?php do_action('woocommerce_after_shop_loop'); ?>
+        <?php else : ?>
+          <?php do_action('woocommerce_no_products_found'); ?>
+        <?php endif; ?>
+      </section>
+    </main>
+    <?php
+    get_footer('shop');
+    return;
+endif;
+
+$accessory_products = [];
+if (class_exists('WooCommerce') && function_exists('wc_get_products')) {
+    $accessory_products = wc_get_products([
+        'status'   => 'publish',
+        'limit'    => 8,
+        'category' => ['accessories'],
+        'orderby'  => 'menu_order',
+        'order'    => 'ASC',
+    ]);
+    $accessory_products = array_values(array_filter($accessory_products, static function ($product) {
+        return $product instanceof WC_Product && $product->is_visible();
+    }));
+}
+
 $card_data = [
     '10p' => [
         'product'         => class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null,
@@ -191,6 +246,53 @@ foreach ($card_data as $key => $card) {
       <?php endforeach; ?>
     </div>
   </section>
+
+  <?php if (!empty($accessory_products)) : ?>
+    <section class="shop-accessories" aria-labelledby="shop-accessories-title">
+      <header class="shop-accessories__header">
+        <span class="shop-accessories__eyebrow"><?php echo esc_html__('Accessories', 'svicloudtvbox-lumen'); ?></span>
+        <h2 class="shop-accessories__title" id="shop-accessories-title"><?php echo esc_html__('Replacement remotes and add-ons', 'svicloudtvbox-lumen'); ?></h2>
+        <p class="shop-accessories__subtitle"><?php echo esc_html__('Official SVICLOUD accessories for replacement parts, second rooms, and support cases.', 'svicloudtvbox-lumen'); ?></p>
+      </header>
+
+      <div class="shop-accessories__grid">
+        <?php foreach ($accessory_products as $accessory_product) :
+            $accessory_url   = svic_url_with_lang(get_permalink($accessory_product->get_id()));
+            $accessory_image = svic_product_primary_image($accessory_product, 'woocommerce_thumbnail');
+            $accessory_price = svic_price_html($accessory_product);
+            $accessory_desc  = wp_strip_all_tags($accessory_product->get_short_description());
+            if ($accessory_desc === '') {
+                $accessory_desc = wp_strip_all_tags($accessory_product->get_description());
+            }
+            if (function_exists('mb_strimwidth')) {
+                $accessory_desc = mb_strimwidth($accessory_desc, 0, 130, '...', 'UTF-8');
+            } else {
+                $accessory_desc = strlen($accessory_desc) > 130 ? substr($accessory_desc, 0, 127) . '...' : $accessory_desc;
+            }
+        ?>
+          <article class="shop-accessory-card">
+            <a class="shop-accessory-card__media" href="<?php echo esc_url($accessory_url); ?>">
+              <?php echo $accessory_image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+            </a>
+            <div class="shop-accessory-card__body">
+              <h3 class="shop-accessory-card__title">
+                <a href="<?php echo esc_url($accessory_url); ?>"><?php echo esc_html($accessory_product->get_name()); ?></a>
+              </h3>
+              <?php if ($accessory_desc !== '') : ?>
+                <p class="shop-accessory-card__copy"><?php echo esc_html($accessory_desc); ?></p>
+              <?php endif; ?>
+              <?php if ($accessory_price !== '') : ?>
+                <div class="shop-accessory-card__price"><?php echo $accessory_price; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+              <?php endif; ?>
+              <a class="lumen-pill lumen-pill--ghost shop-accessory-card__cta" href="<?php echo esc_url($accessory_url); ?>">
+                <?php echo esc_html__('View product', 'svicloudtvbox-lumen'); ?>
+              </a>
+            </div>
+          </article>
+        <?php endforeach; ?>
+      </div>
+    </section>
+  <?php endif; ?>
 </main>
 
 <?php
@@ -204,6 +306,27 @@ foreach ($card_data as $card) {
     }
 
     $product_node = svic_build_product_schema_from_wc_product($card['product']);
+    if (empty($product_node)) {
+        continue;
+    }
+
+    $shop_schema_products[] = $product_node;
+    $shop_item_list[]       = [
+        '@type'    => 'ListItem',
+        'position' => $shop_position++,
+        'item'     => [
+            '@id'  => $product_node['@id'],
+            'name' => $product_node['name'],
+        ],
+    ];
+}
+
+foreach ($accessory_products as $accessory_product) {
+    if (!$accessory_product instanceof WC_Product) {
+        continue;
+    }
+
+    $product_node = svic_build_product_schema_from_wc_product($accessory_product);
     if (empty($product_node)) {
         continue;
     }
