@@ -141,7 +141,7 @@ foreach ($card_data as $key => $card) {
 }
 ?>
 
-<main class="page-shell shop-page">
+<main id="main-content" class="page-shell shop-page" tabindex="-1">
   <header class="page-hero shop-hero">
     <span class="shop-hero__badge"><?php echo svic_translate_html('shop.hero.badge'); ?></span>
     <h1 class="shop-hero__title"><?php echo svic_translate_html('shop.hero.title'); ?></h1>

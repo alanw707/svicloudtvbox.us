@@ -21,6 +21,7 @@
 </head>
 <body <?php body_class(); ?>>
   <?php wp_body_open(); ?>
+  <a class="svic-skip-link" href="#main-content"><?php esc_html_e('Skip to main content', 'svicloudtvbox-lumen'); ?></a>
   <?php
     $custom_logo_id  = get_theme_mod( 'custom_logo' );
     $has_custom_logo = function_exists( 'has_custom_logo' ) && has_custom_logo();
@@ -138,8 +139,13 @@
       class="lumen-mobile-nav"
       id="lumen-mobile-nav"
       hidden
+      role="dialog"
+      aria-modal="true"
+      aria-label="<?php esc_attr_e('Mobile navigation', 'svicloudtvbox-lumen'); ?>"
       data-submenu-expand="<?php echo svic_translate_attr('header.nav.submenu_expand'); ?>"
       data-submenu-collapse="<?php echo svic_translate_attr('header.nav.submenu_collapse'); ?>"
+      data-nav-open="<?php esc_attr_e('Open navigation', 'svicloudtvbox-lumen'); ?>"
+      data-nav-close="<?php esc_attr_e('Close navigation', 'svicloudtvbox-lumen'); ?>"
     >
       <?php
         $mobile_menu = wp_nav_menu([

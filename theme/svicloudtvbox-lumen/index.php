@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<main class="page-shell">
+<main id="main-content" class="page-shell" tabindex="-1">
   <?php if (have_posts()) : ?>
     <?php if (is_archive() || is_search()) : ?>
       <header class="page-hero">

@@ -482,7 +482,7 @@ if (!$blog_posts_query instanceof WP_Query) {
     ]);
 }
 ?>
-<main class="main-content">
+<main id="main-content" class="main-content" tabindex="-1">
   <!-- Hero Section: store rating above headline -->
   <section class="hero-dashboard" id="hero">
     <div class="hero-dashboard__background" aria-hidden="true">

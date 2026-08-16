@@ -57,7 +57,7 @@ $list_label = svic_translate('blog.index.list_label');
 
 ?>
 
-<main class="page-shell blog-shell blog-archive">
+<main id="main-content" class="page-shell blog-shell blog-archive" tabindex="-1">
   <div class="blog-archive__container">
     <section class="blog-archive__hero" aria-labelledby="blog-archive-title">
       <div class="blog-hero__main">

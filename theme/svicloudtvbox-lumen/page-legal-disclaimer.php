@@ -60,7 +60,7 @@ $contact_page_url = function_exists('svic_url_with_lang')
     ? svic_url_with_lang(home_url('/contact/'))
     : home_url('/contact/');
 ?>
-<main class="policy-page policy-page--legal">
+<main id="main-content" class="policy-page policy-page--legal" tabindex="-1">
   <section class="policy-hero">
     <div class="policy-hero__inner">
       <span class="policy-hero__badge"><?php echo svic_translate_html('legal_disclaimer.hero.badge'); ?></span>

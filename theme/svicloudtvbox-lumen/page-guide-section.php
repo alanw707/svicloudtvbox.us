@@ -275,7 +275,7 @@ $render_inline_cro_cta = static function () use ($product_10p_url, $product_10s_
 };
 
 ?>
-<main class="guides-detail guides-detail--<?php echo esc_attr($section_key); ?> surface--dark">
+<main id="main-content" class="guides-detail guides-detail--<?php echo esc_attr($section_key); ?> surface--dark" tabindex="-1">
   <header class="guides-detail__hero">
     <div class="guides-detail__hero-inner">
       <div class="guides-detail__hero-copy">

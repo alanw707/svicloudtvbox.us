@@ -39,8 +39,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 38px;
-  min-height: 30px;
+  min-width: var(--lumen-control-min-height);
+  min-height: var(--lumen-control-min-height);
   padding: 0 10px;
   font-family: var(--font-primary), var(--font-chinese);
   font-size: clamp(0.68rem, 0.64rem + 0.14vw, 0.82rem);
@@ -54,11 +54,11 @@
 }
 
 .lumen-lang-toggle--desktop .lumen-lang-toggle__link {
-  min-width: 34px;
-  min-height: 28px;
+  min-width: var(--lumen-control-min-height);
+  min-height: var(--lumen-control-min-height);
   padding: 0 8px;
-  letter-spacing: 0.06em;
-  font-size: clamp(0.64rem, 0.6rem + 0.12vw, 0.78rem);
+  letter-spacing: 0.05em;
+  font-size: var(--lumen-font-size-label);
 }
 
 .lumen-lang-toggle__link.is-active {
@@ -91,7 +91,7 @@
 .lumen-lang-toggle--mobile .lumen-lang-toggle__link {
   flex: 1;
   width: auto;
-  min-height: 42px;
+  min-height: var(--lumen-control-min-height);
   padding: 0 0.75rem;
   font-size: 0.85rem;
 }
@@ -100,6 +100,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: var(--lumen-control-min-height);
   padding: 11px 20px;
   border-radius: 999px;
   font-family: var(--font-primary), var(--font-chinese);
@@ -155,7 +156,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.55rem;
-  min-height: 36px;
+  min-height: var(--lumen-control-min-height);
   padding: 0 0.95rem;
   border-radius: 999px;
   background: rgba(12, 28, 62, 0.52);

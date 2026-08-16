@@ -101,7 +101,7 @@ if (!function_exists('svic_render_decision_page')) {
         $product_10p_url = svic_url_with_lang(home_url('/product/svicloud-10p-plus/'));
         $product_10s_url = svic_url_with_lang(home_url('/product/svicloud-10s/'));
         ?>
-        <main class="guides-detail guides-detail--decision surface--dark">
+        <main id="main-content" class="guides-detail guides-detail--decision surface--dark" tabindex="-1">
           <header class="guides-detail__hero"><div class="guides-detail__hero-inner"><div class="guides-detail__hero-copy">
             <span class="guides-badge guides-badge--on-dark">Official US guidance</span>
             <h1 class="guides-detail__title"><?php echo esc_html($page['title']); ?></h1>
