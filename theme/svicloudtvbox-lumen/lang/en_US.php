@@ -433,6 +433,7 @@ return [
             'title' => 'Payment & confirmation',
             'intro' => 'Choose a saved card or enter a new payment method, then place your order with secure checkout.',
             'cards_label' => 'Accepted cards: Visa, Mastercard, American Express, and Discover.',
+            'unavailable_action' => 'Payment unavailable',
         ],
         'coupon' => [
             'toggle_lead' => 'Have a promo code?',

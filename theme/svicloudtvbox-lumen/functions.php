@@ -5291,6 +5291,48 @@ add_action('after_setup_theme', function () {
 add_filter('woocommerce_has_cart_block', '__return_false', 5);
 add_filter('woocommerce_has_checkout_block', '__return_false', 5);
 
+if (!function_exists('svic_render_classic_cart_content')) {
+    /**
+     * Keep block-authored Cart pages on the maintained theme cart template.
+     */
+    function svic_render_classic_cart_content(string $content): string {
+        if (!function_exists('is_cart') || !is_cart() || !in_the_loop() || !is_main_query()) {
+            return $content;
+        }
+        if (!function_exists('has_block') || !has_block('woocommerce/cart', $content)) {
+            return $content;
+        }
+
+        return do_shortcode('[woocommerce_cart]');
+    }
+}
+add_filter('the_content', 'svic_render_classic_cart_content', 5);
+
+if (!function_exists('svic_checkout_order_button_html')) {
+    /**
+     * Prevent a dead-end order submission when no gateway is available.
+     */
+    function svic_checkout_order_button_html(string $button_html): string {
+        if (!function_exists('is_checkout') || !is_checkout() || !function_exists('WC')) {
+            return $button_html;
+        }
+        $cart = WC()->cart;
+        $gateways = WC()->payment_gateways();
+        if (!$cart || !$gateways || !$cart->needs_payment()) {
+            return $button_html;
+        }
+        if (!empty($gateways->get_available_payment_gateways())) {
+            return $button_html;
+        }
+
+        return sprintf(
+            '<button type="button" class="button alt lumen-checkout__payment-unavailable" id="place_order" disabled aria-disabled="true">%s</button>',
+            esc_html(svic_translate('checkout_page.payment.unavailable_action'))
+        );
+    }
+}
+add_filter('woocommerce_order_button_html', 'svic_checkout_order_button_html');
+
 add_action('wp_enqueue_scripts', function () {
     $theme_version = wp_get_theme()->get('Version');
 
