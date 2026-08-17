@@ -171,6 +171,53 @@ foreach ($card_data as $key => $card) {
     <p class="shop-hero__subtitle"><?php echo svic_translate_html('shop.hero.subtitle'); ?></p>
   </header>
 
+  <?php if (!empty($accessory_products)) : ?>
+    <section class="shop-accessories" aria-labelledby="shop-accessories-title">
+      <header class="shop-accessories__header">
+        <span class="shop-accessories__eyebrow"><?php echo esc_html__('Accessories', 'svicloudtvbox-lumen'); ?></span>
+        <h2 class="shop-accessories__title" id="shop-accessories-title"><?php echo esc_html__('Replacement remotes and add-ons', 'svicloudtvbox-lumen'); ?></h2>
+        <p class="shop-accessories__subtitle"><?php echo esc_html__('Official SVICLOUD accessories for replacement parts, second rooms, and support cases.', 'svicloudtvbox-lumen'); ?></p>
+      </header>
+
+      <div class="shop-accessories__grid">
+        <?php foreach ($accessory_products as $accessory_product) :
+            $accessory_url   = svic_url_with_lang(get_permalink($accessory_product->get_id()));
+            $accessory_image = svic_product_primary_image($accessory_product, 'woocommerce_thumbnail');
+            $accessory_price = svic_price_html($accessory_product);
+            $accessory_desc  = wp_strip_all_tags($accessory_product->get_short_description());
+            if ($accessory_desc === '') {
+                $accessory_desc = wp_strip_all_tags($accessory_product->get_description());
+            }
+            if (function_exists('mb_strimwidth')) {
+                $accessory_desc = mb_strimwidth($accessory_desc, 0, 130, '...', 'UTF-8');
+            } else {
+                $accessory_desc = strlen($accessory_desc) > 130 ? substr($accessory_desc, 0, 127) . '...' : $accessory_desc;
+            }
+        ?>
+          <article class="shop-accessory-card">
+            <a class="shop-accessory-card__media" href="<?php echo esc_url($accessory_url); ?>">
+              <?php echo $accessory_image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+            </a>
+            <div class="shop-accessory-card__body">
+              <h3 class="shop-accessory-card__title">
+                <a href="<?php echo esc_url($accessory_url); ?>"><?php echo esc_html($accessory_product->get_name()); ?></a>
+              </h3>
+              <?php if ($accessory_desc !== '') : ?>
+                <p class="shop-accessory-card__copy"><?php echo esc_html($accessory_desc); ?></p>
+              <?php endif; ?>
+              <?php if ($accessory_price !== '') : ?>
+                <div class="shop-accessory-card__price"><?php echo $accessory_price; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+              <?php endif; ?>
+              <a class="lumen-pill lumen-pill--ghost shop-accessory-card__cta" href="<?php echo esc_url($accessory_url); ?>">
+                <?php echo esc_html__('View product', 'svicloudtvbox-lumen'); ?>
+              </a>
+            </div>
+          </article>
+        <?php endforeach; ?>
+      </div>
+    </section>
+  <?php endif; ?>
+
   <section class="shop-products">
     <div class="shop-products__grid">
       <?php foreach ($card_data as $key => $card) :
@@ -246,53 +293,6 @@ foreach ($card_data as $key => $card) {
       <?php endforeach; ?>
     </div>
   </section>
-
-  <?php if (!empty($accessory_products)) : ?>
-    <section class="shop-accessories" aria-labelledby="shop-accessories-title">
-      <header class="shop-accessories__header">
-        <span class="shop-accessories__eyebrow"><?php echo esc_html__('Accessories', 'svicloudtvbox-lumen'); ?></span>
-        <h2 class="shop-accessories__title" id="shop-accessories-title"><?php echo esc_html__('Replacement remotes and add-ons', 'svicloudtvbox-lumen'); ?></h2>
-        <p class="shop-accessories__subtitle"><?php echo esc_html__('Official SVICLOUD accessories for replacement parts, second rooms, and support cases.', 'svicloudtvbox-lumen'); ?></p>
-      </header>
-
-      <div class="shop-accessories__grid">
-        <?php foreach ($accessory_products as $accessory_product) :
-            $accessory_url   = svic_url_with_lang(get_permalink($accessory_product->get_id()));
-            $accessory_image = svic_product_primary_image($accessory_product, 'woocommerce_thumbnail');
-            $accessory_price = svic_price_html($accessory_product);
-            $accessory_desc  = wp_strip_all_tags($accessory_product->get_short_description());
-            if ($accessory_desc === '') {
-                $accessory_desc = wp_strip_all_tags($accessory_product->get_description());
-            }
-            if (function_exists('mb_strimwidth')) {
-                $accessory_desc = mb_strimwidth($accessory_desc, 0, 130, '...', 'UTF-8');
-            } else {
-                $accessory_desc = strlen($accessory_desc) > 130 ? substr($accessory_desc, 0, 127) . '...' : $accessory_desc;
-            }
-        ?>
-          <article class="shop-accessory-card">
-            <a class="shop-accessory-card__media" href="<?php echo esc_url($accessory_url); ?>">
-              <?php echo $accessory_image; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-            </a>
-            <div class="shop-accessory-card__body">
-              <h3 class="shop-accessory-card__title">
-                <a href="<?php echo esc_url($accessory_url); ?>"><?php echo esc_html($accessory_product->get_name()); ?></a>
-              </h3>
-              <?php if ($accessory_desc !== '') : ?>
-                <p class="shop-accessory-card__copy"><?php echo esc_html($accessory_desc); ?></p>
-              <?php endif; ?>
-              <?php if ($accessory_price !== '') : ?>
-                <div class="shop-accessory-card__price"><?php echo $accessory_price; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
-              <?php endif; ?>
-              <a class="lumen-pill lumen-pill--ghost shop-accessory-card__cta" href="<?php echo esc_url($accessory_url); ?>">
-                <?php echo esc_html__('View product', 'svicloudtvbox-lumen'); ?>
-              </a>
-            </div>
-          </article>
-        <?php endforeach; ?>
-      </div>
-    </section>
-  <?php endif; ?>
 </main>
 
 <?php
