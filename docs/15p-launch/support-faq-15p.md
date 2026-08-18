@@ -1,47 +1,33 @@
-# SVICloud 15P — Prelaunch Support FAQ
+# SVICLOUD 15P support FAQ
 
-Support-team script. **Every 15P-specific answer remains TBC until supplier confirmation. Do not improvise specifications or policies.**
+Use only the answers below. Hardware facts map to [`../15p-source-traceability.md`](../15p-source-traceability.md).
 
-## Availability & ordering
+## Availability and price
 
-**Q: Is the 15P in stock?**  
-A: [AVAILABILITY TBC] U.S. inventory and ship date are not confirmed. Offer to record the customer’s email for a launch notice.
+**Can I order 15P now?**
+Yes. It is available on backorder for $299.00 (regular $379.00). Shipping date not announced.
 
-**Q: How is the 15P different from the 10P+?**  
-A: [SPEC TBC] No official 15P specification sheet is public yet. We will compare chipset, RAM, storage, video, Wi-Fi, OS, remote, apps, and policies after confirmation.
+## Confirmed platform
 
-**Q: Should I upgrade from my 9P?**  
-A: Wait for official specifications and hands-on validation. Keep a working 9P unless a verified 15P difference solves a specific need.
+**What hardware is confirmed?**
+Android 14, Amlogic S905Y5 quad-core ARM Cortex-A55, Mali-G31 MP2, 4 GB DDR3, 64 GB eMMC, dual-band Wi-Fi 6 2T2R, and Bluetooth 5.4.
 
-**Q: Should I upgrade from my 10P/10P+?**  
-A: Keep it unless released 15P information proves a useful difference for your setup.
+**What video formats are listed?**
+The supplier specification lists HDR10+, HDR10, HLG, AV1, VP9, H.265/HEVC, H.264, and additional legacy codecs with format-specific limits. Do not generalize one codec’s limit to every format.
 
-**Q: What is the price?**  
-A: [PRICE TBC] Do not quote a range or placeholder as the launch price.
+**Which ports are listed?**
+HDMI 2.1, two USB 2.0 ports, RJ45 Ethernet, optical audio, and Type-C 5V/2A power.
 
-## Setup & compatibility
+**What is in the box?**
+Gift box, AC adapter, HDMI cable, Bluetooth voice remote, and user manual. Do not promise a specific plug variant or an extra adapter.
 
-**Q: Do old remotes or accessories work?**  
-A: [COMPATIBILITY TBC] Confirm with the supplier.
+## Features and policies
 
-**Q: Does it have the same channels/apps and no-monthly-fee terms?**  
-A: [FEATURE/POLICY TBC] Confirm the exact content, apps, and fee terms in writing.
+**Does it include Kids and Karaoke apps?**
+Yes. Direct supplier confirmation relayed by the site owner confirms both apps are included. Do not promise a catalogue, subscription, region, or continuing service availability.
 
-**Q: Can settings transfer from an older box?**  
-A: [SETUP TBC] Confirm migration behavior after testing a retail unit.
+**What warranty, returns, shipping, fee terms, or support apply?**
+Normal checkout, payment, shipping-rate, cancellation, and return behavior applies. Do not add a 15P-specific shipping speed, dispatch date, delivery date, or warranty promise.
 
-## Shipping, warranty & returns
-
-**Q: Where does it ship from and how fast?**  
-A: [POLICY TBC] Confirm inventory location, handling time, carrier service, and tracking.
-
-**Q: What warranty is included?**  
-A: [POLICY TBC] Confirm warranty length, coverage, and domestic handling.
-
-**Q: What is the return window?**  
-A: [POLICY TBC] Confirm 15P eligibility and terms before quoting the current-model policy.
-
-## Escalation
-
-- Unknown specification or policy → “That 15P detail is not confirmed yet. I can notify you when official information arrives.”
-- Never convert a placeholder, current-model feature, or seller plan into a confirmed 15P claim.
+**Is it faster than 9P, 10P, or 10P+?**
+The supplied files contain no measured comparison. Do not state a speed or model-superiority claim.

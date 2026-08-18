@@ -475,6 +475,78 @@ function svic_fixture_import_products(array $products, array $variations, string
     }
 }
 
+function svic_fixture_import_local_media(array $items, array &$maps): void {
+    require_once ABSPATH . 'wp-admin/includes/file.php';
+    require_once ABSPATH . 'wp-admin/includes/image.php';
+
+    $theme_directory = realpath(get_stylesheet_directory());
+    $uploads = wp_upload_dir();
+    if (!is_string($theme_directory) || !empty($uploads['error'])) {
+        WP_CLI::error('Could not resolve the theme or uploads directory for local fixture media.');
+    }
+
+    foreach ($items as $key => $item) {
+        $source_path = realpath($theme_directory . '/' . ltrim((string) ($item['path'] ?? ''), '/'));
+        if (!is_string($source_path) || !str_starts_with($source_path, $theme_directory . DIRECTORY_SEPARATOR) || !is_readable($source_path)) {
+            WP_CLI::error("Local fixture media is missing: {$key}");
+        }
+        $filename = wp_unique_filename((string) $uploads['path'], wp_basename($source_path));
+        $destination = trailingslashit((string) $uploads['path']) . $filename;
+        if (!copy($source_path, $destination)) {
+            WP_CLI::error("Could not copy local fixture media: {$key}");
+        }
+        $filetype = wp_check_filetype($filename);
+        $attachment_id = wp_insert_attachment(array(
+            'post_mime_type' => (string) ($filetype['type'] ?? 'image/webp'),
+            'post_title' => (string) ($item['title'] ?? ''),
+            'post_status' => 'inherit',
+        ), $destination, 0, true);
+        if (is_wp_error($attachment_id)) {
+            WP_CLI::error("Could not import local fixture media {$key}: " . $attachment_id->get_error_message());
+        }
+        wp_update_attachment_metadata((int) $attachment_id, wp_generate_attachment_metadata((int) $attachment_id, $destination));
+        update_post_meta((int) $attachment_id, '_wp_attachment_image_alt', (string) ($item['alt'] ?? ''));
+        update_post_meta((int) $attachment_id, '_svic_local_fixture_key', '15p-' . $key);
+        $maps['local_media'][$key] = (int) $attachment_id;
+    }
+}
+
+function svic_fixture_import_local_15p(array &$maps): void {
+    $media = array(
+        'front' => array('path' => 'assets/images/products/svicloud-15p-front.webp', 'title' => 'SVICLOUD 15P front view', 'alt' => 'SVICLOUD 15P TV box front view'),
+        'angle' => array('path' => 'assets/images/products/svicloud-15p-angle.webp', 'title' => 'SVICLOUD 15P angled view', 'alt' => 'SVICLOUD 15P TV box angled view showing rear ports'),
+        'package' => array('path' => 'assets/images/products/svicloud-15p-package.webp', 'title' => 'SVICLOUD 15P packaging', 'alt' => 'SVICLOUD 15P packaging front'),
+    );
+    svic_fixture_import_local_media($media, $maps);
+
+    $product = new WC_Product_Simple();
+    $product->set_name('SVICLOUD 15P TV Box');
+    $product->set_slug('svicloud-15p');
+    $product->set_status('publish');
+    $product->set_catalog_visibility('visible');
+    $product->set_short_description('Available on backorder: Android 14, Amlogic S905Y5, 4 GB DDR3 memory, 64 GB eMMC storage, dual-band Wi-Fi 6, Bluetooth 5.4, and 4K HDR playback.');
+    $product->set_description('<p>The SVICLOUD 15P TV Box runs Android 14 on an Amlogic S905Y5 quad-core ARM Cortex-A55 processor.</p><h2>Core specifications</h2><ul><li>4 GB DDR3 memory and 64 GB eMMC storage</li><li>Dual-band 2.4/5 GHz Wi-Fi 6 with 2T2R and Bluetooth 5.4</li><li>HDR10+, HDR10, and HLG processing</li><li>AV1, VP9, H.265/HEVC, and H.264 hardware decoding</li><li>HDMI 2.1, two USB 2.0 ports, RJ45 Ethernet, optical audio, and Type-C 5V/2A power</li></ul><h2>In the box</h2><p>Gift box, AC adapter, HDMI cable, Bluetooth voice remote, and user manual.</p><p><strong>Available on backorder for $299.00 (regular $379.00).</strong> Shipping date not announced.</p>');
+    $product->set_regular_price('379');
+    $product->set_sale_price('299');
+    $product->set_price('299');
+    $product->set_manage_stock(true);
+    $product->set_stock_quantity(0);
+    $product->set_backorders('notify');
+    $product->set_stock_status('onbackorder');
+    $product->set_reviews_allowed(false);
+    $product->set_image_id((int) $maps['local_media']['front']);
+    $product->set_gallery_image_ids(array_values(array_map(static fn(string $key): int => (int) $maps['local_media'][$key], array('angle', 'package'))));
+    $categories = array_filter(array_map(static function (string $slug): int {
+        $term = get_term_by('slug', $slug, 'product_cat');
+        return $term instanceof WP_Term ? (int) $term->term_id : 0;
+    }, array('svicloud-tv-box', 'android-tv-box')));
+    $product->set_category_ids($categories);
+    $product_id = $product->save();
+    update_post_meta((int) $product_id, '_svic_local_fixture_key', '15p');
+    delete_post_meta((int) $product_id, '_svic_coming_soon');
+    $maps['local_products']['15p'] = (int) $product_id;
+}
+
 function svic_fixture_import_menus(array $menus, array $items, string $source_url, string $local_url, array &$maps): void {
     $locations = (array) get_theme_mod('nav_menu_locations', array());
     $registered_locations = get_registered_nav_menus();
@@ -612,7 +684,7 @@ function svic_fixture_import_navigation(array $navigation, string $source_url, s
     }
 }
 
-$maps = array('media' => array(), 'media_by_source_url' => array(), 'urls' => array(), 'posts' => array(), 'products' => array(), 'terms' => array(), 'attributes' => array(), 'menus' => array(), 'menu_items' => array(), 'counts' => array('terms' => array()));
+$maps = array('media' => array(), 'media_by_source_url' => array(), 'local_media' => array(), 'urls' => array(), 'posts' => array(), 'products' => array(), 'local_products' => array(), 'terms' => array(), 'attributes' => array(), 'menus' => array(), 'menu_items' => array(), 'counts' => array('terms' => array()));
 svic_fixture_delete_content();
 svic_fixture_import_terms((array) ($fixture['categories'] ?? array()), 'category', $maps);
 svic_fixture_import_terms((array) ($fixture['tags'] ?? array()), 'post_tag', $maps);
@@ -626,10 +698,11 @@ svic_fixture_import_display_settings((array) ($fixture['settings'] ?? array()), 
 svic_fixture_import_woocommerce_pages((array) ($fixture['pages'] ?? array()), $maps);
 svic_fixture_import_global_attributes((array) ($fixture['product_attributes'] ?? array()), (array) ($fixture['attribute_terms'] ?? array()), $maps);
 svic_fixture_import_products((array) ($fixture['products'] ?? array()), (array) ($fixture['variations'] ?? array()), $source_url, $local_url, $maps);
+svic_fixture_import_local_15p($maps);
 svic_fixture_import_menus((array) ($fixture['menus'] ?? array()), (array) ($fixture['menu_items'] ?? array()), $source_url, $local_url, $maps);
 svic_fixture_import_navigation((array) ($fixture['navigation'] ?? array()), $source_url, $local_url, $maps);
 svic_fixture_assert_complete($fixture, $maps);
 svic_fixture_fail_if_incomplete();
 svic_fixture_rewrite_media_urls($maps);
 wp_cache_flush();
-WP_CLI::success(sprintf('Imported public fixture: %d pages, %d posts, %d products, %d media items, %d menus.', count((array) ($fixture['pages'] ?? array())), count((array) ($fixture['posts'] ?? array())), count((array) ($fixture['products'] ?? array())), count((array) ($fixture['media'] ?? array())), count((array) ($fixture['menus'] ?? array()))));
+WP_CLI::success(sprintf('Imported public fixture: %d pages, %d posts, %d products, %d media items, %d menus.', count((array) ($fixture['pages'] ?? array())), count((array) ($fixture['posts'] ?? array())), count((array) ($fixture['products'] ?? array())) + count($maps['local_products']), count((array) ($fixture['media'] ?? array())) + count($maps['local_media']), count((array) ($fixture['menus'] ?? array()))));

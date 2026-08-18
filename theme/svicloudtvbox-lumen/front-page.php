@@ -6,11 +6,14 @@ get_header();
 
 $hero_product_15p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-15p') : null;
 $hero_15p_url = $hero_product_15p ? svic_url_with_lang(get_permalink($hero_product_15p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-15p'));
+$hero_15p_artwork = svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v4.webp');
 $hero_product_10p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
 $hero_product_10s = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null;
 $hero_10p_url = $hero_product_10p ? svic_url_with_lang(get_permalink($hero_product_10p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10p-plus'));
 $hero_10s_url = $hero_product_10s ? svic_url_with_lang(get_permalink($hero_product_10s->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10s'));
 
+// Keep the 15P hero limited to source-confirmed product facts. Fulfillment
+// and warranty terms for current models appear only in their own sections.
 $hero_bullet_keys = [
     'frontpage.hero.bullets.shipping',
     'frontpage.hero.bullets.warranty',
@@ -93,12 +96,10 @@ $frontpage_confidence_steps = [
 ];
 
 $pricing_card_images = [
-    '15p' => [
-        'alt'    => svic_translate('frontpage.pricing.cards.15p.image_alt'),
-        'url'    => '',
-        'width'  => null,
-        'height' => null,
-    ],
+    '15p' => array_merge(
+        ['alt' => svic_translate('frontpage.pricing.cards.15p.image_alt')],
+        svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v4.webp')
+    ),
     '10p' => array_merge(
         ['alt' => svic_translate('frontpage.pricing.cards.10p.image_alt')],
         function_exists('svic_get_product_image_meta')
@@ -116,26 +117,22 @@ $pricing_card_images = [
 $pricing_cards = [
     '15p' => [
         'product'         => $hero_product_15p,
-        'fallback_price'  => '',
+        'fallback_price'  => '$299.00',
         'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-15p')),
         'image'           => $pricing_card_images['15p'],
         'highlight'       => true,
         'modifier'        => 'shop-product-card--new',
-        'prelaunch'       => true,
         'badge_key'       => 'frontpage.pricing.cards.15p.badge',
+        'price_label_key' => 'shop.cards.15p.price_label',
         'price_note_key'  => 'shop.cards.15p.price_note',
         'title_key'       => 'frontpage.pricing.cards.15p.title',
         'copy_key'        => 'frontpage.pricing.cards.15p.copy',
         'feature_keys'    => [
-            'frontpage.pricing.cards.15p.features.newest',
+            'frontpage.pricing.cards.15p.features.processor',
             'frontpage.pricing.cards.15p.features.no_fees',
             'frontpage.pricing.cards.15p.features.support',
         ],
-        'assurance_keys'  => [
-            'shop.cards.15p.assurance.shipping',
-            'shop.cards.15p.assurance.warranty',
-            'shop.cards.15p.assurance.support',
-        ],
+        'assurance_keys'  => [],
         'cta_key'         => 'frontpage.pricing.cards.15p.cta',
         'buy_cta_key'     => 'frontpage.pricing.cards.15p.buy_cta',
     ],
@@ -202,9 +199,7 @@ foreach ($pricing_cards as $slug => $card) {
     if ($product && class_exists('WC_Product')) {
         $has_wc_product = $product instanceof WC_Product;
     }
-    $is_prelaunch_card = !empty($card['prelaunch']);
-
-    if ($has_wc_product && !$is_prelaunch_card) {
+    if ($has_wc_product) {
         $pricing_cards[$slug]['price_html'] = svic_price_html($product);
         $pricing_cards[$slug]['cta_url']    = svic_url_with_lang(get_permalink($product->get_id()));
         $pricing_cards[$slug]['buy_url'] = $product->is_purchasable() && $product->is_in_stock()
@@ -232,9 +227,7 @@ foreach ($pricing_cards as $slug => $card) {
             }
         }
     } else {
-        $fallback_price = $is_prelaunch_card
-            ? svic_translate('shop.cards.15p.price_tbc')
-            : (string) $card['fallback_price'];
+        $fallback_price = (string) $card['fallback_price'];
         $pricing_cards[$slug]['price_html'] = sprintf(
             '<span class="lumen-price"><span class="lumen-price__current">%s</span></span>',
             esc_html($fallback_price)
@@ -283,7 +276,7 @@ foreach ($pricing_cards as $slug => $card) {
     }
 
     $price_value = null;
-    if ($has_wc_product && !$is_prelaunch_card) {
+    if ($has_wc_product) {
         $price_string = $product->get_price();
         if ($price_string === '') {
             $price_string = $product->get_regular_price();
@@ -298,10 +291,9 @@ foreach ($pricing_cards as $slug => $card) {
         }
     }
 
-    $availability = 'https://schema.org/InStock';
-    if ($has_wc_product && !$product->is_in_stock()) {
-        $availability = 'https://schema.org/OutOfStock';
-    }
+    $availability = $has_wc_product && function_exists('svic_product_schema_availability')
+        ? svic_product_schema_availability($product)
+        : 'https://schema.org/OutOfStock';
 
     $sku = '';
     if ($has_wc_product) {
@@ -457,6 +449,7 @@ if (!$blog_posts_query instanceof WP_Query) {
       </div>
       <div class="hero-dashboard__visual">
         <article class="hero-15p" aria-labelledby="hero-15p-title">
+          <img class="hero-15p__image" src="<?php echo esc_url($hero_15p_artwork['url'] ?? ''); ?>" alt="<?php echo svic_translate_attr('frontpage.hero.showcase.image_alt'); ?>" width="<?php echo esc_attr((string) ($hero_15p_artwork['width'] ?? 1422)); ?>" height="<?php echo esc_attr((string) ($hero_15p_artwork['height'] ?? 800)); ?>" loading="eager" decoding="async" />
           <div class="hero-15p__topline">
             <span><?php echo svic_translate_html('frontpage.hero.showcase.kicker'); ?></span>
             <span><?php echo svic_translate_html('frontpage.hero.showcase.release'); ?></span>
@@ -610,7 +603,7 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
       <header class="lumen-section-header">
         <h2 class="lumen-section-header__title"><?php echo svic_translate_html('frontpage.pricing.title'); ?></h2>
         <p class="lumen-section-header__subtitle"><?php echo svic_translate_html('frontpage.pricing.subtitle'); ?></p>
-        <div class="lumen-pricing__quick-buy" aria-label="<?php echo esc_attr(svic_translate('frontpage.pricing.cards.10p.buy_cta')); ?>">
+        <div class="lumen-pricing__quick-buy" aria-label="<?php echo esc_attr(svic_translate('frontpage.pricing.cards.15p.buy_cta')); ?>">
           <a class="lumen-pill lumen-pill--primary lumen-pricing__quick-buy-cta" href="<?php echo esc_url($hero_15p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="homepage_pricing_header" data-svic-label="pricing_header_buy_15p" data-svic-model="svicloud-15p">
             <?php echo svic_translate_html('frontpage.pricing.cards.15p.buy_cta'); ?>
           </a>
@@ -621,7 +614,7 @@ $certificate_asset_relative = '/assets/images/certification-authorized-dealer.we
 $svic_all_in_stock = true;
 foreach ($pricing_cards as $_svic_card) {
     $_svic_p = $_svic_card['product'] ?? null;
-    if ($_svic_p instanceof WC_Product && ! $_svic_p->is_in_stock()) {
+    if ($_svic_p instanceof WC_Product && (!$_svic_p->is_in_stock() || $_svic_p->is_on_backorder(1))) {
         $svic_all_in_stock = false;
         break;
     }
@@ -658,13 +651,13 @@ foreach ($pricing_cards as $_svic_card) {
               <?php endif; ?>
               <?php if (!empty($card['image']['url'])) : ?>
                 <figure class="shop-product-card__media">
-                  <img src="<?php echo esc_url($card['image']['url']); ?>" alt="<?php echo esc_attr($card['image']['alt'] ?? ''); ?>" loading="lazy" width="520" height="520" />
+                  <img src="<?php echo esc_url($card['image']['url']); ?>" alt="<?php echo esc_attr($card['image']['alt'] ?? ''); ?>" loading="lazy" width="<?php echo esc_attr((string) ($card['image']['width'] ?? 520)); ?>" height="<?php echo esc_attr((string) ($card['image']['height'] ?? 520)); ?>" />
                 </figure>
               <?php elseif ($slug === '15p') : ?>
                 <figure class="shop-product-card__media" role="img" aria-label="<?php echo esc_attr($card['image']['alt'] ?? ''); ?>"></figure>
               <?php endif; ?>
               <div class="shop-product-card__price-line">
-                <span class="shop-product-card__price-label"><?php echo svic_translate_html('shop.cards.price_label'); ?></span>
+                <span class="shop-product-card__price-label"><?php echo svic_translate_html($card['price_label_key'] ?? 'shop.cards.price_label'); ?></span>
                 <span class="shop-product-card__price-amount"><?php echo $card['price_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
               </div>
               <?php if (!empty($card['price_note_key'])) : ?>
