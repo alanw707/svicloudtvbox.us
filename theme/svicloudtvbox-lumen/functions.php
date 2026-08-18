@@ -4236,6 +4236,18 @@ if (!function_exists('svic_output_rank_math_meta_fallback')) {
             $description = isset($meta['description']) ? trim((string) $meta['description']) : '';
             $image_meta  = isset($meta['image']) && is_array($meta['image']) ? $meta['image'] : [];
             $image_url   = isset($image_meta['url']) ? (string) $image_meta['url'] : '';
+        } elseif (function_exists('svic_get_static_page_meta_slug')
+            && function_exists('svic_resolve_static_page_meta')
+            && is_array(svic_resolve_static_page_meta(svic_get_static_page_meta_slug()))
+        ) {
+            $meta = svic_resolve_static_page_meta(svic_get_static_page_meta_slug());
+            if (is_array($meta)) {
+                $description = isset($meta['description']) ? trim((string) $meta['description']) : '';
+                $image_meta = !empty($meta['image']) && function_exists('svic_get_theme_image_meta')
+                    ? svic_get_theme_image_meta($meta['image'])
+                    : [];
+                $image_url = isset($image_meta['url']) ? (string) $image_meta['url'] : '';
+            }
         } else {
             $post_id = get_queried_object_id();
             if ($post_id) {
@@ -4274,6 +4286,11 @@ if (!function_exists('svic_output_rank_math_meta_fallback')) {
         if ($description !== '') {
             echo '<meta name="description" content="' . esc_attr($description) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             if ($rank_math_meta_seen) {
+                if ($image_url !== '') {
+                    echo '<meta property="og:image" content="' . esc_url($image_url) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                    echo '<meta name="twitter:image" content="' . esc_url($image_url) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                }
+
                 return;
             }
 
@@ -5079,9 +5096,17 @@ if (!function_exists('svic_preferred_sitemap_url')) {
 
 // Ensure robots.txt advertises the canonical sitemap endpoint.
 add_filter('robots_txt', function ($output, $public) {
-    // Respect site visibility setting; only append when public
-    if ((int) get_option('blog_public', 1) !== 1) {
+    $host = wp_parse_url(home_url('/'), PHP_URL_HOST);
+    $is_launch_host = is_string($host) && in_array(strtolower($host), ['svicloudtvbox.us', 'www.svicloudtvbox.us'], true);
+
+    // The approved production launch makes the public release host indexable;
+    // keep non-production/local visibility settings unchanged.
+    if ((int) get_option('blog_public', 1) !== 1 && !$is_launch_host) {
         return $output;
+    }
+
+    if ($is_launch_host) {
+        $output = preg_replace('/^Disallow:\s*\/\s*$/mi', 'Disallow:', (string) $output) ?: (string) $output;
     }
 
     $line = 'Sitemap: ' . esc_url_raw(svic_preferred_sitemap_url());
