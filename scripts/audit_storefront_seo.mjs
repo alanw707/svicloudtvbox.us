@@ -146,7 +146,7 @@ try {
         }
         if (normalizeUrl(data.social.ogUrl[0] || requestedUrl) !== expectedUrl) issue(scope, 'og:url does not match canonical');
         if (!data.title.includes('15P') || !data.title.includes(locale.marker)) issue(scope, `title lacks locale/15P relevance: ${data.title}`);
-        if (!data.descriptions[0]?.includes('299') || !data.descriptions[0]?.includes('379')) issue(scope, 'description lacks 299/379 pricing');
+        if (!data.descriptions[0]?.includes('288') || !data.descriptions[0]?.includes('379')) issue(scope, 'description lacks 288/379 pricing');
         if (route.key === 'home' && data.title !== locale.title) issue(scope, `homepage title differs from approved title: ${data.title}`);
         if (/price (and release date )?(has|have) not been announced/i.test(data.text) || /價格與推出日期尚未公布|价格与推出日期尚未公布/.test(data.text)) issue(scope, 'obsolete price-unannounced copy remains');
 
@@ -169,7 +169,7 @@ try {
           if (offers.length !== 1) issue(scope, `expected one 15P Offer, got ${offers.length}`);
           else {
             const offer = offers[0];
-            if (Number(offer.price) !== 299 || offer.priceCurrency !== 'USD' || offer.availability !== 'https://schema.org/BackOrder') issue(scope, `15P Offer mismatch: ${JSON.stringify({ price: offer.price, currency: offer.priceCurrency, availability: offer.availability })}`);
+            if (Number(offer.price) !== 288 || offer.priceCurrency !== 'USD' || offer.availability !== 'https://schema.org/BackOrder') issue(scope, `15P Offer mismatch: ${JSON.stringify({ price: offer.price, currency: offer.priceCurrency, availability: offer.availability })}`);
             if (JSON.stringify(offer.shippingDetails || '').includes('deliveryTime')) issue(scope, 'BackOrder Offer includes deliveryTime');
           }
         }

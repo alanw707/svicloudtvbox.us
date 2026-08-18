@@ -74,7 +74,7 @@
 ```
 
 - Homepage 15P artwork: `svicloud-15p-marketing-v4.webp`, natural size 1536×1024; desktop rendered box approximately 628×399 with no console errors.
-- Required commerce delta is not yet implemented: regular `$379.00`, sale `$299.00`, purchasable, backorders allowed, no unverified fulfillment date.
+- Required commerce delta is not yet implemented: regular `$379.00`, sale `$288.00`, purchasable, backorders allowed, no unverified fulfillment date.
 
 ## Test baseline
 

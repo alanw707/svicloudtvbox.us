@@ -23,7 +23,7 @@
 | AC2 | T1–T3 | Research has workflow/file maps, design evidence, SEO extension, and Ready verdict. |
 | AC3 | T3 | Complete pack approved explicitly before recovery/implementation. |
 | AC4 | T1 | Git/DB/uploads/private recovery proof passed. |
-| AC5 | T2/T6 | Runtime and post-refresh state: `379/299/299`, managed `0`, `notify`, `onbackorder`, purchasable. |
+| AC5 | T2/T6 | Runtime and post-refresh state: `379/288/288`, managed `0`, `notify`, `onbackorder`, purchasable. |
 | AC6 | T4/T6 | PDP → cart → checkout browser flow passes with localized backorder/date notices. |
 | AC7 | T3/T4/T7 | Homepage/Shop/Compare/PDP/cart/checkout/meta/schema agree; one BackOrder Offer. |
 | AC8 | T4/T6 | EN/繁中/简中 route/action/status/meta assertions pass in both projects. |
@@ -38,7 +38,7 @@
 | AC17 | T5/T7 | Final 24-page audit: 200, self-canonical, four hreflang, H1/main, social/schema/image checks, zero issues. |
 | AC18 | T3/T7 | Homepage authorized-dealer/小雲盒子/15P relevance and approved metadata preserved. |
 | AC19 | T5/T7 | Robots advertises active sitemap; English 15P included; locale discovery/self-canonical links pass. |
-| AC20 | T3/T7 | Exactly one PDP Product Offer: `299.00 USD`, `BackOrder`, no `deliveryTime`. |
+| AC20 | T3/T7 | Exactly one PDP Product Offer: `288.00 USD`, `BackOrder`, no `deliveryTime`. |
 | AC21 | T7 | Lighthouse SEO 100 desktop/mobile; performance observations and production `NO_FCP` limitation documented. |
 | AC22 | T7/T9 | Final SEO report has zero blockers and routes baseline/deferred observations explicitly. |
 

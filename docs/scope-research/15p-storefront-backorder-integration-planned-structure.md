@@ -19,10 +19,10 @@ Canonical file/shape handoff for implementing the approved 15P backorder launch,
 public REST fixture (read only)
   -> generic public importer [commit 1]
   -> deterministic local 15P supplement [commit 3]
-       WC price 379/299 + managed qty 0 + notify backorders + onbackorder
+       WC price 379/288 + managed qty 0 + notify backorders + onbackorder
        -> shared price renderer + shared schema availability mapper
        -> homepage / Shop / Compare / PDP / cart / checkout
-       -> one Product Offer: 299 USD, BackOrder, no deliveryTime
+       -> one Product Offer: 288 USD, BackOrder, no deliveryTime
        -> post-sync invariant + private-data verification
 
 localized SEO/content
@@ -88,7 +88,7 @@ localized SEO/content
 | Availability schema | InStock/OutOfStock only | shared BackOrder/InStock/OutOfStock mapper |
 | Delivery schema | fixed timing on every Offer | BackOrder omits delivery time; current products unchanged |
 | Customer action | Explore/Preview or no form | localized Backorder 15P + standard WC cart flow |
-| SEO metadata | launch-first, price-unannounced | authorized-dealer intent + 15P Backorder `$299/$379` |
+| SEO metadata | launch-first, price-unannounced | authorized-dealer intent + 15P Backorder `$288/$379` |
 | SEO verification | partial metadata assertions | reusable route/infrastructure/schema audit + Lighthouse evidence |
 | Recovery | none on mixed `main` worktree | local snapshot commit + external DB/manifest |
 

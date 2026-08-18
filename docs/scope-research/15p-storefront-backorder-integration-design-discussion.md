@@ -2,7 +2,7 @@
 
 ## Context Summary
 
-The worktree combines a read-only public fixture refresh, header/Guides work, and an informational 15P launch. The 15P product currently has no price, is non-purchasable, and is hard-coded as prelaunch across four surfaces. The approved change makes it a notified backorder at `$299` sale / `$379` regular while preserving current features and search visibility. Research and baseline evidence live in `15p-storefront-backorder-integration-research.md`, `15p-storefront-integration-inventory.md`, and `15p-storefront-seo-baseline.json`.
+The worktree combines a read-only public fixture refresh, header/Guides work, and an informational 15P launch. The 15P product currently has no price, is non-purchasable, and is hard-coded as prelaunch across four surfaces. The approved change makes it a notified backorder at `$288` sale / `$379` regular while preserving current features and search visibility. Research and baseline evidence live in `15p-storefront-backorder-integration-research.md`, `15p-storefront-integration-inventory.md`, and `15p-storefront-seo-baseline.json`.
 
 ## Design Goals
 
@@ -17,7 +17,7 @@ The worktree combines a read-only public fixture refresh, header/Guides work, an
 
 ### Product and fixture authority
 
-The deterministic local 15P supplement remains a normal `WC_Product_Simple`. Its fixture state becomes: regular `379`, sale/effective `299`, managed stock enabled, quantity `0`, backorders `notify`, stock status `onbackorder`, published/visible, and three approved gallery attachments. The obsolete coming-soon product marker is removed or made non-authoritative. Post-sync verification asserts exact price, sale, stock, backorder, purchasability, media, and fixture-key state.
+The deterministic local 15P supplement remains a normal `WC_Product_Simple`. Its fixture state becomes: regular `379`, sale/effective `288`, managed stock enabled, quantity `0`, backorders `notify`, stock status `onbackorder`, published/visible, and three approved gallery attachments. The obsolete coming-soon product marker is removed or made non-authoritative. Post-sync verification asserts exact price, sale, stock, backorder, purchasability, media, and fixture-key state.
 
 ### Storefront presentation
 
@@ -37,7 +37,7 @@ Homepage metadata combines established intent with the approved launch:
 - 繁中 title: `小雲 15P 缺貨訂購｜小雲盒子美國授權經銷`
 - 简中 title: `小云 15P 缺货订购｜小云盒子美国授权经销`
 
-Descriptions include `$299`, regular `$379`, authorized-dealer context, 10P+/10S comparison, and no announced shipping date. They do not add shipping-speed or warranty promises. Existing self-canonical and reciprocal hreflang behavior remains. The active sitemap is environment-specific: core WordPress locally and Rank Math in production. English 15P must appear in the product sitemap; localized virtual URLs remain discoverable through reciprocal hreflang and internal links rather than introducing a second sitemap architecture in this slice.
+Descriptions include `$288`, regular `$379`, authorized-dealer context, 10P+/10S comparison, and no announced shipping date. They do not add shipping-speed or warranty promises. Existing self-canonical and reciprocal hreflang behavior remains. The active sitemap is environment-specific: core WordPress locally and Rank Math in production. English 15P must appear in the product sitemap; localized virtual URLs remain discoverable through reciprocal hreflang and internal links rather than introducing a second sitemap architecture in this slice.
 
 A new repository audit script records route-level status/final URL, indexability, title/description, canonical/hreflang, headings, social metadata, images, internal links, JSON-LD, robots/sitemap, and 15P Offer accuracy. Lighthouse remains a separate command: local desktop/mobile required; production comparisons best-effort because production mobile repeatedly returned `NO_FCP` at baseline.
 

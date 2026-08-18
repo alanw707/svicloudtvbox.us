@@ -83,7 +83,7 @@ try {
         }
         if (!metrics.text.includes('Android 14')) fail(`${locale.code} ${viewport.key} ${route.key}: Android 14 copy missing`);
         const normalizedText = metrics.text.toLocaleLowerCase();
-        for (const required of [locale.availability, locale.action, locale.shippingDate, '299', '379']) {
+        for (const required of [locale.availability, locale.action, locale.shippingDate, '288', '379']) {
           if (!normalizedText.includes(required.toLocaleLowerCase())) fail(`${locale.code} ${viewport.key} ${route.key}: required backorder content missing: ${required}`);
         }
         if (/price (and release date )?(has|have) not been announced/i.test(metrics.text)) fail(`${locale.code} ${viewport.key} ${route.key}: obsolete price copy remains`);
@@ -144,7 +144,7 @@ try {
           });
           if (productNodes.length !== 1) fail(`${locale.code} ${viewport.key}: expected one Product node, got ${productNodes.length}`);
           const offer = productNodes[0]?.offers;
-          if (!offer || offer.price !== '299.00' || offer.availability !== 'https://schema.org/BackOrder') fail(`${locale.code} ${viewport.key}: BackOrder Offer mismatch`);
+          if (!offer || offer.price !== '288.00' || offer.availability !== 'https://schema.org/BackOrder') fail(`${locale.code} ${viewport.key}: BackOrder Offer mismatch`);
           if (offer.shippingDetails?.deliveryTime) fail(`${locale.code} ${viewport.key}: BackOrder Offer includes deliveryTime`);
           for (const policy of locale.forbiddenPolicies) {
             if (metrics.text.includes(policy)) fail(`${locale.code} ${viewport.key}: unverified 15P policy rendered: ${policy}`);

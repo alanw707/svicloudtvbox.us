@@ -5,7 +5,7 @@ Use only the answers below. Hardware facts map to [`../15p-source-traceability.m
 ## Availability and price
 
 **Can I order 15P now?**
-Yes. It is available on backorder for $299.00 (regular $379.00). Shipping date not announced.
+Yes. It is available on backorder for $288.00 (regular $379.00). Shipping date not announced.
 
 ## Confirmed platform
 

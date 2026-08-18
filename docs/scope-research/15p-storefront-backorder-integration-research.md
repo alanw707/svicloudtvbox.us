@@ -62,7 +62,7 @@ Source: `docs/specs/15p-storefront-backorder-integration.md`. Baseline: `docs/sc
 - `is_in_stock()` treats every stock status except `outofstock` as in stock (`abstract-wc-product.php:1750-1758`).
 - `is_on_backorder()` is true for explicit `onbackorder`, or for managed stock below requested quantity when backorders are allowed (`abstract-wc-product.php:1831-1836`).
 - Backorder notifications require managed stock plus mode `notify` (`abstract-wc-product.php:1821-1822`).
-- A runtime-only unsaved probe using prices 379/299, managed quantity 0, `backorders=notify`, and `stock_status=onbackorder` returned: sale=true, purchasable=true, in_stock=true, on_backorder=true, notification=true. No repository or product data was changed.
+- A runtime-only unsaved probe using prices 379/288, managed quantity 0, `backorders=notify`, and `stock_status=onbackorder` returned: sale=true, purchasable=true, in_stock=true, on_backorder=true, notification=true. No repository or product data was changed.
 
 ### Technical/on-page SEO baseline
 

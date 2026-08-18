@@ -4,7 +4,7 @@ Normal checkout, payment, shipping-rate, cancellation, and return behavior appli
 
 ## Approved storefront wording
 
-> Available on backorder for $299.00 (regular $379.00). Shipping date not announced.
+> Available on backorder for $288.00 (regular $379.00). Shipping date not announced.
 
 Do not reuse 10P+/10S shipping-speed or warranty marketing as a 15P promise. General policy links may remain in checkout and structured commerce data, but the 15P BackOrder Offer must omit handling/transit estimates.
 
