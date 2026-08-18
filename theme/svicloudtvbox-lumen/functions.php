@@ -4429,15 +4429,11 @@ if (!function_exists('svic_finish_head_meta_description_buffer')) {
             echo '<meta name="description" content="' . esc_attr($meta['description']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta property="og:title" content="' . esc_attr($meta['title']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta property="og:description" content="' . esc_attr($meta['description']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            if (!defined('RANK_MATH_VERSION') && !defined('WPSEO_VERSION')) {
-                echo '<meta property="og:image" content="' . esc_url($meta['image']['url']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            }
+            echo '<meta property="og:image" content="' . esc_url($meta['image']['url']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta property="og:image:alt" content="' . esc_attr($meta['image_alt']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta name="twitter:title" content="' . esc_attr($meta['title']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta name="twitter:description" content="' . esc_attr($meta['description']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            if (!defined('RANK_MATH_VERSION') && !defined('WPSEO_VERSION')) {
-                echo '<meta name="twitter:image" content="' . esc_url($meta['image']['url']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            }
+            echo '<meta name="twitter:image" content="' . esc_url($meta['image']['url']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta name="twitter:image:alt" content="' . esc_attr($meta['image_alt']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             return;
         }
@@ -4473,8 +4469,8 @@ if (!function_exists('svic_finish_head_meta_description_buffer')) {
     }
 }
 
-add_action('wp_head', 'svic_start_head_meta_description_buffer', 0);
-add_action('wp_head', 'svic_finish_head_meta_description_buffer', 1000000);
+add_action('wp_head', 'svic_start_head_meta_description_buffer', -999);
+add_action('wp_head', 'svic_finish_head_meta_description_buffer', PHP_INT_MAX);
 
 add_filter('wp_robots', function (array $robots): array {
     $is_order_tracking = is_page('order-tracking') || is_page_template('page-order-tracking.php');
