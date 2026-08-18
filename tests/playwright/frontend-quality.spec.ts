@@ -1,7 +1,14 @@
 import { expect, test, type Page } from '@playwright/test';
 
-async function seedCart(page: Page) {
-  await page.goto('/?add-to-cart=12', { waitUntil: 'domcontentloaded' });
+async function seedCart(page: Page, prefix = '') {
+  await page.goto(`${prefix}/product/svicloud-10p-plus/`, { waitUntil: 'networkidle' });
+  await page.locator('.single_add_to_cart_button').click();
+  const expectedMessage = prefix === '/zh'
+    ? '已加入您的購物車'
+    : prefix === '/zh-cn'
+      ? '已加入您的购物车'
+      : 'added to your cart';
+  await expect(page.locator('.woocommerce-message')).toContainText(expectedMessage);
 }
 
 test.describe('storefront frontend quality safeguards', () => {
@@ -59,7 +66,7 @@ test.describe('storefront frontend quality safeguards', () => {
     const desktopColumns = await page.locator('.shop-products__grid').evaluate((element) =>
       getComputedStyle(element).gridTemplateColumns.split(' ').length,
     );
-    expect(desktopColumns).toBe(3);
+    expect(desktopColumns).toBe(2);
 
     await page.setViewportSize({ width: 390, height: 844 });
     const mobileColumns = await page.locator('.shop-products__grid').evaluate((element) =>
@@ -165,7 +172,7 @@ test.describe('storefront frontend quality safeguards', () => {
       await expect(toggle).toHaveAccessibleName(locale.close);
       await page.keyboard.press('Escape');
 
-      await page.goto(`${locale.prefix}/?add-to-cart=12`, { waitUntil: 'domcontentloaded' });
+      await seedCart(page, locale.prefix);
       await page.goto(`${locale.prefix}/cart/`, { waitUntil: 'domcontentloaded' });
       await expect(page.locator('[data-qty-control="increase"]')).toHaveAccessibleName(locale.increase);
     }
@@ -174,7 +181,7 @@ test.describe('storefront frontend quality safeguards', () => {
   test('all scoped EN and zh discovery routes reflow at 320px', async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 844 });
     const routes = [
-      '/', '/shop/', '/compare/', '/product/svicloud-15p/', '/product/svicloud-10p-plus/', '/product/svicloud-9p/',
+      '/', '/shop/', '/compare/', '/product/svicloud-15p/', '/product/svicloud-10p-plus/', '/product/svicloud-10s/',
       '/zh/', '/zh/shop/', '/zh/compare/', '/zh/product/svicloud-15p/',
     ];
 

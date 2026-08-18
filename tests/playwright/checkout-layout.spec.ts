@@ -4,7 +4,9 @@ const THEME_BASE = 'http://svicloud10p.svic.local';
 const STRIPE_E2E_ENABLED = process.env.PLAYWRIGHT_STRIPE_E2E === '1';
 
 async function seedCart(page: import("@playwright/test").Page) {
-  await page.goto(`${THEME_BASE}/?add-to-cart=12`, { waitUntil: 'networkidle' });
+  await page.goto(`${THEME_BASE}/product/svicloud-10p-plus/`, { waitUntil: 'networkidle' });
+  await page.locator('.single_add_to_cart_button').click();
+  await expect(page.locator('.woocommerce-message')).toContainText('added to your cart');
 }
 
 test.describe('Checkout layout spacing', () => {

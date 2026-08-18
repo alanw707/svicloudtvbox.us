@@ -1116,6 +1116,22 @@ if (!function_exists('svic_price_html')) {
     }
 }
 
+if (!function_exists('svic_product_schema_availability')) {
+    function svic_product_schema_availability($product): string {
+        if (!$product instanceof WC_Product) {
+            return 'https://schema.org/OutOfStock';
+        }
+
+        if ($product->is_on_backorder(1)) {
+            return 'https://schema.org/BackOrder';
+        }
+
+        return $product->is_in_stock()
+            ? 'https://schema.org/InStock'
+            : 'https://schema.org/OutOfStock';
+    }
+}
+
 if (!function_exists('svic_get_product_image_meta')) {
     function svic_get_product_image_meta($product, int $index = 0, string $size = 'full'): array {
         $fallback = function_exists('svic_get_theme_image_meta')

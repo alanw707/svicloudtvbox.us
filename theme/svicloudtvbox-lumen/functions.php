@@ -925,38 +925,38 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'compare' => [
                 'title'       => [
-                    'en' => 'SVICLOUD 10P+ vs 10S | 小雲盒子 型號比較',
-                    'zh' => 'SVICLOUD 10P+ vs 10S | 小雲盒子 型號比較',
-                    'zh-cn' => 'SVICLOUD 10P+ vs 10S | 小雲盒子 型號比較',
+                    'en' => 'SVICLOUD 15P vs 10P+ vs 10S | Model Comparison',
+                    'zh' => '小雲 15P vs 10P+ vs 10S｜機型規格比較',
+                    'zh-cn' => '小云 15P vs 10P+ vs 10S｜机型规格比较',
                 ],
                 'description' => [
-                    'en' => 'Compare SVICLOUD 10P+ and 10S specs, storage, and features. 小雲盒子 型號規格比較。',
-                    'zh' => 'Compare SVICLOUD 10P+ and 10S specs, storage, and features. 小雲盒子 型號規格比較。',
-                    'zh-cn' => 'Compare SVICLOUD 10P+ and 10S specs, storage, and features. 小雲盒子 型號規格比較。',
+                    'en' => 'Compare the $299 SVICLOUD 15P backorder ($379 regular) with 10P+ and 10S hardware, video support, pricing, and availability.',
+                    'zh' => '比較 US$299 缺貨訂購的小雲 15P（原價 US$379）與 10P+、10S 的硬體、影音支援、價格及銷售狀態。',
+                    'zh-cn' => '比较 US$299 缺货订购的小云 15P（原价 US$379）与 10P+、10S 的硬件、影音支持、价格及销售状态。',
                 ],
-                'image'       => '/assets/images/svicloud-hero-product.webp',
+                'image'       => '/assets/images/products/svicloud-15p-front.webp',
                 'image_alt'   => [
-                    'en' => 'SVICLOUD 10P+ and 10S side-by-side',
-                    'zh' => '小雲 10P+ 與 10S 並排圖',
-                    'zh-cn' => '小云 10P+ 与 10S 并排图',
+                    'en' => 'SVICLOUD 15P TV box front view',
+                    'zh' => '小雲 15P 電視盒正面',
+                    'zh-cn' => '小云 15P 电视盒正面',
                 ],
             ],
             'shop' => [
                 'title'       => [
-                    'en' => 'Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨',
-                    'zh' => 'Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨',
-                    'zh-cn' => 'Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨',
+                    'en' => 'Shop SVICLOUD 15P, 10P+ & 10S TV Boxes',
+                    'zh' => '選購小雲 15P、10P+ 與 10S 電視盒',
+                    'zh-cn' => '选购小云 15P、10P+ 与 10S 电视盒',
                 ],
                 'description' => [
-                    'en' => 'SVICLOUD 10P+ and 10S with U.S. warranty, fast shipping, and concierge support. 小雲盒子 美國現貨保固。',
-                    'zh' => 'SVICLOUD 10P+ and 10S with U.S. warranty, fast shipping, and concierge support. 小雲盒子 美國現貨保固。',
-                    'zh-cn' => 'SVICLOUD 10P+ and 10S with U.S. warranty, fast shipping, and concierge support. 小雲盒子 美國現貨保固。',
+                    'en' => 'Backorder SVICLOUD 15P for $299 (regular $379), or shop current 10P+, 10S, and Bluetooth remote products.',
+                    'zh' => '以 US$299 缺貨訂購小雲 15P（原價 US$379），或選購現售 10P+、10S 與藍牙遙控器。',
+                    'zh-cn' => '以 US$299 缺货订购小云 15P（原价 US$379），或选购现售 10P+、10S 与蓝牙遥控器。',
                 ],
-                'image'       => '/assets/images/svicloud-hero-product.webp',
+                'image'       => '/assets/images/products/svicloud-15p-marketing-v4.webp',
                 'image_alt'   => [
-                    'en' => 'SVICLOUD 10P+ product photo',
-                    'zh' => '小雲 10P+ 產品照',
-                    'zh-cn' => '小云 10P+ 产品照',
+                    'en' => 'SVICLOUD 15P Android 14 feature graphic',
+                    'zh' => '小雲 15P Android 14 功能宣傳圖',
+                    'zh-cn' => '小云 15P Android 14 功能宣传图',
                 ],
             ],
             'cart' => [
@@ -1959,19 +1959,19 @@ if (!function_exists('svic_homepage_meta_definitions')) {
 
         $definitions = [
             'zh_tw' => [
-                'title'       => '小雲盒子美國授權經銷｜SVICLOUD 15P 即將上市｜SVICLOUD TV Box US',
-                'description' => '小雲盒子美國授權經銷，全新旗艦 SVICLOUD 15P 即將在美國上市；另提供 10P+、10S 美國現貨、快速出貨、1 年保固與 English/中文 禮賓支援。',
-                'image_alt'   => 'SVICLOUD 15P and 10P+ streaming boxes with concierge support badge, 小雲盒子',
+                'title'       => '小雲 15P 缺貨訂購｜小雲盒子美國授權經銷',
+                'description' => '小雲 15P 現以 US$299 接受缺貨訂購（原價 US$379），由小雲盒子美國授權經銷提供。可比較 10P+ 與 10S，出貨日期尚未公布。',
+                'image_alt'   => '小雲 15P Android 14 電視盒缺貨訂購圖',
             ],
             'zh_cn' => [
-                'title'       => '小云盒子美国授权经销｜SVICLOUD 15P 即将上市｜SVICLOUD TV Box US',
-                'description' => '小云盒子美国授权经销，全新旗舰 SVICLOUD 15P 即将在美国上市；另提供 10P+、10S 美国现货、快速发货、1 年保修与 English/中文 礼宾支持。',
-                'image_alt'   => 'SVICLOUD 15P and 10P+ streaming boxes with concierge support badge, 小雲盒子',
+                'title'       => '小云 15P 缺货订购｜小云盒子美国授权经销',
+                'description' => '小云 15P 现以 US$299 接受缺货订购（原价 US$379），由小云盒子美国授权经销提供。可比较 10P+ 与 10S，发货日期尚未公布。',
+                'image_alt'   => '小云 15P Android 14 电视盒缺货订购图',
             ],
             'en_us' => [
-                'title'       => 'New SVICLOUD 15P Coming Soon | Authorized SVICLOUD TV Box US Dealer',
-                'description' => 'The new SVICLOUD 15P is coming soon to our authorized U.S. store. Shop 10P+ and 10S now with U.S. shipping, warranty, and bilingual English/中文 support.',
-                'image_alt'   => 'SVICLOUD 15P and 10P+ streaming boxes with concierge support badge, 小雲盒子',
+                'title'       => 'SVICLOUD 15P Backorder | 小雲盒子 U.S. Authorized Dealer',
+                'description' => 'Backorder SVICLOUD 15P for $299 (regular $379) from an authorized U.S. dealer. Compare 10P+ and 10S with bilingual English/中文 support. Shipping date not announced.',
+                'image_alt'   => 'SVICLOUD 15P Android 14 TV box backorder graphic',
             ],
         ];
 
@@ -2034,7 +2034,7 @@ if (!function_exists('svic_get_theme_image_meta')) {
 if (!function_exists('svic_get_homepage_hero_image_meta')) {
     function svic_get_homepage_hero_image_meta(): array
     {
-        return svic_get_theme_image_meta('/assets/images/hero-voice-assistant.webp');
+        return svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v4.webp');
     }
 }
 
@@ -2190,6 +2190,11 @@ if (!function_exists('svic_rank_math_should_override_static_page_meta')) {
             return false;
         }
 
+        $slug = function_exists('svic_get_static_page_meta_slug') ? svic_get_static_page_meta_slug() : null;
+        if (in_array($slug, array('shop', 'compare'), true)) {
+            return true;
+        }
+
         $lang = svic_language_query_value();
         return $lang === 'zh' || $lang === 'zh-cn';
     }
@@ -2279,24 +2284,80 @@ if (!function_exists('svic_filter_rank_math_static_page_og_description')) {
     }
 }
 
-if (!function_exists('svic_disable_rank_math_front_page_schema')) {
-    /**
-     * Force Rank Math to skip its default schema on the static homepage.
-     *
-     * Only relevant when Rank Math is not controlling schema output. If Rank Math
-     * is active, we leave its WebPage node intact so structured data stays complete.
-     */
-    function svic_disable_rank_math_front_page_schema($schema, $type, $object_id)
+if (!function_exists('svic_is_15p_product_page')) {
+    function svic_is_15p_product_page(): bool
     {
-        if (function_exists('is_front_page') && is_front_page()) {
-            return 'none';
-        }
+        return !is_admin()
+            && function_exists('is_product')
+            && is_product()
+            && get_post_field('post_name', get_queried_object_id()) === 'svicloud-15p';
+    }
+}
 
-        return $schema;
+if (!function_exists('svic_get_15p_product_meta_definitions')) {
+    /** @return array{title:string,description:string,image_alt:string,image:array} */
+    function svic_get_15p_product_meta_definitions(): array
+    {
+        return array(
+            'title'       => trim(wp_strip_all_tags(svic_translate('products.svicloud-15p.meta.title'))),
+            'description' => trim(wp_strip_all_tags(svic_translate('products.svicloud-15p.meta.description'))),
+            'image_alt'   => trim(wp_strip_all_tags(svic_translate('products.svicloud-15p.meta.image_alt'))),
+            'image'       => svic_get_theme_image_meta('/assets/images/products/svicloud-15p-front.webp'),
+        );
+    }
+}
+
+if (!function_exists('svic_filter_15p_document_title')) {
+    function svic_filter_15p_document_title(array $parts): array
+    {
+        if (svic_is_15p_product_page()) {
+            $parts['title'] = svic_get_15p_product_meta_definitions()['title'];
+        }
+        return $parts;
+    }
+    add_filter('document_title_parts', 'svic_filter_15p_document_title', 60);
+}
+
+if (!function_exists('svic_filter_rank_math_15p_title')) {
+    function svic_filter_rank_math_15p_title($title)
+    {
+        return svic_is_15p_product_page() ? svic_get_15p_product_meta_definitions()['title'] : $title;
     }
 
-    if (!defined('RANK_MATH_VERSION')) {
-        add_filter('rank_math/frontend/schema/post_type', 'svic_disable_rank_math_front_page_schema', 20, 3);
+    function svic_filter_rank_math_15p_description($description)
+    {
+        return svic_is_15p_product_page() ? svic_get_15p_product_meta_definitions()['description'] : $description;
+    }
+
+    function svic_filter_rank_math_15p_image($image)
+    {
+        if (!svic_is_15p_product_page()) {
+            return $image;
+        }
+        $meta = svic_get_15p_product_meta_definitions();
+        $attachment = array('url' => $meta['image']['url'] ?? '');
+        if (!empty($meta['image']['width'])) {
+            $attachment['width'] = (int) $meta['image']['width'];
+        }
+        if (!empty($meta['image']['height'])) {
+            $attachment['height'] = (int) $meta['image']['height'];
+        }
+        if ($meta['image_alt'] !== '') {
+            $attachment['alt'] = $meta['image_alt'];
+        }
+        return $attachment;
+    }
+
+    if (defined('RANK_MATH_VERSION')) {
+        add_filter('rank_math/frontend/title', 'svic_filter_rank_math_15p_title', 999);
+        add_filter('rank_math/frontend/description', 'svic_filter_rank_math_15p_description', 999);
+        add_filter('rank_math/frontend/snippet_description', 'svic_filter_rank_math_15p_description', 999);
+        add_filter('rank_math/opengraph/facebook/og_title', 'svic_filter_rank_math_15p_title', 999);
+        add_filter('rank_math/opengraph/twitter/twitter_title', 'svic_filter_rank_math_15p_title', 999);
+        add_filter('rank_math/opengraph/facebook/og_description', 'svic_filter_rank_math_15p_description', 999);
+        add_filter('rank_math/opengraph/twitter/twitter_description', 'svic_filter_rank_math_15p_description', 999);
+        add_filter('rank_math/opengraph/facebook/image_array', 'svic_filter_rank_math_15p_image', 999);
+        add_filter('rank_math/opengraph/twitter/image_array', 'svic_filter_rank_math_15p_image', 999);
     }
 }
 
@@ -2559,7 +2620,9 @@ if (!function_exists('svic_build_product_schema_from_wc_product')) {
             $price_value = number_format((float) $raw_price, 2, '.', '');
         }
 
-        $availability = $product->is_in_stock() ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock';
+        $availability = function_exists('svic_product_schema_availability')
+            ? svic_product_schema_availability($product)
+            : ($product->is_in_stock() ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock');
 
         $sku = $product->get_sku();
         if (!is_string($sku) || $sku === '') {
@@ -2592,8 +2655,7 @@ if (!function_exists('svic_build_product_schema_from_wc_product')) {
         }
 
         if ($price_value !== null) {
-            $shipping_policy_url = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/shipping-policy/')) : home_url('/shipping-policy/');
-            $return_policy_url   = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/return-policy/')) : home_url('/return-policy/');
+            $return_policy_url = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/return-policy/')) : home_url('/return-policy/');
 
             $product_node['offers'] = [
                 '@type'         => 'Offer',
@@ -2604,34 +2666,7 @@ if (!function_exists('svic_build_product_schema_from_wc_product')) {
                 'seller'        => [
                     '@id' => svic_get_organization_schema_id(),
                 ],
-                'shippingDetails' => [
-                    '@type' => 'OfferShippingDetails',
-                    'shippingDestination' => [
-                        '@type' => 'DefinedRegion',
-                        'addressCountry' => 'US',
-                    ],
-                    'shippingRate' => [
-                        '@type' => 'MonetaryAmount',
-                        'value' => '0',
-                        'currency' => strtoupper(get_option('woocommerce_currency', 'USD')),
-                    ],
-                    'deliveryTime' => [
-                        '@type' => 'ShippingDeliveryTime',
-                        'handlingTime' => [
-                            '@type' => 'QuantitativeValue',
-                            'minValue' => 0,
-                            'maxValue' => 2,
-                            'unitCode' => 'd',
-                        ],
-                        'transitTime' => [
-                            '@type' => 'QuantitativeValue',
-                            'minValue' => 2,
-                            'maxValue' => 5,
-                            'unitCode' => 'd',
-                        ],
-                    ],
-                    'url' => esc_url_raw($shipping_policy_url),
-                ],
+                'shippingDetails' => svic_google_merchant_shipping_details_schema($availability !== 'https://schema.org/BackOrder'),
                 'hasMerchantReturnPolicy' => [
                     '@type' => 'MerchantReturnPolicy',
                     'applicableCountry' => 'US',
@@ -2649,12 +2684,11 @@ if (!function_exists('svic_build_product_schema_from_wc_product')) {
 }
 
 if (!function_exists('svic_google_merchant_shipping_details_schema')) {
-    function svic_google_merchant_shipping_details_schema(): array
+    function svic_google_merchant_shipping_details_schema(bool $include_delivery_time = true): array
     {
         $currency            = strtoupper(get_option('woocommerce_currency', 'USD'));
         $shipping_policy_url = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/shipping-policy/')) : home_url('/shipping-policy/');
-
-        return [
+        $details             = [
             '@type' => 'OfferShippingDetails',
             'shippingDestination' => [
                 '@type' => 'DefinedRegion',
@@ -2665,7 +2699,11 @@ if (!function_exists('svic_google_merchant_shipping_details_schema')) {
                 'value' => '0',
                 'currency' => $currency,
             ],
-            'deliveryTime' => [
+            'url' => esc_url_raw($shipping_policy_url),
+        ];
+
+        if ($include_delivery_time) {
+            $details['deliveryTime'] = [
                 '@type' => 'ShippingDeliveryTime',
                 'handlingTime' => [
                     '@type' => 'QuantitativeValue',
@@ -2679,9 +2717,10 @@ if (!function_exists('svic_google_merchant_shipping_details_schema')) {
                     'maxValue' => 5,
                     'unitCode' => 'd',
                 ],
-            ],
-            'url' => esc_url_raw($shipping_policy_url),
-        ];
+            ];
+        }
+
+        return $details;
     }
 }
 
@@ -2712,8 +2751,21 @@ if (!function_exists('svic_enrich_offer_schema_for_google_merchant')) {
      */
     function svic_enrich_offer_schema_for_google_merchant(array $offer): array
     {
+        $is_backorder = ($offer['availability'] ?? '') === 'https://schema.org/BackOrder';
+
         if (empty($offer['shippingDetails'])) {
-            $offer['shippingDetails'] = svic_google_merchant_shipping_details_schema();
+            $offer['shippingDetails'] = svic_google_merchant_shipping_details_schema(!$is_backorder);
+        } elseif ($is_backorder && is_array($offer['shippingDetails'])) {
+            if (isset($offer['shippingDetails']['@type'])) {
+                unset($offer['shippingDetails']['deliveryTime']);
+            } else {
+                foreach ($offer['shippingDetails'] as $key => $details) {
+                    if (is_array($details)) {
+                        unset($details['deliveryTime']);
+                        $offer['shippingDetails'][$key] = $details;
+                    }
+                }
+            }
         }
 
         if (empty($offer['hasMerchantReturnPolicy'])) {
@@ -4159,6 +4211,11 @@ if (!function_exists('svic_output_rank_math_meta_fallback')) {
             $description = isset($meta['description']) ? trim((string) $meta['description']) : '';
             $image_meta  = svic_get_homepage_hero_image_meta();
             $image_url   = is_array($image_meta) && !empty($image_meta['url']) ? (string) $image_meta['url'] : '';
+        } elseif (function_exists('svic_is_15p_product_page') && svic_is_15p_product_page()) {
+            $meta        = svic_get_15p_product_meta_definitions();
+            $description = $meta['description'];
+            $image_meta  = $meta['image'];
+            $image_url   = is_array($image_meta) && !empty($image_meta['url']) ? (string) $image_meta['url'] : '';
         } elseif (function_exists('is_page_template') && is_page_template('page-compare.php') && function_exists('svic_get_compare_page_meta_definitions')) {
             $meta        = svic_get_compare_page_meta_definitions();
             $description = isset($meta['description']) ? trim((string) $meta['description']) : '';
@@ -4233,6 +4290,10 @@ if (!function_exists('svic_resolve_current_meta_description')) {
             return svic_get_homepage_meta_for_output()['description'] ?? '';
         }
 
+        if (function_exists('svic_is_15p_product_page') && svic_is_15p_product_page()) {
+            return svic_get_15p_product_meta_definitions()['description'];
+        }
+
         if (function_exists('is_page_template') && is_page_template('page-compare.php') && function_exists('svic_get_compare_page_meta_definitions')) {
             $meta = svic_get_compare_page_meta_definitions();
             return isset($meta['description']) ? trim((string) $meta['description']) : '';
@@ -4300,6 +4361,29 @@ if (!function_exists('svic_finish_head_meta_description_buffer')) {
         $head = ob_get_clean();
 
         if (!is_string($head)) {
+            return;
+        }
+
+        if (function_exists('svic_is_15p_product_page') && svic_is_15p_product_page()) {
+            $meta = svic_get_15p_product_meta_definitions();
+            $patterns = array(
+                '/<meta\s+name=["\']description["\'][^>]*>\s*/i',
+                '/<meta\s+property=["\']og:title["\'][^>]*>\s*/i',
+                '/<meta\s+property=["\']og:description["\'][^>]*>\s*/i',
+                '/<meta\s+property=["\']og:image:alt["\'][^>]*>\s*/i',
+                '/<meta\s+name=["\']twitter:title["\'][^>]*>\s*/i',
+                '/<meta\s+name=["\']twitter:description["\'][^>]*>\s*/i',
+                '/<meta\s+name=["\']twitter:image:alt["\'][^>]*>\s*/i',
+            );
+            $head = preg_replace($patterns, '', $head) ?: $head;
+            echo $head; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<meta name="description" content="' . esc_attr($meta['description']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<meta property="og:title" content="' . esc_attr($meta['title']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<meta property="og:description" content="' . esc_attr($meta['description']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<meta property="og:image:alt" content="' . esc_attr($meta['image_alt']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<meta name="twitter:title" content="' . esc_attr($meta['title']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<meta name="twitter:description" content="' . esc_attr($meta['description']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<meta name="twitter:image:alt" content="' . esc_attr($meta['image_alt']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             return;
         }
 
@@ -5708,6 +5792,27 @@ if (!function_exists('svic_filter_woocommerce_url_with_lang')) {
 
     add_filter('woocommerce_get_cart_url', 'svic_filter_woocommerce_url_with_lang', 20);
     add_filter('woocommerce_get_checkout_url', 'svic_filter_woocommerce_url_with_lang', 20);
+    add_filter('woocommerce_add_to_cart_form_action', 'svic_filter_woocommerce_url_with_lang', 20);
+}
+
+if (!function_exists('svic_localize_woocommerce_add_to_cart_message')) {
+    function svic_localize_woocommerce_add_to_cart_message(string $message): string
+    {
+        if (function_exists('svic_language_query_value') && svic_language_query_value() !== 'zh-cn') {
+            return $message;
+        }
+
+        return str_replace(
+            array('has been added to your cart', 'View cart'),
+            array(
+                esc_html(svic_translate('core.cart.added_notice')),
+                esc_html(svic_translate('core.cart.view_cart')),
+            ),
+            $message
+        );
+    }
+
+    add_filter('wc_add_to_cart_message_html', 'svic_localize_woocommerce_add_to_cart_message', 20);
 }
 
 // Keep the zh/zh-cn prefix when WooCommerce redirects away from checkout (e.g. empty cart).
@@ -5768,6 +5873,76 @@ add_action('template_redirect', function () {
         }
     }
 }, 20);
+
+if (!function_exists('svic_is_15p_product_object')) {
+    function svic_is_15p_product_object($product): bool
+    {
+        return $product instanceof WC_Product && $product->get_slug() === 'svicloud-15p';
+    }
+}
+
+if (!function_exists('svic_cart_contains_15p')) {
+    function svic_cart_contains_15p(): bool
+    {
+        if (!function_exists('WC')) {
+            return false;
+        }
+
+        $wc = WC();
+        if (!$wc || !isset($wc->cart) || !$wc->cart) {
+            return false;
+        }
+
+        foreach ($wc->cart->get_cart() as $cart_item) {
+            if (svic_is_15p_product_object($cart_item['data'] ?? null)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+}
+
+add_filter('woocommerce_product_single_add_to_cart_text', function ($text, $product) {
+    return svic_is_15p_product_object($product)
+        ? svic_translate('shop.cards.15p.button')
+        : $text;
+}, 20, 2);
+
+add_filter('woocommerce_get_availability_text', function ($availability, $product) {
+    return svic_is_15p_product_object($product) && $product->is_on_backorder(1)
+        ? svic_translate('shop.cards.15p.price_tbc')
+        : $availability;
+}, 20, 2);
+
+if (!function_exists('svic_render_15p_checkout_backorder_notice')) {
+    function svic_render_15p_checkout_backorder_notice(): void
+    {
+        if (!function_exists('WC')) {
+            return;
+        }
+
+        $wc = WC();
+        if (!$wc || !isset($wc->cart) || !$wc->cart) {
+            return;
+        }
+
+        foreach ($wc->cart->get_cart() as $cart_item) {
+            $product = $cart_item['data'] ?? null;
+            if (!svic_is_15p_product_object($product) || !$product->is_on_backorder((int) ($cart_item['quantity'] ?? 1))) {
+                continue;
+            }
+            ?>
+            <p class="woocommerce-info lumen-checkout-backorder-notice" role="status">
+                <strong><?php echo svic_translate_html('shop.cards.15p.price_tbc'); ?></strong>
+                <?php echo svic_translate_html('shop.cards.15p.price_note'); ?>
+            </p>
+            <?php
+            return;
+        }
+    }
+}
+add_action('woocommerce_checkout_before_order_review', 'svic_render_15p_checkout_backorder_notice', 5);
 
 /**
  * Legacy URL guardrails for blog posts that referenced older slugs/files.

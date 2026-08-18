@@ -1,0 +1,4991 @@
+{
+  "capturedAt": "2026-08-17T21:34:23.260Z",
+  "targets": {
+    "local": {
+      "pages": [
+        {
+          "locale": "en",
+          "route": "home",
+          "requestedUrl": "http://svicloud10p.svic.local/",
+          "finalUrl": "http://svicloud10p.svic.local/",
+          "status": 200,
+          "errors": [],
+          "lang": "en-US",
+          "title": "New SVICLOUD 15P Coming Soon | Authorized SVICLOUD TV Box US Dealer",
+          "titleLength": 67,
+          "description": "SVICLOUD 15P specifications list Android 14, Amlogic S905Y5, Wi-Fi 6, and Bluetooth 5.4; price and release date are not announced. Current 10P+ and 10S product…",
+          "descriptionLength": 160,
+          "robots": [
+            "max-image-preview:large",
+            "max-image-preview:large"
+          ],
+          "canonical": [
+            "http://svicloud10p.svic.local/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "http://svicloud10p.svic.local/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "http://svicloud10p.svic.local/zh/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "http://svicloud10p.svic.local/zh-cn/"
+            },
+            {
+              "lang": "x-default",
+              "href": "http://svicloud10p.svic.local/"
+            }
+          ],
+          "social": {
+            "ogTitle": "New SVICLOUD 15P Coming Soon | Authorized SVICLOUD TV Box US Dealer",
+            "ogDescription": "SVICLOUD 15P specifications list Android 14, Amlogic S905Y5, Wi-Fi 6, and Bluetooth 5.4; price and release date are not announced. Current 10P+ and 10S products have separate U.S. fulfillment terms.",
+            "ogUrl": "http://svicloud10p.svic.local/",
+            "ogImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant.webp",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "New SVICLOUD 15P Coming Soon | Authorized SVICLOUD TV Box US Dealer",
+            "twitterDescription": "SVICLOUD 15P specifications list Android 14, Amlogic S905Y5, Wi-Fi 6, and Bluetooth 5.4; price and release date are not announced. Current 10P+ and 10S products have separate U.S. fulfillment terms.",
+            "twitterImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant.webp"
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "Meet the New SVICLOUD 15P."
+            },
+            {
+              "level": 2,
+              "text": "Android 14. Wi-Fi 6. 4K HDR."
+            },
+            {
+              "level": 2,
+              "text": "Skip the import hassle. Get your SVICLOUD set up in 中文 or English, shipped from Nevada in 48 hours."
+            },
+            {
+              "level": 2,
+              "text": "What's in the Box"
+            },
+            {
+              "level": 2,
+              "text": "SVI.STUDIO Authorized Dealer Certification"
+            },
+            {
+              "level": 2,
+              "text": "Choose Your SVICLOUD Device"
+            },
+            {
+              "level": 3,
+              "text": "SVICLOUD 15P"
+            },
+            {
+              "level": 3,
+              "text": "SVICLOUD 10P+"
+            },
+            {
+              "level": 3,
+              "text": "SVICLOUD 10S"
+            },
+            {
+              "level": 2,
+              "text": "Why order direct from SVICLOUDTVBOX.US"
+            },
+            {
+              "level": 3,
+              "text": "Official U.S. dealer"
+            },
+            {
+              "level": 3,
+              "text": "Nevada fulfillment"
+            },
+            {
+              "level": 3,
+              "text": "English & 中文 help"
+            },
+            {
+              "level": 3,
+              "text": "Warranty + returns clarity"
+            },
+            {
+              "level": 3,
+              "text": "What happens next"
+            },
+            {
+              "level": 2,
+              "text": "Top questions from U.S. & Canada buyers"
+            },
+            {
+              "level": 3,
+              "text": "Orders & shipping"
+            },
+            {
+              "level": 3,
+              "text": "Device & setup"
+            },
+            {
+              "level": 3,
+              "text": "Models & comparisons"
+            }
+          ],
+          "wordCount": 1079,
+          "images": {
+            "total": 10,
+            "missingAlt": 0,
+            "missingDimensions": 3,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 4,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "http://svicloud10p.svic.local/product/svicloud-15p#product",
+                "name": "SVICLOUD 15P TV Box",
+                "offers": []
+              },
+              {
+                "id": "http://svicloud10p.svic.local/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/product/svicloud-10p-plus/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              },
+              {
+                "id": "http://svicloud10p.svic.local/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/product/svicloud-10s/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Answer",
+              "Brand",
+              "ContactPoint",
+              "FAQPage",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "Offer",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "Question",
+              "SearchAction",
+              "SiteNavigationElement",
+              "WebPage",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "en",
+          "route": "shop",
+          "requestedUrl": "http://svicloud10p.svic.local/shop/",
+          "finalUrl": "http://svicloud10p.svic.local/shop/",
+          "status": 200,
+          "errors": [],
+          "lang": "en-US",
+          "title": "Shop SVICLOUD 15P, 10P+ & 10S TV Boxes",
+          "titleLength": 38,
+          "description": "Explore source-confirmed SVICLOUD 15P specifications and Coming Soon state, or view current 10P+, 10S, and remote products.",
+          "descriptionLength": 123,
+          "robots": [
+            "max-image-preview:large",
+            "max-image-preview:large"
+          ],
+          "canonical": [
+            "http://svicloud10p.svic.local/shop/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "http://svicloud10p.svic.local/shop/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "http://svicloud10p.svic.local/zh/shop/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "http://svicloud10p.svic.local/zh-cn/shop/"
+            },
+            {
+              "lang": "x-default",
+              "href": "http://svicloud10p.svic.local/shop/"
+            }
+          ],
+          "social": {
+            "ogTitle": "Shop SVICLOUD 15P, 10P+ & 10S TV Boxes",
+            "ogDescription": "Explore source-confirmed SVICLOUD 15P specifications and Coming Soon state, or view current 10P+, 10S, and remote products.",
+            "ogUrl": "http://svicloud10p.svic.local/shop/",
+            "ogImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v4.webp",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "Shop SVICLOUD 15P, 10P+ & 10S TV Boxes",
+            "twitterDescription": "Explore source-confirmed SVICLOUD 15P specifications and Coming Soon state, or view current 10P+, 10S, and remote products.",
+            "twitterImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v4.webp"
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "SVICLOUD TV Boxes"
+            },
+            {
+              "level": 2,
+              "text": "SVICLOUD 15P TV Box"
+            },
+            {
+              "level": 2,
+              "text": "SVICLOUD 10P+"
+            },
+            {
+              "level": 2,
+              "text": "SVICLOUD 10S"
+            },
+            {
+              "level": 2,
+              "text": "Bluetooth Remote for 10P+"
+            }
+          ],
+          "wordCount": 425,
+          "images": {
+            "total": 9,
+            "missingAlt": 0,
+            "missingDimensions": 4,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 3,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "http://svicloud10p.svic.local/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/product/svicloud-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "http://svicloud10p.svic.local/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/product/svicloud-10s/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "http://svicloud10p.svic.local/product/svicloud-bluetooth-remote-10p-plus#product",
+                "name": "Bluetooth TV Remote Control for SVICLOUD 10P+",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "27.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/product/svicloud-bluetooth-remote-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Brand",
+              "BreadcrumbList",
+              "ContactPoint",
+              "DefinedRegion",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "MerchantReturnPolicy",
+              "MonetaryAmount",
+              "Offer",
+              "OfferShippingDetails",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "QuantitativeValue",
+              "SearchAction",
+              "ShippingDeliveryTime",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "en",
+          "route": "compare",
+          "requestedUrl": "http://svicloud10p.svic.local/compare/",
+          "finalUrl": "http://svicloud10p.svic.local/compare/",
+          "status": 200,
+          "errors": [],
+          "lang": "en-US",
+          "title": "SVICLOUD 15P vs 10P+ vs 10S | Model Comparison",
+          "titleLength": 46,
+          "description": "Compare confirmed SVICLOUD 15P specifications with 10P+ and 10S hardware, connectivity, video support, and availability state.",
+          "descriptionLength": 126,
+          "robots": [
+            "max-image-preview:large",
+            "max-image-preview:large"
+          ],
+          "canonical": [
+            "http://svicloud10p.svic.local/compare/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "http://svicloud10p.svic.local/compare/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "http://svicloud10p.svic.local/zh/compare/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "http://svicloud10p.svic.local/zh-cn/compare/"
+            },
+            {
+              "lang": "x-default",
+              "href": "http://svicloud10p.svic.local/compare/"
+            }
+          ],
+          "social": {
+            "ogTitle": "SVICLOUD 15P vs 10P+ vs 10S | Model Comparison",
+            "ogDescription": "Compare confirmed SVICLOUD 15P specifications with 10P+ and 10S hardware, connectivity, video support, and availability state.",
+            "ogUrl": "http://svicloud10p.svic.local/compare/",
+            "ogImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-front.webp",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "SVICLOUD 15P vs 10P+ vs 10S | Model Comparison",
+            "twitterDescription": "Compare confirmed SVICLOUD 15P specifications with 10P+ and 10S hardware, connectivity, video support, and availability state.",
+            "twitterImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-front.webp"
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "SVICLOUD 15P vs 10P+ vs 10S"
+            },
+            {
+              "level": 2,
+              "text": "Compare a Coming Soon platform with models available from U.S. inventory"
+            },
+            {
+              "level": 3,
+              "text": "Android 14 + Bluetooth 5.4"
+            },
+            {
+              "level": 3,
+              "text": "Premium Performance"
+            },
+            {
+              "level": 3,
+              "text": "Family Entertainment"
+            },
+            {
+              "level": 3,
+              "text": "Smart Value"
+            },
+            {
+              "level": 2,
+              "text": "Top questions before you buy"
+            },
+            {
+              "level": 2,
+              "text": "SVICLOUD 15P TV Box"
+            },
+            {
+              "level": 3,
+              "text": "Feature Comparison"
+            },
+            {
+              "level": 2,
+              "text": "SVICLOUD 10P+"
+            },
+            {
+              "level": 3,
+              "text": "Feature Comparison"
+            },
+            {
+              "level": 2,
+              "text": "SVICLOUD 10S"
+            },
+            {
+              "level": 3,
+              "text": "Feature Comparison"
+            },
+            {
+              "level": 2,
+              "text": "Pick your model, then order with local support"
+            },
+            {
+              "level": 3,
+              "text": "Official U.S. storefront"
+            },
+            {
+              "level": 3,
+              "text": "Tracked Nevada shipping"
+            },
+            {
+              "level": 3,
+              "text": "Bilingual setup help"
+            },
+            {
+              "level": 3,
+              "text": "Warranty-backed purchase"
+            },
+            {
+              "level": 3,
+              "text": "From model choice to living-room setup"
+            },
+            {
+              "level": 2,
+              "text": "Ready to upgrade your home viewing experience?"
+            }
+          ],
+          "wordCount": 984,
+          "images": {
+            "total": 11,
+            "missingAlt": 3,
+            "missingDimensions": 3,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 3,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "http://svicloud10p.svic.local/product/svicloud-15p#product",
+                "name": "SVICLOUD 15P TV Box",
+                "offers": []
+              },
+              {
+                "id": "http://svicloud10p.svic.local/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/product/svicloud-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "http://svicloud10p.svic.local/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/product/svicloud-10s/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Brand",
+              "BreadcrumbList",
+              "ContactPoint",
+              "DefinedRegion",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "MerchantReturnPolicy",
+              "MonetaryAmount",
+              "Offer",
+              "OfferShippingDetails",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "QuantitativeValue",
+              "SearchAction",
+              "ShippingDeliveryTime",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "en",
+          "route": "product-15p",
+          "requestedUrl": "http://svicloud10p.svic.local/product/svicloud-15p/",
+          "finalUrl": "http://svicloud10p.svic.local/product/svicloud-15p/",
+          "status": 200,
+          "errors": [],
+          "lang": "en-US",
+          "title": "SVICLOUD 15P TV Box Specs | Coming Soon",
+          "titleLength": 39,
+          "description": "SVICLOUD 15P specifications: Android 14, Amlogic S905Y5, 4 GB DDR3, 64 GB eMMC, Wi-Fi 6, Bluetooth 5.4, and 4K HDR. Price and release date are not announced.",
+          "descriptionLength": 157,
+          "robots": [
+            "max-image-preview:large",
+            "max-image-preview:large"
+          ],
+          "canonical": [
+            "http://svicloud10p.svic.local/product/svicloud-15p/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "http://svicloud10p.svic.local/product/svicloud-15p/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "http://svicloud10p.svic.local/zh/product/svicloud-15p/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "http://svicloud10p.svic.local/zh-cn/product/svicloud-15p/"
+            },
+            {
+              "lang": "x-default",
+              "href": "http://svicloud10p.svic.local/product/svicloud-15p/"
+            }
+          ],
+          "social": {
+            "ogTitle": "SVICLOUD 15P TV Box Specs | Coming Soon",
+            "ogDescription": "SVICLOUD 15P specifications: Android 14, Amlogic S905Y5, 4 GB DDR3, 64 GB eMMC, Wi-Fi 6, Bluetooth 5.4, and 4K HDR. Price and release date are not announced.",
+            "ogUrl": "http://svicloud10p.svic.local/product/svicloud-15p/",
+            "ogImage": "http://svicloud10p.svic.local/wp-content/uploads/2026/08/svicloud-15p-front.webp",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "SVICLOUD 15P TV Box Specs | Coming Soon",
+            "twitterDescription": "SVICLOUD 15P specifications: Android 14, Amlogic S905Y5, 4 GB DDR3, 64 GB eMMC, Wi-Fi 6, Bluetooth 5.4, and 4K HDR. Price and release date are not announced.",
+            "twitterImage": "http://svicloud10p.svic.local/wp-content/uploads/2026/08/svicloud-15p-front.webp"
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "SVICLOUD 15P TV Box"
+            },
+            {
+              "level": 2,
+              "text": "Android 14 with Wi-Fi 6 and Bluetooth 5.4"
+            },
+            {
+              "level": 2,
+              "text": "Confirmed 15P hardware at a glance"
+            },
+            {
+              "level": 2,
+              "text": "Description"
+            },
+            {
+              "level": 2,
+              "text": "Core specifications"
+            },
+            {
+              "level": 2,
+              "text": "In the box"
+            },
+            {
+              "level": 2,
+              "text": "What's in the Box"
+            },
+            {
+              "level": 2,
+              "text": "Android 14 with the listed wired and wireless connections"
+            },
+            {
+              "level": 2,
+              "text": "SVICLOUD 15P vs 10P+ vs 9P"
+            },
+            {
+              "level": 3,
+              "text": "15P vs 10P+"
+            },
+            {
+              "level": 3,
+              "text": "15P vs 9P"
+            },
+            {
+              "level": 3,
+              "text": "Comparison guidance"
+            },
+            {
+              "level": 3,
+              "text": "What is confirmed and what still waits"
+            },
+            {
+              "level": 2,
+              "text": "Confirmed specifications and open commerce fields"
+            },
+            {
+              "level": 2,
+              "text": "Store reviews from Google"
+            }
+          ],
+          "wordCount": 875,
+          "images": {
+            "total": 8,
+            "missingAlt": 0,
+            "missingDimensions": 3,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 4,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "http://svicloud10p.svic.local/product/svicloud-15p#product",
+                "name": "SVICLOUD 15P TV Box",
+                "offers": []
+              }
+            ],
+            "types": [
+              "Answer",
+              "Brand",
+              "BreadcrumbList",
+              "ContactPoint",
+              "FAQPage",
+              "ImageObject",
+              "ListItem",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "Question",
+              "SearchAction",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-TW",
+          "route": "home",
+          "requestedUrl": "http://svicloud10p.svic.local/zh/",
+          "finalUrl": "http://svicloud10p.svic.local/zh/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-TW",
+          "title": "小雲盒子美國授權經銷｜SVICLOUD 15P 即將上市｜SVICLOUD TV Box US",
+          "titleLength": 47,
+          "description": "小雲盒子美國授權經銷；SVICLOUD 15P 已公布 Android 14、Amlogic S905Y5、Wi-Fi 6 與藍牙 5.4 規格，價格與推出日期尚未公布。10P+、10S 現售商品另有美國出貨與支援條款。",
+          "descriptionLength": 110,
+          "robots": [
+            "max-image-preview:large",
+            "max-image-preview:large"
+          ],
+          "canonical": [
+            "http://svicloud10p.svic.local/zh/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "http://svicloud10p.svic.local/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "http://svicloud10p.svic.local/zh/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "http://svicloud10p.svic.local/zh-cn/"
+            },
+            {
+              "lang": "x-default",
+              "href": "http://svicloud10p.svic.local/"
+            }
+          ],
+          "social": {
+            "ogTitle": "小雲盒子美國授權經銷｜SVICLOUD 15P 即將上市｜SVICLOUD TV Box US",
+            "ogDescription": "小雲盒子美國授權經銷；SVICLOUD 15P 已公布 Android 14、Amlogic S905Y5、Wi-Fi 6 與藍牙 5.4 規格，價格與推出日期尚未公布。10P+、10S 現售商品另有美國出貨與支援條款。",
+            "ogUrl": "http://svicloud10p.svic.local/zh/",
+            "ogImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant.webp",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "小雲盒子美國授權經銷｜SVICLOUD 15P 即將上市｜SVICLOUD TV Box US",
+            "twitterDescription": "小雲盒子美國授權經銷；SVICLOUD 15P 已公布 Android 14、Amlogic S905Y5、Wi-Fi 6 與藍牙 5.4 規格，價格與推出日期尚未公布。10P+、10S 現售商品另有美國出貨與支援條款。",
+            "twitterImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant.webp"
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "全新小雲 15P 即將登場。亞洲娛樂，重新想像。"
+            },
+            {
+              "level": 2,
+              "text": "Android 14、Wi-Fi 6、4K HDR。"
+            },
+            {
+              "level": 2,
+              "text": "免去水貨煩惱。中文或英文禮賓代客設定，內華達 48 小時出貨。"
+            },
+            {
+              "level": 2,
+              "text": "包裝盒內容物"
+            },
+            {
+              "level": 2,
+              "text": "SVI.STUDIO 官方授權證書"
+            },
+            {
+              "level": 2,
+              "text": "選擇適合您的小雲電視盒設備"
+            },
+            {
+              "level": 3,
+              "text": "小雲 15P 電視盒"
+            },
+            {
+              "level": 3,
+              "text": "小雲電視盒 10P+"
+            },
+            {
+              "level": 3,
+              "text": "小雲電視盒 10S"
+            },
+            {
+              "level": 2,
+              "text": "為什麼直接在 SVICLOUDTVBOX.US 下單"
+            },
+            {
+              "level": 3,
+              "text": "美國官方授權通路"
+            },
+            {
+              "level": 3,
+              "text": "內華達在地出貨"
+            },
+            {
+              "level": 3,
+              "text": "中英雙語禮賓"
+            },
+            {
+              "level": 3,
+              "text": "保固與退換貨清楚"
+            },
+            {
+              "level": 3,
+              "text": "接下來會發生什麼"
+            },
+            {
+              "level": 2,
+              "text": "美加客戶最常詢問的重點"
+            },
+            {
+              "level": 3,
+              "text": "訂單與配送"
+            },
+            {
+              "level": 3,
+              "text": "裝置與安裝"
+            },
+            {
+              "level": 3,
+              "text": "機型與比較"
+            }
+          ],
+          "wordCount": 451,
+          "images": {
+            "total": 10,
+            "missingAlt": 0,
+            "missingDimensions": 3,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 4,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "http://svicloud10p.svic.local/zh/product/svicloud-15p#product",
+                "name": "SVICLOUD 15P TV Box",
+                "offers": []
+              },
+              {
+                "id": "http://svicloud10p.svic.local/zh/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh/product/svicloud-10p-plus/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              },
+              {
+                "id": "http://svicloud10p.svic.local/zh/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh/product/svicloud-10s/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Answer",
+              "Brand",
+              "ContactPoint",
+              "FAQPage",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "Offer",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "Question",
+              "SearchAction",
+              "SiteNavigationElement",
+              "WebPage",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-TW",
+          "route": "shop",
+          "requestedUrl": "http://svicloud10p.svic.local/zh/shop/",
+          "finalUrl": "http://svicloud10p.svic.local/zh/shop/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-TW",
+          "title": "選購小雲 15P、10P+ 與 10S 電視盒",
+          "titleLength": 23,
+          "description": "查看小雲 15P 已確認規格與即將推出狀態，或瀏覽現有 10P+、10S 與遙控器產品。",
+          "descriptionLength": 44,
+          "robots": [
+            "max-image-preview:large",
+            "max-image-preview:large"
+          ],
+          "canonical": [
+            "http://svicloud10p.svic.local/zh/shop/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "http://svicloud10p.svic.local/shop/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "http://svicloud10p.svic.local/zh/shop/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "http://svicloud10p.svic.local/zh-cn/shop/"
+            },
+            {
+              "lang": "x-default",
+              "href": "http://svicloud10p.svic.local/shop/"
+            }
+          ],
+          "social": {
+            "ogTitle": "選購小雲 15P、10P+ 與 10S 電視盒",
+            "ogDescription": "查看小雲 15P 已確認規格與即將推出狀態，或瀏覽現有 10P+、10S 與遙控器產品。",
+            "ogUrl": "http://svicloud10p.svic.local/zh/shop/",
+            "ogImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v4.webp",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "選購小雲 15P、10P+ 與 10S 電視盒",
+            "twitterDescription": "查看小雲 15P 已確認規格與即將推出狀態，或瀏覽現有 10P+、10S 與遙控器產品。",
+            "twitterImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v4.webp"
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "小雲電視盒"
+            },
+            {
+              "level": 2,
+              "text": "小雲 15P 電視盒"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10P+"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10S"
+            },
+            {
+              "level": 2,
+              "text": "10P+ 藍牙遙控器"
+            }
+          ],
+          "wordCount": 194,
+          "images": {
+            "total": 9,
+            "missingAlt": 0,
+            "missingDimensions": 4,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 3,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "http://svicloud10p.svic.local/zh/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh/product/svicloud-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "http://svicloud10p.svic.local/zh/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh/product/svicloud-10s/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "http://svicloud10p.svic.local/zh/product/svicloud-bluetooth-remote-10p-plus#product",
+                "name": "Bluetooth TV Remote Control for SVICLOUD 10P+",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "27.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh/product/svicloud-bluetooth-remote-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Brand",
+              "BreadcrumbList",
+              "ContactPoint",
+              "DefinedRegion",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "MerchantReturnPolicy",
+              "MonetaryAmount",
+              "Offer",
+              "OfferShippingDetails",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "QuantitativeValue",
+              "SearchAction",
+              "ShippingDeliveryTime",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-TW",
+          "route": "compare",
+          "requestedUrl": "http://svicloud10p.svic.local/zh/compare/",
+          "finalUrl": "http://svicloud10p.svic.local/zh/compare/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-TW",
+          "title": "小雲 15P vs 10P+ vs 10S｜機型規格比較",
+          "titleLength": 28,
+          "description": "比較小雲 15P 已確認規格與 10P+、10S 的硬體、連線、影音支援及銷售狀態。",
+          "descriptionLength": 42,
+          "robots": [
+            "max-image-preview:large",
+            "max-image-preview:large"
+          ],
+          "canonical": [
+            "http://svicloud10p.svic.local/zh/compare/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "http://svicloud10p.svic.local/compare/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "http://svicloud10p.svic.local/zh/compare/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "http://svicloud10p.svic.local/zh-cn/compare/"
+            },
+            {
+              "lang": "x-default",
+              "href": "http://svicloud10p.svic.local/compare/"
+            }
+          ],
+          "social": {
+            "ogTitle": "小雲 15P vs 10P+ vs 10S｜機型規格比較",
+            "ogDescription": "比較小雲 15P 已確認規格與 10P+、10S 的硬體、連線、影音支援及銷售狀態。",
+            "ogUrl": "http://svicloud10p.svic.local/zh/compare/",
+            "ogImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-front.webp",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "小雲 15P vs 10P+ vs 10S｜機型規格比較",
+            "twitterDescription": "比較小雲 15P 已確認規格與 10P+、10S 的硬體、連線、影音支援及銷售狀態。",
+            "twitterImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-front.webp"
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "小雲 15P vs 10P+ vs 10S"
+            },
+            {
+              "level": 2,
+              "text": "比較即將推出的平台與美國現貨機型"
+            },
+            {
+              "level": 3,
+              "text": "Android 14 + 藍牙 5.4"
+            },
+            {
+              "level": 3,
+              "text": "頂級效能"
+            },
+            {
+              "level": 3,
+              "text": "家庭娛樂"
+            },
+            {
+              "level": 3,
+              "text": "聰明首選"
+            },
+            {
+              "level": 2,
+              "text": "購買前最常問的 3 個問題"
+            },
+            {
+              "level": 2,
+              "text": "小雲 15P 電視盒"
+            },
+            {
+              "level": 3,
+              "text": "功能比較"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10P+"
+            },
+            {
+              "level": 3,
+              "text": "功能比較"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10S"
+            },
+            {
+              "level": 3,
+              "text": "功能比較"
+            },
+            {
+              "level": 2,
+              "text": "挑好機型後，後續流程也有在地支援"
+            },
+            {
+              "level": 3,
+              "text": "美國官方銷售通路"
+            },
+            {
+              "level": 3,
+              "text": "內華達州追蹤出貨"
+            },
+            {
+              "level": 3,
+              "text": "雙語安裝協助"
+            },
+            {
+              "level": 3,
+              "text": "購買後仍有保固"
+            },
+            {
+              "level": 3,
+              "text": "從選機到家中安裝"
+            },
+            {
+              "level": 2,
+              "text": "準備好升級家的觀影體驗了嗎？"
+            }
+          ],
+          "wordCount": 416,
+          "images": {
+            "total": 11,
+            "missingAlt": 3,
+            "missingDimensions": 3,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 3,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "http://svicloud10p.svic.local/zh/product/svicloud-15p#product",
+                "name": "SVICLOUD 15P TV Box",
+                "offers": []
+              },
+              {
+                "id": "http://svicloud10p.svic.local/zh/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh/product/svicloud-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "http://svicloud10p.svic.local/zh/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh/product/svicloud-10s/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Brand",
+              "BreadcrumbList",
+              "ContactPoint",
+              "DefinedRegion",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "MerchantReturnPolicy",
+              "MonetaryAmount",
+              "Offer",
+              "OfferShippingDetails",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "QuantitativeValue",
+              "SearchAction",
+              "ShippingDeliveryTime",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-TW",
+          "route": "product-15p",
+          "requestedUrl": "http://svicloud10p.svic.local/zh/product/svicloud-15p/",
+          "finalUrl": "http://svicloud10p.svic.local/zh/product/svicloud-15p/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-TW",
+          "title": "小雲 15P 電視盒規格｜即將推出",
+          "titleLength": 17,
+          "description": "小雲 15P 規格：Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、藍牙 5.4 與 4K HDR；價格與推出日期尚未公布。",
+          "descriptionLength": 93,
+          "robots": [
+            "max-image-preview:large",
+            "max-image-preview:large"
+          ],
+          "canonical": [
+            "http://svicloud10p.svic.local/zh/product/svicloud-15p/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "http://svicloud10p.svic.local/product/svicloud-15p/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "http://svicloud10p.svic.local/zh/product/svicloud-15p/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "http://svicloud10p.svic.local/zh-cn/product/svicloud-15p/"
+            },
+            {
+              "lang": "x-default",
+              "href": "http://svicloud10p.svic.local/product/svicloud-15p/"
+            }
+          ],
+          "social": {
+            "ogTitle": "小雲 15P 電視盒規格｜即將推出",
+            "ogDescription": "小雲 15P 規格：Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、藍牙 5.4 與 4K HDR；價格與推出日期尚未公布。",
+            "ogUrl": "http://svicloud10p.svic.local/zh/product/svicloud-15p/",
+            "ogImage": "http://svicloud10p.svic.local/wp-content/uploads/2026/08/svicloud-15p-front.webp",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "小雲 15P 電視盒規格｜即將推出",
+            "twitterDescription": "小雲 15P 規格：Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、藍牙 5.4 與 4K HDR；價格與推出日期尚未公布。",
+            "twitterImage": "http://svicloud10p.svic.local/wp-content/uploads/2026/08/svicloud-15p-front.webp"
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "小雲 15P 電視盒"
+            },
+            {
+              "level": 2,
+              "text": "Android 14、Wi-Fi 6 與藍牙 5.4"
+            },
+            {
+              "level": 2,
+              "text": "小雲 15P 已確認硬體重點"
+            },
+            {
+              "level": 2,
+              "text": "Description"
+            },
+            {
+              "level": 2,
+              "text": "核心規格"
+            },
+            {
+              "level": 2,
+              "text": "盒內配件"
+            },
+            {
+              "level": 2,
+              "text": "包裝盒內容物"
+            },
+            {
+              "level": 2,
+              "text": "Android 14 與規格表列出的有線、無線連線"
+            },
+            {
+              "level": 2,
+              "text": "小雲 15P vs 10P+ vs 9P"
+            },
+            {
+              "level": 3,
+              "text": "15P vs 10P+"
+            },
+            {
+              "level": 3,
+              "text": "15P vs 9P"
+            },
+            {
+              "level": 3,
+              "text": "比較說明"
+            },
+            {
+              "level": 3,
+              "text": "已確認與尚未公布的資訊"
+            },
+            {
+              "level": 2,
+              "text": "已確認規格與尚未公布的商務資訊"
+            },
+            {
+              "level": 2,
+              "text": "Google 商店評價"
+            }
+          ],
+          "wordCount": 433,
+          "images": {
+            "total": 8,
+            "missingAlt": 0,
+            "missingDimensions": 3,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 4,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "http://svicloud10p.svic.local/zh/product/svicloud-15p#product",
+                "name": "SVICLOUD 15P TV Box",
+                "offers": []
+              }
+            ],
+            "types": [
+              "Answer",
+              "Brand",
+              "BreadcrumbList",
+              "ContactPoint",
+              "FAQPage",
+              "ImageObject",
+              "ListItem",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "Question",
+              "SearchAction",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-CN",
+          "route": "home",
+          "requestedUrl": "http://svicloud10p.svic.local/zh-cn/",
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-CN",
+          "title": "小云盒子美国授权经销｜SVICLOUD 15P 即将上市｜SVICLOUD TV Box US",
+          "titleLength": 47,
+          "description": "小云盒子美国授权经销；SVICLOUD 15P 已公布 Android 14、Amlogic S905Y5、Wi-Fi 6 与蓝牙 5.4 规格，价格与推出日期尚未公布。10P+、10S 现售商品另有美国发货与支持条款。",
+          "descriptionLength": 110,
+          "robots": [
+            "max-image-preview:large",
+            "max-image-preview:large"
+          ],
+          "canonical": [
+            "http://svicloud10p.svic.local/zh-cn/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "http://svicloud10p.svic.local/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "http://svicloud10p.svic.local/zh/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "http://svicloud10p.svic.local/zh-cn/"
+            },
+            {
+              "lang": "x-default",
+              "href": "http://svicloud10p.svic.local/"
+            }
+          ],
+          "social": {
+            "ogTitle": "小云盒子美国授权经销｜SVICLOUD 15P 即将上市｜SVICLOUD TV Box US",
+            "ogDescription": "小云盒子美国授权经销；SVICLOUD 15P 已公布 Android 14、Amlogic S905Y5、Wi-Fi 6 与蓝牙 5.4 规格，价格与推出日期尚未公布。10P+、10S 现售商品另有美国发货与支持条款。",
+            "ogUrl": "http://svicloud10p.svic.local/zh-cn/",
+            "ogImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant.webp",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "小云盒子美国授权经销｜SVICLOUD 15P 即将上市｜SVICLOUD TV Box US",
+            "twitterDescription": "小云盒子美国授权经销；SVICLOUD 15P 已公布 Android 14、Amlogic S905Y5、Wi-Fi 6 与蓝牙 5.4 规格，价格与推出日期尚未公布。10P+、10S 现售商品另有美国发货与支持条款。",
+            "twitterImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant.webp"
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "全新小云 15P 即将登场。亚洲娱乐，重新想象。"
+            },
+            {
+              "level": 2,
+              "text": "Android 14、Wi-Fi 6、4K HDR。"
+            },
+            {
+              "level": 2,
+              "text": "免去水货烦恼。中文或英文礼宾代客设置，内华达 48 小时发货。"
+            },
+            {
+              "level": 2,
+              "text": "包装盒内容物"
+            },
+            {
+              "level": 2,
+              "text": "SVI.STUDIO 官方授权证书"
+            },
+            {
+              "level": 2,
+              "text": "選擇適合您的小雲電視盒設備"
+            },
+            {
+              "level": 3,
+              "text": "小云 15P 电视盒"
+            },
+            {
+              "level": 3,
+              "text": "小雲電視盒 10P+"
+            },
+            {
+              "level": 3,
+              "text": "小雲電視盒 10S"
+            },
+            {
+              "level": 2,
+              "text": "为什么直接在 SVICLOUDTVBOX.US 下单"
+            },
+            {
+              "level": 3,
+              "text": "美国官方授权通路"
+            },
+            {
+              "level": 3,
+              "text": "内华达本地发货"
+            },
+            {
+              "level": 3,
+              "text": "中英双语礼宾"
+            },
+            {
+              "level": 3,
+              "text": "保修与退换货清楚"
+            },
+            {
+              "level": 3,
+              "text": "接下来会发生什么"
+            },
+            {
+              "level": 2,
+              "text": "美加客户最常询问的重点"
+            },
+            {
+              "level": 3,
+              "text": "订单与配送"
+            },
+            {
+              "level": 3,
+              "text": "装置与安装"
+            },
+            {
+              "level": 3,
+              "text": "机型与比较"
+            }
+          ],
+          "wordCount": 449,
+          "images": {
+            "total": 10,
+            "missingAlt": 0,
+            "missingDimensions": 3,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 4,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "http://svicloud10p.svic.local/zh-cn/product/svicloud-15p#product",
+                "name": "SVICLOUD 15P TV Box",
+                "offers": []
+              },
+              {
+                "id": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10p-plus/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              },
+              {
+                "id": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10s/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Answer",
+              "Brand",
+              "ContactPoint",
+              "FAQPage",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "Offer",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "Question",
+              "SearchAction",
+              "SiteNavigationElement",
+              "WebPage",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-CN",
+          "route": "shop",
+          "requestedUrl": "http://svicloud10p.svic.local/zh-cn/shop/",
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/shop/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-CN",
+          "title": "选购小云 15P、10P+ 与 10S 电视盒",
+          "titleLength": 23,
+          "description": "查看小云 15P 已确认规格与即将推出状态，或浏览现有 10P+、10S 与遥控器产品。",
+          "descriptionLength": 44,
+          "robots": [
+            "max-image-preview:large",
+            "max-image-preview:large"
+          ],
+          "canonical": [
+            "http://svicloud10p.svic.local/zh-cn/shop/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "http://svicloud10p.svic.local/shop/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "http://svicloud10p.svic.local/zh/shop/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "http://svicloud10p.svic.local/zh-cn/shop/"
+            },
+            {
+              "lang": "x-default",
+              "href": "http://svicloud10p.svic.local/shop/"
+            }
+          ],
+          "social": {
+            "ogTitle": "选购小云 15P、10P+ 与 10S 电视盒",
+            "ogDescription": "查看小云 15P 已确认规格与即将推出状态，或浏览现有 10P+、10S 与遥控器产品。",
+            "ogUrl": "http://svicloud10p.svic.local/zh-cn/shop/",
+            "ogImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v4.webp",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "选购小云 15P、10P+ 与 10S 电视盒",
+            "twitterDescription": "查看小云 15P 已确认规格与即将推出状态，或浏览现有 10P+、10S 与遥控器产品。",
+            "twitterImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v4.webp"
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "小云电视盒"
+            },
+            {
+              "level": 2,
+              "text": "小云 15P 电视盒"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10P+"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10S"
+            },
+            {
+              "level": 2,
+              "text": "10P+ 蓝牙遥控器"
+            }
+          ],
+          "wordCount": 195,
+          "images": {
+            "total": 9,
+            "missingAlt": 0,
+            "missingDimensions": 4,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 3,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10s/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "http://svicloud10p.svic.local/zh-cn/product/svicloud-bluetooth-remote-10p-plus#product",
+                "name": "Bluetooth TV Remote Control for SVICLOUD 10P+",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "27.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh-cn/product/svicloud-bluetooth-remote-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Brand",
+              "BreadcrumbList",
+              "ContactPoint",
+              "DefinedRegion",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "MerchantReturnPolicy",
+              "MonetaryAmount",
+              "Offer",
+              "OfferShippingDetails",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "QuantitativeValue",
+              "SearchAction",
+              "ShippingDeliveryTime",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-CN",
+          "route": "compare",
+          "requestedUrl": "http://svicloud10p.svic.local/zh-cn/compare/",
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/compare/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-CN",
+          "title": "小云 15P vs 10P+ vs 10S｜机型规格比较",
+          "titleLength": 28,
+          "description": "比较小云 15P 已确认规格与 10P+、10S 的硬件、连接、影音支持及销售状态。",
+          "descriptionLength": 42,
+          "robots": [
+            "max-image-preview:large",
+            "max-image-preview:large"
+          ],
+          "canonical": [
+            "http://svicloud10p.svic.local/zh-cn/compare/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "http://svicloud10p.svic.local/compare/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "http://svicloud10p.svic.local/zh/compare/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "http://svicloud10p.svic.local/zh-cn/compare/"
+            },
+            {
+              "lang": "x-default",
+              "href": "http://svicloud10p.svic.local/compare/"
+            }
+          ],
+          "social": {
+            "ogTitle": "小云 15P vs 10P+ vs 10S｜机型规格比较",
+            "ogDescription": "比较小云 15P 已确认规格与 10P+、10S 的硬件、连接、影音支持及销售状态。",
+            "ogUrl": "http://svicloud10p.svic.local/zh-cn/compare/",
+            "ogImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-front.webp",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "小云 15P vs 10P+ vs 10S｜机型规格比较",
+            "twitterDescription": "比较小云 15P 已确认规格与 10P+、10S 的硬件、连接、影音支持及销售状态。",
+            "twitterImage": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-front.webp"
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "小云 15P vs 10P+ vs 10S"
+            },
+            {
+              "level": 2,
+              "text": "比较即将推出的平台与美国现货机型"
+            },
+            {
+              "level": 3,
+              "text": "Android 14 + 蓝牙 5.4"
+            },
+            {
+              "level": 3,
+              "text": "顶级效能"
+            },
+            {
+              "level": 3,
+              "text": "家庭娱乐"
+            },
+            {
+              "level": 3,
+              "text": "聪明首选"
+            },
+            {
+              "level": 2,
+              "text": "购买前最常问的 3 个问题"
+            },
+            {
+              "level": 2,
+              "text": "小云 15P 电视盒"
+            },
+            {
+              "level": 3,
+              "text": "功能比较"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10P+"
+            },
+            {
+              "level": 3,
+              "text": "功能比较"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10S"
+            },
+            {
+              "level": 3,
+              "text": "功能比较"
+            },
+            {
+              "level": 2,
+              "text": "挑好机型后，后续流程也有本地支援"
+            },
+            {
+              "level": 3,
+              "text": "美国官方销售通路"
+            },
+            {
+              "level": 3,
+              "text": "内华达州追踪发货"
+            },
+            {
+              "level": 3,
+              "text": "双语安装协助"
+            },
+            {
+              "level": 3,
+              "text": "购买后仍有保修"
+            },
+            {
+              "level": 3,
+              "text": "从选机到家中安装"
+            },
+            {
+              "level": 2,
+              "text": "准备好升级家的观影体验了吗？"
+            }
+          ],
+          "wordCount": 416,
+          "images": {
+            "total": 11,
+            "missingAlt": 3,
+            "missingDimensions": 3,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 3,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "http://svicloud10p.svic.local/zh-cn/product/svicloud-15p#product",
+                "name": "SVICLOUD 15P TV Box",
+                "offers": []
+              },
+              {
+                "id": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10s/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Brand",
+              "BreadcrumbList",
+              "ContactPoint",
+              "DefinedRegion",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "MerchantReturnPolicy",
+              "MonetaryAmount",
+              "Offer",
+              "OfferShippingDetails",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "QuantitativeValue",
+              "SearchAction",
+              "ShippingDeliveryTime",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-CN",
+          "route": "product-15p",
+          "requestedUrl": "http://svicloud10p.svic.local/zh-cn/product/svicloud-15p/",
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/product/svicloud-15p/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-CN",
+          "title": "小云 15P 电视盒规格｜即将推出",
+          "titleLength": 17,
+          "description": "小云 15P 规格：Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、蓝牙 5.4 与 4K HDR；价格与推出日期尚未公布。",
+          "descriptionLength": 93,
+          "robots": [
+            "max-image-preview:large",
+            "max-image-preview:large"
+          ],
+          "canonical": [
+            "http://svicloud10p.svic.local/zh-cn/product/svicloud-15p/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "http://svicloud10p.svic.local/product/svicloud-15p/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "http://svicloud10p.svic.local/zh/product/svicloud-15p/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "http://svicloud10p.svic.local/zh-cn/product/svicloud-15p/"
+            },
+            {
+              "lang": "x-default",
+              "href": "http://svicloud10p.svic.local/product/svicloud-15p/"
+            }
+          ],
+          "social": {
+            "ogTitle": "小云 15P 电视盒规格｜即将推出",
+            "ogDescription": "小云 15P 规格：Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、蓝牙 5.4 与 4K HDR；价格与推出日期尚未公布。",
+            "ogUrl": "http://svicloud10p.svic.local/zh-cn/product/svicloud-15p/",
+            "ogImage": "http://svicloud10p.svic.local/wp-content/uploads/2026/08/svicloud-15p-front.webp",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "小云 15P 电视盒规格｜即将推出",
+            "twitterDescription": "小云 15P 规格：Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、蓝牙 5.4 与 4K HDR；价格与推出日期尚未公布。",
+            "twitterImage": "http://svicloud10p.svic.local/wp-content/uploads/2026/08/svicloud-15p-front.webp"
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "小云 15P 电视盒"
+            },
+            {
+              "level": 2,
+              "text": "Android 14、Wi-Fi 6 与蓝牙 5.4"
+            },
+            {
+              "level": 2,
+              "text": "小云 15P 已确认硬件重点"
+            },
+            {
+              "level": 2,
+              "text": "Description"
+            },
+            {
+              "level": 2,
+              "text": "核心规格"
+            },
+            {
+              "level": 2,
+              "text": "盒内配件"
+            },
+            {
+              "level": 2,
+              "text": "包装盒内容物"
+            },
+            {
+              "level": 2,
+              "text": "Android 14 与规格表列出的有线、无线连接"
+            },
+            {
+              "level": 2,
+              "text": "小云 15P vs 10P+ vs 9P"
+            },
+            {
+              "level": 3,
+              "text": "15P vs 10P+"
+            },
+            {
+              "level": 3,
+              "text": "15P vs 9P"
+            },
+            {
+              "level": 3,
+              "text": "比较说明"
+            },
+            {
+              "level": 3,
+              "text": "已确认与尚未公布的信息"
+            },
+            {
+              "level": 2,
+              "text": "已确认规格与尚未公布的商务信息"
+            },
+            {
+              "level": 2,
+              "text": "Google 商店评价"
+            }
+          ],
+          "wordCount": 436,
+          "images": {
+            "total": 8,
+            "missingAlt": 0,
+            "missingDimensions": 3,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 4,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "http://svicloud10p.svic.local/zh-cn/product/svicloud-15p#product",
+                "name": "SVICLOUD 15P TV Box",
+                "offers": []
+              }
+            ],
+            "types": [
+              "Answer",
+              "Brand",
+              "BreadcrumbList",
+              "ContactPoint",
+              "FAQPage",
+              "ImageObject",
+              "ListItem",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "Question",
+              "SearchAction",
+              "WebSite"
+            ]
+          }
+        }
+      ],
+      "infrastructure": {
+        "/robots.txt": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/robots.txt",
+          "text": "User-agent: *\nDisallow: /wp-content/uploads/wc-logs/\nDisallow: /wp-content/uploads/woocommerce_transient_files/\nDisallow: /wp-content/uploads/woocommerce_uploads/\nDisallow: /*?add-to-cart=\nDisallow: /*?*add-to-cart=\nDisallow: /wp-admin/\nAllow: /wp-admin/admin-ajax.php\n\nSitemap: http://svicloud10p.svic.local/wp-sitemap.xml\nSitemap: http://svicloud10p.svic.local/agent-friendly-sitemap.xml\n"
+        },
+        "/sitemap_index.xml": {
+          "status": 404,
+          "finalUrl": "http://svicloud10p.svic.local/sitemap_index.xml",
+          "text": "Skip to main content\nCompare\nShop\nBlog\nGuides\nSetup guide\nAfter setup\nNeed support\nResources\nApp install guide\nTroubleshooting\nFAQ\nAbout\nLegal Disclaimer\nReturn Policy\nOrder Tracking\nEN\n繁\n简\nView Cart\nCart is empty\nOops!\nWe couldn't find that page.\n\nThe link might be outdated or the page is still being built. Explore our products or head back to the homepage.\n\nShop Devices\nReturn Home\nAUTHORIZED U.S. DISTRIBUTOR · NEVADA FULFILLMENT\n\nStream top Chinese and global entertainment with Nevada-based fulfillment and warranty support.\n\nSHIPS FROM THE USA\n1-YEAR U.S. WARRANTY\nENGLISH & 中文 CONCIERGE\n48-HOUR U.S. SHIPPING\n\nMost orders leave our Nevada warehouse within two business days.\n\nAUTHORIZED DEALER\n\nEvery SVICLOUD device is genuine with U.S. warranty support.\n\nBILINGUAL CONCIERGE\n\nLive support in English & 中文 to help you install, stream, and troubleshoot.\n\n© 2026 SVICLOUDTVBOX.US · All rights reserved."
+        }
+      },
+      "homepageInternalLinkChecks": {
+        "http://svicloud10p.svic.local/#main-content": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/#main-content"
+        },
+        "http://svicloud10p.svic.local/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/"
+        },
+        "http://svicloud10p.svic.local/compare/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/compare/"
+        },
+        "http://svicloud10p.svic.local/shop/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/shop/"
+        },
+        "http://svicloud10p.svic.local/blog/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/blog/"
+        },
+        "http://svicloud10p.svic.local/guides/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/guides/"
+        },
+        "http://svicloud10p.svic.local/guides-setup/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/guides-setup/"
+        },
+        "http://svicloud10p.svic.local/guides-after-setup/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/guides-after-setup/"
+        },
+        "http://svicloud10p.svic.local/guides-support/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/guides-support/"
+        },
+        "http://svicloud10p.svic.local/guides-resources/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/guides-resources/"
+        },
+        "http://svicloud10p.svic.local/guides-apps/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/guides-apps/"
+        },
+        "http://svicloud10p.svic.local/guides-troubleshooting/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/guides-troubleshooting/"
+        },
+        "http://svicloud10p.svic.local/faq/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/faq/"
+        },
+        "http://svicloud10p.svic.local/about/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/about/"
+        },
+        "http://svicloud10p.svic.local/legal-disclaimer/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/legal-disclaimer/"
+        },
+        "http://svicloud10p.svic.local/return-policy/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/return-policy/"
+        },
+        "http://svicloud10p.svic.local/order-tracking/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/order-tracking/"
+        },
+        "http://svicloud10p.svic.local/zh/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/"
+        },
+        "http://svicloud10p.svic.local/cart/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/cart/"
+        },
+        "http://svicloud10p.svic.local/product/svicloud-15p/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/product/svicloud-15p/"
+        },
+        "http://svicloud10p.svic.local/product/svicloud-10p-plus/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/product/svicloud-10p-plus/"
+        },
+        "http://svicloud10p.svic.local/#pricing": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/#pricing"
+        },
+        "http://svicloud10p.svic.local/svicloud-tv-box-usa-guide-2026/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/svicloud-tv-box-usa-guide-2026/"
+        },
+        "http://svicloud10p.svic.local/contact/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/contact/"
+        },
+        "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/certification-authorized-dealer.webp": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/images/certification-authorized-dealer.webp"
+        },
+        "http://svicloud10p.svic.local/checkout/?add-to-cart=4471&quantity=1&svic_buynow=1": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/checkout/"
+        },
+        "http://svicloud10p.svic.local/checkout/?add-to-cart=4470&quantity=1&svic_buynow=1": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/checkout/"
+        },
+        "http://svicloud10p.svic.local/product/svicloud-10s/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/product/svicloud-10s/"
+        },
+        "http://svicloud10p.svic.local/support/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/support/"
+        },
+        "http://svicloud10p.svic.local/zh/#main-content": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/#main-content"
+        },
+        "http://svicloud10p.svic.local/zh/compare/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/compare/"
+        },
+        "http://svicloud10p.svic.local/zh/shop/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/shop/"
+        },
+        "http://svicloud10p.svic.local/zh/blog/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/blog/"
+        },
+        "http://svicloud10p.svic.local/zh/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/"
+        },
+        "http://svicloud10p.svic.local/zh/guides-setup/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/guides-setup/"
+        },
+        "http://svicloud10p.svic.local/zh/guides-after-setup/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/guides-after-setup/"
+        },
+        "http://svicloud10p.svic.local/zh/guides-support/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/guides-support/"
+        },
+        "http://svicloud10p.svic.local/zh/guides-resources/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/guides-resources/"
+        },
+        "http://svicloud10p.svic.local/zh/guides-apps/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/guides-apps/"
+        },
+        "http://svicloud10p.svic.local/zh/guides-troubleshooting/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/guides-troubleshooting/"
+        },
+        "http://svicloud10p.svic.local/zh/faq/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/faq/"
+        },
+        "http://svicloud10p.svic.local/zh/about/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/about/"
+        },
+        "http://svicloud10p.svic.local/zh/legal-disclaimer/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/legal-disclaimer/"
+        },
+        "http://svicloud10p.svic.local/zh/return-policy/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/return-policy/"
+        },
+        "http://svicloud10p.svic.local/zh/order-tracking/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/order-tracking/"
+        },
+        "http://svicloud10p.svic.local/zh/cart/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/cart/"
+        },
+        "http://svicloud10p.svic.local/zh/product/svicloud-15p/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/product/svicloud-15p/"
+        },
+        "http://svicloud10p.svic.local/zh/product/svicloud-10p-plus/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/product/svicloud-10p-plus/"
+        },
+        "http://svicloud10p.svic.local/zh/#pricing": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/#pricing"
+        },
+        "http://svicloud10p.svic.local/zh/svicloud-tv-box-usa-guide-2026/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/svicloud-tv-box-usa-guide-2026/"
+        },
+        "http://svicloud10p.svic.local/zh/contact/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/contact/"
+        },
+        "http://svicloud10p.svic.local/zh/checkout/?add-to-cart=4471&quantity=1&svic_buynow=1": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/checkout/"
+        },
+        "http://svicloud10p.svic.local/zh/checkout/?add-to-cart=4470&quantity=1&svic_buynow=1": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/checkout/"
+        },
+        "http://svicloud10p.svic.local/zh/product/svicloud-10s/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/product/svicloud-10s/"
+        },
+        "http://svicloud10p.svic.local/zh/support/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh/support/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/#main-content": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/#main-content"
+        },
+        "http://svicloud10p.svic.local/zh-cn/compare/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/compare/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/shop/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/shop/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/blog/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/blog/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/guides-setup/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/guides-setup/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/guides-after-setup/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/guides-after-setup/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/guides-support/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/guides-support/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/guides-resources/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/guides-resources/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/guides-apps/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/guides-apps/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/guides-troubleshooting/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/guides-troubleshooting/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/faq/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/faq/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/about/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/about/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/legal-disclaimer/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/legal-disclaimer/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/return-policy/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/return-policy/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/order-tracking/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/order-tracking/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/cart/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/cart/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/product/svicloud-15p/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/product/svicloud-15p/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/product/svicloud-10p-plus/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10p-plus/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/#pricing": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/#pricing"
+        },
+        "http://svicloud10p.svic.local/zh-cn/svicloud-tv-box-usa-guide-2026/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/svicloud-tv-box-usa-guide-2026/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/contact/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/contact/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/checkout/?add-to-cart=4471&quantity=1&svic_buynow=1": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/checkout/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/checkout/?add-to-cart=4470&quantity=1&svic_buynow=1": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/checkout/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/product/svicloud-10s/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/product/svicloud-10s/"
+        },
+        "http://svicloud10p.svic.local/zh-cn/support/": {
+          "status": 200,
+          "finalUrl": "http://svicloud10p.svic.local/zh-cn/support/"
+        }
+      },
+      "lighthouse": {
+        "desktop": {
+          "runtimeError": null,
+          "runtimeErrorMessage": null,
+          "seo": 100,
+          "performance": 96,
+          "fcp": "0.9 s",
+          "lcp": "0.9 s",
+          "cls": "0.089",
+          "tbt": "0 ms"
+        },
+        "mobile": {
+          "runtimeError": null,
+          "runtimeErrorMessage": null,
+          "seo": 100,
+          "performance": 83,
+          "fcp": "1.9 s",
+          "lcp": "2.9 s",
+          "cls": "0.047",
+          "tbt": "410 ms"
+        }
+      }
+    },
+    "production": {
+      "pages": [
+        {
+          "locale": "en",
+          "route": "home",
+          "requestedUrl": "https://svicloudtvbox.us/",
+          "finalUrl": "https://svicloudtvbox.us/",
+          "status": 200,
+          "errors": [],
+          "lang": "en-US",
+          "title": "小雲盒子 美國授權經銷 | SVICLOUD TV Box US Dealer",
+          "titleLength": 39,
+          "description": "Buy 小雲盒子 in the USA from an authorized SVICLOUD dealer. Shop SVICLOUD 10P+ and 10S with U.S. shipping, warranty, and bilingual English/中文 support.",
+          "descriptionLength": 146,
+          "robots": [
+            "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+          ],
+          "canonical": [
+            "https://svicloudtvbox.us/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "https://svicloudtvbox.us/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "https://svicloudtvbox.us/zh/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "https://svicloudtvbox.us/zh-cn/"
+            },
+            {
+              "lang": "x-default",
+              "href": "https://svicloudtvbox.us/"
+            }
+          ],
+          "social": {
+            "ogTitle": "小雲盒子 美國授權經銷 | SVICLOUD TV Box US Dealer",
+            "ogDescription": "Buy 小雲盒子 in the USA from an authorized SVICLOUD dealer. Shop SVICLOUD 10P+ and 10S with U.S. shipping, warranty, and bilingual English/中文 support.",
+            "ogUrl": "https://svicloudtvbox.us/",
+            "ogImage": "",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "小雲盒子 美國授權經銷 | SVICLOUD TV Box US Dealer",
+            "twitterDescription": "Buy 小雲盒子 in the USA from an authorized SVICLOUD dealer. Shop SVICLOUD 10P+ and 10S with U.S. shipping, warranty, and bilingual English/中文 support.",
+            "twitterImage": ""
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "Best SVICLOUD TV Boxes for U.S. Chinese Families in 2026 — Fast U.S. Shipping, Warranty, and Bilingual Setup Help"
+            },
+            {
+              "level": 2,
+              "text": "Skip the import hassle. Get your SVICLOUD set up in 中文 or English, shipped from Nevada in 48 hours."
+            },
+            {
+              "level": 2,
+              "text": "What's in the Box"
+            },
+            {
+              "level": 2,
+              "text": "SVI.STUDIO Authorized Dealer Certification"
+            },
+            {
+              "level": 2,
+              "text": "Why SVICLOUD Beats Generic Streaming Boxes"
+            },
+            {
+              "level": 3,
+              "text": "Complete Entertainment"
+            },
+            {
+              "level": 3,
+              "text": "Next-Gen Hardware"
+            },
+            {
+              "level": 3,
+              "text": "Local Expert Support"
+            },
+            {
+              "level": 2,
+              "text": "White-Glove Concierge From Setup To Streaming Night"
+            },
+            {
+              "level": 3,
+              "text": "What We Handle For You"
+            },
+            {
+              "level": 2,
+              "text": "Choose Your SVICLOUD Device"
+            },
+            {
+              "level": 3,
+              "text": "SVICLOUD 10P+"
+            },
+            {
+              "level": 3,
+              "text": "SVICLOUD 10S"
+            },
+            {
+              "level": 2,
+              "text": "Why order direct from SVICLOUDTVBOX.US"
+            },
+            {
+              "level": 3,
+              "text": "Official U.S. dealer"
+            },
+            {
+              "level": 3,
+              "text": "Nevada fulfillment"
+            },
+            {
+              "level": 3,
+              "text": "English & 中文 help"
+            },
+            {
+              "level": 3,
+              "text": "Warranty + returns clarity"
+            },
+            {
+              "level": 3,
+              "text": "What happens next"
+            },
+            {
+              "level": 2,
+              "text": "Top questions from U.S. & Canada buyers"
+            },
+            {
+              "level": 3,
+              "text": "Orders & shipping"
+            },
+            {
+              "level": 3,
+              "text": "Device & setup"
+            },
+            {
+              "level": 3,
+              "text": "Models & comparisons"
+            }
+          ],
+          "wordCount": 572,
+          "images": {
+            "total": 20,
+            "missingAlt": 0,
+            "missingDimensions": 14,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 2,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "https://svicloudtvbox.us/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/product/svicloud-10p-plus/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/product/svicloud-10s/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Answer",
+              "Brand",
+              "ContactPoint",
+              "ElectronicsStore",
+              "FAQPage",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "Offer",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "Question",
+              "SearchAction",
+              "SiteNavigationElement",
+              "WebPage",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "en",
+          "route": "shop",
+          "requestedUrl": "https://svicloudtvbox.us/shop/",
+          "finalUrl": "https://svicloudtvbox.us/shop/",
+          "status": 200,
+          "errors": [],
+          "lang": "en-US",
+          "title": "Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨",
+          "titleLength": 34,
+          "description": "SVICLOUD 10P+ and 10S Android TV boxes, authorized U.S. dealer, fast shipping, 1-year warranty. 小雲盒子 美國現貨保固。",
+          "descriptionLength": 108,
+          "robots": [
+            "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+          ],
+          "canonical": [
+            "https://svicloudtvbox.us/shop/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "https://svicloudtvbox.us/shop/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "https://svicloudtvbox.us/zh/shop/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "https://svicloudtvbox.us/zh-cn/shop/"
+            },
+            {
+              "lang": "x-default",
+              "href": "https://svicloudtvbox.us/shop/"
+            }
+          ],
+          "social": {
+            "ogTitle": "Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨",
+            "ogDescription": "SVICLOUD 10P+ and 10S Android TV boxes, authorized U.S. dealer, fast shipping, 1-year warranty. 小雲盒子 美國現貨保固。",
+            "ogUrl": "https://svicloudtvbox.us/shop/",
+            "ogImage": "",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨",
+            "twitterDescription": "SVICLOUD 10P+ and 10S Android TV boxes, authorized U.S. dealer, fast shipping, 1-year warranty. 小雲盒子 美國現貨保固。",
+            "twitterImage": ""
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "SVICLOUD TV Boxes"
+            },
+            {
+              "level": 2,
+              "text": "Replacement remotes and add-ons"
+            },
+            {
+              "level": 3,
+              "text": "Bluetooth TV Remote Control for SVICLOUD 10P+"
+            },
+            {
+              "level": 2,
+              "text": "SVICLOUD 10P+"
+            },
+            {
+              "level": 2,
+              "text": "SVICLOUD 10S"
+            }
+          ],
+          "wordCount": 461,
+          "images": {
+            "total": 9,
+            "missingAlt": 1,
+            "missingDimensions": 3,
+            "failed": 1
+          },
+          "jsonLd": {
+            "blocks": 3,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "https://svicloudtvbox.us/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/product/svicloud-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/product/svicloud-10s/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/product/svicloud-bluetooth-remote-10p-plus#product",
+                "name": "Bluetooth TV Remote Control for SVICLOUD 10P+",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "27.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/product/svicloud-bluetooth-remote-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Brand",
+              "BreadcrumbList",
+              "CollectionPage",
+              "DefinedRegion",
+              "ElectronicsStore",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "MerchantReturnPolicy",
+              "MonetaryAmount",
+              "Offer",
+              "OfferShippingDetails",
+              "Product",
+              "QuantitativeValue",
+              "ShippingDeliveryTime",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "en",
+          "route": "compare",
+          "requestedUrl": "https://svicloudtvbox.us/compare/",
+          "finalUrl": "https://svicloudtvbox.us/compare/",
+          "status": 200,
+          "errors": [],
+          "lang": "en-US",
+          "title": "小雲盒子 10P+ 和 10S 比較 | SVICLOUD USA",
+          "titleLength": 33,
+          "description": "Compare 小雲盒子 10P+ and 10S side-by-side for U.S. buyers. Review specs, storage, karaoke features, and pricing to choose the best model for your home.",
+          "descriptionLength": 148,
+          "robots": [
+            "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+          ],
+          "canonical": [
+            "https://svicloudtvbox.us/compare/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "https://svicloudtvbox.us/compare/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "https://svicloudtvbox.us/zh/compare/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "https://svicloudtvbox.us/zh-cn/compare/"
+            },
+            {
+              "lang": "x-default",
+              "href": "https://svicloudtvbox.us/compare/"
+            }
+          ],
+          "social": {
+            "ogTitle": "小雲盒子 10P+ 和 10S 比較 | SVICLOUD USA",
+            "ogDescription": "Compare 小雲盒子 10P+ and 10S side-by-side for U.S. buyers. Review specs, storage, karaoke features, and pricing to choose the best model for your home.",
+            "ogUrl": "https://svicloudtvbox.us/compare/",
+            "ogImage": "",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "小雲盒子 10P+ 和 10S 比較 | SVICLOUD USA",
+            "twitterDescription": "Compare 小雲盒子 10P+ and 10S side-by-side for U.S. buyers. Review specs, storage, karaoke features, and pricing to choose the best model for your home.",
+            "twitterImage": ""
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "SVICLOUD 10P+ vs 10S — 2026 Model Comparison"
+            },
+            {
+              "level": 2,
+              "text": "Bilingual U.S. support, 48-hour shipping, and warranty on both models"
+            },
+            {
+              "level": 3,
+              "text": "Premium Performance"
+            },
+            {
+              "level": 3,
+              "text": "Family Entertainment"
+            },
+            {
+              "level": 3,
+              "text": "Smart Value"
+            },
+            {
+              "level": 2,
+              "text": "Top questions before you buy"
+            },
+            {
+              "level": 2,
+              "text": "SVICLOUD 10P+"
+            },
+            {
+              "level": 3,
+              "text": "Feature Comparison"
+            },
+            {
+              "level": 2,
+              "text": "SVICLOUD 10S"
+            },
+            {
+              "level": 3,
+              "text": "Feature Comparison"
+            },
+            {
+              "level": 2,
+              "text": "Pick your model, then order with local support"
+            },
+            {
+              "level": 3,
+              "text": "Official U.S. storefront"
+            },
+            {
+              "level": 3,
+              "text": "Tracked Nevada shipping"
+            },
+            {
+              "level": 3,
+              "text": "Bilingual setup help"
+            },
+            {
+              "level": 3,
+              "text": "Warranty-backed purchase"
+            },
+            {
+              "level": 3,
+              "text": "From model choice to living-room setup"
+            },
+            {
+              "level": 2,
+              "text": "Ready to upgrade your home viewing experience?"
+            }
+          ],
+          "wordCount": 891,
+          "images": {
+            "total": 10,
+            "missingAlt": 3,
+            "missingDimensions": 3,
+            "failed": 1
+          },
+          "jsonLd": {
+            "blocks": 3,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "https://svicloudtvbox.us/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/product/svicloud-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/product/svicloud-10s/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Brand",
+              "BreadcrumbList",
+              "DefinedRegion",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "MerchantReturnPolicy",
+              "MonetaryAmount",
+              "Offer",
+              "OfferShippingDetails",
+              "Product",
+              "QuantitativeValue",
+              "ShippingDeliveryTime"
+            ]
+          }
+        },
+        {
+          "locale": "en",
+          "route": "product-15p",
+          "requestedUrl": "https://svicloudtvbox.us/product/svicloud-15p/",
+          "finalUrl": "https://svicloudtvbox.us/",
+          "status": 200,
+          "errors": [],
+          "lang": "en-US",
+          "title": "小雲盒子 美國授權經銷 | SVICLOUD TV Box US Dealer",
+          "titleLength": 39,
+          "description": "Buy 小雲盒子 in the USA from an authorized SVICLOUD dealer. Shop SVICLOUD 10P+ and 10S with U.S. shipping, warranty, and bilingual English/中文 support.",
+          "descriptionLength": 146,
+          "robots": [
+            "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+          ],
+          "canonical": [
+            "https://svicloudtvbox.us/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "https://svicloudtvbox.us/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "https://svicloudtvbox.us/zh/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "https://svicloudtvbox.us/zh-cn/"
+            },
+            {
+              "lang": "x-default",
+              "href": "https://svicloudtvbox.us/"
+            }
+          ],
+          "social": {
+            "ogTitle": "小雲盒子 美國授權經銷 | SVICLOUD TV Box US Dealer",
+            "ogDescription": "Buy 小雲盒子 in the USA from an authorized SVICLOUD dealer. Shop SVICLOUD 10P+ and 10S with U.S. shipping, warranty, and bilingual English/中文 support.",
+            "ogUrl": "https://svicloudtvbox.us/",
+            "ogImage": "",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "小雲盒子 美國授權經銷 | SVICLOUD TV Box US Dealer",
+            "twitterDescription": "Buy 小雲盒子 in the USA from an authorized SVICLOUD dealer. Shop SVICLOUD 10P+ and 10S with U.S. shipping, warranty, and bilingual English/中文 support.",
+            "twitterImage": ""
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "Best SVICLOUD TV Boxes for U.S. Chinese Families in 2026 — Fast U.S. Shipping, Warranty, and Bilingual Setup Help"
+            },
+            {
+              "level": 2,
+              "text": "Skip the import hassle. Get your SVICLOUD set up in 中文 or English, shipped from Nevada in 48 hours."
+            },
+            {
+              "level": 2,
+              "text": "What's in the Box"
+            },
+            {
+              "level": 2,
+              "text": "SVI.STUDIO Authorized Dealer Certification"
+            },
+            {
+              "level": 2,
+              "text": "Why SVICLOUD Beats Generic Streaming Boxes"
+            },
+            {
+              "level": 3,
+              "text": "Complete Entertainment"
+            },
+            {
+              "level": 3,
+              "text": "Next-Gen Hardware"
+            },
+            {
+              "level": 3,
+              "text": "Local Expert Support"
+            },
+            {
+              "level": 2,
+              "text": "White-Glove Concierge From Setup To Streaming Night"
+            },
+            {
+              "level": 3,
+              "text": "What We Handle For You"
+            },
+            {
+              "level": 2,
+              "text": "Choose Your SVICLOUD Device"
+            },
+            {
+              "level": 3,
+              "text": "SVICLOUD 10P+"
+            },
+            {
+              "level": 3,
+              "text": "SVICLOUD 10S"
+            },
+            {
+              "level": 2,
+              "text": "Why order direct from SVICLOUDTVBOX.US"
+            },
+            {
+              "level": 3,
+              "text": "Official U.S. dealer"
+            },
+            {
+              "level": 3,
+              "text": "Nevada fulfillment"
+            },
+            {
+              "level": 3,
+              "text": "English & 中文 help"
+            },
+            {
+              "level": 3,
+              "text": "Warranty + returns clarity"
+            },
+            {
+              "level": 3,
+              "text": "What happens next"
+            },
+            {
+              "level": 2,
+              "text": "Top questions from U.S. & Canada buyers"
+            },
+            {
+              "level": 3,
+              "text": "Orders & shipping"
+            },
+            {
+              "level": 3,
+              "text": "Device & setup"
+            },
+            {
+              "level": 3,
+              "text": "Models & comparisons"
+            }
+          ],
+          "wordCount": 572,
+          "images": {
+            "total": 21,
+            "missingAlt": 1,
+            "missingDimensions": 14,
+            "failed": 1
+          },
+          "jsonLd": {
+            "blocks": 2,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "https://svicloudtvbox.us/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/product/svicloud-10p-plus/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/product/svicloud-10s/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Answer",
+              "Brand",
+              "ContactPoint",
+              "ElectronicsStore",
+              "FAQPage",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "Offer",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "Question",
+              "SearchAction",
+              "SiteNavigationElement",
+              "WebPage",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-TW",
+          "route": "home",
+          "requestedUrl": "https://svicloudtvbox.us/zh/",
+          "finalUrl": "https://svicloudtvbox.us/zh/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-TW",
+          "title": "小雲盒子美國授權經銷｜SVICLOUD TV Box US 美國購買",
+          "titleLength": 34,
+          "description": "小雲盒子美國授權經銷，提供 SVICLOUD 10P+、10S 美國現貨、美國購買、快速出貨、1 年保固與 English/中文 禮賓支援。",
+          "descriptionLength": 70,
+          "robots": [
+            "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+          ],
+          "canonical": [
+            "https://svicloudtvbox.us/zh/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "https://svicloudtvbox.us/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "https://svicloudtvbox.us/zh/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "https://svicloudtvbox.us/zh-cn/"
+            },
+            {
+              "lang": "x-default",
+              "href": "https://svicloudtvbox.us/"
+            }
+          ],
+          "social": {
+            "ogTitle": "小雲盒子美國授權經銷｜SVICLOUD TV Box US 美國購買",
+            "ogDescription": "小雲盒子美國授權經銷，提供 SVICLOUD 10P+、10S 美國現貨、美國購買、快速出貨、1 年保固與 English/中文 禮賓支援。",
+            "ogUrl": "https://svicloudtvbox.us/zh/",
+            "ogImage": "",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "小雲盒子美國授權經銷｜SVICLOUD TV Box US 美國購買",
+            "twitterDescription": "小雲盒子美國授權經銷，提供 SVICLOUD 10P+、10S 美國現貨、美國購買、快速出貨、1 年保固與 English/中文 禮賓支援。",
+            "twitterImage": ""
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "2026 美國華人家庭的高階小雲電視盒 — 美國快速出貨、保固與中英雙語設定協助"
+            },
+            {
+              "level": 2,
+              "text": "免去水貨煩惱。中文或英文禮賓代客設定，內華達 48 小時出貨。"
+            },
+            {
+              "level": 2,
+              "text": "包裝盒內容物"
+            },
+            {
+              "level": 2,
+              "text": "SVI.STUDIO 官方授權證書"
+            },
+            {
+              "level": 2,
+              "text": "為什麼小雲電視盒勝過一般串流盒"
+            },
+            {
+              "level": 3,
+              "text": "全方位娛樂"
+            },
+            {
+              "level": 3,
+              "text": "新世代硬體"
+            },
+            {
+              "level": 3,
+              "text": "在地專家支援"
+            },
+            {
+              "level": 2,
+              "text": "從安裝到觀影夜晚的全程禮賓服務"
+            },
+            {
+              "level": 3,
+              "text": "我們替您處理"
+            },
+            {
+              "level": 2,
+              "text": "選擇適合您的小雲電視盒設備"
+            },
+            {
+              "level": 3,
+              "text": "小雲電視盒 10P+"
+            },
+            {
+              "level": 3,
+              "text": "小雲電視盒 10S"
+            },
+            {
+              "level": 2,
+              "text": "為什麼直接在 SVICLOUDTVBOX.US 下單"
+            },
+            {
+              "level": 3,
+              "text": "美國官方授權通路"
+            },
+            {
+              "level": 3,
+              "text": "內華達在地出貨"
+            },
+            {
+              "level": 3,
+              "text": "中英雙語禮賓"
+            },
+            {
+              "level": 3,
+              "text": "保固與退換貨清楚"
+            },
+            {
+              "level": 3,
+              "text": "接下來會發生什麼"
+            },
+            {
+              "level": 2,
+              "text": "美加客戶最常詢問的重點"
+            },
+            {
+              "level": 3,
+              "text": "訂單與配送"
+            },
+            {
+              "level": 3,
+              "text": "裝置與安裝"
+            },
+            {
+              "level": 3,
+              "text": "機型與比較"
+            }
+          ],
+          "wordCount": 301,
+          "images": {
+            "total": 20,
+            "missingAlt": 0,
+            "missingDimensions": 14,
+            "failed": 0
+          },
+          "jsonLd": {
+            "blocks": 2,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "https://svicloudtvbox.us/zh/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh/product/svicloud-10p-plus/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/zh/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh/product/svicloud-10s/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Answer",
+              "Brand",
+              "ContactPoint",
+              "ElectronicsStore",
+              "FAQPage",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "Offer",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "Question",
+              "SearchAction",
+              "SiteNavigationElement",
+              "WebPage",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-TW",
+          "route": "shop",
+          "requestedUrl": "https://svicloudtvbox.us/zh/shop/",
+          "finalUrl": "https://svicloudtvbox.us/zh/shop/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-TW",
+          "title": "Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨",
+          "titleLength": 34,
+          "description": "SVICLOUD 10P+ and 10S with U.S. warranty, fast shipping, and concierge support. 小雲盒子 美國現貨保固。",
+          "descriptionLength": 92,
+          "robots": [
+            "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+          ],
+          "canonical": [
+            "https://svicloudtvbox.us/zh/shop/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "https://svicloudtvbox.us/shop/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "https://svicloudtvbox.us/zh/shop/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "https://svicloudtvbox.us/zh-cn/shop/"
+            },
+            {
+              "lang": "x-default",
+              "href": "https://svicloudtvbox.us/shop/"
+            }
+          ],
+          "social": {
+            "ogTitle": "Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨",
+            "ogDescription": "SVICLOUD 10P+ and 10S with U.S. warranty, fast shipping, and concierge support. 小雲盒子 美國現貨保固。",
+            "ogUrl": "https://svicloudtvbox.us/zh/shop/",
+            "ogImage": "",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨",
+            "twitterDescription": "SVICLOUD 10P+ and 10S with U.S. warranty, fast shipping, and concierge support. 小雲盒子 美國現貨保固。",
+            "twitterImage": ""
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "小雲電視盒"
+            },
+            {
+              "level": 2,
+              "text": "Replacement remotes and add-ons"
+            },
+            {
+              "level": 3,
+              "text": "Bluetooth TV Remote Control for SVICLOUD 10P+"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10P+"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10S"
+            }
+          ],
+          "wordCount": 269,
+          "images": {
+            "total": 9,
+            "missingAlt": 1,
+            "missingDimensions": 3,
+            "failed": 1
+          },
+          "jsonLd": {
+            "blocks": 3,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "https://svicloudtvbox.us/zh/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh/product/svicloud-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/zh/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh/product/svicloud-10s/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/zh/product/svicloud-bluetooth-remote-10p-plus#product",
+                "name": "Bluetooth TV Remote Control for SVICLOUD 10P+",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "27.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh/product/svicloud-bluetooth-remote-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Brand",
+              "BreadcrumbList",
+              "CollectionPage",
+              "DefinedRegion",
+              "ElectronicsStore",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "MerchantReturnPolicy",
+              "MonetaryAmount",
+              "Offer",
+              "OfferShippingDetails",
+              "Product",
+              "QuantitativeValue",
+              "ShippingDeliveryTime",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-TW",
+          "route": "compare",
+          "requestedUrl": "https://svicloudtvbox.us/zh/compare/",
+          "finalUrl": "https://svicloudtvbox.us/zh/compare/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-TW",
+          "title": "SVICLOUD 10P+ Vs 10S | 小雲盒子 型號比較",
+          "titleLength": 32,
+          "description": "Compare SVICLOUD 10P+ and 10S specs, storage, and features. 小雲盒子 型號規格比較。",
+          "descriptionLength": 72,
+          "robots": [
+            "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+          ],
+          "canonical": [
+            "https://svicloudtvbox.us/zh/compare/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "https://svicloudtvbox.us/compare/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "https://svicloudtvbox.us/zh/compare/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "https://svicloudtvbox.us/zh-cn/compare/"
+            },
+            {
+              "lang": "x-default",
+              "href": "https://svicloudtvbox.us/compare/"
+            }
+          ],
+          "social": {
+            "ogTitle": "SVICLOUD 10P+ vs 10S | 小雲盒子 型號比較",
+            "ogDescription": "Compare SVICLOUD 10P+ and 10S specs, storage, and features. 小雲盒子 型號規格比較。",
+            "ogUrl": "https://svicloudtvbox.us/zh/compare/",
+            "ogImage": "",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "SVICLOUD 10P+ vs 10S | 小雲盒子 型號比較",
+            "twitterDescription": "Compare SVICLOUD 10P+ and 10S specs, storage, and features. 小雲盒子 型號規格比較。",
+            "twitterImage": ""
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "小雲電視盒 10P+ 與 10S 2026 比較"
+            },
+            {
+              "level": 2,
+              "text": "雙語客服、48 小時出貨、完整保固（兩款皆適用）"
+            },
+            {
+              "level": 3,
+              "text": "頂級效能"
+            },
+            {
+              "level": 3,
+              "text": "家庭娛樂"
+            },
+            {
+              "level": 3,
+              "text": "聰明首選"
+            },
+            {
+              "level": 2,
+              "text": "購買前最常問的 3 個問題"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10P+"
+            },
+            {
+              "level": 3,
+              "text": "功能比較"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10S"
+            },
+            {
+              "level": 3,
+              "text": "功能比較"
+            },
+            {
+              "level": 2,
+              "text": "挑好機型後，後續流程也有在地支援"
+            },
+            {
+              "level": 3,
+              "text": "美國官方銷售通路"
+            },
+            {
+              "level": 3,
+              "text": "內華達州追蹤出貨"
+            },
+            {
+              "level": 3,
+              "text": "雙語安裝協助"
+            },
+            {
+              "level": 3,
+              "text": "購買後仍有保固"
+            },
+            {
+              "level": 3,
+              "text": "從選機到家中安裝"
+            },
+            {
+              "level": 2,
+              "text": "準備好升級家的觀影體驗了嗎？"
+            }
+          ],
+          "wordCount": 380,
+          "images": {
+            "total": 10,
+            "missingAlt": 3,
+            "missingDimensions": 3,
+            "failed": 1
+          },
+          "jsonLd": {
+            "blocks": 3,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "https://svicloudtvbox.us/zh/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh/product/svicloud-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/zh/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh/product/svicloud-10s/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Brand",
+              "BreadcrumbList",
+              "DefinedRegion",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "MerchantReturnPolicy",
+              "MonetaryAmount",
+              "Offer",
+              "OfferShippingDetails",
+              "Product",
+              "QuantitativeValue",
+              "ShippingDeliveryTime"
+            ]
+          }
+        },
+        {
+          "locale": "zh-TW",
+          "route": "product-15p",
+          "requestedUrl": "https://svicloudtvbox.us/zh/product/svicloud-15p/",
+          "finalUrl": "https://svicloudtvbox.us/",
+          "status": 200,
+          "errors": [],
+          "lang": "en-US",
+          "title": "小雲盒子 美國授權經銷 | SVICLOUD TV Box US Dealer",
+          "titleLength": 39,
+          "description": "Buy 小雲盒子 in the USA from an authorized SVICLOUD dealer. Shop SVICLOUD 10P+ and 10S with U.S. shipping, warranty, and bilingual English/中文 support.",
+          "descriptionLength": 146,
+          "robots": [
+            "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+          ],
+          "canonical": [
+            "https://svicloudtvbox.us/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "https://svicloudtvbox.us/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "https://svicloudtvbox.us/zh/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "https://svicloudtvbox.us/zh-cn/"
+            },
+            {
+              "lang": "x-default",
+              "href": "https://svicloudtvbox.us/"
+            }
+          ],
+          "social": {
+            "ogTitle": "小雲盒子 美國授權經銷 | SVICLOUD TV Box US Dealer",
+            "ogDescription": "Buy 小雲盒子 in the USA from an authorized SVICLOUD dealer. Shop SVICLOUD 10P+ and 10S with U.S. shipping, warranty, and bilingual English/中文 support.",
+            "ogUrl": "https://svicloudtvbox.us/",
+            "ogImage": "",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "小雲盒子 美國授權經銷 | SVICLOUD TV Box US Dealer",
+            "twitterDescription": "Buy 小雲盒子 in the USA from an authorized SVICLOUD dealer. Shop SVICLOUD 10P+ and 10S with U.S. shipping, warranty, and bilingual English/中文 support.",
+            "twitterImage": ""
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "Best SVICLOUD TV Boxes for U.S. Chinese Families in 2026 — Fast U.S. Shipping, Warranty, and Bilingual Setup Help"
+            },
+            {
+              "level": 2,
+              "text": "Skip the import hassle. Get your SVICLOUD set up in 中文 or English, shipped from Nevada in 48 hours."
+            },
+            {
+              "level": 2,
+              "text": "What's in the Box"
+            },
+            {
+              "level": 2,
+              "text": "SVI.STUDIO Authorized Dealer Certification"
+            },
+            {
+              "level": 2,
+              "text": "Why SVICLOUD Beats Generic Streaming Boxes"
+            },
+            {
+              "level": 3,
+              "text": "Complete Entertainment"
+            },
+            {
+              "level": 3,
+              "text": "Next-Gen Hardware"
+            },
+            {
+              "level": 3,
+              "text": "Local Expert Support"
+            },
+            {
+              "level": 2,
+              "text": "White-Glove Concierge From Setup To Streaming Night"
+            },
+            {
+              "level": 3,
+              "text": "What We Handle For You"
+            },
+            {
+              "level": 2,
+              "text": "Choose Your SVICLOUD Device"
+            },
+            {
+              "level": 3,
+              "text": "SVICLOUD 10P+"
+            },
+            {
+              "level": 3,
+              "text": "SVICLOUD 10S"
+            },
+            {
+              "level": 2,
+              "text": "Why order direct from SVICLOUDTVBOX.US"
+            },
+            {
+              "level": 3,
+              "text": "Official U.S. dealer"
+            },
+            {
+              "level": 3,
+              "text": "Nevada fulfillment"
+            },
+            {
+              "level": 3,
+              "text": "English & 中文 help"
+            },
+            {
+              "level": 3,
+              "text": "Warranty + returns clarity"
+            },
+            {
+              "level": 3,
+              "text": "What happens next"
+            },
+            {
+              "level": 2,
+              "text": "Top questions from U.S. & Canada buyers"
+            },
+            {
+              "level": 3,
+              "text": "Orders & shipping"
+            },
+            {
+              "level": 3,
+              "text": "Device & setup"
+            },
+            {
+              "level": 3,
+              "text": "Models & comparisons"
+            }
+          ],
+          "wordCount": 572,
+          "images": {
+            "total": 21,
+            "missingAlt": 1,
+            "missingDimensions": 14,
+            "failed": 1
+          },
+          "jsonLd": {
+            "blocks": 2,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "https://svicloudtvbox.us/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/product/svicloud-10p-plus/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/product/svicloud-10s/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Answer",
+              "Brand",
+              "ContactPoint",
+              "ElectronicsStore",
+              "FAQPage",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "Offer",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "Question",
+              "SearchAction",
+              "SiteNavigationElement",
+              "WebPage",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-CN",
+          "route": "home",
+          "requestedUrl": "https://svicloudtvbox.us/zh-cn/",
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-CN",
+          "title": "小雲盒子美國授權經銷｜SVICLOUD TV Box US 美國購買",
+          "titleLength": 34,
+          "description": "小雲盒子美國授權經銷，提供 SVICLOUD 10P+、10S 美國現貨、美國購買、快速出貨、1 年保固與 English/中文 禮賓支援。",
+          "descriptionLength": 70,
+          "robots": [
+            "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+          ],
+          "canonical": [
+            "https://svicloudtvbox.us/zh-cn/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "https://svicloudtvbox.us/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "https://svicloudtvbox.us/zh/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "https://svicloudtvbox.us/zh-cn/"
+            },
+            {
+              "lang": "x-default",
+              "href": "https://svicloudtvbox.us/"
+            }
+          ],
+          "social": {
+            "ogTitle": "小雲盒子美國授權經銷｜SVICLOUD TV Box US 美國購買",
+            "ogDescription": "小雲盒子美國授權經銷，提供 SVICLOUD 10P+、10S 美國現貨、美國購買、快速出貨、1 年保固與 English/中文 禮賓支援。",
+            "ogUrl": "https://svicloudtvbox.us/zh-cn/",
+            "ogImage": "",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "小雲盒子美國授權經銷｜SVICLOUD TV Box US 美國購買",
+            "twitterDescription": "小雲盒子美國授權經銷，提供 SVICLOUD 10P+、10S 美國現貨、美國購買、快速出貨、1 年保固與 English/中文 禮賓支援。",
+            "twitterImage": ""
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "2026 美国华人家庭的 SVICLOUD 中文电视盒首选 — 1000+ 频道 4K 直播，内华达 48 小时出货"
+            },
+            {
+              "level": 2,
+              "text": "免去水货烦恼。中文或英文礼宾代客设置，内华达 48 小时发货。"
+            },
+            {
+              "level": 2,
+              "text": "包装盒内容物"
+            },
+            {
+              "level": 2,
+              "text": "SVI.STUDIO 官方授权证书"
+            },
+            {
+              "level": 2,
+              "text": "为什么小云电视盒胜过一般串流盒"
+            },
+            {
+              "level": 3,
+              "text": "全方位娱乐"
+            },
+            {
+              "level": 3,
+              "text": "新世代硬件"
+            },
+            {
+              "level": 3,
+              "text": "在地专家支援"
+            },
+            {
+              "level": 2,
+              "text": "从安装到观影夜晚的全程礼宾服务"
+            },
+            {
+              "level": 3,
+              "text": "我们替您处理"
+            },
+            {
+              "level": 2,
+              "text": "選擇適合您的小雲電視盒設備"
+            },
+            {
+              "level": 3,
+              "text": "小雲電視盒 10P+"
+            },
+            {
+              "level": 3,
+              "text": "小雲電視盒 10S"
+            },
+            {
+              "level": 2,
+              "text": "为什么直接在 SVICLOUDTVBOX.US 下单"
+            },
+            {
+              "level": 3,
+              "text": "美国官方授权通路"
+            },
+            {
+              "level": 3,
+              "text": "内华达本地发货"
+            },
+            {
+              "level": 3,
+              "text": "中英双语礼宾"
+            },
+            {
+              "level": 3,
+              "text": "保修与退换货清楚"
+            },
+            {
+              "level": 3,
+              "text": "接下来会发生什么"
+            },
+            {
+              "level": 2,
+              "text": "美加客户最常询问的重点"
+            },
+            {
+              "level": 3,
+              "text": "订单与配送"
+            },
+            {
+              "level": 3,
+              "text": "装置与安装"
+            },
+            {
+              "level": 3,
+              "text": "机型与比较"
+            }
+          ],
+          "wordCount": 310,
+          "images": {
+            "total": 21,
+            "missingAlt": 1,
+            "missingDimensions": 14,
+            "failed": 1
+          },
+          "jsonLd": {
+            "blocks": 2,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "https://svicloudtvbox.us/zh-cn/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh-cn/product/svicloud-10p-plus/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/zh-cn/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh-cn/product/svicloud-10s/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Answer",
+              "Brand",
+              "ContactPoint",
+              "ElectronicsStore",
+              "FAQPage",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "Offer",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "Question",
+              "SearchAction",
+              "SiteNavigationElement",
+              "WebPage",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-CN",
+          "route": "shop",
+          "requestedUrl": "https://svicloudtvbox.us/zh-cn/shop/",
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/shop/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-CN",
+          "title": "Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨",
+          "titleLength": 34,
+          "description": "SVICLOUD 10P+ and 10S with U.S. warranty, fast shipping, and concierge support. 小雲盒子 美國現貨保固。",
+          "descriptionLength": 92,
+          "robots": [
+            "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+          ],
+          "canonical": [
+            "https://svicloudtvbox.us/zh-cn/shop/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "https://svicloudtvbox.us/shop/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "https://svicloudtvbox.us/zh/shop/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "https://svicloudtvbox.us/zh-cn/shop/"
+            },
+            {
+              "lang": "x-default",
+              "href": "https://svicloudtvbox.us/shop/"
+            }
+          ],
+          "social": {
+            "ogTitle": "Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨",
+            "ogDescription": "SVICLOUD 10P+ and 10S with U.S. warranty, fast shipping, and concierge support. 小雲盒子 美國現貨保固。",
+            "ogUrl": "https://svicloudtvbox.us/zh-cn/shop/",
+            "ogImage": "",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨",
+            "twitterDescription": "SVICLOUD 10P+ and 10S with U.S. warranty, fast shipping, and concierge support. 小雲盒子 美國現貨保固。",
+            "twitterImage": ""
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "小雲電視盒"
+            },
+            {
+              "level": 2,
+              "text": "Replacement remotes and add-ons"
+            },
+            {
+              "level": 3,
+              "text": "Bluetooth TV Remote Control for SVICLOUD 10P+"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10P+"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10S"
+            }
+          ],
+          "wordCount": 269,
+          "images": {
+            "total": 9,
+            "missingAlt": 1,
+            "missingDimensions": 3,
+            "failed": 1
+          },
+          "jsonLd": {
+            "blocks": 3,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "https://svicloudtvbox.us/zh-cn/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh-cn/product/svicloud-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/zh-cn/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh-cn/product/svicloud-10s/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/zh-cn/product/svicloud-bluetooth-remote-10p-plus#product",
+                "name": "Bluetooth TV Remote Control for SVICLOUD 10P+",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "27.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh-cn/product/svicloud-bluetooth-remote-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Brand",
+              "BreadcrumbList",
+              "CollectionPage",
+              "DefinedRegion",
+              "ElectronicsStore",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "MerchantReturnPolicy",
+              "MonetaryAmount",
+              "Offer",
+              "OfferShippingDetails",
+              "Product",
+              "QuantitativeValue",
+              "ShippingDeliveryTime",
+              "WebSite"
+            ]
+          }
+        },
+        {
+          "locale": "zh-CN",
+          "route": "compare",
+          "requestedUrl": "https://svicloudtvbox.us/zh-cn/compare/",
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/compare/",
+          "status": 200,
+          "errors": [],
+          "lang": "zh-CN",
+          "title": "SVICLOUD 10P+ Vs 10S | 小雲盒子 型號比較",
+          "titleLength": 32,
+          "description": "Compare SVICLOUD 10P+ and 10S specs, storage, and features. 小雲盒子 型號規格比較。",
+          "descriptionLength": 72,
+          "robots": [
+            "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+          ],
+          "canonical": [
+            "https://svicloudtvbox.us/zh-cn/compare/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "https://svicloudtvbox.us/compare/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "https://svicloudtvbox.us/zh/compare/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "https://svicloudtvbox.us/zh-cn/compare/"
+            },
+            {
+              "lang": "x-default",
+              "href": "https://svicloudtvbox.us/compare/"
+            }
+          ],
+          "social": {
+            "ogTitle": "SVICLOUD 10P+ vs 10S | 小雲盒子 型號比較",
+            "ogDescription": "Compare SVICLOUD 10P+ and 10S specs, storage, and features. 小雲盒子 型號規格比較。",
+            "ogUrl": "https://svicloudtvbox.us/zh-cn/compare/",
+            "ogImage": "",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "SVICLOUD 10P+ vs 10S | 小雲盒子 型號比較",
+            "twitterDescription": "Compare SVICLOUD 10P+ and 10S specs, storage, and features. 小雲盒子 型號規格比較。",
+            "twitterImage": ""
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "小云电视盒 10P+ 与 10S 2026 比较"
+            },
+            {
+              "level": 2,
+              "text": "双语客服、48 小时出货、完整保修（两款皆适用）"
+            },
+            {
+              "level": 3,
+              "text": "顶级效能"
+            },
+            {
+              "level": 3,
+              "text": "家庭娱乐"
+            },
+            {
+              "level": 3,
+              "text": "聪明首选"
+            },
+            {
+              "level": 2,
+              "text": "购买前最常问的 3 个问题"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10P+"
+            },
+            {
+              "level": 3,
+              "text": "功能比较"
+            },
+            {
+              "level": 2,
+              "text": "小雲電視盒 10S"
+            },
+            {
+              "level": 3,
+              "text": "功能比较"
+            },
+            {
+              "level": 2,
+              "text": "挑好机型后，后续流程也有本地支援"
+            },
+            {
+              "level": 3,
+              "text": "美国官方销售通路"
+            },
+            {
+              "level": 3,
+              "text": "内华达州追踪发货"
+            },
+            {
+              "level": 3,
+              "text": "双语安装协助"
+            },
+            {
+              "level": 3,
+              "text": "购买后仍有保修"
+            },
+            {
+              "level": 3,
+              "text": "从选机到家中安装"
+            },
+            {
+              "level": 2,
+              "text": "准备好升级家的观影体验了吗？"
+            }
+          ],
+          "wordCount": 380,
+          "images": {
+            "total": 10,
+            "missingAlt": 3,
+            "missingDimensions": 3,
+            "failed": 1
+          },
+          "jsonLd": {
+            "blocks": 3,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "https://svicloudtvbox.us/zh-cn/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh-cn/product/svicloud-10p-plus/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/zh-cn/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/zh-cn/product/svicloud-10s/",
+                    "shippingDetails": true,
+                    "deliveryTime": true
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Brand",
+              "BreadcrumbList",
+              "DefinedRegion",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "MerchantReturnPolicy",
+              "MonetaryAmount",
+              "Offer",
+              "OfferShippingDetails",
+              "Product",
+              "QuantitativeValue",
+              "ShippingDeliveryTime"
+            ]
+          }
+        },
+        {
+          "locale": "zh-CN",
+          "route": "product-15p",
+          "requestedUrl": "https://svicloudtvbox.us/zh-cn/product/svicloud-15p/",
+          "finalUrl": "https://svicloudtvbox.us/",
+          "status": 200,
+          "errors": [],
+          "lang": "en-US",
+          "title": "小雲盒子 美國授權經銷 | SVICLOUD TV Box US Dealer",
+          "titleLength": 39,
+          "description": "Buy 小雲盒子 in the USA from an authorized SVICLOUD dealer. Shop SVICLOUD 10P+ and 10S with U.S. shipping, warranty, and bilingual English/中文 support.",
+          "descriptionLength": 146,
+          "robots": [
+            "follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large"
+          ],
+          "canonical": [
+            "https://svicloudtvbox.us/"
+          ],
+          "hreflang": [
+            {
+              "lang": "en-US",
+              "href": "https://svicloudtvbox.us/"
+            },
+            {
+              "lang": "zh-Hant-US",
+              "href": "https://svicloudtvbox.us/zh/"
+            },
+            {
+              "lang": "zh-Hans-US",
+              "href": "https://svicloudtvbox.us/zh-cn/"
+            },
+            {
+              "lang": "x-default",
+              "href": "https://svicloudtvbox.us/"
+            }
+          ],
+          "social": {
+            "ogTitle": "小雲盒子 美國授權經銷 | SVICLOUD TV Box US Dealer",
+            "ogDescription": "Buy 小雲盒子 in the USA from an authorized SVICLOUD dealer. Shop SVICLOUD 10P+ and 10S with U.S. shipping, warranty, and bilingual English/中文 support.",
+            "ogUrl": "https://svicloudtvbox.us/",
+            "ogImage": "",
+            "twitterCard": "summary_large_image",
+            "twitterTitle": "小雲盒子 美國授權經銷 | SVICLOUD TV Box US Dealer",
+            "twitterDescription": "Buy 小雲盒子 in the USA from an authorized SVICLOUD dealer. Shop SVICLOUD 10P+ and 10S with U.S. shipping, warranty, and bilingual English/中文 support.",
+            "twitterImage": ""
+          },
+          "h1Count": 1,
+          "mainCount": 1,
+          "headings": [
+            {
+              "level": 1,
+              "text": "Best SVICLOUD TV Boxes for U.S. Chinese Families in 2026 — Fast U.S. Shipping, Warranty, and Bilingual Setup Help"
+            },
+            {
+              "level": 2,
+              "text": "Skip the import hassle. Get your SVICLOUD set up in 中文 or English, shipped from Nevada in 48 hours."
+            },
+            {
+              "level": 2,
+              "text": "What's in the Box"
+            },
+            {
+              "level": 2,
+              "text": "SVI.STUDIO Authorized Dealer Certification"
+            },
+            {
+              "level": 2,
+              "text": "Why SVICLOUD Beats Generic Streaming Boxes"
+            },
+            {
+              "level": 3,
+              "text": "Complete Entertainment"
+            },
+            {
+              "level": 3,
+              "text": "Next-Gen Hardware"
+            },
+            {
+              "level": 3,
+              "text": "Local Expert Support"
+            },
+            {
+              "level": 2,
+              "text": "White-Glove Concierge From Setup To Streaming Night"
+            },
+            {
+              "level": 3,
+              "text": "What We Handle For You"
+            },
+            {
+              "level": 2,
+              "text": "Choose Your SVICLOUD Device"
+            },
+            {
+              "level": 3,
+              "text": "SVICLOUD 10P+"
+            },
+            {
+              "level": 3,
+              "text": "SVICLOUD 10S"
+            },
+            {
+              "level": 2,
+              "text": "Why order direct from SVICLOUDTVBOX.US"
+            },
+            {
+              "level": 3,
+              "text": "Official U.S. dealer"
+            },
+            {
+              "level": 3,
+              "text": "Nevada fulfillment"
+            },
+            {
+              "level": 3,
+              "text": "English & 中文 help"
+            },
+            {
+              "level": 3,
+              "text": "Warranty + returns clarity"
+            },
+            {
+              "level": 3,
+              "text": "What happens next"
+            },
+            {
+              "level": 2,
+              "text": "Top questions from U.S. & Canada buyers"
+            },
+            {
+              "level": 3,
+              "text": "Orders & shipping"
+            },
+            {
+              "level": 3,
+              "text": "Device & setup"
+            },
+            {
+              "level": 3,
+              "text": "Models & comparisons"
+            }
+          ],
+          "wordCount": 572,
+          "images": {
+            "total": 21,
+            "missingAlt": 1,
+            "missingDimensions": 14,
+            "failed": 1
+          },
+          "jsonLd": {
+            "blocks": 2,
+            "invalid": 0,
+            "products": [
+              {
+                "id": "https://svicloudtvbox.us/product/svicloud-10p-plus#product",
+                "name": "SVICLOUD 10P+ TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "269.00",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/product/svicloud-10p-plus/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              },
+              {
+                "id": "https://svicloudtvbox.us/product/svicloud-10s#product",
+                "name": "SVICLOUD 10S TV Box 4K HDR",
+                "offers": [
+                  {
+                    "type": "Offer",
+                    "priceCurrency": "USD",
+                    "price": "204.99",
+                    "availability": "https://schema.org/InStock",
+                    "url": "https://svicloudtvbox.us/product/svicloud-10s/",
+                    "shippingDetails": false,
+                    "deliveryTime": false
+                  }
+                ]
+              }
+            ],
+            "types": [
+              "Answer",
+              "Brand",
+              "ContactPoint",
+              "ElectronicsStore",
+              "FAQPage",
+              "ImageObject",
+              "ItemList",
+              "ListItem",
+              "Offer",
+              "Organization",
+              "PostalAddress",
+              "Product",
+              "Question",
+              "SearchAction",
+              "SiteNavigationElement",
+              "WebPage",
+              "WebSite"
+            ]
+          }
+        }
+      ],
+      "infrastructure": {
+        "/robots.txt": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/robots.txt",
+          "text": "# As a condition of accessing this website, you agree to abide by the following\n# content signals:\n\n# (a)  If a Content-Signal = yes, you may collect content for the corresponding\n#      use.\n# (b)  If a Content-Signal = no, you may not collect content for the\n#      corresponding use.\n# (c)  If the website operator does not include a Content-Signal for a\n#      corresponding use, the website operator neither grants nor restricts\n#      permission via Content-Signal with respect to the corresponding use.\n\n# The content signals and their meanings are:\n\n# search:   building a search index and providing search results (e.g., returning\n#           hyperlinks and short excerpts from your website's contents). Search does not\n#           include providing AI-generated search summaries.\n# ai-input: inputting content into one or more AI models (e.g., retrieval\n#           augmented generation, grounding, or other real-time taking of content for\n#           generative AI search answers).\n# ai-train: training or fine-tuning AI models.\n# use:      how AI systems may consume the content (immediate, reference, or full).\n\n# ANY RESTRICTIONS EXPRESSED VIA CONTENT SIGNALS ARE EXPRESS RESERVATIONS O"
+        },
+        "/sitemap_index.xml": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/sitemap_index.xml",
+          "text": "XML Sitemap\n\nThis XML Sitemap is generated by Rank Math WordPress SEO Plugin. It is what search engines like Google use to crawl and re-crawl posts/pages/products/images/archives on your website.\n\nLearn more about XML Sitemaps.\n\nThis XML Sitemap Index file contains 4 sitemaps.\n\nSitemap\tLast Modified\n\nhttps://svicloudtvbox.us/post-sitemap.xml\n\t2026-08-17 18:42 +00:00\n\nhttps://svicloudtvbox.us/page-sitemap.xml\n\t2026-03-02 14:33 +00:00\n\nhttps://svicloudtvbox.us/product-sitemap.xml\n\t2026-08-12 02:53 +00:00\n\nhttps://svicloudtvbox.us/category-sitemap.xml\n\t2026-08-17 18:42 +00:00"
+        }
+      },
+      "homepageInternalLinkChecks": {
+        "https://svicloudtvbox.us/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/"
+        },
+        "https://svicloudtvbox.us/compare/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/compare/"
+        },
+        "https://svicloudtvbox.us/shop/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/shop/"
+        },
+        "https://svicloudtvbox.us/blog/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/blog/"
+        },
+        "https://svicloudtvbox.us/guides/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/guides/"
+        },
+        "https://svicloudtvbox.us/guides-setup/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/guides-setup/"
+        },
+        "https://svicloudtvbox.us/guides-after-setup/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/guides-after-setup/"
+        },
+        "https://svicloudtvbox.us/guides-support/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/guides-support/"
+        },
+        "https://svicloudtvbox.us/guides-resources/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/guides-resources/"
+        },
+        "https://svicloudtvbox.us/guides-apps/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/guides-apps/"
+        },
+        "https://svicloudtvbox.us/guides-troubleshooting/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/guides-troubleshooting/"
+        },
+        "https://svicloudtvbox.us/faq/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/faq/"
+        },
+        "https://svicloudtvbox.us/about/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/about/"
+        },
+        "https://svicloudtvbox.us/legal-disclaimer/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/legal-disclaimer/"
+        },
+        "https://svicloudtvbox.us/return-policy/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/return-policy/"
+        },
+        "https://svicloudtvbox.us/order-tracking/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/order-tracking/"
+        },
+        "https://svicloudtvbox.us/zh/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/"
+        },
+        "https://svicloudtvbox.us/zh-cn/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/"
+        },
+        "https://svicloudtvbox.us/cart/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/cart/"
+        },
+        "https://svicloudtvbox.us/product/svicloud-10p-plus/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/product/svicloud-10p-plus/"
+        },
+        "https://svicloudtvbox.us/#pricing": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/#pricing"
+        },
+        "https://svicloudtvbox.us/svicloud-tv-box-usa-guide-2026/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/svicloud-tv-box-usa-guide-2026/"
+        },
+        "https://svicloudtvbox.us/contact/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/contact/"
+        },
+        "https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/certification-authorized-dealer.webp": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/certification-authorized-dealer.webp"
+        },
+        "https://svicloudtvbox.us/checkout/?add-to-cart=12&quantity=1&svic_buynow=1": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/checkout/"
+        },
+        "https://svicloudtvbox.us/checkout/?add-to-cart=14&quantity=1&svic_buynow=1": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/checkout/"
+        },
+        "https://svicloudtvbox.us/product/svicloud-10s/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/product/svicloud-10s/"
+        },
+        "https://svicloudtvbox.us/support/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/support/"
+        },
+        "https://svicloudtvbox.us/zh/compare/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/compare/"
+        },
+        "https://svicloudtvbox.us/zh/shop/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/shop/"
+        },
+        "https://svicloudtvbox.us/zh/blog/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/blog/"
+        },
+        "https://svicloudtvbox.us/zh/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/"
+        },
+        "https://svicloudtvbox.us/zh/guides-setup/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/guides-setup/"
+        },
+        "https://svicloudtvbox.us/zh/guides-after-setup/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/guides-after-setup/"
+        },
+        "https://svicloudtvbox.us/zh/guides-support/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/guides-support/"
+        },
+        "https://svicloudtvbox.us/zh/guides-resources/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/guides-resources/"
+        },
+        "https://svicloudtvbox.us/zh/guides-apps/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/guides-apps/"
+        },
+        "https://svicloudtvbox.us/zh/guides-troubleshooting/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/guides-troubleshooting/"
+        },
+        "https://svicloudtvbox.us/zh/faq/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/faq/"
+        },
+        "https://svicloudtvbox.us/zh/about/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/about/"
+        },
+        "https://svicloudtvbox.us/zh/legal-disclaimer/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/legal-disclaimer/"
+        },
+        "https://svicloudtvbox.us/zh/return-policy/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/return-policy/"
+        },
+        "https://svicloudtvbox.us/zh/order-tracking/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/order-tracking/"
+        },
+        "https://svicloudtvbox.us/zh/cart/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/cart/"
+        },
+        "https://svicloudtvbox.us/zh/product/svicloud-10p-plus/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/product/svicloud-10p-plus/"
+        },
+        "https://svicloudtvbox.us/zh/#pricing": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/#pricing"
+        },
+        "https://svicloudtvbox.us/zh/svicloud-tv-box-usa-guide-2026/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/svicloud-tv-box-usa-guide-2026/"
+        },
+        "https://svicloudtvbox.us/zh/contact/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/contact/"
+        },
+        "https://svicloudtvbox.us/zh/checkout/?add-to-cart=12&quantity=1&svic_buynow=1": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/checkout/"
+        },
+        "https://svicloudtvbox.us/zh/checkout/?add-to-cart=14&quantity=1&svic_buynow=1": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/checkout/"
+        },
+        "https://svicloudtvbox.us/zh/product/svicloud-10s/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/product/svicloud-10s/"
+        },
+        "https://svicloudtvbox.us/zh/support/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh/support/"
+        },
+        "https://svicloudtvbox.us/zh-cn/compare/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/compare/"
+        },
+        "https://svicloudtvbox.us/zh-cn/shop/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/shop/"
+        },
+        "https://svicloudtvbox.us/zh-cn/blog/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/blog/"
+        },
+        "https://svicloudtvbox.us/zh-cn/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/"
+        },
+        "https://svicloudtvbox.us/zh-cn/guides-setup/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/guides-setup/"
+        },
+        "https://svicloudtvbox.us/zh-cn/guides-after-setup/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/guides-after-setup/"
+        },
+        "https://svicloudtvbox.us/zh-cn/guides-support/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/guides-support/"
+        },
+        "https://svicloudtvbox.us/zh-cn/guides-resources/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/guides-resources/"
+        },
+        "https://svicloudtvbox.us/zh-cn/guides-apps/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/guides-apps/"
+        },
+        "https://svicloudtvbox.us/zh-cn/guides-troubleshooting/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/guides-troubleshooting/"
+        },
+        "https://svicloudtvbox.us/zh-cn/faq/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/faq/"
+        },
+        "https://svicloudtvbox.us/zh-cn/about/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/about/"
+        },
+        "https://svicloudtvbox.us/zh-cn/legal-disclaimer/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/legal-disclaimer/"
+        },
+        "https://svicloudtvbox.us/zh-cn/return-policy/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/return-policy/"
+        },
+        "https://svicloudtvbox.us/zh-cn/order-tracking/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/order-tracking/"
+        },
+        "https://svicloudtvbox.us/zh-cn/cart/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/cart/"
+        },
+        "https://svicloudtvbox.us/zh-cn/product/svicloud-10p-plus/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/product/svicloud-10p-plus/"
+        },
+        "https://svicloudtvbox.us/zh-cn/#pricing": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/#pricing"
+        },
+        "https://svicloudtvbox.us/zh-cn/svicloud-tv-box-usa-guide-2026/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/svicloud-tv-box-usa-guide-2026/"
+        },
+        "https://svicloudtvbox.us/zh-cn/contact/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/contact/"
+        },
+        "https://svicloudtvbox.us/zh-cn/checkout/?add-to-cart=12&quantity=1&svic_buynow=1": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/checkout/"
+        },
+        "https://svicloudtvbox.us/zh-cn/checkout/?add-to-cart=14&quantity=1&svic_buynow=1": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/checkout/"
+        },
+        "https://svicloudtvbox.us/zh-cn/product/svicloud-10s/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/product/svicloud-10s/"
+        },
+        "https://svicloudtvbox.us/zh-cn/support/": {
+          "status": 200,
+          "finalUrl": "https://svicloudtvbox.us/zh-cn/support/"
+        }
+      },
+      "lighthouse": {
+        "desktop": {
+          "runtimeError": null,
+          "runtimeErrorMessage": null,
+          "seo": 100,
+          "performance": 87,
+          "fcp": "0.4 s",
+          "lcp": "1.1 s",
+          "cls": "0.054",
+          "tbt": "270 ms"
+        },
+        "mobile": {
+          "runtimeError": "NO_FCP",
+          "runtimeErrorMessage": "The page did not paint any content. Please ensure you keep the browser window in the foreground during the load and try again. (NO_FCP)",
+          "seo": null,
+          "performance": null,
+          "fcp": null,
+          "lcp": null,
+          "cls": null,
+          "tbt": null
+        }
+      }
+    }
+  },
+  "notes": [
+    "Production 15P paths currently redirect to the corresponding homepage baseline; 15P is not in the production product sitemap.",
+    "Local robots.txt advertises wp-sitemap.xml rather than sitemap_index.xml.",
+    "Production mobile Lighthouse repeatedly returned NO_FCP; local mobile and both desktop baselines are recorded."
+  ]
+}

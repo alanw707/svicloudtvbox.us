@@ -36,9 +36,12 @@ while (have_posts()) :
     $image_id = $product->get_image_id();
     $gallery = method_exists($product, 'get_gallery_image_ids') ? (array) $product->get_gallery_image_ids() : [];
     $slug = method_exists($product, 'get_slug') ? $product->get_slug() : '';
-    $is_prelaunch_product = $slug === 'svicloud-15p';
+    $is_15p_product = $slug === 'svicloud-15p';
 
     $fallback_gallery_files = [];
+    $localized_product_title = $is_15p_product
+        ? svic_translate('products.svicloud-15p.title')
+        : get_the_title();
 
     $gallery_entries = [];
     if ($gallery) {
@@ -73,17 +76,17 @@ while (have_posts()) :
     if ($image_id) {
         $primary_image_html = wp_get_attachment_image($image_id, 'large', false, [
             'class' => 'product-hero-image',
-            'alt'   => esc_attr(get_the_title()),
+            'alt'   => esc_attr($localized_product_title),
         ]);
     } elseif (!empty($gallery_entries)) {
         $primary_image_html = '<img class="product-hero-image" src="' . esc_url($gallery_entries[0]['full']) . '" alt="' . esc_attr(get_the_title()) . '" loading="lazy" />';
-    } elseif ($is_prelaunch_product) {
-        $primary_image_html = '<div class="product-hero-placeholder" role="img" aria-label="' . svic_translate_attr('products.svicloud-15p.prelaunch.image_placeholder') . '"><strong>15P</strong><span>' . svic_translate_html('products.svicloud-15p.prelaunch.image_placeholder') . '</span></div>';
+    } elseif ($is_15p_product) {
+        $primary_image_html = '<img class="product-hero-image" src="' . esc_url(svic_theme_image_uri('/assets/images/products/svicloud-15p-front.webp')) . '" alt="' . esc_attr($localized_product_title) . '" />';
     } else {
         $primary_image_html = '<img class="product-hero-image" src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . esc_attr(get_the_title()) . '" />';
     }
 
-    $product_highlight_keys = $is_prelaunch_product
+    $product_highlight_keys = $is_15p_product
         ? [
             'products.svicloud-15p.prelaunch.highlights.specs',
             'products.svicloud-15p.prelaunch.highlights.availability',
@@ -94,7 +97,7 @@ while (have_posts()) :
             'product.highlights.concierge',
             'product.highlights.no_fees',
         ];
-    $product_badge_keys = $is_prelaunch_product
+    $product_badge_keys = $is_15p_product
         ? [
             'products.svicloud-15p.prelaunch.badges.specs',
             'products.svicloud-15p.prelaunch.badges.availability',
@@ -105,10 +108,10 @@ while (have_posts()) :
             'core.badges.ships_from_usa',
             'core.badges.one_year_warranty',
         ];
-    $product_subtitle_key = $is_prelaunch_product
+    $product_subtitle_key = $is_15p_product
         ? 'products.svicloud-15p.prelaunch.subtitle'
         : 'product.hero.subtitle';
-    $product_detail_key = $is_prelaunch_product
+    $product_detail_key = $is_15p_product
         ? 'products.svicloud-15p.prelaunch.detail'
         : 'product.hero.detail';
 
@@ -117,13 +120,21 @@ while (have_posts()) :
     $contact_url     = svic_url_with_lang(home_url('/contact/'));
     $setup_guide_url = svic_url_with_lang(home_url('/guides-setup/'));
 
-    $product_box_item_keys = [
-        'frontpage.inbox.items.box',
-        'frontpage.inbox.items.power',
-        'frontpage.inbox.items.hdmi',
-        'frontpage.inbox.items.remote',
-        'frontpage.inbox.items.guide',
-    ];
+    $product_box_item_keys = $is_15p_product
+        ? [
+            'products.svicloud-15p.inbox.items.box',
+            'products.svicloud-15p.inbox.items.power',
+            'products.svicloud-15p.inbox.items.hdmi',
+            'products.svicloud-15p.inbox.items.remote',
+            'products.svicloud-15p.inbox.items.manual',
+        ]
+        : [
+            'frontpage.inbox.items.box',
+            'frontpage.inbox.items.power',
+            'frontpage.inbox.items.hdmi',
+            'frontpage.inbox.items.remote',
+            'frontpage.inbox.items.guide',
+        ];
 
     $product_best_for_key_base = 'products.' . $slug . '.best_for';
     $product_best_for_title = svic_translate($product_best_for_key_base . '.title');
@@ -133,7 +144,7 @@ while (have_posts()) :
         $product_best_for_key_base . '.bullets.tertiary',
     ];
 
-    $product_reassurance_key_base = $is_prelaunch_product
+    $product_reassurance_key_base = $is_15p_product
         ? 'products.svicloud-15p.prelaunch.reassurance'
         : 'product.hero.reassurance';
     $product_reassurance_title = svic_translate($product_reassurance_key_base . '.title');
@@ -143,7 +154,10 @@ while (have_posts()) :
         $product_reassurance_key_base . '.bullets.concierge',
     ];
 
-    $product_faq_items = $is_prelaunch_product ? [
+    $product_faq_header_base = $is_15p_product
+        ? 'products.svicloud-15p.prelaunch.faq_header'
+        : 'product.faq';
+    $product_faq_items = $is_15p_product ? [
         [
             'question_key' => 'products.svicloud-15p.prelaunch.faq.specs.q',
             'answer_key'   => 'products.svicloud-15p.prelaunch.faq.specs.a',
@@ -229,7 +243,7 @@ while (have_posts()) :
                 <span class="badge"><?php echo svic_translate_html($product_badge_key); ?></span>
               <?php endforeach; ?>
             </div>
-            <h1 class="product-hero-title"><?php the_title(); ?></h1>
+            <h1 class="product-hero-title"><?php echo esc_html($localized_product_title); ?></h1>
             <p class="product-hero-subtitle">
               <?php echo svic_translate_html($product_subtitle_key); ?>
             </p>
@@ -250,6 +264,9 @@ while (have_posts()) :
             <div class="product-hero-cta">
               <?php woocommerce_template_single_add_to_cart(); ?>
             </div>
+            <?php if ($is_15p_product) : ?>
+              <p class="product-hero-backorder-note"><?php echo svic_translate_html('shop.cards.15p.price_note'); ?></p>
+            <?php endif; ?>
             <?php if (is_string($product_reassurance_title) && $product_reassurance_title !== '' && $product_reassurance_title !== 'title') : ?>
               <section class="product-hero-reassurance" aria-labelledby="product-hero-reassurance-heading">
                 <span class="product-hero-reassurance__badge"><?php echo svic_translate_html($product_reassurance_key_base . '.badge'); ?></span>
@@ -315,7 +332,6 @@ while (have_posts()) :
       </aside>
       <?php endif; ?>
 
-      <?php if (!$is_prelaunch_product) : ?>
       <section class="product-description product-description--inbox">
         <h2 class="h3 spacing-normal"><?php echo svic_translate_html('frontpage.inbox.title'); ?></h2>
         <div class="entry-content">
@@ -326,7 +342,6 @@ while (have_posts()) :
           </ul>
         </div>
       </section>
-      <?php endif; ?>
 
       <section class="product-traffic">
         <div class="product-traffic__inner">
@@ -361,7 +376,8 @@ while (have_posts()) :
       $pdp_compare_title = svic_translate($pdp_compare_base . '.title');
       if (is_string($pdp_compare_title) && $pdp_compare_title !== '' && $pdp_compare_title !== 'title') :
           $product_10p_url = svic_url_with_lang(home_url('/product/svicloud-10p-plus/'));
-          $product_9p_url  = svic_url_with_lang(home_url('/product/svicloud-9p/'));
+          $product_9p     = function_exists('svic_get_product_by_slug') ? svic_get_product_by_slug('svicloud-9p') : null;
+          $product_9p_url = $product_9p instanceof WC_Product ? svic_url_with_lang(get_permalink($product_9p->get_id())) : '';
           $pdp_compare_cards = [
               'vs_10p' => ['bullets' => ['one', 'two', 'three'], 'link' => $product_10p_url],
               'vs_9p'  => ['bullets' => ['one', 'two', 'three'], 'link' => $product_9p_url],
@@ -416,9 +432,9 @@ while (have_posts()) :
       <section class="product-faq" id="product-faq">
         <div class="product-faq__inner">
           <header class="product-faq__header">
-            <span class="product-faq__badge"><?php echo svic_translate_html('product.faq.badge'); ?></span>
-            <h2 class="product-faq__title"><?php echo svic_translate_html('product.faq.title'); ?></h2>
-            <p class="product-faq__lead"><?php echo svic_translate_html('product.faq.lead'); ?></p>
+            <span class="product-faq__badge"><?php echo svic_translate_html($product_faq_header_base . '.badge'); ?></span>
+            <h2 class="product-faq__title"><?php echo svic_translate_html($product_faq_header_base . '.title'); ?></h2>
+            <p class="product-faq__lead"><?php echo svic_translate_html($product_faq_header_base . '.lead'); ?></p>
           </header>
           <div class="product-faq__grid">
             <?php foreach ($product_faq_items as $idx => $item) : ?>

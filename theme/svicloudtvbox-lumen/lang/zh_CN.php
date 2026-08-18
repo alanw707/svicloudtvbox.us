@@ -6,6 +6,12 @@
 $base = include __DIR__ . '/zh_TW.php';
 
 $overrides = [
+    'core' => [
+        'cart' => [
+            'added_notice' => '已加入您的购物车',
+            'view_cart'    => '查看购物车',
+        ],
+    ],
     'announcement' => [
         'message' => '目前商品暂时缺货，新库存即将到来！',
         'cta'     => '',
@@ -47,7 +53,7 @@ $overrides = [
             'blog'     => '博客',
             'shop'     => '选购',
             'faq'      => '常见问题',
-            'fifteen_p' => '小云电视盒 15P 新旗舰',
+            'fifteen_p' => '小云 15P 电视盒',
             'ten_p'    => '小云电视盒 10P+ 旗舰款',
             'ten_s'    => '小云电视盒 10S 轻巧款',
             'concierge'=> '礼宾客服',
@@ -76,17 +82,42 @@ $overrides = [
         ],
     ],
     'shop' => [
+        'hero' => [
+            'badge'    => '选购',
+            'title'    => '小云电视盒',
+            'subtitle' => '以 US$299 缺货订购规格已确认的小云 15P（原价 US$379），或选购现售 10P+、10S 与配件。',
+        ],
         'cards' => [
             '15p' => [
-                'price_label' => '上市价格',
-                'price_tbc'   => '价格待确认',
-                'price_note'  => '尚未公布正式价格',
-                'image_alt'   => '小云 15P 官方图片待确认',
-                'image_tbc'   => '官方图片待确认',
+                'title'   => '小云 15P 电视盒',
+                'lead'    => '搭载 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、双频 Wi-Fi 6、蓝牙 5.4 与 4K HDR。',
+                'button'  => '缺货订购 15P',
+                'badge'   => '接受缺货订购',
+                'best_for' => 'Android 14、Wi-Fi 6、蓝牙 5.4 与 4K 解码支持',
+                'price_label' => '缺货订购价',
+                'price_tbc'   => '接受缺货订购',
+                'price_note'  => '发货日期尚未公布',
+                'image_alt'   => '小云 15P Android 14 缺货订购图',
+                'image_tbc'   => '小云 15P 产品图片',
+                'features' => [
+                    'hardware' => 'Amlogic S905Y5 + Android 14',
+                    'apps'     => '4 GB DDR3 + 64 GB eMMC',
+                    'remote'   => 'Wi-Fi 6 + 蓝牙 5.4 + AV1 解码',
+                ],
                 'assurance' => [
-                    'shipping' => '【政策待确认】库存与发货',
-                    'warranty' => '【政策待确认】保修与退换货',
-                    'support'  => '【政策待确认】客服与安装协助',
+                    'shipping' => '接受缺货订购',
+                    'warranty' => '特价 US$299 · 原价 US$379',
+                    'support'  => '发货日期尚未公布',
+                ],
+            ],
+            '10p' => [
+                'features' => [
+                    'ram_storage' => 'Android 12 + 4GB 内存 / 64GB 存储与 AV1 解码',
+                ],
+            ],
+            '10s' => [
+                'features' => [
+                    'ram_storage' => 'Android 12 + 2GB 内存 / 32GB 存储，满足日常播放',
                 ],
             ],
             'rating_label' => 'Google 平均评分',
@@ -95,6 +126,18 @@ $overrides = [
             'product_rating_label' => '产品评分',
             'product_rating_count' => '%d 条产品评价',
             'product_rating_aria'  => '产品评分 {{rating}} 满分 5 分，来自 {{count}} 条评价',
+            'remote' => [
+                'title'    => '10P+ 蓝牙遥控器',
+                'lead'     => '小云 10P+ 官方替换或备用遥控器，由美国现货发货。',
+                'button'   => '查看遥控器',
+                'badge'    => '配件',
+                'best_for' => '需要替换遥控器或多人共用的家庭',
+                'features' => [
+                    'bluetooth' => '蓝牙 5.0 配对，最远约 10 米',
+                    'voice'     => '内置麦克风，支持语音搜索',
+                    'controls'  => '通用电视电源、音量与输入控制',
+                ],
+            ],
         ],
     ],
     'cart_page' => [
@@ -593,35 +636,36 @@ $overrides = [
     'frontpage' => [
         'hero' => [
             'badge'   => '美国授权经销 · 内华达',
-            'title'   => '全新小云 15P 即将登场。亚洲娱乐，重新想象。',
-            'title_lead' => '全新小云 15P 即将登场',
+            'title'   => '小云 15P 开放缺货订购。亚洲娱乐，重新想象。',
+            'title_lead' => '小云 15P 开放缺货订购',
             'title_separator' => '。',
             'title_tail' => '亚洲娱乐，重新想象。',
-            'copy'    => '小云 15P 上市预览。规格、内容、价格、美国到货、费用、保修与客服均待确认；10P+ 与 10S 现有资料可立即查看。',
+            'copy'    => '小云 15P 现以 US$299 接受缺货订购（原价 US$379），搭载 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、蓝牙 5.4 与 4K HDR。',
             'launch'  => [
                 'badge' => '新品',
-                'text'  => '小云 15P 上市资料待确认',
+                'text'  => '小云 15P 缺货订购已开放',
             ],
             'showcase' => [
-                'kicker'  => '新一代旗舰',
-                'release' => '2026 新品',
-                'title'   => '全新旗舰，即将登场。',
-                'copy'    => '即将上市的小云机型预览。正式规格、价格、政策与美国到货信息将在供应商确认后公布。',
+                'kicker'  => '小云 15P 电视盒',
+                'release' => '接受缺货订购',
+                'title'   => 'Android 14、Wi-Fi 6、4K HDR。',
+                'copy'    => '全新小云 15P 搭载 Amlogic S905Y5、4 GB DDR3、64 GB eMMC、蓝牙 5.4 与 AV1 解码。',
+                'image_alt' => '小云 15P 电视盒正面',
                 'points'  => [
-                    'usa'     => '【待确认】美国库存',
-                    'fees'    => '【待确认】费用条款',
-                    'support' => '【待确认】客服范围',
+                    'usa'     => 'Android 14',
+                    'fees'    => 'Wi-Fi 6 + 蓝牙 5.4',
+                    'support' => '4K HDR + AV1 解码',
                 ],
-                'cta'     => '探索 15P',
+                'cta'     => '缺货订购 15P',
                 'compare' => '比较全系列',
             ],
             'bullets' => [
-                'shipping' => '【到货待确认】美国库存与发货',
-                'warranty' => '【政策待确认】保修与退换货',
-                'fees'     => '【政策待确认】费用条款',
+                'shipping' => 'Amlogic S905Y5 四核心处理器',
+                'warranty' => '4 GB DDR3 + 64 GB eMMC',
+                'fees'     => '双频 Wi-Fi 6 + 蓝牙 5.4',
             ],
             'cta' => [
-                'primary'   => '预览 15P',
+                'primary'   => '缺货订购 15P',
                 'tenp'      => '选购 10P+',
                 'bundles'   => '查看优惠组合',
                 'compare'   => '查看价格',
@@ -866,26 +910,34 @@ $overrides = [
             'savings_label'        => '节省 %1$s（%2$s%% 折扣）',
             'cards'                => [
                 '15p' => [
-                    'badge'     => '即将上市',
-                    'title'     => '小云电视盒 15P',
-                    'image_alt' => '小云电视盒 15P 上市预览',
+                    'badge'     => '接受缺货订购',
+                    'title'     => '小云 15P 电视盒',
+                    'image_alt' => '小云 15P Android 14 缺货订购图',
                     'interval'  => '台',
-                    'copy'      => '预览即将上市的机型；规格、价格、库存与政策仍待确认。',
-                    'stock_note' => '库存与发货日期待确认',
+                    'copy'      => '搭载 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、蓝牙 5.4 与 4K HDR。',
+                    'stock_note' => '发货日期尚未公布',
                     'features'  => [
-                        'newest'  => '【规格待确认】硬件与软件',
-                        'no_fees' => '【政策待确认】费用条款',
-                        'support' => '【政策待确认】美国发货、保修与客服',
+                        'processor' => 'Amlogic S905Y5 + Android 14',
+                        'no_fees' => '4 GB DDR3 + 64 GB eMMC',
+                        'support' => 'Wi-Fi 6 + 蓝牙 5.4 + AV1',
                     ],
-                    'cta'      => '探索 15P',
-                    'buy_cta'  => '查看全新 15P',
+                    'cta'      => '缺货订购 15P',
+                    'buy_cta'  => '缺货订购 15P',
                 ],
                 '10p' => [
                     'image_alt'=> '小云电视盒 10P+ 产品图',
+                    'copy'     => 'Android 12、4GB 内存 / 64GB 存储，内建儿童与卡拉 OK 应用。',
+                    'features' => [
+                        'hdr' => 'Android 12 + 4K HDR + AV1 解码',
+                    ],
                     'buy_cta' => '立即购买 10P+',
                 ],
                 '10s' => [
                     'image_alt'=> '小云电视盒 10S 产品图',
+                    'copy'     => 'Android 12、2GB 内存 / 32GB 存储，适合卧室或第二台电视。',
+                    'features' => [
+                        'hdr' => 'Android 12 + 4K HDR + AV1 解码',
+                    ],
                     'buy_cta' => '立即购买 10S',
                 ],
             ],
@@ -1037,8 +1089,8 @@ $overrides = [
     ],
     'products' => [
         'svicloud-10p-plus' => [
-            'short_description' => '旗舰 4K 流媒体盒，4GB 内存 / 64GB 存储，内建儿童模式、卡拉 OK 与双语礼宾支持。',
-            'description' => '<p>小云电视盒 10P+ 是家庭客厅的旗舰机，结合语音操控、卡拉 OK 与最快的硬件性能。</p><ul><li>4GB 内存与 64GB 存储、AV1 解码，直播体育赛事与戏剧都能流畅 4K 播放。</li><li>内建儿童模式与卡拉 OK 应用，附英文 / 中文礼宾带领完成设置。</li><li>标配 Wi-Fi 6、Gigabit 有线网络、蓝牙语音遥控、USB 3.0 与扩展端口，满足多种安装场景。</li><li>支持 Dolby 环绕音效，可搭配相容的电视、Soundbar 与功放使用。</li><li>美国内华达州仓库配送，14 天安心退换、一年美国保修与真人礼宾客服。</li></ul><p>盒内附 HDMI 线、电源适配器、语音遥控，支持双无线麦克风卡拉 OK。</p>',
+            'short_description' => 'Android 12 旗舰 4K 流媒体盒，4GB 内存 / 64GB 存储，内建儿童模式、卡拉 OK 与双语礼宾支持。',
+            'description' => '<p>小云电视盒 10P+ 搭载 Android 12，是家庭客厅的旗舰机，结合语音操控、卡拉 OK 与最快的硬件性能。</p><ul><li>4GB 内存与 64GB 存储、AV1 解码，直播体育赛事与戏剧都能流畅 4K 播放。</li><li>内建儿童模式与卡拉 OK 应用，附英文 / 中文礼宾带领完成设置。</li><li>标配 Wi-Fi 6、Gigabit 有线网络、蓝牙语音遥控、USB 3.0 与扩展端口，满足多种安装场景。</li><li>支持 Dolby 环绕音效，可搭配相容的电视、Soundbar 与功放使用。</li><li>美国内华达州仓库配送，14 天安心退换、一年美国保修与真人礼宾客服。</li></ul><p>盒内附 HDMI 线、电源适配器、语音遥控，支持双无线麦克风卡拉 OK。</p>',
             'best_for' => [
                 'badge' => '最适合',
                 'title' => '客厅主机、卡拉 OK 聚会，以及想一次买到位的买家',
@@ -1051,15 +1103,15 @@ $overrides = [
             ],
             'crosslink' => [
                 'badge'  => '新机登场',
-                'title'  => '全新小云 15P 即将上市',
-                'lead'   => '想入手最新旗舰？先预览 15P 上市页；正式硬件规格与美国到货信息将在发布时确认。',
-                'cta'    => '预览小云 15P',
+                'title'  => '小云 15P 缺货订购已开放',
+                'lead'   => '小云 15P 现以 US$299 接受缺货订购（原价 US$379）；发货日期尚未公布。',
+                'cta'    => '缺货订购小云 15P',
                 'target' => 'svicloud-15p',
             ],
         ],
         'svicloud-10s' => [
-            'short_description' => '高性价比 4K 串流盒，2GB 内存 / 32GB 存储，适合卧室、客房、第二台电视与小空间使用。',
-            'description' => '<p>小云电视盒 10S 是主打高性价比的 4K 串流机型，适合想要 SVICLOUD 正版内容、但不需要旗舰级附加功能的家庭。</p><ul><li>2GB 内存与 32GB 存储搭配 AV1 解码，可顺畅播放直播、剧集与点播内容。</li><li>体积轻巧，特别适合卧室、客房、宿舍、出租屋或第二台电视使用。</li><li>具备 HDMI、以太网与 USB 接口，可快速完成 Wi‑Fi 或有线安装。</li><li>美国现货发货，附一年保修、中英双语客服与礼宾式开箱协助。</li></ul><p>如果你重视价格与基本影音需求，10S 是最划算的选择。若你需要更强性能、K 歌与语音控制，则更适合 10P+。</p>',
+            'short_description' => 'Android 12 高性价比 4K 串流盒，2GB 内存 / 32GB 存储，适合卧室、客房、第二台电视与小空间使用。',
+            'description' => '<p>小云电视盒 10S 搭载 Android 12，是主打高性价比的 4K 串流机型，适合想要 SVICLOUD 正版内容、但不需要旗舰级附加功能的家庭。</p><ul><li>2GB 内存与 32GB 存储搭配 AV1 解码，可顺畅播放直播、剧集与点播内容。</li><li>体积轻巧，特别适合卧室、客房、宿舍、出租屋或第二台电视使用。</li><li>具备 HDMI、以太网与 USB 接口，可快速完成 Wi‑Fi 或有线安装。</li><li>美国现货发货，附一年保修、中英双语客服与礼宾式开箱协助。</li></ul><p>如果你重视价格与基本影音需求，10S 是最划算的选择。若你需要更强性能、K 歌与语音控制，则更适合 10P+。</p>',
             'best_for' => [
                 'badge' => '最适合',
                 'title' => '卧室、客房、第二台电视与重视预算的买家',
@@ -1082,19 +1134,19 @@ $overrides = [
             ],
             'crosslink' => [
                 'badge'  => '新机登场',
-                'title'  => '抢先认识小云 15P',
-                'lead'   => '准备从入门款升级？先预览 15P 上市页，正式规格与美国到货信息将在发布时确认。',
-                'cta'    => '预览小云 15P',
+                'title'  => '缺货订购小云 15P',
+                'lead'   => 'Android 14、Wi-Fi 6 与蓝牙 5.4 小云 15P 现以 US$299 接受缺货订购（原价 US$379）。',
+                'cta'    => '缺货订购小云 15P',
                 'target' => 'svicloud-15p',
             ],
         ],
         'svicloud-9p' => [
             'short_description' => '保留给现有用户的旧款小云 9P 页面，方便查找支持信息与比较后续机型。',
-            'description' => '<p>小云 9P 是上一代机型。本页持续保留，不删除也不隐藏，供现有用户查找与比较。</p><ul><li>9P 若仍符合需求，无需急着更换。</li><li>正式升级建议必须等待 15P 规格公布。</li><li>可先预览 15P 上市页，追踪待确认项目。</li></ul>',
+            'description' => '<p>小云 9P 是上一代机型。本页持续保留，不删除也不隐藏，供现有用户查找与比较。</p><ul><li>9P 若仍符合需求，无需急着更换。</li><li>15P 硬件规格已公布，可按实际差异比较。</li><li>15P 现以 US$299 接受缺货订购（原价 US$379）；发货日期尚未公布。</li></ul>',
             'best_for' => [
                 'badge' => '旧款机型',
                 'title' => '正在评估下一台盒子的 9P 用户',
-                'copy'  => '如果 9P 仍正常使用，请继续保留。等 15P 正式规格公布后，再依实际差异决定是否升级。',
+                'copy'  => '如果 9P 仍正常使用，请继续保留。可比较 15P 已确认的硬件与目前 US$299 缺货订购价后再决定。',
                 'bullets' => [
                     'primary'   => '保留旧款页面与搜索排名',
                     'secondary' => '不催促更换正常运行的盒子',
@@ -1102,115 +1154,158 @@ $overrides = [
                 ],
             ],
             'crosslink' => [
-                'badge'  => '即将上市',
+                'badge'  => '接受缺货订购',
                 'title'  => '考虑从 9P 升级？',
-                'lead'   => '先预览小云 15P 上市页。处理器、内存、无线规格、保修与美国到货信息均待发布确认。',
-                'cta'    => '预览小云 15P',
+                'lead'   => '比较小云 15P 已确认的规格，并以 US$299 缺货订购（原价 US$379）。',
+                'cta'    => '缺货订购小云 15P',
                 'target' => 'svicloud-15p',
             ],
         ],
         'svicloud-15p' => [
-            'short_description' => '即将上市的小云 15P 预览页。规格、价格、美国到货、保修与盒内配件均待发布确认。',
-            'description' => '<p>小云 15P 是即将上市的机型。本预览页已先完成，但所有 15P 硬件与履约信息都尚未定案。</p><ul><li>【规格待确认】处理器、内存、存储、系统、视频解码与无线连接。</li><li>【功能待确认】卡拉 OK、儿童模式、语音遥控、频道内容与免月费条款。</li><li>【政策待确认】美国库存、发货时间、保修、退换货与双语客服范围。</li><li>【盒内待确认】HDMI 线、电源、遥控器与其他配件。</li></ul><p>上市前将以供应商正式资料替换所有待确认项目。</p>',
-            'prelaunch' => [
-                'subtitle' => '上市预览 — 规格、价格、库存与政策尚未确认。',
-                'detail'   => '暂不销售 · 等待供应商确认',
-                'image_placeholder' => '小云 15P 官方图片待确认',
+            'title' => '小云 15P 电视盒',
+            'meta' => [
+                'title'       => '小云 15P 缺货订购 US$299｜Android 14 电视盒',
+                'description' => '小云 15P 现以 US$299 接受缺货订购（原价 US$379），搭载 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6 与蓝牙 5.4。',
+                'image_alt'   => '小云 15P 电视盒正面',
+            ],
+            'short_description' => '现以 US$299 接受缺货订购（原价 US$379）：Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、蓝牙 5.4 与 4K HDR。',
+            'description' => '<p>全新小云 15P 电视盒搭载 Android 14 与 Amlogic S905Y5 四核心 ARM Cortex-A55 处理器。</p><h2>核心规格</h2><ul><li>4 GB DDR3 内存与 64 GB eMMC 存储空间。</li><li>2.4/5 GHz 双频 Wi-Fi 6（2T2R）与蓝牙 5.4。</li><li>HDR10+、HDR10 与 HLG 画面处理。</li><li>支持 AV1、VP9、H.265/HEVC 与 H.264 硬件解码；AV1、VP9、H.265/HEVC 最高支持 4K × 2K 60 fps。</li><li>HDMI 2.1、两个 USB 2.0、RJ45 有线网络、光纤音频与 Type-C 5V/2A 电源。</li></ul><h2>盒内配件</h2><p>礼盒、AC 适配器、HDMI 线、蓝牙语音飞鼠遥控器与用户手册。</p><p><strong>现以 US$299 接受缺货订购（原价 US$379）。</strong>发货日期尚未公布。</p>',
+            'footer' => [
+                'tagline' => '小云 15P 缺货订购信息',
+                'summary' => '根据供应商来源整理的小云 15P 硬件资料；特价 US$299（原价 US$379），发货日期尚未公布。',
                 'badges' => [
-                    'specs'        => '规格待确认',
-                    'availability' => '到货待确认',
-                    'policy'       => '政策待确认',
+                    'coming_soon'   => '接受缺货订购',
+                    'specifications'=> '硬件规格已公布',
+                    'commerce'      => '特价 US$299 · 原价 US$379',
+                ],
+                'benefits' => [
+                    'platform' => [
+                        'label'       => '已确认平台',
+                        'description' => 'Android 14、Amlogic S905Y5、4 GB DDR3 与 64 GB eMMC。',
+                    ],
+                    'connectivity' => [
+                        'label'       => '已确认连接',
+                        'description' => '双频 Wi-Fi 6、蓝牙 5.4、RJ45、HDMI 2.1、光纤音频与 Type-C 电源。',
+                    ],
+                    'availability' => [
+                        'label'       => '缺货订购状态',
+                        'description' => '现以 US$299 接受缺货订购；发货日期尚未公布。',
+                    ],
+                ],
+            ],
+            'inbox' => [
+                'items' => [
+                    'box'    => '小云 15P 电视盒',
+                    'power'  => 'AC 适配器（插头版本未指定）',
+                    'hdmi'   => 'HDMI 线',
+                    'remote' => '蓝牙语音飞鼠遥控器',
+                    'manual' => '用户手册',
+                ],
+            ],
+            'prelaunch' => [
+                'subtitle' => '接受缺货订购，搭载 Android 14、Amlogic S905Y5、Wi-Fi 6、蓝牙 5.4 与 4K HDR。',
+                'detail'   => '特价 US$299 · 原价 US$379 · 发货日期尚未公布',
+                'image_placeholder' => '小云 15P 电视盒正面',
+                'badges' => [
+                    'specs'        => 'Android 14',
+                    'availability' => '接受缺货订购',
+                    'policy'       => '4 GB + 64 GB',
                 ],
                 'highlights' => [
-                    'specs'        => '【规格待确认】硬件与功能',
-                    'availability' => '【到货待确认】美国库存与发货日期',
-                    'policy'       => '【政策待确认】费用、保修、退换货与客服',
+                    'specs'        => 'Amlogic S905Y5 四核心 ARM Cortex-A55 处理器',
+                    'availability' => '双频 Wi-Fi 6（2T2R）+ 蓝牙 5.4',
+                    'policy'       => 'HDR10+/HDR10/HLG + AV1 硬件解码',
                 ],
                 'reassurance' => [
-                    'badge' => '下单前',
-                    'title' => '请等待书面上市确认',
-                    'copy'  => '本预览页不提供 15P 购买。下单前请确认正式产品与卖家条款。',
+                    'badge' => '已确认产品资料',
+                    'title' => '小云 15P 已确认硬件重点',
+                    'copy'  => '下单前可查看已确认的硬件与盒内配件；缺货订购价 US$299，发货日期尚未公布。',
                     'bullets' => [
-                        'shipping'  => '【政策待确认】库存地点与发货时间',
-                        'warranty'  => '【政策待确认】保修与退换货条款',
-                        'concierge' => '【政策待确认】客服渠道与安装协助范围',
+                        'shipping'  => 'Android 14 + Amlogic S905Y5',
+                        'warranty'  => '4 GB DDR3 + 64 GB eMMC',
+                        'concierge' => 'Wi-Fi 6、蓝牙 5.4、4K HDR 与 AV1',
                     ],
+                ],
+                'faq_header' => [
+                    'badge' => '15P 缺货订购信息',
+                    'title' => '已确认规格与缺货订购详情',
+                    'lead'  => '供应商资料确认所列硬件与盒内配件；缺货订购价 US$299（原价 US$379），发货日期尚未公布。',
                 ],
                 'faq' => [
                     'specs' => [
-                        'q' => '小云 15P 规格已经确认了吗？',
-                        'a' => '尚未。处理器、内存、存储、视频、Wi-Fi、系统、遥控器、应用与配件均待确认。',
+                        'q' => '小云 15P 有哪些已确认规格？',
+                        'a' => '15P 搭载 Android 14、Amlogic S905Y5 四核心 ARM Cortex-A55、4 GB DDR3、64 GB eMMC、双频 Wi-Fi 6、蓝牙 5.4，并支持 AV1 等主要格式硬件解码。',
                     ],
                     'availability' => [
-                        'q' => '现在可以购买小云 15P 吗？',
-                        'a' => '不可以。本页是上市预览；价格、美国库存与发货日期尚未确认。',
+                        'q' => '现在可以订购小云 15P 吗？',
+                        'a' => '可以。15P 现以 US$299 接受缺货订购（原价 US$379）；发货日期尚未公布。',
                     ],
                     'policy' => [
-                        'q' => '15P 会提供哪些保修、退换货与客服？',
-                        'a' => '15P 专属政策仍待确认，购买前必须取得书面条款。',
+                        'q' => '小云 15P 盒内有哪些配件？',
+                        'a' => '来源包装清单包含电视盒、AC 适配器、HDMI 线、蓝牙语音遥控器、用户手册与礼盒；不承诺特定插头版本。',
                     ],
                 ],
             ],
             'best_for' => [
-                'badge' => '最适合',
-                'title' => '等待 15P 正式上市资料的买家',
-                'copy'  => '本页仅供追踪新品。正式规格、价格与美国到货确认前，不应把 15P 当作优于现有机型的选择。',
+                'badge' => '已确认平台',
+                'title' => 'Android 14、Wi-Fi 6 与蓝牙 5.4',
+                'copy'  => '供应商规格列出 Android 14、Amlogic S905Y5、双频 Wi-Fi 6、蓝牙 5.4 与所列 4K 解码支持。',
                 'bullets' => [
-                    'primary'   => '【规格待确认】硬件与软件配置',
-                    'secondary' => '【适用待确认】性能验证后再建议房间与用途',
-                    'tertiary'  => '【政策待确认】费用、美国发货、保修与客服条款',
+                    'primary'   => '4 GB DDR3 与 64 GB eMMC',
+                    'secondary' => '双频 Wi-Fi 6、RJ45 有线网络与蓝牙 5.4',
+                    'tertiary'  => '4K HDR 与 AV1、VP9、H.265/HEVC、H.264 硬件解码',
                 ],
             ],
             'traffic' => [
-                'badge' => '15P 美国上市规划',
-                'title' => '预计提供美国履约与客服 — 尚待确认',
-                'lead'  => '卖家计划提供美国发货与双语客服，但所有 15P 专属的库存、运输、保修与到货条款均须在上市时确认。',
+                'badge' => '小云 15P 核心规格',
+                'title' => 'Android 14 与规格表列出的有线、无线连接',
+                'lead'  => '15P 规格列出 AV1、VP9、H.265/HEVC、H.264、双频 Wi-Fi 6、蓝牙 5.4、HDMI 2.1、RJ45、光纤音频、USB 与 Type-C 电源。',
                 'bullets' => [
-                    'shipping'  => '【政策待确认】美国库存、发货时间、追踪与配件',
-                    'concierge' => '【政策待确认】中英双语安装与客服范围',
-                    'warranty'  => '【政策待确认】保修期限与退换货期间',
+                    'shipping'  => 'HDMI 2.1、两个 USB 2.0、RJ45、光纤音频与 Type-C 电源',
+                    'concierge' => '蓝牙语音飞鼠遥控器与 HDMI CEC 电视控制',
+                    'warranty'  => '支持 HDR10+、HDR10、HLG、AV1、VP9、H.265/HEVC 与 H.264',
                 ],
             ],
             'comparison' => [
                 'badge' => '机型比较',
-                'title' => '小云 15P vs 10P+ vs 9P — 上市确认清单',
-                'lead'  => '15P 正式规格尚未公布。以下比较只列出上市前必须验证的项目，不声称尚未证实的升级优势。',
+                'title' => '小云 15P vs 10P+ vs 9P',
+                'lead'  => '以已确认的 15P 规格比较现有机型，不设置性能排名。',
                 'cards' => [
                     'vs_10p' => [
                         'title'   => '15P vs 10P+',
-                        'summary' => '10P+ 已有公开规格；目前没有任何 15P 硬件优势获得证实。',
+                        'summary' => '两款皆提供 4 GB / 64 GB 配置；请依已确认的平台功能，以及是否需要立即购买来选择。',
                         'bullets' => [
-                            'one'   => '【规格待确认】比较处理器、内存与 10P+（4GB/64GB）的差异',
-                            'two'   => '【规格待确认】比较无线连接与 10P+ Wi-Fi 6 的差异',
-                            'three' => '【功能待确认】验证卡拉 OK、儿童模式、语音遥控与费用条款是否延续',
+                            'one'   => '15P：Amlogic S905Y5、Android 14、4 GB DDR3 与 64 GB eMMC',
+                            'two'   => '15P：双频 Wi-Fi 6、蓝牙 5.4、HDMI 2.1 与光纤音频',
+                            'three' => '15P 现以 US$299 接受缺货订购（原价 US$379）；发货日期尚未公布',
                         ],
                         'link_label' => '查看小云 10P+',
                     ],
                     'vs_9p' => [
                         'title'   => '15P vs 9P',
-                        'summary' => '正式规格与实机测试公布前，不能声称 15P 性能优于 9P。',
+                        'summary' => '15P 已确认采用 Android 14 与 Wi-Fi 6，但来源没有提供与 9P 的实测性能比较。',
                         'bullets' => [
-                            'one'   => '【规格待确认】比较处理器、内存、存储与 Android 版本',
-                            'two'   => '【规格待确认】验证 AV1、Wi-Fi 世代与视频输出',
-                            'three' => '【测试待确认】测量开机、App 切换、串流稳定与支持政策',
+                            'one'   => '15P：Android 14、Amlogic S905Y5、4 GB DDR3 与 64 GB eMMC',
+                            'two'   => '15P：Wi-Fi 6、蓝牙 5.4、4K HDR 与 AV1 解码',
+                            'three' => '升级前请比较目前 US$299 缺货订购方案与您的 9P',
                         ],
                         'link_label' => '查看旧款小云 9P 页面',
                     ],
                 ],
                 'upgrade' => [
-                    'title' => '谁适合升级',
+                    'title' => '比较说明',
                     'items' => [
-                        'from_9p'   => '从 9P 或更旧机型：等待正式规格与实机测试后再决定。',
-                        'from_10p'  => '从 10P/10P+：除非经验证的 15P 差异能解决特定需求，否则继续使用现有机型。',
-                        'new_buyer' => '第一次购买：上市时比较正式价格、功能、库存与政策条款。',
+                        'from_9p'   => '15P 来源确认 Android 14、Wi-Fi 6、蓝牙 5.4 与所列解码格式；未提供与 9P 的实测比较。',
+                        'from_10p'  => '15P 来源未提供与 10P 或 10P+ 的实测性能比较。',
+                        'new_buyer' => '15P 现以 US$299 接受缺货订购（原价 US$379）；现有机型维持各自销售状态。',
                     ],
                 ],
                 'assurance' => [
-                    'title' => '预计提供美国履约与客服 — 条款待确认',
+                    'title' => '已确认与尚未公布的信息',
                     'items' => [
-                        'shipping' => '【政策待确认】库存地点、处理时间、追踪与配送范围',
-                        'support'  => '【政策待确认】中英双语客服渠道与服务范围',
-                        'warranty' => '【政策待确认】保修期限、退换货与美国处理方式',
+                        'shipping' => '已确认：硬件、接口、无线规格、解码格式与盒内配件',
+                        'support'  => '缺货订购价：特价 US$299、原价 US$379；发货日期尚未公布',
+                        'warranty' => '尚未公布：15P 专属保修与退换货条款',
                     ],
                 ],
             ],
@@ -1218,25 +1313,26 @@ $overrides = [
     ],
     'compare' => [
         'meta' => [
-            'title'       => '小云盒子 10P+ 和 10S 2026 比较｜美国购买前先看规格差异',
-            'description' => '比较 2026 小云盒子 10P+ 与 10S 的规格、功能、价格与适用场景，帮你在美国购买前快速选出最适合的机型。',
-            'image_alt'   => '小云电视盒 10P+ 与 10S 并排展示，旁边放着语音遥控器',
+            'title'       => '小云 15P vs 10P+ vs 10S｜机型规格比较',
+            'description' => '比较 US$299 缺货订购的小云 15P（原价 US$379）与 10P+、10S，包括硬件、存储、连接、影音支持、价格与销售状态。',
+            'image_alt'   => '小云 15P、10P+ 与 10S 电视盒',
         ],
         'hero' => [
             'badge'    => '机型比较',
-            'title'    => '小云电视盒 10P+ 与 10S 2026 比较',
-            'subtitle' => '逐项比较硬件规格、功能与使用情境，帮你挑到最适合家庭的小云电视盒。',
+            'title'    => '小云 15P vs 10P+ vs 10S',
+            'subtitle' => '比较 US$299 缺货订购的 15P 与现售 10P+、10S 的价格、规格及销售状态。',
         ],
         'traffic' => [
             'badge' => '美国购买更安心',
-            'title' => '双语客服、48 小时出货、完整保修（两款皆适用）',
-            'lead'  => '为在美华人/亚洲家庭设计：内华达仓配货，中文/English 礼宾，并清楚指引哪款适合你的房间使用。',
+            'title' => '比较 15P 缺货订购与美国现货机型',
+            'lead'  => '15P 现以 US$299 接受缺货订购（原价 US$379），发货日期尚未公布；10P+ 与 10S 维持各自现售条款。',
             'bullets' => [
                 'shipping'  => '48 小时美国发货，附本地电源/HDMI 与追踪号',
                 'concierge' => '双语礼宾协助安装、Wi-Fi 调优、K 歌麦克风、Kids Mode',
                 'warranty'  => '1 年美国保修 + 14 天退换货，礼宾协助处理',
             ],
             'links' => [
+                'p15p'    => '缺货订购 15P',
                 'p10p'    => '购买 10P+',
                 'p10s'    => '购买 10S',
                 'faq'     => '查看 FAQ',
@@ -1244,6 +1340,10 @@ $overrides = [
             ],
         ],
         'differences' => [
+            'next_generation' => [
+                'title'       => 'Android 14 + 蓝牙 5.4',
+                'description' => '15P 结合 Android 14、Amlogic S905Y5、双频 Wi-Fi 6 与蓝牙 5.4，缺货订购价 US$299。',
+            ],
             'premium_performance' => [
                 'title'       => '顶级效能',
                 'description' => '双倍内存与存储空间，多工处理更顺畅，可安装更多应用程式。',
@@ -1258,12 +1358,23 @@ $overrides = [
             ],
         ],
         'products' => [
+            '15p' => [
+                'lead'     => '接受缺货订购的 Android 14 硬件，规格列有 Wi-Fi 6、蓝牙 5.4 与 4K 解码。',
+                'fit_label'=> '接受缺货订购',
+                'fit_copy' => 'Android 14、Amlogic S905Y5、双频 Wi-Fi 6、蓝牙 5.4 与所列 4K 解码支持；特价 US$299（原价 US$379）。',
+                'bullets' => [
+                    'processor_os'        => 'Amlogic S905Y5 四核心 Cortex-A55 + Android 14',
+                    'memory_connectivity' => '4 GB DDR3 / 64 GB eMMC + Wi-Fi 6 / 蓝牙 5.4',
+                    'video_remote'        => '4K HDR + AV1 解码 + 蓝牙语音飞鼠遥控器',
+                ],
+                'cta' => '缺货订购 15P',
+            ],
             '10p' => [
                 'lead'    => '旗舰硬件、专属家庭功能与最快速的运算效能。',
                 'fit_label'=> '最适合',
                 'fit_copy' => '客厅主机、K 歌聚会、爱看体育赛事，以及想要最快硬件体验的家庭。',
                 'bullets' => [
-                    'ram_storage' => '4GB 内存、64GB 存储与 AV1 解码',
+                    'ram_storage' => 'Android 12、4GB 内存、64GB 存储与 AV1 解码',
                     'apps'        => '内建儿童模式与卡拉 OK 应用',
                     'remote'      => '蓝牙 AI 语音遥控 + Wi-Fi 6',
                 ],
@@ -1274,7 +1385,7 @@ $overrides = [
                 'fit_label'=> '最适合',
                 'fit_copy' => '卧室、客房、第二台电视，以及希望用更低预算稳定收看的买家。',
                 'bullets' => [
-                    'ram_storage' => '2GB 内存、32GB 存储，满足日常播放',
+                    'ram_storage' => 'Android 12、2GB 内存、32GB 存储，满足日常播放',
                     'remote'      => '4K HDR + AV1 解码，搭配语音遥控',
                     'ports'       => '内建 HDMI、USB 3.0 与有线网络接口',
                 ],
@@ -1287,8 +1398,10 @@ $overrides = [
             'traffic_actions'=> '比较页主要操作',
             'differences'    => '机型重点差异',
             'product_list'   => '产品重点卡片',
+            'product_alt_15p'=> '小云 15P 电视盒',
             'product_alt_10p'=> '小云电视盒 10P+',
             'product_alt_10s'=> '小云电视盒 10S',
+            'comparison_15p' => '小云 15P 功能比较',
             'comparison_10p' => '小云电视盒 10P+ 功能比较',
             'comparison_10s' => '小云电视盒 10S 功能比较',
             'final_cta'      => '最终行动号召',
@@ -1299,7 +1412,7 @@ $overrides = [
         'confidence' => [
             'badge' => '下单更清楚',
             'title' => '挑好机型后，后续流程也有本地支援',
-            'lead'  => '不论选 10P+ 或 10S，后续流程都一样：美国现货、双语礼宾、可追踪配送，以及完整保修支持。',
+            'lead'  => '以已确认规格与价格比较三款机型；15P 接受缺货订购，发货日期尚未公布。',
             'cards' => [
                 'official' => [
                     'title' => '美国官方销售通路',
@@ -1315,7 +1428,7 @@ $overrides = [
                 ],
                 'warranty' => [
                     'title' => '购买后仍有保修',
-                    'copy'  => '两款机型皆包含 1 年美国保修与 14 天退换货期间。',
+                    'copy'  => '已公布的保修与退换货条款只适用目前可购买的机型；15P 专属条款尚未公布。',
                 ],
             ],
             'timeline' => [
@@ -1345,33 +1458,57 @@ $overrides = [
         'comparison' => [
             'title' => '功能比较',
             'rows'  => [
+                'processor' => [
+                    'label' => '处理器',
+                    'p15p'  => 'Amlogic S905Y5 四核心 Cortex-A55',
+                    'p10p'  => 'Amlogic S928X 八核心',
+                    'p10s'  => '四核心处理器',
+                ],
                 'ram_storage' => [
                     'label' => '内存 / 存储',
+                    'p15p'  => '4GB DDR3 / 64GB eMMC',
                     'p10p'  => '4GB / 64GB',
                     'p10s'  => '2GB / 32GB',
                 ],
+                'operating_system' => [
+                    'label' => '操作系统',
+                    'p15p'  => 'Android 14',
+                    'p10p'  => 'Android 12',
+                    'p10s'  => 'Android 12',
+                ],
+                'connectivity' => [
+                    'label' => '连接能力',
+                    'p15p'  => 'Wi-Fi 6 2T2R、蓝牙 5.4、RJ45',
+                    'p10p'  => 'Wi-Fi 6、蓝牙语音遥控、Gigabit LAN',
+                    'p10s'  => '双频 Wi-Fi、蓝牙、有线网络',
+                ],
                 'video_quality' => [
                     'label' => '影像品质',
+                    'p15p'  => '4K HDR10+/HDR10/HLG、AV1 解码',
                     'p10p'  => '4K HDR、AV1 解码',
                     'p10s'  => '4K HDR、AV1 解码',
                 ],
                 'voice_remote' => [
                     'label' => '语音遥控器',
+                    'p15p'  => '附蓝牙语音飞鼠遥控器',
                     'p10p'  => '支持',
                     'p10s'  => '支持',
                 ],
                 'kids_app' => [
                     'label' => '儿童应用',
-                    'p10p'  => '10P+ 独享',
+                    'p15p'  => '内含',
+                    'p10p'  => '内含',
                     'p10s'  => '无',
                 ],
                 'karaoke_mode' => [
                     'label' => '卡拉 OK 模式',
-                    'p10p'  => '10P+ 独享',
+                    'p15p'  => '内含',
+                    'p10p'  => '内含',
                     'p10s'  => '无',
                 ],
                 'best_for' => [
-                    'label' => '最适合',
+                    'label' => '机型定位',
+                    'p15p'  => 'Android 14、Wi-Fi 6、蓝牙 5.4；缺货订购 US$299',
                     'p10p'  => '家庭、运动迷、4K 家庭剧院',
                     'p10s'  => '精省用户 / 次要房间',
                 ],
@@ -1383,12 +1520,14 @@ $overrides = [
             'copy'    => '选择最符合您家庭需求与预算的小云电视盒机型。',
             'cta_10p' => '选购小云电视盒 10P+',
             'cta_10s' => '选购小云电视盒 10S',
+            'cta_15p' => '缺货订购小云 15P',
         ],
         'sticky_buy' => [
             'aria_label' => '固定比较操作',
             'label'      => '准备好选机了？直接下单美国现货',
             'cta_10p'    => '购买 10P+',
             'cta_10s'    => '购买 10S',
+            'cta_15p'    => '缺货订购 15P',
         ],
         'faq' => [
             'sections' => [

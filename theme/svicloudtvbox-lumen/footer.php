@@ -5,13 +5,44 @@
   $logo_alt        = $custom_logo_id ? get_post_meta( $custom_logo_id, '_wp_attachment_image_alt', true ) : '';
   $logo_alt        = $logo_alt ? $logo_alt : $site_name;
 
-  $footer_badge_keys = [
-    'footer.badges.ships',
-    'footer.badges.warranty',
-    'footer.badges.concierge',
-  ];
+  $is_15p_product = function_exists('is_product')
+    && is_product()
+    && get_post_field('post_name', get_queried_object_id()) === 'svicloud-15p';
+  $is_15p_commerce_flow = function_exists('svic_cart_contains_15p')
+    && ((function_exists('is_cart') && is_cart()) || (function_exists('is_checkout') && is_checkout()))
+    && svic_cart_contains_15p();
+  $is_15p_context = $is_15p_product || $is_15p_commerce_flow;
+  $footer_tagline_key = $is_15p_context ? 'products.svicloud-15p.footer.tagline' : 'footer.tagline';
+  $footer_summary_key = $is_15p_context ? 'products.svicloud-15p.footer.summary' : 'footer.summary';
+  $footer_badge_keys = $is_15p_context
+    ? [
+      'products.svicloud-15p.footer.badges.coming_soon',
+      'products.svicloud-15p.footer.badges.specifications',
+      'products.svicloud-15p.footer.badges.commerce',
+    ]
+    : [
+      'footer.badges.ships',
+      'footer.badges.warranty',
+      'footer.badges.concierge',
+    ];
 
-  $footer_benefit_map = [
+  $footer_benefit_map = $is_15p_context ? [
+    [
+      'icon'      => 'icon-box.svg',
+      'label_key' => 'products.svicloud-15p.footer.benefits.platform.label',
+      'desc_key'  => 'products.svicloud-15p.footer.benefits.platform.description',
+    ],
+    [
+      'icon'      => 'icon-wifi.svg',
+      'label_key' => 'products.svicloud-15p.footer.benefits.connectivity.label',
+      'desc_key'  => 'products.svicloud-15p.footer.benefits.connectivity.description',
+    ],
+    [
+      'icon'      => 'icon-check.svg',
+      'label_key' => 'products.svicloud-15p.footer.benefits.availability.label',
+      'desc_key'  => 'products.svicloud-15p.footer.benefits.availability.description',
+    ],
+  ] : [
     [
       'icon'      => 'icon-truck.svg',
       'label_key' => 'footer.benefits.shipping.label',
@@ -47,10 +78,10 @@
           <?php endif; ?>
         </span>
         <span class="footer-logo__text">
-          <span class="footer-logo__tagline"><?php echo svic_translate_html('footer.tagline'); ?></span>
+          <span class="footer-logo__tagline"><?php echo svic_translate_html($footer_tagline_key); ?></span>
         </span>
           </a>
-          <p class="footer-brand__summary"><?php echo svic_translate_html('footer.summary'); ?></p>
+          <p class="footer-brand__summary"><?php echo svic_translate_html($footer_summary_key); ?></p>
           <ul class="footer-brand__badges" role="list">
             <?php foreach ($footer_badge_keys as $badge_key) : ?>
               <li class="footer-brand__badge"><?php echo svic_translate_html($badge_key); ?></li>
@@ -64,7 +95,7 @@
               <?php foreach ($footer_benefit_map as $benefit) : ?>
                 <li class="footer-benefits__item">
                   <span class="footer-benefits__icon" style="color:rgba(236,246,255,0.95);">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svg/' . $benefit['icon'] ); ?>" alt="<?php echo esc_attr( svic_icon_label( $benefit['icon'] ) ); ?>" loading="lazy" />
+                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/svg/' . $benefit['icon'] ); ?>" alt="<?php echo esc_attr( svic_icon_label( $benefit['icon'] ) ); ?>" width="24" height="24" loading="lazy" />
                   </span>
                   <div class="footer-benefits__content">
                     <span class="footer-benefits__label"><?php echo svic_translate_html($benefit['label_key']); ?></span>

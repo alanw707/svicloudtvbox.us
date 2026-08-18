@@ -1,75 +1,99 @@
-# 15P Launch Build — Local Verification Report
+# SVICLOUD 15P backorder verification report
 
-Date: 2026-08-15
+Verified against `http://svicloud10p.svic.local` after a complete production-derived public-fixture refresh plus the deterministic local 15P supplement.
 
-## Build and code quality
+## Product invariant
 
-- `python3 scripts/build_css.py --theme svicloudtvbox-lumen` — clean; generated CSS rebuilt from registered partials.
-- `./scripts/sync_theme_container.sh svicloud10p` — complete; bind-mounted theme live in local Docker.
-- PHP lint — clean for `functions.php`, homepage, compare page, WooCommerce templates, and all three locale files.
-- `git diff --check` — clean.
-- Work recorded in Conventional Commits (verify with `git log`).
+- Status/visibility: `publish` / `visible`
+- Regular price: `$379.00`
+- Sale/effective price: `$299.00`
+- Managed stock: enabled, quantity `0`
+- Backorders: `notify`; stock status `onbackorder`
+- Purchasable / on backorder / notification required: `true / true / true`
+- Product images: one primary plus two gallery images; approved v4 marketing artwork remains separate for homepage/Shop cards
+- `/product/svicloud-15p/`: HTTP 200 in EN/繁中/简中
+- Product schema: exactly one Product and one `299.00 USD` Offer with `https://schema.org/BackOrder`
+- Offer delivery timing: absent
+- Customer action: localized `Backorder 15P`
+- Customer status: localized `Available on backorder` and `Shipping date not announced`
 
-## Rendered SEO and schema
+## Source, content, and policy boundaries
 
-- Local `/` → HTTP 200 and rendered title: `New SVICLOUD 15P Coming Soon | Authorized SVICLOUD TV Box US Dealer`.
-- Local `/product/svicloud-15p/` → HTTP 200.
-- 15P JSON-LD contains exactly **one** `Product` node (one unique `@id`), one `FAQPage`, and one `BreadcrumbList`.
-- Prelaunch Product node has **no Offer** because price and inventory are unconfirmed.
-- 15P FAQ schema asks whether specs, availability, and policies are confirmed; answers explicitly say TBC.
+- PDF/PPTX hashes match `docs/15p-source-traceability.md`; source files remain external/untracked.
+- Parent-media inventory has 89 rows (85 images + 4 videos); embedded-PPTX inventory has 27 excluded assets.
+- Hardware/app claims remain mapped to source evidence or direct supplier confirmation.
+- Site-owner commerce decision is recorded separately from supplier facts.
+- “Coming Soon” remains only inside approved v4 artwork.
+- Homepage, Shop, Compare, PDP, cart, checkout, metadata, and JSON-LD consistently display `$299/$379` and backorder state.
+- Standard WooCommerce checkout/cart/payment/shipping-rate/cancellation/return paths remain; the local environment has no default active payment gateway, so successful order completion is proven separately with a temporary offline test gateway only.
+- Cart/checkout switch to 15P-specific backorder badges, summary copy, notice, and footer rather than current-model fulfillment/warranty marketing.
+- No model-specific shipping-speed, dispatch-date, delivery-date, or warranty promise is introduced.
 
-## Product state and claim safety
+## Automated results
 
-- Local 15P product ID 95 is published as an **out-of-stock, no-price, non-purchasable preview**.
-- No 15P add-to-cart control renders.
-- Official imagery placeholder replaces the generic old-model product image.
-- Hardware, features, fee terms, inventory, shipping, warranty, returns, support, and in-box contents are visibly marked SPEC/FEATURE/POLICY/TBC.
-- Unsupported performance phrases are absent from rendered 15P comparison copy.
-- Draft articles and support scripts include prepublication gates and TBC fields.
+| Check | Result |
+|---|---:|
+| `tests/playwright/launch-15p.spec.ts` | 10 passed, 0 failed |
+| `scripts/audit_15p_storefront.mjs` | 36/36 passed |
+| `scripts/audit_storefront_seo.mjs` | 24 page observations + 77 internal links, 0 issues |
+| `tests/playwright/frontend-quality.spec.ts` | 18 passed, 0 failed |
+| `tests/playwright/checkout-layout.spec.ts` | 2 passed, 4 environment skips, 0 failed |
+| `tests/playwright/guides-locale.spec.ts` | 4 passed across Chromium/WebKit, 0 failed |
+| `tests/playwright/locale-commerce.spec.ts` | 4 passed across Chromium/WebKit, 0 failed |
+| `scripts/test_public_fixture_security.py` | 3 passed, 0 failed |
+| Isolated local offline checkout | order-received reached; dummy orders deleted; gateway and stock restored |
+| `tests/playwright/smoke.spec.ts` | 14 passed, 2 known `/my-account/` baseline failures |
+| Full `npm test` | 112 passed, 8 skipped, 8 proven pre-existing failures |
+| Header/hero accessibility audit | 25 named/focusable controls, 41 contrast checks, heading/decorative checks: pass |
+| Header/hero layout audit | 1920/1512/1280/1024/390: no overlap or horizontal overflow |
+| Product permalink verification | 4/4 HTTP 200 |
+| Remote Shop card audit | one visible card/link, image loaded, no errors |
+| Private fixture preservation probe | five seeded records plus content/media/term identity preserved |
+| Full refresh private counts | 1 user, 80 HPOS orders, 80 customers, 84 private/unpublished records preserved |
+| PHP lint / Python compile / Node syntax / CSS+JS builds | passed |
+| `git diff --check` | passed |
+| Adversarial review security/fixture regressions | 3 security tests passed; controlled incomplete fixture exited nonzero; valid full refresh passed |
+| Localized Guides header-route regressions | 4 passed across Chromium/WebKit |
+| Localized 15P commerce regressions | 4 passed across Chromium/WebKit |
+| Isolated offline checkout | order-received reached with dummy buyer; all temporary orders deleted; gateway restored |
 
-## 9P preservation and funnel
+### Full-suite baseline classification
 
-- Local `/product/svicloud-9p/` and `/zh/product/svicloud-9p/` → HTTP 200.
-- 9P is published but out of stock as a legacy support/reference page.
-- 9P PDP links to `/product/svicloud-15p/`; 15P comparison links back to both 9P and 10P+.
-- 10P+ and 10S PDPs also link to the 15P preview.
+The eight remaining full-suite failures are unrelated and predate this implementation:
+
+1. **Two `/my-account/` gutter failures:** exactly match the captured pre-implementation smoke baseline (`x=0`, expected ≥12).
+2. **Two blog-image tests:** report 19 missing historical upload files. All 19 are absent from the verified pre-implementation `uploads.tar.gz`, proving this launch did not remove them.
+3. **Four dynamic Blog-menu tests:** expect `.menu-item-svic-dynamic`, but that implementation does not exist in baseline HEAD `34af29c` or its theme source. Current header/menu layout and accessibility audits pass.
+
+No new failure remains after updating stale hard-coded product-ID and non-purchasable-15P test assumptions. The localized Guides and commerce regressions now exercise the actual header links and PDP form actions.
+
+## SEO audit
+
+Detailed findings: `docs/scope-research/15p-storefront-seo-audit.md`. Machine evidence: `15p-storefront-seo-baseline.json` and `15p-storefront-seo-final.json`.
+
+- Every required route is HTTP 200, indexable, self-canonical, and has four reciprocal hreflang values.
+- Titles/descriptions, OG/Twitter metadata, headings, internal links, image metadata, and JSON-LD pass.
+- Active local `wp-sitemap.xml` includes the English 15P PDP.
+- Zero broken audited links or unintended non-transactional redirects.
+- Lighthouse SEO: desktop 100, mobile 100.
+- Local performance score: desktop 96, mobile 90; key observations and runner variance are documented.
+
+## Preserved data/environment integrations
+
+- Complete recovery points: original safety commit `9846579656fd99de71bb3dfdc4b336eb2b5e01f7` plus adversarial pre-fix branch `safety/adversarial-review-pre-fix-20260818` at `6f619f8492b98cbb3d881a1137210d3e4b32e120`; the latter has a gzip-tested database backup under the external Pi backup directory.
+- Complete fixture refresh now fails nonzero on partial media/post/product/term/menu imports and verifies the full source-ID manifest; valid refresh and private-preservation probe pass.
+- Recent-shipment strip constant and renderer remain enabled/present; local absence remains data-dependent because the fixture has no completed eligible shipments.
+- Google Customer Reviews constant, merchant ID, renderer, footer hook, and CSP support remain present. Development filter intentionally disables the external badge; production behavior remains enabled.
 
 ## Screenshots
 
-Homepage evidence:
-- `screenshots/before-home-desktop.png`
-- `screenshots/before-home-mobile.png`
-- `screenshots/redesign-home-desktop.png`
-- `screenshots/redesign-home-mobile.png`
+Tracked final desktop/mobile captures:
 
-Genuine same-URL PDP evidence (`/product/svicloud-10p-plus/`):
-- `screenshots/before-pdp-10p-desktop.png` SHA-256 `477d3dde...`
-- `screenshots/after-pdp-10p-desktop.png` SHA-256 `4eb66af1...`
-- `screenshots/before-pdp-10p-mobile.png` SHA-256 `9cb76d1c...`
-- `screenshots/after-pdp-10p-mobile.png` SHA-256 `43764117...`
+- Homepage: `after-home-*` and `redesign-home-*`
+- Shop: `final-shop-*`
+- Compare: `final-compare-*`
+- PDP: `final-pdp-15p-*`
+- Cart: `final-cart-15p-*`
+- Checkout: `final-checkout-15p-*`
 
-The corresponding before/after hashes differ. Final prelaunch surface screenshots:
-- `screenshots/final-pdp-15p-desktop.png`
-- `screenshots/final-pdp-15p-mobile.png`
-- `screenshots/final-shop-desktop.png`
-- `screenshots/final-shop-mobile.png`
-
-## Playwright
-
-`npm test`: **90 passed, 8 declared skips, 0 failed** (exit 0).
-
-Additional launch safeguards in `tests/playwright/launch-15p.spec.ts` verify:
-
-- rendered homepage title contains 15P;
-- exactly one Product schema node and no Offer;
-- no 15P add-to-cart control;
-- unsupported comparison claims are absent and TBC copy is present;
-- homepage hero visibly marks availability, fee, warranty, return, and support claims TBC;
-- homepage and shop 15P cards show `Price TBC`, never `$299.00`, and use 15P-specific POLICY TBC assurances;
-- legacy 9P URL is live and links to 15P.
-
-`tests/playwright/smoke.spec.ts` collects every console error without an ignore list. Homepage, compare, shop, current PDPs, 15P, and account pass on Chromium desktop and WebKit mobile with zero console errors. The strict smoke + launch safeguards passed three consecutive runs (20/20 each). The external floating Google rating badge is disabled only when `wp_get_environment_type()` is `development`, eliminating uncontrollable third-party report-only CSP noise; production badge behavior remains opt-in testable with `PLAYWRIGHT_EXPECT_GOOGLE_REVIEWS_BADGE=1`.
-
-## Deployment boundary
-
-No production theme deployment is included. Product creation, final price/inventory, official images, spec replacement, publication, advertising, and launch activation remain manual launch-day steps.
+Runtime locale/viewports remain under `.playwright/15p-audit/` and are intentionally untracked.

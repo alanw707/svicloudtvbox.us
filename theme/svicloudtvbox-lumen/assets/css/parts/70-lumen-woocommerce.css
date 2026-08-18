@@ -531,6 +531,13 @@
   color: var(--lumen-accent-teal);
 }
 
+.lumen-product .product-hero-backorder-note {
+  max-width: 48ch;
+  margin: -0.5rem 0 0;
+  color: rgba(221, 235, 252, 0.8);
+  line-height: 1.65;
+}
+
 .lumen-product .product-hero-cta .cart {
   display: flex;
   align-items: center;

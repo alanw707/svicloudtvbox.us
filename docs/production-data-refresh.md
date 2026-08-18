@@ -15,6 +15,8 @@ The sync makes read-only production requests with the application password confi
 
 Source URLs in imported post, product, navigation, menu, and media content are rewritten to the local site URL. Downloaded assets live in the ignored local `sites/` runtime directory. The existing local custom-logo/site-icon attachments are retained as local infrastructure so the active theme chrome remains valid.
 
+After importing the production-derived catalog, the local importer recreates one documented supplemental product: the SVICLOUD 15P. Its verified specifications, three source/gallery images, and separate marketing artwork are tracked with the theme and documented in `docs/15p-source-traceability.md`. It is catalog-visible and purchasable for a $299 sale price ($379 regular) with managed zero stock and notified backorders. Its shipping date is not announced. This local-only supplement is never sent to production and its exact commerce/media state is verified after every applied refresh.
+
 ## What it never requests or changes
 
 - production users, orders, refunds, customers, addresses, payment data, sessions, logs, API keys, credentials, or private plugin data;
@@ -58,7 +60,7 @@ WP_REST_LOCAL_ENDPOINT=http://svicloud10p.svic.local/wp-json/wp/v2
    python3 scripts/sync_public_theme_fixture.py --env-file .env --apply
    ```
 
-   `--apply` deletes and recreates managed or published local pages/posts/products/media/categories/tags/product attributes/menu items/navigation. Draft, pending, private, future, and trashed local content is retained with its attached media and terms. It verifies representative content plus the complete source-ID manifest, and aborts if local user/order/customer counts change. Local private counts may be nonzero; the sync preserves them rather than requiring or making them zero. It does not delete local users or query/create private production records. Do not run it against a shared or production container.
+   `--apply` deletes and recreates managed or published local pages/posts/products/media/categories/tags/product attributes/menu items/navigation, then recreates the documented local-only 15P product. Draft, pending, private, future, and trashed local content is retained with its attached media and terms. It compares representative local page, product, media, and menu records to the in-memory production fixture, verifies the 15P state and image count, and aborts if local user/order/customer counts change. Local private counts may be nonzero; the sync preserves them rather than requiring or making them zero. It does not delete local users or query/create private production records. Do not run it against a shared or production container.
 
 ## Validation
 
