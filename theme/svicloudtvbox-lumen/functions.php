@@ -4418,9 +4418,11 @@ if (!function_exists('svic_finish_head_meta_description_buffer')) {
                 '/<meta\s+name=["\']description["\'][^>]*>\s*/i',
                 '/<meta\s+property=["\']og:title["\'][^>]*>\s*/i',
                 '/<meta\s+property=["\']og:description["\'][^>]*>\s*/i',
+                '/<meta\s+property=["\']og:image["\'][^>]*>\s*/i',
                 '/<meta\s+property=["\']og:image:alt["\'][^>]*>\s*/i',
                 '/<meta\s+name=["\']twitter:title["\'][^>]*>\s*/i',
                 '/<meta\s+name=["\']twitter:description["\'][^>]*>\s*/i',
+                '/<meta\s+name=["\']twitter:image["\'][^>]*>\s*/i',
                 '/<meta\s+name=["\']twitter:image:alt["\'][^>]*>\s*/i',
             );
             $head = preg_replace($patterns, '', $head) ?: $head;
@@ -4428,9 +4430,11 @@ if (!function_exists('svic_finish_head_meta_description_buffer')) {
             echo '<meta name="description" content="' . esc_attr($meta['description']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta property="og:title" content="' . esc_attr($meta['title']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta property="og:description" content="' . esc_attr($meta['description']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<meta property="og:image" content="' . esc_url($meta['image']['url']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta property="og:image:alt" content="' . esc_attr($meta['image_alt']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta name="twitter:title" content="' . esc_attr($meta['title']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta name="twitter:description" content="' . esc_attr($meta['description']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<meta name="twitter:image" content="' . esc_url($meta['image']['url']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta name="twitter:image:alt" content="' . esc_attr($meta['image_alt']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             return;
         }
