@@ -929,9 +929,9 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh-cn' => '小云 15P vs 10P+ vs 10S｜机型规格比较',
                 ],
                 'description' => [
-                    'en' => 'Compare the $299 SVICLOUD 15P backorder ($379 regular) with 10P+ and 10S hardware, video support, pricing, and availability.',
-                    'zh' => '比較 US$299 缺貨訂購的小雲 15P（原價 US$379）與 10P+、10S 的硬體、影音支援、價格及銷售狀態。',
-                    'zh-cn' => '比较 US$299 缺货订购的小云 15P（原价 US$379）与 10P+、10S 的硬件、影音支持、价格及销售状态。',
+                    'en' => 'Compare the $288 SVICLOUD 15P backorder ($379 regular) with 10P+ and 10S hardware, video support, pricing, and availability.',
+                    'zh' => '比較 US$288 缺貨訂購的小雲 15P（原價 US$379）與 10P+、10S 的硬體、影音支援、價格及銷售狀態。',
+                    'zh-cn' => '比较 US$288 缺货订购的小云 15P（原价 US$379）与 10P+、10S 的硬件、影音支持、价格及销售状态。',
                 ],
                 'image'       => '/assets/images/products/svicloud-15p-front.webp',
                 'image_alt'   => [
@@ -947,9 +947,9 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh-cn' => '选购小云 15P、10P+ 与 10S 电视盒',
                 ],
                 'description' => [
-                    'en' => 'Backorder SVICLOUD 15P for $299 (regular $379), or shop current 10P+, 10S, and Bluetooth remote products.',
-                    'zh' => '以 US$299 缺貨訂購小雲 15P（原價 US$379），或選購現售 10P+、10S 與藍牙遙控器。',
-                    'zh-cn' => '以 US$299 缺货订购小云 15P（原价 US$379），或选购现售 10P+、10S 与蓝牙遥控器。',
+                    'en' => 'Backorder SVICLOUD 15P for $288 (regular $379), or shop current 10P+, 10S, and Bluetooth remote products.',
+                    'zh' => '以 US$288 缺貨訂購小雲 15P（原價 US$379），或選購現售 10P+、10S 與藍牙遙控器。',
+                    'zh-cn' => '以 US$288 缺货订购小云 15P（原价 US$379），或选购现售 10P+、10S 与蓝牙遥控器。',
                 ],
                 'image'       => '/assets/images/products/svicloud-15p-marketing-v4.webp',
                 'image_alt'   => [
@@ -1959,17 +1959,17 @@ if (!function_exists('svic_homepage_meta_definitions')) {
         $definitions = [
             'zh_tw' => [
                 'title'       => '小雲 15P 缺貨訂購｜小雲盒子美國授權經銷',
-                'description' => '小雲 15P 現以 US$299 接受缺貨訂購（原價 US$379），由小雲盒子美國授權經銷提供。可比較 10P+ 與 10S，出貨日期尚未公布。',
+                'description' => '小雲 15P 現以 US$288 接受缺貨訂購（原價 US$379），由小雲盒子美國授權經銷提供。可比較 10P+ 與 10S，出貨日期尚未公布。',
                 'image_alt'   => '小雲 15P Android 14 電視盒缺貨訂購圖',
             ],
             'zh_cn' => [
                 'title'       => '小云 15P 缺货订购｜小云盒子美国授权经销',
-                'description' => '小云 15P 现以 US$299 接受缺货订购（原价 US$379），由小云盒子美国授权经销提供。可比较 10P+ 与 10S，发货日期尚未公布。',
+                'description' => '小云 15P 现以 US$288 接受缺货订购（原价 US$379），由小云盒子美国授权经销提供。可比较 10P+ 与 10S，发货日期尚未公布。',
                 'image_alt'   => '小云 15P Android 14 电视盒缺货订购图',
             ],
             'en_us' => [
                 'title'       => 'SVICLOUD 15P Backorder | 小雲盒子 U.S. Authorized Dealer',
-                'description' => 'Backorder SVICLOUD 15P for $299 (regular $379) from an authorized U.S. dealer. Compare 10P+ and 10S with bilingual English/中文 support. Shipping date not announced.',
+                'description' => 'Backorder SVICLOUD 15P for $288 (regular $379) from an authorized U.S. dealer. Compare 10P+ and 10S with bilingual English/中文 support. Shipping date not announced.',
                 'image_alt'   => 'SVICLOUD 15P Android 14 TV box backorder graphic',
             ],
         ];

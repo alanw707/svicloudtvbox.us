@@ -11,7 +11,7 @@ $price_15p_markup = $hero_product_15p && function_exists('svic_price_html')
     ? svic_price_html($hero_product_15p)
     : '';
 if ($price_15p_markup === '') {
-    $price_15p_markup = '<span class="lumen-price"><span class="lumen-price__current">$299.00</span><span class="lumen-price__original">$379.00</span></span>';
+    $price_15p_markup = '<span class="lumen-price"><span class="lumen-price__current">$288.00</span><span class="lumen-price__original">$379.00</span></span>';
 }
 
 $hero_product_10p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null;

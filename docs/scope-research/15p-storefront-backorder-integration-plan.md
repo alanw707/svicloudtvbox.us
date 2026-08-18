@@ -15,7 +15,7 @@
 ## Clarifications Resolved
 
 - Visible action: `Backorder 15P`; natural locale equivalents preserve the same meaning.
-- Price/state: regular `$379`, sale/effective `$299`, managed zero stock, backorders `notify`, `onbackorder`.
+- Price/state: regular `$379`, sale/effective `$288`, managed zero stock, backorders `notify`, `onbackorder`.
 - Card: match 10P+ rhythm; left-aligned price/status/title/copy, centered CTA.
 - “Coming Soon”: artwork only. UI says Available on backorder / Shipping date not announced.
 - Policies: normal checkout/payment/shipping-rate/cancellation/return behavior; no 15P-specific speed/date/warranty promise.
@@ -77,7 +77,7 @@ Use existing WooCommerce product state as the single commerce authority, existin
 
 ### T4. Implement consistent storefront and localized backorder flow
 - Files: `theme/svicloudtvbox-lumen/front-page.php`, `woocommerce/archive-product.php`, `page-compare.php`, `woocommerce/single-product.php`, `woocommerce/cart/cart.php`, locale registries, `assets/css/parts/32b-15p-launch-redesign.css`, `65-shop.css`, `70-lumen-woocommerce.css`, generated CSS bundles, `tests/playwright/launch-15p.spec.ts`, `scripts/audit_15p_storefront.mjs`
-- Action: remove prelaunch commerce suppression while retaining 15P media/content; render `$299/$379`, Available on backorder, Shipping date not announced, and Backorder 15P on all approved surfaces; use standard WC add-to-cart/cart/checkout; align card geometry; retain v4 on hero/cards and clean media on PDP/Compare; rewrite obsolete negative tests for cart/locale/schema/accessibility behavior.
+- Action: remove prelaunch commerce suppression while retaining 15P media/content; render `$288/$379`, Available on backorder, Shipping date not announced, and Backorder 15P on all approved surfaces; use standard WC add-to-cart/cart/checkout; align card geometry; retain v4 on hero/cards and clean media on PDP/Compare; rewrite obsolete negative tests for cart/locale/schema/accessibility behavior.
 - Depends on: T1
 - Rollback: restore template/locale/CSS/test hunks from safety snapshot and rebuild bundles.
 - Parallel: yes, except locale files must be coordinated with T3
@@ -180,7 +180,7 @@ Use existing WooCommerce product state as the single commerce authority, existin
 | T1 | snapshot/DB/manifest hashes | T1 Verify command |
 | T2 | exact fixture state and preservation | T2 then T6 commands |
 | T3 | one BackOrder Offer, localized meta, no deliveryTime | SEO audit + launch suite |
-| T4 | `$299/$379`, actions/notices/cart flow, alignment | launch suite + 36-check audit |
+| T4 | `$288/$379`, actions/notices/cart flow, alignment | launch suite + 36-check audit |
 | T5 | bounded route/infrastructure audit | `node scripts/audit_storefront_seo.mjs` |
 | T6 | repeatability and targeted green gate | complete T6 command |
 | T7 | SEO report + Lighthouse comparison | complete T7 command |

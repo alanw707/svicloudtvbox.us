@@ -6,13 +6,13 @@ Verified against `http://svicloud10p.svic.local` after a complete production-der
 
 - Status/visibility: `publish` / `visible`
 - Regular price: `$379.00`
-- Sale/effective price: `$299.00`
+- Sale/effective price: `$288.00`
 - Managed stock: enabled, quantity `0`
 - Backorders: `notify`; stock status `onbackorder`
 - Purchasable / on backorder / notification required: `true / true / true`
 - Product images: one primary plus two gallery images; approved v4 marketing artwork remains separate for homepage/Shop cards
 - `/product/svicloud-15p/`: HTTP 200 in EN/繁中/简中
-- Product schema: exactly one Product and one `299.00 USD` Offer with `https://schema.org/BackOrder`
+- Product schema: exactly one Product and one `288.00 USD` Offer with `https://schema.org/BackOrder`
 - Offer delivery timing: absent
 - Customer action: localized `Backorder 15P`
 - Customer status: localized `Available on backorder` and `Shipping date not announced`
@@ -24,7 +24,7 @@ Verified against `http://svicloud10p.svic.local` after a complete production-der
 - Hardware/app claims remain mapped to source evidence or direct supplier confirmation.
 - Site-owner commerce decision is recorded separately from supplier facts.
 - “Coming Soon” remains only inside approved v4 artwork.
-- Homepage, Shop, Compare, PDP, cart, checkout, metadata, and JSON-LD consistently display `$299/$379` and backorder state.
+- Homepage, Shop, Compare, PDP, cart, checkout, metadata, and JSON-LD consistently display `$288/$379` and backorder state.
 - Standard WooCommerce checkout/cart/payment/shipping-rate/cancellation/return paths remain; the local environment has no default active payment gateway, so successful order completion is proven separately with a temporary offline test gateway only.
 - Cart/checkout switch to 15P-specific backorder badges, summary copy, notice, and footer rather than current-model fulfillment/warranty marketing.
 - No model-specific shipping-speed, dispatch-date, delivery-date, or warranty promise is introduced.

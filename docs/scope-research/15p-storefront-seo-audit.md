@@ -14,7 +14,7 @@
 |---|---|
 | HTTP/indexability | EN/繁中/简中 return 200; no redirect; no `noindex`. |
 | Title | EN `SVICLOUD 15P Backorder \| 小雲盒子 U.S. Authorized Dealer` (52 chars); approved localized titles present. |
-| Description | EN 160 chars; localized descriptions contain 15P, `$299/$379`, authorized-dealer context, model comparison, and no announced shipping date. |
+| Description | EN 160 chars; localized descriptions contain 15P, `$288/$379`, authorized-dealer context, model comparison, and no announced shipping date. |
 | Canonical/hreflang | One self-canonical plus reciprocal `en-US`, `zh-Hant-US`, `zh-Hans-US`, and `x-default` on every locale. |
 | Headings | One H1 and one main landmark; no skipped heading level. |
 | Internal discovery | Homepage links expose 15P PDP, Shop, Compare, current models, Guides, and support; no broken link among the audited site-wide set. |
@@ -42,7 +42,7 @@ For every observation the audit found:
 - no absent image `alt`, failed image, or missing width/height attribute;
 - no horizontal overflow or application console/page error;
 - parseable JSON-LD with unique Product IDs;
-- one 15P Product Offer at `299.00 USD`, availability `https://schema.org/BackOrder`, and no `deliveryTime`.
+- one 15P Product Offer at `288.00 USD`, availability `https://schema.org/BackOrder`, and no `deliveryTime`.
 
 ## Robots, sitemap, links, and redirects
 
@@ -69,7 +69,7 @@ Homepage social imagery now matches the v4 15P marketing creative; PDP/Compare r
 ## Structured-data review
 
 - PDP has exactly one 15P Product node and one Offer.
-- Effective Offer price is `$299.00`; storefront markup also exposes regular `$379.00`.
+- Effective Offer price is `$288.00`; storefront markup also exposes regular `$379.00`.
 - Availability is `BackOrder`, not WooCommerce’s broader in-stock boolean.
 - BackOrder shipping details retain normal destination/rate/policy information but omit handling/transit timing.
 - Current products keep their existing InStock delivery data.
@@ -89,7 +89,7 @@ The one-run local mobile LCP value increased by 0.7 s while the overall performa
 
 ## Findings resolved during audit
 
-1. Compare descriptions mentioned `$299` but omitted regular `$379`; all locale metadata now includes both.
+1. Compare descriptions mentioned `$288` but omitted regular `$379`; all locale metadata now includes both.
 2. 15P PDP linked to nonexistent localized 9P product routes; links are now omitted when the product does not exist.
 3. Footer SVGs lacked explicit HTML dimensions; native 24×24 dimensions are now present.
 4. English 15P sitemap inclusion, localized self-canonicals, and reciprocal hreflang were explicitly verified.

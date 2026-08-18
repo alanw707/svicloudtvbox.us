@@ -10,7 +10,7 @@
 
 ## Commerce activation
 
-- [x] Site owner approved `$379.00` regular / `$299.00` sale
+- [x] Site owner approved `$379.00` regular / `$288.00` sale
 - [x] Managed zero stock, `notify` backorders, `onbackorder`, and purchasing configured
 - [x] Customer actions use `Backorder 15P`
 - [x] Surrounding UI uses `Available on backorder` and `Shipping date not announced`

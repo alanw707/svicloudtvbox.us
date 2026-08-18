@@ -513,9 +513,11 @@ function svic_fixture_import_local_media(array $items, array &$maps): void {
 
 function svic_fixture_import_local_15p(array &$maps): void {
     $media = array(
-        'front' => array('path' => 'assets/images/products/svicloud-15p-front.webp', 'title' => 'SVICLOUD 15P front view', 'alt' => 'SVICLOUD 15P TV box front view'),
-        'angle' => array('path' => 'assets/images/products/svicloud-15p-angle.webp', 'title' => 'SVICLOUD 15P angled view', 'alt' => 'SVICLOUD 15P TV box angled view showing rear ports'),
-        'package' => array('path' => 'assets/images/products/svicloud-15p-package.webp', 'title' => 'SVICLOUD 15P packaging', 'alt' => 'SVICLOUD 15P packaging front'),
+        'primary_ai' => array('path' => 'assets/images/products/svicloud-15p-primary-ai-watermarked.webp', 'title' => 'SVICLOUD 15P primary AI product image', 'alt' => 'SVICLOUD 15P TV Box front view with watermark'),
+        'angle' => array('path' => 'assets/images/products/svicloud-15p-angle-watermarked.webp', 'title' => 'SVICLOUD 15P angled watermarked view', 'alt' => 'SVICLOUD 15P TV box angled view showing rear ports'),
+        'package' => array('path' => 'assets/images/products/svicloud-15p-package-watermarked.webp', 'title' => 'SVICLOUD 15P watermarked packaging', 'alt' => 'SVICLOUD 15P packaging front'),
+        'lifestyle_ai' => array('path' => 'assets/images/products/svicloud-15p-lifestyle-ai-watermarked.webp', 'title' => 'SVICLOUD 15P AI lifestyle image', 'alt' => 'SVICLOUD 15P AI lifestyle product image with watermark'),
+        'lifestyle_ai_2' => array('path' => 'assets/images/products/svicloud-15p-lifestyle-ai-2-watermarked.webp', 'title' => 'SVICLOUD 15P second AI lifestyle image', 'alt' => 'SVICLOUD 15P second AI lifestyle product image with watermark'),
     );
     svic_fixture_import_local_media($media, $maps);
 
@@ -525,17 +527,17 @@ function svic_fixture_import_local_15p(array &$maps): void {
     $product->set_status('publish');
     $product->set_catalog_visibility('visible');
     $product->set_short_description('Available on backorder: Android 14, Amlogic S905Y5, 4 GB DDR3 memory, 64 GB eMMC storage, dual-band Wi-Fi 6, Bluetooth 5.4, and 4K HDR playback.');
-    $product->set_description('<p>The SVICLOUD 15P TV Box runs Android 14 on an Amlogic S905Y5 quad-core ARM Cortex-A55 processor.</p><h2>Core specifications</h2><ul><li>4 GB DDR3 memory and 64 GB eMMC storage</li><li>Dual-band 2.4/5 GHz Wi-Fi 6 with 2T2R and Bluetooth 5.4</li><li>HDR10+, HDR10, and HLG processing</li><li>AV1, VP9, H.265/HEVC, and H.264 hardware decoding</li><li>HDMI 2.1, two USB 2.0 ports, RJ45 Ethernet, optical audio, and Type-C 5V/2A power</li></ul><h2>In the box</h2><p>Gift box, AC adapter, HDMI cable, Bluetooth voice remote, and user manual.</p><p><strong>Available on backorder for $299.00 (regular $379.00).</strong> Shipping date not announced.</p>');
+    $product->set_description('<p>The SVICLOUD 15P TV Box runs Android 14 on an Amlogic S905Y5 quad-core ARM Cortex-A55 processor.</p><h2>Core specifications</h2><ul><li>4 GB DDR3 memory and 64 GB eMMC storage</li><li>Dual-band 2.4/5 GHz Wi-Fi 6 with 2T2R and Bluetooth 5.4</li><li>HDR10+, HDR10, and HLG processing</li><li>AV1, VP9, H.265/HEVC, and H.264 hardware decoding</li><li>HDMI 2.1, two USB 2.0 ports, RJ45 Ethernet, optical audio, and Type-C 5V/2A power</li></ul><h2>In the box</h2><p>Gift box, AC adapter, HDMI cable, Bluetooth voice remote, and user manual.</p><p><strong>Available on backorder for $288.00 (regular $379.00).</strong> Shipping date not announced.</p>');
     $product->set_regular_price('379');
-    $product->set_sale_price('299');
-    $product->set_price('299');
+    $product->set_sale_price('288');
+    $product->set_price('288');
     $product->set_manage_stock(true);
     $product->set_stock_quantity(0);
     $product->set_backorders('notify');
     $product->set_stock_status('onbackorder');
     $product->set_reviews_allowed(false);
-    $product->set_image_id((int) $maps['local_media']['front']);
-    $product->set_gallery_image_ids(array_values(array_map(static fn(string $key): int => (int) $maps['local_media'][$key], array('angle', 'package'))));
+    $product->set_image_id((int) $maps['local_media']['primary_ai']);
+    $product->set_gallery_image_ids(array_values(array_map(static fn(string $key): int => (int) $maps['local_media'][$key], array('angle', 'package', 'lifestyle_ai', 'lifestyle_ai_2'))));
     $categories = array_filter(array_map(static function (string $slug): int {
         $term = get_term_by('slug', $slug, 'product_cat');
         return $term instanceof WP_Term ? (int) $term->term_id : 0;

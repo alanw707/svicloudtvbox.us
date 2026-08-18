@@ -44,7 +44,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     const pricingCardText = await pricingCard.innerText();
     expect(pricingCardText.toLowerCase()).toContain('available on backorder');
     expect(pricingCardText.toLowerCase()).toContain('shipping date not announced');
-    expect(pricingCardText).toContain('$299.00');
+    expect(pricingCardText).toContain('$288.00');
     expect(pricingCardText).toContain('$379.00');
     expect(pricingCardText).not.toContain('Coming Soon');
     expect(pricingCardText).not.toContain('warranty');
@@ -59,7 +59,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
 
     const card = page.locator('.shop-product-card--backorder');
     const cardText = await card.innerText();
-    for (const claim of ['Available on backorder', 'Shipping date not announced', '$299.00', '$379.00', 'Amlogic S905Y5', 'Android 14', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'AV1']) {
+    for (const claim of ['Available on backorder', 'Shipping date not announced', '$288.00', '$379.00', 'Amlogic S905Y5', 'Android 14', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'AV1']) {
       expect(cardText.toLowerCase()).toContain(claim.toLowerCase());
     }
     expect(cardText).not.toContain('Coming Soon');
@@ -103,13 +103,13 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     expect(offer).toMatchObject({
       '@type': 'Offer',
       priceCurrency: 'USD',
-      price: '299.00',
+      price: '288.00',
       availability: 'https://schema.org/BackOrder',
     });
     expect((offer.shippingDetails as Record<string, unknown> | undefined)?.deliveryTime).toBeUndefined();
 
     await expectLoadedImage(page.locator('.product-hero-image'));
-    await expect(page.locator('.product-hero-price')).toContainText('$299.00');
+    await expect(page.locator('.product-hero-price')).toContainText('$288.00');
     await expect(page.locator('.product-hero-price')).toContainText('$379.00');
     await expect(page.locator('.stock.available-on-backorder')).toContainText('Available on backorder');
     const button = page.locator('.single_add_to_cart_button');
@@ -157,11 +157,11 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
           expect(value).toContain('15P');
           expect(value).toContain(locale.marker);
         }
-        expect(metadata.join(' ')).toContain('299');
+        expect(metadata.join(' ')).toContain('288');
         const routeText = await page.locator('body').innerText();
         expect(routeText.toLocaleLowerCase()).toContain(locale.action.toLocaleLowerCase());
         expect(routeText.toLocaleLowerCase()).toContain(locale.availability.toLocaleLowerCase());
-        expect(routeText).toMatch(/299/);
+        expect(routeText).toMatch(/288/);
         expect(routeText).toMatch(/379/);
         if (route === '/product/svicloud-15p/') {
           await expect(page.locator('.single_add_to_cart_button')).toHaveText(locale.action);
