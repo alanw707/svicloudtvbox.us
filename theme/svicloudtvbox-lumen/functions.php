@@ -2789,16 +2789,31 @@ if (!function_exists('svic_enrich_product_schema_for_google_merchant')) {
             return $node;
         }
 
+        $normalize_schema_url = static function ($value) {
+            if (!is_string($value)) {
+                return $value;
+            }
+
+            return preg_replace('#^http://schema\\.org/#i', 'https://schema.org/', $value) ?: $value;
+        };
+
+        $enrich_offer = static function ($offer) use ($normalize_schema_url) {
+            if (!is_array($offer)) {
+                return $offer;
+            }
+
+            $offer['availability'] = $normalize_schema_url($offer['availability'] ?? null);
+            return svic_enrich_offer_schema_for_google_merchant($offer);
+        };
+
         if (is_array($node['offers']) && isset($node['offers']['@type'])) {
-            $node['offers'] = svic_enrich_offer_schema_for_google_merchant($node['offers']);
+            $node['offers'] = $enrich_offer($node['offers']);
             return $node;
         }
 
         if (is_array($node['offers'])) {
             foreach ($node['offers'] as $offer_key => $offer) {
-                if (is_array($offer)) {
-                    $node['offers'][$offer_key] = svic_enrich_offer_schema_for_google_merchant($offer);
-                }
+                $node['offers'][$offer_key] = $enrich_offer($offer);
             }
         }
 
@@ -5801,11 +5816,27 @@ if (!function_exists('svic_localize_woocommerce_add_to_cart_message')) {
             return $message;
         }
 
+        $added_notice = esc_html(svic_translate('core.cart.added_notice'));
+        $view_cart    = esc_html(svic_translate('core.cart.view_cart'));
+
         return str_replace(
-            array('has been added to your cart', 'View cart'),
             array(
-                esc_html(svic_translate('core.cart.added_notice')),
-                esc_html(svic_translate('core.cart.view_cart')),
+                'has been added to your cart',
+                'View cart',
+                '已被添加到您的购物车。',
+                '已被添加到您的购物车',
+                '已加入您的购物车。',
+                '已加入您的购物车',
+                '查看购物车',
+            ),
+            array(
+                $added_notice,
+                $view_cart,
+                $added_notice,
+                $added_notice,
+                $added_notice,
+                $added_notice,
+                $view_cart,
             ),
             $message
         );
