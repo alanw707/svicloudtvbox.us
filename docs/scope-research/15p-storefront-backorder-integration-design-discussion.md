@@ -17,7 +17,7 @@ The worktree combines a read-only public fixture refresh, header/Guides work, an
 
 ### Product and fixture authority
 
-The deterministic local 15P supplement remains a normal `WC_Product_Simple`. Its fixture state becomes: regular `379`, sale/effective `288`, managed stock enabled, quantity `0`, backorders `notify`, stock status `onbackorder`, published/visible, and three approved gallery attachments. The obsolete coming-soon product marker is removed or made non-authoritative. Post-sync verification asserts exact price, sale, stock, backorder, purchasability, media, and fixture-key state.
+The deterministic local 15P supplement remains a normal `WC_Product_Simple`. Its fixture state becomes: regular `379`, sale/effective `288`, managed stock enabled, quantity `0`, backorders `notify`, stock status `onbackorder`, published/visible, and five approved watermarked gallery attachments. The obsolete coming-soon product marker is removed or made non-authoritative. Post-sync verification asserts exact price, sale, stock, backorder, purchasability, media, and fixture-key state.
 
 ### Storefront presentation
 
