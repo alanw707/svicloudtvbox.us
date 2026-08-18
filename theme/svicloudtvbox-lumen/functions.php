@@ -4277,7 +4277,8 @@ if (!function_exists('svic_output_rank_math_meta_fallback')) {
         }
 
         if ($rank_math_description_seen) {
-            if ($image_url !== '') {
+            $is_product_page = function_exists('is_product') && is_product();
+            if (!$is_product_page && $image_url !== '') {
                 echo '<meta property="og:image" content="' . esc_url($image_url) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 echo '<meta name="twitter:image" content="' . esc_url($image_url) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             }
@@ -4292,7 +4293,8 @@ if (!function_exists('svic_output_rank_math_meta_fallback')) {
         if ($description !== '') {
             echo '<meta name="description" content="' . esc_attr($description) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             if ($rank_math_meta_seen) {
-                if ($image_url !== '') {
+                $is_product_page = function_exists('is_product') && is_product();
+                if (!$is_product_page && $image_url !== '') {
                     echo '<meta property="og:image" content="' . esc_url($image_url) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     echo '<meta name="twitter:image" content="' . esc_url($image_url) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                 }
