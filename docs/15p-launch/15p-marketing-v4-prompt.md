@@ -5,8 +5,8 @@
 **Reference roles:**
 
 - Previous 15P marketing graphic: visual direction and redesign target (intermediate removed after v4 approval)
-- `assets/images/products/svicloud-15p-front.webp`: authoritative product identity
-- `assets/images/products/svicloud-15p-angle.webp`: supporting product geometry
+- `assets/images/products/svicloud-15p-front.webp`: authoritative watermarked product identity
+- `assets/images/products/svicloud-15p-angle.webp`: supporting watermarked product geometry
 
 ## Generation instruction
 
@@ -21,5 +21,5 @@ Edit the immediately preceding generated marketing graphic with only this target
 
 Create truly empty crop-safe atmosphere bands: the entire outer top 12% of the canvas and the entire outer bottom 12% of the canvas must contain atmospheric background only. No text, badge, feature pill, icon, or any part of the product may enter those bands. Move the compact “COMING SOON” badge downward so its top edge begins clearly below the 12% boundary. Uniformly compress and reposition the remaining layout with clean spacing. Scale the device down modestly and raise it so the full product—including its complete top, side contours, entire glossy black bottom/front band, LED, and embossed 15 mark—ends clearly above the 88% boundary, leaving visible navy floor/background beneath it. Keep all essential content inside the middle 76% height and retain generous breathing room. Do not crop anything.
 
-Maintain exact permitted text, each exactly once and no other words: “SVICLOUD 15P”; “ANDROID 14 TV BOX”; “COMING SOON”; “WI-FI 6”; “BLUETOOTH 5.4”; “4 GB + 64 GB”; “4K HDR + AV1”. No CTA, no button-like CTA, no Explore text, price, date/year, promotional adjectives, service/app logos, remote, cable, packaging, people, watermark, invented ports, duplicate product, or extra microtext.
+Maintain exact permitted text, each exactly once and no other words: “SVICLOUD 15P”; “ANDROID 14 TV BOX”; “COMING SOON”; “WI-FI 6”; “BLUETOOTH 5.4”; “4 GB + 64 GB”; “4K HDR + AV1”. No CTA, no button-like CTA, no Explore text, price, date/year, promotional adjectives, service/app logos, remote, cable, packaging, people, invented ports, duplicate product, or extra microtext. Apply the existing SVICLOUD wordmark plus `svicloudtvbox.us` as a visible semi-transparent bottom-right delivery watermark after generation.
 ```

@@ -69,7 +69,7 @@ All output images are optimized WebP files; source PDF/PPTX files remain externa
 
 | Theme asset | Source | Purpose and alt text |
 |---|---|---|
-| `assets/images/products/svicloud-15p-marketing-v4.webp` | OpenAI Codex built-in `image_gen`, grounded by approved product references; exact prompts in `docs/15p-launch/15p-marketing-v4-prompt.md` | Watermarked homepage hero, Shop card, pricing card, and social metadata. Alt: `SVICLOUD 15P Android 14 feature graphic`. |
+| `assets/images/products/svicloud-15p-marketing-v4-watermarked.webp` | OpenAI Codex built-in `image_gen`, grounded by approved product references; exact prompts in `docs/15p-launch/15p-marketing-v4-prompt.md` | Watermarked homepage hero, Shop card, pricing card, and social metadata. Alt: `SVICLOUD 15P Android 14 feature graphic`. |
 | `assets/images/products/svicloud-15p-primary-ai-watermarked.webp` | Supplied screenshot-derived AI primary image | Watermarked primary/front image and product metadata. Alt: `SVICLOUD 15P TV Box front view with watermark`. |
 | `assets/images/products/svicloud-15p-front.webp` | PDF p.1 embedded front product photo, watermark derivative | Watermarked fallback/identity image. Alt: `SVICLOUD 15P TV box front view`. |
 | `assets/images/products/svicloud-15p-angle.webp` | PDF p.1 embedded angled product photo, watermark derivative | Watermarked gallery/fallback image. Alt: `SVICLOUD 15P TV box angled view showing rear ports`. |
@@ -112,12 +112,12 @@ Every 15P-facing theme key is restricted to a source-backed fact or the confirme
 
 | Surface / key family | Published content | Evidence above |
 |---|---|---|
-| Homepage `frontpage.hero` and `frontpage.pricing.cards.15p` | Accepted hardware facts; `$299/$379`; Available on backorder; Backorder 15P; shipping date not announced | Accepted claims; site-owner commerce decision; Canonical product state |
+| Homepage `frontpage.hero` and `frontpage.pricing.cards.15p` | Accepted hardware facts; `$288/$379`; Available on backorder; Backorder 15P; shipping date not announced | Accepted claims; site-owner commerce decision; Canonical product state |
 | Shop `shop.cards.15p` | Same hardware/commerce facts with v4 artwork and aligned card | Accepted claims; Selected image map; Canonical product state |
 | PDP `products.svicloud-15p` | Detailed hardware/package list; sale/regular price; notified backorder form; no delivery-date or warranty promise | Accepted claims; site-owner commerce decision; excluded/qualified material |
 | 15P PDP FAQ header and product-specific footer | Confirmed platform plus price/backorder state and shipping-date disclaimer | Canonical product state and implementation guardrail 3 |
-| Compare `compare.products.15p` and `compare.comparison.rows.*.p15p` | Direct specification values and `$299/$379` backorder state; no speed or superiority claim | Accepted claims; comparison qualification; commerce decision |
-| Header/meta | Localized EN/繁/简 Shop, Compare, PDP, and homepage metadata with authorized-dealer intent, `$299/$379`, and BackOrder state | Canonical product state, approved SEO decision, and accepted claims |
+| Compare `compare.products.15p` and `compare.comparison.rows.*.p15p` | Direct specification values and `$288/$379` backorder state; no speed or superiority claim | Accepted claims; comparison qualification; commerce decision |
+| Header/meta | Localized EN/繁/简 Shop, Compare, PDP, and homepage metadata with authorized-dealer intent, `$288/$379`, and BackOrder state | Canonical product state, approved SEO decision, and accepted claims |
 
 Labels such as `Confirmed platform`, `Core specifications`, and `At a glance` organize evidence; they do not assert performance or suitability. The site makes no “newest,” “best,” “faster,” everyday-use, room-fit, or model-superiority claim for 15P.
 
