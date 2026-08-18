@@ -1,0 +1,95 @@
+{
+  "rows": [
+    {
+      "index": 0,
+      "src": "https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-primary-ai-watermarked-1024x631.webp",
+      "natural": [
+        1024,
+        631
+      ],
+      "objectFit": "contain",
+      "inside": true,
+      "rect": [
+        585,
+        360.46875
+      ],
+      "stage": [
+        651,
+        426.46875
+      ]
+    },
+    {
+      "index": 1,
+      "src": "https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-angle-watermarked-1024x698.webp",
+      "natural": [
+        1024,
+        698
+      ],
+      "objectFit": "contain",
+      "inside": true,
+      "rect": [
+        585,
+        398.75
+      ],
+      "stage": [
+        651,
+        464.75
+      ]
+    },
+    {
+      "index": 2,
+      "src": "https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-packaging-mockup-watermarked-1024x768.webp",
+      "natural": [
+        1024,
+        768
+      ],
+      "objectFit": "contain",
+      "inside": true,
+      "rect": [
+        585,
+        438.75
+      ],
+      "stage": [
+        651,
+        504.75
+      ]
+    },
+    {
+      "index": 3,
+      "src": "https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-lifestyle-clean-watermarked-1024x379.webp",
+      "natural": [
+        1024,
+        379
+      ],
+      "objectFit": "contain",
+      "inside": true,
+      "rect": [
+        585,
+        216.515625
+      ],
+      "stage": [
+        651,
+        282.515625
+      ]
+    },
+    {
+      "index": 4,
+      "src": "https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-lifestyle-clean-2-watermarked-1024x522.webp",
+      "natural": [
+        1024,
+        522
+      ],
+      "objectFit": "contain",
+      "inside": true,
+      "rect": [
+        585,
+        298.203125
+      ],
+      "stage": [
+        651,
+        364.203125
+      ]
+    }
+  ],
+  "pass": true
+}

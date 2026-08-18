@@ -17,4 +17,4 @@ Pre-update checkpoint for the corrected 15P gallery and pre-order copy release.
 
 ## Prior production reference captured
 
-The read-only product reference is `production-product-before.json` in the same directory. It records product `1204`, prior media `1210–1214`, `$379/$288`, `notify`, `onbackorder`, and purchasability. The live REST reference currently reports `stock_quantity=-1`; this is a preflight gate failure against the required managed quantity `0` and must be corrected and rechecked during the approved deployment. No corrective production write has been made in this checkpoint.
+The read-only product reference is `production-product-before.json` in the same directory. It records product `1204`, prior media `1210–1214`, `$379/$288`, `notify`, `onbackorder`, and purchasability. The live REST reference reported `stock_quantity=-1`; this was corrected to `0` during the approved deployment. Deployment ordering and post-write verification are recorded in `docs/15p-launch/production-deployment-log.md` and the committed production evidence directory.
