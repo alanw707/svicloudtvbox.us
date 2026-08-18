@@ -13,8 +13,9 @@ The approval covered the five-image watermarked gallery, screenshot-derived AI p
 ## Release history
 
 - Preflight commit: `51fb067a11ca455856e674d8cb39fdf9d3757007`
-- Corrected theme commit: `afa372c85d73eb7463dc2eb2b446e4f76e09407f`
-- Final repository commit: `ea3d5b7da51d4aae1a2fb354809e3ba94a6bf0ca`
+- Corrected SEO theme commit: `afa372c85d73eb7463dc2eb2b446e4f76e09407f`
+- Watermark/sitemap fix commit: `9ae0f847fdb7d1c91a7cf55c54b7e0671de026d5`
+- Final repository commit: `9ae0f847fdb7d1c91a7cf55c54b7e0671de026d5`
 - Initial retry failed the social-image gate; product/media/theme rollback completed. Evidence: external Pi backup `rollback-evidence.md`.
 - Corrected retry added explicit 15P social-image metadata and deployed the fully watermarked fallback assets.
 
@@ -25,6 +26,7 @@ The approval covered the five-image watermarked gallery, screenshot-derived AI p
 - Gallery IDs: `1210`, `1211`, `1212`, `1213`, `1214`
 - Gallery order: screenshot-derived AI primary, angle/rear ports, packaging, AI lifestyle, second AI lifestyle
 - All five production image response bodies match committed local watermarked WebP hashes.
+- Theme marketing/fallback surfaces use only watermarked assets; old `svicloud-15p-marketing-v4.webp` was removed from the repository and remote theme. Production homepage, Shop, Compare, PDP, and metadata surface probes found no old unwatermarked `marketing-v4` or `front` references.
 - Theme remote verification: `212/212` files match.
 
 ## Verification
@@ -35,7 +37,7 @@ The approval covered the five-image watermarked gallery, screenshot-derived AI p
 - SEO audit: 24 pages, 77 internal links, 0 issues.
 - Product schema: one `$288.00 USD` BackOrder offer, no delivery-time promise.
 - Social metadata: one unique `og:image` and one unique `twitter:image`, both watermarked primary image.
-- Active sitemap: `/sitemap_index.xml` and all four children HTTP 200; `/wp-sitemap.xml` resolves to the active Rank Math sitemap rather than the homepage.
+- Active sitemap: `/sitemap_index.xml` and all four children HTTP 200; `/wp-sitemap.xml` resolves to the active Rank Math sitemap rather than the homepage via the pinned remote `.htaccess` redirect. Pre-update `.htaccess` SHA-256 and final redirect update are recorded in the external preflight evidence.
 - No production offline-verifier orders/customers; no unrelated/private data or infrastructure writes.
 
 The pre-update DB/uploads/remote-theme backups and rollback procedure remain external and hash-verified. No DB/uploads restoration was performed.
