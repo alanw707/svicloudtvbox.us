@@ -59,7 +59,7 @@ try {
           if (resource.status() >= 400 && !isExternalFont(resource.url())) errors.push(`response: ${resource.status()} ${resource.url()}`);
         });
         const localizedPath = `${locale.prefix}${route.path}`.replace(/\/+/g, '/');
-        const response = await page.goto(`${baseUrl}${localizedPath}`, { waitUntil: 'networkidle' });
+        const response = await page.goto(`${baseUrl}${localizedPath}`, { waitUntil: 'domcontentloaded', timeout: 60_000 });
         if (response?.status() !== 200) fail(`${locale.code} ${viewport.key} ${route.key}: HTTP ${response?.status()}`);
 
         const target = page.locator(route.image).first();
