@@ -2377,7 +2377,9 @@ if (!function_exists('svic_filter_rank_math_15p_title')) {
         echo '<meta name="twitter:image" content="' . esc_url($image) . '" />' . "\n";
     }
 
-    add_action('wp_head', 'svic_output_15p_social_image_meta', 9999);
+    // Production LiteSpeed/edge output strips duplicate social tags from wp_head;
+    // emit the same unique values at wp_footer so crawlers still receive them.
+    add_action('wp_footer', 'svic_output_15p_social_image_meta', 1);
 }
 
 if (!function_exists('svic_get_compare_page_meta_definitions')) {
