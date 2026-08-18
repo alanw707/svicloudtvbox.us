@@ -2378,7 +2378,7 @@ if (!function_exists('svic_filter_rank_math_15p_title')) {
         echo '<meta name="twitter:image" content="' . esc_url($image) . '" />' . "\n";
     }
 
-    add_action('wp_head', 'svic_output_15p_social_image_meta', 2);
+    add_action('wp_head', 'svic_output_15p_social_image_meta', 9999);
 }
 
 if (!function_exists('svic_get_compare_page_meta_definitions')) {
