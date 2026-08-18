@@ -90,6 +90,33 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     }
   });
 
+  test('15P gallery keeps every selected image fully visible', async ({ page }) => {
+    await page.goto('/product/svicloud-15p/', { waitUntil: 'networkidle' });
+    const stage = page.locator('.product-hero-stage');
+    const image = page.locator('.product-hero-image');
+    for (let index = 0; index < await page.locator('.product-thumb').count(); index += 1) {
+      await page.locator('.product-thumb').nth(index).click();
+      await expectLoadedImage(image);
+      const geometry = await image.evaluate((node) => {
+        const imageRect = node.getBoundingClientRect();
+        const stageRect = node.parentElement?.getBoundingClientRect();
+        const style = getComputedStyle(node);
+        return {
+          objectFit: style.objectFit,
+          leftGap: imageRect.left - (stageRect?.left || 0),
+          topGap: imageRect.top - (stageRect?.top || 0),
+          rightGap: imageRect.right - (stageRect?.right || 0),
+          bottomGap: imageRect.bottom - (stageRect?.bottom || 0),
+        };
+      });
+      expect(geometry.objectFit).toBe('contain');
+      expect(geometry.leftGap).toBeGreaterThanOrEqual(0);
+      expect(geometry.topGap).toBeGreaterThanOrEqual(0);
+      expect(geometry.rightGap).toBeLessThanOrEqual(0);
+      expect(geometry.bottomGap).toBeLessThanOrEqual(0);
+    }
+  });
+
   test('15P exposes one BackOrder Offer and supports notified backorders', async ({ page }) => {
     const response = await page.goto('/product/svicloud-15p/', { waitUntil: 'networkidle' });
     expect(response?.ok()).toBeTruthy();
