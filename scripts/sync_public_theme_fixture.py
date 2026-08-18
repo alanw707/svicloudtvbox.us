@@ -241,6 +241,9 @@ def snapshot(client: RestClient, local_url: str) -> dict[str, Any]:
     require_status(pages_raw, "publish", "pages")
     require_status(posts_raw, "publish", "posts")
     require_status(products_raw, "publish", "products")
+    # 15P is a local launch fixture with its own approved five-image gallery;
+    # never let the public production copy overwrite that local-only product.
+    products_raw = [product for product in products_raw if product.get("slug") != "svicloud-15p"]
 
     public_client = RestClient(client.root)
     media_raw = public_client.collection("/wp-json/wp/v2/media?context=view&status=inherit")
