@@ -72,7 +72,8 @@ try {
           if (response.status() >= 400 && !response.url().startsWith('https://fonts.gstatic.com/')) runtimeErrors.push(`response: ${response.status()} ${response.url()}`);
         });
 
-        const response = await page.goto(requestedUrl, { waitUntil: 'networkidle', timeout: 45_000 });
+        const response = await page.goto(requestedUrl, { waitUntil: 'domcontentloaded', timeout: 60_000 });
+        await page.waitForTimeout(750);
         const data = await page.evaluate(() => {
           const content = selector => [...document.querySelectorAll(selector)].map(node => node.getAttribute('content') || '');
           const blocks = [...document.querySelectorAll('script[type="application/ld+json"]')].map(node => node.textContent || '');
@@ -91,7 +92,10 @@ try {
           };
           values.forEach(visit);
           const headings = [...document.querySelectorAll('h1,h2,h3,h4,h5,h6')].map(node => ({ level: Number(node.tagName.slice(1)), text: (node.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 160) }));
-          const images = [...document.images];
+          const images = [...document.images].filter(image => {
+            try { return new URL(image.currentSrc || image.src, location.href).origin === location.origin; }
+            catch { return false; }
+          });
           return {
             title: document.title,
             descriptions: content('meta[name="description"]'),

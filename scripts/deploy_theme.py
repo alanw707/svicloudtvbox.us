@@ -14,7 +14,8 @@ Usage examples:
   # Or with flags
   python3 scripts/deploy_theme.py \
     --host 147.79.122.118 --user uXXXX --password 'secret' \
-    --protocol ftps --remote-root public_html/wp-content/themes/svicloudtvbox-lumen
+    --protocol ftps --tls-server-name ftp.example.hstgr.io \
+    --remote-root public_html/wp-content/themes/svicloudtvbox-lumen
 
 Security note: Prefer passing secrets via environment variables or a local .env
 file that is gitignored. Do not commit credentials.
@@ -24,6 +25,7 @@ from __future__ import annotations
 
 import argparse
 import fnmatch
+import hashlib
 import os
 import posixpath
 import socket
@@ -41,6 +43,30 @@ try:
 except Exception as e:  # pragma: no cover - environment issue
     print(f"Failed to import ftplib: {e}")
     sys.exit(2)
+
+
+class PinnedFTP_TLS(FTP_TLS):
+    """FTP_TLS that checks the pinned certificate on control and data sockets."""
+
+    def __init__(self, *args, cert_sha256: str, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.cert_sha256 = cert_sha256
+
+    def _check_pin(self, sock) -> None:
+        actual = hashlib.sha256(sock.getpeercert(binary_form=True)).hexdigest()
+        if actual != self.cert_sha256:
+            raise ssl.SSLError(f"FTPS certificate pin mismatch: expected {self.cert_sha256}, got {actual}")
+
+    def auth(self):
+        response = super().auth()
+        self._check_pin(self.sock)
+        return response
+
+    def ntransfercmd(self, cmd, rest=None):
+        conn, size = super().ntransfercmd(cmd, rest)
+        if self._prot_p:
+            self._check_pin(conn)
+        return conn, size
 
 
 # Defaults
@@ -82,6 +108,7 @@ class DeployConfig:
     dry_run: bool = False
     verify_tls: bool = True
     tls_server_name: str | None = None
+    tls_cert_sha256: str | None = None
     connect_retries: int = 5
     connect_timeout: int = 45
     skip_same_size: bool = True
@@ -104,6 +131,7 @@ def parse_args() -> DeployConfig:
     p.add_argument("--verify-tls", dest="verify_tls", action="store_true", help="Verify TLS cert and hostname when using FTPS (default)")
     p.add_argument("--no-verify-tls", dest="verify_tls", action="store_false", help="Disable FTPS certificate/hostname verification (explicitly unsafe)")
     p.add_argument("--tls-server-name", default=env.get("FTP_TLS_SERVER_NAME"), help="Hostname covered by the FTPS certificate")
+    p.add_argument("--tls-cert-sha256", default=env.get("FTP_TLS_CERT_SHA256"), help="Explicit SHA-256 certificate pin when the endpoint has no resolvable certificate hostname")
     p.add_argument("--connect-retries", type=int, default=int(env.get("FTP_CONNECT_RETRIES", 5)), help="FTP/FTPS connect/login retry count")
     p.add_argument("--connect-timeout", type=int, default=int(env.get("FTP_CONNECT_TIMEOUT", 45)), help="FTP/FTPS connect timeout in seconds")
     p.add_argument("--skip-same-size", action="store_true", default=env.get("FTP_SKIP_SAME_SIZE", "0").lower() in {"1", "true", "yes"}, help="Skip remote files only when byte sizes match")
@@ -130,6 +158,7 @@ def parse_args() -> DeployConfig:
         dry_run=bool(a.dry_run),
         verify_tls=bool(a.verify_tls),
         tls_server_name=a.tls_server_name.strip() if isinstance(a.tls_server_name, str) and a.tls_server_name.strip() else None,
+        tls_cert_sha256=a.tls_cert_sha256.strip().lower().replace(":", "") if isinstance(a.tls_cert_sha256, str) and a.tls_cert_sha256.strip() else None,
         connect_retries=max(1, int(a.connect_retries)),
         connect_timeout=max(10, int(a.connect_timeout)),
         skip_same_size=bool(a.skip_same_size),
@@ -165,16 +194,22 @@ def _connect(cfg: DeployConfig):
         try:
             print(f"Connecting to FTP server (attempt {attempt}/{cfg.connect_retries}, timeout {cfg.connect_timeout}s)...")
             if cfg.protocol == "ftps":
-                if cfg.verify_tls and not cfg.tls_server_name:
-                    print("FTPS TLS hostname is required when certificate verification is enabled; set FTP_TLS_SERVER_NAME or --tls-server-name.", file=sys.stderr)
+                if cfg.verify_tls and not cfg.tls_server_name and not cfg.tls_cert_sha256:
+                    print("FTPS TLS hostname or certificate pin is required when certificate verification is enabled; set FTP_TLS_SERVER_NAME/FTP_TLS_CERT_SHA256 or the corresponding flags.", file=sys.stderr)
                     sys.exit(2)
                 context = ssl.create_default_context() if cfg.verify_tls else ssl._create_unverified_context()
-                ftp = FTP_TLS(context=context)
+                if cfg.verify_tls and cfg.tls_cert_sha256 and not cfg.tls_server_name:
+                    context.check_hostname = False
+                ftp_class = PinnedFTP_TLS if cfg.verify_tls and cfg.tls_cert_sha256 else FTP_TLS
+                ftp_kwargs = {"cert_sha256": cfg.tls_cert_sha256} if ftp_class is PinnedFTP_TLS else {}
+                ftp = ftp_class(context=context, **ftp_kwargs)
                 ftp.connect(host=cfg.host, port=cfg.port, timeout=cfg.connect_timeout)
-                if cfg.verify_tls:
+                if cfg.verify_tls and cfg.tls_server_name:
                     # FTP_TLS wraps the control socket during login and uses ftp.host as SNI.
                     ftp.host = cfg.tls_server_name
                 ftp.login(cfg.user, cfg.password)
+                if cfg.verify_tls and cfg.tls_cert_sha256:
+                    print(f"Verified FTPS certificate pin on control channel: {cfg.tls_cert_sha256}")
                 ftp.prot_p()  # Secure data connection
             else:
                 ftp = FTP()
