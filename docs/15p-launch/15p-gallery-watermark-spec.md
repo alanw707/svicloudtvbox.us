@@ -16,7 +16,7 @@ Source reference: `/mnt/c/Users/alanw/Pictures/Screenshots/gshot-2026-08-18-1044
 
 ## Watermark
 
-Each delivered image contains the existing SVICLOUD wordmark plus `svicloudtvbox.us` in a visible, semi-transparent dark rounded watermark panel at bottom-right. Source images remain unchanged; only the delivered web derivatives carry the watermark.
+Each delivered image contains the existing SVICLOUD wordmark plus `svicloudtvbox.us` in a visible, semi-transparent dark rounded watermark panel at bottom-right. External source references remain unchanged; every delivered theme asset and product-media derivative carries the watermark.
 
 ## Commerce update
 

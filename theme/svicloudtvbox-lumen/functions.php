@@ -969,7 +969,7 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh' => '以 US$288 缺貨訂購小雲 15P（原價 US$379），或選購現售 10P+、10S 與藍牙遙控器。',
                     'zh-cn' => '以 US$288 缺货订购小云 15P（原价 US$379），或选购现售 10P+、10S 与蓝牙遥控器。',
                 ],
-                'image'       => '/assets/images/products/svicloud-15p-marketing-v4.webp',
+                'image'       => '/assets/images/products/svicloud-15p-marketing-v4-watermarked.webp',
                 'image_alt'   => [
                     'en' => 'SVICLOUD 15P Android 14 feature graphic',
                     'zh' => '小雲 15P Android 14 功能宣傳圖',
@@ -2051,7 +2051,7 @@ if (!function_exists('svic_get_theme_image_meta')) {
 if (!function_exists('svic_get_homepage_hero_image_meta')) {
     function svic_get_homepage_hero_image_meta(): array
     {
-        return svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v4.webp');
+        return svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v4-watermarked.webp');
     }
 }
 
