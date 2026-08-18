@@ -30,6 +30,7 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         initAnimationOnScroll();
         initPerformanceOptimizations();
         initLumenNavigation();
+        initHeaderNavFit();
         initSkipLink();
         initProductHeroGallery();
         initStripeSavedCardPills();
@@ -39,6 +40,68 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         enhanceCheckoutAccessibility();
         $(document.body).on('updated_checkout applied_coupon_in_checkout removed_coupon_in_checkout', relocateCheckoutCoupon);
         $(document.body).on('updated_checkout checkout_error', enhanceCheckoutAccessibility);
+    }
+
+    /**
+     * Keep the desktop nav on a single row: drop it to a full-width second tier
+     * when it cannot sit beside the logo, then fall back to the mobile dialog.
+     */
+    function initHeaderNavFit() {
+        const header = document.querySelector('[data-lumen-header]');
+        const list = header ? header.querySelector('.lumen-nav__list') : null;
+        if (!header || !list) {
+            return;
+        }
+
+        const rowCount = function() {
+            const tops = new Set();
+            Array.prototype.forEach.call(list.children, function(item) {
+                if (item.offsetParent !== null) {
+                    tops.add(Math.round(item.getBoundingClientRect().top));
+                }
+            });
+            return tops.size;
+        };
+
+        let measuring = false;
+        const measure = function() {
+            if (measuring) {
+                return;
+            }
+            measuring = true;
+            header.classList.remove('lumen-header--nav-tiered', 'lumen-header--nav-collapsed');
+
+            if (list.offsetParent === null) {
+                measuring = false;
+                return;
+            }
+            if (rowCount() > 1) {
+                // Full-width second tier; two balanced rows are allowed there.
+                header.classList.add('lumen-header--nav-tiered');
+                if (rowCount() > 2) {
+                    header.classList.add('lumen-header--nav-collapsed');
+                }
+            }
+            measuring = false;
+        };
+
+        measure();
+
+        let frame = null;
+        const scheduleMeasure = function() {
+            if (frame) {
+                cancelAnimationFrame(frame);
+            }
+            frame = requestAnimationFrame(function() {
+                frame = null;
+                measure();
+            });
+        };
+
+        $(window).on('resize orientationchange', scheduleMeasure);
+        if (document.fonts && typeof document.fonts.ready === 'object') {
+            document.fonts.ready.then(scheduleMeasure).catch(function() {});
+        }
     }
 
     function initSkipLink() {

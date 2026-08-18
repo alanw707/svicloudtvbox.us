@@ -1047,6 +1047,37 @@ if (!function_exists('svic_normalize_meta_slug')) {
     }
 }
 
+if (!function_exists('svic_is_guides_hub_page')) {
+    function svic_is_guides_hub_page(): bool
+    {
+        if (!function_exists('is_page') || !is_page()) {
+            return false;
+        }
+
+        if (is_page('guides')) {
+            return true;
+        }
+
+        $slug = get_post_field('post_name', get_queried_object_id());
+        return function_exists('svic_normalize_meta_slug')
+            && svic_normalize_meta_slug(is_string($slug) ? $slug : null) === 'guides';
+    }
+}
+
+if (!function_exists('svic_route_guides_hub_template')) {
+    function svic_route_guides_hub_template(string $template): string
+    {
+        if (!svic_is_guides_hub_page()) {
+            return $template;
+        }
+
+        $guides_template = get_template_directory() . '/page-guides.php';
+        return is_readable($guides_template) ? $guides_template : $template;
+    }
+
+    add_filter('template_include', 'svic_route_guides_hub_template', 99);
+}
+
 if (!function_exists('svic_resolve_static_page_meta')) {
     function svic_resolve_static_page_meta(?string $slug): ?array
     {
@@ -5405,7 +5436,7 @@ add_action('wp_enqueue_scripts', function () {
     // Determine which contextual bundles should load for this request.
     $is_front_page = is_front_page() || is_page_template('front-page.php');
     $is_about_page = is_page_template('page-about.php') || is_page('about');
-    $is_guides_page = is_page_template('page-guides.php') || is_page('guides');
+    $is_guides_page = (function_exists('svic_is_guides_hub_page') && svic_is_guides_hub_page()) || is_page_template('page-guides.php');
     if (! $is_guides_page) {
         $guide_section_slugs = array_map(static function ($item) {
             return isset($item['slug']) ? sanitize_title($item['slug']) : null;
