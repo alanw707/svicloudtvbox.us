@@ -4202,6 +4202,11 @@ if (!function_exists('svic_output_rank_math_meta_fallback')) {
             return;
         }
 
+        // Rank Math already owns product social tags; avoid duplicate OG/Twitter images.
+        if (function_exists('is_product') && is_product()) {
+            return;
+        }
+
         $rank_math_description_seen = !empty($GLOBALS['svic_rank_math_description_seen']);
         $rank_math_meta_seen = !empty($GLOBALS['svic_rank_math_meta_seen']);
 
