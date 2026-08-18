@@ -81,7 +81,7 @@ while (have_posts()) :
     } elseif (!empty($gallery_entries)) {
         $primary_image_html = '<img class="product-hero-image" src="' . esc_url($gallery_entries[0]['full']) . '" alt="' . esc_attr(get_the_title()) . '" loading="lazy" />';
     } elseif ($is_15p_product) {
-        $primary_image_html = '<img class="product-hero-image" src="' . esc_url(svic_theme_image_uri('/assets/images/products/svicloud-15p-front.webp')) . '" alt="' . esc_attr($localized_product_title) . '" />';
+        $primary_image_html = '<img class="product-hero-image" src="' . esc_url(svic_theme_image_uri('/assets/images/products/svicloud-15p-primary-ai-watermarked.webp')) . '" alt="' . esc_attr($localized_product_title) . '" />';
     } else {
         $primary_image_html = '<img class="product-hero-image" src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . esc_attr(get_the_title()) . '" />';
     }

@@ -211,6 +211,14 @@ try {
     }
   }
 
+  const legacySitemapResponse = await request.request.get(`${baseUrl}/wp-sitemap.xml`, { maxRedirects: 4 });
+  const legacySitemapUrl = normalizeUrl(legacySitemapResponse.url());
+  report.infrastructure.legacyWpSitemap = { status: legacySitemapResponse.status(), finalUrl: legacySitemapUrl };
+  const localCoreSitemap = new URL(baseUrl).hostname.endsWith('.svic.local') && legacySitemapUrl.endsWith('/wp-sitemap.xml');
+  if (legacySitemapResponse.status() !== 200 || (!legacySitemapUrl.endsWith('/sitemap_index.xml') && !localCoreSitemap)) {
+    issue('infrastructure', `legacy wp-sitemap.xml does not resolve to active sitemap: ${legacySitemapResponse.status()} ${legacySitemapUrl}`);
+  }
+
   const robotsResponse = await request.request.get(`${baseUrl}/robots.txt`);
   const robotsText = await robotsResponse.text();
   const sitemapUrls = [...robotsText.matchAll(/^Sitemap:\s*(\S+)/gim)].map(match => match[1]);

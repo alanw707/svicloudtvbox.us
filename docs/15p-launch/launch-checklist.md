@@ -4,9 +4,9 @@
 
 - [x] Supplier PDF/PPTX hashed and parsed read-only
 - [x] Source traceability plus 89-file parent-media inventory (85 images + 4 videos) recorded
-- [x] Three claim-free PDF-derived WebP assets tracked; source PDF/PPTX and flattened marketing slides excluded
+- [x] Five watermarked 15P WebP gallery derivatives tracked; source PDF/PPTX and unwatermarked originals are not delivered
 - [x] Direct supplier confirmation for included Kids and Karaoke apps recorded
-- [x] Approved v4 marketing artwork tracked with exact prompt and safe framing
+- [x] Approved v4 marketing artwork tracked with exact prompt, safe framing, and SVICLOUD + svicloudtvbox.us watermark
 
 ## Commerce activation
 
@@ -22,6 +22,6 @@
 - [x] Private-data preservation passes around the full refresh
 - [x] Final SEO, accessibility, smoke, and visual audits pass with only documented pre-existing failures
 - [x] Post-implementation review has no blocking finding
-- [ ] Approved local commits created; no push/deployment
+- [x] Approved commit history, safety branches, production approval, deployment, rollback, and final evidence recorded; `origin/main` unchanged
 
 Normal checkout/payment/shipping-rate/cancellation/return behavior applies. Do not add a 15P-specific shipping speed, dispatch date, delivery date, or warranty promise without written confirmation and a plan update.

@@ -9,16 +9,16 @@ The 15P hardware and media content is derived from the two read-only source file
 | `D:\168mediagroup\SVICloudTVBox.us\15P\15P Specs最新.pdf` | `76e421663e5d45076c53f13b12a6cc24cef98639ef3d1c50b87ccc31d6e41108` | 2 pages; page 1 contains the specification table and four embedded product/manual images; page 2 is blank. |
 | `D:\168mediagroup\SVICloudTVBox.us\15P\15P PDF.pptx` | `3388cab020d0f9f9a3bc4797241c2ad57b30972109d89588d7575fe9bc0dd85b` | 27 slides; each slide is one 1422×800 raster marketing image. |
 | Direct supplier confirmation relayed by site owner, 2026-08-17 | N/A | Confirms that the 15P includes the Kids and Karaoke apps. |
-| Site-owner commerce decision, 2026-08-17 | N/A | Sets U.S. regular price `$379.00`, sale price `$299.00`, and notified backorders; no shipping date was supplied. |
+| Site-owner commerce decision, 2026-08-17 | N/A | Sets U.S. regular price `$379.00`, sale price `$288.00`, and notified backorders; no shipping date was supplied. |
 
-Extraction used the official Anthropic `pdf` and `pptx` skills, PyMuPDF/PDFPlumber, OOXML inspection, and image hashing. The source files were not modified. The parent folder contained 89 media files (85 images and four MP4 videos), but none had an authoritative 15P identity; no image had an exact hash match with the PDF/PPTX assets. The complete parent-folder path/dimension/duration/size/hash/disposition inventory is inspectable in [`docs/15p-parent-media-inventory.md`](15p-parent-media-inventory.md), and all 27 embedded PPTX media parts—with slide mapping, hashes, content risks, and disposition—are listed in [`docs/15p-pptx-media-inventory.md`](15p-pptx-media-inventory.md). Therefore, the three claim-free 15P reference/gallery photos come from PDF page 1 and are stored under descriptive theme filenames; no parent-folder or flattened PPTX media is published. The Shop/pricing marketing creative is an AI-generated derivative grounded in the approved front and angled PDF photos, with layout inspiration from the existing 10P+ card artwork.
+Extraction used the official Anthropic `pdf` and `pptx` skills, PyMuPDF/PDFPlumber, OOXML inspection, and image hashing. The source files were not modified. The parent folder contained 89 media files (85 images and four MP4 videos), but none had an authoritative 15P identity; no image had an exact hash match with the PDF/PPTX assets. The complete parent-folder path/dimension/duration/size/hash/disposition inventory is inspectable in [`docs/15p-parent-media-inventory.md`](15p-parent-media-inventory.md), and all 27 embedded PPTX media parts—with slide mapping, hashes, content risks, and disposition—are listed in [`docs/15p-pptx-media-inventory.md`](15p-pptx-media-inventory.md). Therefore, five watermarked 15P gallery derivatives are delivered under descriptive theme filenames; no unwatermarked source image is delivered, and no unmodified flattened PPTX slide is published. The Shop/pricing marketing creative is an AI-generated derivative grounded in approved product references and carries the same watermark.
 
 ## Canonical product state
 
 - **Product:** SVICLOUD 15P TV Box / 小雲 15P 電視盒 / 小云 15P 电视盒.
 - **Slug:** `svicloud-15p`.
 - **Catalog state:** Published and catalog-visible.
-- **Commerce state:** Regular `$379.00`, sale/effective `$299.00`, managed zero stock, notified backorders allowed, and purchasable. Shipping date not announced.
+- **Commerce state:** Regular `$379.00`, sale/effective `$288.00`, managed zero stock, notified backorders allowed, and purchasable. Shipping date not announced.
 - **Claim boundary:** The PDF/PPTX do not state price, release timing, inventory, shipping, warranty, or returns. Price/backorder state is a site-owner business decision; no 15P-specific shipping-speed, delivery-date, or warranty claim is added.
 - **Primary positioning:** Android 14 TV box with Amlogic S905Y5, 4 GB DDR3 memory, 64 GB eMMC storage, dual-band Wi-Fi 6, Bluetooth 5.4, and 4K HDR/AV1 playback.
 
@@ -69,10 +69,13 @@ All output images are optimized WebP files; source PDF/PPTX files remain externa
 
 | Theme asset | Source | Purpose and alt text |
 |---|---|---|
-| `assets/images/products/svicloud-15p-marketing-v4.webp` | OpenAI Codex built-in `image_gen`, grounded by the approved PDF p.1 front/angled photos and using prior 10P+/15P artwork only as layout direction; exact prompts in `docs/15p-launch/15p-marketing-v4-prompt.md` | Homepage hero, Shop card, homepage pricing card, and Shop social metadata. Alt: `SVICLOUD 15P Android 14 feature graphic`. |
-| `assets/images/products/svicloud-15p-front.webp` | PDF p.1 embedded front product photo | WooCommerce primary image, Compare, PDP, product metadata, and identity reference for generated artwork. Alt: `SVICLOUD 15P TV box front view`. |
-| `assets/images/products/svicloud-15p-angle.webp` | PDF p.1 embedded angled product photo | PDP gallery. Alt: `SVICLOUD 15P TV box angled view showing rear ports`. |
-| `assets/images/products/svicloud-15p-package.webp` | PDF p.1 embedded package-front artwork | PDP gallery. Alt: `SVICLOUD 15P packaging front`. |
+| `assets/images/products/svicloud-15p-marketing-v4.webp` | OpenAI Codex built-in `image_gen`, grounded by approved product references; exact prompts in `docs/15p-launch/15p-marketing-v4-prompt.md` | Watermarked homepage hero, Shop card, pricing card, and social metadata. Alt: `SVICLOUD 15P Android 14 feature graphic`. |
+| `assets/images/products/svicloud-15p-primary-ai-watermarked.webp` | Supplied screenshot-derived AI primary image | Watermarked primary/front image and product metadata. Alt: `SVICLOUD 15P TV Box front view with watermark`. |
+| `assets/images/products/svicloud-15p-front.webp` | PDF p.1 embedded front product photo, watermark derivative | Watermarked fallback/identity image. Alt: `SVICLOUD 15P TV box front view`. |
+| `assets/images/products/svicloud-15p-angle.webp` | PDF p.1 embedded angled product photo, watermark derivative | Watermarked gallery/fallback image. Alt: `SVICLOUD 15P TV box angled view showing rear ports`. |
+| `assets/images/products/svicloud-15p-package.webp` | PDF p.1 embedded package-front artwork, watermark derivative | Watermarked gallery image. Alt: `SVICLOUD 15P packaging front`. |
+| `assets/images/products/svicloud-15p-lifestyle-ai-watermarked.webp` | Cropped approved AI marketing reference | Watermarked lifestyle/AI gallery image. |
+| `assets/images/products/svicloud-15p-lifestyle-ai-2-watermarked.webp` | Cropped approved AI lifestyle reference | Watermarked lifestyle/AI gallery image. |
 
 ## Localized content contract
 
@@ -83,7 +86,7 @@ All output images are optimized WebP files; source PDF/PPTX files remain externa
 - **Lead:** SVICLOUD 15P runs Android 14 on an Amlogic S905Y5 processor with 4 GB DDR3 memory, 64 GB eMMC storage, dual-band Wi-Fi 6, Bluetooth 5.4, and 4K HDR playback.
 - **Feature labels:** `Amlogic S905Y5 + Android 14`; `4 GB DDR3 + 64 GB eMMC`; `Wi-Fi 6 + Bluetooth 5.4`; `4K HDR + AV1 decoding`.
 - **CTA:** Backorder 15P
-- **Availability:** `$299.00` sale / `$379.00` regular; shipping date not announced.
+- **Availability:** `$288.00` sale / `$379.00` regular; shipping date not announced.
 
 ### Traditional Chinese
 
@@ -92,7 +95,7 @@ All output images are optimized WebP files; source PDF/PPTX files remain externa
 - **Lead:** 全新小雲 15P 搭載 Android 14、Amlogic S905Y5 處理器、4 GB DDR3 記憶體、64 GB eMMC 儲存空間、雙頻 Wi-Fi 6、藍牙 5.4 與 4K HDR 播放。
 - **Feature labels:** `Amlogic S905Y5 + Android 14`; `4 GB DDR3 + 64 GB eMMC`; `Wi-Fi 6 + 藍牙 5.4`; `4K HDR + AV1 解碼`.
 - **CTA:** 缺貨訂購 15P
-- **Availability:** 特價 `US$299` / 原價 `US$379`；出貨日期尚未公布。
+- **Availability:** 特價 `US$288` / 原價 `US$379`；出貨日期尚未公布。
 
 ### Simplified Chinese
 
@@ -101,7 +104,7 @@ All output images are optimized WebP files; source PDF/PPTX files remain externa
 - **Lead:** 全新小云 15P 搭载 Android 14、Amlogic S905Y5 处理器、4 GB DDR3 内存、64 GB eMMC 存储空间、双频 Wi-Fi 6、蓝牙 5.4 与 4K HDR 播放。
 - **Feature labels:** `Amlogic S905Y5 + Android 14`; `4 GB DDR3 + 64 GB eMMC`; `Wi-Fi 6 + 蓝牙 5.4`; `4K HDR + AV1 解码`.
 - **CTA:** 缺货订购 15P
-- **Availability:** 特价 `US$299` / 原价 `US$379`；发货日期尚未公布。
+- **Availability:** 特价 `US$288` / 原价 `US$379`；发货日期尚未公布。
 
 ## Rendered-copy map
 
@@ -120,7 +123,7 @@ Labels such as `Confirmed platform`, `Core specifications`, and `At a glance` or
 
 ## Implementation guardrails
 
-1. A local fixture refresh must recreate the supplemental 15P product with regular `379`, sale/effective `299`, managed quantity `0`, backorders `notify`, stock status `onbackorder`, and three source/gallery images.
+1. A local fixture refresh must recreate the supplemental 15P product with regular `379`, sale/effective `288`, managed quantity `0`, backorders `notify`, stock status `onbackorder`, and five watermarked source/gallery images.
 2. Homepage, Shop, Compare, PDP, cart/checkout, metadata, and Product/Offer JSON-LD must agree on the price and BackOrder state.
 3. Normal checkout/payment/shipping-rate/cancellation/return behavior applies, but no 15P-specific shipping speed, dispatch date, delivery date, or warranty promise may be added.
 4. “Coming Soon” remains only inside approved v4 artwork; surrounding UI uses localized Backorder action/status/date-disclaimer copy.

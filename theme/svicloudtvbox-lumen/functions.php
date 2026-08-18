@@ -11,6 +11,24 @@ if (!defined('SVIC_THEME_TEXT_DOMAIN')) {
     define('SVIC_THEME_TEXT_DOMAIN', 'svicloudtvbox-lumen');
 }
 
+if (!function_exists('svic_redirect_legacy_wp_sitemap')) {
+    function svic_redirect_legacy_wp_sitemap(): void {
+        if (!defined('RANK_MATH_VERSION')) {
+            return;
+        }
+
+        $request_path = wp_parse_url((string) ($_SERVER['REQUEST_URI'] ?? ''), PHP_URL_PATH);
+        if ($request_path !== '/wp-sitemap.xml') {
+            return;
+        }
+
+        wp_safe_redirect(home_url('/sitemap_index.xml'), 301, 'SVIC active Rank Math sitemap');
+        exit;
+    }
+
+    add_action('template_redirect', 'svic_redirect_legacy_wp_sitemap', 1);
+}
+
 /**
  * Announcement bar toggle.
  * Set to true to show the out-of-stock (or any) banner across all pages.
@@ -933,7 +951,7 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh' => '比較 US$288 缺貨訂購的小雲 15P（原價 US$379）與 10P+、10S 的硬體、影音支援、價格及銷售狀態。',
                     'zh-cn' => '比较 US$288 缺货订购的小云 15P（原价 US$379）与 10P+、10S 的硬件、影音支持、价格及销售状态。',
                 ],
-                'image'       => '/assets/images/products/svicloud-15p-front.webp',
+                'image'       => '/assets/images/products/svicloud-15p-primary-ai-watermarked.webp',
                 'image_alt'   => [
                     'en' => 'SVICLOUD 15P TV box front view',
                     'zh' => '小雲 15P 電視盒正面',

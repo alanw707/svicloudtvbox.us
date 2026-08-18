@@ -1,6 +1,6 @@
 # SVICLOUD 15P backorder verification report
 
-Verified against `http://svicloud10p.svic.local` after a complete production-derived public-fixture refresh plus the deterministic local 15P supplement.
+Verified against `http://svicloud10p.svic.local` after a complete production-derived public-fixture refresh plus the deterministic local 15P supplement. Corrected production deployment evidence is recorded in `production-gallery-price-update-evidence.md`.
 
 ## Product invariant
 
@@ -10,7 +10,7 @@ Verified against `http://svicloud10p.svic.local` after a complete production-der
 - Managed stock: enabled, quantity `0`
 - Backorders: `notify`; stock status `onbackorder`
 - Purchasable / on backorder / notification required: `true / true / true`
-- Product images: one primary plus two gallery images; approved v4 marketing artwork remains separate for homepage/Shop cards
+- Product images: exactly five delivered gallery images; primary/front, angle/rear ports, packaging, and two watermarked lifestyle/AI images. Homepage/Shop/metadata artwork is also watermarked.
 - `/product/svicloud-15p/`: HTTP 200 in EN/繁中/简中
 - Product schema: exactly one Product and one `288.00 USD` Offer with `https://schema.org/BackOrder`
 - Offer delivery timing: absent
