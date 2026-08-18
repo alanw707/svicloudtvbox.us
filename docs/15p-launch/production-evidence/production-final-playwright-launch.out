@@ -1,0 +1,22 @@
+
+Running 12 tests using 2 workers
+
+  ✓   1 [chromium-desktop] › tests/playwright/launch-15p.spec.ts:28:7 › SVICLOUD 15P launch safeguards › homepage renders source-confirmed 15P backorder pricing without unsupported policies (4.2s)
+  ✓   2 [webkit-mobile] › tests/playwright/launch-15p.spec.ts:28:7 › SVICLOUD 15P launch safeguards › homepage renders source-confirmed 15P backorder pricing without unsupported policies (5.9s)
+  ✓   3 [chromium-desktop] › tests/playwright/launch-15p.spec.ts:56:7 › SVICLOUD 15P launch safeguards › shop 15P card shows aligned backorder pricing and action (3.5s)
+  ✓   4 [webkit-mobile] › tests/playwright/launch-15p.spec.ts:56:7 › SVICLOUD 15P launch safeguards › shop 15P card shows aligned backorder pricing and action (5.7s)
+  ✓   5 [chromium-desktop] › tests/playwright/launch-15p.spec.ts:93:7 › SVICLOUD 15P launch safeguards › 15P gallery keeps every selected image fully visible (5.7s)
+  ✓   6 [webkit-mobile] › tests/playwright/launch-15p.spec.ts:93:7 › SVICLOUD 15P launch safeguards › 15P gallery keeps every selected image fully visible (6.8s)
+  ✓   7 [chromium-desktop] › tests/playwright/launch-15p.spec.ts:120:7 › SVICLOUD 15P launch safeguards › 15P exposes one BackOrder Offer and supports notified backorders (15.3s)
+  ✓   8 [webkit-mobile] › tests/playwright/launch-15p.spec.ts:120:7 › SVICLOUD 15P launch safeguards › 15P exposes one BackOrder Offer and supports notified backorders (16.0s)
+  ✓   9 [chromium-desktop] › tests/playwright/launch-15p.spec.ts:168:7 › SVICLOUD 15P launch safeguards › localizes launch metadata and shows Android 12 for 10P+ and 10S in every locale (23.6s)
+  ✓  11 [chromium-desktop] › tests/playwright/launch-15p.spec.ts:216:7 › SVICLOUD 15P launch safeguards › current 10P+ product remains live and links to the 15P backorder page (3.7s)
+  ✓  10 [webkit-mobile] › tests/playwright/launch-15p.spec.ts:168:7 › SVICLOUD 15P launch safeguards › localizes launch metadata and shows Android 12 for 10P+ and 10S in every locale (33.3s)
+  ✓  12 [webkit-mobile] › tests/playwright/launch-15p.spec.ts:216:7 › SVICLOUD 15P launch safeguards › current 10P+ product remains live and links to the 15P backorder page (3.9s)
+
+  12 passed (1.2m)
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m
