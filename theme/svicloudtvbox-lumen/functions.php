@@ -4203,7 +4203,8 @@ if (!function_exists('svic_output_rank_math_meta_fallback')) {
 
         // Rank Math already owns product social tags; avoid duplicate OG/Twitter images.
         $request_path = wp_parse_url((string) ($_SERVER['REQUEST_URI'] ?? ''), PHP_URL_PATH);
-        $is_product_request = function_exists('is_product') && is_product();
+        $is_product_request = (function_exists('is_product') && is_product())
+            || (function_exists('is_singular') && is_singular('product'));
         $is_product_path = is_string($request_path) && preg_match('#/product/[^/]+/?$#', $request_path);
         if ($is_product_request || $is_product_path) {
             return;
