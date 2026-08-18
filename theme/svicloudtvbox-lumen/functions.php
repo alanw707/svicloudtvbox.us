@@ -2361,7 +2361,9 @@ if (!function_exists('svic_filter_rank_math_15p_title')) {
 
     function svic_output_15p_social_image_meta(): void
     {
-        if (!svic_is_15p_product_page()) {
+        $post_id = get_queried_object_id();
+        $product = function_exists('wc_get_product') ? wc_get_product($post_id) : null;
+        if (!$product || !method_exists($product, 'get_slug') || $product->get_slug() !== 'svicloud-15p') {
             return;
         }
 
@@ -2375,7 +2377,7 @@ if (!function_exists('svic_filter_rank_math_15p_title')) {
         echo '<meta name="twitter:image" content="' . esc_url($image) . '" />' . "\n";
     }
 
-    add_action('wp_head', 'svic_output_15p_social_image_meta', 9);
+    add_action('wp_head', 'svic_output_15p_social_image_meta', 2);
 }
 
 if (!function_exists('svic_get_compare_page_meta_definitions')) {
