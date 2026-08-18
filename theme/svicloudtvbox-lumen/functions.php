@@ -4201,10 +4201,7 @@ if (!function_exists('svic_output_rank_math_meta_fallback')) {
             return;
         }
 
-        if (!empty($GLOBALS['svic_rank_math_description_seen'])) {
-            return;
-        }
-
+        $rank_math_description_seen = !empty($GLOBALS['svic_rank_math_description_seen']);
         $rank_math_meta_seen = !empty($GLOBALS['svic_rank_math_meta_seen']);
 
         $canonical = svic_get_localized_canonical_url();
@@ -4276,6 +4273,15 @@ if (!function_exists('svic_output_rank_math_meta_fallback')) {
                 $image_meta = svic_get_featured_image_meta($post_id);
                 $image_url  = is_array($image_meta) && !empty($image_meta['url']) ? (string) $image_meta['url'] : '';
             }
+        }
+
+        if ($rank_math_description_seen) {
+            if ($image_url !== '') {
+                echo '<meta property="og:image" content="' . esc_url($image_url) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo '<meta name="twitter:image" content="' . esc_url($image_url) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            }
+
+            return;
         }
 
         if (!$rank_math_meta_seen) {

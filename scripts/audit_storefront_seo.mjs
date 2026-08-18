@@ -212,7 +212,12 @@ try {
   const storefrontSitemap = sitemapUrls.find(url => !url.includes('agent-friendly-sitemap')) || '';
   report.infrastructure.robots = { status: robotsResponse.status(), sitemapUrls };
   if (robotsResponse.status() !== 200 || !storefrontSitemap) issue('infrastructure', 'robots.txt lacks active storefront sitemap');
-  if (/Disallow:\s*\/$/im.test(robotsText)) issue('infrastructure', 'robots.txt blocks the whole site');
+  const robotsGroups = robotsText.split(/\n(?=User-agent:\s*)/i);
+  const wildcardRobotsGroup = robotsGroups.find(group => /^User-agent:\s*\*\s*$/im.test(group)) || '';
+  const wildcardAllowsRoot = /^Allow:\s*\/\s*$/im.test(wildcardRobotsGroup);
+  if (!wildcardAllowsRoot && /Disallow:\s*\/$/im.test(wildcardRobotsGroup)) {
+    issue('infrastructure', 'robots.txt blocks the whole site for the wildcard user-agent');
+  }
 
   const sitemapQueue = storefrontSitemap ? [storefrontSitemap] : [];
   const visited = new Set();
