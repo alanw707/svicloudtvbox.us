@@ -3,7 +3,7 @@
 | Requirement | Evidence |
 |---|---|
 | Authoritative hardware facts and exclusions | `docs/15p-source-traceability.md` |
-| Approved commerce decision | `$379` regular / `$288` sale, notified backorders, and no shipping date recorded in source traceability and RPI spec |
+| Approved commerce decision | `$379` regular / `$288` sale, customer-facing pre-order copy backed by notified backorders, and no shipping date recorded in source traceability and RPI spec |
 | Existing source-folder media inventory | `docs/15p-parent-media-inventory.md` (85 images + 4 videos, each with disposition) |
 | Embedded PPTX media inventory | `docs/15p-pptx-media-inventory.md` (27 rows, all excluded with reasons) |
 | Optimized assets | Five watermarked gallery derivatives plus watermarked v4 marketing artwork under `assets/images/products/` |

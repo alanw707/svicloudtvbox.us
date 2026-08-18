@@ -1,10 +1,10 @@
 # SVICLOUD 15P warranty, return, and fulfillment wording
 
-Normal checkout, payment, shipping-rate, cancellation, and return behavior applies to 15P backorders. No 15P-specific shipping speed, dispatch date, delivery date, or warranty promise has been approved.
+Normal checkout, payment, shipping-rate, cancellation, and return behavior applies to 15P pre-orders. No 15P-specific shipping speed, dispatch date, delivery date, or warranty promise has been approved.
 
 ## Approved storefront wording
 
-> Available on backorder for $288.00 (regular $379.00). Shipping date not announced.
+> Available for pre-order at $288.00 (regular $379.00). Shipping date not announced.
 
 Do not reuse 10P+/10S shipping-speed or warranty marketing as a 15P promise. General policy links may remain in checkout and structured commerce data, but the 15P BackOrder Offer must omit handling/transit estimates.
 

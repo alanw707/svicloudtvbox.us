@@ -8,9 +8,9 @@ Five watermarked web images are delivered in the theme product-assets directory:
 
 1. `svicloud-15p-primary-ai-watermarked.webp` — primary/front image, cropped from the supplied AI reference screenshot without browser chrome or page copy.
 2. `svicloud-15p-angle-watermarked.webp` — angle/rear-port view.
-3. `svicloud-15p-package-watermarked.webp` — packaging view.
-4. `svicloud-15p-lifestyle-ai-watermarked.webp` — AI marketing/environment image, cropped to remove embedded marketing copy.
-5. `svicloud-15p-lifestyle-ai-2-watermarked.webp` — second approved AI marketing/environment image, cropped to remove embedded marketing copy.
+3. `svicloud-15p-packaging-mockup-watermarked.webp` — watermarked retail-packaging mockup.
+4. `svicloud-15p-lifestyle-clean-watermarked.webp` — AI product/environment image with embedded marketing copy removed.
+5. `svicloud-15p-lifestyle-clean-2-watermarked.webp` — second AI product/environment image with embedded marketing copy removed.
 
 Source reference: `/mnt/c/Users/alanw/Pictures/Screenshots/gshot-2026-08-18-104456-PGkJ.png`.
 

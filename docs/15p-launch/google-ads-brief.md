@@ -2,14 +2,14 @@
 
 Status: **blocked — do not activate**.
 
-The 15P is available on backorder for `$288.00` (regular `$379.00`), but no shipping date or 15P-specific shipping-speed/warranty promise is approved. Paid-ad activation, Merchant Center publication, conversion validation, and production deployment are outside the current local integration.
+The 15P is available for pre-order at `$288.00` (regular `$379.00`), but no shipping date or 15P-specific shipping-speed/warranty promise is approved. Paid-ad activation, Merchant Center publication, conversion validation, and production deployment are outside the current local integration.
 
 ## Permitted factual draft concepts
 
 Planning notes only—not an activation-ready campaign:
 
 - `SVICLOUD 15P TV Box`
-- `Backorder $288 · Regular $379`
+- `Pre-order $288 · Regular $379`
 - `Android 14 · Amlogic S905Y5`
 - `4 GB DDR3 · 64 GB eMMC`
 - `Wi-Fi 6 · Bluetooth 5.4`

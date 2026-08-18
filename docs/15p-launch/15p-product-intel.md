@@ -1,6 +1,6 @@
 # SVICLOUD 15P product intelligence
 
-Status: **source-confirmed hardware; $288 backorder commerce state ($379 regular)**.
+Status: **source-confirmed hardware; $288 pre-order commerce state ($379 regular)**.
 
 The earlier web-research placeholders in this file were superseded on 2026-08-17 by supplier files:
 

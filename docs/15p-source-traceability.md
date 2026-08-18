@@ -73,9 +73,9 @@ All output images are optimized WebP files; source PDF/PPTX files remain externa
 | `assets/images/products/svicloud-15p-primary-ai-watermarked.webp` | Supplied screenshot-derived AI primary image | Watermarked primary/front image and product metadata. Alt: `SVICLOUD 15P TV Box front view with watermark`. |
 | `assets/images/products/svicloud-15p-front.webp` | PDF p.1 embedded front product photo, watermark derivative | Watermarked fallback/identity image. Alt: `SVICLOUD 15P TV box front view`. |
 | `assets/images/products/svicloud-15p-angle.webp` | PDF p.1 embedded angled product photo, watermark derivative | Watermarked gallery/fallback image. Alt: `SVICLOUD 15P TV box angled view showing rear ports`. |
-| `assets/images/products/svicloud-15p-package.webp` | PDF p.1 embedded package-front artwork, watermark derivative | Watermarked gallery image. Alt: `SVICLOUD 15P packaging front`. |
-| `assets/images/products/svicloud-15p-lifestyle-ai-watermarked.webp` | Cropped approved AI marketing reference | Watermarked lifestyle/AI gallery image. |
-| `assets/images/products/svicloud-15p-lifestyle-ai-2-watermarked.webp` | Cropped approved AI lifestyle reference | Watermarked lifestyle/AI gallery image. |
+| `assets/images/products/svicloud-15p-packaging-mockup-watermarked.webp` | Watermarked 3D presentation of the supplied 15P packaging artwork | Packaging mockup gallery image. Alt: `SVICLOUD 15P retail packaging mockup`. |
+| `assets/images/products/svicloud-15p-lifestyle-clean-watermarked.webp` | Cropped approved AI product/environment reference with embedded copy removed | Watermarked lifestyle/AI gallery image. |
+| `assets/images/products/svicloud-15p-lifestyle-clean-2-watermarked.webp` | Cropped approved AI lifestyle reference with embedded copy removed | Watermarked lifestyle/AI gallery image. |
 
 ## Localized content contract
 

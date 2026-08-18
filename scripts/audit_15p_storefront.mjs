@@ -8,15 +8,15 @@ mkdirSync(outputDir, { recursive: true });
 
 const locales = [
   {
-    code: 'en', prefix: '', title: 'SVICLOUD 15P TV Box', availability: 'Available on backorder', action: 'Backorder 15P', shippingDate: 'Shipping date not announced', metaMarker: 'SVICLOUD',
+    code: 'en', prefix: '', title: 'SVICLOUD 15P TV Box', availability: 'Available for pre-order', action: 'Pre-order 15P', shippingDate: 'Shipping date not announced', metaMarker: 'SVICLOUD',
     forbiddenPolicies: ['48-Hour U.S. Shipping', '1-Year U.S. Warranty', 'Every SVICLOUD device is genuine with U.S. warranty support', 'Shipping speed, warranty, and setup help'],
   },
   {
-    code: 'zh-TW', prefix: '/zh', title: '小雲 15P 電視盒', availability: '接受缺貨訂購', action: '缺貨訂購 15P', shippingDate: '出貨日期尚未公布', metaMarker: '小雲',
+    code: 'zh-TW', prefix: '/zh', title: '小雲 15P 電視盒', availability: '接受預購', action: '預購 15P', shippingDate: '出貨日期尚未公布', metaMarker: '小雲',
     forbiddenPolicies: ['一年美國保固', '標準配送與追蹤', '提供原廠保固與在地服務', '配送時程、保固退換與中文安裝協助'],
   },
   {
-    code: 'zh-CN', prefix: '/zh-cn', title: '小云 15P 电视盒', availability: '接受缺货订购', action: '缺货订购 15P', shippingDate: '发货日期尚未公布', metaMarker: '小云',
+    code: 'zh-CN', prefix: '/zh-cn', title: '小云 15P 电视盒', availability: '接受预订', action: '预订 15P', shippingDate: '发货日期尚未公布', metaMarker: '小云',
     forbiddenPolicies: ['1-Year U.S. Warranty', '48-Hour U.S. Shipping', '一年美国保修', '配送时效、保修退换、中文安装协助'],
   },
 ];
@@ -84,7 +84,7 @@ try {
         if (!metrics.text.includes('Android 14')) fail(`${locale.code} ${viewport.key} ${route.key}: Android 14 copy missing`);
         const normalizedText = metrics.text.toLocaleLowerCase();
         for (const required of [locale.availability, locale.action, locale.shippingDate, '288', '379']) {
-          if (!normalizedText.includes(required.toLocaleLowerCase())) fail(`${locale.code} ${viewport.key} ${route.key}: required backorder content missing: ${required}`);
+          if (!normalizedText.includes(required.toLocaleLowerCase())) fail(`${locale.code} ${viewport.key} ${route.key}: required pre-order content missing: ${required}`);
         }
         if (/price (and release date )?(has|have) not been announced/i.test(metrics.text)) fail(`${locale.code} ${viewport.key} ${route.key}: obsolete price copy remains`);
         if (errors.length) fail(`${locale.code} ${viewport.key} ${route.key}: ${errors.join('; ')}`);

@@ -42,14 +42,14 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
 
     const pricingCard = page.locator('.lumen-pricing .shop-product-card--new');
     const pricingCardText = await pricingCard.innerText();
-    expect(pricingCardText.toLowerCase()).toContain('available on backorder');
+    expect(pricingCardText.toLowerCase()).toContain('available for pre-order');
     expect(pricingCardText.toLowerCase()).toContain('shipping date not announced');
     expect(pricingCardText).toContain('$288.00');
     expect(pricingCardText).toContain('$379.00');
     expect(pricingCardText).not.toContain('Coming Soon');
     expect(pricingCardText).not.toContain('warranty');
     expect(pricingCardText).not.toContain('Android 14 performance');
-    await expect(pricingCard.locator('.shop-product-card__cta')).toHaveText('Backorder 15P');
+    await expect(pricingCard.locator('.shop-product-card__cta')).toHaveText('Pre-order 15P');
     await expectLoadedImage(pricingCard.locator('img'));
   });
 
@@ -59,14 +59,14 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
 
     const card = page.locator('.shop-product-card--backorder');
     const cardText = await card.innerText();
-    for (const claim of ['Available on backorder', 'Shipping date not announced', '$288.00', '$379.00', 'Amlogic S905Y5', 'Android 14', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'AV1']) {
+    for (const claim of ['Available for pre-order', 'Shipping date not announced', '$288.00', '$379.00', 'Amlogic S905Y5', 'Android 14', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'AV1']) {
       expect(cardText.toLowerCase()).toContain(claim.toLowerCase());
     }
     expect(cardText).not.toContain('Coming Soon');
     for (const unverifiedPolicy of ['Ships from Nevada warehouse', 'Includes 1-year U.S. warranty', 'Bilingual concierge onboarding', 'TBC', 'Buyers who want', 'next-generation connectivity']) {
       expect(cardText).not.toContain(unverifiedPolicy);
     }
-    await expect(card.locator('.shop-product-card__cta')).toHaveText('Backorder 15P');
+    await expect(card.locator('.shop-product-card__cta')).toHaveText('Pre-order 15P');
     await expectLoadedImage(card.locator('img'));
     await expect(card.locator('a')).toHaveAttribute('href', /\/product\/svicloud-15p\/$/);
 
@@ -111,9 +111,9 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     await expectLoadedImage(page.locator('.product-hero-image'));
     await expect(page.locator('.product-hero-price')).toContainText('$288.00');
     await expect(page.locator('.product-hero-price')).toContainText('$379.00');
-    await expect(page.locator('.stock.available-on-backorder')).toContainText('Available on backorder');
+    await expect(page.locator('.stock.available-on-backorder')).toContainText('Available for pre-order');
     const button = page.locator('.single_add_to_cart_button');
-    await expect(button).toHaveText('Backorder 15P');
+    await expect(button).toHaveText('Pre-order 15P');
 
     const body = await page.locator('body').innerText();
     for (const claim of ['Android 14', 'Amlogic S905Y5', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'HDR10+', 'AV1', 'Shipping date not announced']) {
@@ -127,12 +127,12 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     await button.click();
     await expect(page.locator('.woocommerce-message')).toContainText(/added to (your )?cart/i);
     await page.goto('/cart/', { waitUntil: 'networkidle' });
-    await expect(page.locator('.lumen-cart-product__notice')).toContainText('Available on backorder');
+    await expect(page.locator('.lumen-cart-product__notice')).toContainText('Available for pre-order');
     await expect(page.locator('.lumen-cart-product__notice')).toContainText('Shipping date not announced');
     let commerceText = await page.locator('body').innerText();
     expect(commerceText).not.toMatch(/48-hour U\.S\. shipping|1-year U\.S\. warranty|ships from our Nevada warehouse/i);
     await page.goto('/checkout/', { waitUntil: 'networkidle' });
-    await expect(page.locator('.lumen-checkout-backorder-notice')).toContainText('Available on backorder');
+    await expect(page.locator('.lumen-checkout-backorder-notice')).toContainText('Available for pre-order');
     await expect(page.locator('.lumen-checkout-backorder-notice')).toContainText('Shipping date not announced');
     commerceText = await page.locator('body').innerText();
     expect(commerceText).not.toMatch(/48-hour U\.S\. shipping|1-year U\.S\. warranty|ships from Nevada within 48 hours/i);
@@ -140,9 +140,9 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
 
   test('localizes launch metadata and shows Android 12 for 10P+ and 10S in every locale', async ({ page }) => {
     const locales = [
-      { prefix: '', marker: 'SVICLOUD', included: 'Included', action: 'Backorder 15P', availability: 'Available on backorder' },
-      { prefix: '/zh', marker: '小雲', included: '內含', action: '缺貨訂購 15P', availability: '接受缺貨訂購' },
-      { prefix: '/zh-cn', marker: '小云', included: '内含', action: '缺货订购 15P', availability: '接受缺货订购' },
+      { prefix: '', marker: 'SVICLOUD', included: 'Included', action: 'Pre-order 15P', availability: 'Available for pre-order' },
+      { prefix: '/zh', marker: '小雲', included: '內含', action: '預購 15P', availability: '接受預購' },
+      { prefix: '/zh-cn', marker: '小云', included: '内含', action: '预订 15P', availability: '接受预订' },
     ];
     for (const locale of locales) {
       for (const route of ['/', '/shop/', '/compare/', '/product/svicloud-15p/']) {

@@ -172,7 +172,7 @@ Baseline screenshots already tracked or generated under `docs/15p-launch/screens
 | `??` | `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-angle.webp` | 15P product media | Approved PDF references or grounded image generation | No | Keep referenced optimized WebP assets |
 | `??` | `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-front.webp` | 15P product media | Approved PDF references or grounded image generation | No | Keep referenced optimized WebP assets |
 | `??` | `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v4.webp` | 15P product media | Approved PDF references or grounded image generation | Yes | Keep referenced optimized WebP assets |
-| `??` | `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-package.webp` | 15P product media | Approved PDF references or grounded image generation | No | Keep referenced optimized WebP assets |
+| `??` | `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-packaging-mockup-watermarked.webp` | 15P packaging gallery media | Supplied packaging artwork presented as a watermarked mockup | Yes | Keep referenced optimized WebP asset |
 
 ## Inventory verdict
 
