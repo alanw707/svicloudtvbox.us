@@ -1,11 +1,11 @@
 # 15P PPTX embedded-media inventory
 
-Inventory of every media part embedded in the read-only `15P PDF.pptx`. Dimensions, sizes, hashes, and slide relationships were extracted from OOXML without modifying the deck. All 27 parts are flattened marketing slides and are excluded from storefront media; only claim-free PDF page-1 photos are shipped.
+Inventory of every media part embedded in the read-only `15P PDF.pptx`. Dimensions, sizes, hashes, and slide relationships were extracted from OOXML without modifying the deck. All 27 original parts remain excluded from storefront media. One background-only crop derived from slide 2 is used as a watermarked lifestyle derivative after embedded marketing copy was removed; no unmodified flattened slide is shipped.
 
 | Embedded path | Slide | Dimensions | Size | SHA-256 | Content / disposition |
 |---|---:|---:|---:|---|---|
 | `ppt/media/image1.png` | 1 | 1422×800 | 1261 KiB | `b21d382c99333d8a5e130a2d4a75550dfb84d66794c6c075bf24d10cb8aa240c` | “Officially launched” conflicts with Coming Soon; professional-grade claim. **Excluded.** |
-| `ppt/media/image2.png` | 2 | 1422×800 | 1038 KiB | `bad4ed753b1e8493bfe3921c8aa18df9e8d889bd0d3b563ff46e3878f5c7cc7f` | Minimalist/premium qualitative marketing. **Excluded.** |
+| `ppt/media/image2.png` | 2 | 1422×800 | 1038 KiB | `bad4ed753b1e8493bfe3921c8aa18df9e8d889bd0d3b563ff46e3878f5c7cc7f` | Original slide excluded; a copy-free crop of the device/background is used only as a watermarked lifestyle derivative. |
 | `ppt/media/image3.png` | 3 | 1422×800 | 939 KiB | `c6c90b634ade82240c31c520478f3e0b6b97eede1a9b142ab9f7c789e65d0191` | Type-C technical label combined with enhanced-compatibility marketing. **Excluded.** |
 | `ppt/media/image4.png` | 4 | 1422×800 | 984 KiB | `e791493c1e90bb0be34aa01f61e3f687d90e700f196722427e0190c86c239686` | A55 technical label combined with performance marketing. **Excluded.** |
 | `ppt/media/image5.png` | 5 | 1422×800 | 1216 KiB | `c36ffbdd050d49b658fd979de21a2302aecb6698ea9cdf8639cce515787d6110` | Wi-Fi 6 label combined with super-coverage/stable-transmission claims. **Excluded.** |
