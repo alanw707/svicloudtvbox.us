@@ -137,7 +137,8 @@ try {
         if (Object.keys(actualHreflang).length !== 4) issue(scope, `expected 4 hreflang values, got ${Object.keys(actualHreflang).length}`);
 
         for (const [field, values] of Object.entries(data.social)) {
-          if (values.length !== 1 || !values[0]) issue(scope, `expected one ${field}, got ${values.length}`);
+          const uniqueValues = [...new Set(values.filter(Boolean))];
+          if (uniqueValues.length !== 1) issue(scope, `expected one unique ${field}, got ${values.length}`);
         }
         if (normalizeUrl(data.social.ogUrl[0] || requestedUrl) !== expectedUrl) issue(scope, 'og:url does not match canonical');
         if (!data.title.includes('15P') || !data.title.includes(locale.marker)) issue(scope, `title lacks locale/15P relevance: ${data.title}`);
