@@ -27,6 +27,7 @@ import fnmatch
 import os
 import posixpath
 import socket
+import ssl
 import sys
 import time
 from io import BytesIO
@@ -79,7 +80,8 @@ class DeployConfig:
     remote_root: str = DEFAULT_REMOTE_ROOT
     delete_remote: bool = True
     dry_run: bool = False
-    verify_tls: bool = False  # Hostinger often uses self-signed; set True if valid cert
+    verify_tls: bool = True
+    tls_server_name: str | None = None
     connect_retries: int = 5
     connect_timeout: int = 45
     skip_same_size: bool = True
@@ -99,12 +101,14 @@ def parse_args() -> DeployConfig:
     p.add_argument("--no-delete-remote", dest="delete_remote", action="store_false", help="Skip deleting remote files")
     p.add_argument("--dry-run", action="store_true", help="Preview actions without uploading")
     p.add_argument("--bust-cache", action="store_true", help="Write .deploy-version (epoch) before upload")
-    p.add_argument("--verify-tls", action="store_true", help="Verify TLS cert when using FTPS")
+    p.add_argument("--verify-tls", dest="verify_tls", action="store_true", help="Verify TLS cert and hostname when using FTPS (default)")
+    p.add_argument("--no-verify-tls", dest="verify_tls", action="store_false", help="Disable FTPS certificate/hostname verification (explicitly unsafe)")
+    p.add_argument("--tls-server-name", default=env.get("FTP_TLS_SERVER_NAME"), help="Hostname covered by the FTPS certificate")
     p.add_argument("--connect-retries", type=int, default=int(env.get("FTP_CONNECT_RETRIES", 5)), help="FTP/FTPS connect/login retry count")
     p.add_argument("--connect-timeout", type=int, default=int(env.get("FTP_CONNECT_TIMEOUT", 45)), help="FTP/FTPS connect timeout in seconds")
     p.add_argument("--skip-same-size", action="store_true", default=env.get("FTP_SKIP_SAME_SIZE", "0").lower() in {"1", "true", "yes"}, help="Skip remote files only when byte sizes match")
 
-    p.set_defaults(delete_remote=True)
+    p.set_defaults(delete_remote=True, verify_tls=env.get("FTP_VERIFY_TLS", "1").lower() not in {"0", "false", "no"})
 
     a = p.parse_args()
     if not a.host or not a.user or not a.password:
@@ -125,6 +129,7 @@ def parse_args() -> DeployConfig:
         delete_remote=bool(a.delete_remote),
         dry_run=bool(a.dry_run),
         verify_tls=bool(a.verify_tls),
+        tls_server_name=a.tls_server_name.strip() if isinstance(a.tls_server_name, str) and a.tls_server_name.strip() else None,
         connect_retries=max(1, int(a.connect_retries)),
         connect_timeout=max(10, int(a.connect_timeout)),
         skip_same_size=bool(a.skip_same_size),
@@ -160,10 +165,15 @@ def _connect(cfg: DeployConfig):
         try:
             print(f"Connecting to FTP server (attempt {attempt}/{cfg.connect_retries}, timeout {cfg.connect_timeout}s)...")
             if cfg.protocol == "ftps":
-                ftp = FTP_TLS()
-                # Note: certificate verification is off by default for FTP_TLS in many environments
-                # We expose a flag to enforce verification if desired.
+                if cfg.verify_tls and not cfg.tls_server_name:
+                    print("FTPS TLS hostname is required when certificate verification is enabled; set FTP_TLS_SERVER_NAME or --tls-server-name.", file=sys.stderr)
+                    sys.exit(2)
+                context = ssl.create_default_context() if cfg.verify_tls else ssl._create_unverified_context()
+                ftp = FTP_TLS(context=context)
                 ftp.connect(host=cfg.host, port=cfg.port, timeout=cfg.connect_timeout)
+                if cfg.verify_tls:
+                    # FTP_TLS wraps the control socket during login and uses ftp.host as SNI.
+                    ftp.host = cfg.tls_server_name
                 ftp.login(cfg.user, cfg.password)
                 ftp.prot_p()  # Secure data connection
             else:
