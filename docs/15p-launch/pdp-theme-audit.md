@@ -7,7 +7,7 @@ The local theme renders `svicloud-15p` through `woocommerce/single-product.php`,
 - Local supplemental WooCommerce product is published and catalog-visible.
 - Regular price is `$379.00`; sale/effective price is `$288.00`.
 - Managed stock is zero with notified backorders and `onbackorder` status.
-- PDP renders localized `Backorder 15P`, WooCommerce quantity/Add to Cart behavior, `Available on backorder`, and `Shipping date not announced`.
+- PDP renders localized `Pre-order 15P`, WooCommerce quantity/Add to Cart behavior, `Available for pre-order`, and `Shipping date not announced`.
 - Product schema emits one `$288.00` Offer with `https://schema.org/BackOrder` and no delivery-time estimate.
 - Primary image plus four gallery images are recreated from tracked watermarked media after every fixture refresh; all delivered 15P theme artwork is watermarked.
 - EN/繁/简 title, detailed specification, package list, FAQ, comparison qualification, price, and availability text come from locale registries/product state.

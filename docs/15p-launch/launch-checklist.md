@@ -12,8 +12,8 @@
 
 - [x] Site owner approved `$379.00` regular / `$288.00` sale
 - [x] Managed zero stock, `notify` backorders, `onbackorder`, and purchasing configured
-- [x] Customer actions use `Backorder 15P`
-- [x] Surrounding UI uses `Available on backorder` and `Shipping date not announced`
+- [x] Customer actions use `Pre-order 15P`
+- [x] Surrounding UI uses `Available for pre-order` and `Shipping date not announced`
 - [x] “Coming Soon” remains only inside approved artwork
 - [x] Product Offer uses `BackOrder` and omits delivery-time estimates
 - [x] EN/繁/简 storefront, metadata, and support wording updated

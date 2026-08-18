@@ -68,7 +68,7 @@ localized SEO/content
 ### Media
 
 - `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v4.webp` — hero/pricing/Shop only.
-- `svicloud-15p-front.webp`, `svicloud-15p-angle.webp`, `svicloud-15p-package.webp` — PDP/Compare/fixture gallery.
+- `svicloud-15p-front.webp`, `svicloud-15p-angle.webp`, `svicloud-15p-packaging-mockup-watermarked.webp` — PDP/Compare/fixture gallery.
 - `docs/15p-launch/15p-marketing-v4-prompt.md` and approved screenshots — provenance/evidence.
 
 ### Verification

@@ -50,7 +50,7 @@ test.describe('SVICLOUD site smoke', () => {
         }
         const addBtn = page.locator('.single_add_to_cart_button');
         await expect(addBtn).toBeVisible();
-        await expect(addBtn).toHaveText(isBackorder15p ? /backorder 15p/i : /add to cart/i);
+        await expect(addBtn).toHaveText(isBackorder15p ? /pre-order 15p/i : /add to cart/i);
         if (isBackorder15p) {
           await expect(page.locator('.pdp-compare')).toBeVisible();
           await expect(page.locator('.stock.available-on-backorder')).toBeVisible();

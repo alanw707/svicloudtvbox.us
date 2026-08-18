@@ -6,9 +6,9 @@ import { chromium } from 'playwright';
 const baseUrl = (process.env.PLAYWRIGHT_BASE_URL || 'http://svicloud10p.svic.local').replace(/\/$/, '');
 const outputPath = process.env.SEO_AUDIT_OUTPUT || '.playwright/seo-audit/report.json';
 const locales = [
-  { code: 'en', prefix: '', marker: 'SVICLOUD', title: 'SVICLOUD 15P Backorder | 小雲盒子 U.S. Authorized Dealer' },
-  { code: 'zh-TW', prefix: '/zh', marker: '小雲', title: '小雲 15P 缺貨訂購｜小雲盒子美國授權經銷' },
-  { code: 'zh-CN', prefix: '/zh-cn', marker: '小云', title: '小云 15P 缺货订购｜小云盒子美国授权经销' },
+  { code: 'en', prefix: '', marker: 'SVICLOUD', title: 'SVICLOUD 15P Pre-order | 小雲盒子 U.S. Authorized Dealer' },
+  { code: 'zh-TW', prefix: '/zh', marker: '小雲', title: '小雲 15P 預購｜小雲盒子美國授權經銷' },
+  { code: 'zh-CN', prefix: '/zh-cn', marker: '小云', title: '小云 15P 预订｜小云盒子美国授权经销' },
 ];
 const routes = [
   { key: 'home', path: '/', image: '.hero-15p__image' },
