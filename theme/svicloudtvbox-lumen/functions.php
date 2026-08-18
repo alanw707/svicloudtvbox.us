@@ -2301,7 +2301,7 @@ if (!function_exists('svic_get_15p_product_meta_definitions')) {
             'title'       => trim(wp_strip_all_tags(svic_translate('products.svicloud-15p.meta.title'))),
             'description' => trim(wp_strip_all_tags(svic_translate('products.svicloud-15p.meta.description'))),
             'image_alt'   => trim(wp_strip_all_tags(svic_translate('products.svicloud-15p.meta.image_alt'))),
-            'image'       => svic_get_theme_image_meta('/assets/images/products/svicloud-15p-front.webp'),
+            'image'       => svic_get_theme_image_meta('/assets/images/products/svicloud-15p-primary-ai-watermarked.webp'),
         );
     }
 }
@@ -2358,6 +2358,24 @@ if (!function_exists('svic_filter_rank_math_15p_title')) {
         add_filter('rank_math/opengraph/facebook/image_array', 'svic_filter_rank_math_15p_image', 999);
         add_filter('rank_math/opengraph/twitter/image_array', 'svic_filter_rank_math_15p_image', 999);
     }
+
+    function svic_output_15p_social_image_meta(): void
+    {
+        if (!svic_is_15p_product_page()) {
+            return;
+        }
+
+        $meta = svic_get_15p_product_meta_definitions();
+        $image = isset($meta['image']['url']) ? trim((string) $meta['image']['url']) : '';
+        if ($image === '') {
+            return;
+        }
+
+        echo '<meta property="og:image" content="' . esc_url($image) . '" />' . "\n";
+        echo '<meta name="twitter:image" content="' . esc_url($image) . '" />' . "\n";
+    }
+
+    add_action('wp_head', 'svic_output_15p_social_image_meta', 9);
 }
 
 if (!function_exists('svic_get_compare_page_meta_definitions')) {
