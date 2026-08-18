@@ -15,7 +15,8 @@ The approval covered the five-image watermarked gallery, screenshot-derived AI p
 - Preflight commit: `51fb067a11ca455856e674d8cb39fdf9d3757007`
 - Corrected SEO theme commit: `afa372c85d73eb7463dc2eb2b446e4f76e09407f`
 - Watermark/sitemap fix commit: `9ae0f847fdb7d1c91a7cf55c54b7e0671de026d5`
-- Final repository commit: `9ae0f847fdb7d1c91a7cf55c54b7e0671de026d5`
+- Final source commit: `9ae0f847fdb7d1c91a7cf55c54b7e0671de026d5`
+- Evidence history commits: `08c4bc9a704d94f11745d1d6f30e8cc094963144`, `231ba8583870dca8510c936a7aba614971e43eee`
 - Initial retry failed the social-image gate; product/media/theme rollback completed. Evidence: external Pi backup `rollback-evidence.md`.
 - Corrected retry added explicit 15P social-image metadata and deployed the fully watermarked fallback assets.
 
