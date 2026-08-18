@@ -4430,11 +4430,17 @@ if (!function_exists('svic_finish_head_meta_description_buffer')) {
             echo '<meta name="description" content="' . esc_attr($meta['description']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta property="og:title" content="' . esc_attr($meta['title']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta property="og:description" content="' . esc_attr($meta['description']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo '<meta property="og:image" content="' . esc_url($meta['image']['url']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            $meta_host = wp_parse_url(home_url('/'), PHP_URL_HOST);
+            $rank_math_owns_social_image = is_string($meta_host) && in_array(strtolower($meta_host), ['svicloudtvbox.us', 'www.svicloudtvbox.us'], true);
+            if (!$rank_math_owns_social_image) {
+                echo '<meta property="og:image" content="' . esc_url($meta['image']['url']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            }
             echo '<meta property="og:image:alt" content="' . esc_attr($meta['image_alt']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta name="twitter:title" content="' . esc_attr($meta['title']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo '<meta name="twitter:description" content="' . esc_attr($meta['description']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo '<meta name="twitter:image" content="' . esc_url($meta['image']['url']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            if (!$rank_math_owns_social_image) {
+                echo '<meta name="twitter:image" content="' . esc_url($meta['image']['url']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            }
             echo '<meta name="twitter:image:alt" content="' . esc_attr($meta['image_alt']) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             return;
         }
