@@ -26,7 +26,7 @@ The approval covered the five-image watermarked gallery, screenshot-derived AI p
 - Gallery IDs: `1210`, `1211`, `1212`, `1213`, `1214`
 - Gallery order: screenshot-derived AI primary, angle/rear ports, packaging, AI lifestyle, second AI lifestyle
 - All five production image response bodies match committed local watermarked WebP hashes.
-- Theme marketing/fallback surfaces use only watermarked assets; old `svicloud-15p-marketing-v4.webp` was removed from the repository and remote theme. Production homepage, Shop, Compare, PDP, and metadata surface probes found no old unwatermarked `marketing-v4` or `front` references.
+- Theme marketing/fallback surfaces use only watermarked assets; old `svicloud-15p-marketing-v4.webp` was removed from the repository and remote theme, and the remote `.htaccess` retires that legacy path with HTTP 410. Production homepage, Shop, Compare, PDP, and metadata surface probes found no old unwatermarked `marketing-v4` or `front` references.
 - Theme remote verification: `212/212` files match.
 
 ## Verification
@@ -37,7 +37,7 @@ The approval covered the five-image watermarked gallery, screenshot-derived AI p
 - SEO audit: 24 pages, 77 internal links, 0 issues.
 - Product schema: one `$288.00 USD` BackOrder offer, no delivery-time promise.
 - Social metadata: one unique `og:image` and one unique `twitter:image`, both watermarked primary image.
-- Active sitemap: `/sitemap_index.xml` and all four children HTTP 200; `/wp-sitemap.xml` resolves to the active Rank Math sitemap rather than the homepage via the pinned remote `.htaccess` redirect. Pre-update `.htaccess` SHA-256 and final redirect update are recorded in the external preflight evidence.
+- Active sitemap: `/sitemap_index.xml` and all four children HTTP 200; `/wp-sitemap.xml` resolves to the active Rank Math sitemap rather than the homepage via the pinned remote `.htaccess` redirect. The pre-update/final `.htaccess` hashes and retired legacy-image rule are recorded in the external preflight evidence.
 - No production offline-verifier orders/customers; no unrelated/private data or infrastructure writes.
 
 The pre-update DB/uploads/remote-theme backups and rollback procedure remain external and hash-verified. No DB/uploads restoration was performed.
