@@ -14,7 +14,8 @@ Status: local validation complete; production approval pending.
 
 ## Release candidate
 
-- Source commit: `ea89e9abaeb45e46bbde53a9a934bcbf9acef81b`
+- Source implementation commit: `ea89e9abaeb45e46bbde53a9a934bcbf9acef81b`
+- Release candidate: `8f4e4a5c4908f2280cf53fbaa117947376fb493f`
 - Safety branch: `safety/15p-delivery-banner-20260818`
 - Production writes: **none**
 - Required approval text: **“I approve deploying the 2–3 week delivery banner to production.”**
