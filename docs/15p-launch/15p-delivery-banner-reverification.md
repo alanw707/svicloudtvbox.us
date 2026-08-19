@@ -5,7 +5,8 @@
 - Final verification commit: `9407a92beca8ae66e84e550b21878769d32dfe85`
 - Updated base: `origin/main` `d4c2e2a358d1049099985916553b051bd1e5824d`
 - Local `main`: `b25fa8aa3ba892c221c11e1a885d31c5f30815cf` (unchanged)
-- Explicit production approval: `I approve deploying the 2–3 week delivery banner to production.`
+- Explicit production approval, recorded before the guarded deployment: `I approve deploying the 2–3 week delivery banner to production.`
+- Approval gate audit trail: the superseded preflight document now labels its pending/none fields as historical; this final record is authoritative.
 
 ## Production banner probe
 
@@ -18,7 +19,7 @@ The approved banner is live and passed a six-case Chromium/WebKit × English/Tra
 - Production Playwright: 16/16 Chromium/WebKit launch and localized commerce tests pass after replacing third-party-sensitive `networkidle` waits with DOM-ready waits in test commit `9407a92`.
 - Local Playwright rerun: 16/16 pass.
 
-Third-party Google Pay, PayPal, Clarity, and report-only CSP console noise was excluded from first-party error counting; it did not affect banner or commerce assertions.
+Third-party Google Pay, PayPal, Clarity, and report-only CSP console noise was excluded from first-party error counting; it did not affect banner or commerce assertions. The unfiltered diagnostic output is retained as `production-delivery-banner-probe.out`; the final gate uses `production-delivery-banner-probe-filtered.out`, whose first-party error count is zero.
 
 ## Preserved release state
 
