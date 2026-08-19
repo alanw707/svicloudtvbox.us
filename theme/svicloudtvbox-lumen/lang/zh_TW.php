@@ -42,6 +42,8 @@ return [
         'cart'   => [
             'adding'             => '加入中…',
             'added'              => '已加入購物車！',
+            'added_notice'       => '已加入您的購物車',
+            'view_cart'          => '查看購物車',
             'count_label_single' => '購物車內有 {{count}} 件商品',
             'count_label_plural' => '購物車內有 {{count}} 件商品',
             'count_label_empty'  => '購物車目前為空',
@@ -583,6 +585,10 @@ return [
         ],
         'remove'            => '移除商品',
         'remove_aria'       => '從購物車移除 %s',
+        'quantity'          => [
+            'decrease' => '減少數量',
+            'increase' => '增加數量',
+        ],
         'update'            => '更新購物車',
         'coupon'            => [
             'label'       => '優惠代碼',
@@ -634,6 +640,7 @@ return [
             'title' => '付款與確認',
             'intro' => '選擇已儲存的信用卡或新增付款方式，然後提交訂單完成安全結帳。',
             'cards_label' => '支援的信用卡：Visa、Mastercard、American Express、Discover。',
+            'unavailable_action' => '目前無可用付款方式',
         ],
         'coupon' => [
             'toggle_lead' => '有折扣碼嗎？',
@@ -848,6 +855,7 @@ return [
             'blog'     => '部落格',
             'shop'     => '選購',
             'faq'      => '常見問題',
+            'fifteen_p' => '小雲 15P 電視盒',
             'ten_p'    => '小雲電視盒 10P+ 旗艦款',
             'ten_s'    => '小雲電視盒 10S 輕巧款',
             'concierge'=> '禮賓客服',
@@ -860,6 +868,10 @@ return [
             'my-account' => '會員中心',
             'submenu_expand'   => '展開次選單',
             'submenu_collapse' => '收合次選單',
+            'skip_content'      => '跳至主要內容',
+            'mobile_navigation' => '行動版導覽',
+            'open_navigation'   => '開啟導覽',
+            'close_navigation'  => '關閉導覽',
         ],
     ],
 
@@ -890,19 +902,38 @@ return [
     ],
     'frontpage' => [
         'hero' => [
-            'badge'   => '美國授權經銷商',
-            'title'   => '2026 美國華人家庭的高階小雲電視盒 — 美國快速出貨、保固與中英雙語設定協助',
-            'title_lead' => '2026 美國華人家庭的高階小雲電視盒',
-            'title_separator' => ' — ',
-            'title_tail' => '美國快速出貨、保固與中英雙語設定協助',
-            'copy'    => '小雲電視盒美國代理，提供 SVICLOUD 10P+ 與 10S 現貨，整合華語與國際娛樂、卡拉 OK 與兒童內容，中英雙語禮賓服務與一年保固，無月費。',
+            'badge'   => '美國授權經銷 · 內華達',
+            'title'   => '小雲 15P 開放預購。亞洲娛樂，重新想像。',
+            'title_lead' => '小雲 15P 開放預購',
+            'title_separator' => '。',
+            'title_tail' => '亞洲娛樂，重新想像。',
+            'copy'    => '小雲 15P 現以 US$288 接受預購（原價 US$379），搭載 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、藍牙 5.4 與 4K HDR。',
+            'launch'  => [
+                'badge' => '新品',
+                'text'  => '小雲 15P 預購已開放',
+            ],
+            'showcase' => [
+                'kicker'  => '小雲 15P 電視盒',
+                'release' => '接受預購',
+                'title'   => 'Android 14、Wi-Fi 6、4K HDR。',
+                'copy'    => '全新小雲 15P 搭載 Amlogic S905Y5、4 GB DDR3、64 GB eMMC、藍牙 5.4 與 AV1 解碼。',
+                'image_alt' => '小雲 15P 電視盒正面',
+                'points'  => [
+                    'usa'     => 'Android 14',
+                    'fees'    => 'Wi-Fi 6 + 藍牙 5.4',
+                    'support' => '4K HDR + AV1 解碼',
+                ],
+                'cta'     => '預購 15P',
+                'compare' => '比較全系列',
+            ],
             'bullets' => [
-                'shipping' => '美國現貨配送',
-                'warranty' => '一年美國保固',
-                'fees'     => '無月租費',
+                'shipping' => 'Amlogic S905Y5 四核心處理器',
+                'warranty' => '4 GB DDR3 + 64 GB eMMC',
+                'fees'     => '雙頻 Wi-Fi 6 + 藍牙 5.4',
             ],
             'cta' => [
-                'primary'   => '選購 10P+',
+                'primary'   => '預購 15P',
+                'tenp'      => '選購 10P+',
                 'bundles'   => '查看優惠組合',
                 'compare'   => '查看定價',
                 'secondary' => '查看定價',
@@ -1124,14 +1155,29 @@ return [
             'sr_sale_announcement' => '特價 %2$s，原價 %1$s',
             'savings_label'        => '省下 %1$s（%2$s%% OFF）',
             'cards'    => [
+                '15p' => [
+                    'badge'     => '接受預購',
+                    'title'     => '小雲 15P 電視盒',
+                    'image_alt' => '小雲 15P Android 14 預購圖',
+                    'interval'  => '台',
+                    'copy'      => '搭載 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、藍牙 5.4 與 4K HDR。',
+                    'stock_note' => '預計下單後 2–3 週送達',
+                    'features'  => [
+                        'processor' => 'Amlogic S905Y5 + Android 14',
+                        'no_fees' => '4 GB DDR3 + 64 GB eMMC',
+                        'support' => 'Wi-Fi 6 + 藍牙 5.4 + AV1',
+                    ],
+                    'cta'      => '預購 15P',
+                    'buy_cta'  => '預購 15P',
+                ],
                 '10p' => [
                     'badge'    => '最受歡迎',
                     'title'    => '小雲電視盒 10P+',
                     'image_alt'=> '小雲電視盒 10P+ 產品圖',
                     'interval' => '台',
-                    'copy'     => '旗艦 4GB 記憶體 / 64GB 儲存，內建兒童與卡拉 OK 應用。',
+                    'copy'     => 'Android 12、4GB 記憶體 / 64GB 儲存，內建兒童與卡拉 OK 應用。',
                     'features' => [
-                        'hdr'    => '4K HDR + AV1 解碼',
+                        'hdr'    => 'Android 12 + 4K HDR + AV1 解碼',
                         'apps'   => '內含兒童與卡拉 OK 應用',
                         'wifi'   => 'AI 語音遙控 + 雙頻 Wi-Fi',
                     ],
@@ -1148,9 +1194,9 @@ return [
                     'title'    => '小雲電視盒 10S',
                     'image_alt'=> '小雲電視盒 10S 產品圖',
                     'interval' => '台',
-                    'copy'     => '超值 2GB 記憶體 / 32GB 儲存，適合臥室或第二台電視。',
+                    'copy'     => 'Android 12、2GB 記憶體 / 32GB 儲存，適合臥室或第二台電視。',
                     'features' => [
-                        'hdr'    => '4K HDR + AV1 解碼',
+                        'hdr'    => 'Android 12 + 4K HDR + AV1 解碼',
                         'remote' => 'AI 語音遙控',
                         'bundle' => '附 HDMI 與電源配件',
                     ],
@@ -1267,7 +1313,7 @@ return [
         'hero' => [
             'badge'     => '選購',
             'title'     => '小雲電視盒',
-            'subtitle'  => '美國授權經銷，提供標準配送、一年保固與英文/中文客服。',
+            'subtitle'  => '查看小雲 15P 已確認規格，或選購現有機型，享標準配送、一年保固與英文/中文客服。',
             'highlights' => [
                 'shipping' => '美國倉庫 標準配送並提供追蹤碼，時程依承運商為準',
                 'warranty' => '含一年美國保固',
@@ -1290,6 +1336,31 @@ return [
                 'warranty' => '提供一年美國保固',
                 'support'  => '附中英雙語遠端設定',
             ],
+            '15p' => [
+                'title'   => '小雲 15P 電視盒',
+                'lead'    => '搭載 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、雙頻 Wi-Fi 6、藍牙 5.4 與 4K HDR。',
+                'button'  => '預購 15P',
+                'badge'   => '接受預購',
+                'best_for' => '家庭客廳、體育迷與手機 App 使用者',
+                'price_label' => '預購價',
+                'price_tbc'   => '接受預購',
+                'price_note'  => '預計下單後 2–3 週送達',
+                'delivery_banner_label' => '預購配送',
+                'delivery_banner_copy'  => '預計下單後 2–3 週送達。',
+                'image_alt'   => '小雲 15P Android 14 預購圖',
+                'image_tbc'   => '小雲 15P 產品圖片',
+                'features' => [
+                    'hardware'     => 'Amlogic S905Y5 + Android 14',
+                    'apps'         => '4 GB DDR3 + 64 GB eMMC',
+                    'remote'       => 'Wi-Fi 6 + 藍牙 5.4 + AV1 解碼',
+                    'mobile_apps'  => '支援下載手機 App',
+                ],
+                'assurance' => [
+                    'shipping' => '接受預購',
+                    'warranty' => '特價 US$288 · 原價 US$379',
+                    'support'  => '預計下單後 2–3 週送達',
+                ],
+            ],
             '10p' => [
                 'title'   => '小雲電視盒 10P+',
                 'lead'    => '旗艦硬體配上專屬家庭功能與最快速的運算效能。',
@@ -1297,7 +1368,7 @@ return [
                 'badge'   => '熱銷旗艦',
                 'best_for' => '家庭客廳・體育迷・K 歌派對',
                 'features' => [
-                    'ram_storage' => '4GB 記憶體 / 64GB 儲存與 AV1 解碼',
+                    'ram_storage' => 'Android 12 + 4GB 記憶體 / 64GB 儲存與 AV1 解碼',
                     'apps'        => '內建兒童模式與卡拉 OK 應用',
                     'remote'      => '藍牙 AI 語音遙控 + Wi-Fi 6',
                 ],
@@ -1309,17 +1380,29 @@ return [
                 'badge'   => '超值推薦',
                 'best_for' => '臥室・客房・入門影音',
                 'features' => [
-                    'ram_storage' => '2GB 記憶體 / 32GB 儲存，滿足日常播放',
+                    'ram_storage' => 'Android 12 + 2GB 記憶體 / 32GB 儲存，滿足日常播放',
                     'remote'      => '4K HDR + AV1 解碼，搭配語音遙控',
                     'ports'       => '含 HDMI、USB 3.0 與有線網路端口',
+                ],
+            ],
+            'remote' => [
+                'title'    => '10P+ 藍牙遙控器',
+                'lead'     => '小雲 10P+ 官方替換或備用遙控器，由美國現貨寄送。',
+                'button'   => '查看遙控器',
+                'badge'    => '配件',
+                'best_for' => '需要替換遙控器或多人共用的家庭',
+                'features' => [
+                    'bluetooth' => '藍牙 5.0 配對，最遠約 10 公尺',
+                    'voice'     => '內建麥克風，支援語音搜尋',
+                    'controls'  => '通用電視電源、音量與輸入控制',
                 ],
             ],
         ],
     ],
     'products' => [
         'svicloud-10p-plus' => [
-            'short_description' => '旗艦 4K 盒子，4GB 記憶體 / 64GB 儲存，內建兒童模式、卡拉 OK 與雙語禮賓支援。',
-            'description' => '<p>小雲電視盒 10P+ 是家庭客廳的旗艦機，結合語音操控、卡拉 OK 與最快的硬體效能。</p><ul><li>4GB 記憶體與 64GB 儲存、AV1 解碼，直播體育賽事與戲劇都能流暢 4K 播放。</li><li>內建兒童模式與卡拉 OK 應用，附英文 / 中文禮賓帶領完成設定。</li><li>標配 Wi-Fi 6、Gigabit 有線網路、藍牙語音遙控、USB 3.0 與擴充埠，滿足多種安裝情境。</li><li>支援 Dolby 環繞音效，可搭配相容的電視、Soundbar 與擴大機使用。</li><li>美國內華達州倉庫配送，14 天安心退換、一年美國保固與真人禮賓客服。</li></ul><p>盒內附 HDMI 線、電源供應器、語音遙控，支援雙無線麥克風卡拉 OK。</p>',
+            'short_description' => 'Android 12 旗艦 4K 盒子，4GB 記憶體 / 64GB 儲存，內建兒童模式、卡拉 OK 與雙語禮賓支援。',
+            'description' => '<p>小雲電視盒 10P+ 搭載 Android 12，是家庭客廳的旗艦機，結合語音操控、卡拉 OK 與最快的硬體效能。</p><ul><li>4GB 記憶體與 64GB 儲存、AV1 解碼，直播體育賽事與戲劇都能流暢 4K 播放。</li><li>內建兒童模式與卡拉 OK 應用，附英文 / 中文禮賓帶領完成設定。</li><li>標配 Wi-Fi 6、Gigabit 有線網路、藍牙語音遙控、USB 3.0 與擴充埠，滿足多種安裝情境。</li><li>支援 Dolby 環繞音效，可搭配相容的電視、Soundbar 與擴大機使用。</li><li>美國內華達州倉庫配送，14 天安心退換、一年美國保固與真人禮賓客服。</li></ul><p>盒內附 HDMI 線、電源供應器、語音遙控，支援雙無線麥克風卡拉 OK。</p>',
             'best_for' => [
                 'badge' => '最適合',
                 'title' => '客廳主機、卡拉 OK 聚會，以及想一次買到位的買家',
@@ -1330,10 +1413,17 @@ return [
                     'tertiary'  => '特別適合愛看體育賽事、家庭共用客廳，以及不想之後再升級的家庭',
                 ],
             ],
+            'crosslink' => [
+                'badge'  => '新機登場',
+                'title'  => '小雲 15P 預購已開放',
+                'lead'   => '小雲 15P 現以 US$288 接受預購（原價 US$379）；預計下單後 2–3 週送達。',
+                'cta'    => '預購小雲 15P',
+                'target' => 'svicloud-15p',
+            ],
         ],
         'svicloud-10s' => [
-            'short_description' => '高性價比 4K 串流盒，2GB 記憶體 / 32GB 儲存，適合臥室、客房、第二台電視與小坪數空間。',
-            'description' => '<p>小雲電視盒 10S 是主打高性價比的 4K 串流機型，適合想要 SVICLOUD 正版內容、但不需要旗艦級附加功能的家庭。</p><ul><li>2GB 記憶體與 32GB 儲存搭配 AV1 解碼，可順暢播放直播、戲劇與隨選內容。</li><li>體積輕巧，特別適合臥室、客房、宿舍、出租屋或第二台電視使用。</li><li>具備 HDMI、乙太網路與 USB 連接埠，可快速完成 Wi‑Fi 或有線安裝。</li><li>美國現貨配送，附一年保固、中英雙語客服與禮賓式開箱協助。</li></ul><p>如果你重視價格與基本影音需求，10S 是最划算的選擇。若你需要更強效能、卡拉 OK 與語音控制，則更適合 10P+。</p>',
+            'short_description' => 'Android 12 高性價比 4K 串流盒，2GB 記憶體 / 32GB 儲存，適合臥室、客房、第二台電視與小坪數空間。',
+            'description' => '<p>小雲電視盒 10S 搭載 Android 12，是主打高性價比的 4K 串流機型，適合想要 SVICLOUD 正版內容、但不需要旗艦級附加功能的家庭。</p><ul><li>2GB 記憶體與 32GB 儲存搭配 AV1 解碼，可順暢播放直播、戲劇與隨選內容。</li><li>體積輕巧，特別適合臥室、客房、宿舍、出租屋或第二台電視使用。</li><li>具備 HDMI、乙太網路與 USB 連接埠，可快速完成 Wi‑Fi 或有線安裝。</li><li>美國現貨配送，附一年保固、中英雙語客服與禮賓式開箱協助。</li></ul><p>如果你重視價格與基本影音需求，10S 是最划算的選擇。若你需要更強效能、卡拉 OK 與語音控制，則更適合 10P+。</p>',
             'best_for' => [
                 'badge' => '最適合',
                 'title' => '臥室、客房、第二台電視與重視預算的買家',
@@ -1354,29 +1444,207 @@ return [
                     'warranty'  => '1 年美國保固 + 14 天退換貨，禮賓客服協助處理',
                 ],
             ],
+            'crosslink' => [
+                'badge'  => '新機登場',
+                'title'  => '預購小雲 15P',
+                'lead'   => 'Android 14、Wi-Fi 6 與藍牙 5.4 小雲 15P 現以 US$288 接受預購（原價 US$379）。',
+                'cta'    => '預購小雲 15P',
+                'target' => 'svicloud-15p',
+            ],
+        ],
+        'svicloud-9p' => [
+            'short_description' => '保留給現有使用者的舊款小雲 9P 頁面，方便查找支援資訊與比較後續機型。',
+            'description' => '<p>小雲 9P 是上一代機型。本頁持續保留，不刪除也不隱藏，供現有使用者查找與比較。</p><ul><li>9P 若仍符合需求，無需急著更換。</li><li>15P 硬體規格已公布，可依實際差異比較。</li><li>15P 現以 US$288 接受預購（原價 US$379）；預計下單後 2–3 週送達。</li></ul>',
+            'best_for' => [
+                'badge' => '舊款機型',
+                'title' => '正在評估下一台盒子的 9P 使用者',
+                'copy'  => '如果 9P 仍正常使用，請繼續保留。可比較 15P 已確認的硬體與目前 US$288 預購價後再決定。',
+                'bullets' => [
+                    'primary'   => '保留舊款頁面與搜尋排名',
+                    'secondary' => '不催促更換正常運作的盒子',
+                    'tertiary'  => '只依正式規格做升級比較',
+                ],
+            ],
+            'crosslink' => [
+                'badge'  => '接受預購',
+                'title'  => '考慮從 9P 升級？',
+                'lead'   => '比較小雲 15P 已確認的規格，並以 US$288 預購（原價 US$379）。',
+                'cta'    => '預購小雲 15P',
+                'target' => 'svicloud-15p',
+            ],
+        ],
+        'svicloud-15p' => [
+            'title' => '小雲 15P 電視盒',
+            'meta' => [
+                'title'       => '小雲 15P 預購 US$288｜Android 14 電視盒',
+                'description' => '小雲 15P 現以 US$288 接受預購（原價 US$379），搭載 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6 與藍牙 5.4。',
+                'image_alt'   => '小雲 15P 電視盒正面',
+            ],
+            'short_description' => '具備 10P+ 的全部功能，並支援下載手機 App。',
+            'description' => '<p>全新小雲 15P 電視盒搭載 Android 14 與 Amlogic S905Y5 四核心 ARM Cortex-A55 處理器。</p><h2>核心規格</h2><ul><li>4 GB DDR3 記憶體與 64 GB eMMC 儲存空間。</li><li>2.4/5 GHz 雙頻 Wi-Fi 6（2T2R）與藍牙 5.4。</li><li>HDR10+、HDR10 與 HLG 畫面處理。</li><li>支援 AV1、VP9、H.265/HEVC 與 H.264 硬體解碼；AV1、VP9、H.265/HEVC 最高支援 4K × 2K 60 fps。</li><li>HDMI 2.1、兩個 USB 2.0、RJ45 有線網路、光纖音訊與 Type-C 5V/2A 電源。</li></ul><h2>盒內配件</h2><p>禮盒、AC 變壓器、HDMI 線、藍牙語音飛鼠遙控器與使用手冊。</p><p><strong>現以 US$288 接受預購（原價 US$379）。</strong>預計下單後 2–3 週送達。</p>',
+            'footer' => [
+                'tagline' => '小雲 15P 預購資訊',
+                'summary' => '依供應商來源整理的小雲 15P 硬體資料；特價 US$288（原價 US$379），預計下單後 2–3 週送達。',
+                'badges' => [
+                    'coming_soon'   => '接受預購',
+                    'specifications'=> '硬體規格已公布',
+                    'commerce'      => '特價 US$288 · 原價 US$379',
+                ],
+                'benefits' => [
+                    'platform' => [
+                        'label'       => '已確認平台',
+                        'description' => 'Android 14、Amlogic S905Y5、4 GB DDR3 與 64 GB eMMC。',
+                    ],
+                    'connectivity' => [
+                        'label'       => '已確認連線',
+                        'description' => '雙頻 Wi-Fi 6、藍牙 5.4、RJ45、HDMI 2.1、光纖音訊與 Type-C 電源。',
+                    ],
+                    'availability' => [
+                        'label'       => '預購狀態',
+                        'description' => '現以 US$288 接受預購；預計下單後 2–3 週送達。'
+                    ],
+                ],
+            ],
+            'inbox' => [
+                'items' => [
+                    'box'    => '小雲 15P 電視盒',
+                    'power'  => 'AC 變壓器（插頭版本未指定）',
+                    'hdmi'   => 'HDMI 線',
+                    'remote' => '藍牙語音飛鼠遙控器',
+                    'manual' => '使用手冊',
+                ],
+            ],
+            'prelaunch' => [
+                'subtitle' => '接受預購，搭載 Android 14、Amlogic S905Y5、Wi-Fi 6、藍牙 5.4 與 4K HDR。',
+                'detail'   => '特價 US$288 · 原價 US$379 · 預計下單後 2–3 週送達',
+                'image_placeholder' => '小雲 15P 電視盒正面',
+                'badges' => [
+                    'specs'        => 'Android 14',
+                    'availability' => '接受預購',
+                    'policy'       => '4 GB + 64 GB',
+                ],
+                'highlights' => [
+                    'specs'        => 'Amlogic S905Y5 四核心 ARM Cortex-A55 處理器',
+                    'availability' => '雙頻 Wi-Fi 6（2T2R）+ 藍牙 5.4',
+                    'policy'       => 'HDR10+/HDR10/HLG + AV1 硬體解碼',
+                ],
+                'reassurance' => [
+                    'badge' => '已確認產品資料',
+                    'title' => '小雲 15P 已確認硬體重點',
+                    'copy'  => '下單前可查看已確認的硬體與盒內配件；預購價 US$288，預計下單後 2–3 週送達。',
+                    'bullets' => [
+                        'shipping'  => 'Android 14 + Amlogic S905Y5',
+                        'warranty'  => '4 GB DDR3 + 64 GB eMMC',
+                        'concierge' => 'Wi-Fi 6、藍牙 5.4、4K HDR 與 AV1',
+                    ],
+                ],
+                'faq_header' => [
+                    'badge' => '15P 預購資訊',
+                    'title' => '已確認規格與預購詳情',
+                    'lead'  => '供應商資料確認所列硬體與盒內配件；預購價 US$288（原價 US$379），預計下單後 2–3 週送達。',
+                ],
+                'faq' => [
+                    'specs' => [
+                        'q' => '小雲 15P 有哪些已確認規格？',
+                        'a' => '15P 搭載 Android 14、Amlogic S905Y5 四核心 ARM Cortex-A55、4 GB DDR3、64 GB eMMC、雙頻 Wi-Fi 6、藍牙 5.4，並支援 AV1 等主要格式硬體解碼。',
+                    ],
+                    'availability' => [
+                        'q' => '現在可以訂購小雲 15P 嗎？',
+                        'a' => '可以。15P 現以 US$288 接受預購（原價 US$379）；預計下單後 2–3 週送達。',
+                    ],
+                    'policy' => [
+                        'q' => '小雲 15P 盒內有哪些配件？',
+                        'a' => '來源包裝清單包含電視盒、AC 變壓器、HDMI 線、藍牙語音遙控器、使用手冊與禮盒；不承諾特定插頭版本。',
+                    ],
+                ],
+            ],
+            'best_for' => [
+                'badge' => '已確認平台',
+                'title' => 'Android 14、Wi-Fi 6 與藍牙 5.4',
+                'copy'  => '供應商規格列出 Android 14、Amlogic S905Y5、雙頻 Wi-Fi 6、藍牙 5.4 與所列 4K 解碼支援。',
+                'bullets' => [
+                    'primary'   => '4 GB DDR3 與 64 GB eMMC',
+                    'secondary' => '雙頻 Wi-Fi 6、RJ45 有線網路與藍牙 5.4',
+                    'tertiary'  => '4K HDR 與 AV1、VP9、H.265/HEVC、H.264 硬體解碼',
+                ],
+            ],
+            'traffic' => [
+                'badge' => '小雲 15P 核心規格',
+                'title' => 'Android 14 與規格表列出的有線、無線連線',
+                'lead'  => '15P 規格列出 AV1、VP9、H.265/HEVC、H.264、雙頻 Wi-Fi 6、藍牙 5.4、HDMI 2.1、RJ45、光纖音訊、USB 與 Type-C 電源。',
+                'bullets' => [
+                    'shipping'  => 'HDMI 2.1、兩個 USB 2.0、RJ45、光纖音訊與 Type-C 電源',
+                    'concierge' => '藍牙語音飛鼠遙控器與 HDMI CEC 電視控制',
+                    'warranty'  => '支援 HDR10+、HDR10、HLG、AV1、VP9、H.265/HEVC 與 H.264',
+                ],
+            ],
+            'comparison' => [
+                'badge' => '機型比較',
+                'title' => '小雲 15P vs 10P+ vs 9P',
+                'lead'  => '以已確認的 15P 規格比較現有機型，不設定效能排名。',
+                'cards' => [
+                    'vs_10p' => [
+                        'title'   => '15P vs 10P+',
+                        'summary' => '兩款皆提供 4 GB / 64 GB 配置；請依已確認的平台功能，以及是否需要立即購買來選擇。',
+                        'bullets' => [
+                            'one'   => '15P：Amlogic S905Y5、Android 14、4 GB DDR3 與 64 GB eMMC',
+                            'two'   => '15P：雙頻 Wi-Fi 6、藍牙 5.4、HDMI 2.1 與光纖音訊',
+                            'three' => '15P 現以 US$288 接受預購（原價 US$379）；預計下單後 2–3 週送達'
+                        ],
+                        'link_label' => '查看小雲 10P+',
+                    ],
+                    'vs_9p' => [
+                        'title'   => '15P vs 9P',
+                        'summary' => '15P 已確認採用 Android 14 與 Wi-Fi 6，但來源沒有提供與 9P 的實測效能比較。',
+                        'bullets' => [
+                            'one'   => '15P：Android 14、Amlogic S905Y5、4 GB DDR3 與 64 GB eMMC',
+                            'two'   => '15P：Wi-Fi 6、藍牙 5.4、4K HDR 與 AV1 解碼',
+                            'three' => '升級前請比較目前 US$288 預購方案與您的 9P',
+                        ],
+                        'link_label' => '查看舊款小雲 9P 頁面',
+                    ],
+                ],
+                'upgrade' => [
+                    'title' => '比較說明',
+                    'items' => [
+                        'from_9p'   => '15P 來源確認 Android 14、Wi-Fi 6、藍牙 5.4 與所列解碼格式；未提供與 9P 的實測比較。',
+                        'from_10p'  => '15P 來源未提供與 10P 或 10P+ 的實測效能比較。',
+                        'new_buyer' => '15P 現以 US$288 接受預購（原價 US$379）；現有機型維持個別銷售狀態。',
+                    ],
+                ],
+                'assurance' => [
+                    'title' => '已確認與尚未公布的資訊',
+                    'items' => [
+                        'shipping' => '已確認：硬體、接口、無線規格、解碼格式與盒內配件',
+                        'support'  => '預購價：特價 US$288、原價 US$379；預計下單後 2–3 週送達',
+                        'warranty' => '尚未公布：15P 專屬保固與退換貨條款',
+                    ],
+                ],
+            ],
         ],
     ],
     'compare' => [
         'meta' => [
-            'title'       => '小雲盒子 10P+ 和 10S 2026 比較｜美國購買前先看規格差異',
-            'description' => '比較 2026 小雲盒子 10P+ 與 10S 的規格、功能、價格與適用情境，幫你在美國購買前快速選出最適合的機型。',
-            'image_alt'   => '小雲電視盒 10P+ 與 10S 並排展示，旁邊放著語音遙控器',
+            'title'       => '小雲 15P vs 10P+ vs 10S｜機型規格比較',
+            'description' => '比較 US$288 預購的小雲 15P（原價 US$379）與 10P+、10S，包括硬體、儲存、連線、影音支援、價格與銷售狀態。',
+            'image_alt'   => '小雲 15P、10P+ 與 10S 電視盒',
         ],
         'hero' => [
             'badge'    => '機型比較',
-            'title'    => '小雲電視盒 10P+ 與 10S 2026 比較',
-            'subtitle' => '逐項比較硬體規格、功能與使用情境，幫你挑到最適合家庭的小雲電視盒。',
+            'title'    => '小雲 15P vs 10P+ vs 10S',
+            'subtitle' => '比較 US$288 預購的 15P 與現售 10P+、10S 的價格、規格及銷售狀態。',
         ],
         'traffic' => [
             'badge' => '美國購買更安心',
-            'title' => '雙語客服、48 小時出貨、完整保固（兩款皆適用）',
-            'lead'  => '為在美華人/亞洲家庭設計：內華達倉配貨，中文/English 禮賓，並清楚指引哪款適合你的房間使用。',
+            'title' => '比較 15P 預購與美國現貨機型',
+            'lead'  => '15P 現以 US$288 接受預購（原價 US$379），預計下單後 2–3 週送達；10P+ 與 10S 維持各自現售條款。',
             'bullets' => [
                 'shipping'  => '48 小時美國出貨，附在地電源/HDMI 與追蹤編號',
                 'concierge' => '雙語禮賓協助安裝、Wi-Fi 調校、卡拉 OK 麥克風、Kids Mode',
                 'warranty'  => '1 年美國保固 + 14 天退換貨，禮賓協助處理',
             ],
             'links' => [
+                'p15p'    => '預購 15P',
                 'p10p'    => '選購 10P+',
                 'p10s'    => '選購 10S',
                 'faq'     => '查看 FAQ',
@@ -1384,6 +1652,10 @@ return [
             ],
         ],
         'differences' => [
+            'next_generation' => [
+                'title'       => 'Android 14 + 藍牙 5.4',
+                'description' => '15P 結合 Android 14、Amlogic S905Y5、雙頻 Wi-Fi 6 與藍牙 5.4，預購價 US$288。',
+            ],
             'premium_performance' => [
                 'title'       => '頂級效能',
                 'description' => '雙倍記憶體與儲存空間，多工處理更順暢，可安裝更多應用程式。',
@@ -1398,12 +1670,23 @@ return [
             ],
         ],
         'products' => [
+            '15p' => [
+                'lead'     => '接受預購的 Android 14 硬體，規格列有 Wi-Fi 6、藍牙 5.4 與 4K 解碼。',
+                'fit_label'=> '接受預購',
+                'fit_copy' => 'Android 14、Amlogic S905Y5、雙頻 Wi-Fi 6、藍牙 5.4 與所列 4K 解碼支援；特價 US$288（原價 US$379）。',
+                'bullets' => [
+                    'processor_os'        => 'Amlogic S905Y5 四核心 Cortex-A55 + Android 14',
+                    'memory_connectivity' => '4 GB DDR3 / 64 GB eMMC + Wi-Fi 6 / 藍牙 5.4',
+                    'video_remote'        => '4K HDR + AV1 解碼 + 藍牙語音飛鼠遙控器',
+                ],
+                'cta' => '預購 15P',
+            ],
             '10p' => [
                 'lead'    => '旗艦硬體、專屬家庭功能與最快速的運算效能。',
                 'fit_label'=> '最適合',
                 'fit_copy' => '客廳主機、K 歌聚會、愛看體育賽事，以及想要最快硬體體驗的家庭。',
                 'bullets' => [
-                    'ram_storage' => '4GB 記憶體、64GB 儲存與 AV1 解碼',
+                    'ram_storage' => 'Android 12、4GB 記憶體、64GB 儲存與 AV1 解碼',
                     'apps'        => '內建兒童模式與卡拉 OK 應用',
                     'remote'      => '藍牙 AI 語音遙控 + Wi-Fi 6',
                 ],
@@ -1414,7 +1697,7 @@ return [
                 'fit_label'=> '最適合',
                 'fit_copy' => '臥室、客房、第二台電視，以及希望用更低預算穩定收看的買家。',
                 'bullets' => [
-                    'ram_storage' => '2GB 記憶體、32GB 儲存，滿足日常播放',
+                    'ram_storage' => 'Android 12、2GB 記憶體、32GB 儲存，滿足日常播放',
                     'remote'      => '4K HDR + AV1 解碼，搭配語音遙控',
                     'ports'       => '內建 HDMI、USB 3.0 與有線網路接口',
                 ],
@@ -1427,8 +1710,10 @@ return [
             'traffic_actions'=> '比較頁主要操作',
             'differences'    => '機型重點差異',
             'product_list'   => '產品重點卡片',
+            'product_alt_15p'=> '小雲 15P 電視盒',
             'product_alt_10p'=> '小雲電視盒 10P+',
             'product_alt_10s'=> '小雲電視盒 10S',
+            'comparison_15p' => '小雲 15P 功能比較',
             'comparison_10p' => '小雲電視盒 10P+ 功能比較',
             'comparison_10s' => '小雲電視盒 10S 功能比較',
             'final_cta'      => '最終行動呼籲',
@@ -1439,7 +1724,7 @@ return [
         'confidence' => [
             'badge' => '下單更清楚',
             'title' => '挑好機型後，後續流程也有在地支援',
-            'lead'  => '不論選 10P+ 或 10S，後續流程都一樣：美國現貨、雙語禮賓、可追蹤配送，以及完整保固支援。',
+            'lead'  => '以已確認規格與價格比較三款機型；15P 接受預購，預計下單後 2–3 週送達。',
             'cards' => [
                 'official' => [
                     'title' => '美國官方銷售通路',
@@ -1455,7 +1740,7 @@ return [
                 ],
                 'warranty' => [
                     'title' => '購買後仍有保固',
-                    'copy'  => '兩款機型皆包含 1 年美國保固與 14 天退換貨期間。',
+                    'copy'  => '已公布的保固與退換貨條款只適用目前可購買的機型；15P 專屬條款尚未公布。',
                 ],
             ],
             'timeline' => [
@@ -1485,33 +1770,57 @@ return [
         'comparison' => [
             'title' => '功能比較',
             'rows'  => [
+                'processor' => [
+                    'label' => '處理器',
+                    'p15p'  => 'Amlogic S905Y5 四核心 Cortex-A55',
+                    'p10p'  => 'Amlogic S928X 八核心',
+                    'p10s'  => '四核心處理器',
+                ],
                 'ram_storage' => [
                     'label' => '記憶體 / 儲存',
+                    'p15p'  => '4GB DDR3 / 64GB eMMC',
                     'p10p'  => '4GB / 64GB',
                     'p10s'  => '2GB / 32GB',
                 ],
+                'operating_system' => [
+                    'label' => '作業系統',
+                    'p15p'  => 'Android 14',
+                    'p10p'  => 'Android 12',
+                    'p10s'  => 'Android 12',
+                ],
+                'connectivity' => [
+                    'label' => '連線能力',
+                    'p15p'  => 'Wi-Fi 6 2T2R、藍牙 5.4、RJ45',
+                    'p10p'  => 'Wi-Fi 6、藍牙語音遙控、Gigabit LAN',
+                    'p10s'  => '雙頻 Wi-Fi、藍牙、有線網路',
+                ],
                 'video_quality' => [
                     'label' => '影像品質',
+                    'p15p'  => '4K HDR10+/HDR10/HLG、AV1 解碼',
                     'p10p'  => '4K HDR、AV1 解碼',
                     'p10s'  => '4K HDR、AV1 解碼',
                 ],
                 'voice_remote' => [
                     'label' => '語音遙控器',
+                    'p15p'  => '附藍牙語音飛鼠遙控器',
                     'p10p'  => '支援',
                     'p10s'  => '支援',
                 ],
                 'kids_app' => [
                     'label' => '兒童應用',
-                    'p10p'  => '10P+ 獨享',
+                    'p15p'  => '內含',
+                    'p10p'  => '內含',
                     'p10s'  => '無',
                 ],
                 'karaoke_mode' => [
                     'label' => '卡拉 OK 模式',
-                    'p10p'  => '10P+ 獨享',
+                    'p15p'  => '內含',
+                    'p10p'  => '內含',
                     'p10s'  => '無',
                 ],
                 'best_for' => [
-                    'label' => '最適合',
+                    'label' => '機型定位',
+                    'p15p'  => 'Android 14、Wi-Fi 6、藍牙 5.4；預購 US$288',
                     'p10p'  => '家庭、運動迷、4K 家庭劇院',
                     'p10s'  => '精省用戶 / 次要房間',
                 ],
@@ -1523,12 +1832,14 @@ return [
             'copy'    => '選擇最符合您家庭需求與預算的小雲電視盒機型。',
             'cta_10p' => '選購小雲電視盒 10P+',
             'cta_10s' => '選購小雲電視盒 10S',
+            'cta_15p' => '預購小雲 15P',
         ],
         'sticky_buy' => [
             'aria_label' => '固定比較操作',
             'label'      => '準備好選機了？直接下單美國現貨',
             'cta_10p'    => '購買 10P+',
             'cta_10s'    => '購買 10S',
+            'cta_15p'    => '預購 15P',
         ],
     ],
     'about' => [

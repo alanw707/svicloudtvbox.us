@@ -1,0 +1,1253 @@
+{
+  "phase": "after",
+  "baseURL": "http://svicloud10p.svic.local",
+  "capturedAt": "2026-08-16T00:56:58.522Z",
+  "pages": [
+    {
+      "routeName": "home",
+      "routePath": "/",
+      "viewportName": "desktop",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/",
+      "consoleErrors": [],
+      "title": "New SVICLOUD 15P Coming Soon | Authorized SVICLOUD TV Box US Dealer",
+      "language": "en-US",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentSize": {
+        "width": 1440,
+        "height": 8153
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "home wp-singular page-template-default page page-id-20 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 1,
+      "h1": [
+        "Meet the New SVICLOUD 15P."
+      ],
+      "headingOrder": [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        3,
+        3,
+        3
+      ],
+      "stylesheets": [
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/front-page.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": []
+    },
+    {
+      "routeName": "shop",
+      "routePath": "/shop/",
+      "viewportName": "desktop",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/shop/",
+      "consoleErrors": [],
+      "title": "Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨 – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentSize": {
+        "width": 1440,
+        "height": 2787
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "archive post-type-archive post-type-archive-product wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-shop woocommerce woocommerce-page woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 2,
+      "h1": [
+        "SVICLOUD TV Boxes"
+      ],
+      "headingOrder": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": []
+    },
+    {
+      "routeName": "compare",
+      "routePath": "/compare/",
+      "viewportName": "desktop",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/compare/",
+      "consoleErrors": [],
+      "title": "Compare – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentSize": {
+        "width": 1440,
+        "height": 7358
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "wp-singular page-template page-template-page-compare page-template-page-compare-php page page-id-44 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 2,
+      "h1": [
+        "SVICLOUD 10P+ vs 10S — 2026 Model Comparison"
+      ],
+      "headingOrder": [
+        1,
+        2,
+        3,
+        3,
+        3,
+        2,
+        2,
+        3,
+        2,
+        3,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/compare.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": []
+    },
+    {
+      "routeName": "product-15p",
+      "routePath": "/product/svicloud-15p/",
+      "viewportName": "desktop",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/product/svicloud-15p/",
+      "consoleErrors": [],
+      "title": "SVICLOUD 15P TV Box – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentSize": {
+        "width": 1440,
+        "height": 5454
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "wp-singular product-template-default single single-product postid-95 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce woocommerce-page woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 2,
+      "h1": [
+        "SVICLOUD 15P TV Box"
+      ],
+      "headingOrder": [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": []
+    },
+    {
+      "routeName": "product-10p",
+      "routePath": "/product/svicloud-10p-plus/",
+      "viewportName": "desktop",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/product/svicloud-10p-plus/",
+      "consoleErrors": [],
+      "title": "SviCloud TV Box 10P+ – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentSize": {
+        "width": 1440,
+        "height": 5517
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "wp-singular product-template-default single single-product postid-12 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce woocommerce-page woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 2,
+      "h1": [
+        "SviCloud TV Box 10P+"
+      ],
+      "headingOrder": [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": []
+    },
+    {
+      "routeName": "product-9p",
+      "routePath": "/product/svicloud-9p/",
+      "viewportName": "desktop",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/product/svicloud-9p/",
+      "consoleErrors": [],
+      "title": "SVICLOUD 9P TV Box (Legacy) – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentSize": {
+        "width": 1440,
+        "height": 5244
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "wp-singular product-template-default single single-product postid-190 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce woocommerce-page woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 2,
+      "h1": [
+        "SVICLOUD 9P TV Box (Legacy)"
+      ],
+      "headingOrder": [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": []
+    },
+    {
+      "routeName": "cart",
+      "routePath": "/cart/",
+      "viewportName": "desktop",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/cart/",
+      "consoleErrors": [],
+      "title": "SVICLOUD Cart | Review Items Before Checkout – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentSize": {
+        "width": 1440,
+        "height": 2118
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "wp-singular page-template-default page page-id-24 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-cart woocommerce-page woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 1,
+      "h1": [
+        "Your cart"
+      ],
+      "headingOrder": [
+        1,
+        2,
+        2
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/select2.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": [
+        {
+          "tag": "a",
+          "text": "View cart",
+          "width": 69,
+          "height": 23
+        }
+      ]
+    },
+    {
+      "routeName": "checkout",
+      "routePath": "/checkout/",
+      "viewportName": "desktop",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/checkout/",
+      "consoleErrors": [],
+      "title": "Secure Checkout | SVICLOUD 10P+ & 10S in the USA – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "documentSize": {
+        "width": 1440,
+        "height": 3218
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "wp-singular page-template-default page page-id-25 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-checkout woocommerce-page woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 1,
+      "h1": [
+        "Complete your SVICLOUD order"
+      ],
+      "headingOrder": [
+        1,
+        3,
+        3,
+        2,
+        2,
+        2,
+        3
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/select2.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/checkout.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/packages-style.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": [
+        {
+          "tag": "select",
+          "text": "Select an option…AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawa",
+          "width": 1,
+          "height": 34
+        },
+        {
+          "tag": "a",
+          "text": "privacy policy",
+          "width": 100,
+          "height": 18
+        }
+      ]
+    },
+    {
+      "routeName": "home",
+      "routePath": "/",
+      "viewportName": "mobile",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/",
+      "consoleErrors": [],
+      "title": "New SVICLOUD 15P Coming Soon | Authorized SVICLOUD TV Box US Dealer",
+      "language": "en-US",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentSize": {
+        "width": 390,
+        "height": 13567
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "home wp-singular page-template-default page page-id-20 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 1,
+      "h1": [
+        "Meet the New SVICLOUD 15P."
+      ],
+      "headingOrder": [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2,
+        3,
+        3,
+        3
+      ],
+      "stylesheets": [
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/front-page.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": []
+    },
+    {
+      "routeName": "shop",
+      "routePath": "/shop/",
+      "viewportName": "mobile",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/shop/",
+      "consoleErrors": [],
+      "title": "Shop SVICLOUD TV Boxes | 小雲盒子 美國現貨 – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentSize": {
+        "width": 390,
+        "height": 5368
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "archive post-type-archive post-type-archive-product wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-shop woocommerce woocommerce-page woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 2,
+      "h1": [
+        "SVICLOUD TV Boxes"
+      ],
+      "headingOrder": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": []
+    },
+    {
+      "routeName": "compare",
+      "routePath": "/compare/",
+      "viewportName": "mobile",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/compare/",
+      "consoleErrors": [],
+      "title": "Compare – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentSize": {
+        "width": 390,
+        "height": 10963
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "wp-singular page-template page-template-page-compare page-template-page-compare-php page page-id-44 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 2,
+      "h1": [
+        "SVICLOUD 10P+ vs 10S — 2026 Model Comparison"
+      ],
+      "headingOrder": [
+        1,
+        2,
+        3,
+        3,
+        3,
+        2,
+        2,
+        3,
+        2,
+        3,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        2
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/compare.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": []
+    },
+    {
+      "routeName": "product-15p",
+      "routePath": "/product/svicloud-15p/",
+      "viewportName": "mobile",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/product/svicloud-15p/",
+      "consoleErrors": [],
+      "title": "SVICLOUD 15P TV Box – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentSize": {
+        "width": 390,
+        "height": 8439
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "wp-singular product-template-default single single-product postid-95 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce woocommerce-page woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 2,
+      "h1": [
+        "SVICLOUD 15P TV Box"
+      ],
+      "headingOrder": [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        2
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": []
+    },
+    {
+      "routeName": "product-10p",
+      "routePath": "/product/svicloud-10p-plus/",
+      "viewportName": "mobile",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/product/svicloud-10p-plus/",
+      "consoleErrors": [],
+      "title": "SviCloud TV Box 10P+ – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentSize": {
+        "width": 390,
+        "height": 7687
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "wp-singular product-template-default single single-product postid-12 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce woocommerce-page woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 2,
+      "h1": [
+        "SviCloud TV Box 10P+"
+      ],
+      "headingOrder": [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": []
+    },
+    {
+      "routeName": "product-9p",
+      "routePath": "/product/svicloud-9p/",
+      "viewportName": "mobile",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/product/svicloud-9p/",
+      "consoleErrors": [],
+      "title": "SVICLOUD 9P TV Box (Legacy) – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentSize": {
+        "width": 390,
+        "height": 7016
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "wp-singular product-template-default single single-product postid-190 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce woocommerce-page woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 2,
+      "h1": [
+        "SVICLOUD 9P TV Box (Legacy)"
+      ],
+      "headingOrder": [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": []
+    },
+    {
+      "routeName": "cart",
+      "routePath": "/cart/",
+      "viewportName": "mobile",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/cart/",
+      "consoleErrors": [],
+      "title": "SVICLOUD Cart | Review Items Before Checkout – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentSize": {
+        "width": 390,
+        "height": 3320
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "wp-singular page-template-default page page-id-24 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-cart woocommerce-page woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 1,
+      "h1": [
+        "Your cart"
+      ],
+      "headingOrder": [
+        1,
+        2,
+        2
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/select2.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": [
+        {
+          "tag": "a",
+          "text": "View cart",
+          "width": 69,
+          "height": 23
+        },
+        {
+          "tag": "a",
+          "text": "SviCloud TV Box 10P+",
+          "width": 174,
+          "height": 20
+        }
+      ]
+    },
+    {
+      "routeName": "checkout",
+      "routePath": "/checkout/",
+      "viewportName": "mobile",
+      "status": 200,
+      "finalURL": "http://svicloud10p.svic.local/checkout/",
+      "consoleErrors": [],
+      "title": "Secure Checkout | SVICLOUD 10P+ & 10S in the USA – SVICLOUD TV BOX US",
+      "language": "en-US",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "documentSize": {
+        "width": 390,
+        "height": 4799
+      },
+      "horizontalOverflow": false,
+      "bodyClasses": "wp-singular page-template-default page page-id-25 wp-custom-logo wp-theme-svicloudtvbox-lumen woocommerce-checkout woocommerce-page woocommerce-js loaded animations-ready",
+      "mainCount": 1,
+      "navCount": 1,
+      "h1": [
+        "Complete your SVICLOUD order"
+      ],
+      "headingOrder": [
+        1,
+        3,
+        3,
+        2,
+        2,
+        2,
+        3
+      ],
+      "stylesheets": [
+        {
+          "href": "http://svicloud10p.svic.local/wp-includes/css/dist/block-library/style.min.css?ver=6.8.3",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/select2.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/css/brands.css?ver=10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css?ver=1786841788",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/checkout.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        },
+        {
+          "href": "http://svicloud10p.svic.local/wp-content/plugins/woocommerce/assets/client/blocks/packages-style.css?ver=wc-10.3.8",
+          "media": "all",
+          "loaded": true
+        }
+      ],
+      "duplicateIds": [],
+      "unnamedControls": [],
+      "unlabeledInputs": [],
+      "imagesWithoutAlt": [],
+      "smallTargets": [
+        {
+          "tag": "select",
+          "text": "Select an option…AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawa",
+          "width": 1,
+          "height": 34
+        },
+        {
+          "tag": "a",
+          "text": "privacy policy",
+          "width": 100,
+          "height": 18
+        }
+      ]
+    }
+  ]
+}

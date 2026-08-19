@@ -18,13 +18,13 @@ if (!$checkout->is_registration_enabled() && $checkout->is_registration_required
 }
 
 $has_translator = function_exists('svic_translate_html');
+$has_15p_backorder = function_exists('svic_cart_contains_15p') && svic_cart_contains_15p();
 $summary_benefits = [];
 if ($has_translator) {
-    $summary_benefits = array_filter([
-        svic_translate_html('checkout_page.benefits.shipping'),
-        svic_translate_html('checkout_page.benefits.warranty'),
-        svic_translate_html('checkout_page.benefits.concierge'),
-    ]);
+    $benefit_keys = $has_15p_backorder
+        ? ['shop.cards.15p.price_tbc', 'products.svicloud-15p.footer.badges.commerce', 'shop.cards.15p.price_note']
+        : ['checkout_page.benefits.shipping', 'checkout_page.benefits.warranty', 'checkout_page.benefits.concierge'];
+    $summary_benefits = array_filter(array_map('svic_translate_html', $benefit_keys));
 }
 ?>
 <section class="lumen-checkout" data-checkout-page>
@@ -32,7 +32,11 @@ if ($has_translator) {
         <?php if ($has_translator) : ?>
             <span class="lumen-checkout__badge"><?php echo svic_translate_html('checkout_page.badge'); ?></span>
             <h1 class="lumen-checkout__title"><?php echo svic_translate_html('checkout_page.title'); ?></h1>
-            <p class="lumen-checkout__subtitle"><?php echo svic_translate_html('checkout_page.subtitle'); ?></p>
+            <p class="lumen-checkout__subtitle">
+                <?php echo $has_15p_backorder
+                    ? svic_translate_html('products.svicloud-15p.footer.summary')
+                    : svic_translate_html('checkout_page.subtitle'); ?>
+            </p>
         <?php else : ?>
             <h1 class="lumen-checkout__title"><?php esc_html_e('Checkout', 'woocommerce'); ?></h1>
         <?php endif; ?>
@@ -91,7 +95,11 @@ if ($has_translator) {
                 <div class="lumen-checkout-summary__card">
                     <?php if ($has_translator) : ?>
                         <h2 id="lumen-checkout-summary-title" class="lumen-checkout-summary__title"><?php echo svic_translate_html('checkout_page.summary.title'); ?></h2>
-                        <p class="lumen-checkout-summary__intro"><?php echo svic_translate_html('checkout_page.summary.intro'); ?></p>
+                        <p class="lumen-checkout-summary__intro">
+                            <?php echo $has_15p_backorder
+                                ? svic_translate_html('products.svicloud-15p.footer.summary')
+                                : svic_translate_html('checkout_page.summary.intro'); ?>
+                        </p>
                     <?php else : ?>
                         <h2 id="lumen-checkout-summary-title" class="lumen-checkout-summary__title"><?php esc_html_e('Your order', 'woocommerce'); ?></h2>
                     <?php endif; ?>
@@ -105,7 +113,11 @@ if ($has_translator) {
                     <?php endif; ?>
 
                     <?php if ($has_translator) : ?>
-                        <p class="lumen-checkout-summary__reassurance"><?php echo svic_translate_html('checkout_page.summary.reassurance'); ?></p>
+                        <p class="lumen-checkout-summary__reassurance">
+                            <?php echo $has_15p_backorder
+                                ? svic_translate_html('shop.cards.15p.price_note')
+                                : svic_translate_html('checkout_page.summary.reassurance'); ?>
+                        </p>
                         <div class="lumen-checkout-summary__links lumen-action-group">
                             <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/faq/'))); ?>" data-svic-event="svic_cta_click" data-svic-location="checkout_summary" data-svic-label="faq_before_order"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
                             <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact/'))); ?>" data-svic-event="svic_cta_click" data-svic-location="checkout_summary" data-svic-label="contact_concierge"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>

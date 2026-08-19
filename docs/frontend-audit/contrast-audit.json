@@ -1,0 +1,46 @@
+{
+  "baseURL": "http://svicloud10p.svic.local",
+  "auditedAt": "2026-08-16T00:51:55.356Z",
+  "pages": [
+    {
+      "name": "home",
+      "route": "/",
+      "failures": []
+    },
+    {
+      "name": "shop",
+      "route": "/shop/",
+      "failures": []
+    },
+    {
+      "name": "compare",
+      "route": "/compare/",
+      "failures": []
+    },
+    {
+      "name": "product-15p",
+      "route": "/product/svicloud-15p/",
+      "failures": []
+    },
+    {
+      "name": "product-10p",
+      "route": "/product/svicloud-10p-plus/",
+      "failures": []
+    },
+    {
+      "name": "product-9p",
+      "route": "/product/svicloud-9p/",
+      "failures": []
+    },
+    {
+      "name": "cart",
+      "route": "/cart/",
+      "failures": []
+    },
+    {
+      "name": "checkout",
+      "route": "/checkout/",
+      "failures": []
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "results": [
+    {
+      "browser": "chromium",
+      "locale": "/zh",
+      "steps": [
+        {
+          "step": "home",
+          "status": 200,
+          "url": "https://svicloudtvbox.us/zh/"
+        },
+        {
+          "step": "guides",
+          "status": 200,
+          "url": "https://svicloudtvbox.us/zh/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/",
+          "guideHref": "https://svicloudtvbox.us/zh/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/"
+        },
+        {
+          "step": "add-to-cart",
+          "url": "https://svicloudtvbox.us/zh/product/svicloud-15p/",
+          "action": "https://svicloudtvbox.us/zh/product/svicloud-15p/",
+          "message": "“SVICLOUD 15P TV Box” 已加入您的購物車\n查看購物車",
+          "messageHref": "https://svicloudtvbox.us/zh/cart/"
+        },
+        {
+          "step": "cart",
+          "url": "https://svicloudtvbox.us/zh/cart/",
+          "notice": "接受預購 — 出貨日期尚未公布"
+        },
+        {
+          "step": "checkout",
+          "url": "https://svicloudtvbox.us/zh/checkout/",
+          "notice": "接受預購\n出貨日期尚未公布"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "browser": "chromium",
+      "locale": "/zh-cn",
+      "steps": [
+        {
+          "step": "home",
+          "status": 200,
+          "url": "https://svicloudtvbox.us/zh-cn/"
+        },
+        {
+          "step": "guides",
+          "status": 200,
+          "url": "https://svicloudtvbox.us/zh-cn/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/",
+          "guideHref": "https://svicloudtvbox.us/zh-cn/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/"
+        },
+        {
+          "step": "add-to-cart",
+          "url": "https://svicloudtvbox.us/zh-cn/product/svicloud-15p/",
+          "action": "https://svicloudtvbox.us/zh-cn/product/svicloud-15p/",
+          "message": "“SVICLOUD 15P TV Box” 已加入您的购物车\n查看购物车",
+          "messageHref": "https://svicloudtvbox.us/zh-cn/cart/"
+        },
+        {
+          "step": "cart",
+          "url": "https://svicloudtvbox.us/zh-cn/cart/",
+          "notice": "接受预订 — 发货日期尚未公布"
+        },
+        {
+          "step": "checkout",
+          "url": "https://svicloudtvbox.us/zh-cn/checkout/",
+          "notice": "接受预订\n发货日期尚未公布"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "browser": "webkit",
+      "locale": "/zh",
+      "steps": [
+        {
+          "step": "home",
+          "status": 200,
+          "url": "https://svicloudtvbox.us/zh/"
+        },
+        {
+          "step": "guides",
+          "status": 200,
+          "url": "https://svicloudtvbox.us/zh/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/",
+          "guideHref": "https://svicloudtvbox.us/zh/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/"
+        },
+        {
+          "step": "add-to-cart",
+          "url": "https://svicloudtvbox.us/zh/product/svicloud-15p/",
+          "action": "https://svicloudtvbox.us/zh/product/svicloud-15p/",
+          "message": "“SVICLOUD 15P TV Box” 已加入您的購物車\n查看購物車\n",
+          "messageHref": "https://svicloudtvbox.us/zh/cart/"
+        },
+        {
+          "step": "cart",
+          "url": "https://svicloudtvbox.us/zh/cart/",
+          "notice": "接受預購 — 出貨日期尚未公布"
+        },
+        {
+          "step": "checkout",
+          "url": "https://svicloudtvbox.us/zh/checkout/",
+          "notice": "接受預購\n出貨日期尚未公布"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "browser": "webkit",
+      "locale": "/zh-cn",
+      "steps": [
+        {
+          "step": "home",
+          "status": 200,
+          "url": "https://svicloudtvbox.us/zh-cn/"
+        },
+        {
+          "step": "guides",
+          "status": 200,
+          "url": "https://svicloudtvbox.us/zh-cn/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/",
+          "guideHref": "https://svicloudtvbox.us/zh-cn/%e4%bd%bf%e7%94%a8%e6%8c%87%e5%8d%97/"
+        },
+        {
+          "step": "add-to-cart",
+          "url": "https://svicloudtvbox.us/zh-cn/product/svicloud-15p/",
+          "action": "https://svicloudtvbox.us/zh-cn/product/svicloud-15p/",
+          "message": "“SVICLOUD 15P TV Box” 已加入您的购物车\n查看购物车\n",
+          "messageHref": "https://svicloudtvbox.us/zh-cn/cart/"
+        },
+        {
+          "step": "cart",
+          "url": "https://svicloudtvbox.us/zh-cn/cart/",
+          "notice": "接受预订 — 发货日期尚未公布"
+        },
+        {
+          "step": "checkout",
+          "url": "https://svicloudtvbox.us/zh-cn/checkout/",
+          "notice": "接受预订\n发货日期尚未公布"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "failures": 0
+}

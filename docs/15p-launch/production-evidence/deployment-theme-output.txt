@@ -1,0 +1,234 @@
+Built 9 partial(s) into /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/css/about.css (14062 bytes)
+Built 2 partial(s) into /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/css/blog.css (18660 bytes)
+Built 8 partial(s) into /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/css/compare.css (34933 bytes)
+Built 1 partial(s) into /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/css/contact.css (6745 bytes)
+Built 1 partial(s) into /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/css/faq.css (5714 bytes)
+Built 16 partial(s) into /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/css/front-page.css (67727 bytes)
+Built 2 partial(s) into /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/css/guides.css (34667 bytes)
+Built 3 partial(s) into /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/css/return-policy.css (6589 bytes)
+Built 16 partial(s) into /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/css/style.css (63793 bytes)
+Built 1 partial(s) into /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/css/support.css (6906 bytes)
+Built 16 partial(s) into /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/css/woocommerce.css (148573 bytes)
+Wrote cache-bust marker: /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/.deploy-version -> 1787089791
+== Theme Deploy ==
+Host: 147.79.122.118:21  Protocol: FTPS  PASV: yes
+Local: /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen
+Connecting to FTP server (attempt 1/5, timeout 45s)...
+Verified FTPS certificate pin on control channel: 47e1b5dc5d6102e8ed8c012161af8b225370ab5563b00caf146cbd7a9651e95e
+Remote: /public_html/wp-content/themes/svicloudtvbox-lumen
+PUT /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/page-guides-setup.php -> /public_html/wp-content/themes/svicloudtvbox-lumen/./page-guides-setup.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-guides-apps.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-terms.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-guides-support.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-compare.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./home.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./front-page.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-return-policy.php
+PUT /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/.deploy-version -> /public_html/wp-content/themes/svicloudtvbox-lumen/./.deploy-version
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-privacy-policy.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./index.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./header.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./footer.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-shipping-policy.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./style.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-guide-section.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./single.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-guides-troubleshooting.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-legal-disclaimer.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-guides-after-setup.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-guides-resources.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./404.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./vapi-escalation.php
+PUT /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/functions.php -> /public_html/wp-content/themes/svicloudtvbox-lumen/./functions.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-support.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-contact.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-faq.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-about.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/./page-guides.php
+PUT /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/lang/zh_CN.php -> /public_html/wp-content/themes/svicloudtvbox-lumen/lang/zh_CN.php
+PUT /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/lang/en_US.php -> /public_html/wp-content/themes/svicloudtvbox-lumen/lang/en_US.php
+PUT /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/lang/zh_TW.php -> /public_html/wp-content/themes/svicloudtvbox-lumen/lang/zh_TW.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/woocommerce/single-product.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/woocommerce/archive-product.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/woocommerce/cart/cart.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/woocommerce/cart/cart-empty.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/woocommerce/checkout/thankyou.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/woocommerce/checkout/form-coupon.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/woocommerce/checkout/form-checkout.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/woocommerce/order/tracking.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/woocommerce/order/form-tracking.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/theme-maintenance.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/class-svic-markdown.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/virtual-page-state.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/policy-contact-routes.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/guides-data.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/agent-sitemap.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/helpers-svic.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/class-svic-locale-resolver.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/agent-resources.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/class-svic-zh-sitemap.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/class-svic-recent-shipments.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/class-svic-tracking-notifier.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/guide-routes.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/class-svic-translator.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/active-promotion.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/inc/decision-pages.php
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/guides.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/support.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/bundles.json
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/front-page.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/woocommerce.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/contact.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/style.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/compare.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/blog.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/faq.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/README.md
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/return-policy.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/about.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/34-hero-dashboard-animations.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/32b-15p-launch-redesign.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/45-lumen-section-certification.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/71e-checkout-notices.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/74-woocommerce-order-tracking-responsive.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/52-about-base.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/48-lumen-section-experience.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/71z-checkout-responsive.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/64-compare-final-cta.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/69b-policy-hero.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/73-woocommerce-order-tracking-summary.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/82-support-chat.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/58-about-concierge.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/50-woocommerce.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/49-lumen-section-pricing.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/47-lumen-section-feature-grid.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/71b-checkout-panels.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/50-lumen-section-utilities.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/69a-policy-layout.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/12-header-base.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/05-announcement-bar.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/55-about-certification.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/13-header-actions.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/15-header-motion.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/64b-compare-sticky-buy.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/71c-checkout-summary.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/50b-lumen-inbox.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/65-shop.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/71a-checkout-layout.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/50-blog-archive.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/61-compare-hero.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/71d-checkout-payment.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/48b-lumen-section-testimonials.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/56-about-timeline.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/06-recent-shipments-strip.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/14-header-mobile.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/70-lumen-woocommerce.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/63-compare-products.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/80-footer.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/70a-pdp-compare.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/67-guides.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/49b-lumen-section-confidence.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/69-contact.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/70-support-form.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/70a-return-policy.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/30-hero.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/53a-about-location.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/60-pages.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/54-about-story.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/05a-promotion-bar.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/20-navigation.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/62-compare-differences.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/33-hero-dashboard-visuals.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/43-shop-product-card.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/32-hero-dashboard-base.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/90-utilities.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/66-woocommerce-cart.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/68-faq.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/70-blog.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/40-cards.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/75-woocommerce-order-received.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/25-breadcrumbs.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/46-lumen-section-metrics.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/41-frontpage-helpers.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/51-frontpage-blog.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/60-compare-base.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/91-sticky-buy.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/00-tokens.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/16-header-redesign.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/57-about-values.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/63b-compare-confidence.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/59-about-responsive.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/49a-lumen-inline-cta.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/44-lumen-section-header.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/72-woocommerce-order-tracking-base.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/css/parts/53-about-hero.css
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/favicon-192.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/19f258dab5.jpg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10p-plus.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10p-plus-lifestyle-2.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-tvbox-10s.jpg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10p-plus-lifestyle-3.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10p-plus-lifestyle-2.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant-800.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10p-plus-lifestyle-3.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/site-logo.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant-1200.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10p-plus-lifestyle-1.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/favicon-96.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant-1200.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-hero-product.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/nevada-warehouse.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-1.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/b7986872f5.jpg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-3.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10p-plus-lifestyle-1.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/13b9858cc4.jpg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-3.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/certification-authorized-dealer.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/favicon-32.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/favicon.ico
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-2.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/hero-voice-assistant-800.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/ff4375689e.jpg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/apple-touch-icon.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/favicon.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/certification-authorized-dealer.jpg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/375871c602.jpg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-2.png
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-1.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-hero-product.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/6afa1a4f33.jpg
+PUT /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-packaging-mockup-watermarked.webp -> /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-packaging-mockup-watermarked.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-front.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v4-watermarked.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-angle-watermarked.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-primary-ai-watermarked.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-package.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-angle.webp
+PUT /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-lifestyle-clean-watermarked.webp -> /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-lifestyle-clean-watermarked.webp
+PUT /home/alanw/projects/svicloudtvbox.us/theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-lifestyle-clean-2-watermarked.webp -> /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-lifestyle-clean-2-watermarked.webp
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/js/theme.js
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/js/theme.min.js
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-truck.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-box.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/illustration-concierge-car.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-star.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-lock.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-grid-2.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-grid-4.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-check.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-tool.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-handshake.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-list.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-mic.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-family.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-bolt.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-satellite.svg
+SKIP identical: /public_html/wp-content/themes/svicloudtvbox-lumen/assets/svg/icon-wifi.svg
+DEL /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-lifestyle-ai-2-watermarked.webp
+DEL /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-lifestyle-ai-watermarked.webp
+DEL /public_html/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-package-watermarked.webp
+Done. Uploaded: 9 file(s). Deleted: 3 file(s).

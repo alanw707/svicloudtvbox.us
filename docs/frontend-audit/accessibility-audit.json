@@ -1,0 +1,2088 @@
+{
+  "baseURL": "http://svicloud10p.svic.local",
+  "auditedAt": "2026-08-16T00:56:29.371Z",
+  "pages": [
+    {
+      "name": "home",
+      "route": "/",
+      "width": 1440,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 1,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.",
+          "name": "Guides",
+          "width": 81,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Reviews",
+          "width": 90,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Compare",
+          "width": 96,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Account",
+          "width": 89,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Shop",
+          "width": 68,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "SVICLOUD 15P",
+          "width": 180,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Blog",
+          "width": 64,
+          "height": 41
+        },
+        {
+          "selector": "a.hero-15p__compare",
+          "name": "Compare the lineup",
+          "width": 175,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Explore 15P →",
+          "width": 124,
+          "height": 26
+        },
+        {
+          "selector": "a.lumen-pricing__details-link",
+          "name": "Explore 15P",
+          "width": 124,
+          "height": 24
+        },
+        {
+          "selector": "a.lumen-pricing__details-link",
+          "name": "View 10P+",
+          "width": 113,
+          "height": 24
+        },
+        {
+          "selector": "a.lumen-pricing__details-link",
+          "name": "View 10S",
+          "width": 100,
+          "height": 24
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "shop",
+      "route": "/shop/",
+      "width": 1440,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.",
+          "name": "Guides",
+          "width": 78,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Reviews",
+          "width": 88,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Compare",
+          "width": 93,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Account",
+          "width": 88,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Shop",
+          "width": 67,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "SVICLOUD 15P",
+          "width": 176,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Blog",
+          "width": 61,
+          "height": 41
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 44,
+          "height": 27
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "compare",
+      "route": "/compare/",
+      "width": 1440,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.",
+          "name": "Guides",
+          "width": 81,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Reviews",
+          "width": 90,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Compare",
+          "width": 103,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Account",
+          "width": 89,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Shop",
+          "width": 68,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "SVICLOUD 15P",
+          "width": 180,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Blog",
+          "width": 64,
+          "height": 41
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 47,
+          "height": 27
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "product-15p",
+      "route": "/product/svicloud-15p/",
+      "width": 1440,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.",
+          "name": "Guides",
+          "width": 78,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Reviews",
+          "width": 88,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Compare",
+          "width": 93,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Account",
+          "width": 88,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Shop",
+          "width": 67,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "SVICLOUD 15P",
+          "width": 133,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Blog",
+          "width": 61,
+          "height": 41
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 44,
+          "height": 27
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Shop",
+          "width": 38,
+          "height": 27
+        },
+        {
+          "selector": "a.product-hero-best-for__link",
+          "name": "Compare 10P+ vs 10S",
+          "width": 164,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Read FAQ",
+          "width": 72,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Talk to concierge",
+          "width": 129,
+          "height": 26
+        },
+        {
+          "selector": "a.pdp-compare__card-link",
+          "name": "See the SVICLOUD 10P+",
+          "width": 182,
+          "height": 32
+        },
+        {
+          "selector": "a.pdp-compare__card-link",
+          "name": "See the legacy SVICLOUD 9P page",
+          "width": 261,
+          "height": 32
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "product-10p",
+      "route": "/product/svicloud-10p-plus/",
+      "width": 1440,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.",
+          "name": "Guides",
+          "width": 78,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Reviews",
+          "width": 88,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Compare",
+          "width": 93,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Account",
+          "width": 88,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Shop",
+          "width": 67,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "SVICLOUD 15P",
+          "width": 176,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Blog",
+          "width": 61,
+          "height": 41
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 44,
+          "height": 27
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Shop",
+          "width": 38,
+          "height": 27
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Uncategorized",
+          "width": 109,
+          "height": 27
+        },
+        {
+          "selector": "a.product-hero-best-for__link",
+          "name": "Compare 10P+ vs 10S",
+          "width": 164,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Read FAQ",
+          "width": 72,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Talk to concierge",
+          "width": 129,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Uncategorized",
+          "width": 124,
+          "height": 32
+        },
+        {
+          "selector": "a.",
+          "name": "compare table",
+          "width": 108,
+          "height": 32
+        },
+        {
+          "selector": "a.",
+          "name": "setup guide",
+          "width": 89,
+          "height": 32
+        }
+      ],
+      "focusWithoutVisualChange": [
+        {
+          "selector": "#quantity_6a810ac0dd73d",
+          "name": "Product quantity",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(245, 248, 255)",
+            "none",
+            "rgb(245, 248, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(245, 248, 255)"
+          ]
+        },
+        {
+          "selector": "a.",
+          "name": "compare table",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(105, 208, 255)",
+            "none",
+            "rgb(105, 208, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(105, 208, 255)"
+          ]
+        },
+        {
+          "selector": "a.",
+          "name": "setup guide",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(105, 208, 255)",
+            "none",
+            "rgb(105, 208, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(105, 208, 255)"
+          ]
+        }
+      ],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "product-9p",
+      "route": "/product/svicloud-9p/",
+      "width": 1440,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.",
+          "name": "Guides",
+          "width": 78,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Reviews",
+          "width": 88,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Compare",
+          "width": 93,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Account",
+          "width": 88,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Shop",
+          "width": 67,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "SVICLOUD 15P",
+          "width": 176,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Blog",
+          "width": 61,
+          "height": 41
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 44,
+          "height": 27
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Shop",
+          "width": 38,
+          "height": 27
+        },
+        {
+          "selector": "a.product-hero-best-for__link",
+          "name": "Compare 10P+ vs 10S",
+          "width": 164,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Read FAQ",
+          "width": 72,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Talk to concierge",
+          "width": 129,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "compare table",
+          "width": 108,
+          "height": 32
+        },
+        {
+          "selector": "a.",
+          "name": "setup guide",
+          "width": 89,
+          "height": 32
+        }
+      ],
+      "focusWithoutVisualChange": [
+        {
+          "selector": "a.",
+          "name": "compare table",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(105, 208, 255)",
+            "none",
+            "rgb(105, 208, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(105, 208, 255)"
+          ]
+        },
+        {
+          "selector": "a.",
+          "name": "setup guide",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(105, 208, 255)",
+            "none",
+            "rgb(105, 208, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(105, 208, 255)"
+          ]
+        }
+      ],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "cart",
+      "route": "/cart/",
+      "width": 1440,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 1,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [
+        "#coupon_code"
+      ],
+      "targetUnder24": [
+        {
+          "selector": "a.button.wc-forward",
+          "name": "View cart",
+          "width": 69,
+          "height": 23
+        }
+      ],
+      "targetUnder44": [
+        {
+          "selector": "a.",
+          "name": "Guides",
+          "width": 78,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Reviews",
+          "width": 88,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Compare",
+          "width": 93,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Account",
+          "width": 88,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Shop",
+          "width": 66,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "SVICLOUD 15P",
+          "width": 176,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Blog",
+          "width": 61,
+          "height": 41
+        },
+        {
+          "selector": "a.button.wc-forward",
+          "name": "View cart",
+          "width": 69,
+          "height": 23
+        },
+        {
+          "selector": "a.lumen-cart-actions__continue",
+          "name": "←\n                            Continue shopping",
+          "width": 258,
+          "height": 32
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "checkout",
+      "route": "/checkout/",
+      "width": 1440,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 1,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [
+        {
+          "level": 3,
+          "text": "Billing details"
+        }
+      ],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [
+        "#billing_first_name",
+        "#billing_last_name",
+        "#billing_address_1",
+        "#billing_address_2",
+        "#billing_city",
+        "#billing_postcode",
+        "#billing_phone",
+        "#billing_email",
+        "#order_comments",
+        "#checkout_coupon_code"
+      ],
+      "targetUnder24": [
+        {
+          "selector": "#billing_state",
+          "name": "Select an option…AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawa",
+          "width": 1,
+          "height": 34
+        },
+        {
+          "selector": "a.woocommerce-privacy-policy-link",
+          "name": "privacy policy",
+          "width": 100,
+          "height": 18
+        }
+      ],
+      "targetUnder44": [
+        {
+          "selector": "a.",
+          "name": "Guides",
+          "width": 78,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Reviews",
+          "width": 88,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Compare",
+          "width": 93,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Account",
+          "width": 88,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Shop",
+          "width": 66,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "SVICLOUD 15P",
+          "width": 176,
+          "height": 41
+        },
+        {
+          "selector": "a.",
+          "name": "Blog",
+          "width": 61,
+          "height": 41
+        },
+        {
+          "selector": "a.button.wc-forward",
+          "name": "View cart",
+          "width": 70,
+          "height": 24
+        },
+        {
+          "selector": "#billing_first_name",
+          "name": "",
+          "width": 462,
+          "height": 36
+        },
+        {
+          "selector": "#billing_last_name",
+          "name": "",
+          "width": 462,
+          "height": 36
+        },
+        {
+          "selector": "#billing_address_1",
+          "name": "",
+          "width": 462,
+          "height": 36
+        },
+        {
+          "selector": "#billing_address_2",
+          "name": "",
+          "width": 462,
+          "height": 36
+        },
+        {
+          "selector": "#billing_city",
+          "name": "",
+          "width": 462,
+          "height": 36
+        },
+        {
+          "selector": "#billing_state",
+          "name": "Select an option…AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawa",
+          "width": 1,
+          "height": 34
+        },
+        {
+          "selector": "#billing_postcode",
+          "name": "",
+          "width": 462,
+          "height": 36
+        },
+        {
+          "selector": "#billing_phone",
+          "name": "",
+          "width": 462,
+          "height": 36
+        },
+        {
+          "selector": "#billing_email",
+          "name": "",
+          "width": 462,
+          "height": 36
+        },
+        {
+          "selector": "a.woocommerce-privacy-policy-link",
+          "name": "privacy policy",
+          "width": 100,
+          "height": 18
+        },
+        {
+          "selector": "button.button",
+          "name": "Apply",
+          "width": 208,
+          "height": 42
+        }
+      ],
+      "focusWithoutVisualChange": [
+        {
+          "selector": "#billing_state",
+          "name": "Select an option…AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawa",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgba(246, 250, 255, 0.96)",
+            "none",
+            "rgba(246, 250, 255, 0.96)",
+            "rgba(18, 36, 68, 0.7)",
+            "rgba(246, 250, 255, 0.96)"
+          ]
+        }
+      ],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "home",
+      "route": "/",
+      "width": 390,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 1,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.hero-15p__compare",
+          "name": "Compare the lineup",
+          "width": 175,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Explore 15P →",
+          "width": 124,
+          "height": 26
+        },
+        {
+          "selector": "a.lumen-pricing__details-link",
+          "name": "Explore 15P",
+          "width": 124,
+          "height": 24
+        },
+        {
+          "selector": "a.lumen-pricing__details-link",
+          "name": "View 10P+",
+          "width": 113,
+          "height": 24
+        },
+        {
+          "selector": "a.lumen-pricing__details-link",
+          "name": "View 10S",
+          "width": 100,
+          "height": 24
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "shop",
+      "route": "/shop/",
+      "width": 390,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 44,
+          "height": 27
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "compare",
+      "route": "/compare/",
+      "width": 390,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 47,
+          "height": 27
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "product-15p",
+      "route": "/product/svicloud-15p/",
+      "width": 390,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 44,
+          "height": 27
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Shop",
+          "width": 38,
+          "height": 27
+        },
+        {
+          "selector": "a.product-hero-best-for__link",
+          "name": "Compare 10P+ vs 10S",
+          "width": 164,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Read FAQ",
+          "width": 72,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Talk to concierge",
+          "width": 129,
+          "height": 26
+        },
+        {
+          "selector": "a.pdp-compare__card-link",
+          "name": "See the SVICLOUD 10P+",
+          "width": 182,
+          "height": 32
+        },
+        {
+          "selector": "a.pdp-compare__card-link",
+          "name": "See the legacy SVICLOUD 9P page",
+          "width": 261,
+          "height": 32
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "product-10p",
+      "route": "/product/svicloud-10p-plus/",
+      "width": 390,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 44,
+          "height": 27
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Shop",
+          "width": 38,
+          "height": 27
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Uncategorized",
+          "width": 109,
+          "height": 27
+        },
+        {
+          "selector": "a.product-hero-best-for__link",
+          "name": "Compare 10P+ vs 10S",
+          "width": 164,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Read FAQ",
+          "width": 72,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Talk to concierge",
+          "width": 129,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Uncategorized",
+          "width": 124,
+          "height": 32
+        },
+        {
+          "selector": "a.",
+          "name": "compare table",
+          "width": 108,
+          "height": 32
+        },
+        {
+          "selector": "a.",
+          "name": "setup guide",
+          "width": 89,
+          "height": 32
+        }
+      ],
+      "focusWithoutVisualChange": [
+        {
+          "selector": "#quantity_6a810ac873d16",
+          "name": "Product quantity",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(245, 248, 255)",
+            "none",
+            "rgb(245, 248, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(245, 248, 255)"
+          ]
+        },
+        {
+          "selector": "a.",
+          "name": "compare table",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(105, 208, 255)",
+            "none",
+            "rgb(105, 208, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(105, 208, 255)"
+          ]
+        },
+        {
+          "selector": "a.",
+          "name": "setup guide",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(105, 208, 255)",
+            "none",
+            "rgb(105, 208, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(105, 208, 255)"
+          ]
+        }
+      ],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "product-9p",
+      "route": "/product/svicloud-9p/",
+      "width": 390,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 44,
+          "height": 27
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Shop",
+          "width": 38,
+          "height": 27
+        },
+        {
+          "selector": "a.product-hero-best-for__link",
+          "name": "Compare 10P+ vs 10S",
+          "width": 164,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Read FAQ",
+          "width": 72,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Talk to concierge",
+          "width": 129,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "compare table",
+          "width": 108,
+          "height": 32
+        },
+        {
+          "selector": "a.",
+          "name": "setup guide",
+          "width": 89,
+          "height": 32
+        }
+      ],
+      "focusWithoutVisualChange": [
+        {
+          "selector": "a.",
+          "name": "compare table",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(105, 208, 255)",
+            "none",
+            "rgb(105, 208, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(105, 208, 255)"
+          ]
+        },
+        {
+          "selector": "a.",
+          "name": "setup guide",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(105, 208, 255)",
+            "none",
+            "rgb(105, 208, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(105, 208, 255)"
+          ]
+        }
+      ],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "cart",
+      "route": "/cart/",
+      "width": 390,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 1,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [
+        "#coupon_code"
+      ],
+      "targetUnder24": [
+        {
+          "selector": "a.button.wc-forward",
+          "name": "View cart",
+          "width": 69,
+          "height": 23
+        },
+        {
+          "selector": "a.lumen-cart-product__link",
+          "name": "SviCloud TV Box 10P+",
+          "width": 174,
+          "height": 20
+        }
+      ],
+      "targetUnder44": [
+        {
+          "selector": "a.button.wc-forward",
+          "name": "View cart",
+          "width": 69,
+          "height": 23
+        },
+        {
+          "selector": "a.lumen-cart-product__link",
+          "name": "SviCloud TV Box 10P+",
+          "width": 174,
+          "height": 20
+        },
+        {
+          "selector": "a.lumen-cart-actions__continue",
+          "name": "←\n                            Continue shopping",
+          "width": 351,
+          "height": 32
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "checkout",
+      "route": "/checkout/",
+      "width": 390,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 1,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [
+        {
+          "level": 3,
+          "text": "Billing details"
+        }
+      ],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [
+        "#billing_first_name",
+        "#billing_last_name",
+        "#billing_address_1",
+        "#billing_address_2",
+        "#billing_city",
+        "#billing_postcode",
+        "#billing_phone",
+        "#billing_email",
+        "#order_comments",
+        "#checkout_coupon_code"
+      ],
+      "targetUnder24": [
+        {
+          "selector": "#billing_state",
+          "name": "Select an option…AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawa",
+          "width": 1,
+          "height": 34
+        },
+        {
+          "selector": "a.woocommerce-privacy-policy-link",
+          "name": "privacy policy",
+          "width": 100,
+          "height": 18
+        }
+      ],
+      "targetUnder44": [
+        {
+          "selector": "#billing_first_name",
+          "name": "",
+          "width": 222,
+          "height": 36
+        },
+        {
+          "selector": "#billing_last_name",
+          "name": "",
+          "width": 222,
+          "height": 36
+        },
+        {
+          "selector": "#billing_address_1",
+          "name": "",
+          "width": 222,
+          "height": 36
+        },
+        {
+          "selector": "#billing_address_2",
+          "name": "",
+          "width": 222,
+          "height": 36
+        },
+        {
+          "selector": "#billing_city",
+          "name": "",
+          "width": 222,
+          "height": 36
+        },
+        {
+          "selector": "#billing_state",
+          "name": "Select an option…AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawa",
+          "width": 1,
+          "height": 34
+        },
+        {
+          "selector": "#billing_postcode",
+          "name": "",
+          "width": 222,
+          "height": 36
+        },
+        {
+          "selector": "#billing_phone",
+          "name": "",
+          "width": 222,
+          "height": 36
+        },
+        {
+          "selector": "#billing_email",
+          "name": "",
+          "width": 222,
+          "height": 36
+        },
+        {
+          "selector": "a.woocommerce-privacy-policy-link",
+          "name": "privacy policy",
+          "width": 100,
+          "height": 18
+        },
+        {
+          "selector": "button.button",
+          "name": "Apply",
+          "width": 208,
+          "height": 42
+        }
+      ],
+      "focusWithoutVisualChange": [
+        {
+          "selector": "#billing_state",
+          "name": "Select an option…AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawa",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgba(246, 250, 255, 0.96)",
+            "none",
+            "rgba(246, 250, 255, 0.96)",
+            "rgba(18, 36, 68, 0.7)",
+            "rgba(246, 250, 255, 0.96)"
+          ]
+        }
+      ],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "home",
+      "route": "/",
+      "width": 320,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 1,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.hero-15p__compare",
+          "name": "Compare the lineup",
+          "width": 147,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Explore 15P →",
+          "width": 104,
+          "height": 26
+        },
+        {
+          "selector": "a.lumen-pricing__details-link",
+          "name": "Explore 15P",
+          "width": 108,
+          "height": 24
+        },
+        {
+          "selector": "a.lumen-pricing__details-link",
+          "name": "View 10P+",
+          "width": 101,
+          "height": 24
+        },
+        {
+          "selector": "a.lumen-pricing__details-link",
+          "name": "View 10S",
+          "width": 90,
+          "height": 24
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "shop",
+      "route": "/shop/",
+      "width": 320,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 44,
+          "height": 27
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "compare",
+      "route": "/compare/",
+      "width": 320,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 44,
+          "height": 27
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "product-15p",
+      "route": "/product/svicloud-15p/",
+      "width": 320,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 44,
+          "height": 27
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Shop",
+          "width": 38,
+          "height": 27
+        },
+        {
+          "selector": "a.product-hero-best-for__link",
+          "name": "Compare 10P+ vs 10S",
+          "width": 164,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Read FAQ",
+          "width": 72,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Talk to concierge",
+          "width": 129,
+          "height": 26
+        },
+        {
+          "selector": "a.pdp-compare__card-link",
+          "name": "See the SVICLOUD 10P+",
+          "width": 182,
+          "height": 32
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "product-10p",
+      "route": "/product/svicloud-10p-plus/",
+      "width": 320,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 44,
+          "height": 27
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Shop",
+          "width": 38,
+          "height": 27
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Uncategorized",
+          "width": 109,
+          "height": 27
+        },
+        {
+          "selector": "a.product-hero-best-for__link",
+          "name": "Compare 10P+ vs 10S",
+          "width": 164,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Read FAQ",
+          "width": 72,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Talk to concierge",
+          "width": 129,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Uncategorized",
+          "width": 124,
+          "height": 32
+        },
+        {
+          "selector": "a.",
+          "name": "compare table",
+          "width": 108,
+          "height": 32
+        },
+        {
+          "selector": "a.",
+          "name": "setup guide",
+          "width": 89,
+          "height": 32
+        }
+      ],
+      "focusWithoutVisualChange": [
+        {
+          "selector": "#quantity_6a810acf5acf3",
+          "name": "Product quantity",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(245, 248, 255)",
+            "none",
+            "rgb(245, 248, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(245, 248, 255)"
+          ]
+        },
+        {
+          "selector": "a.",
+          "name": "compare table",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(105, 208, 255)",
+            "none",
+            "rgb(105, 208, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(105, 208, 255)"
+          ]
+        },
+        {
+          "selector": "a.",
+          "name": "setup guide",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(105, 208, 255)",
+            "none",
+            "rgb(105, 208, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(105, 208, 255)"
+          ]
+        }
+      ],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "product-9p",
+      "route": "/product/svicloud-9p/",
+      "width": 320,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 2,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [],
+      "targetUnder24": [],
+      "targetUnder44": [
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Home",
+          "width": 44,
+          "height": 27
+        },
+        {
+          "selector": "a.svic-breadcrumbs__link",
+          "name": "Shop",
+          "width": 38,
+          "height": 27
+        },
+        {
+          "selector": "a.product-hero-best-for__link",
+          "name": "Compare 10P+ vs 10S",
+          "width": 164,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Read FAQ",
+          "width": 72,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "Talk to concierge",
+          "width": 129,
+          "height": 26
+        },
+        {
+          "selector": "a.",
+          "name": "compare table",
+          "width": 108,
+          "height": 32
+        },
+        {
+          "selector": "a.",
+          "name": "setup guide",
+          "width": 89,
+          "height": 32
+        }
+      ],
+      "focusWithoutVisualChange": [
+        {
+          "selector": "a.",
+          "name": "compare table",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(105, 208, 255)",
+            "none",
+            "rgb(105, 208, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(105, 208, 255)"
+          ]
+        },
+        {
+          "selector": "a.",
+          "name": "setup guide",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgb(105, 208, 255)",
+            "none",
+            "rgb(105, 208, 255)",
+            "rgba(0, 0, 0, 0)",
+            "rgb(105, 208, 255)"
+          ]
+        }
+      ],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "cart",
+      "route": "/cart/",
+      "width": 320,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 1,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [
+        "#coupon_code"
+      ],
+      "targetUnder24": [
+        {
+          "selector": "a.button.wc-forward",
+          "name": "View cart",
+          "width": 69,
+          "height": 23
+        },
+        {
+          "selector": "a.lumen-cart-product__link",
+          "name": "SviCloud TV Box 10P+",
+          "width": 174,
+          "height": 20
+        }
+      ],
+      "targetUnder44": [
+        {
+          "selector": "a.button.wc-forward",
+          "name": "View cart",
+          "width": 69,
+          "height": 23
+        },
+        {
+          "selector": "a.lumen-cart-product__link",
+          "name": "SviCloud TV Box 10P+",
+          "width": 174,
+          "height": 20
+        },
+        {
+          "selector": "a.lumen-cart-actions__continue",
+          "name": "←\n                            Continue shopping",
+          "width": 288,
+          "height": 32
+        }
+      ],
+      "focusWithoutVisualChange": [],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    },
+    {
+      "name": "checkout",
+      "route": "/checkout/",
+      "width": 320,
+      "lang": "en-US",
+      "landmarks": {
+        "main": 1,
+        "nav": 1,
+        "footer": 1
+      },
+      "h1Count": 1,
+      "skippedHeadings": [
+        {
+          "level": 3,
+          "text": "Billing details"
+        }
+      ],
+      "duplicateIds": [],
+      "unlabeled": [],
+      "unnamed": [
+        "#billing_first_name",
+        "#billing_last_name",
+        "#billing_address_1",
+        "#billing_address_2",
+        "#billing_city",
+        "#billing_postcode",
+        "#billing_phone",
+        "#billing_email",
+        "#order_comments",
+        "#checkout_coupon_code"
+      ],
+      "targetUnder24": [
+        {
+          "selector": "#billing_state",
+          "name": "Select an option…AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawa",
+          "width": 1,
+          "height": 34
+        },
+        {
+          "selector": "a.woocommerce-privacy-policy-link",
+          "name": "privacy policy",
+          "width": 100,
+          "height": 18
+        }
+      ],
+      "targetUnder44": [
+        {
+          "selector": "a.button.wc-forward",
+          "name": "View cart",
+          "width": 36,
+          "height": 48
+        },
+        {
+          "selector": "#billing_first_name",
+          "name": "",
+          "width": 152,
+          "height": 36
+        },
+        {
+          "selector": "#billing_last_name",
+          "name": "",
+          "width": 152,
+          "height": 36
+        },
+        {
+          "selector": "#billing_address_1",
+          "name": "",
+          "width": 152,
+          "height": 36
+        },
+        {
+          "selector": "#billing_address_2",
+          "name": "",
+          "width": 152,
+          "height": 36
+        },
+        {
+          "selector": "#billing_city",
+          "name": "",
+          "width": 152,
+          "height": 36
+        },
+        {
+          "selector": "#billing_state",
+          "name": "Select an option…AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawa",
+          "width": 1,
+          "height": 34
+        },
+        {
+          "selector": "#billing_postcode",
+          "name": "",
+          "width": 152,
+          "height": 36
+        },
+        {
+          "selector": "#billing_phone",
+          "name": "",
+          "width": 152,
+          "height": 36
+        },
+        {
+          "selector": "#billing_email",
+          "name": "",
+          "width": 152,
+          "height": 36
+        },
+        {
+          "selector": "a.woocommerce-privacy-policy-link",
+          "name": "privacy policy",
+          "width": 100,
+          "height": 18
+        },
+        {
+          "selector": "button.button",
+          "name": "Apply",
+          "width": 175,
+          "height": 42
+        }
+      ],
+      "focusWithoutVisualChange": [
+        {
+          "selector": "#billing_state",
+          "name": "Select an option…AlabamaAlaskaArizonaArkansasCaliforniaColoradoConnecticutDelawa",
+          "changed": false,
+          "focused": [
+            "none",
+            "0px",
+            "rgba(246, 250, 255, 0.96)",
+            "none",
+            "rgba(246, 250, 255, 0.96)",
+            "rgba(18, 36, 68, 0.7)",
+            "rgba(246, 250, 255, 0.96)"
+          ]
+        }
+      ],
+      "activeMotion": [],
+      "horizontalOverflow": false
+    }
+  ],
+  "interactions": {
+    "mobileNavigation": {
+      "openState": {
+        "expanded": "true",
+        "navHidden": false,
+        "bodyOverflow": "hidden",
+        "inertOutside": true
+      },
+      "tabNames": [
+        "Reviews",
+        "Compare",
+        "Account",
+        "Shop",
+        "SVICLOUD 15P",
+        "Blog",
+        "EN",
+        "繁",
+        "简",
+        "View Cart",
+        "Close navigation",
+        "Guides",
+        "Reviews",
+        "Compare"
+      ],
+      "closedState": {
+        "expanded": "false",
+        "navHidden": true,
+        "focusReturned": true
+      }
+    },
+    "checkoutValidation": {
+      "focused": "BODY",
+      "invalidFields": [],
+      "errors": [],
+      "errorRoles": [],
+      "placeOrderDisabled": true,
+      "placeOrderText": "Payment unavailable"
+    }
+  }
+}

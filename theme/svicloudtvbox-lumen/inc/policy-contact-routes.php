@@ -34,7 +34,7 @@ if (!function_exists('svic_render_policy_contact_route')) {
         }
         get_header();
         ?>
-        <main class="guides-detail guides-detail--policy surface--dark">
+        <main id="main-content" class="guides-detail guides-detail--policy surface--dark" tabindex="-1">
           <header class="guides-detail__hero"><div class="guides-detail__hero-inner"><div class="guides-detail__hero-copy">
             <span class="guides-badge guides-badge--on-dark">Official US support</span>
             <h1 class="guides-detail__title"><?php echo esc_html($page['title']); ?></h1>

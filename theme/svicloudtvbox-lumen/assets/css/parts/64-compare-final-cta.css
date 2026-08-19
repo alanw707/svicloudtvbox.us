@@ -141,7 +141,7 @@
 
   .compare-final-cta__badge {
     letter-spacing: 0.18em;
-    font-size: 0.72rem;
+    font-size: var(--lumen-font-size-label);
   }
 
   .compare-final-cta__copy {

@@ -183,7 +183,7 @@
   justify-content: center;
   padding: 6px 12px;
   border-radius: 999px;
-  font-size: 0.74rem;
+  font-size: var(--lumen-font-size-label);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: rgba(6, 18, 36, 0.96);
@@ -247,21 +247,31 @@
 .compare-hero__device {
   display: block;
   width: auto;
-  max-width: min(100%, 460px);
-  height: clamp(230px, 29vw, 360px);
+  max-width: min(100%, 300px);
+  height: clamp(190px, 22vw, 240px);
   object-fit: contain;
   object-position: center bottom;
   filter: drop-shadow(0 20px 52px rgba(5, 14, 34, 0.58));
   transition: transform var(--transition-normal), filter var(--transition-normal);
 }
 
+.compare-hero__device--15p {
+  height: clamp(210px, 24vw, 260px);
+  transform: translate(16px, -4px) rotate(-3deg);
+}
+
 .compare-hero__device--10p {
-  height: clamp(250px, 31vw, 390px);
-  transform: translate(10px, 10px) rotate(-4deg);
+  height: clamp(210px, 24vw, 260px);
+  transform: translate(0, 10px) rotate(-2deg);
 }
 
 .compare-hero__device--10s {
   transform: translate(-12px, -4px) rotate(4deg);
+}
+
+.compare-hero__devices:hover .compare-hero__device--15p,
+.compare-hero__devices:focus-within .compare-hero__device--15p {
+  transform: translate(16px, -8px) rotate(-2deg) scale(1.015);
 }
 
 .compare-hero__devices:hover .compare-hero__device--10p,
@@ -411,6 +421,18 @@
   }
 }
 
+@media (min-width: 600px) and (max-width: 959px) {
+  .compare-hero__device {
+    max-width: min(100%, 220px);
+    height: 170px;
+  }
+
+  .compare-hero__device--15p,
+  .compare-hero__device--10p {
+    height: 190px;
+  }
+}
+
 @media (max-width: 599px) {
   .compare-hero {
     padding-bottom: calc(clamp(26px, 10vw, 48px) + env(safe-area-inset-bottom, 0px));
@@ -439,6 +461,10 @@
 
   .compare-hero__device--10p,
   .compare-hero__device--10s {
+    display: none;
+  }
+
+  .compare-hero__device--15p {
     transform: translateY(0) rotate(0deg);
   }
 
@@ -448,7 +474,7 @@
     height: clamp(170px, 46vw, 250px);
   }
 
-  .compare-hero__device--10p {
+  .compare-hero__device--15p {
     height: clamp(190px, 52vw, 280px);
   }
 

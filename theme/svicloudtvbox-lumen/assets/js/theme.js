@@ -30,12 +30,90 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         initAnimationOnScroll();
         initPerformanceOptimizations();
         initLumenNavigation();
+        initHeaderNavFit();
+        initSkipLink();
         initProductHeroGallery();
         initStripeSavedCardPills();
         initCartQuantityControls();
         $(document.body).on('updated_wc_div cart_page_refreshed updated_cart_totals', initCartQuantityControls);
         relocateCheckoutCoupon();
+        enhanceCheckoutAccessibility();
         $(document.body).on('updated_checkout applied_coupon_in_checkout removed_coupon_in_checkout', relocateCheckoutCoupon);
+        $(document.body).on('updated_checkout checkout_error', enhanceCheckoutAccessibility);
+    }
+
+    /**
+     * Keep the desktop nav on a single row: drop it to a full-width second tier
+     * when it cannot sit beside the logo, then fall back to the mobile dialog.
+     */
+    function initHeaderNavFit() {
+        const header = document.querySelector('[data-lumen-header]');
+        const list = header ? header.querySelector('.lumen-nav__list') : null;
+        if (!header || !list) {
+            return;
+        }
+
+        const rowCount = function() {
+            const tops = new Set();
+            Array.prototype.forEach.call(list.children, function(item) {
+                if (item.offsetParent !== null) {
+                    tops.add(Math.round(item.getBoundingClientRect().top));
+                }
+            });
+            return tops.size;
+        };
+
+        let measuring = false;
+        const measure = function() {
+            if (measuring) {
+                return;
+            }
+            measuring = true;
+            header.classList.remove('lumen-header--nav-tiered', 'lumen-header--nav-collapsed');
+
+            if (list.offsetParent === null) {
+                measuring = false;
+                return;
+            }
+            if (rowCount() > 1) {
+                // Full-width second tier; two balanced rows are allowed there.
+                header.classList.add('lumen-header--nav-tiered');
+                if (rowCount() > 2) {
+                    header.classList.add('lumen-header--nav-collapsed');
+                }
+            }
+            measuring = false;
+        };
+
+        measure();
+
+        let frame = null;
+        const scheduleMeasure = function() {
+            if (frame) {
+                cancelAnimationFrame(frame);
+            }
+            frame = requestAnimationFrame(function() {
+                frame = null;
+                measure();
+            });
+        };
+
+        $(window).on('resize orientationchange', scheduleMeasure);
+        if (document.fonts && typeof document.fonts.ready === 'object') {
+            document.fonts.ready.then(scheduleMeasure).catch(function() {});
+        }
+    }
+
+    function initSkipLink() {
+        $('.svic-skip-link').on('click', function() {
+            const target = document.getElementById('main-content');
+            if (!target) {
+                return;
+            }
+            window.setTimeout(function() {
+                target.focus({ preventScroll: true });
+            }, 0);
+        });
     }
 
     function getStickyScrollOffset() {
@@ -529,6 +607,9 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         const bodyClass = 'lumen-nav-open';
         const submenuExpandLabel = $mobileNav.data('submenu-expand') || 'Expand submenu';
         const submenuCollapseLabel = $mobileNav.data('submenu-collapse') || 'Collapse submenu';
+        const navOpenLabel = $mobileNav.data('nav-open') || 'Open navigation';
+        const navCloseLabel = $mobileNav.data('nav-close') || 'Close navigation';
+        const $background = $('body').children().not($header).not('script, style, link');
 
         const updateSubmenuToggle = ($toggle, expanded) => {
             $toggle.attr('aria-expanded', expanded ? 'true' : 'false');
@@ -585,32 +666,81 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
 
         enhanceMobileSubmenus();
 
-        function setNavState(open) {
+        function updateMainToggle(open) {
             $toggle.attr('aria-expanded', open ? 'true' : 'false');
+            $toggle.find('.screen-reader-text').text(open ? navCloseLabel : navOpenLabel);
+        }
+
+        function getNavFocusable() {
+            const selector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+            return $toggle.add($mobileNav.find(selector).filter(':visible'));
+        }
+
+        function setNavState(open, returnFocus) {
+            updateMainToggle(open);
             if (open) {
                 $mobileNav.addClass('is-open').removeAttr('hidden');
                 enhanceMobileSubmenus();
+                $background.attr('inert', '').attr('data-svic-nav-inert', 'true');
+                window.setTimeout(function() {
+                    const $firstNavLink = $mobileNav.find('a[href]:visible').first();
+                    if ($firstNavLink.length) {
+                        $firstNavLink.trigger('focus');
+                    }
+                }, 0);
             } else {
                 $mobileNav.removeClass('is-open').attr('hidden', 'hidden');
                 closeAllSubmenus();
+                $('[data-svic-nav-inert="true"]').removeAttr('inert data-svic-nav-inert');
+                if (returnFocus) {
+                    $toggle.trigger('focus');
+                }
             }
             $('body').toggleClass(bodyClass, open);
         }
 
+        updateMainToggle(false);
+
         $toggle.on('click', function() {
             const isOpen = $(this).attr('aria-expanded') === 'true';
-            setNavState(!isOpen);
+            setNavState(!isOpen, isOpen);
         });
 
         $(document).on('click', function(event) {
             if (!$(event.target).closest('#lumen-mobile-nav, [data-lumen-toggle]').length) {
-                setNavState(false);
+                setNavState(false, false);
             }
         });
 
         $(document).on('keydown', function(event) {
+            const isOpen = $toggle.attr('aria-expanded') === 'true';
+            if (!isOpen) {
+                return;
+            }
             if (event.key === 'Escape') {
-                setNavState(false);
+                event.preventDefault();
+                setNavState(false, true);
+                return;
+            }
+            if (event.key !== 'Tab') {
+                return;
+            }
+
+            const $focusable = getNavFocusable();
+            if (!$focusable.length) {
+                return;
+            }
+            const first = $focusable.get(0);
+            const last = $focusable.get($focusable.length - 1);
+            if (event.shiftKey && document.activeElement === first) {
+                event.preventDefault();
+                last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+                event.preventDefault();
+                first.focus();
+            } else if (!$.contains($header.get(0), document.activeElement)) {
+                event.preventDefault();
+                first.focus();
             }
         });
 
@@ -804,6 +934,16 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         });
     }
 
+    function enhanceCheckoutAccessibility() {
+        if (!document.body || !document.body.classList.contains('woocommerce-checkout')) {
+            return;
+        }
+        $('.woocommerce-error')
+            .attr({ role: 'alert', 'aria-live': 'assertive', tabindex: '-1' });
+        $('.woocommerce-invalid-required-field, .woocommerce-invalid').find('input, select, textarea')
+            .attr('aria-invalid', 'true');
+    }
+
     function relocateCheckoutCoupon() {
         if (!document.body || !document.body.classList.contains('woocommerce-checkout')) {
             return;
@@ -829,6 +969,14 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         displayBlock.classList.add('lumen-checkout-coupon-display');
         displayBlock.removeAttribute('data-lumen-coupon-original');
         displayBlock.removeAttribute('hidden');
+        const displayInput = displayBlock.querySelector('input[name="coupon_code"]');
+        const displayLabel = displayBlock.querySelector('label[for="coupon_code"]');
+        if (displayInput) {
+            displayInput.id = 'checkout_coupon_code';
+        }
+        if (displayLabel) {
+            displayLabel.setAttribute('for', 'checkout_coupon_code');
+        }
         summaryCard.insertBefore(displayBlock, target);
 
         originalBlock.setAttribute('hidden', 'hidden');
@@ -1107,15 +1255,16 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
                 return $(this).text().trim().length > 0;
             }).first();
             const pending = consumePendingToast();
-            if (!$notice.length && !pending) {
+            if ($notice.length) {
+                hasShownInitialNotice = true;
+                return;
+            }
+            if (!pending) {
                 return;
             }
             let message = '';
-            let variant = 'success';
-            if ($notice.length) {
-                message = stripMessage($notice.html());
-                variant = $notice.hasClass('woocommerce-error') ? 'error' : 'success';
-            } else if (pending) {
+            const variant = 'success';
+            if (pending) {
                 message = (svicTheme.i18n && svicTheme.i18n.addedToCart) ? svicTheme.i18n.addedToCart : 'Added to cart!';
             }
             if (!message) {

@@ -18,6 +18,7 @@ $shop_url = svic_url_with_lang($shop_url);
 $cart = WC()->cart;
 $cart_items = [];
 $has_items = false;
+$has_15p_backorder = function_exists('svic_cart_contains_15p') && svic_cart_contains_15p();
 
 if (is_object($cart)) {
     if (method_exists($cart, 'get_cart')) {
@@ -94,14 +95,23 @@ if (is_object($cart)) {
                                     <td class="product-name" data-title="<?php echo esc_attr(svic_translate('cart_page.table.product')); ?>">
                                         <div class="lumen-cart-product__details">
                                             <div class="lumen-cart-product__title"><?php echo wp_kses_post($product_name); ?></div>
+                                            <?php
+                                            $item_badge_keys = function_exists('svic_is_15p_product_object') && svic_is_15p_product_object($product)
+                                                ? ['shop.cards.15p.price_tbc', 'products.svicloud-15p.footer.badges.commerce', 'shop.cards.15p.price_note']
+                                                : ['cart_page.meta.authorized', 'cart_page.meta.shipping', 'cart_page.meta.warranty'];
+                                            ?>
                                             <ul class="lumen-cart-product__badges" role="list">
-                                                <li class="lumen-cart-product__badge lumen-cart-product__badge--authorized"><?php echo svic_translate_html('cart_page.meta.authorized'); ?></li>
-                                                <li class="lumen-cart-product__badge lumen-cart-product__badge--shipping"><?php echo svic_translate_html('cart_page.meta.shipping'); ?></li>
-                                                <li class="lumen-cart-product__badge lumen-cart-product__badge--warranty"><?php echo svic_translate_html('cart_page.meta.warranty'); ?></li>
+                                                <?php foreach ($item_badge_keys as $badge_key): ?>
+                                                    <li class="lumen-cart-product__badge"><?php echo svic_translate_html($badge_key); ?></li>
+                                                <?php endforeach; ?>
                                             </ul>
                                             <?php echo wc_get_formatted_cart_item_data($cart_item); ?>
                                             <?php if ($product->backorders_require_notification() && $product->is_on_backorder((int) $cart_item['quantity'])): ?>
-                                                <p class="lumen-cart-product__notice"><?php echo esc_html($product->get_backorder_notification()); ?></p>
+                                                <?php if (function_exists('svic_is_15p_product_object') && svic_is_15p_product_object($product)): ?>
+                                                    <?php svic_render_15p_delivery_banner(); ?>
+                                                <?php else: ?>
+                                                    <p class="lumen-cart-product__notice"><?php esc_html_e('Available on backorder', 'woocommerce'); ?></p>
+                                                <?php endif; ?>
                                             <?php endif; ?>
                                         </div>
                                     </td>
@@ -115,7 +125,7 @@ if (is_object($cart)) {
                                             <?php else: ?>
                                                 <div class="lumen-cart-qty__inner" data-qty>
                                                     <button type="button" class="lumen-cart-qty__button lumen-cart-qty__button--decrease" data-qty-control="decrease">
-                                                        <span class="screen-reader-text"><?php echo esc_html__('Decrease quantity', svic_text_domain()); ?></span>
+                                                        <span class="screen-reader-text"><?php echo svic_translate_html('cart_page.quantity.decrease'); ?></span>
                                                     </button>
                                                     <div class="lumen-cart-qty__input">
                                                         <?php
@@ -137,7 +147,7 @@ if (is_object($cart)) {
                                                         ?>
                                                     </div>
                                                     <button type="button" class="lumen-cart-qty__button lumen-cart-qty__button--increase" data-qty-control="increase">
-                                                        <span class="screen-reader-text"><?php echo esc_html__('Increase quantity', svic_text_domain()); ?></span>
+                                                        <span class="screen-reader-text"><?php echo svic_translate_html('cart_page.quantity.increase'); ?></span>
                                                     </button>
                                                 </div>
                                             <?php endif; ?>
@@ -205,7 +215,11 @@ if (is_object($cart)) {
             <aside class="lumen-cart__summary" aria-labelledby="lumen-cart-summary-title">
                 <div class="lumen-cart-summary__card">
                     <h2 id="lumen-cart-summary-title" class="lumen-cart-summary__title"><?php echo svic_translate_html('cart_page.summary.title'); ?></h2>
-                    <p class="lumen-cart-summary__intro"><?php echo svic_translate_html('cart_page.summary.intro'); ?></p>
+                    <p class="lumen-cart-summary__intro">
+                        <?php echo $has_15p_backorder
+                            ? svic_translate_html('products.svicloud-15p.footer.summary')
+                            : svic_translate_html('cart_page.summary.intro'); ?>
+                    </p>
                     <div class="lumen-cart-summary__notices" aria-live="polite">
                         <?php if (function_exists('woocommerce_output_all_notices')) {
                             woocommerce_output_all_notices();
@@ -233,28 +247,11 @@ if (is_object($cart)) {
                             <?php woocommerce_cart_totals(); ?>
                         </div>
 
-                        <p class="lumen-cart-summary__reassurance"><?php echo svic_translate_html('cart_page.summary.reassurance'); ?></p>
-
-                        <div class="lumen-cart-summary__links lumen-action-group">
-                            <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url(wc_get_checkout_url()); ?>" data-svic-event="svic_begin_checkout" data-svic-location="cart_summary" data-svic-label="proceed_to_checkout"><?php echo svic_translate_html('checkout_page.title'); ?></a>
-                            <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/faq/'))); ?>" data-svic-event="svic_cta_click" data-svic-location="cart_summary" data-svic-label="faq_before_checkout"><?php echo svic_translate_html('product.traffic.links.faq'); ?></a>
-                            <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/contact/'))); ?>" data-svic-event="svic_cta_click" data-svic-location="cart_summary" data-svic-label="contact_concierge"><?php echo svic_translate_html('product.traffic.links.contact'); ?></a>
-                        </div>
-
-                        <ul class="lumen-cart-summary__benefits">
-                            <li>
-                                <span class="lumen-cart-summary__benefit-title"><?php echo svic_translate_html('cart_page.benefits.shipping.title'); ?></span>
-                                <span class="lumen-cart-summary__benefit-copy"><?php echo svic_translate_html('cart_page.benefits.shipping.copy'); ?></span>
-                            </li>
-                            <li>
-                                <span class="lumen-cart-summary__benefit-title"><?php echo svic_translate_html('cart_page.benefits.warranty.title'); ?></span>
-                                <span class="lumen-cart-summary__benefit-copy"><?php echo svic_translate_html('cart_page.benefits.warranty.copy'); ?></span>
-                            </li>
-                            <li>
-                                <span class="lumen-cart-summary__benefit-title"><?php echo svic_translate_html('cart_page.benefits.concierge.title'); ?></span>
-                                <span class="lumen-cart-summary__benefit-copy"><?php echo svic_translate_html('cart_page.benefits.concierge.copy'); ?></span>
-                            </li>
-                        </ul>
+                        <p class="lumen-cart-summary__reassurance">
+                            <?php echo $has_15p_backorder
+                                ? svic_translate_html('shop.cards.15p.price_note')
+                                : svic_translate_html('cart_page.summary.reassurance'); ?>
+                        </p>
                     <?php else: ?>
                         <p class="lumen-cart-summary__empty"><?php echo svic_translate_html('cart_page.summary.empty'); ?></p>
                     <?php endif; ?>

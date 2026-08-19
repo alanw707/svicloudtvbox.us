@@ -50,7 +50,7 @@ $faq_copy = svic_translate_rich('contact.faq.copy', [
 ]);
 ?>
 
-<main class="contact-page">
+<main id="main-content" class="contact-page" tabindex="-1">
   <section class="contact-hero">
     <div class="contact-hero__inner">
       <span class="contact-hero__badge"><?php echo svic_translate_html('contact.hero.badge'); ?></span>

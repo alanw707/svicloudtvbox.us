@@ -42,6 +42,8 @@ return [
         'cart'   => [
             'adding'             => 'Adding…',
             'added'              => 'Added to cart!',
+            'added_notice'       => 'has been added to your cart',
+            'view_cart'          => 'View cart',
             'count_label_single' => '{{count}} item in cart',
             'count_label_plural' => '{{count}} items in cart',
             'count_label_empty'  => 'Cart is empty',
@@ -382,6 +384,10 @@ return [
         ],
         'remove'            => 'Remove item',
         'remove_aria'       => 'Remove %s from cart',
+        'quantity'          => [
+            'decrease' => 'Decrease quantity',
+            'increase' => 'Increase quantity',
+        ],
         'update'            => 'Update cart',
         'coupon'            => [
             'label'       => 'Promo code',
@@ -433,6 +439,7 @@ return [
             'title' => 'Payment & confirmation',
             'intro' => 'Choose a saved card or enter a new payment method, then place your order with secure checkout.',
             'cards_label' => 'Accepted cards: Visa, Mastercard, American Express, and Discover.',
+            'unavailable_action' => 'Payment unavailable',
         ],
         'coupon' => [
             'toggle_lead' => 'Have a promo code?',
@@ -731,6 +738,7 @@ return [
             'blog'     => 'Blog',
             'shop'     => 'Shop',
             'faq'      => 'FAQ',
+            'fifteen_p' => 'SVICLOUD 15P',
             'ten_p'    => 'SVICLOUD 10P+',
             'ten_s'    => 'SVICLOUD 10S',
             'concierge'=> 'Concierge',
@@ -743,6 +751,10 @@ return [
             'my-account' => 'Account',
             'submenu_expand'   => 'Expand submenu',
             'submenu_collapse' => 'Collapse submenu',
+            'skip_content'      => 'Skip to main content',
+            'mobile_navigation' => 'Mobile navigation',
+            'open_navigation'   => 'Open navigation',
+            'close_navigation'  => 'Close navigation',
         ],
     ],
 
@@ -773,19 +785,38 @@ return [
     ],
     'frontpage' => [
         'hero' => [
-            'badge'   => 'Authorized U.S. Dealer',
-            'title'   => 'Best SVICLOUD TV Boxes for U.S. Chinese Families in 2026 — Fast U.S. Shipping, Warranty, and Bilingual Setup Help',
-            'title_lead' => 'Best SVICLOUD TV Boxes for U.S. Chinese Families in 2026',
-            'title_separator' => ' — ',
-            'title_tail' => 'Fast U.S. Shipping, Warranty, and Bilingual Setup Help',
-            'copy'    => 'SVICLOUD 10P+ and 10S bring Chinese and international entertainment, karaoke, and kids favorites into one easy family streaming setup—ships fast from the USA with bilingual concierge support.',
+            'badge'   => 'Authorized U.S. Dealer · Nevada',
+            'title'   => 'Meet the New SVICLOUD 15P.',
+            'title_lead' => 'Meet the New SVICLOUD 15P',
+            'title_separator' => '.',
+            'title_tail' => '',
+            'copy'    => 'Pre-order the SVICLOUD 15P for $288 (regular $379) with Android 14, Amlogic S905Y5, 4 GB DDR3, 64 GB eMMC, Wi-Fi 6, Bluetooth 5.4, and 4K HDR.',
+            'launch'  => [
+                'badge' => 'New',
+                'text'  => 'SVICLOUD 15P pre-orders are open',
+            ],
+            'showcase' => [
+                'kicker'  => 'SVICLOUD 15P',
+                'release' => 'Available for pre-order',
+                'title'   => 'Android 14. Wi-Fi 6. 4K HDR.',
+                'copy'    => 'Amlogic S905Y5, 4 GB DDR3 memory, 64 GB eMMC storage, Bluetooth 5.4, and AV1 decoding in the SVICLOUD 15P.',
+                'image_alt' => 'SVICLOUD 15P TV box front view',
+                'points'  => [
+                    'usa'     => 'Android 14',
+                    'fees'    => 'Wi-Fi 6 + Bluetooth 5.4',
+                    'support' => '4K HDR + AV1 decoding',
+                ],
+                'cta'     => 'Pre-order 15P',
+                'compare' => 'Compare the lineup',
+            ],
             'bullets' => [
-                'shipping' => 'Ships from USA',
-                'warranty' => '1-Year U.S. Warranty',
-                'fees'     => 'No Monthly Fees',
+                'shipping' => 'Amlogic S905Y5 quad-core processor',
+                'warranty' => '4 GB DDR3 memory + 64 GB eMMC storage',
+                'fees'     => 'Dual-band Wi-Fi 6 + Bluetooth 5.4',
             ],
             'cta' => [
-                'primary'   => 'Shop 10P+',
+                'primary'   => 'Pre-order 15P',
+                'tenp'      => 'Shop 10P+',
                 'bundles'   => 'View Bundles',
                 'compare'   => 'See Pricing',
                 'secondary' => 'See Pricing',
@@ -1007,14 +1038,29 @@ return [
             'sr_sale_announcement' => 'Sale price %2$s, original price %1$s',
             'savings_label'        => 'Save %1$s (%2$s%% off)',
             'cards'    => [
+                '15p' => [
+                    'badge'     => 'Available for pre-order',
+                    'title'     => 'SVICLOUD 15P',
+                    'image_alt' => 'SVICLOUD 15P Android 14 pre-order graphic',
+                    'interval'  => 'device',
+                    'copy'      => 'Android 14 with Amlogic S905Y5, 4 GB DDR3, 64 GB eMMC, Wi-Fi 6, Bluetooth 5.4, and 4K HDR playback.',
+                    'stock_note' => 'Expected delivery: 2–3 weeks after ordering',
+                    'features'  => [
+                        'processor' => 'Amlogic S905Y5 + Android 14',
+                        'no_fees' => '4 GB DDR3 + 64 GB eMMC',
+                        'support' => 'Wi-Fi 6 + Bluetooth 5.4 + AV1',
+                    ],
+                    'cta'      => 'Pre-order 15P',
+                    'buy_cta'  => 'Pre-order 15P',
+                ],
                 '10p' => [
                     'badge'    => 'Most Popular',
                     'title'    => 'SVICLOUD 10P+',
                     'image_alt'=> 'SVICLOUD 10P+ product image',
                     'interval' => 'device',
-                    'copy'     => 'Flagship 4GB RAM / 64GB storage with Kids & Karaoke apps included.',
+                    'copy'     => 'Android 12 with 4GB RAM / 64GB storage and Kids & Karaoke apps included.',
                     'features' => [
-                        'hdr'    => '4K HDR + AV1 decode',
+                        'hdr'    => 'Android 12 + 4K HDR + AV1 decode',
                         'apps'   => 'Kids & Karaoke apps included',
                         'wifi'   => 'AI voice remote + dual-band Wi-Fi',
                     ],
@@ -1030,9 +1076,9 @@ return [
                     'title'    => 'SVICLOUD 10S',
                     'image_alt'=> 'SVICLOUD 10S product image',
                     'interval' => 'device',
-                    'copy'     => 'Best value with 2GB RAM / 32GB storage—ideal for bedrooms or secondary TVs.',
+                    'copy'     => 'Android 12 with 2GB RAM / 32GB storage—ideal for bedrooms or secondary TVs.',
                     'features' => [
-                        'hdr'    => '4K HDR + AV1 decode',
+                        'hdr'    => 'Android 12 + 4K HDR + AV1 decode',
                         'remote' => 'AI voice remote',
                         'bundle' => 'Includes HDMI & power accessories',
                     ],
@@ -1150,7 +1196,7 @@ return [
         'hero' => [
             'badge'     => 'Shop',
             'title'     => 'SVICLOUD TV Boxes',
-            'subtitle'  => 'Authorized U.S. dealer with fast domestic shipping, 1-year warranty, and English/中文 support.',
+            'subtitle'  => 'Explore the confirmed SVICLOUD 15P specifications, or shop current models with fast domestic shipping, 1-year warranty, and English/中文 support.',
             'highlights' => [
                 'shipping' => 'Free 2–4 day U.S. shipping',
                 'warranty' => '1-year U.S. warranty included',
@@ -1173,6 +1219,31 @@ return [
                 'warranty' => 'Includes 1-year U.S. warranty',
                 'support'  => 'Bilingual concierge onboarding',
             ],
+            '15p' => [
+                'title'   => 'SVICLOUD 15P TV Box',
+                'lead'    => 'Android 14 TV box with Amlogic S905Y5, 4 GB DDR3, 64 GB eMMC, dual-band Wi-Fi 6, Bluetooth 5.4, and 4K HDR playback.',
+                'button'  => 'Pre-order 15P',
+                'badge'   => 'Available for pre-order',
+                'best_for' => 'Family rooms, sports fans, and mobile app users',
+                'price_label' => 'Pre-order price',
+                'price_tbc'   => 'Available for pre-order',
+                'price_note'  => 'Expected delivery: 2–3 weeks after ordering',
+                'delivery_banner_label' => 'Pre-order delivery',
+                'delivery_banner_copy'  => 'Expected delivery: 2–3 weeks after ordering.',
+                'image_alt'   => 'SVICLOUD 15P Android 14 pre-order graphic',
+                'image_tbc'   => 'SVICLOUD 15P product image',
+                'features' => [
+                    'hardware'     => 'Amlogic S905Y5 + Android 14',
+                    'apps'         => '4 GB DDR3 + 64 GB eMMC storage',
+                    'remote'       => 'Wi-Fi 6 + Bluetooth 5.4 + AV1 decoding',
+                    'mobile_apps'  => 'Supports downloading mobile apps',
+                ],
+                'assurance' => [
+                    'shipping' => 'Available for pre-order',
+                    'warranty' => '$288 sale · $379 regular',
+                    'support'  => 'Expected delivery: 2–3 weeks after ordering',
+                ],
+            ],
             '10p' => [
                 'title'   => 'SVICLOUD 10P+',
                 'lead'    => 'Flagship hardware with exclusive family features and the fastest performance we ship.',
@@ -1180,7 +1251,7 @@ return [
                 'badge'   => 'Most popular',
                 'best_for' => 'Family rooms, sports fans, karaoke nights',
                 'features' => [
-                    'ram_storage' => '4GB RAM / 64GB storage with AV1 decode',
+                    'ram_storage' => 'Android 12 + 4GB RAM / 64GB storage with AV1 decode',
                     'apps'        => 'Kids Mode & Karaoke apps included',
                     'remote'      => 'Bluetooth AI voice remote + Wi-Fi 6',
                 ],
@@ -1192,17 +1263,29 @@ return [
                 'badge'   => 'Best value',
                 'best_for' => 'Bedrooms, guest suites, casual streaming',
                 'features' => [
-                    'ram_storage' => '2GB RAM / 32GB storage for everyday streaming',
+                    'ram_storage' => 'Android 12 + 2GB RAM / 32GB storage for everyday streaming',
                     'remote'      => '4K HDR + AV1 decode with voice remote',
                     'ports'       => 'HDMI, USB 3.0, and wired Ethernet included',
+                ],
+            ],
+            'remote' => [
+                'title'    => 'Bluetooth Remote for 10P+',
+                'lead'     => 'Official replacement or second remote for SVICLOUD 10P+, shipped from U.S. inventory.',
+                'button'   => 'View Remote',
+                'badge'    => 'Accessory',
+                'best_for' => 'Replacement remotes and multi-user households',
+                'features' => [
+                    'bluetooth' => 'Bluetooth 5.0 pairing with range up to 10 meters',
+                    'voice'     => 'Built-in microphone for voice search',
+                    'controls'  => 'Universal TV power, volume, and input controls',
                 ],
             ],
         ],
     ],
     'products' => [
         'svicloud-10p-plus' => [
-            'short_description' => 'Flagship 4K streaming box with 4GB RAM / 64GB storage, karaoke apps, and bilingual concierge support.',
-            'description' => '<p>SVICLOUD 10P+ is our flagship streaming box for families who want voice control, karaoke nights, and the fastest hardware we ship.</p><ul><li>4GB RAM and 64GB storage with AV1 decode keep 4K live sports and dramas smooth.</li><li>Kids Mode and Karaoke apps come preinstalled with English / 中文 concierge walkthroughs.</li><li>Wi-Fi 6, Gigabit Ethernet, Bluetooth voice remote, USB 3.0, and expandable storage cover every installation.</li><li>Dolby surround sound support adds a stronger audio option for compatible TVs, soundbars, and receivers.</li><li>Ships from Nevada with a 1-year U.S. warranty, free returns within 14 days, and live concierge setup help.</li></ul><p>The box includes HDMI cable, power adapter, voice remote, and supports dual wireless microphones for karaoke.</p>',
+            'short_description' => 'Android 12 flagship 4K streaming box with 4GB RAM / 64GB storage, karaoke apps, and bilingual concierge support.',
+            'description' => '<p>SVICLOUD 10P+ runs Android 12 and is our flagship streaming box for families who want voice control, karaoke nights, and the fastest hardware we ship.</p><ul><li>4GB RAM and 64GB storage with AV1 decode keep 4K live sports and dramas smooth.</li><li>Kids Mode and Karaoke apps come preinstalled with English / 中文 concierge walkthroughs.</li><li>Wi-Fi 6, Gigabit Ethernet, Bluetooth voice remote, USB 3.0, and expandable storage cover every installation.</li><li>Dolby surround sound support adds a stronger audio option for compatible TVs, soundbars, and receivers.</li><li>Ships from Nevada with a 1-year U.S. warranty, free returns within 14 days, and live concierge setup help.</li></ul><p>The box includes HDMI cable, power adapter, voice remote, and supports dual wireless microphones for karaoke.</p>',
             'best_for' => [
                 'badge' => 'Best for',
                 'title' => 'Main family TVs, karaoke nights, and buyers who want the fastest box',
@@ -1213,10 +1296,17 @@ return [
                     'tertiary'  => 'Best match for sports-heavy homes, family rooms, and buyers who do not want to second-guess the upgrade',
                 ],
             ],
+            'crosslink' => [
+                'badge'  => 'New model',
+                'title'  => 'SVICLOUD 15P pre-orders are open',
+                'lead'   => 'Pre-order the Android 14 SVICLOUD 15P for $288 (regular $379). Expected delivery is 2–3 weeks after ordering.',
+                'cta'    => 'Pre-order SVICLOUD 15P',
+                'target' => 'svicloud-15p',
+            ],
         ],
         'svicloud-10s' => [
-            'short_description' => 'Affordable 4K streaming box with 2GB RAM / 32GB storage and easy plug-and-play setup for bedrooms, guest rooms, and second TVs.',
-            'description' => '<p>SVICLOUD 10S is our budget-friendly 4K streaming box for shoppers who want reliable SVICLOUD access without paying for flagship extras.</p><ul><li>2GB RAM and 32GB storage with AV1 decode handle live TV, dramas, and on-demand playback smoothly.</li><li>A compact design makes it a strong fit for bedrooms, guest rooms, dorms, and secondary TVs.</li><li>HDMI, Ethernet, and USB ports make setup quick whether you prefer Wi-Fi or a hardwired connection.</li><li>Ships from U.S. inventory with a 1-year warranty, bilingual English / 中文 support, and concierge onboarding.</li></ul><p>Choose the 10S when you want the best value in the lineup. Choose the 10P+ if you want higher-end performance, karaoke features, and voice control.</p>',
+            'short_description' => 'Affordable Android 12 4K streaming box with 2GB RAM / 32GB storage and easy plug-and-play setup for bedrooms, guest rooms, and second TVs.',
+            'description' => '<p>SVICLOUD 10S runs Android 12 and is our budget-friendly 4K streaming box for shoppers who want reliable SVICLOUD access without paying for flagship extras.</p><ul><li>2GB RAM and 32GB storage with AV1 decode handle live TV, dramas, and on-demand playback smoothly.</li><li>A compact design makes it a strong fit for bedrooms, guest rooms, dorms, and secondary TVs.</li><li>HDMI, Ethernet, and USB ports make setup quick whether you prefer Wi-Fi or a hardwired connection.</li><li>Ships from U.S. inventory with a 1-year warranty, bilingual English / 中文 support, and concierge onboarding.</li></ul><p>Choose the 10S when you want the best value in the lineup. Choose the 10P+ if you want higher-end performance, karaoke features, and voice control.</p>',
             'best_for' => [
                 'badge' => 'Best for',
                 'title' => 'Bedrooms, guest rooms, second TVs, and value-first buyers',
@@ -1237,29 +1327,207 @@ return [
                     'warranty'  => '1-year U.S. warranty + 14-day returns with concierge support',
                 ],
             ],
+            'crosslink' => [
+                'badge'  => 'New model',
+                'title'  => 'Pre-order the SVICLOUD 15P',
+                'lead'   => 'The Android 14, Wi-Fi 6, and Bluetooth 5.4 SVICLOUD 15P is available on pre-order for $288 (regular $379).',
+                'cta'    => 'Pre-order SVICLOUD 15P',
+                'target' => 'svicloud-15p',
+            ],
+        ],
+        'svicloud-9p' => [
+            'short_description' => 'Legacy SVICLOUD 9P model page for existing owners comparing supported replacement options.',
+            'description' => '<p>SVICLOUD 9P is a previous-generation model retained here for owners, support reference, and honest upgrade comparisons.</p><ul><li>This legacy page remains available instead of being removed or redirected.</li><li>Existing owners can continue using support resources and compare current models.</li><li>The 15P is available on pre-order for $288 (regular $379); expected delivery is 2–3 weeks after ordering.</li></ul>',
+            'best_for' => [
+                'badge' => 'Legacy model',
+                'title' => 'Existing 9P owners researching their next box',
+                'copy'  => 'Keep your 9P if it still meets your needs. Compare its fit with the confirmed 15P hardware and current $288 pre-order offer before deciding.',
+                'bullets' => [
+                    'primary'   => 'Legacy reference retained for search and customer support',
+                    'secondary' => 'No pressure to replace a working box',
+                    'tertiary'  => 'Compare confirmed launch specifications before upgrading',
+                ],
+            ],
+            'crosslink' => [
+                'badge'  => 'Pre-order available',
+                'title'  => 'Considering an upgrade from 9P?',
+                'lead'   => 'Compare the confirmed 15P processor, memory, wireless, ports, and video specifications, then pre-order for $288 (regular $379).',
+                'cta'    => 'Pre-order SVICLOUD 15P',
+                'target' => 'svicloud-15p',
+            ],
+        ],
+        'svicloud-15p' => [
+            'title' => 'SVICLOUD 15P TV Box',
+            'meta' => [
+                'title'       => 'SVICLOUD 15P Pre-order $288 | Android 14 TV Box',
+                'description' => 'Pre-order SVICLOUD 15P for $288 (regular $379). Android 14, Amlogic S905Y5, 4 GB DDR3, 64 GB eMMC, Wi-Fi 6, Bluetooth 5.4, and 4K HDR.',
+                'image_alt'   => 'SVICLOUD 15P TV box front view',
+            ],
+            'short_description' => 'Everything in 10P+, plus support for downloading mobile apps.',
+            'description' => '<p>The SVICLOUD 15P TV Box runs Android 14 on an Amlogic S905Y5 quad-core ARM Cortex-A55 processor.</p><h2>Core specifications</h2><ul><li>4 GB DDR3 memory and 64 GB eMMC storage.</li><li>Dual-band 2.4/5 GHz Wi-Fi 6 with 2T2R and Bluetooth 5.4.</li><li>HDR10+, HDR10, and HLG picture processing.</li><li>AV1, VP9, H.265/HEVC, and H.264 hardware decoding, with AV1, VP9, and H.265/HEVC support up to 4K × 2K at 60 fps.</li><li>HDMI 2.1, two USB 2.0 ports, RJ45 Ethernet, optical audio, and Type-C 5V/2A power.</li></ul><h2>In the box</h2><p>Gift box, AC adapter, HDMI cable, Bluetooth voice air-mouse remote, and user manual.</p><p><strong>Available for pre-order for $288 (regular $379).</strong> Expected delivery: 2–3 weeks after ordering.</p>',
+            'footer' => [
+                'tagline' => 'SVICLOUD 15P pre-order information',
+                'summary' => 'Source-confirmed 15P hardware with a $288 pre-order price (regular $379). Expected delivery: 2–3 weeks after ordering.',
+                'badges' => [
+                    'coming_soon'   => 'Available for pre-order',
+                    'specifications'=> 'Hardware specifications available',
+                    'commerce'      => '$288 sale · $379 regular',
+                ],
+                'benefits' => [
+                    'platform' => [
+                        'label'       => 'Confirmed platform',
+                        'description' => 'Android 14, Amlogic S905Y5, 4 GB DDR3, and 64 GB eMMC.',
+                    ],
+                    'connectivity' => [
+                        'label'       => 'Confirmed connectivity',
+                        'description' => 'Dual-band Wi-Fi 6, Bluetooth 5.4, RJ45, HDMI 2.1, optical audio, and Type-C power.',
+                    ],
+                    'availability' => [
+                        'label'       => 'Pre-order status',
+                        'description' => 'Available for pre-order for $288; expected delivery is 2–3 weeks after ordering.',
+                    ],
+                ],
+            ],
+            'inbox' => [
+                'items' => [
+                    'box'    => 'SVICLOUD 15P TV box',
+                    'power'  => 'AC adapter (plug variant not specified)',
+                    'hdmi'   => 'HDMI cable',
+                    'remote' => 'Bluetooth voice air-mouse remote',
+                    'manual' => 'User manual',
+                ],
+            ],
+            'prelaunch' => [
+                'subtitle' => 'Available for pre-order with Android 14, Amlogic S905Y5, Wi-Fi 6, Bluetooth 5.4, and 4K HDR.',
+                'detail'   => '$288 sale · $379 regular · Expected delivery: 2–3 weeks after ordering',
+                'image_placeholder' => 'SVICLOUD 15P TV box front view',
+                'badges' => [
+                    'specs'        => 'Android 14',
+                    'availability' => 'Available for pre-order',
+                    'policy'       => '4 GB + 64 GB',
+                ],
+                'highlights' => [
+                    'specs'        => 'Amlogic S905Y5 quad-core ARM Cortex-A55 processor',
+                    'availability' => 'Dual-band Wi-Fi 6 with 2T2R + Bluetooth 5.4',
+                    'policy'       => 'HDR10+/HDR10/HLG + AV1 hardware decoding',
+                ],
+                'reassurance' => [
+                    'badge' => 'Verified product details',
+                    'title' => 'Confirmed 15P hardware at a glance',
+                    'copy'  => 'Review the verified hardware and in-box accessories before placing a $288 pre-order. Expected delivery: 2–3 weeks after ordering.',
+                    'bullets' => [
+                        'shipping'  => 'Android 14 with Amlogic S905Y5 processing',
+                        'warranty'  => '4 GB DDR3 memory + 64 GB eMMC storage',
+                        'concierge' => 'Wi-Fi 6, Bluetooth 5.4, 4K HDR, and AV1 decoding',
+                    ],
+                ],
+                'faq_header' => [
+                    'badge' => '15P pre-order information',
+                    'title' => 'Confirmed specifications and pre-order details',
+                    'lead'  => 'The supplied files confirm the listed hardware and package contents. Pre-orders are $288 (regular $379); expected delivery is 2–3 weeks after ordering.',
+                ],
+                'faq' => [
+                    'specs' => [
+                        'q' => 'What are the confirmed SVICLOUD 15P specifications?',
+                        'a' => 'The 15P uses Android 14, an Amlogic S905Y5 quad-core ARM Cortex-A55 processor, 4 GB DDR3 memory, 64 GB eMMC storage, dual-band Wi-Fi 6, Bluetooth 5.4, and hardware decoding for AV1 and other major codecs.',
+                    ],
+                    'availability' => [
+                        'q' => 'Can I order the SVICLOUD 15P now?',
+                        'a' => 'Yes. The 15P is available on pre-order for $288 (regular $379). Expected delivery is 2–3 weeks after ordering.',
+                    ],
+                    'policy' => [
+                        'q' => 'What comes with the SVICLOUD 15P?',
+                        'a' => 'The source package list includes the TV box, AC adapter, HDMI cable, Bluetooth voice remote, user manual, and gift box. A particular plug variant is not promised.',
+                    ],
+                ],
+            ],
+            'best_for' => [
+                'badge' => 'Confirmed platform',
+                'title' => 'Android 14 with Wi-Fi 6 and Bluetooth 5.4',
+                'copy'  => 'The supplied specification lists Android 14, Amlogic S905Y5, dual-band Wi-Fi 6, Bluetooth 5.4, and the stated 4K codec support.',
+                'bullets' => [
+                    'primary'   => '4 GB DDR3 memory and 64 GB eMMC storage',
+                    'secondary' => 'Dual-band Wi-Fi 6, RJ45 Ethernet, and Bluetooth 5.4 connectivity',
+                    'tertiary'  => '4K HDR playback with AV1, VP9, H.265/HEVC, and H.264 hardware decoding',
+                ],
+            ],
+            'traffic' => [
+                'badge' => 'Inside the SVICLOUD 15P',
+                'title' => 'Android 14 with the listed wired and wireless connections',
+                'lead'  => 'The 15P specification lists AV1, VP9, H.265/HEVC, H.264, dual-band Wi-Fi 6, Bluetooth 5.4, HDMI 2.1, RJ45, optical audio, USB, and Type-C power.',
+                'bullets' => [
+                    'shipping'  => 'HDMI 2.1, two USB 2.0 ports, RJ45 Ethernet, optical audio, and Type-C power',
+                    'concierge' => 'Bluetooth voice air-mouse remote plus HDMI CEC TV control',
+                    'warranty'  => 'HDR10+, HDR10, HLG, AV1, VP9, H.265/HEVC, and H.264 support',
+                ],
+            ],
+            'comparison' => [
+                'badge' => 'Compare models',
+                'title' => 'SVICLOUD 15P vs 10P+ vs 9P',
+                'lead'  => 'Compare the confirmed 15P specifications with existing models without assigning a performance ranking.',
+                'cards' => [
+                    'vs_10p' => [
+                        'title'   => '15P vs 10P+',
+                        'summary' => 'Both list 4 GB / 64 GB configurations; choose based on confirmed platform features and whether you need a model available now.',
+                        'bullets' => [
+                            'one'   => '15P: Amlogic S905Y5, Android 14, 4 GB DDR3, and 64 GB eMMC',
+                            'two'   => '15P: dual-band Wi-Fi 6, Bluetooth 5.4, HDMI 2.1, and optical audio',
+                            'three' => '15P: available on pre-order for $288 (regular $379); expected delivery is 2–3 weeks after ordering',
+                        ],
+                        'link_label' => 'See the SVICLOUD 10P+',
+                    ],
+                    'vs_9p' => [
+                        'title'   => '15P vs 9P',
+                        'summary' => 'The 15P source lists Android 14 and Wi-Fi 6; it does not provide a measured performance comparison with 9P.',
+                        'bullets' => [
+                            'one'   => '15P confirms Android 14, Amlogic S905Y5, 4 GB DDR3, and 64 GB eMMC',
+                            'two'   => '15P confirms Wi-Fi 6, Bluetooth 5.4, 4K HDR, and AV1 decoding',
+                            'three' => 'Compare the $288 pre-order offer with your current 9P before deciding',
+                        ],
+                        'link_label' => 'See the legacy SVICLOUD 9P page',
+                    ],
+                ],
+                'upgrade' => [
+                    'title' => 'Comparison guidance',
+                    'items' => [
+                        'from_9p'   => 'The 15P source confirms Android 14, Wi-Fi 6, Bluetooth 5.4, and the listed codecs; it contains no measured comparison with 9P.',
+                        'from_10p'  => 'The 15P source contains no measured performance comparison with 10P or 10P+.',
+                        'new_buyer' => '15P is available on pre-order for $288 (regular $379); current models remain separately available.',
+                    ],
+                ],
+                'assurance' => [
+                    'title' => 'What is confirmed and what still waits',
+                    'items' => [
+                        'shipping' => 'Confirmed: hardware, ports, wireless specifications, supported codecs, and package contents',
+                        'support'  => 'Pre-order price: $288 sale, $379 regular; expected delivery is 2–3 weeks after ordering',
+                        'warranty' => 'Not announced: 15P-specific warranty and return terms',
+                    ],
+                ],
+            ],
         ],
     ],
     'compare' => [
         'meta' => [
-            'title'       => 'SVICLOUD 10P+ vs 10S 2026 | Compare 小雲盒子 Models in the USA',
-            'description' => 'Compare SVICLOUD 10P+ and 10S side-by-side for U.S. buyers in 2026. Review specs, storage, karaoke features, and pricing to choose the best 小雲盒子 for your home.',
-            'image_alt'   => 'SVICLOUD 10P+ and 10S streaming boxes with the voice remote',
+            'title'       => 'SVICLOUD 15P vs 10P+ vs 10S | Compare 小雲盒子 Models',
+            'description' => 'Compare the $288 SVICLOUD 15P pre-order ($379 regular) with 10P+ and 10S hardware, storage, connectivity, video support, pricing, and availability.',
+            'image_alt'   => 'SVICLOUD 15P, 10P+, and 10S streaming boxes',
         ],
         'hero' => [
             'badge'    => 'Compare Models',
-            'title'    => 'SVICLOUD 10P+ vs 10S — 2026 Model Comparison',
-            'subtitle' => 'See the hardware, features, and best-use scenarios side-by-side to pick the perfect SVICLOUD for your home.',
+            'title'    => 'SVICLOUD 15P vs 10P+ vs 10S',
+            'subtitle' => 'Compare the $288 15P pre-order with current 10P+ and 10S pricing, specifications, and availability.',
         ],
         'traffic' => [
             'badge' => 'Buy with confidence in the U.S.',
-            'title' => 'Bilingual U.S. support, 48-hour shipping, and warranty on both models',
-            'lead'  => 'Built for U.S.-based Chinese/Asian households: Nevada fulfillment, 中文/English concierge, and clear guidance on which model fits your rooms.',
+            'title' => 'Compare a 15P pre-order with models available from U.S. inventory',
+            'lead'  => '15P is available on pre-order for $288 (regular $379), with expected delivery 2–3 weeks after ordering. Current 10P+ and 10S purchases retain their published fulfillment and support terms.',
             'bullets' => [
                 'shipping'  => '48-hour U.S. shipping with tracking and localized power/HDMI',
                 'concierge' => 'Bilingual concierge for setup, Wi-Fi tuning, karaoke mics, Kids Mode',
                 'warranty'  => '1-year U.S. warranty + 14-day returns with concierge handling',
             ],
             'links' => [
+                'p15p'    => 'Pre-order 15P',
                 'p10p'    => 'Shop 10P+',
                 'p10s'    => 'Shop 10S',
                 'faq'     => 'Read FAQ',
@@ -1267,6 +1535,10 @@ return [
             ],
         ],
         'differences' => [
+            'next_generation' => [
+                'title'       => 'Android 14 + Bluetooth 5.4',
+                'description' => '15P combines Android 14, Amlogic S905Y5, dual-band Wi-Fi 6, and Bluetooth 5.4 with a $288 pre-order price.',
+            ],
             'premium_performance' => [
                 'title'       => 'Premium Performance',
                 'description' => 'Double the RAM and storage for smoother multitasking and more apps.',
@@ -1281,12 +1553,23 @@ return [
             ],
         ],
         'products' => [
+            '15p' => [
+                'lead'     => 'Available for pre-order with Android 14, Wi-Fi 6, Bluetooth 5.4, and the specified 4K codecs.',
+                'fit_label'=> 'Pre-order available',
+                'fit_copy' => 'Android 14, Amlogic S905Y5, dual-band Wi-Fi 6, Bluetooth 5.4, and listed 4K codec support for $288 (regular $379).',
+                'bullets' => [
+                    'processor_os'        => 'Amlogic S905Y5 quad-core Cortex-A55 + Android 14',
+                    'memory_connectivity' => '4 GB DDR3 / 64 GB eMMC + Wi-Fi 6 / Bluetooth 5.4',
+                    'video_remote'        => '4K HDR + AV1 decode + Bluetooth voice air-mouse remote',
+                ],
+                'cta' => 'Pre-order 15P',
+            ],
             '10p' => [
                 'lead'    => 'Premium hardware, exclusive family features, and the fastest performance available.',
                 'fit_label'=> 'Best for',
                 'fit_copy' => 'Main family TVs, karaoke nights, sports-heavy homes, and buyers who want the fastest hardware.',
                 'bullets' => [
-                    'ram_storage' => '4GB RAM / 64GB storage with AV1 decode',
+                    'ram_storage' => 'Android 12 + 4GB RAM / 64GB storage with AV1 decode',
                     'apps'        => 'Kids Mode and Karaoke apps included',
                     'remote'      => 'Bluetooth AI voice remote + Wi-Fi 6',
                 ],
@@ -1297,7 +1580,7 @@ return [
                 'fit_label'=> 'Best for',
                 'fit_copy' => 'Bedrooms, guest rooms, secondary TVs, and buyers who want solid 4K playback at a lower price.',
                 'bullets' => [
-                    'ram_storage' => '2GB RAM / 32GB storage for everyday streaming',
+                    'ram_storage' => 'Android 12 + 2GB RAM / 32GB storage for everyday streaming',
                     'remote'      => '4K HDR + AV1 decode with voice remote',
                     'ports'       => 'HDMI, USB 3.0, and wired Ethernet included',
                 ],
@@ -1310,8 +1593,10 @@ return [
             'traffic_actions'=> 'Primary compare actions',
             'differences'    => 'Key differences between models',
             'product_list'   => 'Product spotlight cards',
+            'product_alt_15p'=> 'SVICLOUD 15P',
             'product_alt_10p'=> 'SVICLOUD 10P+',
             'product_alt_10s'=> 'SVICLOUD 10S',
+            'comparison_15p' => 'Feature comparison for SVICLOUD 15P',
             'comparison_10p' => 'Feature comparison for SVICLOUD 10P+',
             'comparison_10s' => 'Feature comparison for SVICLOUD 10S',
             'final_cta'      => 'Final call to action',
@@ -1322,7 +1607,7 @@ return [
         'confidence' => [
             'badge' => 'Order with clarity',
             'title' => 'Pick your model, then order with local support',
-            'lead'  => 'Whichever box fits your room, the process stays the same: U.S. stock, bilingual concierge, tracked shipping, and warranty-backed support.',
+            'lead'  => 'Use confirmed specifications and prices to compare all three models. 15P is available on pre-order; expected delivery is 2–3 weeks after ordering.',
             'cards' => [
                 'official' => [
                     'title' => 'Official U.S. storefront',
@@ -1330,7 +1615,7 @@ return [
                 ],
                 'shipping' => [
                     'title' => 'Tracked Nevada shipping',
-                    'copy'  => 'Orders leave from U.S. inventory with tracking and the correct accessories for local setup.',
+                    'copy'  => 'Currently purchasable models leave from U.S. inventory with tracking and local setup accessories.',
                 ],
                 'concierge' => [
                     'title' => 'Bilingual setup help',
@@ -1338,7 +1623,7 @@ return [
                 ],
                 'warranty' => [
                     'title' => 'Warranty-backed purchase',
-                    'copy'  => 'Both models include a 1-year U.S. warranty and a 14-day return window.',
+                    'copy'  => 'Normal checkout and return policies apply; no 15P-specific shipping-speed, delivery-date, or warranty promise is made.',
                 ],
             ],
             'timeline' => [
@@ -1368,33 +1653,57 @@ return [
         'comparison' => [
             'title' => 'Feature Comparison',
             'rows'  => [
+                'processor' => [
+                    'label' => 'Processor',
+                    'p15p'  => 'Amlogic S905Y5 quad-core Cortex-A55',
+                    'p10p'  => 'Amlogic S928X octa-core',
+                    'p10s'  => 'Quad-core processor',
+                ],
                 'ram_storage' => [
                     'label' => 'RAM / Storage',
+                    'p15p'  => '4GB DDR3 / 64GB eMMC',
                     'p10p'  => '4GB / 64GB',
                     'p10s'  => '2GB / 32GB',
                 ],
+                'operating_system' => [
+                    'label' => 'Operating System',
+                    'p15p'  => 'Android 14',
+                    'p10p'  => 'Android 12',
+                    'p10s'  => 'Android 12',
+                ],
+                'connectivity' => [
+                    'label' => 'Connectivity',
+                    'p15p'  => 'Wi-Fi 6 2T2R, Bluetooth 5.4, RJ45',
+                    'p10p'  => 'Wi-Fi 6, Bluetooth voice remote, Gigabit LAN',
+                    'p10s'  => 'Dual-band Wi-Fi, Bluetooth, Ethernet',
+                ],
                 'video_quality' => [
                     'label' => 'Video Quality',
+                    'p15p'  => '4K HDR10+/HDR10/HLG, AV1 decode',
                     'p10p'  => '4K HDR, AV1 decode',
                     'p10s'  => '4K HDR, AV1 decode',
                 ],
                 'voice_remote' => [
                     'label' => 'Voice Remote',
+                    'p15p'  => 'Bluetooth voice air-mouse remote included',
                     'p10p'  => 'Included',
                     'p10s'  => 'Included',
                 ],
                 'kids_app' => [
                     'label' => 'Kids App',
-                    'p10p'  => 'Exclusive',
+                    'p15p'  => 'Included',
+                    'p10p'  => 'Included',
                     'p10s'  => 'Not available',
                 ],
                 'karaoke_mode' => [
                     'label' => 'Karaoke Mode',
-                    'p10p'  => 'Exclusive',
+                    'p15p'  => 'Included',
+                    'p10p'  => 'Included',
                     'p10s'  => 'Not available',
                 ],
                 'best_for' => [
-                    'label' => 'Best For',
+                    'label' => 'Model Position',
+                    'p15p'  => 'Android 14, Wi-Fi 6, Bluetooth 5.4; Pre-order $288',
                     'p10p'  => 'Families, sports, 4K home theaters',
                     'p10s'  => 'Value / secondary rooms',
                 ],
@@ -1406,12 +1715,14 @@ return [
             'copy'    => 'Pick the SVICLOUD model that fits your needs and budget.',
             'cta_10p' => 'Buy SVICLOUD 10P+',
             'cta_10s' => 'Buy SVICLOUD 10S',
+            'cta_15p' => 'Pre-order SVICLOUD 15P',
         ],
         'sticky_buy' => [
             'aria_label' => 'Sticky compare actions',
             'label'      => 'Ready to choose? Buy direct from U.S. stock',
             'cta_10p'    => 'Buy 10P+',
             'cta_10s'    => 'Buy 10S',
+            'cta_15p'    => 'Pre-order 15P',
         ],
     ],
     'about' => [

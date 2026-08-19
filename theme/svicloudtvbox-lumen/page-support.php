@@ -28,7 +28,7 @@ $locale_query = svic_language_query_value($current_locale);
 get_header();
 ?>
 
-<main class="support-page">
+<main id="main-content" class="support-page" tabindex="-1">
   <section class="support-hero">
     <div class="support-hero__inner">
       <span class="support-hero__badge"><?php echo svic_translate_html('support.hero.badge'); ?></span>

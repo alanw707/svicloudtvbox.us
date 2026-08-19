@@ -98,14 +98,18 @@
   --space-xl: 3rem;
   --space-2xl: 4rem;
   --space-3xl: 6rem;
+  --space-4xl: 8rem;
 
   /* Layout widths */
   --max-width-content: min(1080px, calc(100% - 72px));
   --max-width-hero: min(1180px, calc(100% - 80px));
   --max-width-readable: min(62ch, 100%);
 
-  /* CTA sizing */
+  /* Functional UI sizing */
   --lumen-action-max-width-mobile: 312px;
+  --lumen-control-min-height: 44px;
+  --lumen-font-size-label: 0.8rem;
+  --lumen-focus-color: #8ff9e8;
 
   /* Content spacing helpers */
   --size-100: 0.25rem;

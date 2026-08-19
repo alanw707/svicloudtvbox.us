@@ -80,7 +80,7 @@ $concierge_car_asset_relative = '/assets/svg/illustration-concierge-car.svg';
 $concierge_car_asset_path     = get_template_directory() . $concierge_car_asset_relative;
 $concierge_car_asset_url      = file_exists($concierge_car_asset_path) ? get_template_directory_uri() . $concierge_car_asset_relative : '';
 ?>
-<main class="about-page">
+<main id="main-content" class="about-page" tabindex="-1">
   <section class="about-hero">
     <div class="about-hero__inner">
       <span class="about-hero__badge"><?php echo svic_translate_html('about.hero.badge'); ?></span>

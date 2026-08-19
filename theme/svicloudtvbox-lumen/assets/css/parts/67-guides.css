@@ -7,7 +7,7 @@
 .guides-hero { position: relative; overflow: hidden; padding: clamp(3rem, 8vw, 4.75rem) 0 clamp(1.25rem, 4vw, 2.25rem); background: var(--gradient-lumen-hero); color: var(--lumen-text-primary); isolation: isolate; }
 .guides-hero::after { content: ''; position: absolute; inset: -40% -20% auto -20%; height: 140%; background: var(--gradient-lumen-glow); opacity: 0.6; z-index: -1; }
 .guides-hero__inner { width: min(1100px, calc(100% - 80px)); margin: 0 auto; display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; justify-content: space-between; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
-.guides-hero__copy { display: grid; gap: var(--space-sm); text-align: left; }
+.guides-hero__copy { display: grid; gap: var(--space-sm); text-align: left; align-content: center; }
 .guides-hero__title { font-size: clamp(2.5rem, 5.2vw, 3.4rem); font-weight: 700; letter-spacing: -0.025em; margin: 0; color: #f6f9ff; text-shadow: 0 18px 48px rgba(6, 19, 40, 0.55); }
 .guides-hero__lead { margin: 0; max-width: 42ch; color: rgba(244, 248, 255, 0.88); font-size: clamp(1.05rem, 2.4vw, 1.2rem); text-shadow: 0 12px 32px rgba(6, 19, 40, 0.45); }
 .guides-hero__actions { display: inline-flex; align-items: center; justify-content: flex-start; gap: 0.85rem; margin-top: var(--space-sm); flex-wrap: wrap; }
@@ -15,26 +15,19 @@
 .guides-hero__secondary { color: var(--lumen-text-primary); border-color: rgba(255, 255, 255, 0.45); }
 .guides-hero__secondary:hover,
 .guides-hero__secondary:focus-visible { color: var(--lumen-text-primary); border-color: rgba(255, 255, 255, 0.7); box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.16); }
-.guides-hero__media { position: relative; display: flex; align-items: flex-end; justify-content: center; flex-wrap: nowrap; gap: clamp(0.95rem, 2vw, 1.9rem); padding: clamp(2rem, 5vw, 3rem); border-radius: var(--radius-hero); min-height: clamp(260px, 36vw, 340px); overflow: hidden; pointer-events: none; }
-.guides-hero__blur { position: absolute; inset: -20% -30% -10% -10%; background: radial-gradient(circle at 30% 20%, rgba(126, 246, 227, 0.38), transparent 62%), radial-gradient(circle at 70% 70%, rgba(27, 92, 255, 0.32), transparent 65%); filter: blur(0); opacity: 0.9; pointer-events: none; }
-.guides-hero__device, .guides-hero__remote { position: relative; display: inline-flex; filter: drop-shadow(0 28px 60px rgba(6, 12, 28, 0.55)); }
-.guides-hero__device img { width: min(100%, clamp(280px, 31vw, 420px)); height: auto; max-height: clamp(230px, 30vw, 360px); object-fit: contain; object-position: center bottom; }
-.guides-hero__remote { position: static; right: auto; bottom: auto; margin-left: clamp(0.45rem, 1.4vw, 1.15rem); margin-bottom: clamp(-0.15rem, 0.15vw, 0.25rem); transform: rotate(-7deg); align-self: flex-end; }
-.guides-hero__remote img { width: min(100%, clamp(150px, 17vw, 250px)); height: auto; max-height: clamp(135px, 19vw, 220px); object-fit: contain; object-position: center bottom; }
+/* Hero media: one framed device card, aligned to the copy column */
+.guides-hero__media { position: relative; display: flex; align-items: center; justify-content: flex-end; margin: 0; padding: 0; pointer-events: none; }
+.guides-hero__frame { position: relative; display: block; width: 100%; max-width: clamp(320px, 42vw, 520px); padding: clamp(0.85rem, 2vw, 1.4rem); border: 1px solid rgba(126, 246, 227, 0.22); border-radius: var(--radius-2xl); background: linear-gradient(150deg, rgba(11, 30, 62, 0.9), rgba(5, 16, 36, 0.86)); box-shadow: 0 28px 64px rgba(4, 12, 30, 0.5); overflow: hidden; }
+.guides-hero__frame img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: contain; object-position: center; border-radius: var(--radius-lg); }
 
-.guides-hero__pill { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; margin: 0 auto; align-self: center; padding: 0.7rem 1rem; width: min(280px, 100%); border-radius: 999px; background: rgba(9, 26, 56, 0.92); border: 1px solid rgba(126, 246, 227, 0.45); color: rgba(244, 248, 255, 0.9); font-size: 0.82rem; font-weight: 500; text-align: center; box-shadow: var(--glass-pill-shadow, 0 14px 32px rgba(4, 12, 30, 0.3)); }
-.guides-hero__pill-badge { background: var(--glass-pill-base, #4fd8ed); color: #041226; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.08em; padding: 0.35rem 0.65rem; border-radius: 999px; text-transform: uppercase; box-shadow: var(--glass-pill-shadow, 0 16px 38px rgba(4, 12, 30, 0.32)); }
-.guides-hero__pill-text { display: inline-flex; flex-direction: column; gap: 0.1rem; }
-.guides-hero__pill-headline { font-weight: 600; color: #f9fcff; }
-.guides-hero__pill-copy { color: rgba(243, 248, 255, 0.86); font-size: 0.8rem; }
-
-.guides-hero__highlights { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0; padding: 0; list-style: none; color: rgba(244, 248, 255, 0.9); }
-.guides-hero__highlights li { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.45rem 0.9rem; border-radius: 999px; background: rgba(15, 28, 58, 0.32); border: 1px solid rgba(126, 246, 227, 0.4); font-size: 0.8rem; font-weight: 500; backdrop-filter: var(--glass-blur-soft); box-shadow: 0 14px 28px rgba(6, 19, 40, 0.38); }
-.guides-hero__highlights li::before { content: ''; width: 6px; height: 6px; border-radius: 999px; background: rgba(126, 246, 227, 0.85); box-shadow: 0 0 6px rgba(126, 246, 227, 0.8); }
+/* Hero highlights: plain marker list, no pill chrome */
+.guides-hero__highlights { display: grid; gap: 0.6rem; margin: 0.15rem 0 0; padding: 0; list-style: none; color: rgba(244, 248, 255, 0.86); }
+.guides-hero__highlights li { position: relative; display: flex; align-items: flex-start; gap: 0.65rem; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; backdrop-filter: none; font-size: 0.98rem; font-weight: 500; line-height: 1.45; }
+.guides-hero__highlights li::before { content: ''; flex: 0 0 auto; width: 1.15rem; height: 1.15rem; margin-top: 0.12rem; border-radius: 999px; border: 1px solid rgba(126, 246, 227, 0.45); background: rgba(126, 246, 227, 0.14); }
+.guides-hero__highlights li::after { content: ''; position: absolute; left: 0.34rem; top: 0.42rem; width: 0.3rem; height: 0.16rem; border-left: 2px solid var(--lumen-accent-teal, #7ef6e3); border-bottom: 2px solid var(--lumen-accent-teal, #7ef6e3); transform: rotate(-45deg); }
 
 .guides-hero__copy > *:first-child { order: 0; }
 .guides-hero__copy .guides-badge { order: -1; }
-.guides-hero__copy .guides-hero__pill { order: 2; }
 .guides-hero__copy .guides-hero__highlights { order: 3; }
 .guides-hero__copy .guides-hero__actions { order: 4; }
 
@@ -43,23 +36,16 @@
   .guides-hero__copy { text-align: center; justify-items: center; }
   .guides-hero__actions { justify-content: center; }
   .guides-hero__lead { max-width: min(46ch, 100%); }
-  .guides-hero__media { margin: 0 auto; max-width: min(760px, 100%); }
-  .guides-hero__remote { margin-left: 0; margin-bottom: 0; }
-  .guides-hero__pill { justify-content: center; }
-  .guides-hero__highlights { justify-content: center; }
+  .guides-hero__media { justify-content: center; margin: 0 auto; max-width: min(560px, 100%); }
+  .guides-hero__frame { max-width: min(480px, 100%); }
+  .guides-hero__highlights { justify-items: start; width: max-content; max-width: 100%; margin-inline: auto; text-align: left; }
 }
 
 @media (max-width: 540px) {
   .guides-hero { padding-top: clamp(2.5rem, 6vw, 3rem); }
   .guides-hero__inner { width: min(100%, calc(100% - 40px)); }
-  .guides-hero__media { padding: 2rem; }
-  .guides-hero__device img { width: min(100%, clamp(220px, 68vw, 320px)); height: auto; max-height: clamp(180px, 52vw, 250px); }
-  .guides-hero__media { flex-wrap: wrap; }
-  .guides-hero__remote { margin-top: clamp(0.1rem, 0.8vw, 0.6rem); margin-left: auto; margin-right: clamp(0.35rem, 3vw, 1.15rem); }
-  .guides-hero__remote img { width: min(100%, clamp(120px, 34vw, 185px)); height: auto; max-height: clamp(115px, 34vw, 170px); }
-  .guides-hero__pill { padding: 0.85rem 1.1rem; }
-  .guides-hero__pill-badge { margin-bottom: 0.15rem; }
-  .guides-hero__pill-text { align-items: center; }
+  .guides-hero__frame { max-width: 100%; padding: 0.75rem; }
+  .guides-hero__highlights li { font-size: 0.94rem; }
 }
 
 .guides-section { padding: clamp(2.5rem, 6vw, 4.5rem) 0; }

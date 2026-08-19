@@ -5,6 +5,15 @@
  */
 get_header();
 
+$hero_product_15p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-15p') : null;
+$hero_15p_url = $hero_product_15p ? svic_url_with_lang(get_permalink($hero_product_15p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-15p'));
+$price_15p_markup = $hero_product_15p && function_exists('svic_price_html')
+    ? svic_price_html($hero_product_15p)
+    : '';
+if ($price_15p_markup === '') {
+    $price_15p_markup = '<span class="lumen-price"><span class="lumen-price__current">$288.00</span><span class="lumen-price__original">$379.00</span></span>';
+}
+
 $hero_product_10p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
 $hero_product_10s = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null;
 $hero_10p_url = $hero_product_10p ? svic_url_with_lang(get_permalink($hero_product_10p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10p-plus'));
@@ -33,12 +42,24 @@ if ($price_10s_markup === '') {
 
 $comparison_rows = [
     [
+        'key'       => 'processor',
+        'highlight' => 'p15p',
+    ],
+    [
         'key'       => 'ram_storage',
         'highlight' => 'p10p',
     ],
     [
+        'key'       => 'operating_system',
+        'highlight' => 'p15p',
+    ],
+    [
+        'key'       => 'connectivity',
+        'highlight' => 'p15p',
+    ],
+    [
         'key'       => 'video_quality',
-        'highlight' => '',
+        'highlight' => 'p15p',
     ],
     [
         'key'       => 'voice_remote',
@@ -60,6 +81,10 @@ $comparison_rows = [
 
 $key_differences = [
     [
+        'model'    => '15P',
+        'base_key' => 'compare.differences.next_generation',
+    ],
+    [
         'model'    => '10P+',
         'base_key' => 'compare.differences.premium_performance',
     ],
@@ -73,9 +98,14 @@ $key_differences = [
     ],
 ];
 
-$hero_highlights = array_slice($key_differences, 0, 3);
+$hero_highlights = array_slice($key_differences, 0, 4);
 
 $compare_product_bullets = [
+    '15p' => [
+        'compare.products.15p.bullets.processor_os',
+        'compare.products.15p.bullets.memory_connectivity',
+        'compare.products.15p.bullets.video_remote',
+    ],
     '10p' => [
         'compare.products.10p.bullets.ram_storage',
         'compare.products.10p.bullets.apps',
@@ -110,6 +140,7 @@ $compare_faq_items = [
 ];
 
 $compare_cta_links = [
+    'p15p'    => $hero_15p_url,
     'p10p'    => $hero_10p_url,
     'p10s'    => $hero_10s_url,
     'faq'     => svic_url_with_lang(home_url('/faq/')),
@@ -130,18 +161,49 @@ $compare_confidence_steps = [
     'compare.confidence.timeline.steps.setup',
 ];
 
+$compare_card_15p_image_html = $hero_product_15p ? svic_product_primary_image($hero_product_15p, 'large') : '';
 $compare_card_10p_image_html = $hero_product_10p ? svic_product_primary_image($hero_product_10p, 'large') : '';
 $compare_card_10s_image_html = $hero_product_10s ? svic_product_primary_image($hero_product_10s, 'large') : '';
+// These two decision cards must render their product media without a scroll
+// event; WebKit otherwise defers below-fold lazy images and leaves no visible
+// comparison cue.
+$compare_card_15p_image_html = str_replace('loading="lazy"', 'loading="eager"', $compare_card_15p_image_html);
+$compare_card_10p_image_html = str_replace('loading="lazy"', 'loading="eager"', $compare_card_10p_image_html);
+$compare_card_10s_image_html = str_replace('loading="lazy"', 'loading="eager"', $compare_card_10s_image_html);
+
+if ($compare_card_15p_image_html === '') {
+    $compare_card_15p_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/products/svicloud-15p-primary-ai-watermarked.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_15p') . '" loading="eager" decoding="async" />';
+}
 
 if ($compare_card_10p_image_html === '') {
-    $compare_card_10p_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10p') . '" loading="lazy" decoding="async" />';
+    $compare_card_10p_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10p') . '" loading="eager" decoding="async" />';
 }
 
 if ($compare_card_10s_image_html === '') {
-    $compare_card_10s_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10s') . '" loading="lazy" decoding="async" />';
+    $compare_card_10s_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_10s') . '" loading="eager" decoding="async" />';
 }
 
 $compare_cards = [
+    '15p' => [
+        'badge_key'             => 'shop.cards.15p.badge',
+        'title_key'             => 'shop.cards.15p.title',
+        'lead_key'              => 'compare.products.15p.lead',
+        'fit_label_key'         => 'compare.products.15p.fit_label',
+        'fit_copy_key'          => 'compare.products.15p.fit_copy',
+        'cta_key'               => 'compare.products.15p.cta',
+        'cta_url'               => $hero_15p_url,
+        'image_html'            => $compare_card_15p_image_html,
+        'price_markup'          => $price_15p_markup,
+        'price_label_key'       => 'shop.cards.15p.price_label',
+        'price_note_key'        => 'shop.cards.15p.price_note',
+        'feature_keys'          => $compare_product_bullets['15p'],
+        'highlight'             => true,
+        'modifier'              => 'shop-product-card--backorder',
+        'comparison_aria_key'   => 'compare.aria.comparison_15p',
+        'comparison_value_key'  => 'p15p',
+        'comparison_highlight'  => 'p15p',
+        'model'                 => 'svicloud-15p',
+    ],
     '10p' => [
         'badge_key'             => 'shop.cards.10p.badge',
         'title_key'             => 'shop.cards.10p.title',
@@ -182,6 +244,9 @@ $compare_cards = [
     ],
 ];
 
+$compare_hero_15p_image = function_exists('svic_get_product_image_meta')
+    ? svic_get_product_image_meta($hero_product_15p, 0, 'large')
+    : svic_get_theme_image_meta('/assets/images/products/svicloud-15p-primary-ai-watermarked.webp');
 $compare_hero_10p_image = function_exists('svic_get_product_image_meta')
     ? svic_get_product_image_meta($hero_product_10p, 0, 'large')
     : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
@@ -195,6 +260,9 @@ $compare_hero_10s_background = function_exists('svic_get_product_image_meta')
     ? svic_get_product_image_meta($hero_product_10s, 1, 'large')
     : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
 $compare_hero_background_style = [];
+if (!empty($compare_hero_15p_image['url'])) {
+    $compare_hero_background_style[] = "--compare-hero-photo-15p:url('" . esc_url_raw($compare_hero_15p_image['url']) . "')";
+}
 if (!empty($compare_hero_10p_background['url'])) {
     $compare_hero_background_style[] = "--compare-hero-photo-primary:url('" . esc_url_raw($compare_hero_10p_background['url']) . "')";
 }
@@ -204,7 +272,7 @@ if (!empty($compare_hero_10s_background['url'])) {
 
 ?>
 
-<main class="compare-page">
+<main id="main-content" class="compare-page" tabindex="-1">
   <section class="compare-hero">
     <div class="compare-hero__background" aria-hidden="true"<?php if (!empty($compare_hero_background_style)) : ?> style="<?php echo esc_attr(implode('; ', $compare_hero_background_style)); ?>"<?php endif; ?>>
       <div class="compare-hero__photo compare-hero__photo--primary"></div>
@@ -233,10 +301,23 @@ if (!empty($compare_hero_10s_background['url'])) {
             <a class="lumen-pill lumen-pill--ghost compare-hero__action" href="<?php echo esc_url($hero_10s_url); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_hero" data-svic-label="buy_10s" data-svic-model="svicloud-10s">
               <?php echo svic_translate_html('compare.products.10s.cta'); ?>
             </a>
+            <a class="lumen-pill lumen-pill--ghost compare-hero__action" href="<?php echo esc_url($hero_15p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_hero" data-svic-label="explore_15p" data-svic-model="svicloud-15p">
+              <?php echo svic_translate_html('compare.products.15p.cta'); ?>
+            </a>
           </div>
         </div>
 
         <div class="compare-hero__devices" aria-hidden="true">
+          <img
+            class="compare-hero__device compare-hero__device--15p"
+            src="<?php echo esc_url($compare_hero_15p_image['url'] ?? svic_theme_image_uri('/assets/images/products/svicloud-15p-primary-ai-watermarked.webp')); ?>"
+            alt=""
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            width="<?php echo esc_attr((string) ($compare_hero_15p_image['width'] ?? 1280)); ?>"
+            height="<?php echo esc_attr((string) ($compare_hero_15p_image['height'] ?? 788)); ?>"
+          />
           <img
             class="compare-hero__device compare-hero__device--10p"
             src="<?php echo esc_url($compare_hero_10p_image['url'] ?? svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')); ?>"
@@ -285,6 +366,7 @@ if (!empty($compare_hero_10s_background['url'])) {
         </ul>
       </div>
       <div class="compare-traffic__links lumen-action-group" role="group" aria-label="<?php echo svic_translate_attr('compare.aria.traffic_actions'); ?>">
+        <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($compare_cta_links['p15p']); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_traffic" data-svic-label="explore_15p" data-svic-model="svicloud-15p"><?php echo svic_translate_html('compare.traffic.links.p15p'); ?></a>
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($compare_cta_links['p10p']); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_traffic" data-svic-label="buy_10p" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('compare.traffic.links.p10p'); ?></a>
         <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($compare_cta_links['p10s']); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_traffic" data-svic-label="buy_10s" data-svic-model="svicloud-10s"><?php echo svic_translate_html('compare.traffic.links.p10s'); ?></a>
         <a class="compare-traffic__textlink" href="<?php echo esc_url($compare_cta_links['faq']); ?>"><?php echo svic_translate_html('compare.traffic.links.faq'); ?></a>
@@ -344,9 +426,9 @@ if (!empty($compare_hero_10s_background['url'])) {
             <?php if (!empty($card['badge_key'])) : ?>
               <span class="shop-product-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></span>
             <?php endif; ?>
-            <figure class="shop-product-card__media"><?php echo $card['image_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
+            <figure class="shop-product-card__media compare-product-card__media"><?php echo $card['image_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></figure>
             <div class="shop-product-card__price-line">
-              <span class="shop-product-card__price-label"><?php echo svic_translate_html('shop.cards.price_label'); ?></span>
+              <span class="shop-product-card__price-label"><?php echo svic_translate_html($card['price_label_key'] ?? 'shop.cards.price_label'); ?></span>
               <span class="shop-product-card__price-amount"><?php echo $card['price_markup']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
             </div>
             <?php if (!empty($card['price_note_key'])) : ?>
@@ -434,6 +516,7 @@ if (!empty($compare_hero_10s_background['url'])) {
       <div class="compare-final-cta__actions lumen-action-group">
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_final_cta" data-svic-label="buy_10p" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('compare.final_cta.cta_10p'); ?></a>
         <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_final_cta" data-svic-label="buy_10s" data-svic-model="svicloud-10s"><?php echo svic_translate_html('compare.final_cta.cta_10s'); ?></a>
+        <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_15p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="compare_final_cta" data-svic-label="explore_15p" data-svic-model="svicloud-15p"><?php echo svic_translate_html('compare.final_cta.cta_15p'); ?></a>
       </div>
     </div>
   </section>
@@ -445,6 +528,7 @@ if (!empty($compare_hero_10s_background['url'])) {
     <div class="compare-sticky-buy__actions">
       <a class="compare-sticky-buy__cta lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="compare_sticky_buy" data-svic-label="sticky_buy_10p" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('compare.sticky_buy.cta_10p'); ?></a>
       <a class="compare-sticky-buy__cta lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="compare_sticky_buy" data-svic-label="sticky_buy_10s" data-svic-model="svicloud-10s"><?php echo svic_translate_html('compare.sticky_buy.cta_10s'); ?></a>
+      <a class="compare-sticky-buy__cta lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_15p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="compare_sticky_buy" data-svic-label="sticky_explore_15p" data-svic-model="svicloud-15p"><?php echo svic_translate_html('compare.sticky_buy.cta_15p'); ?></a>
     </div>
   </div>
 </div>
@@ -485,6 +569,7 @@ if (function_exists('svic_url_with_lang')) {
 $compare_page_url = esc_url_raw($compare_page_url);
 
 $schema_products = [
+    $hero_product_15p,
     $hero_product_10p,
     $hero_product_10s,
 ];

@@ -26,16 +26,13 @@ body.admin-bar { --lumen-admin-bar-offset: 32px; }
 
 /* Toast notifications */
 body.woocommerce-cart .woocommerce-notices-wrapper {
-  position: fixed;
-  top: calc(var(--lumen-admin-bar-offset, 0px) + clamp(16px, 4vw, 32px));
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(520px, calc(100% - clamp(2rem, 10vw, 5.5rem)));
+  position: relative;
+  width: min(720px, calc(100% - clamp(2rem, 10vw, 5.5rem)));
   display: grid;
   gap: clamp(0.65rem, 2vw, 0.9rem);
-  margin: 0;
+  margin: clamp(1rem, 3vw, 1.75rem) auto 0;
   padding: 0;
-  z-index: 1200;
+  z-index: 2;
   pointer-events: none;
 }
 
@@ -158,7 +155,7 @@ body.woocommerce-cart .woocommerce-notices-wrapper a:focus-visible {
 
 .lumen-cart__layout {
   display: grid;
-  gap: clamp(4rem, 8vw, 7rem);
+  gap: clamp(2rem, 4vw, 3.5rem);
   grid-template-columns: minmax(0, 1.5fr) minmax(420px, 1fr);
   align-items: start;
 }
@@ -203,14 +200,14 @@ body.woocommerce-cart .woocommerce-notices-wrapper a:focus-visible {
 .lumen-cart-qty { display: inline-flex; align-items: center; }
 .lumen-cart-qty__inner { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.25rem; border-radius: 999px; border: 1px solid rgba(126, 246, 227, 0.2); background: rgba(8, 26, 54, 0.65); box-shadow: 0 10px 24px rgba(4, 16, 34, 0.45); transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast); }
 .lumen-cart-qty__inner:focus-within { border-color: rgba(126, 246, 227, 0.5); box-shadow: 0 14px 32px rgba(5, 20, 42, 0.5); background: rgba(8, 26, 54, 0.82); }
-.lumen-cart-qty__button { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: none; border-radius: 999px; background: transparent; color: rgba(223, 229, 255, 0.92); cursor: pointer; transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast); }
+.lumen-cart-qty__button { position: relative; display: inline-flex; align-items: center; justify-content: center; width: var(--lumen-control-min-height); height: var(--lumen-control-min-height); border: none; border-radius: 999px; background: transparent; color: rgba(223, 229, 255, 0.92); cursor: pointer; transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast); }
 .lumen-cart-qty__button::before { content: ''; display: inline-block; width: 14px; height: 2px; border-radius: 2px; background: currentColor; }
 .lumen-cart-qty__button--increase::after { content: ''; position: absolute; width: 2px; height: 14px; border-radius: 2px; background: currentColor; }
 .lumen-cart-qty__button:hover,
 .lumen-cart-qty__button:focus-visible { background: rgba(94, 230, 208, 0.15); color: var(--lumen-accent-teal); outline: none; box-shadow: 0 0 0 2px rgba(94, 230, 208, 0.2); }
 .lumen-cart-qty__button:active { transform: scale(0.94); }
 .lumen-cart-qty__input { display: inline-flex; align-items: center; justify-content: center; padding: 0 0.25rem; min-width: 56px; }
-.lumen-cart-qty__field { width: 52px !important; height: 38px; border: none; background: transparent; color: var(--lumen-text-primary); font-weight: 600; font-size: 1rem; text-align: center; caret-color: var(--lumen-accent-teal); }
+.lumen-cart-qty__field { width: 52px !important; height: var(--lumen-control-min-height); border: none; background: transparent; color: var(--lumen-text-primary); font-weight: 600; font-size: 1rem; text-align: center; caret-color: var(--lumen-accent-teal); }
 .lumen-cart-qty__field:focus-visible { outline: none; border-radius: 0.75rem; box-shadow: 0 0 0 2px rgba(94, 230, 208, 0.4); background: rgba(6, 20, 40, 0.9); }
 .lumen-cart-qty__field::-webkit-outer-spin-button,
 .lumen-cart-qty__field::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
@@ -225,7 +222,7 @@ body.woocommerce-cart .woocommerce-notices-wrapper a:focus-visible {
 .lumen-cart-summary__links .lumen-pill { width: 100%; justify-content: center; }
 .lumen-cart-qty__single { display: inline-flex; align-items: center; justify-content: center; min-width: 56px; height: 40px; border-radius: 999px; background: rgba(6, 22, 52, 0.75); border: 1px solid rgba(126, 246, 227, 0.28); font-weight: 600; }
 
-.lumen-cart-remove { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 999px; border: 1px solid rgba(126, 246, 227, 0.24); background: rgba(6, 22, 52, 0.6); color: rgba(223, 229, 255, 0.82); text-decoration: none; transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast); cursor: pointer; }
+.lumen-cart-remove { display: inline-flex; align-items: center; justify-content: center; width: var(--lumen-control-min-height); height: var(--lumen-control-min-height); border-radius: 999px; border: 1px solid rgba(126, 246, 227, 0.24); background: rgba(6, 22, 52, 0.6); color: rgba(223, 229, 255, 0.82); text-decoration: none; transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast); cursor: pointer; }
 .lumen-cart-remove__icon { position: relative; display: block; width: 16px; height: 16px; }
 .lumen-cart-remove__icon::before,
 .lumen-cart-remove__icon::after { content: ''; position: absolute; top: 50%; left: 50%; width: 16px; height: 2px; border-radius: 2px; background: currentColor; transform-origin: center; }
@@ -289,6 +286,7 @@ body.woocommerce-cart .woocommerce-notices-wrapper a:focus-visible {
 .lumen-cart-summary__coupon-button:focus-visible { transform: translateY(-1px); box-shadow: 0 20px 34px rgba(94, 230, 208, 0.32); border-color: rgba(126, 246, 227, 0.6); outline: none; }
 
 .lumen-cart-summary__totals .cart_totals { margin: 0; padding: 0; background: transparent; border: none; box-shadow: none; color: inherit; }
+.lumen-cart-summary__totals .cart_totals > h2 { display: none; }
 .lumen-cart-summary__totals { width: 100%; box-sizing: border-box; }
 .lumen-cart-summary__totals .shop_table { width: 100%; border-collapse: collapse; table-layout: fixed; }
 .lumen-cart-summary__totals .shop_table tr { border-bottom: 1px solid rgba(126, 246, 227, 0.14); }

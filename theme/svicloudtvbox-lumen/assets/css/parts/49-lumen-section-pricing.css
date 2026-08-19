@@ -3,7 +3,7 @@
    ========================================== */
 
 .lumen-pricing {
-  padding: var(--space-2xl) clamp(24px, 6vw, 64px) var(--space-4xl);
+  padding: var(--space-2xl) clamp(24px, 5vw, 56px);
   background: linear-gradient(160deg, rgba(6, 15, 36, 0.96) 0%, rgba(12, 24, 52, 0.88) 45%, rgba(18, 47, 88, 0.6) 100%);
 }
 
@@ -92,13 +92,29 @@
   transform: translateX(2px);
 }
 
-@media (min-width: 960px) {
+@media (min-width: 760px) {
   .lumen-pricing__grid {
-    grid-template-columns: repeat(2, minmax(360px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .lumen-pricing__inner,
+  .lumen-pricing__grid {
+    width: min(1320px, calc(100vw - 64px));
+  }
+
+  .lumen-pricing__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.25rem, 2.4vw, 2rem);
   }
 }
 
 @media (max-width: 720px) {
+  .lumen-pricing__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .lumen-pricing .shop-product-card__header,
   .lumen-pricing .shop-product-card__body {
     padding-inline: 24px;
@@ -115,7 +131,7 @@
   }
 
   .lumen-pricing .shop-product-card__price-note {
-    font-size: 0.68rem;
+    font-size: var(--lumen-font-size-label);
     letter-spacing: 0.1em;
   }
 }

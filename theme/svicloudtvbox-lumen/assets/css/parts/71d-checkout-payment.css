@@ -1089,6 +1089,16 @@
   outline: none;
 }
 
+#place_order:disabled,
+#place_order[aria-disabled="true"] {
+  color: rgba(224, 236, 246, 0.78);
+  background: rgba(86, 108, 132, 0.55);
+  border: 1px solid rgba(196, 218, 236, 0.28);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .woocommerce-checkout-review-order-table .product-name {
   display: grid;
   gap: 0.4rem;

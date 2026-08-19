@@ -9,7 +9,7 @@ get_header();
 
 ?>
 
-<main class="page-shell blog-shell">
+<main id="main-content" class="page-shell blog-shell" tabindex="-1">
   <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     <?php
       $post_id        = get_the_ID();

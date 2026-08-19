@@ -100,6 +100,13 @@
   }
 }
 
+@media (min-width: 1200px) {
+  .compare-products__grid {
+    grid-template-columns: repeat(3, minmax(320px, 1fr));
+    gap: clamp(18px, 2.2vw, 28px);
+  }
+}
+
 @media (max-width: 720px) {
   .compare-product-card__comparison {
     border-radius: 0 0 var(--radius-xl) var(--radius-xl);

@@ -8,7 +8,6 @@ global $post;
 get_header();
 
 $guides_hero_product_10p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
-$guides_hero_product_10s = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null;
 
 $contact_url  = svic_url_with_lang(home_url('/contact'));
 $faq_url      = svic_url_with_lang(home_url('/faq'));
@@ -28,24 +27,14 @@ $anchor_items    = svic_guides_get_anchor_items();
 $guides_hero_10p_image = function_exists('svic_get_product_image_meta')
     ? svic_get_product_image_meta($guides_hero_product_10p, 0, 'large')
     : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
-$guides_hero_10s_image = function_exists('svic_get_product_image_meta')
-    ? svic_get_product_image_meta($guides_hero_product_10s, 0, 'large')
-    : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
 ?>
-<main class="guides-page surface--dark">
+<main id="main-content" class="guides-page surface--dark" tabindex="-1">
   <section class="guides-hero" id="guides-hero">
     <div class="guides-hero__inner">
       <div class="guides-hero__copy">
         <span class="guides-badge guides-badge--on-dark"><?php echo svic_translate_html('guides.hero.badge'); ?></span>
         <h1 class="guides-hero__title"><?php echo svic_translate_html('guides.hero.title'); ?></h1>
         <p class="guides-hero__lead"><?php echo svic_translate_html('guides.hero.lead'); ?></p>
-        <div class="guides-hero__pill">
-          <span class="guides-hero__pill-badge"><?php echo svic_translate_html('guides.hero.callouts_headline'); ?></span>
-          <span class="guides-hero__pill-text">
-            <span class="guides-hero__pill-headline"><?php echo svic_translate_html('guides.hero.pill_headline'); ?></span>
-            <span class="guides-hero__pill-copy"><?php echo svic_translate_html('guides.hero.pill_copy'); ?></span>
-          </span>
-        </div>
         <ul class="guides-hero__highlights">
           <?php foreach ($hero_callouts as $callout_key) : ?>
             <li><?php echo svic_translate_html($callout_key); ?></li>
@@ -61,12 +50,8 @@ $guides_hero_10s_image = function_exists('svic_get_product_image_meta')
         </div>
       </div>
       <figure class="guides-hero__media" aria-hidden="true">
-        <span class="guides-hero__blur"></span>
-        <span class="guides-hero__device">
+        <span class="guides-hero__frame">
           <img src="<?php echo esc_url($guides_hero_10p_image['url'] ?? svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')); ?>" alt="" loading="eager" decoding="async" fetchpriority="high" width="<?php echo esc_attr((string) ($guides_hero_10p_image['width'] ?? 1024)); ?>" height="<?php echo esc_attr((string) ($guides_hero_10p_image['height'] ?? 1024)); ?>" />
-        </span>
-        <span class="guides-hero__remote">
-          <img src="<?php echo esc_url($guides_hero_10s_image['url'] ?? svic_theme_image_uri('/assets/images/svicloud-hero-product.webp')); ?>" alt="" loading="eager" decoding="async" width="<?php echo esc_attr((string) ($guides_hero_10s_image['width'] ?? 750)); ?>" height="<?php echo esc_attr((string) ($guides_hero_10s_image['height'] ?? 470)); ?>" />
         </span>
       </figure>
     </div>

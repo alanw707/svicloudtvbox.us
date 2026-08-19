@@ -63,6 +63,30 @@ if (class_exists('WooCommerce') && function_exists('wc_get_products')) {
 }
 
 $card_data = [
+    '15p' => [
+        'product'         => class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-15p') : null,
+        'title_key'       => 'shop.cards.15p.title',
+        'lead_key'        => 'products.svicloud-15p.short_description',
+        'button_key'      => 'shop.cards.15p.button',
+        'feature_keys'    => [
+            'shop.cards.15p.features.hardware',
+            'shop.cards.15p.features.apps',
+            'shop.cards.15p.features.remote',
+            'shop.cards.15p.features.mobile_apps',
+        ],
+        'badge_key'       => 'shop.cards.15p.badge',
+        'best_for_key'    => 'shop.cards.15p.best_for',
+        'highlight'       => true,
+        'modifier'        => 'shop-product-card--backorder',
+        'assurance_keys'  => [],
+        'price_label_key' => 'shop.cards.15p.price_label',
+        'price_note_key'  => 'shop.cards.15p.price_note',
+        'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-15p')),
+        'fallback_price'  => '$288.00',
+        'image_fallback'  => svic_theme_image_uri('/assets/images/products/svicloud-15p-marketing-v4-watermarked.webp'),
+        'image_width'     => 1536,
+        'image_height'    => 1024,
+    ],
     '10p' => [
         'product'         => class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null,
         'title_key'       => 'shop.cards.10p.title',
@@ -111,6 +135,30 @@ $card_data = [
         'fallback_price'  => '$183.99',
         'image_fallback'  => svic_theme_image_uri('/assets/images/svicloud-hero-product.webp'),
     ],
+    'remote' => [
+        'product'         => class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-bluetooth-remote-10p-plus') : null,
+        'title_key'       => 'shop.cards.remote.title',
+        'lead_key'        => 'shop.cards.remote.lead',
+        'button_key'      => 'shop.cards.remote.button',
+        'feature_keys'    => [
+            'shop.cards.remote.features.bluetooth',
+            'shop.cards.remote.features.voice',
+            'shop.cards.remote.features.controls',
+        ],
+        'badge_key'       => 'shop.cards.remote.badge',
+        'best_for_key'    => 'shop.cards.remote.best_for',
+        'highlight'       => false,
+        'modifier'        => 'shop-product-card--accessory',
+        'assurance_keys'  => [
+            'shop.cards.assurance.shipping',
+            'shop.cards.assurance.warranty',
+            'shop.cards.assurance.support',
+        ],
+        'price_note_key'  => 'shop.cards.price_note',
+        'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-bluetooth-remote-10p-plus')),
+        'fallback_price'  => '$27.99',
+        'image_fallback'  => svic_theme_image_uri('/assets/images/svicloud-hero-product.webp'),
+    ],
 ];
 
 foreach ($card_data as $key => $card) {
@@ -130,7 +178,9 @@ foreach ($card_data as $key => $card) {
         }
 
         $url = svic_url_with_lang(get_permalink($product->get_id()));
-        $image_html = svic_product_primary_image($product, 'large');
+        if ($key !== '15p') {
+            $image_html = svic_product_primary_image($product, 'large');
+        }
     } else {
         $price_markup = sprintf(
             '<span class="lumen-price"><span class="lumen-price__current">%s</span></span>',
@@ -149,10 +199,14 @@ foreach ($card_data as $key => $card) {
             $alt_text = __('SVICLOUD device', 'svicloudtvbox-lumen');
         }
 
+        $dimension_attributes = !empty($card['image_width']) && !empty($card['image_height'])
+            ? sprintf(' width="%d" height="%d"', (int) $card['image_width'], (int) $card['image_height'])
+            : '';
         $image_html = sprintf(
-            '<img src="%s" alt="%s" loading="lazy" decoding="async" />',
+            '<img src="%s" alt="%s" loading="lazy" decoding="async"%s />',
             esc_url($fallback_src),
-            esc_attr($alt_text)
+            esc_attr($alt_text),
+            $dimension_attributes
         );
     }
 
@@ -164,7 +218,7 @@ foreach ($card_data as $key => $card) {
 }
 ?>
 
-<main class="page-shell shop-page">
+<main id="main-content" class="page-shell shop-page" tabindex="-1">
   <header class="page-hero shop-hero">
     <span class="shop-hero__badge"><?php echo svic_translate_html('shop.hero.badge'); ?></span>
     <h1 class="shop-hero__title"><?php echo svic_translate_html('shop.hero.title'); ?></h1>
@@ -252,7 +306,7 @@ foreach ($card_data as $key => $card) {
               </div>
             <?php endif; ?>
             <div class="shop-product-card__price-line">
-              <span class="shop-product-card__price-label"><?php echo svic_translate_html('shop.cards.price_label'); ?></span>
+              <span class="shop-product-card__price-label"><?php echo svic_translate_html($card['price_label_key'] ?? 'shop.cards.price_label'); ?></span>
               <span class="shop-product-card__price-amount"><?php echo $price_markup; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
             </div>
             <?php if (!empty($card['price_note_key'])) : ?>
