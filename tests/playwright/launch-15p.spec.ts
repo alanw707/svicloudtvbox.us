@@ -118,7 +118,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
   });
 
   test('15P exposes one BackOrder Offer and supports notified backorders', async ({ page }) => {
-    const response = await page.goto('/product/svicloud-15p/', { waitUntil: 'networkidle' });
+    const response = await page.goto('/product/svicloud-15p/', { waitUntil: 'domcontentloaded' });
     expect(response?.ok()).toBeTruthy();
 
     const productNodes = collectProductNodes(await page.locator('script[type="application/ld+json"]').allTextContents());
@@ -157,12 +157,12 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
 
     await button.click();
     await expect(page.locator('.woocommerce-message')).toContainText(/added to (your )?cart/i);
-    await page.goto('/cart/', { waitUntil: 'networkidle' });
+    await page.goto('/cart/', { waitUntil: 'domcontentloaded' });
     await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Pre-order delivery');
     await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Expected delivery: 2–3 weeks after ordering');
     let commerceText = await page.locator('body').innerText();
     expect(commerceText).not.toMatch(/48-hour U\.S\. shipping|1-year U\.S\. warranty|ships from our Nevada warehouse/i);
-    await page.goto('/checkout/', { waitUntil: 'networkidle' });
+    await page.goto('/checkout/', { waitUntil: 'domcontentloaded' });
     await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Pre-order delivery');
     await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Expected delivery: 2–3 weeks after ordering');
     commerceText = await page.locator('body').innerText();
