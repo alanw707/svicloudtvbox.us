@@ -24,6 +24,18 @@ return [
             'coupon_not_active'   => 'JULY4 is valid on July 4, 2026.',
             'coupon_not_eligible' => 'JULY4 applies to SVICLOUD products only.',
         ],
+        'google_10p' => [
+            'aria_label'          => 'Google 10P promotion',
+            'eyebrow'             => 'Google Special',
+            'message'             => 'Save 5% on SVICLOUD 10P+.',
+            'offers_label'        => 'Google 10P eligible offer',
+            'offer_10p'           => 'SVICLOUD 10P+ saves 5%',
+            'offer_10s'           => 'SVICLOUD 10P+ saves 5%',
+            'code_label'          => 'Code {{code}}',
+            'cta'                 => 'Shop 10P+',
+            'coupon_not_active'   => 'GOOGLE5 is valid through September 19, 2026.',
+            'coupon_not_eligible' => 'GOOGLE5 applies to SVICLOUD 10P+ only.',
+        ],
     ],
 
     'recent_shipments' => [

@@ -31,6 +31,18 @@ $overrides = [
             'coupon_not_active'   => 'JULY4 适用日期为 2026 年 7 月 4 日。',
             'coupon_not_eligible' => 'JULY4 适用于 SVICLOUD 商品。',
         ],
+        'google_10p' => [
+            'aria_label'          => 'Google 10P 优惠',
+            'eyebrow'             => 'Google 专属优惠',
+            'message'             => 'SVICLOUD 10P+ 省 5%。',
+            'offers_label'        => 'Google 10P 适用优惠',
+            'offer_10p'           => 'SVICLOUD 10P+ 省 5%',
+            'offer_10s'           => 'SVICLOUD 10P+ 省 5%',
+            'code_label'          => '代码 {{code}}',
+            'cta'                 => '选购 10P+',
+            'coupon_not_active'   => 'GOOGLE5 适用至 2026 年 9 月 19 日。',
+            'coupon_not_eligible' => 'GOOGLE5 仅适用于 SVICLOUD 10P+。',
+        ],
     ],
 
     'recent_shipments' => [

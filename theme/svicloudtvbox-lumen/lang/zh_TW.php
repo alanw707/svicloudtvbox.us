@@ -24,6 +24,18 @@ return [
             'coupon_not_active'   => 'JULY4 適用日期為 2026 年 7 月 4 日。',
             'coupon_not_eligible' => 'JULY4 適用於 SVICLOUD 商品。',
         ],
+        'google_10p' => [
+            'aria_label'          => 'Google 10P 優惠',
+            'eyebrow'             => 'Google 專屬優惠',
+            'message'             => 'SVICLOUD 10P+ 省 5%。',
+            'offers_label'        => 'Google 10P 適用優惠',
+            'offer_10p'           => 'SVICLOUD 10P+ 省 5%',
+            'offer_10s'           => 'SVICLOUD 10P+ 省 5%',
+            'code_label'          => '代碼 {{code}}',
+            'cta'                 => '選購 10P+',
+            'coupon_not_active'   => 'GOOGLE5 適用至 2026 年 9 月 19 日。',
+            'coupon_not_eligible' => 'GOOGLE5 僅適用於 SVICLOUD 10P+。',
+        ],
     ],
 
     'recent_shipments' => [

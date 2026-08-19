@@ -18,19 +18,19 @@ if (!defined('SVIC_PROMOTION_ENABLED')) {
 }
 
 if (!defined('SVIC_PROMOTION_KEY')) {
-    define('SVIC_PROMOTION_KEY', 'july_4');
+    define('SVIC_PROMOTION_KEY', 'google_10p');
 }
 
 if (!defined('SVIC_PROMOTION_CODE')) {
-    define('SVIC_PROMOTION_CODE', 'JULY4');
+    define('SVIC_PROMOTION_CODE', 'GOOGLE5');
 }
 
 if (!defined('SVIC_PROMOTION_START')) {
-    define('SVIC_PROMOTION_START', '2026-07-04 00:00:00');
+    define('SVIC_PROMOTION_START', '2026-08-19 13:45:00');
 }
 
 if (!defined('SVIC_PROMOTION_END')) {
-    define('SVIC_PROMOTION_END', '2026-07-04 23:59:59');
+    define('SVIC_PROMOTION_END', '2026-09-19 23:59:59');
 }
 
 if (!defined('SVIC_PROMOTION_RATE')) {
@@ -38,15 +38,15 @@ if (!defined('SVIC_PROMOTION_RATE')) {
 }
 
 if (!defined('SVIC_PROMOTION_PRODUCT_IDS')) {
-    define('SVIC_PROMOTION_PRODUCT_IDS', [12, 14, 840]);
+    define('SVIC_PROMOTION_PRODUCT_IDS', [12]);
 }
 
 if (!defined('SVIC_PROMOTION_DESCRIPTION')) {
-    define('SVIC_PROMOTION_DESCRIPTION', 'July 4th 2026: 5% off all SVICLOUD products.');
+    define('SVIC_PROMOTION_DESCRIPTION', 'Google traffic: 5% off SVICLOUD 10P+ with code GOOGLE5.');
 }
 
 if (!defined('SVIC_PROMOTION_SYNC_MARK')) {
-    define('SVIC_PROMOTION_SYNC_MARK', '20260704-01');
+    define('SVIC_PROMOTION_SYNC_MARK', '20260819-google5-10p-01');
 }
 
 if (!function_exists('svic_active_promotion_config')) {
@@ -317,7 +317,7 @@ if (!function_exists('svic_render_promotion_bar')) {
 
         $code      = svic_promotion_code();
         $promo_key = sanitize_html_class((string) svic_promotion_config_value('key', 'active'));
-        $shopUrl   = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/shop/')) : home_url('/shop/');
+        $shopUrl   = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/product/svicloud-10p-plus/')) : home_url('/product/svicloud-10p-plus/');
         ?>
         <div class="svic-promo-bar svic-promo-bar--<?php echo esc_attr($promo_key); ?>" role="region" aria-label="<?php echo svic_promotion_translate_attr('aria_label'); ?>">
             <div class="svic-promo-bar__inner">
