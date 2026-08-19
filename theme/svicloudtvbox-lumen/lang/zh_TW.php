@@ -1341,7 +1341,7 @@ return [
                 'lead'    => '搭載 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、雙頻 Wi-Fi 6、藍牙 5.4 與 4K HDR。',
                 'button'  => '預購 15P',
                 'badge'   => '接受預購',
-                'best_for' => 'Android 14、Wi-Fi 6、藍牙 5.4 與 4K 解碼支援',
+                'best_for' => '家庭客廳、體育迷與手機 App 使用者',
                 'price_label' => '預購價',
                 'price_tbc'   => '接受預購',
                 'price_note'  => '預計下單後 2–3 週送達',
@@ -1350,9 +1350,10 @@ return [
                 'image_alt'   => '小雲 15P Android 14 預購圖',
                 'image_tbc'   => '小雲 15P 產品圖片',
                 'features' => [
-                    'hardware' => 'Amlogic S905Y5 + Android 14',
-                    'apps'     => '4 GB DDR3 + 64 GB eMMC',
-                    'remote'   => 'Wi-Fi 6 + 藍牙 5.4 + AV1 解碼',
+                    'hardware'     => 'Amlogic S905Y5 + Android 14',
+                    'apps'         => '4 GB DDR3 + 64 GB eMMC',
+                    'remote'       => 'Wi-Fi 6 + 藍牙 5.4 + AV1 解碼',
+                    'mobile_apps'  => '支援下載手機 App',
                 ],
                 'assurance' => [
                     'shipping' => '接受預購',

@@ -66,15 +66,16 @@ $card_data = [
     '15p' => [
         'product'         => class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-15p') : null,
         'title_key'       => 'shop.cards.15p.title',
-        'lead_key'        => 'shop.cards.15p.lead',
+        'lead_key'        => 'products.svicloud-15p.short_description',
         'button_key'      => 'shop.cards.15p.button',
         'feature_keys'    => [
             'shop.cards.15p.features.hardware',
             'shop.cards.15p.features.apps',
             'shop.cards.15p.features.remote',
+            'shop.cards.15p.features.mobile_apps',
         ],
         'badge_key'       => 'shop.cards.15p.badge',
-        'best_for_key'    => '',
+        'best_for_key'    => 'shop.cards.15p.best_for',
         'highlight'       => true,
         'modifier'        => 'shop-product-card--backorder',
         'assurance_keys'  => [],

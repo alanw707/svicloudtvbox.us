@@ -1224,7 +1224,7 @@ return [
                 'lead'    => 'Android 14 TV box with Amlogic S905Y5, 4 GB DDR3, 64 GB eMMC, dual-band Wi-Fi 6, Bluetooth 5.4, and 4K HDR playback.',
                 'button'  => 'Pre-order 15P',
                 'badge'   => 'Available for pre-order',
-                'best_for' => 'Android 14, Wi-Fi 6, Bluetooth 5.4, and 4K codec support',
+                'best_for' => 'Family rooms, sports fans, and mobile app users',
                 'price_label' => 'Pre-order price',
                 'price_tbc'   => 'Available for pre-order',
                 'price_note'  => 'Expected delivery: 2–3 weeks after ordering',
@@ -1233,9 +1233,10 @@ return [
                 'image_alt'   => 'SVICLOUD 15P Android 14 pre-order graphic',
                 'image_tbc'   => 'SVICLOUD 15P product image',
                 'features' => [
-                    'hardware' => 'Amlogic S905Y5 + Android 14',
-                    'apps'     => '4 GB DDR3 + 64 GB eMMC storage',
-                    'remote'   => 'Wi-Fi 6 + Bluetooth 5.4 + AV1 decoding',
+                    'hardware'     => 'Amlogic S905Y5 + Android 14',
+                    'apps'         => '4 GB DDR3 + 64 GB eMMC storage',
+                    'remote'       => 'Wi-Fi 6 + Bluetooth 5.4 + AV1 decoding',
+                    'mobile_apps'  => 'Supports downloading mobile apps',
                 ],
                 'assurance' => [
                     'shipping' => 'Available for pre-order',
