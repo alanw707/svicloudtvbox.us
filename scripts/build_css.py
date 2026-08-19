@@ -30,8 +30,10 @@ SECTION_PATTERNS = [
     (r"/\*\s*@section:utilities start\s*\*/.*?/\*\s*@section:utilities end\s*\*/", "utilities"),
 ]
 
-SPACE_AROUND = frozenset(" ({:;,>+~")
-PUNCTUATION = frozenset(":;,>{}+~(){}")
+# `+` is a binary operator in CSS calc(); removing its surrounding spaces
+# makes the declaration invalid. Keep it out of the punctuation pass.
+SPACE_AROUND = frozenset(" ({:;,>~")
+PUNCTUATION = frozenset(":;,>{}~()")
 
 
 def strip_marked_sections(text: str) -> str:

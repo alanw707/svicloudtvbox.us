@@ -247,6 +247,16 @@ while (have_posts()) :
             <p class="product-hero-subtitle">
               <?php echo svic_translate_html($product_subtitle_key); ?>
             </p>
+            <?php if ($is_15p_product) :
+                $localized_short_description = apply_filters('woocommerce_short_description', $product->get_short_description());
+                $localized_short_description_text = wp_strip_all_tags((string) $localized_short_description);
+            ?>
+              <?php if ($localized_short_description_text !== '') : ?>
+                <p class="product-hero-subtitle product-hero-short-description">
+                  <?php echo esc_html($localized_short_description_text); ?>
+                </p>
+              <?php endif; ?>
+            <?php endif; ?>
             <?php if (is_string($product_best_for_title) && $product_best_for_title !== '' && $product_best_for_title !== 'title') : ?>
               <section class="product-hero-best-for" aria-labelledby="product-best-for-heading">
                 <span class="product-hero-best-for__badge"><?php echo svic_translate_html($product_best_for_key_base . '.badge'); ?></span>

@@ -11,7 +11,7 @@
 .blog-archive__hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,14,32,0) 0%,rgba(6,14,32,0.35) 100%);z-index:0}
 .blog-hero__main{position:relative;z-index:1;width:min(100%,780px);display:grid;gap:var(--size-400);align-content:center}
 .blog-archive__eyebrow{font-size:0.85rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--color-brand-primary)}
-.blog-archive__title{font-family:var(--font-display,'Inter',sans-serif);font-size:clamp(2.35rem,2.5vw+1rem,3.1rem);line-height:1.1;margin:0}
+.blog-archive__title{font-family:var(--font-display,'Inter',sans-serif);font-size:clamp(2.35rem,2.5vw + 1rem,3.1rem);line-height:1.1;margin:0}
 .blog-archive__lead p{margin:0;font-size:1.15rem;line-height:1.8;color:rgba(232,238,255,0.9)}
 .blog-hero__lead{max-width:64ch}
 .blog-archive__actions,.blog-hero__actions{display:flex;flex-wrap:wrap;gap:var(--size-300)}
@@ -31,7 +31,7 @@
 .blog-card__chip{background:rgba(94,230,208,0.18);color:var(--color-brand-primary);padding:0.25rem 0.75rem;border-radius:999px;font-weight:700;letter-spacing:0.04em}
 .blog-card__time,.blog-card__reading-time,.blog-card__updated{display:inline-flex;align-items:center;gap:0.35ch}
 .blog-card__time,.blog-card__reading-time{color:rgba(214,224,255,0.78)}
-.blog-card__title{margin:0;font-size:clamp(1.3rem,1.2vw+1rem,1.65rem);line-height:1.35;color:rgba(246,250,255,0.96);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.blog-card__title{margin:0;font-size:clamp(1.3rem,1.2vw + 1rem,1.65rem);line-height:1.35;color:rgba(246,250,255,0.96);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .blog-card__excerpt{margin:0;font-size:1rem;line-height:1.65;color:rgba(214,224,255,0.85);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .blog-card__updated{margin-top:auto;font-size:0.85rem;color:rgba(200,214,255,0.75)}
 .blog-card__link:hover .blog-card__title,.blog-card__link:focus-visible .blog-card__title{color:var(--color-brand-primary)}
@@ -43,7 +43,7 @@
 .blog-pagination__item .current{border-color:rgba(94,230,208,0.5);background:rgba(94,230,208,0.15);color:var(--color-brand-primary)}
 .blog-empty{background:rgba(9,22,48,0.88);border-radius:var(--radius-600);border:1px solid rgba(126,178,255,0.18);padding:clamp(var(--size-600),6vw,var(--size-900));text-align:center;display:grid;gap:var(--size-400);color:rgba(246,250,255,0.96)}
 .blog-empty__eyebrow{font-size:0.8rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--color-brand-primary)}
-.blog-empty__title{margin:0;font-size:clamp(2rem,2.5vw+1rem,2.6rem);line-height:1.2}
+.blog-empty__title{margin:0;font-size:clamp(2rem,2.5vw + 1rem,2.6rem);line-height:1.2}
 .blog-empty__copy{margin:0;font-size:1.05rem;color:rgba(214,224,255,0.85)}
 @media(max-width:960px){.blog-archive__container{padding-inline:clamp(var(--size-400),6vw,var(--size-600))}
 .blog-hero__grid{grid-template-columns:1fr}
@@ -63,7 +63,7 @@ html[lang*="zh"] .blog-archive__title,html[lang*="zh"] .blog-card__title{font-fa
 .blog-hero{margin-bottom:var(--size-600);display:flex;flex-direction:column;gap:var(--size-400)}
 .blog-hero__meta{display:flex;flex-wrap:wrap;gap:var(--size-200);align-items:center;font-size:0.875rem;color:var(--color-text-muted)}
 .blog-hero__chip{background:var(--color-surface-accent);color:var(--color-brand-primary);border-radius:999px;padding:0.3rem 0.8rem;font-weight:600;letter-spacing:0.01em}
-.blog-hero__title{font-family:var(--font-display,'Inter',sans-serif);font-size:clamp(2.125rem,2vw+1.5rem,2.875rem);line-height:1.1;color:var(--color-text-primary)}
+.blog-hero__title{font-family:var(--font-display,'Inter',sans-serif);font-size:clamp(2.125rem,2vw + 1.5rem,2.875rem);line-height:1.1;color:var(--color-text-primary)}
 .blog-hero__excerpt{font-size:1.125rem;line-height:1.6;color:var(--color-text-secondary);max-width:65ch}
 html[lang*="zh"] .blog-article,html[lang*="zh"] .blog-article__content,html[lang*="zh"] .blog-hero__title,html[lang*="zh"] .blog-hero__excerpt{font-family:var(--font-chinese)}
 html[lang*="zh"] .blog-article__content strong{font-weight:600}

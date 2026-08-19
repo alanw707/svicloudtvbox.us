@@ -32,8 +32,8 @@ review:
 
 | App | 功能亮點 |
 | --- | --- |
-| **Yogurt TV / LUCA TV** | 全球直播頻道、影集與電影，隨時隨地透過小雲設備收看。 |
-| **Yogurt Kids / LUCA Kids** | 為兒童設計的教育與娛樂內容，包含動畫、互動學習遊戲。 |
+| **Yogurt TV** | 全球直播頻道、影集與電影，隨時隨地透過小雲設備收看。 |
+| **Yogurt Kids** | 為兒童設計的教育與娛樂內容，包含動畫、互動學習遊戲。 |
 | **Cherry TV** | 成人專區，需要密碼才能觀看。 |
 | **We Fun / 閤家歡 Karaoke** | 居家卡拉 OK，提供成人與兒童都喜歡的歌單與字幕。 |
 | **地區直播** | 例如 Malaysia Live、Indonesia Live 等在地頻道。 |

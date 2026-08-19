@@ -247,6 +247,7 @@
   margin: 0;
   padding: 0;
   display: grid;
+  align-content: start;
   gap: clamp(14px, 2.6vw, 18px);
   color: rgba(248, 252, 255, 0.96);
 }

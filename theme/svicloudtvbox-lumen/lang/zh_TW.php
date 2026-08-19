@@ -1341,7 +1341,7 @@ return [
                 'lead'    => '搭載 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、雙頻 Wi-Fi 6、藍牙 5.4 與 4K HDR。',
                 'button'  => '預購 15P',
                 'badge'   => '接受預購',
-                'best_for' => 'Android 14、Wi-Fi 6、藍牙 5.4 與 4K 解碼支援',
+                'best_for' => '家庭客廳、體育迷與手機 App 使用者',
                 'price_label' => '預購價',
                 'price_tbc'   => '接受預購',
                 'price_note'  => '預計下單後 2–3 週送達',
@@ -1350,9 +1350,10 @@ return [
                 'image_alt'   => '小雲 15P Android 14 預購圖',
                 'image_tbc'   => '小雲 15P 產品圖片',
                 'features' => [
-                    'hardware' => 'Amlogic S905Y5 + Android 14',
-                    'apps'     => '4 GB DDR3 + 64 GB eMMC',
-                    'remote'   => 'Wi-Fi 6 + 藍牙 5.4 + AV1 解碼',
+                    'hardware'     => 'Amlogic S905Y5 + Android 14',
+                    'apps'         => '4 GB DDR3 + 64 GB eMMC',
+                    'remote'       => 'Wi-Fi 6 + 藍牙 5.4 + AV1 解碼',
+                    'mobile_apps'  => '支援下載手機 App',
                 ],
                 'assurance' => [
                     'shipping' => '接受預購',
@@ -1479,7 +1480,7 @@ return [
                 'description' => '小雲 15P 現以 US$288 接受預購（原價 US$379），搭載 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6 與藍牙 5.4。',
                 'image_alt'   => '小雲 15P 電視盒正面',
             ],
-            'short_description' => '現以 US$288 接受預購（原價 US$379）：Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、藍牙 5.4 與 4K HDR。',
+            'short_description' => '具備 10P+ 的全部功能，並支援下載手機 App。',
             'description' => '<p>全新小雲 15P 電視盒搭載 Android 14 與 Amlogic S905Y5 四核心 ARM Cortex-A55 處理器。</p><h2>核心規格</h2><ul><li>4 GB DDR3 記憶體與 64 GB eMMC 儲存空間。</li><li>2.4/5 GHz 雙頻 Wi-Fi 6（2T2R）與藍牙 5.4。</li><li>HDR10+、HDR10 與 HLG 畫面處理。</li><li>支援 AV1、VP9、H.265/HEVC 與 H.264 硬體解碼；AV1、VP9、H.265/HEVC 最高支援 4K × 2K 60 fps。</li><li>HDMI 2.1、兩個 USB 2.0、RJ45 有線網路、光纖音訊與 Type-C 5V/2A 電源。</li></ul><h2>盒內配件</h2><p>禮盒、AC 變壓器、HDMI 線、藍牙語音飛鼠遙控器與使用手冊。</p><p><strong>現以 US$288 接受預購（原價 US$379）。</strong>預計下單後 2–3 週送達。</p>',
             'footer' => [
                 'tagline' => '小雲 15P 預購資訊',

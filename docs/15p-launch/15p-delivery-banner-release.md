@@ -1,6 +1,6 @@
 # SVICLOUD 15P delivery-time banner release
 
-Status: local validation complete; production approval pending.
+Status: preflight snapshot superseded by the approved deployment and post-rebase reverification recorded in `15p-delivery-banner-reverification.md`.
 
 ## Scope
 
@@ -17,8 +17,10 @@ Status: local validation complete; production approval pending.
 - Source implementation commit: `ea89e9abaeb45e46bbde53a9a934bcbf9acef81b`
 - Release candidate: `8f4e4a5c4908f2280cf53fbaa117947376fb493f`
 - Safety branch: `safety/15p-delivery-banner-20260818`
-- Production writes: **none**
+- Historical preflight write status: **none at snapshot creation**.
 - Required approval text: **“I approve deploying the 2–3 week delivery banner to production.”**
+- Approval subsequently recorded before deployment: **“I approve deploying the 2–3 week delivery banner to production.”**
+- Final production writes and verification: recorded in `15p-delivery-banner-reverification.md` and the external preflight raw outputs.
 
 ## Local validation
 
@@ -41,4 +43,4 @@ A fresh read-only reference was created before any banner deployment write:
 - Read-only product state: `publish|visible|1|379|288|288|1|0|notify|onbackorder`, five gallery images.
 - Verification summary: external `preflight-verification.json`; private archives remain outside Git.
 
-Deploy only after the distinct approval above. Append production banner probes, regression checks, and hashes after deployment. Do not restore DB/uploads archives.
+At this preflight snapshot, deployment was correctly blocked until the distinct approval above. That approval was later provided; the approved deployment, targeted notifier-file restoration, production probes, and final hashes are recorded in `15p-delivery-banner-reverification.md`. Do not restore DB/uploads archives.
