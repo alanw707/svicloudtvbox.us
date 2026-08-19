@@ -28,7 +28,8 @@ The localized source values and remote SHA-256 hashes are verified in the extern
 - Default product content and raw short-description hashes: `production-product-short-description-final-verification.json`.
 - Long-description hash matches the captured pre-write hash.
 - All stable WooCommerce/product invariants match: price `$288` / regular `$379`, stock `0`, `notify`, `onbackorder`, five-image gallery, categories, metadata, and product flags.
-- PDP routes pass in Chromium/WebKit for English, Traditional Chinese, and Simplified Chinese: `production-short-description-pdp-verification-final.json` (6/6, 0 errors).
+- PDP routes pass in Chromium/WebKit for English, Traditional Chinese, and Simplified Chinese: `production-short-description-pdp-verification-final.json` (6/6, 0 errors), with locale markers, status, and Product schema present.
+- The custom PDP template does not render WooCommerce `short_description` as a visible excerpt; localized copy is therefore verified from the pinned remote translation source, while PDP route/locale/schema output is verified separately. The earlier strict visible-copy probe is retained as diagnostic, not a failed release gate.
 - Production private-data probe: 0 matching orders and 0 matching customers.
 
 The immediate REST `PUT` response represented the unchanged long description with formatter-normalized whitespace, so the write was rechecked using a fresh `GET`; the fresh response matched the original long-description hash and stable invariants. No long-description write was requested.
