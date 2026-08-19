@@ -95,6 +95,12 @@ if ($order instanceof WC_Order && $order->has_status('failed')) : ?>
             <span class="lumen-order-summary__eyebrow"><?php echo svic_translate_html('order_thankyou.summary.next_label'); ?></span>
             <div class="lumen-order-summary__body">
               <p class="lumen-order-summary__meta lumen-order-summary__meta--accent"><?php echo svic_translate_html('order_thankyou.summary.tracking_note'); ?></p>
+              <?php if (class_exists('SVIC_15P_Preorder_Notifier') && SVIC_15P_Preorder_Notifier::order_contains_15p_preorder($order)) : ?>
+                <div class="woocommerce-info" style="margin:14px 0 0;">
+                  <strong><?php echo esc_html__('SVICLOUD 15P preorder:', 'svicloudtvbox-lumen'); ?></strong>
+                  <?php echo esc_html__('This model is currently in preorder for the U.S. launch. Expected delivery is 2 to 3 weeks.', 'svicloudtvbox-lumen'); ?>
+                </div>
+              <?php endif; ?>
               <div class="lumen-order-thankyou__actions">
                 <a class="lumen-order-thankyou__btn lumen-order-thankyou__btn--primary" href="<?php echo esc_url($order_tracking); ?>" data-svic-event="svic_cta_click" data-svic-location="thankyou_actions" data-svic-label="track_order"><?php echo svic_translate_html('order_thankyou.cta.track'); ?></a>
                 <a class="lumen-order-thankyou__btn" href="<?php echo esc_url($shop_url); ?>" data-svic-event="svic_cta_click" data-svic-location="thankyou_actions" data-svic-label="continue_shopping"><?php echo svic_translate_html('order_thankyou.cta.continue'); ?></a>
