@@ -31,4 +31,14 @@ Status: local validation complete; production approval pending.
 - Local 15P state: `publish|visible|1|379|288|288|1|0|notify|onbackorder|5`.
 - Local schema: BackOrder offer remains present and has no `deliveryTime`.
 
-Before deployment, create a fresh read-only production safety reference and independently verify it. Deploy only after the distinct approval above. Append production banner probes, regression checks, and hashes after deployment. Do not restore DB/uploads archives.
+## Fresh preflight reference
+
+A fresh read-only reference was created before any banner deployment write:
+
+- External backup directory: `/home/alanw/.pi/backups/svicloudtvbox.us/2026-08-18-15p-delivery-banner-preflight`
+- Remote theme: 212 members, archive SHA-256 `c0f8d22990cc9c8be39aa22a9a3876e573fb4cf549b4ba9b7a74252b986d05f3`
+- Remote `.htaccess` SHA-256: `b1cc1a01c64a885fa34ecebc6d90a8b6df3d1235f6bae64194cd672d2557a4cf`
+- Read-only product state: `publish|visible|1|379|288|288|1|0|notify|onbackorder`, five gallery images.
+- Verification summary: external `preflight-verification.json`; private archives remain outside Git.
+
+Deploy only after the distinct approval above. Append production banner probes, regression checks, and hashes after deployment. Do not restore DB/uploads archives.
