@@ -8,15 +8,15 @@ mkdirSync(outputDir, { recursive: true });
 
 const locales = [
   {
-    code: 'en', prefix: '', title: 'SVICLOUD 15P TV Box', availability: 'Available for pre-order', action: 'Pre-order 15P', shippingDate: 'Shipping date not announced', metaMarker: 'SVICLOUD',
+    code: 'en', prefix: '', title: 'SVICLOUD 15P TV Box', availability: 'Available for pre-order', action: 'Pre-order 15P', shippingDate: 'Expected delivery: 2–3 weeks after ordering', metaMarker: 'SVICLOUD',
     forbiddenPolicies: ['48-Hour U.S. Shipping', '1-Year U.S. Warranty', 'Every SVICLOUD device is genuine with U.S. warranty support', 'Shipping speed, warranty, and setup help'],
   },
   {
-    code: 'zh-TW', prefix: '/zh', title: '小雲 15P 電視盒', availability: '接受預購', action: '預購 15P', shippingDate: '出貨日期尚未公布', metaMarker: '小雲',
+    code: 'zh-TW', prefix: '/zh', title: '小雲 15P 電視盒', availability: '接受預購', action: '預購 15P', shippingDate: '預計下單後 2–3 週送達', metaMarker: '小雲',
     forbiddenPolicies: ['一年美國保固', '標準配送與追蹤', '提供原廠保固與在地服務', '配送時程、保固退換與中文安裝協助'],
   },
   {
-    code: 'zh-CN', prefix: '/zh-cn', title: '小云 15P 电视盒', availability: '接受预订', action: '预订 15P', shippingDate: '发货日期尚未公布', metaMarker: '小云',
+    code: 'zh-CN', prefix: '/zh-cn', title: '小云 15P 电视盒', availability: '接受预订', action: '预订 15P', shippingDate: '预计下单后 2–3 周送达', metaMarker: '小云',
     forbiddenPolicies: ['1-Year U.S. Warranty', '48-Hour U.S. Shipping', '一年美国保修', '配送时效、保修退换、中文安装协助'],
   },
 ];
