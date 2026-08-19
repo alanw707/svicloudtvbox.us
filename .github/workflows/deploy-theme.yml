@@ -44,6 +44,7 @@ jobs:
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASS: ${{ secrets.FTP_PASS }}
           FTP_PROTOCOL: ftps
+          FTP_TLS_CERT_SHA256: 47e1b5dc5d6102e8ed8c012161af8b225370ab5563b00caf146cbd7a9651e95e
           FTP_SKIP_SAME_SIZE: "0"
           LOCAL_THEME_DIR: theme/svicloudtvbox-lumen
           REMOTE_THEME_DIR: public_html/wp-content/themes/svicloudtvbox-lumen
@@ -76,6 +77,7 @@ jobs:
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASS: ${{ secrets.FTP_PASS }}
           FTP_PROTOCOL: ftps
+          FTP_TLS_CERT_SHA256: 47e1b5dc5d6102e8ed8c012161af8b225370ab5563b00caf146cbd7a9651e95e
           FTP_SKIP_SAME_SIZE: "0"
           LOCAL_AGENT_ROOT: agent-root
           REMOTE_AGENT_ROOT: public_html
