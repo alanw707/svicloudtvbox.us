@@ -2,7 +2,7 @@
 
 ## Scope
 
-The 15P homepage visual card keeps its product splash image visible on mobile, but the image is now a separate media block instead of an absolutely positioned layer behind the card copy. Desktop behavior remains unchanged. No production deployment was performed for this redesign.
+The 15P homepage visual card keeps its product splash image visible on mobile, but the image is now a separate media block instead of an absolutely positioned layer behind the card copy. Desktop behavior remains unchanged. The scoped CSS and generated front-page bundle are now deployed to production with a cache purge.
 
 ## Sources
 
@@ -32,9 +32,11 @@ At 1512px:
 - Image remains `position: absolute` with the existing desktop treatment.
 - Content geometry remains unchanged.
 
-## Verification
+## Production deployment and verification
 
-`/tmp/verify_15p_mobile_hero.mjs` passed **12/12** Chromium/WebKit × English/Traditional Chinese/Simplified Chinese × mobile/desktop cases:
+Pinned FTPS deployed only `assets/css/parts/32b-15p-launch-redesign.css` and generated `assets/css/front-page.css`; the deployment artifact is `/home/alanw/.pi/backups/svicloudtvbox.us/2026-08-18-15p-short-description-preflight/home-hero-mobile-css-deploy-final.json`. A temporary cache/opcache purge plugin was removed after use.
+
+`PLAYWRIGHT_BASE_URL=https://svicloudtvbox.us node /tmp/verify_15p_mobile_hero.mjs` passed **12/12** Chromium/WebKit × English/Traditional Chinese/Simplified Chinese × mobile/desktop cases:
 
 - 0 failures
 - 0 filtered console/page errors
