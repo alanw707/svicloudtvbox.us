@@ -31,7 +31,7 @@ return [
             'offers_label'        => 'Google 10P 適用優惠',
             'offer_10p'           => 'SVICLOUD 10P+ 省 5%',
             'offer_10s'           => 'SVICLOUD 10P+ 省 5%',
-            'code_label'          => '代碼 {{code}}',
+            'code_label'          => '僅限 10P+ 代碼 {{code}}',
             'cta'                 => '選購 10P+',
             'coupon_not_active'   => 'GOOGLE5 適用至 2026 年 9 月 19 日。',
             'coupon_not_eligible' => 'GOOGLE5 僅適用於 SVICLOUD 10P+。',

@@ -12,6 +12,7 @@ test.describe('Google 10P promotion bar', () => {
     await expect(bar).toBeVisible();
     await expect(bar).toContainText('GOOGLE5');
     await expect(bar).toContainText('SVICLOUD 10P+ saves 5%');
+    await expect(bar).toContainText('10P+ only code GOOGLE5');
     await expect(bar.locator('.svic-promo-bar__cta')).toHaveAttribute('href', /\/product\/svicloud-10p-plus\/?$/);
   });
 });

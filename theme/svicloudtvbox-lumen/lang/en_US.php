@@ -31,7 +31,7 @@ return [
             'offers_label'        => 'Google 10P eligible offer',
             'offer_10p'           => 'SVICLOUD 10P+ saves 5%',
             'offer_10s'           => 'SVICLOUD 10P+ saves 5%',
-            'code_label'          => 'Code {{code}}',
+            'code_label'          => '10P+ only code {{code}}',
             'cta'                 => 'Shop 10P+',
             'coupon_not_active'   => 'GOOGLE5 is valid through September 19, 2026.',
             'coupon_not_eligible' => 'GOOGLE5 applies to SVICLOUD 10P+ only.',
