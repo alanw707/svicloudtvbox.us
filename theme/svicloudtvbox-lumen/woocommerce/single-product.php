@@ -265,7 +265,7 @@ while (have_posts()) :
               <?php woocommerce_template_single_add_to_cart(); ?>
             </div>
             <?php if ($is_15p_product) : ?>
-              <p class="product-hero-backorder-note"><?php echo svic_translate_html('shop.cards.15p.price_note'); ?></p>
+              <?php svic_render_15p_delivery_banner(); ?>
             <?php endif; ?>
             <?php if (is_string($product_reassurance_title) && $product_reassurance_title !== '' && $product_reassurance_title !== 'title') : ?>
               <section class="product-hero-reassurance" aria-labelledby="product-hero-reassurance-heading">

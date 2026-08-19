@@ -531,6 +531,43 @@
   color: var(--lumen-accent-teal);
 }
 
+.svic-15p-delivery-banner {
+  display: grid;
+  gap: 0.2rem;
+  max-width: 48ch;
+  margin: 0.75rem 0 0;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(126, 246, 227, 0.34);
+  border-left: 3px solid var(--lumen-accent-teal);
+  border-radius: 0.75rem;
+  background: rgba(9, 22, 48, 0.72);
+  color: rgba(238, 247, 255, 0.92);
+  line-height: 1.5;
+}
+
+.svic-15p-delivery-banner__label {
+  color: var(--lumen-accent-teal);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.svic-15p-delivery-banner__copy {
+  color: inherit;
+}
+
+.lumen-cart-product .svic-15p-delivery-banner,
+.lumen-checkout .svic-15p-delivery-banner {
+  max-width: none;
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 540px) {
+  .svic-15p-delivery-banner {
+    padding: 0.75rem 0.85rem;
+  }
+}
+
 .lumen-product .product-hero-backorder-note {
   max-width: 48ch;
   margin: -0.5rem 0 0;

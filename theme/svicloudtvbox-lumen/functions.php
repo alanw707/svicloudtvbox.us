@@ -1977,17 +1977,17 @@ if (!function_exists('svic_homepage_meta_definitions')) {
         $definitions = [
             'zh_tw' => [
                 'title'       => '小雲 15P 預購｜小雲盒子美國授權經銷',
-                'description' => '小雲 15P 現以 US$288 接受預購（原價 US$379），由小雲盒子美國授權經銷提供。可比較 10P+ 與 10S，出貨日期尚未公布。',
+                'description' => '小雲 15P 現以 US$288 接受預購（原價 US$379），預計下單後 2–3 週送達，由小雲盒子美國授權經銷提供。可比較 10P+ 與 10S。',
                 'image_alt'   => '小雲 15P Android 14 電視盒預購圖',
             ],
             'zh_cn' => [
                 'title'       => '小云 15P 预订｜小云盒子美国授权经销',
-                'description' => '小云 15P 现以 US$288 接受预订（原价 US$379），由小云盒子美国授权经销提供。可比较 10P+ 与 10S，发货日期尚未公布。',
+                'description' => '小云 15P 现以 US$288 接受预订（原价 US$379），预计下单后 2–3 周送达，由小云盒子美国授权经销提供。可比较 10P+ 与 10S。',
                 'image_alt'   => '小云 15P Android 14 电视盒预订图',
             ],
             'en_us' => [
                 'title'       => 'SVICLOUD 15P Pre-order | 小雲盒子 U.S. Authorized Dealer',
-                'description' => 'Pre-order SVICLOUD 15P for $288 (regular $379) from an authorized U.S. dealer. Compare 10P+ and 10S with bilingual English/中文 support. Shipping date not announced.',
+                'description' => 'Pre-order SVICLOUD 15P for $288 (regular $379) from an authorized U.S. dealer. Expected delivery is 2–3 weeks after ordering. Compare 10P+ and 10S with bilingual English/中文 support.',
                 'image_alt'   => 'SVICLOUD 15P Android 14 TV box pre-order graphic',
             ],
         ];
@@ -6039,6 +6039,22 @@ add_filter('woocommerce_get_availability_text', function ($availability, $produc
         : $availability;
 }, 20, 2);
 
+if (!function_exists('svic_render_15p_delivery_banner')) {
+    function svic_render_15p_delivery_banner(): void
+    {
+        if (!function_exists('svic_translate_html')) {
+            return;
+        }
+        $label = svic_translate('shop.cards.15p.delivery_banner_label');
+        ?>
+        <aside class="svic-15p-delivery-banner" role="status" aria-label="<?php echo esc_attr($label); ?>">
+            <strong class="svic-15p-delivery-banner__label"><?php echo esc_html($label); ?></strong>
+            <span class="svic-15p-delivery-banner__copy"><?php echo svic_translate_html('shop.cards.15p.delivery_banner_copy'); ?></span>
+        </aside>
+        <?php
+    }
+}
+
 if (!function_exists('svic_render_15p_checkout_backorder_notice')) {
     function svic_render_15p_checkout_backorder_notice(): void
     {
@@ -6056,12 +6072,7 @@ if (!function_exists('svic_render_15p_checkout_backorder_notice')) {
             if (!svic_is_15p_product_object($product) || !$product->is_on_backorder((int) ($cart_item['quantity'] ?? 1))) {
                 continue;
             }
-            ?>
-            <p class="woocommerce-info lumen-checkout-backorder-notice" role="status">
-                <strong><?php echo svic_translate_html('shop.cards.15p.price_tbc'); ?></strong>
-                <?php echo svic_translate_html('shop.cards.15p.price_note'); ?>
-            </p>
-            <?php
+            svic_render_15p_delivery_banner();
             return;
         }
     }

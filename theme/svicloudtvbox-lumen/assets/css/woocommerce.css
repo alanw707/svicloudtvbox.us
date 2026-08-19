@@ -355,6 +355,12 @@ to{opacity:1;transform:translateY(0)}
 .lumen-product .product-hero-best-for__list li::before{content:'';position:absolute;left:0;top:0.62rem;width:0.45rem;height:0.45rem;border-radius:50%;background:linear-gradient(135deg,rgba(126,246,227,0.96),rgba(91,139,255,0.92));box-shadow:0 0 0 5px rgba(94,230,208,0.14)}
 .lumen-product .product-hero-best-for__link{display:inline-flex;align-items:center;width:fit-content;color:var(--link-primary);font-weight:600;text-decoration:underline;text-decoration-color:var(--link-primary-underline);text-underline-offset:4px}
 .lumen-product .product-hero-price{font-size:2.4rem;font-weight:600;color:var(--lumen-accent-teal)}
+.svic-15p-delivery-banner{display:grid;gap:0.2rem;max-width:48ch;margin:0.75rem 0 0;padding:0.8rem 1rem;border:1px solid rgba(126,246,227,0.34);border-left:3px solid var(--lumen-accent-teal);border-radius:0.75rem;background:rgba(9,22,48,0.72);color:rgba(238,247,255,0.92);line-height:1.5}
+.svic-15p-delivery-banner__label{color:var(--lumen-accent-teal);font-size:0.8rem;letter-spacing:0.04em;text-transform:uppercase}
+.svic-15p-delivery-banner__copy{color:inherit}
+.lumen-cart-product .svic-15p-delivery-banner,.lumen-checkout .svic-15p-delivery-banner{max-width:none;margin-top:0.75rem}
+@media(max-width:540px){.svic-15p-delivery-banner{padding:0.75rem 0.85rem}
+}
 .lumen-product .product-hero-backorder-note{max-width:48ch;margin:-0.5rem 0 0;color:rgba(221,235,252,0.8);line-height:1.65}
 .lumen-product .product-hero-cta .cart{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:0}
 .lumen-product .product-hero-cta .quantity{display:flex;align-items:center;background:rgba(9,22,48,0.7);border:1px solid rgba(126,246,227,0.28);min-height:var(--lumen-control-min-height);border-radius:999px;padding:0 12px;box-shadow:inset 0 0 0 1px rgba(94,230,208,0.08)}

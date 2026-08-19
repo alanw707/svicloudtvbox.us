@@ -107,12 +107,11 @@ if (is_object($cart)) {
                                             </ul>
                                             <?php echo wc_get_formatted_cart_item_data($cart_item); ?>
                                             <?php if ($product->backorders_require_notification() && $product->is_on_backorder((int) $cart_item['quantity'])): ?>
-                                                <?php
-                                                $backorder_notice = function_exists('svic_is_15p_product_object') && svic_is_15p_product_object($product)
-                                                    ? svic_translate('shop.cards.15p.price_tbc') . ' — ' . svic_translate('shop.cards.15p.price_note')
-                                                    : __('Available on backorder', 'woocommerce');
-                                                ?>
-                                                <p class="lumen-cart-product__notice"><?php echo esc_html($backorder_notice); ?></p>
+                                                <?php if (function_exists('svic_is_15p_product_object') && svic_is_15p_product_object($product)): ?>
+                                                    <?php svic_render_15p_delivery_banner(); ?>
+                                                <?php else: ?>
+                                                    <p class="lumen-cart-product__notice"><?php esc_html_e('Available on backorder', 'woocommerce'); ?></p>
+                                                <?php endif; ?>
                                             <?php endif; ?>
                                         </div>
                                     </td>
