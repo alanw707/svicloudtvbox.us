@@ -1122,6 +1122,11 @@ if (!function_exists('svic_product_schema_availability')) {
             return 'https://schema.org/OutOfStock';
         }
 
+        $slug = method_exists($product, 'get_slug') ? (string) $product->get_slug() : '';
+        if ($slug === 'svicloud-15p' && $product->is_on_backorder(1)) {
+            return 'https://schema.org/PreOrder';
+        }
+
         if ($product->is_on_backorder(1)) {
             return 'https://schema.org/BackOrder';
         }

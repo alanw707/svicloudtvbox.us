@@ -144,8 +144,8 @@ try {
           });
           if (productNodes.length !== 1) fail(`${locale.code} ${viewport.key}: expected one Product node, got ${productNodes.length}`);
           const offer = productNodes[0]?.offers;
-          if (!offer || offer.price !== '288.00' || offer.availability !== 'https://schema.org/BackOrder') fail(`${locale.code} ${viewport.key}: BackOrder Offer mismatch`);
-          if (offer.shippingDetails?.deliveryTime) fail(`${locale.code} ${viewport.key}: BackOrder Offer includes deliveryTime`);
+          if (!offer || offer.price !== '288.00' || offer.availability !== 'https://schema.org/PreOrder' || offer.availabilityStarts !== '2026-09-09') fail(`${locale.code} ${viewport.key}: PreOrder Offer mismatch`);
+          if (offer.shippingDetails?.deliveryTime) fail(`${locale.code} ${viewport.key}: PreOrder Offer includes deliveryTime`);
           for (const policy of locale.forbiddenPolicies) {
             if (metrics.text.includes(policy)) fail(`${locale.code} ${viewport.key}: unverified 15P policy rendered: ${policy}`);
           }

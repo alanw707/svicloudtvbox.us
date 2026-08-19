@@ -2705,7 +2705,7 @@ if (!function_exists('svic_build_product_schema_from_wc_product')) {
                 'seller'        => [
                     '@id' => svic_get_organization_schema_id(),
                 ],
-                'shippingDetails' => svic_google_merchant_shipping_details_schema($availability !== 'https://schema.org/BackOrder'),
+                'shippingDetails' => svic_google_merchant_shipping_details_schema(!in_array($availability, ['https://schema.org/BackOrder', 'https://schema.org/PreOrder'], true)),
                 'hasMerchantReturnPolicy' => [
                     '@type' => 'MerchantReturnPolicy',
                     'applicableCountry' => 'US',
@@ -2790,11 +2790,12 @@ if (!function_exists('svic_enrich_offer_schema_for_google_merchant')) {
      */
     function svic_enrich_offer_schema_for_google_merchant(array $offer): array
     {
-        $is_backorder = ($offer['availability'] ?? '') === 'https://schema.org/BackOrder';
+        $availability = (string) ($offer['availability'] ?? '');
+        $is_future_availability = in_array($availability, ['https://schema.org/BackOrder', 'https://schema.org/PreOrder'], true);
 
         if (empty($offer['shippingDetails'])) {
-            $offer['shippingDetails'] = svic_google_merchant_shipping_details_schema(!$is_backorder);
-        } elseif ($is_backorder && is_array($offer['shippingDetails'])) {
+            $offer['shippingDetails'] = svic_google_merchant_shipping_details_schema(!$is_future_availability);
+        } elseif ($is_future_availability && is_array($offer['shippingDetails'])) {
             if (isset($offer['shippingDetails']['@type'])) {
                 unset($offer['shippingDetails']['deliveryTime']);
             } else {
@@ -2837,12 +2838,29 @@ if (!function_exists('svic_enrich_product_schema_for_google_merchant')) {
             return preg_replace('#^http://schema\\.org/#i', 'https://schema.org/', $value) ?: $value;
         };
 
-        $enrich_offer = static function ($offer) use ($normalize_schema_url) {
+        $is_15p_node = false;
+        foreach (['@id', 'url', 'sku', 'name'] as $node_key) {
+            if (isset($node[$node_key]) && is_string($node[$node_key]) && stripos($node[$node_key], 'svicloud-15p') !== false) {
+                $is_15p_node = true;
+                break;
+            }
+            if ($node_key === 'name' && isset($node[$node_key]) && is_string($node[$node_key]) && stripos($node[$node_key], '15P') !== false) {
+                $is_15p_node = true;
+                break;
+            }
+        }
+
+        $enrich_offer = static function ($offer) use ($normalize_schema_url, $is_15p_node) {
             if (!is_array($offer)) {
                 return $offer;
             }
 
             $offer['availability'] = $normalize_schema_url($offer['availability'] ?? null);
+            if ($is_15p_node) {
+                $offer['availability'] = 'https://schema.org/PreOrder';
+                $offer['availabilityStarts'] = '2026-09-09';
+            }
+
             return svic_enrich_offer_schema_for_google_merchant($offer);
         };
 
@@ -8127,7 +8145,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             return;
         }
 
-        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v3');
+        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v4');
         $mtime        = (int) filemtime($feed_path);
         if ($last_checked >= $mtime) {
             return;
@@ -8170,7 +8188,14 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             '14' => 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-1.jpg',
         ];
 
-        $patched = preg_replace_callback('/<item>(.*?)<\/item>/s', function ($matches) use ($shipping_block, $offer_images, $image_link_overrides) {
+        $availability_overrides = [
+            '1204' => [
+                'availability'      => 'preorder',
+                'availability_date' => '2026-09-09',
+            ],
+        ];
+
+        $patched = preg_replace_callback('/<item>(.*?)<\/item>/s', function ($matches) use ($shipping_block, $offer_images, $image_link_overrides, $availability_overrides) {
             $item     = $matches[0];
             $offer_id = '';
             if (preg_match('/<g:id>(.*?)<\/g:id>/', $item, $id_matches)) {
@@ -8197,6 +8222,26 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             if (isset($image_link_overrides[$offer_id]) && strpos($patched_item, '<g:image_link>') !== false) {
                 $replacement = '      <g:image_link>' . esc_url($image_link_overrides[$offer_id]) . '</g:image_link>';
                 $patched_item = preg_replace('/\s*<g:image_link>.*?<\/g:image_link>\s*/s', "\n" . $replacement . "\n", $patched_item, 1) ?: $patched_item;
+            }
+
+            if (isset($availability_overrides[$offer_id])) {
+                $availability = sanitize_text_field($availability_overrides[$offer_id]['availability']);
+                $availability_date = sanitize_text_field($availability_overrides[$offer_id]['availability_date']);
+                $availability_tag = '      <g:availability>' . $availability . '</g:availability>';
+                $availability_date_tag = '      <g:availability_date>' . $availability_date . '</g:availability_date>';
+
+                $patched_item = preg_replace('/\s*<g:availability_date>.*?<\/g:availability_date>\s*/s', "\n", $patched_item) ?: $patched_item;
+                if (strpos($patched_item, '<g:availability>') !== false) {
+                    $patched_item = preg_replace('/\s*<g:availability>.*?<\/g:availability>\s*/s', "\n" . $availability_tag . "\n", $patched_item, 1) ?: $patched_item;
+                } elseif (strpos($patched_item, '<g:condition>') !== false) {
+                    $patched_item = str_replace('      <g:condition>', $availability_tag . "\n" . '      <g:condition>', $patched_item);
+                } else {
+                    $patched_item = str_replace('    </item>', $availability_tag . "\n" . '    </item>', $patched_item);
+                }
+
+                if (strpos($patched_item, '<g:availability>') !== false) {
+                    $patched_item = preg_replace('/(<g:availability>.*?<\/g:availability>)/s', '$1' . "\n" . $availability_date_tag, $patched_item, 1) ?: $patched_item;
+                }
             }
 
             $patched_item = preg_replace_callback('/<g:shipping>(.*?)<\/g:shipping>/s', function ($shipping_matches) {
@@ -8267,7 +8312,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             file_put_contents($feed_path, $patched, LOCK_EX);
         }
 
-        set_transient('svic_google_feed_rich_offer_checked_v3', max($mtime, time()), HOUR_IN_SECONDS);
+        set_transient('svic_google_feed_rich_offer_checked_v4', max($mtime, time()), HOUR_IN_SECONDS);
     }
 }
 

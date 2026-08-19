@@ -117,7 +117,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     }
   });
 
-  test('15P exposes one BackOrder Offer and supports notified backorders', async ({ page }) => {
+  test('15P exposes one PreOrder Offer and supports notified backorders', async ({ page }) => {
     const response = await page.goto('/product/svicloud-15p/', { waitUntil: 'networkidle' });
     expect(response?.ok()).toBeTruthy();
 
@@ -131,7 +131,8 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
       '@type': 'Offer',
       priceCurrency: 'USD',
       price: '288.00',
-      availability: 'https://schema.org/BackOrder',
+      availability: 'https://schema.org/PreOrder',
+      availabilityStarts: '2026-09-09',
     });
     expect((offer.shippingDetails as Record<string, unknown> | undefined)?.deliveryTime).toBeUndefined();
 
