@@ -1362,7 +1362,7 @@ return [
                 'description' => 'Pre-order SVICLOUD 15P for $288 (regular $379). Android 14, Amlogic S905Y5, 4 GB DDR3, 64 GB eMMC, Wi-Fi 6, Bluetooth 5.4, and 4K HDR.',
                 'image_alt'   => 'SVICLOUD 15P TV box front view',
             ],
-            'short_description' => 'Available for pre-order for $288 (regular $379) with Android 14, Amlogic S905Y5, 4 GB DDR3, 64 GB eMMC, Wi-Fi 6, Bluetooth 5.4, and 4K HDR.',
+            'short_description' => 'Everything in 10P+, plus support for downloading mobile apps.',
             'description' => '<p>The SVICLOUD 15P TV Box runs Android 14 on an Amlogic S905Y5 quad-core ARM Cortex-A55 processor.</p><h2>Core specifications</h2><ul><li>4 GB DDR3 memory and 64 GB eMMC storage.</li><li>Dual-band 2.4/5 GHz Wi-Fi 6 with 2T2R and Bluetooth 5.4.</li><li>HDR10+, HDR10, and HLG picture processing.</li><li>AV1, VP9, H.265/HEVC, and H.264 hardware decoding, with AV1, VP9, and H.265/HEVC support up to 4K × 2K at 60 fps.</li><li>HDMI 2.1, two USB 2.0 ports, RJ45 Ethernet, optical audio, and Type-C 5V/2A power.</li></ul><h2>In the box</h2><p>Gift box, AC adapter, HDMI cable, Bluetooth voice air-mouse remote, and user manual.</p><p><strong>Available for pre-order for $288 (regular $379).</strong> Expected delivery: 2–3 weeks after ordering.</p>',
             'footer' => [
                 'tagline' => 'SVICLOUD 15P pre-order information',
