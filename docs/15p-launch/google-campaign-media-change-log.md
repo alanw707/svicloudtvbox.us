@@ -132,6 +132,7 @@ Candidate validation is recorded in [`google-ads-candidates/README.md`](google-a
 - Changed field types only: `marketing_image`, `square_marketing_image`, `portrait_marketing_image`.
 - Not sent: `final_url`, `path1`, `path2`, headlines, descriptions, business name, YouTube video, logos, budgets, bids, targeting, campaign settings, Merchant Center fields, or direct Google Ads settings.
 - Candidate hosting: public, approval-labeled raw URLs on the feature branch `campaign/15p-google-media-assets`; Google stored the uploaded image bytes as new asset IDs. No WordPress Media Library record was created.
+- Approval status: each candidate is a mechanically derived derivative of an approved 15P source, authorized by this scoped media-only goal; separate Google policy-review status is not exposed by the REST response and was not changed.
 
 ## After-state verification
 
