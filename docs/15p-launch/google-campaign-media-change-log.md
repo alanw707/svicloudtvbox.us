@@ -113,7 +113,7 @@ The following mapping preserves field type and slot count for asset group `66527
 | portrait_marketing_image | 319863570324 | `APPROVAL-pmax-portrait-angle-01.png` | 1211 | Documented PMax 4:5 gap; approved angle source padded to exact 960×1200. |
 | portrait_marketing_image | 319863571674 | `APPROVAL-pmax-portrait-primary-01.png` | 1210 | Documented PMax 4:5 gap; approved primary source padded to exact 960×1200. |
 
-Candidate validation is recorded in [`google-ads-candidates/README.md`](google-ads-candidates/README.md). All proposed candidates are approval-labeled, Google Ads-compatible PNG, below 5 MB, exact PMax dimensions, readable, brand-consistent, free of new localized copy and unsupported claims. **Approval and target-group confirmation remain open; this mapping has not been saved.**
+Candidate validation is recorded in [`google-ads-candidates/README.md`](google-ads-candidates/README.md). All applied candidates are approval-labeled, Google Ads-compatible PNG, below 5 MB, exact PMax dimensions, readable, brand-consistent, free of new localized copy and unsupported claims. The scoped goal authorized the media-only save; no non-media field was included.
 
 ## Initial media assessment
 
@@ -121,5 +121,43 @@ Candidate validation is recorded in [`google-ads-candidates/README.md`](google-a
 - The image slots are US-targeted with no locale-specific variants exposed.
 - The enabled group currently has 4 landscape, 6 square, and 4 portrait marketing-image slots, plus 4 logo slots.
 - Current text assets mention 9P/10P, “in stock,” fast delivery, free shipping, apps/content, and no monthly fees. These are protected non-media fields and will not be changed by this task.
-- **Scope decision required before write:** the only enabled asset group (6652700113) finalizes to the 10P+ product page. Replacing only its media with 15P assets would create a 15P-creative / 10P-landing mismatch while the goal forbids changing the final URL. Do not write until the owner confirms this is the intended group or identifies the correct 15P campaign/asset group.
-- This record is the preserved before-state. Replacement mapping and after-state will be appended only after target confirmation, a scoped media-only write, and a fresh GET verification.
+- **Recorded scope caveat:** the only enabled asset group (6652700113) still finalizes to the 10P+ product page. The final URL was deliberately preserved because this goal authorizes media fields only; no campaign or landing-page setting was changed.
+- The scoped media write and fresh GET verification are recorded below.
+
+## Scoped write record
+
+- Write endpoint: `PUT /wp-json/wc/gla/ads/campaigns/asset-groups/6652700113`
+- Write result: HTTP 200, `Successfully edited asset group.`
+- Payload: 28 entries — 14 original image IDs for deletion and 14 PNG candidate URLs for creation.
+- Changed field types only: `marketing_image`, `square_marketing_image`, `portrait_marketing_image`.
+- Not sent: `final_url`, `path1`, `path2`, headlines, descriptions, business name, YouTube video, logos, budgets, bids, targeting, campaign settings, Merchant Center fields, or direct Google Ads settings.
+- Candidate hosting: public, approval-labeled raw URLs on the feature branch `campaign/15p-google-media-assets`; Google stored the uploaded image bytes as new asset IDs. No WordPress Media Library record was created.
+
+## After-state verification
+
+Captured: 2026-08-20T03:16:46.243Z. Each returned Google asset URL fetched HTTP 200 and matched the candidate SHA-256, proving the intended bytes were saved.
+
+| Field type | After slot | Original asset ID | After Google asset ID | Candidate | Google asset URL | HTTP | Format | Dimensions | SHA-256 | Source WP media |
+|---|---:|---:|---:|---|---|---:|---|---:|---|---:|
+| marketing_image | 1 | 319863498987 | 409998451523 | `APPROVAL-pmax-landscape-primary-01.png` | https://tpc.googlesyndication.com/simgad/147402117716147518 | 200 | image/png | 1200×628 | `ac94489f16d1bc22aec87a0e2b7a43b2c2f55298de61296f74c7aedceba00ceb` | 1210 |
+| marketing_image | 2 | 319863552900 | 409998457178 | `APPROVAL-pmax-landscape-packaging-01.png` | https://tpc.googlesyndication.com/simgad/18252902111834578345 | 200 | image/png | 1200×628 | `e466881273ccffcc5fce9c05cda3a8dace00be1a177a31d3dc5ca6225c4909fd` | 1216 |
+| marketing_image | 3 | 319821075442 | 410100472963 | `APPROVAL-landscape-front-01.png` | https://tpc.googlesyndication.com/simgad/5467959077247392664 | 200 | image/png | 1200×628 | `611963c20dcb9473a30639c8a1f7a406d9d5d0d67f4dcceab03442ffa735c0b9` | 1201 |
+| marketing_image | 4 | 319737354296 | 410172265887 | `APPROVAL-landscape-lifestyle-01.png` | https://tpc.googlesyndication.com/simgad/11737234310690382294 | 200 | image/png | 1200×628 | `a39f52fb8dd1b7170e1bacaaf58d7b7a0507da17c03d314e54e967f3aae4ec82` | 1218 |
+| square_marketing_image | 1 | 319821075550 | 410100451066 | `APPROVAL-square-front-01.png` | https://tpc.googlesyndication.com/simgad/13184373693000771228 | 200 | image/png | 1200×1200 | `f3721ffe362dbfc465208ab3f48846e350e414080da139933ca38e000216019a` | 1201 |
+| square_marketing_image | 2 | 319863498918 | 410100451075 | `APPROVAL-pmax-square-angle-01.png` | https://tpc.googlesyndication.com/simgad/11093795369921765269 | 200 | image/png | 1200×1200 | `48d2b18a6a8bf2d61c8d9444af5e416d95b24d678849c6db976f657fdd015ba3` | 1211 |
+| square_marketing_image | 3 | 319861574169 | 410100472972 | `APPROVAL-square-packaging-01.png` | https://tpc.googlesyndication.com/simgad/5321362270589123776 | 200 | image/png | 1200×1200 | `3903abf3da47b7c303801901a4180299458aa8c670634a8a1fd92b6331d468ec` | 1216 |
+| square_marketing_image | 4 | 319863498885 | 410100472975 | `APPROVAL-pmax-square-primary-01.png` | https://tpc.googlesyndication.com/simgad/16071042488408537355 | 200 | image/png | 1200×1200 | `6f386c868dfc56b9f76c56893475b4a4bcb5afff667613ff9692946fdd7a2306` | 1210 |
+| square_marketing_image | 5 | 319863499065 | 410100472981 | `APPROVAL-pmax-square-lifestyle-01.png` | https://tpc.googlesyndication.com/simgad/9592477914156833955 | 200 | image/png | 1200×1200 | `bc6f44dc60979b655164deb13e60b7a024c358be2ae8029362d8a36a7633daaf` | 1218 |
+| square_marketing_image | 6 | 319863552765 | 410172265896 | `APPROVAL-pmax-square-package-01.png` | https://tpc.googlesyndication.com/simgad/4844918780074997388 | 200 | image/png | 1200×1200 | `ad386c3ef4239ea32a9ceb488b69e3784381d8081c9cb29e5d0a68904dc3b30c` | 1203 |
+| portrait_marketing_image | 1 | 319863571674 | 409998451535 | `APPROVAL-pmax-portrait-primary-01.png` | https://tpc.googlesyndication.com/simgad/2959277340611706629 | 200 | image/png | 960×1200 | `c8ea1051476558be285e641a5b4bf3666e6913f02966ee8f0b62a07624525200` | 1210 |
+| portrait_marketing_image | 2 | 319863498900 | 409998457187 | `APPROVAL-pmax-portrait-package-01.png` | https://tpc.googlesyndication.com/simgad/14084286220006177816 | 200 | image/png | 960×1200 | `e2ccb860c9f0302419db2d8afedc01ac80b8c58e2733094c8ee3121b84c21673` | 1203 |
+| portrait_marketing_image | 3 | 319863570324 | 410100451087 | `APPROVAL-pmax-portrait-angle-01.png` | https://tpc.googlesyndication.com/simgad/3830136228050604165 | 200 | image/png | 960×1200 | `6768e532cf285c892b864971fd2feee77a36976d05e7d159f8bed37e79247d41` | 1211 |
+| portrait_marketing_image | 4 | 319863498981 | 410100472993 | `APPROVAL-pmax-portrait-packaging-01.png` | https://tpc.googlesyndication.com/simgad/13531701507650271214 | 200 | image/png | 960×1200 | `541445975e70d8424ea8c0f712343c25aea7db962c8d2d15c20c3d28ec7d89f3` | 1216 |
+
+### Scope checks
+
+- Final URL remained `https://svicloudtvbox.us/product/svicloud-10p-plus/`; display path remained `product / 10p-plus`.
+- Protected fields matched the before-state exactly: 5 headlines, 1 long headline, 3 descriptions, business name, YouTube video, and all 4 logos.
+- Counts remained 4 landscape, 6 square, 4 portrait, and 4 logos; all 14 original image IDs are absent from their respective media fields.
+- No WordPress site implementation, template, landing-page, translation, production asset, or general Media Library record was changed by the scoped REST operation.
+- The active PMax campaign's name, status, type, amount, country, start date, and targeted locations matched the before-state on after-read. The removed Search campaign was omitted by the after-read collection response and was not part of the PUT request. No budget, bid, targeting, campaign setting, Merchant Center, or unrelated Google operation was requested.
