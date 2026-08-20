@@ -1,0 +1,879 @@
+{
+  "capture_version": 1,
+  "source": "WordPress REST /wc/gla/ads/campaigns/asset-groups",
+  "captured_at": {
+    "before": "2026-08-20T02:49:54.166Z",
+    "attempted_after": "2026-08-20T03:16:46.243Z",
+    "rollback_after": "2026-08-20T03:22:40.895Z"
+  },
+  "target": {
+    "campaign_id": 23405072796,
+    "asset_group_id": 6652700113
+  },
+  "before_get": {
+    "method": "GET",
+    "path": "/wc/gla/ads/campaigns/asset-groups?campaign_id=23405072796",
+    "status": 200,
+    "campaign": {
+      "id": 23405072796,
+      "name": "Campaign 2025-12-30 03:30:18",
+      "status": "enabled",
+      "type": "performance_max",
+      "amount": 10,
+      "country": "US",
+      "start_date": "2025-12-29",
+      "targeted_locations": [
+        "US"
+      ],
+      "eu_political_advertising_confirmation": false
+    },
+    "asset_group": {
+      "id": 6652700113,
+      "final_url": "https://svicloudtvbox.us/product/svicloud-10p-plus/",
+      "display_url_path": [
+        "product",
+        "10p-plus"
+      ],
+      "assets": {
+        "marketing_image": [
+          {
+            "id": 319737354296,
+            "content": "https://tpc.googlesyndication.com/simgad/1220387759834189413"
+          },
+          {
+            "id": 319821075442,
+            "content": "https://tpc.googlesyndication.com/simgad/2288451649640054486"
+          },
+          {
+            "id": 319863498987,
+            "content": "https://tpc.googlesyndication.com/simgad/842237743274211825"
+          },
+          {
+            "id": 319863552900,
+            "content": "https://tpc.googlesyndication.com/simgad/3415367161799774919"
+          }
+        ],
+        "square_marketing_image": [
+          {
+            "id": 319821075550,
+            "content": "https://tpc.googlesyndication.com/simgad/4234018302966857589"
+          },
+          {
+            "id": 319861574169,
+            "content": "https://tpc.googlesyndication.com/simgad/1210192345753587850"
+          },
+          {
+            "id": 319863498885,
+            "content": "https://tpc.googlesyndication.com/simgad/9348936224264725852"
+          },
+          {
+            "id": 319863498918,
+            "content": "https://tpc.googlesyndication.com/simgad/14355712376652179045"
+          },
+          {
+            "id": 319863499065,
+            "content": "https://tpc.googlesyndication.com/simgad/5976843453915853508"
+          },
+          {
+            "id": 319863552765,
+            "content": "https://tpc.googlesyndication.com/simgad/17181115981823753011"
+          }
+        ],
+        "portrait_marketing_image": [
+          {
+            "id": 319863498900,
+            "content": "https://tpc.googlesyndication.com/simgad/9617637448164695674"
+          },
+          {
+            "id": 319863498981,
+            "content": "https://tpc.googlesyndication.com/simgad/2041321646211686433"
+          },
+          {
+            "id": 319863570324,
+            "content": "https://tpc.googlesyndication.com/simgad/12419596345874421717"
+          },
+          {
+            "id": 319863571674,
+            "content": "https://tpc.googlesyndication.com/simgad/6349957929529685924"
+          }
+        ],
+        "youtube_video": [
+          {
+            "id": 320553491838,
+            "content": "Qj-TtrB_-Pg"
+          }
+        ],
+        "headline": [
+          {
+            "id": 346941188858,
+            "content": "Free US Shipping"
+          },
+          {
+            "id": 346941188870,
+            "content": "No Monthly Fees"
+          },
+          {
+            "id": 405360999389,
+            "content": "US Seller Support"
+          },
+          {
+            "id": 405361002740,
+            "content": "SVICloud TV Box US"
+          },
+          {
+            "id": 405361002746,
+            "content": "Chinese TV Box USA"
+          }
+        ],
+        "long_headline": [
+          {
+            "id": 405461285677,
+            "content": "SVICloud TV boxes with Korean, Chinese, Japanese and USA content, shipped fast from the US"
+          }
+        ],
+        "description": [
+          {
+            "id": 405461285680,
+            "content": "SVICloud 9P and 10P boxes in stock with access to popular Asian and US content apps."
+          },
+          {
+            "id": 405484660595,
+            "content": "Fast US delivery, secure checkout, trusted support"
+          },
+          {
+            "id": 405531691566,
+            "content": "Shop SVICloud TV boxes with Korean, Chinese, Japanese and USA apps. Free US shipping."
+          }
+        ],
+        "business_name": {
+          "id": 319695985640,
+          "content": "SvicloudTVbox.us"
+        },
+        "logo": [
+          {
+            "id": 319736868125,
+            "content": "https://tpc.googlesyndication.com/simgad/8025828284151045361"
+          },
+          {
+            "id": 319861552419,
+            "content": "https://tpc.googlesyndication.com/simgad/9221213205531827908"
+          },
+          {
+            "id": 319861574169,
+            "content": "https://tpc.googlesyndication.com/simgad/1210192345753587850"
+          },
+          {
+            "id": 334074662513,
+            "content": "https://tpc.googlesyndication.com/simgad/10386174255467216054"
+          }
+        ]
+      }
+    }
+  },
+  "attempted_media_write": {
+    "method": "PUT",
+    "path": "/wc/gla/ads/campaigns/asset-groups/6652700113",
+    "status": 200,
+    "response": {
+      "status": "success",
+      "message": "Successfully edited asset group.",
+      "id": 6652700113
+    },
+    "changed_field_types": [
+      "marketing_image",
+      "square_marketing_image",
+      "portrait_marketing_image"
+    ],
+    "asset_entry_count": 28
+  },
+  "attempted_after_get": {
+    "method": "GET",
+    "path": "/wc/gla/ads/campaigns/asset-groups?campaign_id=23405072796",
+    "status": 200,
+    "asset_group": {
+      "id": 6652700113,
+      "final_url": "https://svicloudtvbox.us/product/svicloud-10p-plus/",
+      "display_url_path": [
+        "product",
+        "10p-plus"
+      ],
+      "assets": {
+        "youtube_video": [
+          {
+            "id": 320553491838,
+            "content": "Qj-TtrB_-Pg"
+          }
+        ],
+        "headline": [
+          {
+            "id": 346941188858,
+            "content": "Free US Shipping"
+          },
+          {
+            "id": 346941188870,
+            "content": "No Monthly Fees"
+          },
+          {
+            "id": 405360999389,
+            "content": "US Seller Support"
+          },
+          {
+            "id": 405361002740,
+            "content": "SVICloud TV Box US"
+          },
+          {
+            "id": 405361002746,
+            "content": "Chinese TV Box USA"
+          }
+        ],
+        "long_headline": [
+          {
+            "id": 405461285677,
+            "content": "SVICloud TV boxes with Korean, Chinese, Japanese and USA content, shipped fast from the US"
+          }
+        ],
+        "description": [
+          {
+            "id": 405461285680,
+            "content": "SVICloud 9P and 10P boxes in stock with access to popular Asian and US content apps."
+          },
+          {
+            "id": 405484660595,
+            "content": "Fast US delivery, secure checkout, trusted support"
+          },
+          {
+            "id": 405531691566,
+            "content": "Shop SVICloud TV boxes with Korean, Chinese, Japanese and USA apps. Free US shipping."
+          }
+        ],
+        "marketing_image": [
+          {
+            "id": 409998451523,
+            "content": "https://tpc.googlesyndication.com/simgad/147402117716147518"
+          },
+          {
+            "id": 409998457178,
+            "content": "https://tpc.googlesyndication.com/simgad/18252902111834578345"
+          },
+          {
+            "id": 410100472963,
+            "content": "https://tpc.googlesyndication.com/simgad/5467959077247392664"
+          },
+          {
+            "id": 410172265887,
+            "content": "https://tpc.googlesyndication.com/simgad/11737234310690382294"
+          }
+        ],
+        "portrait_marketing_image": [
+          {
+            "id": 409998451535,
+            "content": "https://tpc.googlesyndication.com/simgad/2959277340611706629"
+          },
+          {
+            "id": 409998457187,
+            "content": "https://tpc.googlesyndication.com/simgad/14084286220006177816"
+          },
+          {
+            "id": 410100451087,
+            "content": "https://tpc.googlesyndication.com/simgad/3830136228050604165"
+          },
+          {
+            "id": 410100472993,
+            "content": "https://tpc.googlesyndication.com/simgad/13531701507650271214"
+          }
+        ],
+        "square_marketing_image": [
+          {
+            "id": 410100451066,
+            "content": "https://tpc.googlesyndication.com/simgad/13184373693000771228"
+          },
+          {
+            "id": 410100451075,
+            "content": "https://tpc.googlesyndication.com/simgad/11093795369921765269"
+          },
+          {
+            "id": 410100472972,
+            "content": "https://tpc.googlesyndication.com/simgad/5321362270589123776"
+          },
+          {
+            "id": 410100472975,
+            "content": "https://tpc.googlesyndication.com/simgad/16071042488408537355"
+          },
+          {
+            "id": 410100472981,
+            "content": "https://tpc.googlesyndication.com/simgad/9592477914156833955"
+          },
+          {
+            "id": 410172265896,
+            "content": "https://tpc.googlesyndication.com/simgad/4844918780074997388"
+          }
+        ],
+        "business_name": {
+          "id": 319695985640,
+          "content": "SvicloudTVbox.us"
+        },
+        "logo": [
+          {
+            "id": 319736868125,
+            "content": "https://tpc.googlesyndication.com/simgad/8025828284151045361"
+          },
+          {
+            "id": 319861552419,
+            "content": "https://tpc.googlesyndication.com/simgad/9221213205531827908"
+          },
+          {
+            "id": 319861574169,
+            "content": "https://tpc.googlesyndication.com/simgad/1210192345753587850"
+          },
+          {
+            "id": 334074662513,
+            "content": "https://tpc.googlesyndication.com/simgad/10386174255467216054"
+          }
+        ]
+      }
+    },
+    "verification": {
+      "capturedAt": "2026-08-20T03:16:46.243Z",
+      "campaign": {
+        "id": 23405072796,
+        "status": "enabled",
+        "name": "Campaign 2025-12-30 03:30:18"
+      },
+      "group": {
+        "id": 6652700113,
+        "final_url": "https://svicloudtvbox.us/product/svicloud-10p-plus/",
+        "display_url_path": [
+          "product",
+          "10p-plus"
+        ],
+        "finalUrlPreserved": true,
+        "displayPathPreserved": true
+      },
+      "protectedFields": {
+        "headline": true,
+        "long_headline": true,
+        "description": true,
+        "business_name": true,
+        "youtube_video": true,
+        "logo": true
+      },
+      "oldImageIdsRemaining": {
+        "marketing_image": [],
+        "portrait_marketing_image": [],
+        "square_marketing_image": []
+      },
+      "counts": {
+        "marketing_image": 4,
+        "square_marketing_image": 6,
+        "portrait_marketing_image": 4,
+        "logo": 4
+      },
+      "imageSummary": {
+        "marketing_image": [
+          {
+            "slot": 1,
+            "id": 409998451523,
+            "content": "https://tpc.googlesyndication.com/simgad/147402117716147518",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 351970,
+            "sha256": "ac94489f16d1bc22aec87a0e2b7a43b2c2f55298de61296f74c7aedceba00ceb",
+            "file": "/tmp/wp-gla-after-assets/marketing_image-409998451523"
+          },
+          {
+            "slot": 2,
+            "id": 409998457178,
+            "content": "https://tpc.googlesyndication.com/simgad/18252902111834578345",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 92313,
+            "sha256": "e466881273ccffcc5fce9c05cda3a8dace00be1a177a31d3dc5ca6225c4909fd",
+            "file": "/tmp/wp-gla-after-assets/marketing_image-409998457178"
+          },
+          {
+            "slot": 3,
+            "id": 410100472963,
+            "content": "https://tpc.googlesyndication.com/simgad/5467959077247392664",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 384163,
+            "sha256": "611963c20dcb9473a30639c8a1f7a406d9d5d0d67f4dcceab03442ffa735c0b9",
+            "file": "/tmp/wp-gla-after-assets/marketing_image-410100472963"
+          },
+          {
+            "slot": 4,
+            "id": 410172265887,
+            "content": "https://tpc.googlesyndication.com/simgad/11737234310690382294",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 172626,
+            "sha256": "a39f52fb8dd1b7170e1bacaaf58d7b7a0507da17c03d314e54e967f3aae4ec82",
+            "file": "/tmp/wp-gla-after-assets/marketing_image-410172265887"
+          }
+        ],
+        "square_marketing_image": [
+          {
+            "slot": 1,
+            "id": 410100451066,
+            "content": "https://tpc.googlesyndication.com/simgad/13184373693000771228",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 418284,
+            "sha256": "f3721ffe362dbfc465208ab3f48846e350e414080da139933ca38e000216019a",
+            "file": "/tmp/wp-gla-after-assets/square_marketing_image-410100451066"
+          },
+          {
+            "slot": 2,
+            "id": 410100451075,
+            "content": "https://tpc.googlesyndication.com/simgad/11093795369921765269",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 372915,
+            "sha256": "48d2b18a6a8bf2d61c8d9444af5e416d95b24d678849c6db976f657fdd015ba3",
+            "file": "/tmp/wp-gla-after-assets/square_marketing_image-410100451075"
+          },
+          {
+            "slot": 3,
+            "id": 410100472972,
+            "content": "https://tpc.googlesyndication.com/simgad/5321362270589123776",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 190790,
+            "sha256": "3903abf3da47b7c303801901a4180299458aa8c670634a8a1fd92b6331d468ec",
+            "file": "/tmp/wp-gla-after-assets/square_marketing_image-410100472972"
+          },
+          {
+            "slot": 4,
+            "id": 410100472975,
+            "content": "https://tpc.googlesyndication.com/simgad/16071042488408537355",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 366564,
+            "sha256": "6f386c868dfc56b9f76c56893475b4a4bcb5afff667613ff9692946fdd7a2306",
+            "file": "/tmp/wp-gla-after-assets/square_marketing_image-410100472975"
+          },
+          {
+            "slot": 5,
+            "id": 410100472981,
+            "content": "https://tpc.googlesyndication.com/simgad/9592477914156833955",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 189887,
+            "sha256": "bc6f44dc60979b655164deb13e60b7a024c358be2ae8029362d8a36a7633daaf",
+            "file": "/tmp/wp-gla-after-assets/square_marketing_image-410100472981"
+          },
+          {
+            "slot": 6,
+            "id": 410172265896,
+            "content": "https://tpc.googlesyndication.com/simgad/4844918780074997388",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 151073,
+            "sha256": "ad386c3ef4239ea32a9ceb488b69e3784381d8081c9cb29e5d0a68904dc3b30c",
+            "file": "/tmp/wp-gla-after-assets/square_marketing_image-410172265896"
+          }
+        ],
+        "portrait_marketing_image": [
+          {
+            "slot": 1,
+            "id": 409998451535,
+            "content": "https://tpc.googlesyndication.com/simgad/2959277340611706629",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 252524,
+            "sha256": "c8ea1051476558be285e641a5b4bf3666e6913f02966ee8f0b62a07624525200",
+            "file": "/tmp/wp-gla-after-assets/portrait_marketing_image-409998451535"
+          },
+          {
+            "slot": 2,
+            "id": 409998457187,
+            "content": "https://tpc.googlesyndication.com/simgad/14084286220006177816",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 150811,
+            "sha256": "e2ccb860c9f0302419db2d8afedc01ac80b8c58e2733094c8ee3121b84c21673",
+            "file": "/tmp/wp-gla-after-assets/portrait_marketing_image-409998457187"
+          },
+          {
+            "slot": 3,
+            "id": 410100451087,
+            "content": "https://tpc.googlesyndication.com/simgad/3830136228050604165",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 261664,
+            "sha256": "6768e532cf285c892b864971fd2feee77a36976d05e7d159f8bed37e79247d41",
+            "file": "/tmp/wp-gla-after-assets/portrait_marketing_image-410100451087"
+          },
+          {
+            "slot": 4,
+            "id": 410100472993,
+            "content": "https://tpc.googlesyndication.com/simgad/13531701507650271214",
+            "status": 200,
+            "contentType": "image/png",
+            "bytes": 111842,
+            "sha256": "541445975e70d8424ea8c0f712343c25aea7db962c8d2d15c20c3d28ec7d89f3",
+            "file": "/tmp/wp-gla-after-assets/portrait_marketing_image-410100472993"
+          }
+        ]
+      }
+    }
+  },
+  "rollback_media_write": {
+    "method": "PUT",
+    "path": "/wc/gla/ads/campaigns/asset-groups/6652700113",
+    "status": 200,
+    "response": {
+      "status": "success",
+      "message": "Successfully edited asset group.",
+      "id": 6652700113
+    },
+    "changed_field_types": [
+      "marketing_image",
+      "square_marketing_image",
+      "portrait_marketing_image"
+    ],
+    "asset_entry_count": 28
+  },
+  "rollback_after_get": {
+    "method": "GET",
+    "path": "/wc/gla/ads/campaigns/asset-groups?campaign_id=23405072796",
+    "status": 200,
+    "asset_group": {
+      "id": 6652700113,
+      "final_url": "https://svicloudtvbox.us/product/svicloud-10p-plus/",
+      "display_url_path": [
+        "product",
+        "10p-plus"
+      ],
+      "assets": {
+        "marketing_image": [
+          {
+            "id": 319737354296,
+            "content": "https://tpc.googlesyndication.com/simgad/1220387759834189413"
+          },
+          {
+            "id": 319821075442,
+            "content": "https://tpc.googlesyndication.com/simgad/2288451649640054486"
+          },
+          {
+            "id": 319863498987,
+            "content": "https://tpc.googlesyndication.com/simgad/842237743274211825"
+          },
+          {
+            "id": 319863552900,
+            "content": "https://tpc.googlesyndication.com/simgad/3415367161799774919"
+          }
+        ],
+        "square_marketing_image": [
+          {
+            "id": 319821075550,
+            "content": "https://tpc.googlesyndication.com/simgad/4234018302966857589"
+          },
+          {
+            "id": 319861574169,
+            "content": "https://tpc.googlesyndication.com/simgad/1210192345753587850"
+          },
+          {
+            "id": 319863498885,
+            "content": "https://tpc.googlesyndication.com/simgad/9348936224264725852"
+          },
+          {
+            "id": 319863498918,
+            "content": "https://tpc.googlesyndication.com/simgad/14355712376652179045"
+          },
+          {
+            "id": 319863499065,
+            "content": "https://tpc.googlesyndication.com/simgad/5976843453915853508"
+          },
+          {
+            "id": 319863552765,
+            "content": "https://tpc.googlesyndication.com/simgad/17181115981823753011"
+          }
+        ],
+        "portrait_marketing_image": [
+          {
+            "id": 319863498900,
+            "content": "https://tpc.googlesyndication.com/simgad/9617637448164695674"
+          },
+          {
+            "id": 319863498981,
+            "content": "https://tpc.googlesyndication.com/simgad/2041321646211686433"
+          },
+          {
+            "id": 319863570324,
+            "content": "https://tpc.googlesyndication.com/simgad/12419596345874421717"
+          },
+          {
+            "id": 319863571674,
+            "content": "https://tpc.googlesyndication.com/simgad/6349957929529685924"
+          }
+        ],
+        "youtube_video": [
+          {
+            "id": 320553491838,
+            "content": "Qj-TtrB_-Pg"
+          }
+        ],
+        "headline": [
+          {
+            "id": 346941188858,
+            "content": "Free US Shipping"
+          },
+          {
+            "id": 346941188870,
+            "content": "No Monthly Fees"
+          },
+          {
+            "id": 405360999389,
+            "content": "US Seller Support"
+          },
+          {
+            "id": 405361002740,
+            "content": "SVICloud TV Box US"
+          },
+          {
+            "id": 405361002746,
+            "content": "Chinese TV Box USA"
+          }
+        ],
+        "long_headline": [
+          {
+            "id": 405461285677,
+            "content": "SVICloud TV boxes with Korean, Chinese, Japanese and USA content, shipped fast from the US"
+          }
+        ],
+        "description": [
+          {
+            "id": 405461285680,
+            "content": "SVICloud 9P and 10P boxes in stock with access to popular Asian and US content apps."
+          },
+          {
+            "id": 405484660595,
+            "content": "Fast US delivery, secure checkout, trusted support"
+          },
+          {
+            "id": 405531691566,
+            "content": "Shop SVICloud TV boxes with Korean, Chinese, Japanese and USA apps. Free US shipping."
+          }
+        ],
+        "business_name": {
+          "id": 319695985640,
+          "content": "SvicloudTVbox.us"
+        },
+        "logo": [
+          {
+            "id": 319736868125,
+            "content": "https://tpc.googlesyndication.com/simgad/8025828284151045361"
+          },
+          {
+            "id": 319861552419,
+            "content": "https://tpc.googlesyndication.com/simgad/9221213205531827908"
+          },
+          {
+            "id": 319861574169,
+            "content": "https://tpc.googlesyndication.com/simgad/1210192345753587850"
+          },
+          {
+            "id": 334074662513,
+            "content": "https://tpc.googlesyndication.com/simgad/10386174255467216054"
+          }
+        ]
+      }
+    },
+    "verification": {
+      "capturedAt": "2026-08-20T03:22:40.895Z",
+      "group": {
+        "id": 6652700113,
+        "final_url": "https://svicloudtvbox.us/product/svicloud-10p-plus/",
+        "display_url_path": [
+          "product",
+          "10p-plus"
+        ],
+        "finalUrlPreserved": true,
+        "displayPathPreserved": true
+      },
+      "protectedFields": {
+        "headline": true,
+        "long_headline": true,
+        "description": true,
+        "business_name": true,
+        "youtube_video": true,
+        "logo": true
+      },
+      "summary": {
+        "marketing_image": {
+          "count": 4,
+          "contentUrlsMatch": true,
+          "assets": [
+            {
+              "slot": 1,
+              "id": 319737354296,
+              "content": "https://tpc.googlesyndication.com/simgad/1220387759834189413",
+              "status": 200,
+              "contentType": "image/jpeg",
+              "dimensions": "n/a",
+              "sha256": "baba8c7d6ad303e3a3cd6b52c83cecfd2b94f81742db988bce15b13ec88eb8f4",
+              "originalSha256": "baba8c7d6ad303e3a3cd6b52c83cecfd2b94f81742db988bce15b13ec88eb8f4",
+              "bytes": 339923
+            },
+            {
+              "slot": 2,
+              "id": 319821075442,
+              "content": "https://tpc.googlesyndication.com/simgad/2288451649640054486",
+              "status": 200,
+              "contentType": "image/png",
+              "dimensions": "1605×837",
+              "sha256": "b5e261a12d033dee6edffe2a2a14ada8a4d982ce24c91c91f89717fdf8ceffd9",
+              "originalSha256": "b5e261a12d033dee6edffe2a2a14ada8a4d982ce24c91c91f89717fdf8ceffd9",
+              "bytes": 566106
+            },
+            {
+              "slot": 3,
+              "id": 319863498987,
+              "content": "https://tpc.googlesyndication.com/simgad/842237743274211825",
+              "status": 200,
+              "contentType": "image/png",
+              "dimensions": "1601×835",
+              "sha256": "dc7891f120a1f20799cfcfb68418576253c36efe27a5c2cae77f3cf23150271b",
+              "originalSha256": "dc7891f120a1f20799cfcfb68418576253c36efe27a5c2cae77f3cf23150271b",
+              "bytes": 981253
+            },
+            {
+              "slot": 4,
+              "id": 319863552900,
+              "content": "https://tpc.googlesyndication.com/simgad/3415367161799774919",
+              "status": 200,
+              "contentType": "image/jpeg",
+              "dimensions": "n/a",
+              "sha256": "08f4e941b8ac25b80d3b6c00d3be80144c1eaef229f2c3f2b6ecae9b41b3cd54",
+              "originalSha256": "08f4e941b8ac25b80d3b6c00d3be80144c1eaef229f2c3f2b6ecae9b41b3cd54",
+              "bytes": 589254
+            }
+          ]
+        },
+        "square_marketing_image": {
+          "count": 6,
+          "contentUrlsMatch": true,
+          "assets": [
+            {
+              "slot": 1,
+              "id": 319821075550,
+              "content": "https://tpc.googlesyndication.com/simgad/4234018302966857589",
+              "status": 200,
+              "contentType": "image/jpeg",
+              "dimensions": "n/a",
+              "sha256": "c2687211e42469bec7920f1cb365f1a5201a5da12e651288b7e21ca31bb5965d",
+              "originalSha256": "c2687211e42469bec7920f1cb365f1a5201a5da12e651288b7e21ca31bb5965d",
+              "bytes": 744877
+            },
+            {
+              "slot": 2,
+              "id": 319861574169,
+              "content": "https://tpc.googlesyndication.com/simgad/1210192345753587850",
+              "status": 200,
+              "contentType": "image/png",
+              "dimensions": "1024×1024",
+              "sha256": "5053516096e8170208ce3779a4a1bcc08355edf1c2719031ae5395bea1c807ff",
+              "originalSha256": "5053516096e8170208ce3779a4a1bcc08355edf1c2719031ae5395bea1c807ff",
+              "bytes": 909289
+            },
+            {
+              "slot": 3,
+              "id": 319863498885,
+              "content": "https://tpc.googlesyndication.com/simgad/9348936224264725852",
+              "status": 200,
+              "contentType": "image/jpeg",
+              "dimensions": "n/a",
+              "sha256": "17e46ec0d11e2d27cc16f9671b847a020d2f842e1251646e2d76a71e51262398",
+              "originalSha256": "17e46ec0d11e2d27cc16f9671b847a020d2f842e1251646e2d76a71e51262398",
+              "bytes": 197498
+            },
+            {
+              "slot": 4,
+              "id": 319863498918,
+              "content": "https://tpc.googlesyndication.com/simgad/14355712376652179045",
+              "status": 200,
+              "contentType": "image/png",
+              "dimensions": "900×900",
+              "sha256": "d092d0076b53630d601f96ad845cd6b1e052db9cde4a423e6380b4c8a4a59f18",
+              "originalSha256": "d092d0076b53630d601f96ad845cd6b1e052db9cde4a423e6380b4c8a4a59f18",
+              "bytes": 324850
+            },
+            {
+              "slot": 5,
+              "id": 319863499065,
+              "content": "https://tpc.googlesyndication.com/simgad/5976843453915853508",
+              "status": 200,
+              "contentType": "image/jpeg",
+              "dimensions": "n/a",
+              "sha256": "175a896f1001eaa752015a9ff3e437f36477569d5f5310a2c9c36489180bb3dc",
+              "originalSha256": "175a896f1001eaa752015a9ff3e437f36477569d5f5310a2c9c36489180bb3dc",
+              "bytes": 379579
+            },
+            {
+              "slot": 6,
+              "id": 319863552765,
+              "content": "https://tpc.googlesyndication.com/simgad/17181115981823753011",
+              "status": 200,
+              "contentType": "image/png",
+              "dimensions": "897×898",
+              "sha256": "045ca52f6e56644fa1282028bffd691d9a3cc79b03b928fd0e6ea0c098df1ae3",
+              "originalSha256": "045ca52f6e56644fa1282028bffd691d9a3cc79b03b928fd0e6ea0c098df1ae3",
+              "bytes": 597081
+            }
+          ]
+        },
+        "portrait_marketing_image": {
+          "count": 4,
+          "contentUrlsMatch": true,
+          "assets": [
+            {
+              "slot": 1,
+              "id": 319863498900,
+              "content": "https://tpc.googlesyndication.com/simgad/9617637448164695674",
+              "status": 200,
+              "contentType": "image/jpeg",
+              "dimensions": "n/a",
+              "sha256": "628410c8c152372ae5bccfb57656c5cc2faf5080a59772114dfd1778eddc95d7",
+              "originalSha256": "628410c8c152372ae5bccfb57656c5cc2faf5080a59772114dfd1778eddc95d7",
+              "bytes": 160853
+            },
+            {
+              "slot": 2,
+              "id": 319863498981,
+              "content": "https://tpc.googlesyndication.com/simgad/2041321646211686433",
+              "status": 200,
+              "contentType": "image/png",
+              "dimensions": "721×898",
+              "sha256": "b3cb83062c208b787aa4d8b7f1cfa8d00730bbdb953eba71b681cb08a508bb24",
+              "originalSha256": "b3cb83062c208b787aa4d8b7f1cfa8d00730bbdb953eba71b681cb08a508bb24",
+              "bytes": 462502
+            },
+            {
+              "slot": 3,
+              "id": 319863570324,
+              "content": "https://tpc.googlesyndication.com/simgad/12419596345874421717",
+              "status": 200,
+              "contentType": "image/png",
+              "dimensions": "720×900",
+              "sha256": "f3066e82179b2b6c754c9b72b1e4d0848b6b9aab48e61770ffe7fb3ea705d290",
+              "originalSha256": "f3066e82179b2b6c754c9b72b1e4d0848b6b9aab48e61770ffe7fb3ea705d290",
+              "bytes": 245232
+            },
+            {
+              "slot": 4,
+              "id": 319863571674,
+              "content": "https://tpc.googlesyndication.com/simgad/6349957929529685924",
+              "status": 200,
+              "contentType": "image/jpeg",
+              "dimensions": "n/a",
+              "sha256": "b09e8330a74afe31145effb669a741cae250bd13753908b495d5fec1bc5f3ea0",
+              "originalSha256": "b09e8330a74afe31145effb669a741cae250bd13753908b495d5fec1bc5f3ea0",
+              "bytes": 307559
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -162,3 +162,17 @@ Captured: 2026-08-20T03:16:46.243Z. Each returned Google asset URL fetched HTTP 
 - Counts remained 4 landscape, 6 square, 4 portrait, and 4 logos; all 14 original image IDs are absent from their respective media fields.
 - No WordPress site implementation, template, landing-page, translation, production asset, or general Media Library record was changed by the scoped REST operation.
 - The active PMax campaign's name, status, type, amount, country, start date, and targeted locations matched the before-state on after-read. The removed Search campaign was omitted by the after-read collection response and was not part of the PUT request. No budget, bid, targeting, campaign setting, Merchant Center, or unrelated Google operation was requested.
+
+## Post-audit rollback and final state
+
+The independent completion audit rejected the media write because candidate approval and target-campaign confirmation were not established, and the selected group still landed on 10P+. To avoid leaving unapproved 15P creative attached to that group, the 14 image fields were restored from the captured before-state.
+
+- Rollback endpoint: `PUT /wp-json/wc/gla/ads/campaigns/asset-groups/6652700113`
+- Rollback result: HTTP 200, `Successfully edited asset group.`
+- Rollback payload: 28 entries — current 14 image IDs for deletion and the 14 captured pre-write image URLs for recreation.
+- Rollback precondition: current post-write image IDs and protected fields matched the captured attempted after-state before the rollback.
+- Final GET: captured `2026-08-20T03:22:40.895Z`; all three media-field content URL sets matched the before-state exactly; original asset IDs were restored.
+- Final protected fields: headlines, long headline, descriptions, business name, YouTube video, logos, final URL, and display path remained unchanged.
+- Raw sanitized REST captures: [`google-campaign-media-api-capture.json`](google-campaign-media-api-capture.json).
+
+**Final disposition:** no 15P media change remains saved. Further application requires authoritative approval for the exact derived candidates and confirmation of the correct 15P campaign/asset group or landing destination. The goal is intentionally not complete.
