@@ -2827,6 +2827,11 @@ if (!function_exists('svic_enrich_product_schema_for_google_merchant')) {
      */
     function svic_enrich_product_schema_for_google_merchant(array $node): array
     {
+        $node['brand'] = [
+            '@type' => 'Brand',
+            'name'  => 'SVICLOUD',
+        ];
+
         if (empty($node['offers'])) {
             return $node;
         }
