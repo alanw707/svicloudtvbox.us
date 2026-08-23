@@ -1056,7 +1056,7 @@ return [
                     'image_alt' => 'SVICLOUD 15P Android 14 pre-order graphic',
                     'interval'  => 'device',
                     'copy'      => 'Android 14 with Amlogic S905Y5, 4 GB DDR3, 64 GB eMMC, Wi-Fi 6, Bluetooth 5.4, and 4K HDR playback.',
-                    'stock_note' => 'Expected delivery: 2–3 weeks after ordering',
+                    'stock_note' => 'Release window: 1 to 2 weeks',
                     'features'  => [
                         'processor' => 'Amlogic S905Y5 + Android 14',
                         'no_fees' => '4 GB DDR3 + 64 GB eMMC',
@@ -1239,9 +1239,9 @@ return [
                 'best_for' => 'Family rooms, sports fans, and mobile app users',
                 'price_label' => 'Pre-order price',
                 'price_tbc'   => 'Available for pre-order',
-                'price_note'  => 'Expected delivery: 2–3 weeks after ordering',
+                'price_note'  => 'Release window: 1 to 2 weeks',
                 'delivery_banner_label' => 'Pre-order delivery',
-                'delivery_banner_copy'  => 'Expected delivery: 2–3 weeks after ordering.',
+                'delivery_banner_copy'  => 'Release window: 1 to 2 weeks.',
                 'image_alt'   => 'SVICLOUD 15P Android 14 pre-order graphic',
                 'image_tbc'   => 'SVICLOUD 15P product image',
                 'features' => [
@@ -1253,7 +1253,7 @@ return [
                 'assurance' => [
                     'shipping' => 'Available for pre-order',
                     'warranty' => '$288 sale · $379 regular',
-                    'support'  => 'Expected delivery: 2–3 weeks after ordering',
+                    'support'  => 'Release window: 1 to 2 weeks',
                 ],
             ],
             '10p' => [
@@ -1311,7 +1311,7 @@ return [
             'crosslink' => [
                 'badge'  => 'New model',
                 'title'  => 'SVICLOUD 15P pre-orders are open',
-                'lead'   => 'Pre-order the Android 14 SVICLOUD 15P for $288 (regular $379). Expected delivery is 2–3 weeks after ordering.',
+                'lead'   => 'Pre-order the Android 14 SVICLOUD 15P for $288 (regular $379). Release window: 1 to 2 weeks.',
                 'cta'    => 'Pre-order SVICLOUD 15P',
                 'target' => 'svicloud-15p',
             ],
@@ -1349,7 +1349,7 @@ return [
         ],
         'svicloud-9p' => [
             'short_description' => 'Legacy SVICLOUD 9P model page for existing owners comparing supported replacement options.',
-            'description' => '<p>SVICLOUD 9P is a previous-generation model retained here for owners, support reference, and honest upgrade comparisons.</p><ul><li>This legacy page remains available instead of being removed or redirected.</li><li>Existing owners can continue using support resources and compare current models.</li><li>The 15P is available on pre-order for $288 (regular $379); expected delivery is 2–3 weeks after ordering.</li></ul>',
+            'description' => '<p>SVICLOUD 9P is a previous-generation model retained here for owners, support reference, and honest upgrade comparisons.</p><ul><li>This legacy page remains available instead of being removed or redirected.</li><li>Existing owners can continue using support resources and compare current models.</li><li>The 15P is available on pre-order for $288 (regular $379), with a release window of 1 to 2 weeks.</li></ul>',
             'best_for' => [
                 'badge' => 'Legacy model',
                 'title' => 'Existing 9P owners researching their next box',
@@ -1371,15 +1371,15 @@ return [
         'svicloud-15p' => [
             'title' => 'SVICLOUD 15P TV Box',
             'meta' => [
-                'title'       => 'SVICLOUD 15P Pre-order $288 | Android 14 TV Box',
-                'description' => 'Pre-order SVICLOUD 15P for $288 (regular $379). Android 14, Amlogic S905Y5, 4 GB DDR3, 64 GB eMMC, Wi-Fi 6, Bluetooth 5.4, and 4K HDR.',
+                'title'       => 'SVICLOUD 15P Release Soon | $288 Android 14 TV Box',
+                'description' => 'SVICLOUD 15P releases in 1 to 2 weeks. Pre-order for $288 (regular $379): Android 14, Amlogic S905Y5, Wi-Fi 6, Bluetooth 5.4, and 4K HDR.',
                 'image_alt'   => 'SVICLOUD 15P TV box front view',
             ],
             'short_description' => 'Everything in 10P+, plus support for downloading mobile apps.',
-            'description' => '<p>The SVICLOUD 15P TV Box runs Android 14 on an Amlogic S905Y5 quad-core ARM Cortex-A55 processor.</p><h2>Core specifications</h2><ul><li>4 GB DDR3 memory and 64 GB eMMC storage.</li><li>Dual-band 2.4/5 GHz Wi-Fi 6 with 2T2R and Bluetooth 5.4.</li><li>HDR10+, HDR10, and HLG picture processing.</li><li>AV1, VP9, H.265/HEVC, and H.264 hardware decoding, with AV1, VP9, and H.265/HEVC support up to 4K × 2K at 60 fps.</li><li>HDMI 2.1, two USB 2.0 ports, RJ45 Ethernet, optical audio, and Type-C 5V/2A power.</li></ul><h2>In the box</h2><p>Gift box, AC adapter, HDMI cable, Bluetooth voice air-mouse remote, and user manual.</p><p><strong>Available for pre-order for $288 (regular $379).</strong> Expected delivery: 2–3 weeks after ordering.</p>',
+            'description' => '<p>The SVICLOUD 15P TV Box runs Android 14 on an Amlogic S905Y5 quad-core ARM Cortex-A55 processor.</p><h2>Core specifications</h2><ul><li>4 GB DDR3 memory and 64 GB eMMC storage.</li><li>Dual-band 2.4/5 GHz Wi-Fi 6 with 2T2R and Bluetooth 5.4.</li><li>HDR10+, HDR10, and HLG picture processing.</li><li>AV1, VP9, H.265/HEVC, and H.264 hardware decoding, with AV1, VP9, and H.265/HEVC support up to 4K × 2K at 60 fps.</li><li>HDMI 2.1, two USB 2.0 ports, RJ45 Ethernet, optical audio, and Type-C 5V/2A power.</li></ul><h2>In the box</h2><p>Gift box, AC adapter, HDMI cable, Bluetooth voice air-mouse remote, and user manual.</p><p><strong>Available for pre-order for $288 (regular $379).</strong> Release window: 1 to 2 weeks.</p>',
             'footer' => [
                 'tagline' => 'SVICLOUD 15P pre-order information',
-                'summary' => 'Source-confirmed 15P hardware with a $288 pre-order price (regular $379). Expected delivery: 2–3 weeks after ordering.',
+                'summary' => 'Source-confirmed 15P hardware with a $288 pre-order price (regular $379). Release window: 1 to 2 weeks.',
                 'badges' => [
                     'coming_soon'   => 'Available for pre-order',
                     'specifications'=> 'Hardware specifications available',
@@ -1396,7 +1396,7 @@ return [
                     ],
                     'availability' => [
                         'label'       => 'Pre-order status',
-                        'description' => 'Available for pre-order for $288; expected delivery is 2–3 weeks after ordering.',
+                        'description' => 'Available for pre-order for $288; release window is 1 to 2 weeks.',
                     ],
                 ],
             ],
@@ -1411,7 +1411,7 @@ return [
             ],
             'prelaunch' => [
                 'subtitle' => 'Available for pre-order with Android 14, Amlogic S905Y5, Wi-Fi 6, Bluetooth 5.4, and 4K HDR.',
-                'detail'   => '$288 sale · $379 regular · Expected delivery: 2–3 weeks after ordering',
+                'detail'   => '$288 sale · $379 regular · Release window: 1 to 2 weeks',
                 'image_placeholder' => 'SVICLOUD 15P TV box front view',
                 'badges' => [
                     'specs'        => 'Android 14',
@@ -1426,7 +1426,7 @@ return [
                 'reassurance' => [
                     'badge' => 'Verified product details',
                     'title' => 'Confirmed 15P hardware at a glance',
-                    'copy'  => 'Review the verified hardware and in-box accessories before placing a $288 pre-order. Expected delivery: 2–3 weeks after ordering.',
+                    'copy'  => 'Review the verified hardware and in-box accessories before placing a $288 pre-order. Release window: 1 to 2 weeks.',
                     'bullets' => [
                         'shipping'  => 'Android 14 with Amlogic S905Y5 processing',
                         'warranty'  => '4 GB DDR3 memory + 64 GB eMMC storage',
@@ -1436,7 +1436,7 @@ return [
                 'faq_header' => [
                     'badge' => '15P pre-order information',
                     'title' => 'Confirmed specifications and pre-order details',
-                    'lead'  => 'The supplied files confirm the listed hardware and package contents. Pre-orders are $288 (regular $379); expected delivery is 2–3 weeks after ordering.',
+                    'lead'  => 'The supplied files confirm the listed hardware and package contents. Pre-orders are $288 (regular $379); release window is 1 to 2 weeks.',
                 ],
                 'faq' => [
                     'specs' => [
@@ -1445,7 +1445,7 @@ return [
                     ],
                     'availability' => [
                         'q' => 'Can I order the SVICLOUD 15P now?',
-                        'a' => 'Yes. The 15P is available on pre-order for $288 (regular $379). Expected delivery is 2–3 weeks after ordering.',
+                        'a' => 'Yes. The 15P is available on pre-order for $288 (regular $379). Release window is 1 to 2 weeks.',
                     ],
                     'policy' => [
                         'q' => 'What comes with the SVICLOUD 15P?',
@@ -1484,7 +1484,7 @@ return [
                         'bullets' => [
                             'one'   => '15P: Amlogic S905Y5, Android 14, 4 GB DDR3, and 64 GB eMMC',
                             'two'   => '15P: dual-band Wi-Fi 6, Bluetooth 5.4, HDMI 2.1, and optical audio',
-                            'three' => '15P: available on pre-order for $288 (regular $379); expected delivery is 2–3 weeks after ordering',
+                            'three' => '15P: available on pre-order for $288 (regular $379); release window is 1 to 2 weeks',
                         ],
                         'link_label' => 'See the SVICLOUD 10P+',
                     ],
@@ -1511,7 +1511,7 @@ return [
                     'title' => 'What is confirmed and what still waits',
                     'items' => [
                         'shipping' => 'Confirmed: hardware, ports, wireless specifications, supported codecs, and package contents',
-                        'support'  => 'Pre-order price: $288 sale, $379 regular; expected delivery is 2–3 weeks after ordering',
+                        'support'  => 'Pre-order price: $288 sale, $379 regular; release window is 1 to 2 weeks',
                         'warranty' => 'Not announced: 15P-specific warranty and return terms',
                     ],
                 ],
@@ -1532,7 +1532,7 @@ return [
         'traffic' => [
             'badge' => 'Buy with confidence in the U.S.',
             'title' => 'Compare a 15P pre-order with models available from U.S. inventory',
-            'lead'  => '15P is available on pre-order for $288 (regular $379), with expected delivery 2–3 weeks after ordering. Current 10P+ and 10S purchases retain their published fulfillment and support terms.',
+            'lead'  => '15P is available on pre-order for $288 (regular $379), with a release window of 1 to 2 weeks. Current 10P+ and 10S purchases retain their published fulfillment and support terms.',
             'bullets' => [
                 'shipping'  => '48-hour U.S. shipping with tracking and localized power/HDMI',
                 'concierge' => 'Bilingual concierge for setup, Wi-Fi tuning, karaoke mics, Kids Mode',
@@ -1619,7 +1619,7 @@ return [
         'confidence' => [
             'badge' => 'Order with clarity',
             'title' => 'Pick your model, then order with local support',
-            'lead'  => 'Use confirmed specifications and prices to compare all three models. 15P is available on pre-order; expected delivery is 2–3 weeks after ordering.',
+            'lead'  => 'Use confirmed specifications and prices to compare all three models. 15P is available on pre-order with a release window of 1 to 2 weeks.',
             'cards' => [
                 'official' => [
                     'title' => 'Official U.S. storefront',

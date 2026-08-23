@@ -7,6 +7,7 @@ if (!function_exists('svic_agent_friendly_sitemap_paths')) {
         $paths = [
             '/llms.txt',
             '/llms-full.txt',
+            '/agent/svicloud-15p.md',
             '/agent/products.md',
             '/agent/compare-10p-vs-10s.md',
             '/agent/apps.md',
@@ -22,6 +23,7 @@ if (!function_exists('svic_agent_friendly_sitemap_paths')) {
             '/zh/guides-setup/',
             '/zh/svicloud遙控器配對失敗-故障碼排查一次搞定/',
             
+            '/svicloud-10p-vs-10s/',
             '/best-svicloud-box-for-chinese-tv-usa/',
             '/yogurt-tv-not-working-upgrade-guide/',
             '/svicloud-box-authenticity-guide/',

@@ -169,7 +169,7 @@ try {
           if (offers.length !== 1) issue(scope, `expected one 15P Offer, got ${offers.length}`);
           else {
             const offer = offers[0];
-            if (Number(offer.price) !== 288 || offer.priceCurrency !== 'USD' || offer.availability !== 'https://schema.org/PreOrder' || offer.availabilityStarts !== '2026-09-09') issue(scope, `15P Offer mismatch: ${JSON.stringify({ price: offer.price, currency: offer.priceCurrency, availability: offer.availability, availabilityStarts: offer.availabilityStarts })}`);
+            if (Number(offer.price) !== 288 || offer.priceCurrency !== 'USD' || offer.availability !== 'https://schema.org/PreOrder' || offer.availabilityStarts !== '2026-09-06') issue(scope, `15P Offer mismatch: ${JSON.stringify({ price: offer.price, currency: offer.priceCurrency, availability: offer.availability, availabilityStarts: offer.availabilityStarts })}`);
             if (JSON.stringify(offer.shippingDetails || '').includes('deliveryTime')) issue(scope, 'PreOrder Offer includes deliveryTime');
           }
         }

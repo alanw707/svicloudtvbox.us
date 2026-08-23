@@ -108,9 +108,9 @@ $overrides = [
                 'best_for' => '家庭客厅、体育迷与手机 App 用户',
                 'price_label' => '预订价',
                 'price_tbc'   => '接受预订',
-                'price_note'  => '预计下单后 2–3 周送达',
+                'price_note'  => '上市时间：1 至 2 周',
                 'delivery_banner_label' => '预订配送',
-                'delivery_banner_copy'  => '预计下单后 2–3 周送达。',
+                'delivery_banner_copy'  => '上市时间：1 至 2 周。',
                 'image_alt'   => '小云 15P Android 14 预订图',
                 'image_tbc'   => '小云 15P 产品图片',
                 'features' => [
@@ -122,7 +122,7 @@ $overrides = [
                 'assurance' => [
                     'shipping' => '接受预订',
                     'warranty' => '特价 US$288 · 原价 US$379',
-                    'support'  => '预计下单后 2–3 周送达',
+                    'support'  => '上市时间：1 至 2 周',
                 ],
             ],
             '10p' => [
@@ -930,7 +930,7 @@ $overrides = [
                     'image_alt' => '小云 15P Android 14 预订图',
                     'interval'  => '台',
                     'copy'      => '搭载 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、蓝牙 5.4 与 4K HDR。',
-                    'stock_note' => '预计下单后 2–3 周送达',
+                    'stock_note' => '上市时间：1 至 2 周',
                     'features'  => [
                         'processor' => 'Amlogic S905Y5 + Android 14',
                         'no_fees' => '4 GB DDR3 + 64 GB eMMC',
@@ -1119,7 +1119,7 @@ $overrides = [
             'crosslink' => [
                 'badge'  => '新机登场',
                 'title'  => '小云 15P 预订已开放',
-                'lead'   => '小云 15P 现以 US$288 接受预订（原价 US$379）；预计下单后 2–3 周送达。',
+                'lead'   => '小云 15P 现以 US$288 接受预订（原价 US$379）；上市时间：1 至 2 周。',
                 'cta'    => '预订小云 15P',
                 'target' => 'svicloud-15p',
             ],
@@ -1157,7 +1157,7 @@ $overrides = [
         ],
         'svicloud-9p' => [
             'short_description' => '保留给现有用户的旧款小云 9P 页面，方便查找支持信息与比较后续机型。',
-            'description' => '<p>小云 9P 是上一代机型。本页持续保留，不删除也不隐藏，供现有用户查找与比较。</p><ul><li>9P 若仍符合需求，无需急着更换。</li><li>15P 硬件规格已公布，可按实际差异比较。</li><li>15P 现以 US$288 接受预订（原价 US$379）；预计下单后 2–3 周送达。</li></ul>',
+            'description' => '<p>小云 9P 是上一代机型。本页持续保留，不删除也不隐藏，供现有用户查找与比较。</p><ul><li>9P 若仍符合需求，无需急着更换。</li><li>15P 硬件规格已公布，可按实际差异比较。</li><li>15P 现以 US$288 接受预订（原价 US$379）；上市时间：1 至 2 周。</li></ul>',
             'best_for' => [
                 'badge' => '旧款机型',
                 'title' => '正在评估下一台盒子的 9P 用户',
@@ -1184,10 +1184,10 @@ $overrides = [
                 'image_alt'   => '小云 15P 电视盒正面',
             ],
             'short_description' => '具备 10P+ 的全部功能，并支持下载手机 App。',
-            'description' => '<p>全新小云 15P 电视盒搭载 Android 14 与 Amlogic S905Y5 四核心 ARM Cortex-A55 处理器。</p><h2>核心规格</h2><ul><li>4 GB DDR3 内存与 64 GB eMMC 存储空间。</li><li>2.4/5 GHz 双频 Wi-Fi 6（2T2R）与蓝牙 5.4。</li><li>HDR10+、HDR10 与 HLG 画面处理。</li><li>支持 AV1、VP9、H.265/HEVC 与 H.264 硬件解码；AV1、VP9、H.265/HEVC 最高支持 4K × 2K 60 fps。</li><li>HDMI 2.1、两个 USB 2.0、RJ45 有线网络、光纤音频与 Type-C 5V/2A 电源。</li></ul><h2>盒内配件</h2><p>礼盒、AC 适配器、HDMI 线、蓝牙语音飞鼠遥控器与用户手册。</p><p><strong>现以 US$288 接受预订（原价 US$379）。</strong>预计下单后 2–3 周送达。</p>',
+            'description' => '<p>全新小云 15P 电视盒搭载 Android 14 与 Amlogic S905Y5 四核心 ARM Cortex-A55 处理器。</p><h2>核心规格</h2><ul><li>4 GB DDR3 内存与 64 GB eMMC 存储空间。</li><li>2.4/5 GHz 双频 Wi-Fi 6（2T2R）与蓝牙 5.4。</li><li>HDR10+、HDR10 与 HLG 画面处理。</li><li>支持 AV1、VP9、H.265/HEVC 与 H.264 硬件解码；AV1、VP9、H.265/HEVC 最高支持 4K × 2K 60 fps。</li><li>HDMI 2.1、两个 USB 2.0、RJ45 有线网络、光纤音频与 Type-C 5V/2A 电源。</li></ul><h2>盒内配件</h2><p>礼盒、AC 适配器、HDMI 线、蓝牙语音飞鼠遥控器与用户手册。</p><p><strong>现以 US$288 接受预订（原价 US$379）。</strong>上市时间：1 至 2 周。</p>',
             'footer' => [
                 'tagline' => '小云 15P 预订信息',
-                'summary' => '根据供应商来源整理的小云 15P 硬件资料；特价 US$288（原价 US$379），预计下单后 2–3 周送达。',
+                'summary' => '根据供应商来源整理的小云 15P 硬件资料；特价 US$288（原价 US$379），上市时间：1 至 2 周。',
                 'badges' => [
                     'coming_soon'   => '接受预订',
                     'specifications'=> '硬件规格已公布',
@@ -1204,7 +1204,7 @@ $overrides = [
                     ],
                     'availability' => [
                         'label'       => '预订状态',
-                        'description' => '现以 US$288 接受预订；预计下单后 2–3 周送达。'
+                        'description' => '现以 US$288 接受预订；上市时间：1 至 2 周。'
                     ],
                 ],
             ],
@@ -1219,7 +1219,7 @@ $overrides = [
             ],
             'prelaunch' => [
                 'subtitle' => '接受预订，搭载 Android 14、Amlogic S905Y5、Wi-Fi 6、蓝牙 5.4 与 4K HDR。',
-                'detail'   => '特价 US$288 · 原价 US$379 · 预计下单后 2–3 周送达',
+                'detail'   => '特价 US$288 · 原价 US$379 · 上市时间：1 至 2 周',
                 'image_placeholder' => '小云 15P 电视盒正面',
                 'badges' => [
                     'specs'        => 'Android 14',
@@ -1234,7 +1234,7 @@ $overrides = [
                 'reassurance' => [
                     'badge' => '已确认产品资料',
                     'title' => '小云 15P 已确认硬件重点',
-                    'copy'  => '下单前可查看已确认的硬件与盒内配件；预订价 US$288，预计下单后 2–3 周送达。',
+                    'copy'  => '下单前可查看已确认的硬件与盒内配件；预订价 US$288，上市时间：1 至 2 周。',
                     'bullets' => [
                         'shipping'  => 'Android 14 + Amlogic S905Y5',
                         'warranty'  => '4 GB DDR3 + 64 GB eMMC',
@@ -1244,7 +1244,7 @@ $overrides = [
                 'faq_header' => [
                     'badge' => '15P 预订信息',
                     'title' => '已确认规格与预订详情',
-                    'lead'  => '供应商资料确认所列硬件与盒内配件；预订价 US$288（原价 US$379），预计下单后 2–3 周送达。',
+                    'lead'  => '供应商资料确认所列硬件与盒内配件；预订价 US$288（原价 US$379），上市时间：1 至 2 周。',
                 ],
                 'faq' => [
                     'specs' => [
@@ -1253,7 +1253,7 @@ $overrides = [
                     ],
                     'availability' => [
                         'q' => '现在可以订购小云 15P 吗？',
-                        'a' => '可以。15P 现以 US$288 接受预订（原价 US$379）；预计下单后 2–3 周送达。',
+                        'a' => '可以。15P 现以 US$288 接受预订（原价 US$379）；上市时间：1 至 2 周。',
                     ],
                     'policy' => [
                         'q' => '小云 15P 盒内有哪些配件？',
@@ -1292,7 +1292,7 @@ $overrides = [
                         'bullets' => [
                             'one'   => '15P：Amlogic S905Y5、Android 14、4 GB DDR3 与 64 GB eMMC',
                             'two'   => '15P：双频 Wi-Fi 6、蓝牙 5.4、HDMI 2.1 与光纤音频',
-                            'three' => '15P 现以 US$288 接受预订（原价 US$379）；预计下单后 2–3 周送达'
+                            'three' => '15P 现以 US$288 接受预订（原价 US$379）；上市时间：1 至 2 周'
                         ],
                         'link_label' => '查看小云 10P+',
                     ],
@@ -1319,7 +1319,7 @@ $overrides = [
                     'title' => '已确认与尚未公布的信息',
                     'items' => [
                         'shipping' => '已确认：硬件、接口、无线规格、解码格式与盒内配件',
-                        'support'  => '预订价：特价 US$288、原价 US$379；预计下单后 2–3 周送达',
+                        'support'  => '预订价：特价 US$288、原价 US$379；上市时间：1 至 2 周',
                         'warranty' => '尚未公布：15P 专属保修与退换货条款',
                     ],
                 ],
@@ -1340,7 +1340,7 @@ $overrides = [
         'traffic' => [
             'badge' => '美国购买更安心',
             'title' => '比较 15P 预订与美国现货机型',
-            'lead'  => '15P 现以 US$288 接受预订（原价 US$379），预计下单后 2–3 周送达；10P+ 与 10S 维持各自现售条款。',
+            'lead'  => '15P 现以 US$288 接受预订（原价 US$379），上市时间：1 至 2 周；10P+ 与 10S 维持各自现售条款。',
             'bullets' => [
                 'shipping'  => '48 小时美国发货，附本地电源/HDMI 与追踪号',
                 'concierge' => '双语礼宾协助安装、Wi-Fi 调优、K 歌麦克风、Kids Mode',
@@ -1427,7 +1427,7 @@ $overrides = [
         'confidence' => [
             'badge' => '下单更清楚',
             'title' => '挑好机型后，后续流程也有本地支援',
-            'lead'  => '以已确认规格与价格比较三款机型；15P 接受预订，预计下单后 2–3 周送达。',
+            'lead'  => '以已确认规格与价格比较三款机型；15P 接受预订，上市时间：1 至 2 周。',
             'cards' => [
                 'official' => [
                     'title' => '美国官方销售通路',

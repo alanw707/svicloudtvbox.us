@@ -2,8 +2,8 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Localized 15P backorder cart flow', () => {
   for (const locale of [
-    { prefix: '/zh', added: '已加入您的購物車', shipping: '預計下單後 2–3 週送達' },
-    { prefix: '/zh-cn', added: '已加入您的购物车', shipping: '预计下单后 2–3 周送达' },
+    { prefix: '/zh', added: '已加入您的購物車', shipping: '上市時程：1 至 2 週' },
+    { prefix: '/zh-cn', added: '已加入您的购物车', shipping: '上市时间：1 至 2 周' },
   ]) {
     test(`keeps ${locale.prefix} through add-to-cart, cart, and checkout`, async ({ page }) => {
       await page.goto(`${locale.prefix}/product/svicloud-15p/`, { waitUntil: 'domcontentloaded' });

@@ -23,7 +23,7 @@ do_action('woocommerce_email_header', $email_heading, $email ?? null);
 </p>
 
 <p>
-    SVICLOUD 15P is currently in preorder for the U.S. launch. The official U.S. launch is expected in about 2 weeks, so the expected delivery timeframe for this order is <strong>2 to 3 weeks</strong>.
+    SVICLOUD 15P is currently in preorder for the U.S. launch. The official U.S. launch window is now <strong>1 to 2 weeks</strong>.
 </p>
 
 <p>
@@ -33,7 +33,7 @@ do_action('woocommerce_email_header', $email_heading, $email ?? null);
 <p>
     <strong>Order:</strong> #<?php echo esc_html($order->get_order_number()); ?><br>
     <strong>Product:</strong> SVICLOUD 15P preorder<br>
-    <strong>Expected delivery:</strong> 2 to 3 weeks
+    <strong>Release window:</strong> 1 to 2 weeks
 </p>
 
 <p>

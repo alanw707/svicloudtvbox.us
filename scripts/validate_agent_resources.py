@@ -16,6 +16,7 @@ WORKFLOW = ROOT / ".github/workflows/deploy-theme.yml"
 REQUIRED_ENDPOINTS = [
     "llms.txt",
     "llms-full.txt",
+    "agent/svicloud-15p.md",
     "agent/products.md",
     "agent/compare-10p-vs-10s.md",
     "agent/apps.md",

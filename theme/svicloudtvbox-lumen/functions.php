@@ -1977,18 +1977,18 @@ if (!function_exists('svic_homepage_meta_definitions')) {
 
         $definitions = [
             'zh_tw' => [
-                'title'       => '小雲 15P 預購｜小雲盒子美國授權經銷',
-                'description' => '小雲 15P 現以 US$288 接受預購（原價 US$379），預計下單後 2–3 週送達，由小雲盒子美國授權經銷提供。可比較 10P+ 與 10S。',
+                'title'       => '小雲 10P+ 與 15P｜小雲盒子美國授權經銷',
+                'description' => '選購現貨小雲 10P+，或預購 1 至 2 週後上市的 15P（US$288，原價 US$379）。小雲盒子美國授權經銷，可比較 10P+、15P 與 10S。',
                 'image_alt'   => '小雲 15P Android 14 電視盒預購圖',
             ],
             'zh_cn' => [
-                'title'       => '小云 15P 预订｜小云盒子美国授权经销',
-                'description' => '小云 15P 现以 US$288 接受预订（原价 US$379），预计下单后 2–3 周送达，由小云盒子美国授权经销提供。可比较 10P+ 与 10S。',
+                'title'       => '小云 10P+ 与 15P｜小云盒子美国授权经销',
+                'description' => '选购现货小云 10P+，或预订 1 至 2 周后上市的 15P（US$288，原价 US$379）。小云盒子美国授权经销，可比较 10P+、15P 与 10S。',
                 'image_alt'   => '小云 15P Android 14 电视盒预订图',
             ],
             'en_us' => [
-                'title'       => 'SVICLOUD 15P Pre-order | 小雲盒子 U.S. Authorized Dealer',
-                'description' => 'Pre-order SVICLOUD 15P for $288 (regular $379) from an authorized U.S. dealer. Expected delivery is 2–3 weeks after ordering. Compare 10P+ and 10S with bilingual English/中文 support.',
+                'title'       => 'SVICLOUD 10P+ & 15P | 小雲盒子 U.S. Authorized Dealer',
+                'description' => 'Shop the in-stock SVICLOUD 10P+ or pre-order 15P, releasing in 1 to 2 weeks for $288 (regular $379). Compare 10P+, 15P, and 10S.',
                 'image_alt'   => 'SVICLOUD 15P Android 14 TV box pre-order graphic',
             ],
         ];
@@ -2864,7 +2864,7 @@ if (!function_exists('svic_enrich_product_schema_for_google_merchant')) {
             $offer['availability'] = $normalize_schema_url($offer['availability'] ?? null);
             if ($is_15p_node) {
                 $offer['availability'] = 'https://schema.org/PreOrder';
-                $offer['availabilityStarts'] = '2026-09-09';
+                $offer['availabilityStarts'] = '2026-09-06';
             }
 
             return svic_enrich_offer_schema_for_google_merchant($offer);
@@ -8197,7 +8197,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
         $availability_overrides = [
             '1204' => [
                 'availability'      => 'preorder',
-                'availability_date' => '2026-09-09',
+                'availability_date' => '2026-09-06',
             ],
         ];
 

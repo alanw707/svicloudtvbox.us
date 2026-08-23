@@ -43,7 +43,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     const pricingCard = page.locator('.lumen-pricing .shop-product-card--new');
     const pricingCardText = await pricingCard.innerText();
     expect(pricingCardText.toLowerCase()).toContain('available for pre-order');
-    expect(pricingCardText.toLowerCase()).toContain('expected delivery: 2–3 weeks after ordering');
+    expect(pricingCardText.toLowerCase()).toContain('release window: 1 to 2 weeks');
     expect(pricingCardText).toContain('$288.00');
     expect(pricingCardText).toContain('$379.00');
     expect(pricingCardText).not.toContain('Coming Soon');
@@ -59,7 +59,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
 
     const card = page.locator('.shop-product-card--backorder');
     const cardText = await card.innerText();
-    for (const claim of ['Available for pre-order', 'Expected delivery: 2–3 weeks after ordering', '$288.00', '$379.00', 'Amlogic S905Y5', 'Android 14', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'AV1']) {
+    for (const claim of ['Available for pre-order', 'Release window: 1 to 2 weeks', '$288.00', '$379.00', 'Amlogic S905Y5', 'Android 14', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'AV1']) {
       expect(cardText.toLowerCase()).toContain(claim.toLowerCase());
     }
     expect(cardText).not.toContain('Coming Soon');
@@ -132,7 +132,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
       priceCurrency: 'USD',
       price: '288.00',
       availability: 'https://schema.org/PreOrder',
-      availabilityStarts: '2026-09-09',
+      availabilityStarts: '2026-09-06',
     });
     expect((offer.shippingDetails as Record<string, unknown> | undefined)?.deliveryTime).toBeUndefined();
 
@@ -145,10 +145,10 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
 
     await expect(page.locator('.svic-15p-delivery-banner')).toBeVisible();
     await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Pre-order delivery');
-    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Expected delivery: 2–3 weeks after ordering');
+    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Release window: 1 to 2 weeks');
 
     const body = await page.locator('body').innerText();
-    for (const claim of ['Android 14', 'Amlogic S905Y5', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'HDR10+', 'AV1', 'Expected delivery: 2–3 weeks after ordering']) {
+    for (const claim of ['Android 14', 'Amlogic S905Y5', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'HDR10+', 'AV1', 'Release window: 1 to 2 weeks']) {
       expect(body).toContain(claim);
     }
     expect(body).not.toMatch(/price (and release date )?(has|have) not been announced/i);
@@ -160,12 +160,12 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     await expect(page.locator('.woocommerce-message')).toContainText(/added to (your )?cart/i);
     await page.goto('/cart/', { waitUntil: 'domcontentloaded' });
     await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Pre-order delivery');
-    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Expected delivery: 2–3 weeks after ordering');
+    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Release window: 1 to 2 weeks');
     let commerceText = await page.locator('body').innerText();
     expect(commerceText).not.toMatch(/48-hour U\.S\. shipping|1-year U\.S\. warranty|ships from our Nevada warehouse/i);
     await page.goto('/checkout/', { waitUntil: 'domcontentloaded' });
     await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Pre-order delivery');
-    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Expected delivery: 2–3 weeks after ordering');
+    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Release window: 1 to 2 weeks');
     commerceText = await page.locator('body').innerText();
     expect(commerceText).not.toMatch(/48-hour U\.S\. shipping|1-year U\.S\. warranty|ships from Nevada within 48 hours/i);
   });

@@ -2,15 +2,20 @@
 
 Official US-focused SVICLOUD storefront and support site.
 
+## Product focus
+- SVICLOUD 10P+ remains the primary in-stock premium model for shoppers who want stronger performance, karaoke, voice remote use, and heavy family viewing.
+- SVICLOUD 15P is the added launch/pre-order model. It releases in 1 to 2 weeks and is available for pre-order at $288 (regular $379).
+- 15P highlights: Android 14, Amlogic S905Y5, Wi-Fi 6, 4 GB DDR3 memory, 64 GB eMMC storage, Bluetooth 5.4, AV1/HDR support, and mobile app download support.
+
 ## Product lineup
-- SVICLOUD 15P: newest pre-order model with Android 14, Wi-Fi 6, 4 GB memory, 64 GB storage, and mobile app download support.
 - SVICLOUD 10P+: premium in-stock model for stronger performance, karaoke, voice remote use, and heavy family viewing.
+- SVICLOUD 15P: launch/pre-order model with Android 14, Wi-Fi 6, 4 GB memory, 64 GB storage, and mobile app download support.
 - SVICLOUD 10S: value in-stock model for everyday viewing, secondary rooms, and simpler setup needs.
 
 ## Core pages
 - Products: https://svicloudtvbox.us/shop/
-- SVICLOUD 15P: https://svicloudtvbox.us/product/svicloud-15p/
 - SVICLOUD 10P+: https://svicloudtvbox.us/product/svicloud-10p-plus/
+- SVICLOUD 15P: https://svicloudtvbox.us/product/svicloud-15p/
 - SVICLOUD 10S: https://svicloudtvbox.us/product/svicloud-10s/
 - Model comparison: https://svicloudtvbox.us/compare/
 - Setup guides: https://svicloudtvbox.us/guides-setup/
@@ -21,6 +26,7 @@ Official US-focused SVICLOUD storefront and support site.
 - Contact: https://svicloudtvbox.us/contact/
 
 ## Agent Markdown resources
+- https://svicloudtvbox.us/agent/svicloud-15p.md
 - https://svicloudtvbox.us/agent/products.md
 - https://svicloudtvbox.us/agent/compare-10p-vs-10s.md
 - https://svicloudtvbox.us/agent/apps.md

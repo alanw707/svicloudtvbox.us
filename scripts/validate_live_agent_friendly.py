@@ -11,7 +11,7 @@ from html.parser import HTMLParser
 from urllib.parse import parse_qs, quote, urlparse
 
 AGENT_PATHS = [
-    "/llms.txt", "/llms-full.txt", "/agent/products.md", "/agent/compare-10p-vs-10s.md",
+    "/llms.txt", "/llms-full.txt", "/agent/svicloud-15p.md", "/agent/products.md", "/agent/compare-10p-vs-10s.md",
     "/agent/apps.md", "/agent/troubleshooting.md", "/agent/setup.md", "/agent/shipping-returns.md", "/agent/contact.md",
 ]
 AGENT_MARKDOWN_PATHS = [path for path in AGENT_PATHS if path.startswith("/agent/")]
@@ -24,7 +24,7 @@ DECISION_PATHS = [
     "/yogurt-tv-not-working-upgrade-guide/", "/svicloud-box-authenticity-guide/",
 ]
 POLICY_CONTACT_PATHS = ["/contact/", "/shipping-policy/", "/return-policy/"]
-PRODUCT_SCHEMA_PATHS = ["/product/svicloud-10p-plus/", "/product/svicloud-10s/"]
+PRODUCT_SCHEMA_PATHS = ["/product/svicloud-15p/", "/product/svicloud-10p-plus/", "/product/svicloud-10s/"]
 SITEMAP_PATH = "/agent-friendly-sitemap.xml"
 
 class JsonLdParser(HTMLParser):

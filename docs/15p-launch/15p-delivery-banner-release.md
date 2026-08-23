@@ -6,9 +6,9 @@ Status: preflight snapshot superseded by the approved deployment and post-rebase
 
 - Customer-facing 15P delivery banner on the product page, cart, and checkout.
 - Localized copy:
-  - English: `Pre-order delivery` / `Expected delivery: 2–3 weeks after ordering.`
-  - Traditional Chinese: `預購配送` / `預計下單後 2–3 週送達。`
-  - Simplified Chinese: `预订配送` / `预计下单后 2–3 周送达。`
+  - English: `Pre-order delivery` / `Release window: 1 to 2 weeks.`
+  - Traditional Chinese: `預購配送` / `上市時程：1 至 2 週。`
+  - Simplified Chinese: `预订配送` / `上市时间：1 至 2 周。`
 - Existing internal WooCommerce `BackOrder`, `notify`, `onbackorder`, pricing, managed stock, gallery, and purchasability remain unchanged.
 - Product schema continues to omit `deliveryTime`; the estimate is customer-facing copy only.
 

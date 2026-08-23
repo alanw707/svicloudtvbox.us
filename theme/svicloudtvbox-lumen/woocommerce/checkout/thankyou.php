@@ -98,7 +98,7 @@ if ($order instanceof WC_Order && $order->has_status('failed')) : ?>
               <?php if (class_exists('SVIC_15P_Preorder_Notifier') && SVIC_15P_Preorder_Notifier::order_contains_15p_preorder($order)) : ?>
                 <div class="woocommerce-info" style="margin:14px 0 0;">
                   <strong><?php echo esc_html__('SVICLOUD 15P preorder:', 'svicloudtvbox-lumen'); ?></strong>
-                  <?php echo esc_html__('This model is currently in preorder for the U.S. launch. Expected delivery is 2 to 3 weeks.', 'svicloudtvbox-lumen'); ?>
+                  <?php echo esc_html__('This model is currently in preorder for the U.S. launch. Release window is 1 to 2 weeks.', 'svicloudtvbox-lumen'); ?>
                 </div>
               <?php endif; ?>
               <div class="lumen-order-thankyou__actions">
