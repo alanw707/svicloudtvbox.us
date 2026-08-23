@@ -54,6 +54,10 @@
             'label_key' => 'header.nav.compare',
         ],
         [
+            'href'      => function_exists('svic_15p_promo_url') ? svic_15p_promo_url() : svic_url_with_lang( home_url( '/svicloud-15p-features/' ) ),
+            'label_key' => 'header.nav.fifteen_p',
+        ],
+        [
             'href'      => svic_url_with_lang( home_url( '/faq/' ) ),
             'label_key' => 'header.nav.faq',
         ],

@@ -16,6 +16,7 @@ Official US-focused SVICLOUD storefront and support site.
 - Products: https://svicloudtvbox.us/shop/
 - SVICLOUD 10P+: https://svicloudtvbox.us/product/svicloud-10p-plus/
 - SVICLOUD 15P: https://svicloudtvbox.us/product/svicloud-15p/
+- SVICLOUD 15P features and specs: https://svicloudtvbox.us/svicloud-15p-features/
 - SVICLOUD 10S: https://svicloudtvbox.us/product/svicloud-10s/
 - Model comparison: https://svicloudtvbox.us/compare/
 - Setup guides: https://svicloudtvbox.us/guides-setup/

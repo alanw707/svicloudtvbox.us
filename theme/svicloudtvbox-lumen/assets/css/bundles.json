@@ -63,7 +63,8 @@
     "output": "guides.css",
     "parts": [
       "47-lumen-section-feature-grid.css",
-      "67-guides.css"
+      "67-guides.css",
+      "67b-15p-promo.css"
     ]
   },
   "faq": {

@@ -25,7 +25,7 @@ REQUIRED_ENDPOINTS = [
     "agent/shipping-returns.md",
     "agent/contact.md",
 ]
-REQUIRED_TERMS = ["SVICLOUD 10P+", "SVICLOUD 10S", "+1 (520) 641-7021", "/compare/", "/contact/"]
+REQUIRED_TERMS = ["SVICLOUD 10P+", "SVICLOUD 10S", "+1 (520) 641-7021", "/compare/", "/contact/", "/svicloud-15p-features/"]
 FORBIDDEN_PHONE_PATTERNS = ["15206417021", "702-389-3415", "702-389-3417"]
 REQUIRED_DECISION_SLUGS = [
     "svicloud-10p-vs-10s",
@@ -95,6 +95,10 @@ def main() -> None:
     for endpoint in REQUIRED_ENDPOINTS:
         if endpoint not in sitemap:
             fail(f"sitemap missing endpoint {endpoint}")
+
+    for promo_slug in ["svicloud-15p-features", "zh/svicloud-15p-features", "zh-cn/svicloud-15p-features"]:
+        if promo_slug not in sitemap:
+            fail(f"sitemap missing 15P promotional route {promo_slug}")
 
     if "agent-friendly-sitemap.xml" not in sitemap or "rank_math/sitemap/index" not in sitemap:
         fail("agent-friendly sitemap integration missing")

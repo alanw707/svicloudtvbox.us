@@ -4,6 +4,7 @@ const paths = [
   '/',
   '/compare/',
   '/shop/',
+  '/svicloud-15p-features/',
   '/product/svicloud-10p-plus/',
   '/product/svicloud-10s/',
   '/product/svicloud-15p/',
@@ -129,6 +130,14 @@ test.describe('SVICLOUD site smoke', () => {
           const cardCount = await page.locator('.comparison-card').count();
           expect(cardCount).toBeGreaterThan(0);
         }
+      }
+
+      if (path === '/svicloud-15p-features/') {
+        await expect(page.locator('.fifteenp-hero')).toBeVisible();
+        await expect(page.locator('.fifteenp-section--features')).toContainText('Yogurt TV Go');
+        await expect(page.locator('.fifteenp-section--compare')).toContainText('10P+');
+        const schemaText = await page.locator('script[type="application/ld+json"]').allTextContents();
+        expect(schemaText.join('\n')).toContain('FAQPage');
       }
 
       if (path === '/guides/') {

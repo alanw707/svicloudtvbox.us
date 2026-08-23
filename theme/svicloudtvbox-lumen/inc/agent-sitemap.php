@@ -7,6 +7,9 @@ if (!function_exists('svic_agent_friendly_sitemap_paths')) {
         $paths = [
             '/llms.txt',
             '/llms-full.txt',
+            '/svicloud-15p-features/',
+            '/zh/svicloud-15p-features/',
+            '/zh-cn/svicloud-15p-features/',
             '/agent/svicloud-15p.md',
             '/agent/products.md',
             '/agent/compare-10p-vs-10s.md',

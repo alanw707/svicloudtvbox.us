@@ -177,7 +177,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
       { prefix: '/zh-cn', marker: '小云', included: '内含', action: '预订 15P', availability: '接受预订' },
     ];
     for (const locale of locales) {
-      for (const route of ['/', '/shop/', '/compare/', '/product/svicloud-15p/']) {
+      for (const route of ['/', '/shop/', '/compare/', '/svicloud-15p-features/', '/product/svicloud-15p/']) {
         await page.goto(`${locale.prefix}${route}`, { waitUntil: 'domcontentloaded' });
         const metadata = [
           await page.title(),

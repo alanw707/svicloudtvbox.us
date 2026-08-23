@@ -528,6 +528,7 @@ require_once get_template_directory() . '/inc/virtual-page-state.php';
 require_once get_template_directory() . '/inc/agent-resources.php';
 require_once get_template_directory() . '/inc/guide-routes.php';
 require_once get_template_directory() . '/inc/decision-pages.php';
+require_once get_template_directory() . '/inc/15p-promo-page.php';
 require_once get_template_directory() . '/inc/agent-sitemap.php';
 require_once get_template_directory() . '/inc/policy-contact-routes.php';
 require_once get_template_directory() . '/inc/class-svic-recent-shipments.php';
@@ -4302,6 +4303,11 @@ if (!function_exists('svic_output_rank_math_meta_fallback')) {
             $description = $meta['description'];
             $image_meta  = $meta['image'];
             $image_url   = is_array($image_meta) && !empty($image_meta['url']) ? (string) $image_meta['url'] : '';
+        } elseif (function_exists('svic_is_15p_promo_request') && svic_is_15p_promo_request()) {
+            $meta        = svic_15p_promo_meta();
+            $description = isset($meta['description']) ? trim((string) $meta['description']) : '';
+            $image_meta  = isset($meta['image']) && is_array($meta['image']) ? $meta['image'] : [];
+            $image_url   = isset($image_meta['url']) ? (string) $image_meta['url'] : '';
         } elseif (function_exists('is_page_template') && is_page_template('page-compare.php') && function_exists('svic_get_compare_page_meta_definitions')) {
             $meta        = svic_get_compare_page_meta_definitions();
             $description = isset($meta['description']) ? trim((string) $meta['description']) : '';
@@ -4406,6 +4412,10 @@ if (!function_exists('svic_resolve_current_meta_description')) {
 
         if (function_exists('svic_is_15p_product_page') && svic_is_15p_product_page()) {
             return svic_get_15p_product_meta_definitions()['description'];
+        }
+
+        if (function_exists('svic_is_15p_promo_request') && svic_is_15p_promo_request()) {
+            return svic_15p_promo_meta()['description'] ?? '';
         }
 
         if (function_exists('is_page_template') && is_page_template('page-compare.php') && function_exists('svic_get_compare_page_meta_definitions')) {

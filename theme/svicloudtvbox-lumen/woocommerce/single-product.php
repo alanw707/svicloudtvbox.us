@@ -119,6 +119,11 @@ while (have_posts()) :
     $faq_url         = svic_url_with_lang(home_url('/faq/'));
     $contact_url     = svic_url_with_lang(home_url('/contact/'));
     $setup_guide_url = svic_url_with_lang(home_url('/guides-setup/'));
+$fifteenp_features_url = function_exists('svic_15p_promo_url')
+    ? svic_15p_promo_url()
+    : svic_url_with_lang(home_url('/svicloud-15p-features/'));
+$fifteenp_promo_content = function_exists('svic_15p_promo_content') ? svic_15p_promo_content() : [];
+$fifteenp_features_label = $fifteenp_promo_content['features_link'] ?? 'Explore 15P features, specs, and Yogurt TV Go guidance';
 
     $product_box_item_keys = $is_15p_product
         ? [
@@ -276,6 +281,9 @@ while (have_posts()) :
             </div>
             <?php if ($is_15p_product) : ?>
               <?php svic_render_15p_delivery_banner(); ?>
+              <p class="svic-15p-feature-link">
+                <a href="<?php echo esc_url($fifteenp_features_url); ?>"><?php echo esc_html($fifteenp_features_label); ?></a>
+              </p>
             <?php endif; ?>
             <?php if (is_string($product_reassurance_title) && $product_reassurance_title !== '' && $product_reassurance_title !== 'title') : ?>
               <section class="product-hero-reassurance" aria-labelledby="product-hero-reassurance-heading">

@@ -25,6 +25,7 @@ DECISION_PATHS = [
 ]
 POLICY_CONTACT_PATHS = ["/contact/", "/shipping-policy/", "/return-policy/"]
 PRODUCT_SCHEMA_PATHS = ["/product/svicloud-15p/", "/product/svicloud-10p-plus/", "/product/svicloud-10s/"]
+PROMO_PATHS = ["/svicloud-15p-features/", "/zh/svicloud-15p-features/", "/zh-cn/svicloud-15p-features/"]
 SITEMAP_PATH = "/agent-friendly-sitemap.xml"
 
 class JsonLdParser(HTMLParser):
@@ -206,6 +207,17 @@ def main() -> None:
         if "+1 (520) 641-7021" not in body:
             fail(f"product page missing official support phone {path}")
 
+    for path in PROMO_PATHS:
+        status, _, body = fetch(args.base, path)
+        types = schema_types(body)
+        if status != 200 or "FAQPage" not in types:
+            fail(f"15P promo endpoint invalid {path} status={status} types={types}")
+        if "error404" in body or "Page not found" in body:
+            fail(f"15P promo endpoint is internally 404 {path}")
+        for term in ["15P", "10P+", "Yogurt TV Go", "288", "379"]:
+            if term not in body:
+                fail(f"15P promo page missing required term {path} -> {term}")
+
     for path in DECISION_PATHS:
         status, _, body = fetch(args.base, path)
         if status != 200 or "svic_decision_cta_click" not in body or "+1 (520) 641-7021" not in body:
@@ -220,7 +232,7 @@ def main() -> None:
     status, _, sitemap = fetch(args.base, SITEMAP_PATH)
     if status != 200:
         fail("agent-friendly sitemap not 200")
-    for path in AGENT_PATHS + GUIDE_PATHS + DECISION_PATHS:
+    for path in AGENT_PATHS + GUIDE_PATHS + DECISION_PATHS + PROMO_PATHS:
         if path not in sitemap:
             fail(f"sitemap missing {path}")
 

@@ -38,6 +38,7 @@ if (!function_exists('svic_virtual_route_slugs')) {
             'best-svicloud-box-for-chinese-tv-usa',
             'yogurt-tv-not-working-upgrade-guide',
             'svicloud-box-authenticity-guide',
+            'svicloud-15p-features',
         ];
     }
 }

@@ -538,7 +538,6 @@
   margin: 0.75rem 0 0;
   padding: 0.8rem 1rem;
   border: 1px solid rgba(126, 246, 227, 0.34);
-  border-left: 3px solid var(--lumen-accent-teal);
   border-radius: 0.75rem;
   background: rgba(9, 22, 48, 0.72);
   color: rgba(238, 247, 255, 0.92);
@@ -554,6 +553,21 @@
 
 .svic-15p-delivery-banner__copy {
   color: inherit;
+}
+
+.svic-15p-feature-link {
+  margin: 0.7rem 0 0;
+}
+
+.svic-15p-feature-link a {
+  color: rgba(216, 247, 255, 0.96);
+  font-weight: 650;
+  text-underline-offset: 0.22em;
+}
+
+.svic-15p-feature-link a:hover,
+.svic-15p-feature-link a:focus-visible {
+  color: #ffffff;
 }
 
 .lumen-cart-product .svic-15p-delivery-banner,
@@ -867,8 +881,9 @@
 
 .lumen-product .product-description .entry-content blockquote {
   color: var(--lumen-text-secondary);
-  border-left: 3px solid rgba(94, 230, 208, 0.35);
-  padding-left: 1rem;
+  border: 1px solid rgba(94, 230, 208, 0.18);
+  border-radius: 0.75rem;
+  padding: 1rem;
   margin: 1.5rem 0;
 }
 
