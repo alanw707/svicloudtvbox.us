@@ -3,12 +3,16 @@
 Official US-focused SVICLOUD storefront and support site.
 
 ## Product lineup
-- SVICLOUD 10P+: premium model for stronger performance and heavy use.
-- SVICLOUD 10S: value/family model for everyday Chinese TV viewing.
+- SVICLOUD 15P: newest pre-order model with Android 14, Wi-Fi 6, 4 GB memory, 64 GB storage, and mobile app download support.
+- SVICLOUD 10P+: premium in-stock model for stronger performance, karaoke, voice remote use, and heavy family viewing.
+- SVICLOUD 10S: value in-stock model for everyday viewing, secondary rooms, and simpler setup needs.
 
 ## Core pages
 - Products: https://svicloudtvbox.us/shop/
-- Compare 10P+ vs 10S: https://svicloudtvbox.us/compare/
+- SVICLOUD 15P: https://svicloudtvbox.us/product/svicloud-15p/
+- SVICLOUD 10P+: https://svicloudtvbox.us/product/svicloud-10p-plus/
+- SVICLOUD 10S: https://svicloudtvbox.us/product/svicloud-10s/
+- Model comparison: https://svicloudtvbox.us/compare/
 - Setup guides: https://svicloudtvbox.us/guides-setup/
 - App guides: https://svicloudtvbox.us/guides-apps/
 - Troubleshooting: https://svicloudtvbox.us/guides-troubleshooting/
