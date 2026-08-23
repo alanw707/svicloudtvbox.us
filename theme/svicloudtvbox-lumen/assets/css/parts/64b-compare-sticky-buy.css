@@ -15,12 +15,19 @@
   border-top: 1px solid rgba(94, 230, 208, 0.25);
   backdrop-filter: blur(12px);
   padding: 0.75rem 0.9rem;
-  transform: translateY(100%);
-  transition: transform 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transform: translateY(calc(100% + 1.25rem));
+  transition: transform 0.3s ease, opacity 0.2s ease, visibility 0s linear 0.3s;
 }
 
 .compare-sticky-buy.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
   transform: translateY(0);
+  transition: transform 0.3s ease, opacity 0.2s ease, visibility 0s linear 0s;
 }
 
 .compare-sticky-buy__inner {
