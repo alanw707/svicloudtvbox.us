@@ -241,7 +241,7 @@
 .compare-final-cta__badge{letter-spacing:0.18em;font-size:var(--lumen-font-size-label)}
 .compare-final-cta__copy{font-size:1rem}
 }
-.compare-sticky-buy{display:none;position:fixed;bottom:0;left:0;right:0;z-index:940;box-sizing:border-box;min-height:var(--lumen-sticky-buy-height,72px);background:rgba(6,13,28,0.96);border-top:1px solid rgba(94,230,208,0.25);backdrop-filter:blur(12px);padding:0.75rem 0.9rem;transform:translateY(100%);transition:transform 0.3s ease}
+.compare-sticky-buy{display:none;position:fixed;bottom:calc(0.75rem + env(safe-area-inset-bottom,0px));left:0;right:0;z-index:940;box-sizing:border-box;min-height:var(--lumen-sticky-buy-height,72px);background:rgba(6,13,28,0.96);border-top:1px solid rgba(94,230,208,0.25);backdrop-filter:blur(12px);padding:0.75rem 0.9rem;transform:translateY(100%);transition:transform 0.3s ease}
 .compare-sticky-buy.is-visible{transform:translateY(0)}
 .compare-sticky-buy__inner{max-width:560px;margin:0 auto;display:grid;gap:0.7rem}
 .compare-sticky-buy__label{font-size:0.84rem;font-weight:600;color:var(--lumen-text-primary,#f4f8ff);text-align:center}
@@ -249,5 +249,7 @@
 .compare-sticky-buy__cta{min-width:0;justify-content:center;padding-inline:0.85rem;font-size:0.82rem}
 @media(min-width:768px){.compare-sticky-buy{display:none !important}
 }
-@media(max-width:767px){.compare-sticky-buy{display:block;bottom:5.5rem;left:0.75rem;right:0.75rem;border:1px solid rgba(94,230,208,0.25);border-radius:22px;padding:0.75rem 0.9rem;box-shadow:0 24px 54px rgba(3,10,28,0.48)}
+@media(max-width:767px){.page-template-page-compare #svic-google-customer-reviews-badge,.page-template-page-compare.has-compare-sticky-buy .svic-support-chat{display:none !important}
+.page-template-page-compare.has-compare-sticky-buy{scroll-padding-bottom:calc(var(--lumen-compare-sticky-buy-height,104px) + 1.25rem + env(safe-area-inset-bottom,0px))}
+.compare-sticky-buy{display:block;left:0.75rem;right:0.75rem;border:1px solid rgba(94,230,208,0.25);border-radius:22px;padding:0.75rem 0.9rem;box-shadow:0 24px 54px rgba(3,10,28,0.48)}
 }

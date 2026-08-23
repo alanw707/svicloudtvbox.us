@@ -537,14 +537,21 @@ if (!empty($compare_hero_10s_background['url'])) {
   var bar = document.getElementById('compare-sticky-buy');
   if (!bar) return;
   var hero = document.querySelector('.compare-hero');
+  var products = document.querySelector('.compare-products');
   var finalCta = document.getElementById('compare-final-cta');
   function update() {
     var afterHero = hero ? window.scrollY > (hero.offsetTop + hero.offsetHeight) : window.scrollY > 400;
     var beforeFinalCta = finalCta ? window.scrollY + window.innerHeight < (finalCta.offsetTop + 120) : true;
-    var visible = afterHero && beforeFinalCta;
+    var overProducts = false;
+    if (products) {
+      var productBounds = products.getBoundingClientRect();
+      overProducts = productBounds.top < (window.innerHeight - 120) && productBounds.bottom > 160;
+    }
+    var visible = afterHero && beforeFinalCta && !overProducts;
     bar.classList.toggle('is-visible', visible);
     document.body.classList.toggle('has-compare-sticky-buy', visible);
     if (visible) {
+      document.body.style.setProperty('--lumen-compare-sticky-buy-height', Math.ceil(bar.getBoundingClientRect().height) + 'px');
       bar.removeAttribute('aria-hidden');
     } else {
       bar.setAttribute('aria-hidden', 'true');
