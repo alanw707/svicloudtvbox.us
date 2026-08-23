@@ -193,7 +193,13 @@
 }
 @media(min-width:1200px){.compare-products__grid{grid-template-columns:repeat(3,minmax(320px,1fr));gap:clamp(18px,2.2vw,28px)}
 }
-@media(max-width:720px){.compare-product-card__comparison{border-radius:0 0 var(--radius-xl) var(--radius-xl);padding:18px 18px 24px;gap:16px}
+@media(max-width:720px){.compare-products__grid{grid-template-columns:minmax(0,1fr);justify-items:stretch;width:100%;max-width:min(100%,390px);gap:clamp(24px,7vw,34px)}
+.compare-product-card{width:100%;max-width:100%;min-width:0;box-sizing:border-box}
+.compare-product-card .shop-product-card__header,.compare-product-card .shop-product-card__body{padding-inline:clamp(20px,6vw,26px)}
+.compare-product-card .shop-product-card__media{height:clamp(176px,52vw,230px);margin-inline:0}
+.compare-product-card .shop-product-card__price-line,.compare-product-card .shop-product-card__price-amount,.compare-product-card .shop-product-card__price-amount .lumen-price{min-width:0;max-width:100%}
+.compare-product-card .shop-product-card__price-amount .lumen-price{flex-wrap:wrap}
+.compare-product-card__comparison{border-radius:0 0 var(--radius-xl) var(--radius-xl);padding:18px clamp(18px,6vw,24px) 24px;gap:16px}
 .compare-product-card__comparison-item{padding:14px 14px}
 .compare-product-card__comparison-item dd{font-size:0.98rem}
 }
@@ -251,5 +257,5 @@
 }
 @media(max-width:767px){.page-template-page-compare #svic-google-customer-reviews-badge,.page-template-page-compare.has-compare-sticky-buy .svic-support-chat{display:none !important}
 .page-template-page-compare.has-compare-sticky-buy{scroll-padding-bottom:calc(var(--lumen-compare-sticky-buy-height,104px) + 1.25rem + env(safe-area-inset-bottom,0px))}
-.compare-sticky-buy{display:block;left:0.75rem;right:0.75rem;border:1px solid rgba(94,230,208,0.25);border-radius:22px;padding:0.75rem 0.9rem;box-shadow:0 24px 54px rgba(3,10,28,0.48)}
+.compare-sticky-buy{display:none !important;left:0.75rem;right:0.75rem;border:1px solid rgba(94,230,208,0.25);border-radius:22px;padding:0.75rem 0.9rem;box-shadow:0 24px 54px rgba(3,10,28,0.48)}
 }

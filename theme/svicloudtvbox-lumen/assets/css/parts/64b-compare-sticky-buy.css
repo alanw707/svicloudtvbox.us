@@ -74,7 +74,7 @@
   }
 
   .compare-sticky-buy {
-    display: block;
+    display: none !important;
     left: 0.75rem;
     right: 0.75rem;
     border: 1px solid rgba(94, 230, 208, 0.25);

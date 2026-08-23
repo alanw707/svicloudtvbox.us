@@ -108,9 +108,45 @@
 }
 
 @media (max-width: 720px) {
+  .compare-products__grid {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: stretch;
+    width: 100%;
+    max-width: min(100%, 390px);
+    gap: clamp(24px, 7vw, 34px);
+  }
+
+  .compare-product-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .compare-product-card .shop-product-card__header,
+  .compare-product-card .shop-product-card__body {
+    padding-inline: clamp(20px, 6vw, 26px);
+  }
+
+  .compare-product-card .shop-product-card__media {
+    height: clamp(176px, 52vw, 230px);
+    margin-inline: 0;
+  }
+
+  .compare-product-card .shop-product-card__price-line,
+  .compare-product-card .shop-product-card__price-amount,
+  .compare-product-card .shop-product-card__price-amount .lumen-price {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .compare-product-card .shop-product-card__price-amount .lumen-price {
+    flex-wrap: wrap;
+  }
+
   .compare-product-card__comparison {
     border-radius: 0 0 var(--radius-xl) var(--radius-xl);
-    padding: 18px 18px 24px;
+    padding: 18px clamp(18px, 6vw, 24px) 24px;
     gap: 16px;
   }
 
