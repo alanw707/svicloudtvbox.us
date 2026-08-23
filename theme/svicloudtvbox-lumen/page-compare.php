@@ -522,40 +522,6 @@ if (!empty($compare_hero_10s_background['url'])) {
   </section>
 </main>
 
-<div class="compare-sticky-buy" id="compare-sticky-buy" aria-hidden="true" aria-label="<?php echo svic_translate_attr('compare.sticky_buy.aria_label'); ?>">
-  <div class="compare-sticky-buy__inner">
-    <span class="compare-sticky-buy__label"><?php echo svic_translate_html('compare.sticky_buy.label'); ?></span>
-    <div class="compare-sticky-buy__actions">
-      <a class="compare-sticky-buy__cta lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_10p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="compare_sticky_buy" data-svic-label="sticky_buy_10p" data-svic-model="svicloud-10p-plus"><?php echo svic_translate_html('compare.sticky_buy.cta_10p'); ?></a>
-      <a class="compare-sticky-buy__cta lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_10s_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="compare_sticky_buy" data-svic-label="sticky_buy_10s" data-svic-model="svicloud-10s"><?php echo svic_translate_html('compare.sticky_buy.cta_10s'); ?></a>
-      <a class="compare-sticky-buy__cta lumen-pill lumen-pill--ghost" href="<?php echo esc_url($hero_15p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="compare_sticky_buy" data-svic-label="sticky_explore_15p" data-svic-model="svicloud-15p"><?php echo svic_translate_html('compare.sticky_buy.cta_15p'); ?></a>
-    </div>
-  </div>
-</div>
-<script>
-(function() {
-  var bar = document.getElementById('compare-sticky-buy');
-  if (!bar) return;
-  var hero = document.querySelector('.compare-hero');
-  var finalCta = document.getElementById('compare-final-cta');
-  function update() {
-    var afterHero = hero ? window.scrollY > (hero.offsetTop + hero.offsetHeight) : window.scrollY > 400;
-    var beforeFinalCta = finalCta ? window.scrollY + window.innerHeight < (finalCta.offsetTop + 120) : true;
-    var visible = afterHero && beforeFinalCta;
-    bar.classList.toggle('is-visible', visible);
-    document.body.classList.toggle('has-compare-sticky-buy', visible);
-    if (visible) {
-      bar.removeAttribute('aria-hidden');
-    } else {
-      bar.setAttribute('aria-hidden', 'true');
-    }
-  }
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  update();
-})();
-</script>
-
 <?php
 $compare_schema_products = [];
 $compare_item_list       = [];
