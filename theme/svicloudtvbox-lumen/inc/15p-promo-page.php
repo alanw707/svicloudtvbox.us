@@ -62,7 +62,7 @@ if (!function_exists('svic_15p_promo_content')) {
                     ['Air-mouse remote', 'Public 15P materials describe pointer-style remote control, a practical difference for app navigation and search.'],
                 ],
                 'compare_title' => '15P vs 10P+: the clean buying angle',
-                'compare_copy' => 'Keep 10P+ SEO alive for shoppers who want the proven in-stock premium model. Use 15P for the launch audience asking for Android 14, Wi-Fi 6, Bluetooth 5.4, mobile app downloads, and the newest SVICLOUD box.',
+                'compare_copy' => 'Choose 10P+ if you want the proven in-stock premium model today. Choose 15P if you want the newest SVICLOUD box with Android 14, Wi-Fi 6, Bluetooth 5.4, and a stronger app-download path.',
                 'compare_rows' => [
                     ['Platform', 'Android 14', 'Established 10P+ platform'],
                     ['Wireless', 'Wi-Fi 6, Bluetooth 5.4', 'In-stock premium family setup'],
@@ -84,8 +84,8 @@ if (!function_exists('svic_15p_promo_content')) {
                 'faq_title' => '15P launch questions',
                 'faqs' => [
                     ['Is SVICLOUD 15P available now?', 'It is available for pre-order at $288, with a public release window of 1 to 2 weeks.'],
-                    ['What is the biggest practical difference?', 'For our SEO and sales copy, the biggest difference is the app-download story: 15P is the newest model to discuss for mobile app downloads, Yogurt TV Go guidance, Android 14, Wi-Fi 6, and Bluetooth 5.4.'],
-                    ['Should 10P+ SEO stay active?', 'Yes. 10P+ remains the primary in-stock premium model. The 15P page should add launch traffic without replacing 10P+ intent.'],
+                    ['What is the biggest practical difference?', '15P is the newer model for shoppers who care about mobile app downloads, Yogurt TV Go guidance, Android 14, Wi-Fi 6, and Bluetooth 5.4.'],
+                    ['Should I choose 15P or 10P+?', 'Choose 15P if you want the newest release and can pre-order. Choose 10P+ if you want the proven premium model that is already in stock.'],
                     ['Can you promise specific Yogurt TV content?', 'No. App menus and availability can change. The page should route setup and content-section questions to the Yogurt TV app guide and support.'],
                 ],
             ],
@@ -112,7 +112,7 @@ if (!function_exists('svic_15p_promo_content')) {
                     ['飛鼠遙控器', '公開 15P 資料提到指標式飛鼠操作，對 App 導航與搜尋更直覺。'],
                 ],
                 'compare_title' => '15P vs 10P+：最清楚的購買角度',
-                'compare_copy' => '10P+ SEO 要繼續保留，因為它仍是現貨高階主力。15P 則承接上市流量：Android 14、Wi-Fi 6、藍牙 5.4、手機 App 下載，以及最新小雲盒子搜尋意圖。',
+                'compare_copy' => '如果想要現在就能出貨、成熟穩定的高階機型，選 10P+。如果想要最新小雲盒子、Android 14、Wi-Fi 6、藍牙 5.4 與更強的 App 下載使用情境，選 15P。',
                 'compare_rows' => [
                     ['平台', 'Android 14', '成熟的 10P+ 平台'],
                     ['無線', 'Wi-Fi 6、藍牙 5.4', '現貨高階家庭使用'],
@@ -134,8 +134,8 @@ if (!function_exists('svic_15p_promo_content')) {
                 'faq_title' => '15P 上市常見問題',
                 'faqs' => [
                     ['小雲 15P 現在能買嗎？', '可以預購，預購價 US$288，上市時程為 1 至 2 週。'],
-                    ['最大的實用差異是什麼？', 'SEO 與銷售文案應該主打 App 下載：15P 適合承接手機 App 下載、Yogurt TV Go、Android 14、Wi-Fi 6 與藍牙 5.4 的搜尋意圖。'],
-                    ['10P+ SEO 還要保留嗎？', '要。10P+ 仍是現貨高階主力；15P 頁面是新增上市流量，不是取代 10P+。'],
+                    ['最大的實用差異是什麼？', '15P 是較新的機型，適合重視手機 App 下載、Yogurt TV Go 指引、Android 14、Wi-Fi 6 與藍牙 5.4 的買家。'],
+                    ['應該選 15P 還是 10P+？', '想要最新上市機型、可以接受預購，選 15P。想要已經現貨供應、成熟穩定的高階機型，選 10P+。'],
                     ['可以保證 Yogurt TV 內容嗎？', '不可以。App 選單與可用性可能變動，內容分類與安裝問題應導向 Yogurt TV App 指南與客服。'],
                 ],
             ],
@@ -162,7 +162,7 @@ if (!function_exists('svic_15p_promo_content')) {
                     ['飞鼠遥控器', '公开 15P 资料提到指针式飞鼠操作，对 App 导航与搜索更直观。'],
                 ],
                 'compare_title' => '15P vs 10P+：最清楚的购买角度',
-                'compare_copy' => '10P+ SEO 要继续保留，因为它仍是现货高端主力。15P 则承接上市流量：Android 14、Wi-Fi 6、蓝牙 5.4、手机 App 下载，以及最新小云盒子搜索意图。',
+                'compare_copy' => '如果想要现在就能发货、成熟稳定的高端机型，选 10P+。如果想要最新小云盒子、Android 14、Wi-Fi 6、蓝牙 5.4 与更强的 App 下载使用场景，选 15P。',
                 'compare_rows' => [
                     ['平台', 'Android 14', '成熟的 10P+ 平台'],
                     ['无线', 'Wi-Fi 6、蓝牙 5.4', '现货高端家庭使用'],
@@ -184,8 +184,8 @@ if (!function_exists('svic_15p_promo_content')) {
                 'faq_title' => '15P 上市常见问题',
                 'faqs' => [
                     ['小云 15P 现在能买吗？', '可以预订，预订价 US$288，上市时间为 1 至 2 周。'],
-                    ['最大的实用差异是什么？', 'SEO 与销售文案应该主打 App 下载：15P 适合承接手机 App 下载、Yogurt TV Go、Android 14、Wi-Fi 6 与蓝牙 5.4 的搜索意图。'],
-                    ['10P+ SEO 还要保留吗？', '要。10P+ 仍是现货高端主力；15P 页面是新增上市流量，不是取代 10P+。'],
+                    ['最大的实用差异是什么？', '15P 是更新的机型，适合重视手机 App 下载、Yogurt TV Go 指引、Android 14、Wi-Fi 6 与蓝牙 5.4 的买家。'],
+                    ['应该选 15P 还是 10P+？', '想要最新上市机型、可以接受预订，选 15P。想要已经现货供应、成熟稳定的高端机型，选 10P+。'],
                     ['可以保证 Yogurt TV 内容吗？', '不可以。App 菜单与可用性可能变动，内容分类与安装问题应导向 Yogurt TV App 指南与客服。'],
                 ],
             ],
