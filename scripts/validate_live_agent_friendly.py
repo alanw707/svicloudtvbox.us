@@ -167,7 +167,7 @@ def main() -> None:
         status, head, body = fetch(args.base, path)
         if status != 200 or "SVICLOUD" not in body or "+1 (520) 641-7021" not in body:
             fail(f"agent endpoint invalid {path} status={status}")
-        if path in AGENT_MARKDOWN_PATHS and "X-Robots-Tag: index, follow" not in head:
+        if path in AGENT_MARKDOWN_PATHS and "x-robots-tag: index, follow" not in head.lower():
             fail(f"agent endpoint missing crawl header {path}")
 
     for path in GUIDE_PATHS:

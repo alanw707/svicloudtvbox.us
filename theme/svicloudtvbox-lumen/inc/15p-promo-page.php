@@ -242,6 +242,13 @@ add_filter('document_title_parts', function (array $parts): array {
     return $parts;
 }, 60);
 
+add_filter('body_class', function (array $classes): array {
+    if (svic_is_15p_promo_request()) {
+        $classes[] = 'svic-15p-promo-page';
+    }
+    return $classes;
+}, 60);
+
 if (defined('RANK_MATH_VERSION')) {
     add_filter('rank_math/frontend/title', function ($title) {
         return svic_is_15p_promo_request() ? svic_15p_promo_meta()['title'] : $title;

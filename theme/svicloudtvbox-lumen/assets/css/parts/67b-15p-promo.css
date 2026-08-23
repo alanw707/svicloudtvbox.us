@@ -4,6 +4,10 @@
   overflow-x: hidden;
 }
 
+.svic-15p-promo-page #svic-google-customer-reviews-badge {
+  display: none !important;
+}
+
 .fifteenp-hero {
   position: relative;
   padding: clamp(3.2rem, 7vw, 5.5rem) 0 clamp(2.4rem, 5vw, 4rem);
