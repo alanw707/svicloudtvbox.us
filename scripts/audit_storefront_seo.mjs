@@ -6,9 +6,9 @@ import { chromium } from 'playwright';
 const baseUrl = (process.env.PLAYWRIGHT_BASE_URL || 'http://svicloud10p.svic.local').replace(/\/$/, '');
 const outputPath = process.env.SEO_AUDIT_OUTPUT || '.playwright/seo-audit/report.json';
 const locales = [
-  { code: 'en', prefix: '', marker: 'SVICLOUD', title: 'SVICLOUD 15P Pre-order | 小雲盒子 U.S. Authorized Dealer' },
-  { code: 'zh-TW', prefix: '/zh', marker: '小雲', title: '小雲 15P 預購｜小雲盒子美國授權經銷' },
-  { code: 'zh-CN', prefix: '/zh-cn', marker: '小云', title: '小云 15P 预订｜小云盒子美国授权经销' },
+  { code: 'en', prefix: '', marker: 'SVICLOUD', title: 'SVICLOUD 10P+ & 15P | 小雲盒子 U.S. Authorized Dealer' },
+  { code: 'zh-TW', prefix: '/zh', marker: '小雲', title: '小雲 10P+ 與 15P｜小雲盒子美國授權經銷' },
+  { code: 'zh-CN', prefix: '/zh-cn', marker: '小云', title: '小云 10P+ 与 15P｜小云盒子美国授权经销' },
 ];
 const routes = [
   { key: 'home', path: '/', image: '.hero-15p__image' },
@@ -149,6 +149,7 @@ try {
         if (!data.descriptions[0]?.includes('288') || !data.descriptions[0]?.includes('379')) issue(scope, 'description lacks 288/379 pricing');
         if (route.key === 'home' && data.title !== locale.title) issue(scope, `homepage title differs from approved title: ${data.title}`);
         if (/price (and release date )?(has|have) not been announced/i.test(data.text) || /價格與推出日期尚未公布|价格与推出日期尚未公布/.test(data.text)) issue(scope, 'obsolete price-unannounced copy remains');
+        if (/15P.{0,140}(pre-order|preorder|release window|1 to 2 weeks|接受預購|上市時程|接受预订|上市时间)|(?:pre-order|preorder|release window|1 to 2 weeks|接受預購|上市時程|接受预订|上市时间).{0,140}15P/i.test(data.text)) issue(scope, 'stale 15P preorder copy remains');
 
         const primary = page.locator(route.image).first();
         if (await primary.count() !== 1) issue(scope, 'primary 15P image missing');
@@ -169,8 +170,7 @@ try {
           if (offers.length !== 1) issue(scope, `expected one 15P Offer, got ${offers.length}`);
           else {
             const offer = offers[0];
-            if (Number(offer.price) !== 288 || offer.priceCurrency !== 'USD' || offer.availability !== 'https://schema.org/PreOrder' || offer.availabilityStarts !== '2026-09-06') issue(scope, `15P Offer mismatch: ${JSON.stringify({ price: offer.price, currency: offer.priceCurrency, availability: offer.availability, availabilityStarts: offer.availabilityStarts })}`);
-            if (JSON.stringify(offer.shippingDetails || '').includes('deliveryTime')) issue(scope, 'PreOrder Offer includes deliveryTime');
+            if (Number(offer.price) !== 288 || offer.priceCurrency !== 'USD' || offer.availability !== 'https://schema.org/InStock' || offer.availabilityStarts) issue(scope, `15P Offer mismatch: ${JSON.stringify({ price: offer.price, currency: offer.priceCurrency, availability: offer.availability, availabilityStarts: offer.availabilityStarts })}`);
           }
         }
 

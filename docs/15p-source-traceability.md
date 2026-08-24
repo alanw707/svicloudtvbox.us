@@ -60,7 +60,7 @@ Extraction used the official Anthropic `pdf` and `pptx` skills, PyMuPDF/PDFPlumb
 | Smart poster wall and UI screenshots on slide 11 | Excluded from core claims because firmware/version behavior is not specified. |
 | Voice-assistant languages on slides 16–17 | Qualified to `voice remote` only; language and service availability are not guaranteed. |
 | Network-function list (`Skype`, `Picasa`, `Flicker`, `Facebook`, etc.) in PDF p.1 | Excluded as outdated and unsupported by release/region details. |
-| `Professional player-grade` and `officially launched` on slide 1; `premium` on slide 2 | Excluded. `Officially launched` conflicts with the unannounced release state; the other phrases are unmeasured marketing language. |
+| `Professional player-grade` and `premium` on PPTX slides | Excluded as unmeasured marketing language. |
 | Qualitative/temporal paraphrases (`S905Y5 power`, `Android 14 performance`, `current playback formats`, `current wireless`, `current platform`, `practical connections`) | Excluded from published copy. The site lists the underlying processor, OS, codec, wireless, and port facts directly without qualitative framing. |
 | Wi-Fi/HDR/remote slide artwork (slides 5, 6, and 14) | Excluded from storefront media. Embedded copy adds unverified coverage, transmission, color-performance, restoration, and operating-experience claims; the remote slide also includes service/content imagery. |
 | Remaining PPTX raster slide artwork | Not published as storefront media. Even when a technical label is accepted, the flattened image may combine it with marketing, app/service, lifestyle, or availability implications that cannot be separated reliably. |
@@ -69,11 +69,11 @@ Extraction used the official Anthropic `pdf` and `pptx` skills, PyMuPDF/PDFPlumb
 
 ## Selected image map
 
-All output images are optimized WebP files; source PDF/PPTX files remain external and untracked. No flattened PPTX marketing slide is shipped. The generated marketing creative uses only accepted Android 14, Wi-Fi 6, Bluetooth 5.4, 4 GB + 64 GB, 4K HDR, AV1, and Coming Soon claims. It contains no embedded CTA; interactive actions remain accessible HTML controls outside the image.
+All output images are optimized WebP files; source PDF/PPTX files remain external and untracked. No flattened PPTX marketing slide is shipped. The generated marketing creative uses only accepted Android 14, Wi-Fi 6, Bluetooth 5.4, 4 GB + 64 GB, 4K HDR, AV1, and in-stock claims. It contains no embedded CTA; interactive actions remain accessible HTML controls outside the image.
 
 | Theme asset | Source | Purpose and alt text |
 |---|---|---|
-| `assets/images/products/svicloud-15p-marketing-v4-watermarked.webp` | OpenAI Codex built-in `image_gen`, grounded by approved product references; exact prompts in `docs/15p-launch/15p-marketing-v4-prompt.md` | Watermarked homepage hero, Shop card, pricing card, and social metadata. Alt: `SVICLOUD 15P Android 14 feature graphic`. |
+| `assets/images/products/svicloud-15p-marketing-v4-watermarked.webp` | OpenAI Codex built-in `image_gen`, grounded by approved product references; exact prompts in `docs/15p-launch/15p-marketing-v4-prompt.md`; 2026-08-24 badge corrected from `COMING SOON` to `IN STOCK NOW` after inventory arrived | Watermarked homepage hero, Shop card, pricing card, and social metadata. Alt: `SVICLOUD 15P Android 14 feature graphic`. |
 | `assets/images/products/svicloud-15p-primary-ai-watermarked.webp` | Supplied screenshot-derived AI primary image | Watermarked primary/front image and product metadata. Alt: `SVICLOUD 15P TV Box front view with watermark`. |
 | `assets/images/products/svicloud-15p-front.webp` | PDF p.1 embedded front product photo, watermark derivative | Watermarked fallback/identity image. Alt: `SVICLOUD 15P TV box front view`. |
 | `assets/images/products/svicloud-15p-angle.webp` | PDF p.1 embedded angled product photo, watermark derivative | Watermarked gallery/fallback image. Alt: `SVICLOUD 15P TV box angled view showing rear ports`. |
@@ -95,20 +95,20 @@ All output images are optimized WebP files; source PDF/PPTX files remain externa
 ### Traditional Chinese
 
 - **Title:** 小雲 15P 電視盒
-- **Badge/status:** 接受缺貨訂購
+- **Badge/status:** 現貨供應
 - **Lead:** 全新小雲 15P 搭載 Android 14、Amlogic S905Y5 處理器、4 GB DDR3 記憶體、64 GB eMMC 儲存空間、雙頻 Wi-Fi 6、藍牙 5.4 與 4K HDR 播放。
 - **Feature labels:** `Amlogic S905Y5 + Android 14`; `4 GB DDR3 + 64 GB eMMC`; `Wi-Fi 6 + 藍牙 5.4`; `4K HDR + AV1 解碼`.
-- **CTA:** 缺貨訂購 15P
-- **Availability:** 特價 `US$288` / 原價 `US$379`；出貨日期尚未公布。
+- **CTA:** 購買 15P
+- **Availability:** 特價 `US$288` / 原價 `US$379`；現貨供應。
 
 ### Simplified Chinese
 
 - **Title:** 小云 15P 电视盒
-- **Badge/status:** 接受缺货订购
+- **Badge/status:** 现货供应
 - **Lead:** 全新小云 15P 搭载 Android 14、Amlogic S905Y5 处理器、4 GB DDR3 内存、64 GB eMMC 存储空间、双频 Wi-Fi 6、蓝牙 5.4 与 4K HDR 播放。
 - **Feature labels:** `Amlogic S905Y5 + Android 14`; `4 GB DDR3 + 64 GB eMMC`; `Wi-Fi 6 + 蓝牙 5.4`; `4K HDR + AV1 解码`.
-- **CTA:** 缺货订购 15P
-- **Availability:** 特价 `US$288` / 原价 `US$379`；发货日期尚未公布。
+- **CTA:** 购买 15P
+- **Availability:** 特价 `US$288` / 原价 `US$379`；现货供应。
 
 ## Rendered-copy map
 
@@ -130,5 +130,5 @@ Labels such as `Confirmed platform`, `Core specifications`, and `At a glance` or
 1. A local fixture refresh must recreate the supplemental 15P product with regular `379`, sale/effective `288`, unmanaged stock, backorders `no`, stock status `instock`, and five watermarked source/gallery images.
 2. Homepage, Shop, Compare, PDP, cart/checkout, metadata, and Product/Offer JSON-LD must agree on the price and InStock state.
 3. Normal checkout/payment/shipping-rate/cancellation/return behavior applies, but no 15P-specific shipping speed, dispatch date, delivery date, or warranty promise may be added.
-4. “Coming Soon” remains only inside approved v4 artwork; surrounding UI uses localized in-stock action/status copy.
+4. The v4 artwork must not say “Coming Soon”; the shipped version uses `IN STOCK NOW` and surrounding UI uses localized in-stock action/status copy.
 5. Every hardware/app storefront claim must map to the accepted-claims table above; otherwise remove it or ask for clarification.

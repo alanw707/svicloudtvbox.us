@@ -1,6 +1,6 @@
 <?php
 /**
- * Legacy SVICLOUD 15P preorder customer notice.
+ * Legacy SVICLOUD 15P launch customer notice.
  *
  * @package SVICloudTVBoxClassic
  */
@@ -18,7 +18,7 @@ if (!class_exists('SVIC_15P_Preorder_Notifier')) {
 
         public static function init(): void {
             // 15P is now in stock, so new orders should use normal WooCommerce
-            // customer emails instead of the launch preorder timing notice.
+            // customer emails instead of the old launch timing notice.
         }
 
         public static function maybe_send_for_order_id(int $order_id): void {
@@ -83,7 +83,7 @@ if (!class_exists('SVIC_15P_Preorder_Notifier')) {
 
             if (self::was_manually_sent($order)) {
                 $order->update_meta_data(self::SENT_META_KEY, 'manual-titan-2026-08-18');
-                $order->add_order_note('SVICLOUD 15P preorder delivery timing email was sent manually from Titan; automation marked it complete.', false, true);
+                $order->add_order_note('SVICLOUD 15P launch timing email was sent manually from Titan; automation marked it complete.', false, true);
                 $order->save();
                 return 'manual-marked';
             }
@@ -102,10 +102,10 @@ if (!class_exists('SVIC_15P_Preorder_Notifier')) {
             }
 
             $subject = sprintf(
-                'SVICLOUD 15P preorder update for order #%s',
+                'SVICLOUD 15P stock update for order #%s',
                 $order->get_order_number()
             );
-            $heading = 'Your SVICLOUD 15P preorder is confirmed';
+            $heading = 'Your SVICLOUD 15P is in stock';
 
             $message = self::build_email_message($order, $heading, $customer_name);
             if ($message === '') {
@@ -125,7 +125,7 @@ if (!class_exists('SVIC_15P_Preorder_Notifier')) {
             }
 
             $order->update_meta_data(self::SENT_META_KEY, gmdate('c'));
-            $order->add_order_note('SVICLOUD 15P preorder delivery timing email sent to customer.', false, true);
+            $order->add_order_note('SVICLOUD 15P stock update email sent to customer.', false, true);
             $order->save();
             return 'sent';
         }

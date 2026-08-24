@@ -8,15 +8,15 @@ mkdirSync(outputDir, { recursive: true });
 
 const locales = [
   {
-    code: 'en', prefix: '', title: 'SVICLOUD 15P TV Box', availability: 'Available for pre-order', action: 'Pre-order 15P', shippingDate: 'Release window: 1 to 2 weeks', metaMarker: 'SVICLOUD',
+    code: 'en', prefix: '', title: 'SVICLOUD 15P TV Box', availability: 'In stock now', action: 'Buy 15P', delivery: 'In-stock delivery', metaMarker: 'SVICLOUD',
     forbiddenPolicies: ['48-Hour U.S. Shipping', '1-Year U.S. Warranty', 'Every SVICLOUD device is genuine with U.S. warranty support', 'Shipping speed, warranty, and setup help'],
   },
   {
-    code: 'zh-TW', prefix: '/zh', title: '小雲 15P 電視盒', availability: '接受預購', action: '預購 15P', shippingDate: '上市時程：1 至 2 週', metaMarker: '小雲',
+    code: 'zh-TW', prefix: '/zh', title: '小雲 15P 電視盒', availability: '現貨供應', action: '購買 15P', delivery: '現貨配送', metaMarker: '小雲',
     forbiddenPolicies: ['一年美國保固', '標準配送與追蹤', '提供原廠保固與在地服務', '配送時程、保固退換與中文安裝協助'],
   },
   {
-    code: 'zh-CN', prefix: '/zh-cn', title: '小云 15P 电视盒', availability: '接受预订', action: '预订 15P', shippingDate: '上市时间：1 至 2 周', metaMarker: '小云',
+    code: 'zh-CN', prefix: '/zh-cn', title: '小云 15P 电视盒', availability: '现货供应', action: '购买 15P', delivery: '现货配送', metaMarker: '小云',
     forbiddenPolicies: ['1-Year U.S. Warranty', '48-Hour U.S. Shipping', '一年美国保修', '配送时效、保修退换、中文安装协助'],
   },
 ];
@@ -83,9 +83,10 @@ try {
         }
         if (!metrics.text.includes('Android 14')) fail(`${locale.code} ${viewport.key} ${route.key}: Android 14 copy missing`);
         const normalizedText = metrics.text.toLocaleLowerCase();
-        for (const required of [locale.availability, locale.action, locale.shippingDate, '288', '379']) {
-          if (!normalizedText.includes(required.toLocaleLowerCase())) fail(`${locale.code} ${viewport.key} ${route.key}: required pre-order content missing: ${required}`);
+        for (const required of [locale.availability, locale.action, locale.delivery, '288', '379']) {
+          if (!normalizedText.includes(required.toLocaleLowerCase())) fail(`${locale.code} ${viewport.key} ${route.key}: required in-stock content missing: ${required}`);
         }
+        if (/pre-order|preorder|release window|1 to 2 weeks|接受預購|上市時程|接受预订|上市时间/i.test(metrics.text)) fail(`${locale.code} ${viewport.key} ${route.key}: stale preorder copy remains`);
         if (/price (and release date )?(has|have) not been announced/i.test(metrics.text)) fail(`${locale.code} ${viewport.key} ${route.key}: obsolete price copy remains`);
         if (errors.length) fail(`${locale.code} ${viewport.key} ${route.key}: ${errors.join('; ')}`);
 
@@ -144,8 +145,7 @@ try {
           });
           if (productNodes.length !== 1) fail(`${locale.code} ${viewport.key}: expected one Product node, got ${productNodes.length}`);
           const offer = productNodes[0]?.offers;
-          if (!offer || offer.price !== '288.00' || offer.availability !== 'https://schema.org/PreOrder' || offer.availabilityStarts !== '2026-09-06') fail(`${locale.code} ${viewport.key}: PreOrder Offer mismatch`);
-          if (offer.shippingDetails?.deliveryTime) fail(`${locale.code} ${viewport.key}: PreOrder Offer includes deliveryTime`);
+          if (!offer || offer.price !== '288.00' || offer.availability !== 'https://schema.org/InStock' || offer.availabilityStarts) fail(`${locale.code} ${viewport.key}: InStock Offer mismatch`);
           for (const policy of locale.forbiddenPolicies) {
             if (metrics.text.includes(policy)) fail(`${locale.code} ${viewport.key}: unverified 15P policy rendered: ${policy}`);
           }

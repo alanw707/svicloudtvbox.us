@@ -1,6 +1,6 @@
 <?php
 /**
- * Legacy customer SVICLOUD 15P preorder timing notice.
+ * Legacy customer SVICLOUD 15P launch timing notice.
  *
  * @package SVICloudTVBoxClassic
  */
@@ -19,11 +19,11 @@ do_action('woocommerce_email_header', $email_heading, $email ?? null);
 <p><?php echo esc_html(sprintf('Hi %s,', $customer_name)); ?></p>
 
 <p>
-    Thank you for your SVICLOUD 15P preorder. Your order has been received and reserved.
+    Thank you for your SVICLOUD 15P order. Your order has been received and reserved.
 </p>
 
 <p>
-    SVICLOUD 15P is now in stock. This legacy preorder notice should only be used for historical preorder follow-up.
+    SVICLOUD 15P is now in stock and available for fulfillment.
 </p>
 
 <p>

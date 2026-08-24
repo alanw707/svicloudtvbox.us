@@ -8156,7 +8156,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             return;
         }
 
-        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v4');
+        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v5');
         $mtime        = (int) filemtime($feed_path);
         if ($last_checked >= $mtime) {
             return;
@@ -8197,6 +8197,11 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             // The original 10S packshot is 750x470; Merchant Center warns when a
             // dimension is under 500px. Use the high-resolution lifestyle image.
             '14' => 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-1.jpg',
+            '1204' => 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-primary-ai-watermarked.webp',
+        ];
+
+        $description_overrides = [
+            '1204' => 'SVICLOUD 15P TV Box is in stock now at $288.00 (regular $379.00). It runs Android 14 on an Amlogic S905Y5 quad-core Cortex-A55 processor with 4 GB DDR3 memory, 64 GB eMMC storage, dual-band Wi-Fi 6, Bluetooth 5.4, 4K HDR, and AV1 support.',
         ];
 
         $availability_overrides = [
@@ -8205,7 +8210,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             ],
         ];
 
-        $patched = preg_replace_callback('/<item>(.*?)<\/item>/s', function ($matches) use ($shipping_block, $offer_images, $image_link_overrides, $availability_overrides) {
+        $patched = preg_replace_callback('/<item>(.*?)<\/item>/s', function ($matches) use ($shipping_block, $offer_images, $image_link_overrides, $description_overrides, $availability_overrides) {
             $item     = $matches[0];
             $offer_id = '';
             if (preg_match('/<g:id>(.*?)<\/g:id>/', $item, $id_matches)) {
@@ -8232,6 +8237,11 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             if (isset($image_link_overrides[$offer_id]) && strpos($patched_item, '<g:image_link>') !== false) {
                 $replacement = '      <g:image_link>' . esc_url($image_link_overrides[$offer_id]) . '</g:image_link>';
                 $patched_item = preg_replace('/\s*<g:image_link>.*?<\/g:image_link>\s*/s', "\n" . $replacement . "\n", $patched_item, 1) ?: $patched_item;
+            }
+
+            if (isset($description_overrides[$offer_id]) && strpos($patched_item, '<g:description>') !== false) {
+                $replacement = '      <g:description><![CDATA[' . $description_overrides[$offer_id] . ']]></g:description>';
+                $patched_item = preg_replace('/\s*<g:description>.*?<\/g:description>\s*/s', "\n" . $replacement . "\n", $patched_item, 1) ?: $patched_item;
             }
 
             if (isset($availability_overrides[$offer_id])) {
@@ -8316,7 +8326,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             file_put_contents($feed_path, $patched, LOCK_EX);
         }
 
-        set_transient('svic_google_feed_rich_offer_checked_v4', max($mtime, time()), HOUR_IN_SECONDS);
+        set_transient('svic_google_feed_rich_offer_checked_v5', max($mtime, time()), HOUR_IN_SECONDS);
     }
 }
 

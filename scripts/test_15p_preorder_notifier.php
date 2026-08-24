@@ -63,7 +63,7 @@ class Test_Order_Item {
 require_once __DIR__ . '/../theme/svicloudtvbox-lumen/inc/class-svic-15p-preorder-notifier.php';
 
 $matching_order = new WC_Order([
-    new Test_Order_Item('SVICLOUD 15P preorder', new WC_Product('SVICLOUD 15P', 'SVIC-15P', 'svicloud-15p')),
+    new Test_Order_Item('SVICLOUD 15P order', new WC_Product('SVICLOUD 15P', 'SVIC-15P', 'svicloud-15p')),
 ]);
 
 $non_matching_order = new WC_Order([
@@ -71,23 +71,23 @@ $non_matching_order = new WC_Order([
 ]);
 
 if (!SVIC_15P_Preorder_Notifier::order_contains_15p_preorder($matching_order)) {
-    fwrite(STDERR, "Expected 15P preorder order to match\n");
+    fwrite(STDERR, "Expected 15P order to match\n");
     exit(1);
 }
 
 if (SVIC_15P_Preorder_Notifier::order_contains_15p_preorder($non_matching_order)) {
-    fwrite(STDERR, "Did not expect 10P order to match 15P preorder\n");
+    fwrite(STDERR, "Did not expect 10P order to match 15P launch notifier\n");
     exit(1);
 }
 
-echo "15p-preorder notifier matcher ok\n";
+echo "15p launch notifier matcher ok\n";
 
 $GLOBALS['options'] = [];
 $GLOBALS['captured_order_queries'] = [];
 $GLOBALS['send_attempts'] = [];
 $GLOBALS['mail_send_result'] = false;
 $failed_order = new WC_Order([
-    new Test_Order_Item('SVICLOUD 15P preorder', new WC_Product('SVICLOUD 15P', 'SVIC-15P', 'svicloud-15p')),
+    new Test_Order_Item('SVICLOUD 15P order', new WC_Product('SVICLOUD 15P', 'SVIC-15P', 'svicloud-15p')),
 ]);
 $GLOBALS['wc_get_orders_pages'] = [1 => [$failed_order], 2 => []];
 
@@ -103,14 +103,14 @@ if (($GLOBALS['captured_order_queries'][0]['limit'] ?? null) !== 100 || ($GLOBAL
     exit(1);
 }
 
-echo "15p-preorder failed-send backfill retry ok\n";
+echo "15p launch failed-send backfill retry ok\n";
 
 $GLOBALS['options'] = [];
 $GLOBALS['captured_order_queries'] = [];
 $GLOBALS['send_attempts'] = [];
 $GLOBALS['mail_send_result'] = true;
 $sent_order = new WC_Order([
-    new Test_Order_Item('SVICLOUD 15P preorder', new WC_Product('SVICLOUD 15P', 'SVIC-15P', 'svicloud-15p')),
+    new Test_Order_Item('SVICLOUD 15P order', new WC_Product('SVICLOUD 15P', 'SVIC-15P', 'svicloud-15p')),
 ]);
 $GLOBALS['wc_get_orders_pages'] = [1 => [$sent_order], 2 => []];
 
@@ -126,11 +126,11 @@ if (($sent_order->meta['_svic_15p_preorder_email_sent'] ?? '') === '') {
     exit(1);
 }
 
-echo "15p-preorder successful backfill close ok\n";
+echo "15p launch successful backfill close ok\n";
 
 $GLOBALS['send_attempts'] = [];
 $manual_order = new WC_Order([
-    new Test_Order_Item('SVICLOUD 15P preorder', new WC_Product('SVICLOUD 15P', 'SVIC-15P', 'svicloud-15p')),
+    new Test_Order_Item('SVICLOUD 15P order', new WC_Product('SVICLOUD 15P', 'SVIC-15P', 'svicloud-15p')),
 ], '1215');
 
 $manual_result = SVIC_15P_Preorder_Notifier::maybe_send($manual_order);
@@ -140,4 +140,4 @@ if ($manual_result !== 'manual-marked' || count($GLOBALS['send_attempts']) !== 0
     exit(1);
 }
 
-echo "15p-preorder manual duplicate guard ok\n";
+echo "15p launch manual duplicate guard ok\n";
