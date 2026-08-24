@@ -535,6 +535,10 @@ function svic_fixture_import_local_15p(array &$maps): void {
     $product->set_stock_quantity(null);
     $product->set_backorders('no');
     $product->set_stock_status('instock');
+    $product->set_weight('1.7');
+    $product->set_length('13');
+    $product->set_width('8');
+    $product->set_height('3');
     $product->set_reviews_allowed(false);
     $product->set_image_id((int) $maps['local_media']['primary_ai']);
     $product->set_gallery_image_ids(array_values(array_map(static fn(string $key): int => (int) $maps['local_media'][$key], array('angle', 'package', 'lifestyle_ai', 'lifestyle_ai_2'))));

@@ -381,8 +381,8 @@ def verify_fixture(fixture: dict[str, Any], container: str) -> None:
     imported_menu_items = wp_eval(container, "echo count(get_posts(array('post_type' => 'nav_menu_item', 'post_status' => 'publish', 'numberposts' => -1, 'fields' => 'ids')));")
     if imported_menu_items != str(len(menu_items)):
         raise RuntimeError("Menu item count does not match the production fixture")
-    local_15p = wp_eval(container, "$post = get_page_by_path('svicloud-15p', OBJECT, 'product'); if (!$post) { exit(4); } $product = wc_get_product($post->ID); if (!$product) { exit(5); } echo implode('|', array($product->get_status(), $product->get_catalog_visibility(), $product->is_purchasable() ? '1' : '0', $product->get_regular_price(), $product->get_sale_price(), $product->get_price(), $product->get_manage_stock() ? '1' : '0', (string) $product->get_stock_quantity(), $product->get_backorders(), $product->get_stock_status(), count($product->get_gallery_image_ids()) + ($product->get_image_id() ? 1 : 0), get_post_meta($post->ID, '_svic_local_fixture_key', true))); ")
-    if local_15p != "publish|visible|1|379|288|288|0||no|instock|5|15p":
+    local_15p = wp_eval(container, "$post = get_page_by_path('svicloud-15p', OBJECT, 'product'); if (!$post) { exit(4); } $product = wc_get_product($post->ID); if (!$product) { exit(5); } echo implode('|', array($product->get_status(), $product->get_catalog_visibility(), $product->is_purchasable() ? '1' : '0', $product->get_regular_price(), $product->get_sale_price(), $product->get_price(), $product->get_manage_stock() ? '1' : '0', (string) $product->get_stock_quantity(), $product->get_backorders(), $product->get_stock_status(), $product->get_weight(), $product->get_length(), $product->get_width(), $product->get_height(), count($product->get_gallery_image_ids()) + ($product->get_image_id() ? 1 : 0), get_post_meta($post->ID, '_svic_local_fixture_key', true))); ")
+    if local_15p != "publish|visible|1|379|288|288|0||no|instock|1.7|13|8|3|5|15p":
         raise RuntimeError("Supplemental 15P product verification failed")
 
 
