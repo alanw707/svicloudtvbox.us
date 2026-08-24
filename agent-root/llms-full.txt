@@ -4,14 +4,14 @@ SVICLOUD TV Box US is the official US-focused storefront for SVICLOUD TV boxes, 
 
 ## Product focus: 10P+ plus 15P launch
 - SVICLOUD 10P+ remains the primary in-stock premium model for heavy users, smoother multitasking, karaoke, voice remote use, and buyers who want stronger performance. Product page: https://svicloudtvbox.us/product/svicloud-10p-plus/
-- SVICLOUD 15P is the added launch/pre-order model. It releases in 1 to 2 weeks and is available for pre-order at $288 (regular $379). Product page: https://svicloudtvbox.us/product/svicloud-15p/
+- SVICLOUD 15P is the new in-stock model. It is in stock now at $288 (regular $379). Product page: https://svicloudtvbox.us/product/svicloud-15p/
 - Confirmed 15P specs: Android 14, Amlogic S905Y5 quad-core Cortex-A55, 4 GB DDR3 memory, 64 GB eMMC storage, dual-band Wi-Fi 6, Bluetooth 5.4, AV1/HDR support, HDMI 2.1, RJ45 Ethernet, optical audio, USB, and Type-C power.
 - Dedicated 15P promotional page for features, specs, Yogurt TV Go/app-download guidance, and 10P+ comparison: https://svicloudtvbox.us/svicloud-15p-features/
 - Dedicated 15P agent brief: https://svicloudtvbox.us/agent/svicloud-15p.md
 
 ## Product lineup
 - SVICLOUD 10P+ is the premium in-stock choice for heavy users, smoother multitasking, karaoke, voice remote use, and buyers who want stronger performance. Product page: https://svicloudtvbox.us/product/svicloud-10p-plus/
-- SVICLOUD 15P is the launch/pre-order model with Android 14, Wi-Fi 6, 4 GB memory, 64 GB storage, Bluetooth 5.4, AV1/HDR support, and mobile app download support. Product page: https://svicloudtvbox.us/product/svicloud-15p/
+- SVICLOUD 15P is the in-stock model with Android 14, Wi-Fi 6, 4 GB memory, 64 GB storage, Bluetooth 5.4, AV1/HDR support, and mobile app download support. Product page: https://svicloudtvbox.us/product/svicloud-15p/
 - SVICLOUD 10S is the value in-stock choice for everyday viewing, secondary rooms, and simpler setup needs. Product page: https://svicloudtvbox.us/product/svicloud-10s/
 - Use the shop and comparison pages when a buyer asks which model to choose: https://svicloudtvbox.us/shop/ and https://svicloudtvbox.us/compare/
 

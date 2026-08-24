@@ -1,6 +1,6 @@
 <?php
 /**
- * Customer SVICLOUD 15P preorder timing notice.
+ * Legacy customer SVICLOUD 15P preorder timing notice.
  *
  * @package SVICloudTVBoxClassic
  */
@@ -23,7 +23,7 @@ do_action('woocommerce_email_header', $email_heading, $email ?? null);
 </p>
 
 <p>
-    SVICLOUD 15P is currently in preorder for the U.S. launch. The official U.S. launch window is now <strong>1 to 2 weeks</strong>.
+    SVICLOUD 15P is now in stock. This legacy preorder notice should only be used for historical preorder follow-up.
 </p>
 
 <p>
@@ -32,8 +32,7 @@ do_action('woocommerce_email_header', $email_heading, $email ?? null);
 
 <p>
     <strong>Order:</strong> #<?php echo esc_html($order->get_order_number()); ?><br>
-    <strong>Product:</strong> SVICLOUD 15P preorder<br>
-    <strong>Release window:</strong> 1 to 2 weeks
+    <strong>Product:</strong> SVICLOUD 15P
 </p>
 
 <p>

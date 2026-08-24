@@ -23,7 +23,7 @@ get_header();
         <h1 class="fifteenp-hero__title"><?php echo esc_html($content['title'] ?? 'SVICLOUD 15P features'); ?></h1>
         <p class="fifteenp-hero__lead"><?php echo esc_html($content['lead'] ?? ''); ?></p>
         <div class="fifteenp-hero__actions lumen-action-group">
-          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($product_url); ?>"><?php echo esc_html($content['primary_cta'] ?? 'Pre-order 15P'); ?></a>
+          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($product_url); ?>"><?php echo esc_html($content['primary_cta'] ?? 'Buy 15P'); ?></a>
           <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($compare_url); ?>"><?php echo esc_html($content['secondary_cta'] ?? 'Compare models'); ?></a>
           <a class="fifteenp-hero__textlink" href="<?php echo esc_url($apps_url); ?>"><?php echo esc_html($content['tertiary_cta'] ?? 'App guide'); ?></a>
         </div>
@@ -62,7 +62,7 @@ get_header();
         <h2 id="fifteenp-compare-title" class="fifteenp-section__title"><?php echo esc_html($content['compare_title'] ?? '15P vs 10P+'); ?></h2>
         <p class="fifteenp-section__lead"><?php echo esc_html($content['compare_copy'] ?? ''); ?></p>
         <div class="fifteenp-compare__actions">
-          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($product_url); ?>"><?php echo esc_html($content['primary_cta'] ?? 'Pre-order 15P'); ?></a>
+          <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($product_url); ?>"><?php echo esc_html($content['primary_cta'] ?? 'Buy 15P'); ?></a>
           <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($shop_url); ?>"><?php echo esc_html($content['shop_cta'] ?? 'Shop lineup'); ?></a>
         </div>
       </div>

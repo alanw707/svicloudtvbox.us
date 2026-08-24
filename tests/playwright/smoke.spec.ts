@@ -36,7 +36,7 @@ test.describe('SVICLOUD site smoke', () => {
       if (path.startsWith('/product/')) {
         const hero = page.locator('.lumen-product .product-hero, .product-hero').first();
         await expect(hero).toBeVisible();
-        const isBackorder15p = path === '/product/svicloud-15p/';
+        const is15p = path === '/product/svicloud-15p/';
         await expect(page.locator('.product-hero-price, .lumen-product .product-hero-price')).toBeVisible();
         const thumbCount = await page.locator('.product-thumb').count();
         if (thumbCount > 1) {
@@ -51,10 +51,10 @@ test.describe('SVICLOUD site smoke', () => {
         }
         const addBtn = page.locator('.single_add_to_cart_button');
         await expect(addBtn).toBeVisible();
-        await expect(addBtn).toHaveText(isBackorder15p ? /pre-order 15p/i : /add to cart/i);
-        if (isBackorder15p) {
+        await expect(addBtn).toHaveText(is15p ? /buy 15p/i : /add to cart/i);
+        if (is15p) {
           await expect(page.locator('.pdp-compare')).toBeVisible();
-          await expect(page.locator('.stock.available-on-backorder')).toBeVisible();
+          await expect(page.locator('.stock.in-stock')).toBeVisible();
         }
         await page.evaluate(() => {
           const form = document.querySelector('form.cart');

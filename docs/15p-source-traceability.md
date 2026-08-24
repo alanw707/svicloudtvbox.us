@@ -9,7 +9,7 @@ The 15P hardware and media content is derived from the two read-only source file
 | `D:\168mediagroup\SVICloudTVBox.us\15P\15P Specs最新.pdf` | `76e421663e5d45076c53f13b12a6cc24cef98639ef3d1c50b87ccc31d6e41108` | 2 pages; page 1 contains the specification table and four embedded product/manual images; page 2 is blank. |
 | `D:\168mediagroup\SVICloudTVBox.us\15P\15P PDF.pptx` | `3388cab020d0f9f9a3bc4797241c2ad57b30972109d89588d7575fe9bc0dd85b` | 27 slides; each slide is one 1422×800 raster marketing image. |
 | Direct supplier confirmation relayed by site owner, 2026-08-17 | N/A | Confirms that the 15P includes the Kids and Karaoke apps. |
-| Site-owner commerce decision, 2026-08-17 | N/A | Sets U.S. regular price `$379.00`, sale price `$288.00`, and notified backorders; no shipping date was supplied. |
+| Site-owner commerce decision, 2026-08-17; stock update relayed by site owner, 2026-08-24 | N/A | Sets U.S. regular price `$379.00`, sale price `$288.00`, and current in-stock ordering. |
 | Public SVICLOUD 15P listing fetched 2026-08-23 | `https://us.svicloudnet.com/products/svicloud-15p?shpxid=32df5470-b562-4243-a46e-105a1d00f6e4` | Publicly describes Android 14, S905Y5, Wi-Fi 6, Bluetooth 5.4, HDR10+/HDR10/HLG, AV1 up to 4K@60fps, Filmax local playback, NAS-style local sources, and air-mouse remote. |
 | Site-owner launch/app positioning, 2026-08-23 | N/A | Sets the 15P promotional page angle around app-download flexibility and Yogurt TV Go guidance; do not frame this as a guaranteed app catalogue or content promise. |
 
@@ -20,8 +20,8 @@ Extraction used the official Anthropic `pdf` and `pptx` skills, PyMuPDF/PDFPlumb
 - **Product:** SVICLOUD 15P TV Box / 小雲 15P 電視盒 / 小云 15P 电视盒.
 - **Slug:** `svicloud-15p`.
 - **Catalog state:** Published and catalog-visible.
-- **Commerce state:** Regular `$379.00`, sale/effective `$288.00`, managed zero stock, notified backorders allowed, and purchasable. Shipping date not announced.
-- **Claim boundary:** The PDF/PPTX do not state price, release timing, inventory, shipping, warranty, or returns. Price/backorder state is a site-owner business decision; no 15P-specific shipping-speed, delivery-date, or warranty claim is added.
+- **Commerce state:** Regular `$379.00`, sale/effective `$288.00`, in stock, normal ordering enabled, and purchasable.
+- **Claim boundary:** The PDF/PPTX do not state price, release timing, inventory, shipping, warranty, or returns. Price and in-stock state are site-owner business decisions; no 15P-specific shipping-speed, delivery-date, or warranty claim is added.
 - **Primary positioning:** Android 14 TV box with Amlogic S905Y5, 4 GB DDR3 memory, 64 GB eMMC storage, dual-band Wi-Fi 6, Bluetooth 5.4, and 4K HDR/AV1 playback.
 
 ## Accepted claims
@@ -86,11 +86,11 @@ All output images are optimized WebP files; source PDF/PPTX files remain externa
 ### English
 
 - **Title:** SVICLOUD 15P TV Box
-- **Badge/status:** Available on backorder
+- **Badge/status:** In stock now
 - **Lead:** SVICLOUD 15P runs Android 14 on an Amlogic S905Y5 processor with 4 GB DDR3 memory, 64 GB eMMC storage, dual-band Wi-Fi 6, Bluetooth 5.4, and 4K HDR playback.
 - **Feature labels:** `Amlogic S905Y5 + Android 14`; `4 GB DDR3 + 64 GB eMMC`; `Wi-Fi 6 + Bluetooth 5.4`; `4K HDR + AV1 decoding`.
-- **CTA:** Backorder 15P
-- **Availability:** `$288.00` sale / `$379.00` regular; shipping date not announced.
+- **CTA:** Buy 15P
+- **Availability:** `$288.00` sale / `$379.00` regular; in stock now.
 
 ### Traditional Chinese
 
@@ -116,19 +116,19 @@ Every 15P-facing theme key is restricted to a source-backed fact or the confirme
 
 | Surface / key family | Published content | Evidence above |
 |---|---|---|
-| Homepage `frontpage.hero` and `frontpage.pricing.cards.15p` | Accepted hardware facts; `$288/$379`; Available on backorder; Backorder 15P; shipping date not announced | Accepted claims; site-owner commerce decision; Canonical product state |
+| Homepage `frontpage.hero` and `frontpage.pricing.cards.15p` | Accepted hardware facts; `$288/$379`; In stock now; Buy 15P | Accepted claims; site-owner commerce decision; Canonical product state |
 | Shop `shop.cards.15p` | Same hardware/commerce facts with v4 artwork and aligned card | Accepted claims; Selected image map; Canonical product state |
-| PDP `products.svicloud-15p` | Detailed hardware/package list; sale/regular price; notified backorder form; no delivery-date or warranty promise | Accepted claims; site-owner commerce decision; excluded/qualified material |
-| 15P PDP FAQ header and product-specific footer | Confirmed platform plus price/backorder state and shipping-date disclaimer | Canonical product state and implementation guardrail 3 |
-| Compare `compare.products.15p` and `compare.comparison.rows.*.p15p` | Direct specification values and `$288/$379` backorder state; no speed or superiority claim | Accepted claims; comparison qualification; commerce decision |
-| Header/meta | Localized EN/繁/简 Shop, Compare, PDP, and homepage metadata with authorized-dealer intent, `$288/$379`, and BackOrder state | Canonical product state, approved SEO decision, and accepted claims |
+| PDP `products.svicloud-15p` | Detailed hardware/package list; sale/regular price; normal in-stock ordering; no delivery-date or warranty promise | Accepted claims; site-owner commerce decision; excluded/qualified material |
+| 15P PDP FAQ header and product-specific footer | Confirmed platform plus price and in-stock state | Canonical product state and implementation guardrail 3 |
+| Compare `compare.products.15p` and `compare.comparison.rows.*.p15p` | Direct specification values and `$288/$379` in-stock state; no speed or superiority claim | Accepted claims; comparison qualification; commerce decision |
+| Header/meta | Localized EN/繁/简 Shop, Compare, PDP, and homepage metadata with authorized-dealer intent, `$288/$379`, and InStock state | Canonical product state, approved SEO decision, and accepted claims |
 
 Labels such as `Confirmed platform`, `Core specifications`, and `At a glance` organize evidence; they do not assert performance or suitability. The site makes no “newest,” “best,” “faster,” everyday-use, room-fit, or model-superiority claim for 15P.
 
 ## Implementation guardrails
 
-1. A local fixture refresh must recreate the supplemental 15P product with regular `379`, sale/effective `288`, managed quantity `0`, backorders `notify`, stock status `onbackorder`, and five watermarked source/gallery images.
-2. Homepage, Shop, Compare, PDP, cart/checkout, metadata, and Product/Offer JSON-LD must agree on the price and BackOrder state.
+1. A local fixture refresh must recreate the supplemental 15P product with regular `379`, sale/effective `288`, unmanaged stock, backorders `no`, stock status `instock`, and five watermarked source/gallery images.
+2. Homepage, Shop, Compare, PDP, cart/checkout, metadata, and Product/Offer JSON-LD must agree on the price and InStock state.
 3. Normal checkout/payment/shipping-rate/cancellation/return behavior applies, but no 15P-specific shipping speed, dispatch date, delivery date, or warranty promise may be added.
-4. “Coming Soon” remains only inside approved v4 artwork; surrounding UI uses localized Backorder action/status/date-disclaimer copy.
+4. “Coming Soon” remains only inside approved v4 artwork; surrounding UI uses localized in-stock action/status copy.
 5. Every hardware/app storefront claim must map to the accepted-claims table above; otherwise remove it or ask for clarification.

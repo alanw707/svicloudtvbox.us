@@ -949,9 +949,9 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh-cn' => '小云 15P vs 10P+ vs 10S｜机型规格比较',
                 ],
                 'description' => [
-                    'en' => 'Compare the $288 SVICLOUD 15P pre-order ($379 regular) with 10P+ and 10S hardware, video support, pricing, and availability.',
-                    'zh' => '比較 US$288 預購的小雲 15P（原價 US$379）與 10P+、10S 的硬體、影音支援、價格及銷售狀態。',
-                    'zh-cn' => '比较 US$288 预订的小云 15P（原价 US$379）与 10P+、10S 的硬件、影音支持、价格及销售状态。',
+                    'en' => 'Compare the in-stock $288 SVICLOUD 15P ($379 regular) with 10P+ and 10S hardware, video support, pricing, and availability.',
+                    'zh' => '比較現貨 US$288 小雲 15P（原價 US$379）與 10P+、10S 的硬體、影音支援、價格及銷售狀態。',
+                    'zh-cn' => '比较现货 US$288 小云 15P（原价 US$379）与 10P+、10S 的硬件、影音支持、价格及销售状态。',
                 ],
                 'image'       => '/assets/images/products/svicloud-15p-primary-ai-watermarked.webp',
                 'image_alt'   => [
@@ -967,9 +967,9 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh-cn' => '选购小云 15P、10P+ 与 10S 电视盒',
                 ],
                 'description' => [
-                    'en' => 'Pre-order SVICLOUD 15P for $288 (regular $379), or shop current 10P+, 10S, and Bluetooth remote products.',
-                    'zh' => '以 US$288 預購小雲 15P（原價 US$379），或選購現售 10P+、10S 與藍牙遙控器。',
-                    'zh-cn' => '以 US$288 预订小云 15P（原价 US$379），或选购现售 10P+、10S 与蓝牙遥控器。',
+                    'en' => 'Buy in-stock SVICLOUD 15P for $288 (regular $379), or shop current 10P+, 10S, and Bluetooth remote products.',
+                    'zh' => '以 US$288 購買現貨小雲 15P（原價 US$379），或選購現售 10P+、10S 與藍牙遙控器。',
+                    'zh-cn' => '以 US$288 购买现货小云 15P（原价 US$379），或选购现售 10P+、10S 与蓝牙遥控器。',
                 ],
                 'image'       => '/assets/images/products/svicloud-15p-marketing-v4-watermarked.webp',
                 'image_alt'   => [
@@ -1979,18 +1979,18 @@ if (!function_exists('svic_homepage_meta_definitions')) {
         $definitions = [
             'zh_tw' => [
                 'title'       => '小雲 10P+ 與 15P｜小雲盒子美國授權經銷',
-                'description' => '選購現貨小雲 10P+，或預購 1 至 2 週後上市的 15P（US$288，原價 US$379）。小雲盒子美國授權經銷，可比較 10P+、15P 與 10S。',
-                'image_alt'   => '小雲 15P Android 14 電視盒預購圖',
+                'description' => '選購現貨小雲 10P+、現貨 15P（US$288，原價 US$379）、10S 與藍牙遙控器。小雲盒子美國授權經銷，可比較 10P+、15P 與 10S。',
+                'image_alt'   => '小雲 15P Android 14 電視盒產品圖',
             ],
             'zh_cn' => [
                 'title'       => '小云 10P+ 与 15P｜小云盒子美国授权经销',
-                'description' => '选购现货小云 10P+，或预订 1 至 2 周后上市的 15P（US$288，原价 US$379）。小云盒子美国授权经销，可比较 10P+、15P 与 10S。',
-                'image_alt'   => '小云 15P Android 14 电视盒预订图',
+                'description' => '选购现货小云 10P+、现货 15P（US$288，原价 US$379）、10S 与蓝牙遥控器。小云盒子美国授权经销，可比较 10P+、15P 与 10S。',
+                'image_alt'   => '小云 15P Android 14 电视盒产品图',
             ],
             'en_us' => [
                 'title'       => 'SVICLOUD 10P+ & 15P | 小雲盒子 U.S. Authorized Dealer',
-                'description' => 'Shop the in-stock SVICLOUD 10P+ or pre-order 15P, releasing in 1 to 2 weeks for $288 (regular $379). Compare 10P+, 15P, and 10S.',
-                'image_alt'   => 'SVICLOUD 15P Android 14 TV box pre-order graphic',
+                'description' => 'Shop the in-stock SVICLOUD 10P+, in-stock 15P for $288 (regular $379), 10S, and Bluetooth remote products. Compare 10P+, 15P, and 10S.',
+                'image_alt'   => 'SVICLOUD 15P Android 14 TV box product graphic',
             ],
         ];
 
@@ -2863,11 +2863,6 @@ if (!function_exists('svic_enrich_product_schema_for_google_merchant')) {
             }
 
             $offer['availability'] = $normalize_schema_url($offer['availability'] ?? null);
-            if ($is_15p_node) {
-                $offer['availability'] = 'https://schema.org/PreOrder';
-                $offer['availabilityStarts'] = '2026-09-06';
-            }
-
             return svic_enrich_offer_schema_for_google_merchant($offer);
         };
 
@@ -8206,8 +8201,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
 
         $availability_overrides = [
             '1204' => [
-                'availability'      => 'preorder',
-                'availability_date' => '2026-09-06',
+                'availability' => 'in_stock',
             ],
         ];
 
@@ -8242,9 +8236,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
 
             if (isset($availability_overrides[$offer_id])) {
                 $availability = sanitize_text_field($availability_overrides[$offer_id]['availability']);
-                $availability_date = sanitize_text_field($availability_overrides[$offer_id]['availability_date']);
                 $availability_tag = '      <g:availability>' . $availability . '</g:availability>';
-                $availability_date_tag = '      <g:availability_date>' . $availability_date . '</g:availability_date>';
 
                 $patched_item = preg_replace('/\s*<g:availability_date>.*?<\/g:availability_date>\s*/s', "\n", $patched_item) ?: $patched_item;
                 if (strpos($patched_item, '<g:availability>') !== false) {
@@ -8253,10 +8245,6 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                     $patched_item = str_replace('      <g:condition>', $availability_tag . "\n" . '      <g:condition>', $patched_item);
                 } else {
                     $patched_item = str_replace('    </item>', $availability_tag . "\n" . '    </item>', $patched_item);
-                }
-
-                if (strpos($patched_item, '<g:availability>') !== false) {
-                    $patched_item = preg_replace('/(<g:availability>.*?<\/g:availability>)/s', '$1' . "\n" . $availability_date_tag, $patched_item, 1) ?: $patched_item;
                 }
             }
 

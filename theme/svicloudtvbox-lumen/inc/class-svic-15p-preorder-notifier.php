@@ -1,6 +1,6 @@
 <?php
 /**
- * SVICLOUD 15P preorder customer notice.
+ * Legacy SVICLOUD 15P preorder customer notice.
  *
  * @package SVICloudTVBoxClassic
  */
@@ -17,10 +17,8 @@ if (!class_exists('SVIC_15P_Preorder_Notifier')) {
         private const MANUALLY_SENT_ORDER_NUMBERS = ['1215'];
 
         public static function init(): void {
-            add_action('woocommerce_order_status_processing', [self::class, 'maybe_send_for_order_id'], 20, 1);
-            add_action('woocommerce_order_status_on-hold', [self::class, 'maybe_send_for_order_id'], 20, 1);
-            add_action('woocommerce_order_status_completed', [self::class, 'maybe_send_for_order_id'], 20, 1);
-            add_action('admin_init', [self::class, 'send_recent_unsent_once'], 20, 0);
+            // 15P is now in stock, so new orders should use normal WooCommerce
+            // customer emails instead of the launch preorder timing notice.
         }
 
         public static function maybe_send_for_order_id(int $order_id): void {

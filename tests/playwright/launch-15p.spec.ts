@@ -25,7 +25,7 @@ async function expectLoadedImage(locator: Locator) {
 }
 
 test.describe('SVICLOUD 15P launch safeguards', () => {
-  test('homepage renders source-confirmed 15P backorder pricing without unsupported policies', async ({ page }) => {
+  test('homepage renders source-confirmed 15P in-stock pricing without unsupported policies', async ({ page }) => {
     const response = await page.goto('/', { waitUntil: 'networkidle' });
     expect(response?.ok()).toBeTruthy();
     await expect(page).toHaveTitle(/SVICLOUD 15P/);
@@ -42,31 +42,30 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
 
     const pricingCard = page.locator('.lumen-pricing .shop-product-card--new');
     const pricingCardText = await pricingCard.innerText();
-    expect(pricingCardText.toLowerCase()).toContain('available for pre-order');
-    expect(pricingCardText.toLowerCase()).toContain('release window: 1 to 2 weeks');
+    expect(pricingCardText.toLowerCase()).toContain('in stock now');
     expect(pricingCardText).toContain('$288.00');
     expect(pricingCardText).toContain('$379.00');
     expect(pricingCardText).not.toContain('Coming Soon');
     expect(pricingCardText).not.toContain('warranty');
     expect(pricingCardText).not.toContain('Android 14 performance');
-    await expect(pricingCard.locator('.shop-product-card__cta')).toHaveText('Pre-order 15P');
+    await expect(pricingCard.locator('.shop-product-card__cta')).toHaveText('Buy 15P');
     await expectLoadedImage(pricingCard.locator('img'));
   });
 
-  test('shop 15P card shows aligned backorder pricing and action', async ({ page }) => {
+  test('shop 15P card shows aligned in-stock pricing and action', async ({ page }) => {
     const response = await page.goto('/shop/', { waitUntil: 'networkidle' });
     expect(response?.ok()).toBeTruthy();
 
     const card = page.locator('.shop-product-card--backorder');
     const cardText = await card.innerText();
-    for (const claim of ['Available for pre-order', 'Release window: 1 to 2 weeks', '$288.00', '$379.00', 'Amlogic S905Y5', 'Android 14', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'AV1']) {
+    for (const claim of ['In stock now', '$288.00', '$379.00', 'Amlogic S905Y5', 'Android 14', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'AV1']) {
       expect(cardText.toLowerCase()).toContain(claim.toLowerCase());
     }
     expect(cardText).not.toContain('Coming Soon');
     for (const unverifiedPolicy of ['Ships from Nevada warehouse', 'Includes 1-year U.S. warranty', 'Bilingual concierge onboarding', 'TBC', 'Buyers who want', 'next-generation connectivity']) {
       expect(cardText).not.toContain(unverifiedPolicy);
     }
-    await expect(card.locator('.shop-product-card__cta')).toHaveText('Pre-order 15P');
+    await expect(card.locator('.shop-product-card__cta')).toHaveText('Buy 15P');
     await expectLoadedImage(card.locator('img'));
     await expect(card.locator('a')).toHaveAttribute('href', /\/product\/svicloud-15p\/$/);
 
@@ -117,7 +116,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     }
   });
 
-  test('15P exposes one PreOrder Offer and supports notified backorders', async ({ page }) => {
+  test('15P exposes one InStock Offer and supports normal checkout', async ({ page }) => {
     const response = await page.goto('/product/svicloud-15p/', { waitUntil: 'domcontentloaded' });
     expect(response?.ok()).toBeTruthy();
 
@@ -131,24 +130,23 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
       '@type': 'Offer',
       priceCurrency: 'USD',
       price: '288.00',
-      availability: 'https://schema.org/PreOrder',
-      availabilityStarts: '2026-09-06',
+      availability: 'https://schema.org/InStock',
     });
-    expect((offer.shippingDetails as Record<string, unknown> | undefined)?.deliveryTime).toBeUndefined();
+    expect((offer as Record<string, unknown>).availabilityStarts).toBeUndefined();
 
     await expectLoadedImage(page.locator('.product-hero-image'));
     await expect(page.locator('.product-hero-price')).toContainText('$288.00');
     await expect(page.locator('.product-hero-price')).toContainText('$379.00');
-    await expect(page.locator('.stock.available-on-backorder')).toContainText('Available for pre-order');
+    await expect(page.locator('.stock.in-stock')).toContainText('In stock');
     const button = page.locator('.single_add_to_cart_button');
-    await expect(button).toHaveText('Pre-order 15P');
+    await expect(button).toHaveText('Buy 15P');
 
     await expect(page.locator('.svic-15p-delivery-banner')).toBeVisible();
-    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Pre-order delivery');
-    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Release window: 1 to 2 weeks');
+    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('In-stock delivery');
+    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('In stock now');
 
     const body = await page.locator('body').innerText();
-    for (const claim of ['Android 14', 'Amlogic S905Y5', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'HDR10+', 'AV1', 'Release window: 1 to 2 weeks']) {
+    for (const claim of ['Android 14', 'Amlogic S905Y5', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'HDR10+', 'AV1', 'In stock now']) {
       expect(body).toContain(claim);
     }
     expect(body).not.toMatch(/price (and release date )?(has|have) not been announced/i);
@@ -159,22 +157,20 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     await button.click();
     await expect(page.locator('.woocommerce-message')).toContainText(/added to (your )?cart/i);
     await page.goto('/cart/', { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Pre-order delivery');
-    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Release window: 1 to 2 weeks');
+    await expect(page.locator('.svic-15p-delivery-banner')).toHaveCount(0);
     let commerceText = await page.locator('body').innerText();
     expect(commerceText).not.toMatch(/48-hour U\.S\. shipping|1-year U\.S\. warranty|ships from our Nevada warehouse/i);
     await page.goto('/checkout/', { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Pre-order delivery');
-    await expect(page.locator('.svic-15p-delivery-banner')).toContainText('Release window: 1 to 2 weeks');
+    await expect(page.locator('.svic-15p-delivery-banner')).toHaveCount(0);
     commerceText = await page.locator('body').innerText();
     expect(commerceText).not.toMatch(/48-hour U\.S\. shipping|1-year U\.S\. warranty|ships from Nevada within 48 hours/i);
   });
 
   test('localizes launch metadata and shows Android 12 for 10P+ and 10S in every locale', async ({ page }) => {
     const locales = [
-      { prefix: '', marker: 'SVICLOUD', included: 'Included', action: 'Pre-order 15P', availability: 'Available for pre-order' },
-      { prefix: '/zh', marker: '小雲', included: '內含', action: '預購 15P', availability: '接受預購' },
-      { prefix: '/zh-cn', marker: '小云', included: '内含', action: '预订 15P', availability: '接受预订' },
+      { prefix: '', marker: 'SVICLOUD', included: 'Included', action: 'Buy 15P', availability: 'In stock now' },
+      { prefix: '/zh', marker: '小雲', included: '內含', action: '購買 15P', availability: '現貨供應' },
+      { prefix: '/zh-cn', marker: '小云', included: '内含', action: '购买 15P', availability: '现货供应' },
     ];
     for (const locale of locales) {
       for (const route of ['/', '/shop/', '/compare/', '/svicloud-15p-features/', '/product/svicloud-15p/']) {
@@ -197,7 +193,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
         expect(routeText).toMatch(/379/);
         if (route === '/product/svicloud-15p/') {
           await expect(page.locator('.single_add_to_cart_button')).toHaveText(locale.action);
-          await expect(page.locator('.stock.available-on-backorder')).toContainText(locale.availability);
+          await expect(page.locator('.stock.in-stock')).toContainText(locale.availability);
         }
         if (route === '/compare/') {
           expect((await page.locator('body').innerText())).not.toContain('current wireless');
@@ -218,7 +214,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     }
   });
 
-  test('current 10P+ product remains live and links to the 15P backorder page', async ({ page }) => {
+  test('current 10P+ product remains live and links to the 15P page', async ({ page }) => {
     const consoleErrors: string[] = [];
     page.on('console', (message) => {
       if (message.type() === 'error') consoleErrors.push(message.text());
