@@ -1,30 +1,29 @@
 # SVICLOUD 15P Google Ads brief
 
-Status: **blocked — do not activate**.
+Status: **ready for final campaign/conversion review — do not activate without explicit approval**.
 
-The 15P is available for pre-order at `$288.00` (regular `$379.00`), but no shipping date or 15P-specific shipping-speed/warranty promise is approved. Paid-ad activation, Merchant Center publication, conversion validation, and production deployment are outside the current local integration.
+The 15P is in stock at `$288.00` (regular `$379.00`). The production product, storefront copy, and Google Merchant feed now use `in_stock` availability. Paid-ad activation still needs explicit approval and conversion validation.
 
 ## Permitted factual draft concepts
 
 Planning notes only—not an activation-ready campaign:
 
 - `SVICLOUD 15P TV Box`
-- `Pre-order $288 · Regular $379`
+- `In stock now · $288`
 - `Android 14 · Amlogic S905Y5`
 - `4 GB DDR3 · 64 GB eMMC`
 - `Wi-Fi 6 · Bluetooth 5.4`
 - `4K HDR · AV1 Decoding`
 - Landing page: `/product/svicloud-15p/`
 
-Do not use `in stock`, shipping speed/date, 15P-specific warranty, subscription/catalogue promises, speed, “best,” “flagship,” or model-superiority claims.
+Do not use unverified shipping speed/date, 15P-specific warranty, subscription/catalogue promises, speed, “best,” “flagship,” or model-superiority claims.
 
 ## Activation gate
 
 - [x] Price approved
-- [x] Local product is purchasable on notified backorder
-- [x] Product schema emits the local BackOrder Offer
-- [ ] Shipping/release date or approved no-date campaign treatment confirmed
-- [ ] Production deployment separately approved and completed
-- [ ] Merchant Center feed reviewed and approved
+- [x] Product is purchasable and in stock
+- [x] Product schema emits the InStock Offer
+- [x] Production deployment completed
+- [x] Merchant feed item `1204` reviewed as `in_stock`
 - [ ] Production add-to-cart and purchase conversion tracking verified
 - [ ] Ad copy rechecked against `docs/15p-source-traceability.md`

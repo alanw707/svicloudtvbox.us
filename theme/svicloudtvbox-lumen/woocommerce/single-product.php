@@ -44,7 +44,20 @@ while (have_posts()) :
         : get_the_title();
 
     $gallery_entries = [];
-    if ($gallery) {
+    if ($is_15p_product && function_exists('svic_15p_remote_product_images')) {
+        foreach (svic_15p_remote_product_images() as $index => $image) {
+            $meta = svic_15p_remote_image_meta((int) $index);
+            if (empty($meta['url'])) {
+                continue;
+            }
+            $gallery_entries[] = [
+                'full'   => (string) $meta['url'],
+                'thumb'  => svic_15p_remote_image_html((int) $index, 'product-thumb-img', 'lazy'),
+                'srcset' => '',
+            ];
+        }
+        $image_id = 0;
+    } elseif ($gallery) {
         foreach ($gallery as $gid) {
             $full = wp_get_attachment_image_url($gid, 'large');
             if (!$full) {
@@ -73,7 +86,9 @@ while (have_posts()) :
     }
 
     $primary_image_html = '';
-    if ($image_id) {
+    if ($is_15p_product && function_exists('svic_15p_remote_image_html')) {
+        $primary_image_html = svic_15p_remote_image_html(0, 'product-hero-image', 'eager');
+    } elseif ($image_id) {
         $primary_image_html = wp_get_attachment_image($image_id, 'large', false, [
             'class' => 'product-hero-image',
             'alt'   => esc_attr($localized_product_title),

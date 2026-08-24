@@ -1,6 +1,6 @@
 # SVICLOUD 15P product intelligence
 
-Status: **source-confirmed hardware; $288 pre-order commerce state ($379 regular)**.
+Status: **source-confirmed hardware; in-stock $288 commerce state ($379 regular)**.
 
 The earlier web-research placeholders in this file were superseded on 2026-08-17 by supplier files:
 
@@ -23,11 +23,11 @@ The authoritative fact, conflict, exclusion, translation, and image mapping is m
 - Bluetooth voice air-mouse remote
 - Package list: gift box, AC adapter, HDMI cable, remote, and user manual
 - Kids and Karaoke apps included (direct supplier confirmation relayed by site owner)
-- Regular price `$379.00`; sale/effective price `$288.00`; notified backorders allowed (site-owner business decision)
+- Regular price `$379.00`; sale/effective price `$288.00`; in stock and purchasable (site-owner business decision)
 
-## Not announced
+## Do not overpromise
 
-Shipping/release date and 15P-specific shipping-speed, dispatch, delivery, or warranty promises. Normal checkout/payment/shipping-rate/cancellation/return behavior applies.
+Do not publish unverified 15P-specific shipping-speed, dispatch-date, delivery-date, or warranty promises. Normal checkout/payment/shipping-rate/cancellation/return behavior applies.
 
 ## Excluded claims
 

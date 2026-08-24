@@ -1151,6 +1151,10 @@ if (!function_exists('svic_get_product_image_meta')) {
             return $fallback;
         }
 
+        if (function_exists('svic_is_15p_product_object') && svic_is_15p_product_object($product)) {
+            return svic_15p_remote_image_meta($index);
+        }
+
         $attachment_ids = [];
         $primary_id = (int) $product->get_image_id();
         if ($primary_id > 0) {
@@ -1184,10 +1188,86 @@ if (!function_exists('svic_get_product_image_meta')) {
     }
 }
 
+if (!function_exists('svic_is_15p_product_object')) {
+    function svic_is_15p_product_object($product): bool {
+        return $product instanceof WC_Product
+            && method_exists($product, 'get_slug')
+            && $product->get_slug() === 'svicloud-15p';
+    }
+}
+
+if (!function_exists('svic_15p_remote_product_images')) {
+    /** @return array<int,array{path:string,alt:string}> */
+    function svic_15p_remote_product_images(): array {
+        return [
+            [
+                'path' => '/assets/images/products/svicloud-15p-primary-studio-v3-remote-watermarked.webp',
+                'alt'  => 'SVICLOUD 15P TV Box front studio view with Bluetooth voice remote',
+            ],
+            [
+                'path' => '/assets/images/products/svicloud-15p-angle-studio-v3-remote-watermarked.webp',
+                'alt'  => 'SVICLOUD 15P TV box angled view with Bluetooth voice remote',
+            ],
+            [
+                'path' => '/assets/images/products/svicloud-15p-lifestyle-studio-v3-remote-watermarked.webp',
+                'alt'  => 'SVICLOUD 15P TV Box on media console with Bluetooth voice remote',
+            ],
+            [
+                'path' => '/assets/images/products/svicloud-15p-detail-studio-v3-remote-watermarked.webp',
+                'alt'  => 'SVICLOUD 15P TV Box front detail view with Bluetooth voice remote',
+            ],
+            [
+                'path' => '/assets/images/products/svicloud-15p-marketing-v6-remote-watermarked.webp',
+                'alt'  => 'SVICLOUD 15P Android 14 in-stock feature graphic with Bluetooth voice remote',
+            ],
+        ];
+    }
+}
+
+if (!function_exists('svic_15p_remote_image_meta')) {
+    function svic_15p_remote_image_meta(int $index = 0): array {
+        $images = svic_15p_remote_product_images();
+        $image  = $images[$index] ?? $images[0];
+
+        if (function_exists('svic_get_theme_image_meta')) {
+            $meta = svic_get_theme_image_meta($image['path']);
+        } else {
+            $meta = [
+                'url' => esc_url_raw(svic_theme_image_uri($image['path'])),
+                'width' => null,
+                'height' => null,
+            ];
+        }
+
+        $meta['alt'] = $image['alt'];
+        return $meta;
+    }
+}
+
+if (!function_exists('svic_15p_remote_image_html')) {
+    function svic_15p_remote_image_html(int $index = 0, string $class = '', string $loading = 'lazy'): string {
+        $meta = svic_15p_remote_image_meta($index);
+
+        return sprintf(
+            '<img%1$s src="%2$s" alt="%3$s"%4$s%5$s loading="%6$s" decoding="async" />',
+            $class !== '' ? ' class="' . esc_attr($class) . '"' : '',
+            esc_url($meta['url']),
+            esc_attr((string) ($meta['alt'] ?? 'SVICLOUD 15P TV Box with Bluetooth voice remote')),
+            !empty($meta['width']) ? ' width="' . esc_attr((string) $meta['width']) . '"' : '',
+            !empty($meta['height']) ? ' height="' . esc_attr((string) $meta['height']) . '"' : '',
+            esc_attr($loading)
+        );
+    }
+}
+
 if (!function_exists('svic_product_primary_image')) {
     function svic_product_primary_image($product, string $size = 'medium'): string {
         if (!$product) {
             return '';
+        }
+
+        if (svic_is_15p_product_object($product)) {
+            return svic_15p_remote_image_html(0);
         }
 
         $image_id = $product->get_image_id();
