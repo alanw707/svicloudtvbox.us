@@ -8156,7 +8156,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             return;
         }
 
-        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v5');
+        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v6');
         $mtime        = (int) filemtime($feed_path);
         if ($last_checked >= $mtime) {
             return;
@@ -8241,7 +8241,9 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
 
             if (isset($description_overrides[$offer_id]) && strpos($patched_item, '<g:description>') !== false) {
                 $replacement = '      <g:description><![CDATA[' . $description_overrides[$offer_id] . ']]></g:description>';
-                $patched_item = preg_replace('/\s*<g:description>.*?<\/g:description>\s*/s', "\n" . $replacement . "\n", $patched_item, 1) ?: $patched_item;
+                $patched_item = preg_replace_callback('/\s*<g:description>.*?<\/g:description>\s*/s', static function () use ($replacement): string {
+                    return "\n" . $replacement . "\n";
+                }, $patched_item, 1) ?: $patched_item;
             }
 
             if (isset($availability_overrides[$offer_id])) {
@@ -8326,7 +8328,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             file_put_contents($feed_path, $patched, LOCK_EX);
         }
 
-        set_transient('svic_google_feed_rich_offer_checked_v5', max($mtime, time()), HOUR_IN_SECONDS);
+        set_transient('svic_google_feed_rich_offer_checked_v6', max($mtime, time()), HOUR_IN_SECONDS);
     }
 }
 
