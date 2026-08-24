@@ -513,11 +513,11 @@ function svic_fixture_import_local_media(array $items, array &$maps): void {
 
 function svic_fixture_import_local_15p(array &$maps): void {
     $media = array(
-        'primary_ai' => array('path' => 'assets/images/products/svicloud-15p-primary-ai-watermarked.webp', 'title' => 'SVICLOUD 15P primary AI product image', 'alt' => 'SVICLOUD 15P TV Box front view with watermark'),
-        'angle' => array('path' => 'assets/images/products/svicloud-15p-angle-watermarked.webp', 'title' => 'SVICLOUD 15P angled watermarked view', 'alt' => 'SVICLOUD 15P TV box angled view showing rear ports'),
-        'package' => array('path' => 'assets/images/products/svicloud-15p-packaging-mockup-watermarked.webp', 'title' => 'SVICLOUD 15P watermarked packaging mockup', 'alt' => 'SVICLOUD 15P retail packaging mockup'),
-        'lifestyle_ai' => array('path' => 'assets/images/products/svicloud-15p-lifestyle-clean-watermarked.webp', 'title' => 'SVICLOUD 15P clean AI lifestyle image', 'alt' => 'SVICLOUD 15P AI lifestyle product image without embedded copy'),
-        'lifestyle_ai_2' => array('path' => 'assets/images/products/svicloud-15p-lifestyle-clean-2-watermarked.webp', 'title' => 'SVICLOUD 15P second clean AI lifestyle image', 'alt' => 'SVICLOUD 15P second AI lifestyle product image without embedded copy'),
+        'primary_studio' => array('path' => 'assets/images/products/svicloud-15p-primary-studio-v2-watermarked.webp', 'title' => 'SVICLOUD 15P studio product image', 'alt' => 'SVICLOUD 15P TV Box front studio view'),
+        'angle_studio' => array('path' => 'assets/images/products/svicloud-15p-angle-studio-v2-watermarked.webp', 'title' => 'SVICLOUD 15P angled studio view', 'alt' => 'SVICLOUD 15P TV box angled view showing rear ports'),
+        'lifestyle_studio' => array('path' => 'assets/images/products/svicloud-15p-lifestyle-studio-v2-watermarked.webp', 'title' => 'SVICLOUD 15P media console studio image', 'alt' => 'SVICLOUD 15P TV Box on media console'),
+        'detail_studio' => array('path' => 'assets/images/products/svicloud-15p-detail-studio-v2-watermarked.webp', 'title' => 'SVICLOUD 15P front detail studio image', 'alt' => 'SVICLOUD 15P TV Box front detail view'),
+        'marketing_feature' => array('path' => 'assets/images/products/svicloud-15p-marketing-v5-watermarked.webp', 'title' => 'SVICLOUD 15P in-stock feature graphic', 'alt' => 'SVICLOUD 15P Android 14 in-stock feature graphic'),
     );
     svic_fixture_import_local_media($media, $maps);
 
@@ -540,8 +540,8 @@ function svic_fixture_import_local_15p(array &$maps): void {
     $product->set_width('8');
     $product->set_height('3');
     $product->set_reviews_allowed(false);
-    $product->set_image_id((int) $maps['local_media']['primary_ai']);
-    $product->set_gallery_image_ids(array_values(array_map(static fn(string $key): int => (int) $maps['local_media'][$key], array('angle', 'package', 'lifestyle_ai', 'lifestyle_ai_2'))));
+    $product->set_image_id((int) $maps['local_media']['primary_studio']);
+    $product->set_gallery_image_ids(array_values(array_map(static fn(string $key): int => (int) $maps['local_media'][$key], array('angle_studio', 'lifestyle_studio', 'detail_studio', 'marketing_feature'))));
     $categories = array_filter(array_map(static function (string $slug): int {
         $term = get_term_by('slug', $slug, 'product_cat');
         return $term instanceof WP_Term ? (int) $term->term_id : 0;

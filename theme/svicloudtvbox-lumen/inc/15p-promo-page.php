@@ -200,7 +200,7 @@ if (!function_exists('svic_15p_promo_meta')) {
     function svic_15p_promo_meta(): array {
         $content = svic_15p_promo_content();
         $image = function_exists('svic_get_theme_image_meta')
-            ? svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v4-watermarked.webp')
+            ? svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v5-watermarked.webp')
             : [];
         return [
             'title' => $content['meta_title'],

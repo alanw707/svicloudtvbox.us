@@ -73,13 +73,14 @@ All output images are optimized WebP files; source PDF/PPTX files remain externa
 
 | Theme asset | Source | Purpose and alt text |
 |---|---|---|
-| `assets/images/products/svicloud-15p-marketing-v4-watermarked.webp` | OpenAI Codex built-in `image_gen`, grounded by approved product references; exact prompts in `docs/15p-launch/15p-marketing-v4-prompt.md`; 2026-08-24 badge corrected from `COMING SOON` to `IN STOCK NOW` after inventory arrived | Watermarked homepage hero, Shop card, pricing card, and social metadata. Alt: `SVICLOUD 15P Android 14 feature graphic`. |
-| `assets/images/products/svicloud-15p-primary-ai-watermarked.webp` | Supplied screenshot-derived AI primary image | Watermarked primary/front image and product metadata. Alt: `SVICLOUD 15P TV Box front view with watermark`. |
+| `assets/images/products/svicloud-15p-marketing-v5-watermarked.webp` | OpenAI Codex built-in `image_gen`, grounded by approved product references; refresh notes in `docs/15p-launch/15p-product-images-v2-prompt.md` | Watermarked homepage hero, Shop card, pricing card, feature page hero, and social metadata. Alt: `SVICLOUD 15P Android 14 feature graphic`. |
+| `assets/images/products/svicloud-15p-primary-studio-v2-watermarked.webp` | OpenAI Codex built-in `image_gen`, grounded by approved 15P product references; refresh notes in `docs/15p-launch/15p-product-images-v2-prompt.md` | Primary WooCommerce/PDP/Compare/Google Merchant image. Alt: `SVICLOUD 15P TV Box front studio view`. |
+| `assets/images/products/svicloud-15p-angle-studio-v2-watermarked.webp` | OpenAI Codex built-in `image_gen`, grounded by approved 15P angle/port reference | Gallery angle/detail image. Alt: `SVICLOUD 15P TV box angled view showing rear ports`. |
+| `assets/images/products/svicloud-15p-lifestyle-studio-v2-watermarked.webp` | OpenAI Codex built-in `image_gen`, grounded by approved 15P product reference | Gallery media-console studio image. Alt: `SVICLOUD 15P TV Box on media console`. |
+| `assets/images/products/svicloud-15p-detail-studio-v2-watermarked.webp` | OpenAI Codex built-in `image_gen`, grounded by approved 15P product reference | Gallery close product detail image. Alt: `SVICLOUD 15P TV Box front detail view`. |
+| `assets/images/products/svicloud-15p-primary-ai-watermarked.webp` | Supplied screenshot-derived AI primary image | Legacy watermarked primary/front image retained for history and rollback. Alt: `SVICLOUD 15P TV Box front view with watermark`. |
 | `assets/images/products/svicloud-15p-front.webp` | PDF p.1 embedded front product photo, watermark derivative | Watermarked fallback/identity image. Alt: `SVICLOUD 15P TV box front view`. |
 | `assets/images/products/svicloud-15p-angle.webp` | PDF p.1 embedded angled product photo, watermark derivative | Watermarked gallery/fallback image. Alt: `SVICLOUD 15P TV box angled view showing rear ports`. |
-| `assets/images/products/svicloud-15p-packaging-mockup-watermarked.webp` | Watermarked 3D presentation of the supplied 15P packaging artwork | Packaging mockup gallery image. Alt: `SVICLOUD 15P retail packaging mockup`. |
-| `assets/images/products/svicloud-15p-lifestyle-clean-watermarked.webp` | Cropped approved AI product/environment reference with embedded copy removed | Watermarked lifestyle/AI gallery image. |
-| `assets/images/products/svicloud-15p-lifestyle-clean-2-watermarked.webp` | Cropped approved AI lifestyle reference with embedded copy removed | Watermarked lifestyle/AI gallery image. |
 
 ## Localized content contract
 

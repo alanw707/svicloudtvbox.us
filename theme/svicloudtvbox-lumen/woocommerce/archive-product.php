@@ -83,7 +83,7 @@ $card_data = [
         'price_note_key'  => 'shop.cards.15p.price_note',
         'fallback_url'    => svic_url_with_lang(home_url('/product/svicloud-15p')),
         'fallback_price'  => '$288.00',
-        'image_fallback'  => svic_theme_image_uri('/assets/images/products/svicloud-15p-marketing-v4-watermarked.webp'),
+        'image_fallback'  => svic_theme_image_uri('/assets/images/products/svicloud-15p-marketing-v5-watermarked.webp'),
         'image_width'     => 1536,
         'image_height'    => 1024,
     ],

@@ -297,7 +297,7 @@
 .fifteenp-hero__notes{display:flex;flex-wrap:wrap;gap:0.65rem;margin:0;padding:0;list-style:none}
 .fifteenp-hero__notes li{display:inline-flex;align-items:center;min-height:38px;padding:0.48rem 0.82rem;border-radius:999px;color:rgba(244,250,255,0.94);background:rgba(8,28,58,0.72);border:1px solid rgba(126,246,227,0.22);box-shadow:0 16px 34px rgba(2,7,20,0.28)}
 .fifteenp-hero__media{margin:0;border-radius:22px;padding:clamp(0.8rem,2vw,1.1rem);background:linear-gradient(160deg,rgba(18,45,86,0.92),rgba(4,16,36,0.82));box-shadow:0 30px 74px rgba(2,7,20,0.5);border:1px solid rgba(126,246,227,0.2)}
-.fifteenp-hero__media img{display:block;width:100%;height:auto;aspect-ratio:1200 / 580;object-fit:contain;border-radius:14px}
+.fifteenp-hero__media img{display:block;width:100%;height:auto;aspect-ratio:3 / 2;object-fit:contain;border-radius:14px}
 .fifteenp-section{padding:clamp(2.8rem,7vw,5rem) 0}
 .fifteenp-container{width:min(1120px,calc(100% - 80px));margin:0 auto;display:grid;gap:clamp(1.4rem,3vw,2rem)}
 .fifteenp-container--split{grid-template-columns:minmax(0,0.82fr) minmax(360px,1fr);align-items:center}
