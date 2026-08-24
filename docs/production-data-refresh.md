@@ -15,7 +15,7 @@ The sync makes read-only production requests with the application password confi
 
 Source URLs in imported post, product, navigation, menu, and media content are rewritten to the local site URL. Downloaded assets live in the ignored local `sites/` runtime directory. The existing local custom-logo/site-icon attachments are retained as local infrastructure so the active theme chrome remains valid.
 
-After importing the production-derived catalog, the local importer recreates one documented supplemental product: the SVICLOUD 15P. Its verified specifications, five watermarked source/gallery images, and watermarked marketing artwork are tracked with the theme and documented in `docs/15p-source-traceability.md`. It is catalog-visible and purchasable for a $288 sale price ($379 regular) with managed zero stock and notified backorders. Its shipping date is not announced. This local-only supplement is never sent to production and its exact commerce/media state is verified after every applied refresh.
+After importing the production-derived catalog, the local importer recreates one documented supplemental product: the SVICLOUD 15P. Its verified specifications, five watermarked source/gallery images, and watermarked marketing artwork are tracked with the theme and documented in `docs/15p-source-traceability.md`. It is catalog-visible, in stock, and purchasable for a $288 sale price ($379 regular), with the same 1.7 lb and 13 x 8 x 3 shipping dimensions as 10P+. This local fixture preserves the production-facing commerce/media state after every applied refresh.
 
 ## What it never requests or changes
 
