@@ -2,6 +2,8 @@
 
 Generated on 2026-08-24 with the Codex built-in `image_gen` tool after 15P moved from preorder to in-stock.
 
+Superseded by `docs/15p-launch/15p-product-images-v3-remote-refresh.md` because the selected v2 images did not show the included Bluetooth voice remote.
+
 ## Selected assets
 
 - `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-primary-studio-v2-watermarked.webp`

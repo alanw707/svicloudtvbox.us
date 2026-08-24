@@ -812,7 +812,7 @@ return [
                 'release' => 'In stock now',
                 'title'   => 'Android 14. Wi-Fi 6. 4K HDR.',
                 'copy'    => 'Amlogic S905Y5, 4 GB DDR3 memory, 64 GB eMMC storage, Bluetooth 5.4, and AV1 decoding in the SVICLOUD 15P.',
-                'image_alt' => 'SVICLOUD 15P TV box front view',
+                'image_alt' => 'SVICLOUD 15P TV box front view with Bluetooth voice remote',
                 'points'  => [
                     'usa'     => 'Android 14',
                     'fees'    => 'Wi-Fi 6 + Bluetooth 5.4',
@@ -1373,7 +1373,7 @@ return [
             'meta' => [
                 'title'       => 'SVICLOUD 15P In Stock | $288 Android 14 TV Box',
                 'description' => 'SVICLOUD 15P is in stock now for $288 (regular $379): Android 14, Amlogic S905Y5, Wi-Fi 6, Bluetooth 5.4, and 4K HDR.',
-                'image_alt'   => 'SVICLOUD 15P TV box front view',
+                'image_alt'   => 'SVICLOUD 15P TV box front view with Bluetooth voice remote',
             ],
             'short_description' => 'Everything in 10P+, plus support for downloading mobile apps.',
             'description' => '<p>The SVICLOUD 15P TV Box runs Android 14 on an Amlogic S905Y5 quad-core ARM Cortex-A55 processor.</p><h2>Core specifications</h2><ul><li>4 GB DDR3 memory and 64 GB eMMC storage.</li><li>Dual-band 2.4/5 GHz Wi-Fi 6 with 2T2R and Bluetooth 5.4.</li><li>HDR10+, HDR10, and HLG picture processing.</li><li>AV1, VP9, H.265/HEVC, and H.264 hardware decoding, with AV1, VP9, and H.265/HEVC support up to 4K × 2K at 60 fps.</li><li>HDMI 2.1, two USB 2.0 ports, RJ45 Ethernet, optical audio, and Type-C 5V/2A power.</li></ul><h2>In the box</h2><p>Gift box, AC adapter, HDMI cable, Bluetooth voice air-mouse remote, and user manual.</p><p><strong>In stock now for $288 (regular $379).</strong></p>',
@@ -1412,7 +1412,7 @@ return [
             'prelaunch' => [
                 'subtitle' => 'In stock now with Android 14, Amlogic S905Y5, Wi-Fi 6, Bluetooth 5.4, and 4K HDR.',
                 'detail'   => '$288 sale · $379 regular · In stock now',
-                'image_placeholder' => 'SVICLOUD 15P TV box front view',
+                'image_placeholder' => 'SVICLOUD 15P TV box front view with Bluetooth voice remote',
                 'badges' => [
                     'specs'        => 'Android 14',
                     'availability' => 'In stock now',
@@ -1605,7 +1605,7 @@ return [
             'traffic_actions'=> 'Primary compare actions',
             'differences'    => 'Key differences between models',
             'product_list'   => 'Product spotlight cards',
-            'product_alt_15p'=> 'SVICLOUD 15P',
+            'product_alt_15p'=> 'SVICLOUD 15P TV box with Bluetooth voice remote',
             'product_alt_10p'=> 'SVICLOUD 10P+',
             'product_alt_10s'=> 'SVICLOUD 10S',
             'comparison_15p' => 'Feature comparison for SVICLOUD 15P',
