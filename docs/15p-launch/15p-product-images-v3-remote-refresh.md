@@ -5,7 +5,7 @@ Generated on 2026-08-24 after visual review found the v2 product images did not 
 ## Selected assets
 
 - `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp`
-- `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-angle-studio-v3-remote-watermarked.webp`
+- `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-angle-studio-v4-bilingual-remote-watermarked.webp`
 - `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-lifestyle-studio-v3-remote-watermarked.webp`
 - `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-detail-studio-v3-remote-watermarked.webp`
 - `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp`

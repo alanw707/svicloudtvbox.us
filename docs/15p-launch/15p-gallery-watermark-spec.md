@@ -7,7 +7,7 @@ Status: refreshed after 15P moved from preorder to in-stock, then updated so eve
 Five watermarked web images are delivered in the theme product-assets directory:
 
 1. `svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp` — primary/front studio ecommerce image with remote and `SVICLOUD 小雲盒子` branding.
-2. `svicloud-15p-angle-studio-v3-remote-watermarked.webp` — angle/rear-port studio view with remote.
+2. `svicloud-15p-angle-studio-v4-bilingual-remote-watermarked.webp` — angle/rear-port studio view with remote, `SVICLOUD 15P`, and `小雲盒子` branding.
 3. `svicloud-15p-lifestyle-studio-v3-remote-watermarked.webp` — product-focused media-console studio image with remote.
 4. `svicloud-15p-detail-studio-v3-remote-watermarked.webp` — front/detail studio view with remote.
 5. `svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp` — in-stock feature graphic with remote and `小雲盒子` branding.

@@ -8156,7 +8156,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             return;
         }
 
-        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v9');
+        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v10');
         $mtime        = (int) filemtime($feed_path);
         if ($last_checked >= $mtime) {
             return;
@@ -8192,7 +8192,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/remote-control-white-600x600.png',
             ],
             '1204' => [
-                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-angle-studio-v3-remote-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-angle-studio-v4-bilingual-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-lifestyle-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-detail-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp',
@@ -8202,8 +8202,10 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
         $obsolete_offer_images = [
             '1204' => [
                 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-primary-studio-v3-remote-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-angle-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-marketing-v6-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-primary-studio-v3-remote-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-angle-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v6-remote-watermarked.webp',
             ],
         ];
@@ -8350,7 +8352,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             file_put_contents($feed_path, $patched, LOCK_EX);
         }
 
-        set_transient('svic_google_feed_rich_offer_checked_v9', max($mtime, time()), HOUR_IN_SECONDS);
+        set_transient('svic_google_feed_rich_offer_checked_v10', max($mtime, time()), HOUR_IN_SECONDS);
     }
 }
 
