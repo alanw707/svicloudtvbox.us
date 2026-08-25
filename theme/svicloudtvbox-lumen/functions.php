@@ -485,7 +485,7 @@ add_filter('woocommerce_add_to_cart_redirect', function (string $url): string {
     return wc_get_checkout_url();
 });
 
-const SVIC_LITESPEED_PURGE_MARK = 'svic-15p-remote-gallery-refresh-20260824';
+const SVIC_LITESPEED_PURGE_MARK = 'svic-15p-second-gallery-label-refresh-20260824';
 const SVIC_REWRITE_FLUSH_MARK   = 'svic-rewrite-flush-20260407';
 
 add_action('init', function () {

@@ -54,6 +54,7 @@ while (have_posts()) :
                 'full'   => (string) $meta['url'],
                 'thumb'  => svic_15p_remote_image_html((int) $index, 'product-thumb-img', 'lazy'),
                 'srcset' => '',
+                'alt'    => (string) ($meta['alt'] ?? ''),
             ];
         }
         $image_id = 0;
@@ -69,6 +70,7 @@ while (have_posts()) :
                 'full'   => $full,
                 'thumb'  => $thumb_html,
                 'srcset' => $srcset,
+                'alt'    => (string) get_post_meta((int) $gid, '_wp_attachment_image_alt', true),
             ];
         }
     }
@@ -81,6 +83,7 @@ while (have_posts()) :
                 'full'   => $full,
                 'thumb'  => $thumb_html,
                 'srcset' => '',
+                'alt'    => '',
             ];
         }
     }
@@ -242,7 +245,7 @@ $fifteenp_features_label = $fifteenp_promo_content['features_link'] ?? 'Explore 
                     $is_active = ($index === 0);
                     $button_classes = $is_active ? 'product-thumb active' : 'product-thumb';
                 ?>
-                  <button type="button" class="<?php echo esc_attr($button_classes); ?>" data-image="<?php echo esc_url($entry['full']); ?>" data-srcset="<?php echo esc_attr($entry['srcset']); ?>" aria-pressed="<?php echo $is_active ? 'true' : 'false'; ?>">
+                  <button type="button" class="<?php echo esc_attr($button_classes); ?>" data-image="<?php echo esc_url($entry['full']); ?>" data-srcset="<?php echo esc_attr($entry['srcset']); ?>" data-alt="<?php echo esc_attr($entry['alt'] ?? ''); ?>" aria-pressed="<?php echo $is_active ? 'true' : 'false'; ?>">
                     <?php echo wp_kses_post($entry['thumb']); ?>
                   </button>
                 <?php endforeach; ?>

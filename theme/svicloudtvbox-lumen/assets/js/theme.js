@@ -576,6 +576,7 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
             const $button = $(this);
             const source = $button.data('image');
             const srcset = $button.data('srcset');
+            const alt = $button.data('alt');
             if (!source) return;
 
             $('.product-thumb').removeClass('active').attr('aria-pressed', 'false');
@@ -587,6 +588,9 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
                     $stageImage.attr('srcset', srcset);
                 } else {
                     $stageImage.removeAttr('srcset');
+                }
+                if (typeof alt === 'string') {
+                    $stageImage.attr('alt', alt);
                 }
                 $stageImage.fadeTo(200, 1);
             });
