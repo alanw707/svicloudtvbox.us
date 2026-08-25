@@ -1205,8 +1205,8 @@ if (!function_exists('svic_15p_remote_product_images')) {
                 'alt'  => 'SVICLOUD 小雲盒子 15P TV Box front studio view with Bluetooth voice remote',
             ],
             [
-                'path' => '/assets/images/products/svicloud-15p-angle-studio-v3-remote-watermarked.webp',
-                'alt'  => 'SVICLOUD 15P TV box angled view with Bluetooth voice remote',
+                'path' => '/assets/images/products/svicloud-15p-angle-studio-v4-bilingual-remote-watermarked.webp',
+                'alt'  => 'SVICLOUD 15P 小雲盒子 TV box angled view with Bluetooth voice remote',
             ],
             [
                 'path' => '/assets/images/products/svicloud-15p-lifestyle-studio-v3-remote-watermarked.webp',
