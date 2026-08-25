@@ -8156,7 +8156,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             return;
         }
 
-        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v7');
+        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v8');
         $mtime        = (int) filemtime($feed_path);
         if ($last_checked >= $mtime) {
             return;
