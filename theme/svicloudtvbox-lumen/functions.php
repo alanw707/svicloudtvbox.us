@@ -8156,7 +8156,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             return;
         }
 
-        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v8');
+        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v9');
         $mtime        = (int) filemtime($feed_path);
         if ($last_checked >= $mtime) {
             return;
@@ -8199,6 +8199,15 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             ],
         ];
 
+        $obsolete_offer_images = [
+            '1204' => [
+                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-primary-studio-v3-remote-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-marketing-v6-remote-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-primary-studio-v3-remote-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v6-remote-watermarked.webp',
+            ],
+        ];
+
         $image_link_overrides = [
             // The original 10S packshot is 750x470; Merchant Center warns when a
             // dimension is under 500px. Use the high-resolution lifestyle image.
@@ -8216,7 +8225,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             ],
         ];
 
-        $patched = preg_replace_callback('/<item>(.*?)<\/item>/s', function ($matches) use ($shipping_block, $offer_images, $image_link_overrides, $description_overrides, $availability_overrides) {
+        $patched = preg_replace_callback('/<item>(.*?)<\/item>/s', function ($matches) use ($shipping_block, $offer_images, $obsolete_offer_images, $image_link_overrides, $description_overrides, $availability_overrides) {
             $item     = $matches[0];
             $offer_id = '';
             if (preg_match('/<g:id>(.*?)<\/g:id>/', $item, $id_matches)) {
@@ -8243,6 +8252,13 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             if (isset($image_link_overrides[$offer_id]) && strpos($patched_item, '<g:image_link>') !== false) {
                 $replacement = '      <g:image_link>' . esc_url($image_link_overrides[$offer_id]) . '</g:image_link>';
                 $patched_item = preg_replace('/\s*<g:image_link>.*?<\/g:image_link>\s*/s', "\n" . $replacement . "\n", $patched_item, 1) ?: $patched_item;
+            }
+
+            if ($offer_id !== '' && isset($obsolete_offer_images[$offer_id])) {
+                foreach ($obsolete_offer_images[$offer_id] as $obsolete_url) {
+                    $obsolete_tag = preg_quote('<g:additional_image_link>' . esc_url($obsolete_url) . '</g:additional_image_link>', '/');
+                    $patched_item = preg_replace('/\s*' . $obsolete_tag . '\s*/', "\n", $patched_item) ?: $patched_item;
+                }
             }
 
             if (isset($description_overrides[$offer_id]) && strpos($patched_item, '<g:description>') !== false) {
@@ -8334,7 +8350,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             file_put_contents($feed_path, $patched, LOCK_EX);
         }
 
-        set_transient('svic_google_feed_rich_offer_checked_v7', max($mtime, time()), HOUR_IN_SECONDS);
+        set_transient('svic_google_feed_rich_offer_checked_v9', max($mtime, time()), HOUR_IN_SECONDS);
     }
 }
 
