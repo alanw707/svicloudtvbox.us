@@ -1201,8 +1201,8 @@ if (!function_exists('svic_15p_remote_product_images')) {
     function svic_15p_remote_product_images(): array {
         return [
             [
-                'path' => '/assets/images/products/svicloud-15p-primary-studio-v3-remote-watermarked.webp',
-                'alt'  => 'SVICLOUD 15P TV Box front studio view with Bluetooth voice remote',
+                'path' => '/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp',
+                'alt'  => 'SVICLOUD 小雲盒子 15P TV Box front studio view with Bluetooth voice remote',
             ],
             [
                 'path' => '/assets/images/products/svicloud-15p-angle-studio-v3-remote-watermarked.webp',
@@ -1217,8 +1217,8 @@ if (!function_exists('svic_15p_remote_product_images')) {
                 'alt'  => 'SVICLOUD 15P TV Box front detail view with Bluetooth voice remote',
             ],
             [
-                'path' => '/assets/images/products/svicloud-15p-marketing-v6-remote-watermarked.webp',
-                'alt'  => 'SVICLOUD 15P Android 14 in-stock feature graphic with Bluetooth voice remote',
+                'path' => '/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp',
+                'alt'  => 'SVICLOUD 小雲盒子 15P Android 14 in-stock feature graphic with Bluetooth voice remote',
             ],
         ];
     }

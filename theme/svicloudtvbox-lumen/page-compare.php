@@ -172,7 +172,7 @@ $compare_card_10p_image_html = str_replace('loading="lazy"', 'loading="eager"', 
 $compare_card_10s_image_html = str_replace('loading="lazy"', 'loading="eager"', $compare_card_10s_image_html);
 
 if ($compare_card_15p_image_html === '') {
-    $compare_card_15p_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/products/svicloud-15p-primary-studio-v3-remote-watermarked.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_15p') . '" loading="eager" decoding="async" />';
+    $compare_card_15p_image_html = '<img src="' . esc_url(svic_theme_image_uri('/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp')) . '" alt="' . svic_translate_attr('compare.aria.product_alt_15p') . '" loading="eager" decoding="async" />';
 }
 
 if ($compare_card_10p_image_html === '') {
@@ -246,7 +246,7 @@ $compare_cards = [
 
 $compare_hero_15p_image = function_exists('svic_get_product_image_meta')
     ? svic_get_product_image_meta($hero_product_15p, 0, 'large')
-    : svic_get_theme_image_meta('/assets/images/products/svicloud-15p-primary-studio-v3-remote-watermarked.webp');
+    : svic_get_theme_image_meta('/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp');
 $compare_hero_10p_image = function_exists('svic_get_product_image_meta')
     ? svic_get_product_image_meta($hero_product_10p, 0, 'large')
     : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
@@ -310,7 +310,7 @@ if (!empty($compare_hero_10s_background['url'])) {
         <div class="compare-hero__devices" aria-hidden="true">
           <img
             class="compare-hero__device compare-hero__device--15p"
-            src="<?php echo esc_url($compare_hero_15p_image['url'] ?? svic_theme_image_uri('/assets/images/products/svicloud-15p-primary-studio-v3-remote-watermarked.webp')); ?>"
+            src="<?php echo esc_url($compare_hero_15p_image['url'] ?? svic_theme_image_uri('/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp')); ?>"
             alt=""
             loading="eager"
             decoding="async"

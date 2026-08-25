@@ -953,7 +953,7 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh' => '比較現貨 US$288 小雲 15P（原價 US$379）與 10P+、10S 的硬體、影音支援、價格及銷售狀態。',
                     'zh-cn' => '比较现货 US$288 小云 15P（原价 US$379）与 10P+、10S 的硬件、影音支持、价格及销售状态。',
                 ],
-                'image'       => '/assets/images/products/svicloud-15p-primary-studio-v3-remote-watermarked.webp',
+                'image'       => '/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp',
                 'image_alt'   => [
                     'en' => 'SVICLOUD 15P TV box front view with Bluetooth voice remote',
                     'zh' => '小雲 15P 電視盒正面與藍牙語音遙控器',
@@ -971,9 +971,9 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh' => '以 US$288 購買現貨小雲 15P（原價 US$379），或選購現售 10P+、10S 與藍牙遙控器。',
                     'zh-cn' => '以 US$288 购买现货小云 15P（原价 US$379），或选购现售 10P+、10S 与蓝牙遥控器。',
                 ],
-                'image'       => '/assets/images/products/svicloud-15p-marketing-v6-remote-watermarked.webp',
+                'image'       => '/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp',
                 'image_alt'   => [
-                    'en' => 'SVICLOUD 15P Android 14 feature graphic with Bluetooth voice remote',
+                    'en' => 'SVICLOUD 小雲盒子 15P Android 14 feature graphic with Bluetooth voice remote',
                     'zh' => '小雲 15P Android 14 功能宣傳圖與藍牙語音遙控器',
                     'zh-cn' => '小云 15P Android 14 功能宣传图与蓝牙语音遥控器',
                 ],
@@ -2053,7 +2053,7 @@ if (!function_exists('svic_get_theme_image_meta')) {
 if (!function_exists('svic_get_homepage_hero_image_meta')) {
     function svic_get_homepage_hero_image_meta(): array
     {
-        return svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v6-remote-watermarked.webp');
+        return svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp');
     }
 }
 
@@ -2321,7 +2321,7 @@ if (!function_exists('svic_get_15p_product_meta_definitions')) {
             'title'       => trim(wp_strip_all_tags(svic_translate('products.svicloud-15p.meta.title'))),
             'description' => trim(wp_strip_all_tags(svic_translate('products.svicloud-15p.meta.description'))),
             'image_alt'   => trim(wp_strip_all_tags(svic_translate('products.svicloud-15p.meta.image_alt'))),
-            'image'       => svic_get_theme_image_meta('/assets/images/products/svicloud-15p-primary-studio-v3-remote-watermarked.webp'),
+            'image'       => svic_get_theme_image_meta('/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp'),
         );
     }
 }
@@ -8195,7 +8195,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-angle-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-lifestyle-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-detail-studio-v3-remote-watermarked.webp',
-                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-marketing-v6-remote-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp',
             ],
         ];
 
@@ -8203,7 +8203,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             // The original 10S packshot is 750x470; Merchant Center warns when a
             // dimension is under 500px. Use the high-resolution lifestyle image.
             '14' => 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-1.jpg',
-            '1204' => 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-primary-studio-v3-remote-watermarked.webp',
+            '1204' => 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp',
         ];
 
         $description_overrides = [
