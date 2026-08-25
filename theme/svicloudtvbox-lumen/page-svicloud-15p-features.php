@@ -10,8 +10,8 @@ $product_url = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_u
 $compare_url = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/compare/')) : home_url('/compare/');
 $apps_url = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/guides-apps/')) : home_url('/guides-apps/');
 $shop_url = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/shop/')) : home_url('/shop/');
-$image_meta = function_exists('svic_get_theme_image_meta') ? svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v6-remote-watermarked.webp') : [];
-$image_url = $image_meta['url'] ?? get_template_directory_uri() . '/assets/images/products/svicloud-15p-marketing-v6-remote-watermarked.webp';
+$image_meta = function_exists('svic_get_theme_image_meta') ? svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp') : [];
+$image_url = $image_meta['url'] ?? get_template_directory_uri() . '/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp';
 
 get_header();
 ?>

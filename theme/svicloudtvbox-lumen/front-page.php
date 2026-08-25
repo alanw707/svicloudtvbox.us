@@ -6,7 +6,7 @@ get_header();
 
 $hero_product_15p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-15p') : null;
 $hero_15p_url = $hero_product_15p ? svic_url_with_lang(get_permalink($hero_product_15p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-15p'));
-$hero_15p_artwork = svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v6-remote-watermarked.webp');
+$hero_15p_artwork = svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp');
 $hero_product_10p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
 $hero_product_10s = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null;
 $hero_10p_url = $hero_product_10p ? svic_url_with_lang(get_permalink($hero_product_10p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10p-plus'));
@@ -98,7 +98,7 @@ $frontpage_confidence_steps = [
 $pricing_card_images = [
     '15p' => array_merge(
         ['alt' => svic_translate('frontpage.pricing.cards.15p.image_alt')],
-        svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v6-remote-watermarked.webp')
+        svic_get_theme_image_meta('/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp')
     ),
     '10p' => array_merge(
         ['alt' => svic_translate('frontpage.pricing.cards.10p.image_alt')],

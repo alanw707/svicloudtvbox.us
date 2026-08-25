@@ -4,11 +4,13 @@ Generated on 2026-08-24 after visual review found the v2 product images did not 
 
 ## Selected assets
 
-- `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-primary-studio-v3-remote-watermarked.webp`
+- `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp`
 - `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-angle-studio-v3-remote-watermarked.webp`
 - `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-lifestyle-studio-v3-remote-watermarked.webp`
 - `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-detail-studio-v3-remote-watermarked.webp`
-- `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v6-remote-watermarked.webp`
+- `theme/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp`
+
+The v4 primary and v7 marketing replacements add exact `SVICLOUD 小雲盒子` / `小雲盒子` branding and rebalance the product group so the 15P no longer reads too far right on mobile product surfaces.
 
 ## Direction
 
