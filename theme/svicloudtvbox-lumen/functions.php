@@ -8162,7 +8162,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             return;
         }
 
-        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v11');
+        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v12');
         $mtime        = (int) filemtime($feed_path);
         if ($last_checked >= $mtime) {
             return;
@@ -8271,8 +8271,11 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             }, $patched_item) ?: $patched_item;
 
             if (isset($image_link_overrides[$offer_key]) && strpos($patched_item, '<g:image_link>') !== false) {
-                $replacement = '      <g:image_link>' . esc_url($image_link_overrides[$offer_key]) . '</g:image_link>';
+                $image_link_url = esc_url($image_link_overrides[$offer_key]);
+                $replacement = '      <g:image_link>' . $image_link_url . '</g:image_link>';
                 $patched_item = preg_replace('/\s*<g:image_link>.*?<\/g:image_link>\s*/s', "\n" . $replacement . "\n", $patched_item, 1) ?: $patched_item;
+                $duplicate_additional = preg_quote('<g:additional_image_link>' . $image_link_url . '</g:additional_image_link>', '/');
+                $patched_item = preg_replace('/\s*' . $duplicate_additional . '\s*/', "\n", $patched_item) ?: $patched_item;
             }
 
             if ($offer_key !== '' && isset($obsolete_offer_images[$offer_key])) {
@@ -8371,7 +8374,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             file_put_contents($feed_path, $patched, LOCK_EX);
         }
 
-        set_transient('svic_google_feed_rich_offer_checked_v11', max($mtime, time()), HOUR_IN_SECONDS);
+        set_transient('svic_google_feed_rich_offer_checked_v12', max($mtime, time()), HOUR_IN_SECONDS);
     }
 }
 
