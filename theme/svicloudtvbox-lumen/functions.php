@@ -8162,7 +8162,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             return;
         }
 
-        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v12');
+        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v13');
         $mtime        = (int) filemtime($feed_path);
         if ($last_checked >= $mtime) {
             return;
@@ -8232,8 +8232,12 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             '1204' => 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp',
         ];
 
+        $title_overrides = [
+            '1204' => 'SVICLOUD 15P TV Box 小雲盒子 15P',
+        ];
+
         $description_overrides = [
-            '1204' => 'SVICLOUD 15P TV Box is in stock now at $288.00 (regular $379.00). It runs Android 14 on an Amlogic S905Y5 quad-core Cortex-A55 processor with 4 GB DDR3 memory, 64 GB eMMC storage, dual-band Wi-Fi 6, Bluetooth 5.4, 4K HDR, and AV1 support.',
+            '1204' => 'SVICLOUD 15P TV Box 小雲盒子 15P is in stock now at $288.00 (regular $379.00). It runs Android 14 on an Amlogic S905Y5 quad-core Cortex-A55 processor with 4 GB DDR3 memory, 64 GB eMMC storage, dual-band Wi-Fi 6, Bluetooth 5.4, 4K HDR, and AV1 support.',
         ];
 
         $availability_overrides = [
@@ -8242,7 +8246,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             ],
         ];
 
-        $patched = preg_replace_callback('/<item>(.*?)<\/item>/s', function ($matches) use ($shipping_block, $offer_images, $obsolete_offer_images, $image_link_overrides, $description_overrides, $availability_overrides) {
+        $patched = preg_replace_callback('/<item>(.*?)<\/item>/s', function ($matches) use ($shipping_block, $offer_images, $obsolete_offer_images, $image_link_overrides, $title_overrides, $description_overrides, $availability_overrides) {
             $item     = $matches[0];
             $offer_id = '';
             if (preg_match('/<g:id>(.*?)<\/g:id>/', $item, $id_matches)) {
@@ -8276,6 +8280,13 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 $patched_item = preg_replace('/\s*<g:image_link>.*?<\/g:image_link>\s*/s', "\n" . $replacement . "\n", $patched_item, 1) ?: $patched_item;
                 $duplicate_additional = preg_quote('<g:additional_image_link>' . $image_link_url . '</g:additional_image_link>', '/');
                 $patched_item = preg_replace('/\s*' . $duplicate_additional . '\s*/', "\n", $patched_item) ?: $patched_item;
+            }
+
+            if (isset($title_overrides[$offer_key]) && strpos($patched_item, '<g:title>') !== false) {
+                $replacement = '      <g:title><![CDATA[' . $title_overrides[$offer_key] . ']]></g:title>';
+                $patched_item = preg_replace_callback('/\s*<g:title>.*?<\/g:title>\s*/s', static function () use ($replacement): string {
+                    return "\n" . $replacement . "\n";
+                }, $patched_item, 1) ?: $patched_item;
             }
 
             if ($offer_key !== '' && isset($obsolete_offer_images[$offer_key])) {
@@ -8374,7 +8385,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             file_put_contents($feed_path, $patched, LOCK_EX);
         }
 
-        set_transient('svic_google_feed_rich_offer_checked_v12', max($mtime, time()), HOUR_IN_SECONDS);
+        set_transient('svic_google_feed_rich_offer_checked_v13', max($mtime, time()), HOUR_IN_SECONDS);
     }
 }
 

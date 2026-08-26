@@ -13,6 +13,9 @@ G_NS = "{http://base.google.com/ns/1.0}"
 REQUIRED_IMAGE_LINKS = {
     "1204": "svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp",
 }
+REQUIRED_TITLE_TERMS = {
+    "1204": ["SVICLOUD 15P", "小雲盒子 15P"],
+}
 
 
 def text_for(item: ET.Element, tag: str) -> str:
@@ -68,6 +71,14 @@ def validate_item(item: ET.Element, min_additional_images: int) -> None:
     image_link = text_for(item, "image_link")
     if not image_link:
         fail(f"{offer_id}: missing image_link")
+    required_title_terms = REQUIRED_TITLE_TERMS.get(offer_key(offer_id), [])
+    if required_title_terms:
+        title = text_for(item, "title")
+        if not title:
+            fail(f"{offer_id}: missing title")
+        for term in required_title_terms:
+            if term not in title:
+                fail(f"{offer_id}: title missing required term {term}")
     required_image_link = REQUIRED_IMAGE_LINKS.get(offer_key(offer_id))
     if required_image_link and required_image_link not in image_link:
         fail(f"{offer_id}: image_link must use {required_image_link}")
