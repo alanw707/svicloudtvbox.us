@@ -79,7 +79,7 @@ def validate_item(item: ET.Element, min_additional_images: int) -> None:
     ]
     if len(set(additional_images)) < min_additional_images:
         fail(f"{offer_id}: needs at least {min_additional_images} unique additional images, got {len(set(additional_images))}")
-    if image_link in additional_images:
+    if required_image_link and image_link in additional_images:
         fail(f"{offer_id}: image_link is duplicated as an additional_image_link")
 
 
