@@ -11,8 +11,11 @@
 **Keywords**:
 - "小雲電視盒 美國" (SviCloud TV Box USA)
 - "小雲電視盒美國代理" (SviCloud TV Box USA Agent)
+- "小雲盒子 15P" (SVICLOUD 15P Chinese brand/model query)
+- "小雲電視盒 15P" (Chinese TV-box/model query)
+- "svicloud 15P" / "SVICLOUD 15P" (English brand/model query)
 
-**Current Status**: ❌ Site NOT in top 10 results for either keyword
+**Current Status**: ❌ Site needs top-10 monitoring across this target keyword set
 
 ---
 
@@ -192,6 +195,12 @@ Multiple regional sites (Taiwan, Hong Kong) are outranking your .us domain for U
 ## Keyword Strategy Expansion
 
 ### Primary Keywords (Target Now)
+- 小雲盒子 15P ⭐⭐⭐
+- SVICLOUD 15P ⭐⭐⭐
+- svicloud 15p ⭐⭐⭐
+- 小雲電視盒 15P ⭐⭐⭐
+- SVICLOUD 15P TV Box ⭐⭐⭐
+- 小雲盒子 15P 美國 ⭐⭐⭐
 - 小雲電視盒 美國 ⭐⭐⭐
 - 小雲電視盒美國代理 ⭐⭐⭐
 - svicloud tv box usa
@@ -200,6 +209,17 @@ Multiple regional sites (Taiwan, Hong Kong) are outranking your .us domain for U
 - 小雲電視盒 10P+
 
 ### Secondary Keywords (3-6 months)
+- 小雲盒子 15P 美國
+- 小雲 15P 現貨
+- 小雲盒子 15P 價格
+- 小雲盒子 15P vs 10P+
+- svicloud 15p price
+- svicloud 15p specs
+- svicloud 15p vs 10p+
+- svicloud 15p usa
+- svicloud 15p in stock
+- 小雲電視盒 15P 現貨
+- 小雲電視盒 15P 價格
 - 小雲電視盒 加州
 - 小雲10P 美國
 - 美國中文電視盒
@@ -253,11 +273,11 @@ Multiple regional sites (Taiwan, Hong Kong) are outranking your .us domain for U
 
 ## Quick Wins (Start This Week)
 
-1. **Blog post**: "2025 美國小雲電視盒購買完整指南"
-2. **Add Chinese FAQs** to homepage
-3. **Create Chinese testimonials** section
-4. **Optimize image alt text** with Chinese keywords
-5. **Add Chinese video** to product pages
+1. **15P query coverage**: ensure homepage, shop, compare, 15P feature page, and 15P PDP titles/descriptions include "小雲盒子 15P" and "SVICLOUD 15P" naturally.
+2. **Blog post**: "小雲盒子 15P 美國現貨：規格、價格與 10P+ 比較"
+3. **Blog post**: "SVICLOUD 15P vs 10P+：美國買家怎麼選？"
+4. **Add Chinese FAQs** to homepage and 15P product page around price, stock, Android 14, app downloads, and 10P+ comparison.
+5. **Optimize image alt text** with Chinese model keywords.
 
 ---
 

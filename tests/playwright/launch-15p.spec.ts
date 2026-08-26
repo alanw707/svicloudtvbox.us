@@ -168,9 +168,9 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
 
   test('localizes launch metadata and shows Android 12 for 10P+ and 10S in every locale', async ({ page }) => {
     const locales = [
-      { prefix: '', marker: 'SVICLOUD', included: 'Included', action: 'Buy 15P', availability: 'In stock now' },
-      { prefix: '/zh', marker: '小雲', included: '內含', action: '購買 15P', availability: '現貨供應' },
-      { prefix: '/zh-cn', marker: '小云', included: '内含', action: '购买 15P', availability: '现货供应' },
+      { prefix: '', marker: 'SVICLOUD', modelKeyword: 'SVICLOUD 15P', secondaryKeyword: '小雲盒子 15P', included: 'Included', action: 'Buy 15P', availability: 'In stock now' },
+      { prefix: '/zh', marker: '小雲', modelKeyword: '小雲盒子 15P', secondaryKeyword: '小雲電視盒 15P', included: '內含', action: '購買 15P', availability: '現貨供應' },
+      { prefix: '/zh-cn', marker: '小云', modelKeyword: '小云盒子 15P', secondaryKeyword: '小云电视盒 15P', included: '内含', action: '购买 15P', availability: '现货供应' },
     ];
     for (const locale of locales) {
       for (const route of ['/', '/shop/', '/compare/', '/svicloud-15p-features/', '/product/svicloud-15p/']) {
@@ -184,6 +184,12 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
         for (const value of metadata) {
           expect(value).toContain('15P');
           expect(value).toContain(locale.marker);
+        }
+        if (locale.modelKeyword && ['/', '/shop/', '/compare/', '/svicloud-15p-features/', '/product/svicloud-15p/'].includes(route)) {
+          expect(metadata.join(' ')).toContain(locale.modelKeyword);
+        }
+        if (locale.secondaryKeyword && ['/', '/shop/', '/compare/', '/svicloud-15p-features/', '/product/svicloud-15p/'].includes(route)) {
+          expect(metadata.join(' ')).toContain(locale.secondaryKeyword);
         }
         expect(metadata.join(' ')).toContain('288');
         const routeText = await page.locator('body').innerText();

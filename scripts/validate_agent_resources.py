@@ -25,7 +25,18 @@ REQUIRED_ENDPOINTS = [
     "agent/shipping-returns.md",
     "agent/contact.md",
 ]
-REQUIRED_TERMS = ["SVICLOUD 10P+", "SVICLOUD 10S", "+1 (520) 641-7021", "/compare/", "/contact/", "/svicloud-15p-features/"]
+REQUIRED_TERMS = [
+    "SVICLOUD 10P+",
+    "SVICLOUD 10S",
+    "+1 (520) 641-7021",
+    "/compare/",
+    "/contact/",
+    "/svicloud-15p-features/",
+    "SVICLOUD 15P TV Box",
+    "svicloud 15p price",
+    "小雲盒子 15P",
+    "小雲電視盒 15P",
+]
 FORBIDDEN_PHONE_PATTERNS = ["15206417021", "702-389-3415", "702-389-3417"]
 REQUIRED_DECISION_SLUGS = [
     "svicloud-10p-vs-10s",

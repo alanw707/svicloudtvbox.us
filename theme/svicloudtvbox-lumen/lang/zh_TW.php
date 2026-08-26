@@ -1486,17 +1486,17 @@ return [
             ],
         ],
         'svicloud-15p' => [
-            'title' => '小雲 15P 電視盒',
+            'title' => '小雲盒子 15P 電視盒',
             'meta' => [
-                'title'       => '小雲 15P 訂購 US$288｜Android 14 電視盒',
-                'description' => '小雲 15P 現以 US$288 現貨供應（原價 US$379），搭載 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6 與藍牙 5.4。',
-                'image_alt'   => '小雲 15P 電視盒正面',
+                'title'       => '小雲盒子 15P 現貨 US$288｜SVICLOUD 15P 電視盒',
+                'description' => '小雲盒子 15P / 小雲電視盒 15P / SVICLOUD 15P 現以 US$288 現貨供應（原價 US$379），搭載 Android 14、Amlogic S905Y5、Wi-Fi 6 與藍牙 5.4。',
+                'image_alt'   => '小雲盒子 15P 電視盒正面',
             ],
             'short_description' => '具備 10P+ 的全部功能，並支援下載手機 App。',
-            'description' => '<p>全新小雲 15P 電視盒搭載 Android 14 與 Amlogic S905Y5 四核心 ARM Cortex-A55 處理器。</p><h2>核心規格</h2><ul><li>4 GB DDR3 記憶體與 64 GB eMMC 儲存空間。</li><li>2.4/5 GHz 雙頻 Wi-Fi 6（2T2R）與藍牙 5.4。</li><li>HDR10+、HDR10 與 HLG 畫面處理。</li><li>支援 AV1、VP9、H.265/HEVC 與 H.264 硬體解碼；AV1、VP9、H.265/HEVC 最高支援 4K × 2K 60 fps。</li><li>HDMI 2.1、兩個 USB 2.0、RJ45 有線網路、光纖音訊與 Type-C 5V/2A 電源。</li></ul><h2>盒內配件</h2><p>禮盒、AC 變壓器、HDMI 線、藍牙語音飛鼠遙控器與使用手冊。</p><p><strong>現以 US$288 現貨供應（原價 US$379）。</strong>現貨供應。</p>',
+            'description' => '<p>全新小雲盒子 15P（SVICLOUD 15P，小雲電視盒 15P）搭載 Android 14 與 Amlogic S905Y5 四核心 ARM Cortex-A55 處理器。</p><h2>核心規格</h2><ul><li>4 GB DDR3 記憶體與 64 GB eMMC 儲存空間。</li><li>2.4/5 GHz 雙頻 Wi-Fi 6（2T2R）與藍牙 5.4。</li><li>HDR10+、HDR10 與 HLG 畫面處理。</li><li>支援 AV1、VP9、H.265/HEVC 與 H.264 硬體解碼；AV1、VP9、H.265/HEVC 最高支援 4K × 2K 60 fps。</li><li>HDMI 2.1、兩個 USB 2.0、RJ45 有線網路、光纖音訊與 Type-C 5V/2A 電源。</li></ul><h2>盒內配件</h2><p>禮盒、AC 變壓器、HDMI 線、藍牙語音飛鼠遙控器與使用手冊。</p><p><strong>現以 US$288 現貨供應（原價 US$379）。</strong>現貨供應。</p>',
             'footer' => [
-                'tagline' => '小雲 15P 產品資訊',
-                'summary' => '依供應商來源整理的小雲 15P 硬體資料；特價 US$288（原價 US$379），現貨供應。',
+                'tagline' => '小雲盒子 15P 產品資訊',
+                'summary' => '依供應商來源整理的小雲盒子 15P 硬體資料；特價 US$288（原價 US$379），現貨供應。',
                 'badges' => [
                     'coming_soon'   => '現貨供應',
                     'specifications'=> '硬體規格已公布',
@@ -1637,9 +1637,9 @@ return [
     ],
     'compare' => [
         'meta' => [
-            'title'       => '小雲 15P vs 10P+ vs 10S｜機型規格比較',
-            'description' => '比較 US$288 訂購的小雲 15P（原價 US$379）與 10P+、10S，包括硬體、儲存、連線、影音支援、價格與銷售狀態。',
-            'image_alt'   => '小雲 15P、10P+ 與 10S 電視盒',
+            'title'       => '小雲盒子 15P vs 10P+ vs 10S｜機型規格比較',
+            'description' => '比較 US$288 現貨小雲盒子 15P／小雲電視盒 15P（原價 US$379）與 10P+、10S，包括硬體、儲存、連線、影音支援、價格與銷售狀態。',
+            'image_alt'   => '小雲盒子 15P、10P+ 與 10S 電視盒',
         ],
         'hero' => [
             'badge'    => '機型比較',

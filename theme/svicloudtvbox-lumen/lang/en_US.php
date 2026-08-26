@@ -1371,8 +1371,8 @@ return [
         'svicloud-15p' => [
             'title' => 'SVICLOUD 15P TV Box',
             'meta' => [
-                'title'       => 'SVICLOUD 15P In Stock | $288 Android 14 TV Box',
-                'description' => 'SVICLOUD 15P is in stock now for $288 (regular $379): Android 14, Amlogic S905Y5, Wi-Fi 6, Bluetooth 5.4, and 4K HDR.',
+                'title'       => 'SVICLOUD 15P In Stock | $288 小雲盒子 TV Box',
+                'description' => 'SVICLOUD 15P / 小雲盒子 15P TV box is in stock now for $288 (regular $379): Android 14, Amlogic S905Y5, Wi-Fi 6, Bluetooth 5.4, and 4K HDR.',
                 'image_alt'   => 'SVICLOUD 15P TV box front view with Bluetooth voice remote',
             ],
             'short_description' => 'Everything in 10P+, plus support for downloading mobile apps.',

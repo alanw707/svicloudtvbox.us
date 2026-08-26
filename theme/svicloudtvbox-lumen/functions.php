@@ -944,38 +944,38 @@ if (!function_exists('svic_static_page_meta_registry')) {
             ],
             'compare' => [
                 'title'       => [
-                    'en' => 'SVICLOUD 15P vs 10P+ vs 10S | Model Comparison',
-                    'zh' => '小雲 15P vs 10P+ vs 10S｜機型規格比較',
-                    'zh-cn' => '小云 15P vs 10P+ vs 10S｜机型规格比较',
+                    'en' => 'SVICLOUD 15P vs 10P+ vs 10S | Compare 小雲盒子 Models',
+                    'zh' => '小雲盒子 15P vs 10P+ vs 10S｜機型規格比較',
+                    'zh-cn' => '小云盒子 15P vs 10P+ vs 10S｜机型规格比较',
                 ],
                 'description' => [
-                    'en' => 'Compare the in-stock $288 SVICLOUD 15P ($379 regular) with 10P+ and 10S hardware, video support, pricing, and availability.',
-                    'zh' => '比較現貨 US$288 小雲 15P（原價 US$379）與 10P+、10S 的硬體、影音支援、價格及銷售狀態。',
-                    'zh-cn' => '比较现货 US$288 小云 15P（原价 US$379）与 10P+、10S 的硬件、影音支持、价格及销售状态。',
+                    'en' => 'Compare the in-stock $288 SVICLOUD 15P / 小雲盒子 15P TV box ($379 regular) with 10P+, 10S, hardware, pricing, and availability.',
+                    'zh' => '比較現貨 US$288 小雲盒子 15P／小雲電視盒 15P（原價 US$379）與 10P+、10S 的硬體、影音支援、價格及銷售狀態。',
+                    'zh-cn' => '比较现货 US$288 小云盒子 15P／小云电视盒 15P（原价 US$379）与 10P+、10S 的硬件、影音支持、价格及销售状态。',
                 ],
                 'image'       => '/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp',
                 'image_alt'   => [
                     'en' => 'SVICLOUD 15P TV box front view with Bluetooth voice remote',
-                    'zh' => '小雲 15P 電視盒正面與藍牙語音遙控器',
-                    'zh-cn' => '小云 15P 电视盒正面与蓝牙语音遥控器',
+                    'zh' => '小雲盒子 15P 電視盒正面與藍牙語音遙控器',
+                    'zh-cn' => '小云盒子 15P 电视盒正面与蓝牙语音遥控器',
                 ],
             ],
             'shop' => [
                 'title'       => [
                     'en' => 'Shop SVICLOUD 15P, 10P+ & 10S TV Boxes',
-                    'zh' => '選購小雲 15P、10P+ 與 10S 電視盒',
-                    'zh-cn' => '选购小云 15P、10P+ 与 10S 电视盒',
+                    'zh' => '選購小雲盒子 15P、10P+ 與 10S 電視盒',
+                    'zh-cn' => '选购小云盒子 15P、10P+ 与 10S 电视盒',
                 ],
                 'description' => [
-                    'en' => 'Buy in-stock SVICLOUD 15P for $288 (regular $379), or shop current 10P+, 10S, and Bluetooth remote products.',
-                    'zh' => '以 US$288 購買現貨小雲 15P（原價 US$379），或選購現售 10P+、10S 與藍牙遙控器。',
-                    'zh-cn' => '以 US$288 购买现货小云 15P（原价 US$379），或选购现售 10P+、10S 与蓝牙遥控器。',
+                    'en' => 'Buy in-stock SVICLOUD 15P / 小雲盒子 15P TV box for $288 (regular $379), or shop current 10P+, 10S, and Bluetooth remote products.',
+                    'zh' => '以 US$288 購買現貨小雲盒子 15P／小雲電視盒 15P（原價 US$379），或選購現售 10P+、10S 與藍牙遙控器。',
+                    'zh-cn' => '以 US$288 购买现货小云盒子 15P／小云电视盒 15P（原价 US$379），或选购现售 10P+、10S 与蓝牙遥控器。',
                 ],
                 'image'       => '/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp',
                 'image_alt'   => [
                     'en' => 'SVICLOUD 小雲盒子 15P Android 14 feature graphic with Bluetooth voice remote',
-                    'zh' => '小雲 15P Android 14 功能宣傳圖與藍牙語音遙控器',
-                    'zh-cn' => '小云 15P Android 14 功能宣传图与蓝牙语音遥控器',
+                    'zh' => '小雲盒子 15P Android 14 功能宣傳圖與藍牙語音遙控器',
+                    'zh-cn' => '小云盒子 15P Android 14 功能宣传图与蓝牙语音遥控器',
                 ],
             ],
             'cart' => [
@@ -1978,18 +1978,18 @@ if (!function_exists('svic_homepage_meta_definitions')) {
 
         $definitions = [
             'zh_tw' => [
-                'title'       => '小雲 10P+ 與 15P｜小雲盒子美國授權經銷',
-                'description' => '選購現貨小雲 10P+、現貨 15P（US$288，原價 US$379）、10S 與藍牙遙控器。小雲盒子美國授權經銷，可比較 10P+、15P 與 10S。',
-                'image_alt'   => '小雲 15P Android 14 電視盒產品圖',
+                'title'       => '小雲盒子 15P 與 10P+｜SVICLOUD 美國授權經銷',
+                'description' => '選購現貨小雲盒子 15P／小雲電視盒 15P（US$288，原價 US$379）、10P+、10S 與藍牙遙控器。SVICLOUD 15P 美國現貨，可比較 15P、10P+ 與 10S。',
+                'image_alt'   => '小雲盒子 15P Android 14 電視盒產品圖',
             ],
             'zh_cn' => [
-                'title'       => '小云 10P+ 与 15P｜小云盒子美国授权经销',
-                'description' => '选购现货小云 10P+、现货 15P（US$288，原价 US$379）、10S 与蓝牙遥控器。小云盒子美国授权经销，可比较 10P+、15P 与 10S。',
-                'image_alt'   => '小云 15P Android 14 电视盒产品图',
+                'title'       => '小云盒子 15P 与 10P+｜SVICLOUD 美国授权经销',
+                'description' => '选购现货小云盒子 15P／小云电视盒 15P（US$288，原价 US$379）、10P+、10S 与蓝牙遥控器。SVICLOUD 15P 美国现货，可比较 15P、10P+ 与 10S。',
+                'image_alt'   => '小云盒子 15P Android 14 电视盒产品图',
             ],
             'en_us' => [
                 'title'       => 'SVICLOUD 10P+ & 15P | 小雲盒子 U.S. Authorized Dealer',
-                'description' => 'Shop the in-stock SVICLOUD 10P+, in-stock 15P for $288 (regular $379), 10S, and Bluetooth remote products. Compare 10P+, 15P, and 10S.',
+                'description' => 'Shop in-stock SVICLOUD 15P / 小雲盒子 15P TV box for $288 (regular $379), plus 10P+, 10S, and Bluetooth remote products. Compare 15P, 10P+, and 10S.',
                 'image_alt'   => 'SVICLOUD 15P Android 14 TV box product graphic',
             ],
         ];
@@ -2777,6 +2777,10 @@ if (!function_exists('svic_google_merchant_return_policy_schema')) {
             'merchantReturnDays' => 14,
             'returnMethod' => 'https://schema.org/ReturnByMail',
             'returnFees' => 'https://schema.org/ReturnShippingFees',
+            'customerRemorseReturnFees' => 'https://schema.org/ReturnShippingFees',
+            'customerRemorseReturnLabelSource' => 'https://schema.org/ReturnLabelCustomerResponsibility',
+            'itemDefectReturnFees' => 'https://schema.org/ReturnShippingFees',
+            'itemDefectReturnLabelSource' => 'https://schema.org/ReturnLabelCustomerResponsibility',
             'url' => esc_url_raw($return_policy_url),
         ];
     }
@@ -2924,6 +2928,8 @@ if (!function_exists('svic_get_organization_schema_enhancements')) {
         if ($price_range !== '') {
             $enhancements['priceRange'] = $price_range;
         }
+
+        $enhancements['hasMerchantReturnPolicy'] = svic_google_merchant_return_policy_schema();
 
         // AggregateRating from Google Business Profile reviews
         // Enable via filter once Google Business Profile has real reviews:
@@ -8156,7 +8162,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             return;
         }
 
-        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v10');
+        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v11');
         $mtime        = (int) filemtime($feed_path);
         if ($last_checked >= $mtime) {
             return;
@@ -8177,11 +8183,19 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
 
         $offer_images = [
             '12' => [
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10p-plus.png',
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10p-plus-lifestyle-1.webp',
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10p-plus-lifestyle-2.webp',
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10p-plus-lifestyle-3.webp',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10p-plus-lifestyle-1.png',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10p-plus-lifestyle-2.png',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10p-plus-lifestyle-3.png',
             ],
             '14' => [
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-tvbox-10s.jpg',
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-1.webp',
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-2.webp',
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-3.webp',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-1.jpg',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-2.jpg',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-3.jpg',
@@ -8192,10 +8206,10 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/remote-control-white-600x600.png',
             ],
             '1204' => [
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-angle-studio-v4-bilingual-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-lifestyle-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-detail-studio-v3-remote-watermarked.webp',
-                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp',
             ],
         ];
 
@@ -8214,7 +8228,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             // The original 10S packshot is 750x470; Merchant Center warns when a
             // dimension is under 500px. Use the high-resolution lifestyle image.
             '14' => 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-1.jpg',
-            '1204' => 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp',
+            '1204' => 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp',
         ];
 
         $description_overrides = [
@@ -8232,6 +8246,10 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             $offer_id = '';
             if (preg_match('/<g:id>(.*?)<\/g:id>/', $item, $id_matches)) {
                 $offer_id = trim(html_entity_decode($id_matches[1], ENT_QUOTES | ENT_XML1, 'UTF-8'));
+            }
+            $offer_key = $offer_id;
+            if ($offer_id !== '' && !isset($offer_images[$offer_key]) && preg_match('/(?:^|[^0-9])([0-9]{2,})(?:[^0-9]|$)/', $offer_id, $offer_id_matches)) {
+                $offer_key = $offer_id_matches[1];
             }
 
             if (strpos($item, '<g:shipping>') !== false) {
@@ -8251,27 +8269,27 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 return $country === 'CA' ? "\n" : $shipping_matches[0];
             }, $patched_item) ?: $patched_item;
 
-            if (isset($image_link_overrides[$offer_id]) && strpos($patched_item, '<g:image_link>') !== false) {
-                $replacement = '      <g:image_link>' . esc_url($image_link_overrides[$offer_id]) . '</g:image_link>';
+            if (isset($image_link_overrides[$offer_key]) && strpos($patched_item, '<g:image_link>') !== false) {
+                $replacement = '      <g:image_link>' . esc_url($image_link_overrides[$offer_key]) . '</g:image_link>';
                 $patched_item = preg_replace('/\s*<g:image_link>.*?<\/g:image_link>\s*/s', "\n" . $replacement . "\n", $patched_item, 1) ?: $patched_item;
             }
 
-            if ($offer_id !== '' && isset($obsolete_offer_images[$offer_id])) {
-                foreach ($obsolete_offer_images[$offer_id] as $obsolete_url) {
+            if ($offer_key !== '' && isset($obsolete_offer_images[$offer_key])) {
+                foreach ($obsolete_offer_images[$offer_key] as $obsolete_url) {
                     $obsolete_tag = preg_quote('<g:additional_image_link>' . esc_url($obsolete_url) . '</g:additional_image_link>', '/');
                     $patched_item = preg_replace('/\s*' . $obsolete_tag . '\s*/', "\n", $patched_item) ?: $patched_item;
                 }
             }
 
-            if (isset($description_overrides[$offer_id]) && strpos($patched_item, '<g:description>') !== false) {
-                $replacement = '      <g:description><![CDATA[' . $description_overrides[$offer_id] . ']]></g:description>';
+            if (isset($description_overrides[$offer_key]) && strpos($patched_item, '<g:description>') !== false) {
+                $replacement = '      <g:description><![CDATA[' . $description_overrides[$offer_key] . ']]></g:description>';
                 $patched_item = preg_replace_callback('/\s*<g:description>.*?<\/g:description>\s*/s', static function () use ($replacement): string {
                     return "\n" . $replacement . "\n";
                 }, $patched_item, 1) ?: $patched_item;
             }
 
-            if (isset($availability_overrides[$offer_id])) {
-                $availability = sanitize_text_field($availability_overrides[$offer_id]['availability']);
+            if (isset($availability_overrides[$offer_key])) {
+                $availability = sanitize_text_field($availability_overrides[$offer_key]['availability']);
                 $availability_tag = '      <g:availability>' . $availability . '</g:availability>';
 
                 $patched_item = preg_replace('/\s*<g:availability_date>.*?<\/g:availability_date>\s*/s', "\n", $patched_item) ?: $patched_item;
@@ -8323,9 +8341,9 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 }
             }
 
-            if ($offer_id !== '' && isset($offer_images[$offer_id])) {
+            if ($offer_key !== '' && isset($offer_images[$offer_key])) {
                 $additional_images = '';
-                foreach ($offer_images[$offer_id] as $image_url) {
+                foreach ($offer_images[$offer_key] as $image_url) {
                     $image_tag = '<g:additional_image_link>' . esc_url($image_url) . '</g:additional_image_link>';
                     if (strpos($patched_item, $image_tag) === false) {
                         $additional_images .= '      ' . $image_tag . "\n";
@@ -8352,7 +8370,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             file_put_contents($feed_path, $patched, LOCK_EX);
         }
 
-        set_transient('svic_google_feed_rich_offer_checked_v10', max($mtime, time()), HOUR_IN_SECONDS);
+        set_transient('svic_google_feed_rich_offer_checked_v11', max($mtime, time()), HOUR_IN_SECONDS);
     }
 }
 
