@@ -8221,6 +8221,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-primary-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-angle-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v6-remote-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp',
             ],
         ];
 

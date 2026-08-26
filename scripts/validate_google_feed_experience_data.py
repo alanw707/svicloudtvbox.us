@@ -65,10 +65,11 @@ def validate_item(item: ET.Element, min_additional_images: int) -> None:
         fail(f"{offer_id}: missing handling time")
     if not text_for(item, "return_policy_label"):
         fail(f"{offer_id}: missing return_policy_label")
-    if not text_for(item, "image_link"):
+    image_link = text_for(item, "image_link")
+    if not image_link:
         fail(f"{offer_id}: missing image_link")
     required_image_link = REQUIRED_IMAGE_LINKS.get(offer_key(offer_id))
-    if required_image_link and required_image_link not in text_for(item, "image_link"):
+    if required_image_link and required_image_link not in image_link:
         fail(f"{offer_id}: image_link must use {required_image_link}")
 
     additional_images = [
@@ -78,6 +79,8 @@ def validate_item(item: ET.Element, min_additional_images: int) -> None:
     ]
     if len(set(additional_images)) < min_additional_images:
         fail(f"{offer_id}: needs at least {min_additional_images} unique additional images, got {len(set(additional_images))}")
+    if image_link in additional_images:
+        fail(f"{offer_id}: image_link is duplicated as an additional_image_link")
 
 
 def validate_feed(path: Path, min_additional_images: int) -> None:
