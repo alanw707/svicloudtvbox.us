@@ -61,6 +61,22 @@
   margin-top: 0;
 }
 
+.lumen-pricing .shop-product-card__media {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  margin-inline: 0;
+  overflow: visible;
+}
+
+.lumen-pricing .shop-product-card__media img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  filter: none;
+}
+
 .lumen-pricing__details-link {
   display: inline-flex;
   align-items: center;

@@ -102,15 +102,11 @@ $pricing_card_images = [
     ),
     '10p' => array_merge(
         ['alt' => svic_translate('frontpage.pricing.cards.10p.image_alt')],
-        function_exists('svic_get_product_image_meta')
-            ? svic_get_product_image_meta($hero_product_10p, 0, 'large')
-            : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp')
+        svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.png')
     ),
     '10s' => array_merge(
         ['alt' => svic_translate('frontpage.pricing.cards.10s.image_alt')],
-        function_exists('svic_get_product_image_meta')
-            ? svic_get_product_image_meta($hero_product_10s, 0, 'large')
-            : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp')
+        svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp')
     ),
 ];
 
@@ -644,7 +640,7 @@ foreach ($pricing_cards as $_svic_card) {
                 '10s' => 'svicloud-10s',
             ][$slug] ?? $slug;
           ?>
-          <article class="<?php echo esc_attr($card_classes); ?>">
+          <article class="<?php echo esc_attr($card_classes); ?>" data-svic-card="<?php echo esc_attr($slug); ?>">
             <div class="shop-product-card__header">
               <?php if (!empty($card['badge_key'])) : ?>
                 <span class="shop-product-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></span>
