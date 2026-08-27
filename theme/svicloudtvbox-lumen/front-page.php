@@ -106,7 +106,7 @@ $pricing_card_images = [
     ),
     '10s' => array_merge(
         ['alt' => svic_translate('frontpage.pricing.cards.10s.image_alt')],
-        svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp')
+        svic_get_theme_image_meta('/assets/images/svicloud-tvbox-10s.jpg')
     ),
 ];
 
