@@ -102,7 +102,7 @@ $pricing_card_images = [
     ),
     '10p' => array_merge(
         ['alt' => svic_translate('frontpage.pricing.cards.10p.image_alt')],
-        svic_get_theme_image_meta('/assets/images/svicloud-10p-plus.png')
+        svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp')
     ),
     '10s' => array_merge(
         ['alt' => svic_translate('frontpage.pricing.cards.10s.image_alt')],
