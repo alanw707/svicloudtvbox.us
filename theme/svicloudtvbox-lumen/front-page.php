@@ -102,11 +102,15 @@ $pricing_card_images = [
     ),
     '10p' => array_merge(
         ['alt' => svic_translate('frontpage.pricing.cards.10p.image_alt')],
-        svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp')
+        function_exists('svic_get_product_image_meta')
+            ? svic_get_product_image_meta($hero_product_10p, 0, 'large')
+            : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp')
     ),
     '10s' => array_merge(
         ['alt' => svic_translate('frontpage.pricing.cards.10s.image_alt')],
-        svic_get_theme_image_meta('/assets/images/svicloud-tvbox-10s.jpg')
+        function_exists('svic_get_product_image_meta')
+            ? svic_get_product_image_meta($hero_product_10s, 0, 'large')
+            : svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp')
     ),
 ];
 

@@ -421,7 +421,7 @@ if (!empty($compare_hero_10s_background['url'])) {
               $card_classes .= ' ' . sanitize_html_class($card['modifier']);
           }
         ?>
-        <article class="<?php echo esc_attr($card_classes); ?>">
+        <article class="<?php echo esc_attr($card_classes); ?>" data-svic-card="<?php echo esc_attr($slug); ?>">
           <div class="shop-product-card__header">
             <?php if (!empty($card['badge_key'])) : ?>
               <span class="shop-product-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></span>
