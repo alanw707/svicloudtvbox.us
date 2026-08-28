@@ -24,7 +24,7 @@ async function productCardSources(page: Page) {
 }
 
 test.describe('Homepage pricing product images', () => {
-  test('10P+ and 10S cards match the compare page product images', async ({ page, baseURL }) => {
+  test('10P+ and 10S cards match the shop page product images', async ({ page, baseURL }) => {
     const url = new URL('/', baseURL);
     url.searchParams.set('cb', Date.now().toString());
 
@@ -33,15 +33,15 @@ test.describe('Homepage pricing product images', () => {
 
     const homeSources = await productCardSources(page);
 
-    const compareUrl = new URL('/compare/', baseURL);
-    compareUrl.searchParams.set('cb', Date.now().toString());
-    const compareResponse = await page.goto(compareUrl.toString(), { waitUntil: 'domcontentloaded' });
-    expect(compareResponse?.ok()).toBeTruthy();
+    const shopUrl = new URL('/shop/', baseURL);
+    shopUrl.searchParams.set('cb', Date.now().toString());
+    const shopResponse = await page.goto(shopUrl.toString(), { waitUntil: 'domcontentloaded' });
+    expect(shopResponse?.ok()).toBeTruthy();
 
-    const compareSources = await productCardSources(page);
+    const shopSources = await productCardSources(page);
 
-    expect(homeSources['10p']).toBe(compareSources['10p']);
-    expect(homeSources['10s']).toBe(compareSources['10s']);
+    expect(homeSources['10p']).toBe(shopSources['10p']);
+    expect(homeSources['10s']).toBe(shopSources['10s']);
     expect(homeSources['10p']).toContain('/wp-content/uploads/');
     expect(homeSources['10s']).toContain('/wp-content/uploads/');
     expect(homeSources['10p']).not.toContain('/assets/images/svicloud-hero-product.webp');

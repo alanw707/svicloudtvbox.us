@@ -237,6 +237,21 @@ foreach ($pricing_cards as $slug => $card) {
         $pricing_cards[$slug]['savings_html'] = '';
     }
 
+    $pricing_cards[$slug]['image_html'] = '';
+    if ($has_wc_product && function_exists('svic_product_primary_image') && $slug !== '15p') {
+        $pricing_cards[$slug]['image_html'] = svic_product_primary_image($product, 'large');
+    }
+
+    if ($pricing_cards[$slug]['image_html'] === '' && !empty($card['image']['url'])) {
+        $pricing_cards[$slug]['image_html'] = sprintf(
+            '<img src="%s" alt="%s" loading="lazy" width="%s" height="%s" />',
+            esc_url($card['image']['url']),
+            esc_attr($card['image']['alt'] ?? ''),
+            esc_attr((string) ($card['image']['width'] ?? 520)),
+            esc_attr((string) ($card['image']['height'] ?? 520))
+        );
+    }
+
     $product_url = esc_url_raw($pricing_cards[$slug]['cta_url']);
     $product_name_source = '';
     if ($has_wc_product) {
@@ -649,9 +664,9 @@ foreach ($pricing_cards as $_svic_card) {
               <?php if (!empty($card['badge_key'])) : ?>
                 <span class="shop-product-card__badge"><?php echo svic_translate_html($card['badge_key']); ?></span>
               <?php endif; ?>
-              <?php if (!empty($card['image']['url'])) : ?>
+              <?php if (!empty($card['image_html'])) : ?>
                 <figure class="shop-product-card__media">
-                  <img src="<?php echo esc_url($card['image']['url']); ?>" alt="<?php echo esc_attr($card['image']['alt'] ?? ''); ?>" loading="lazy" width="<?php echo esc_attr((string) ($card['image']['width'] ?? 520)); ?>" height="<?php echo esc_attr((string) ($card['image']['height'] ?? 520)); ?>" />
+                  <?php echo $card['image_html']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                 </figure>
               <?php elseif ($slug === '15p') : ?>
                 <figure class="shop-product-card__media" role="img" aria-label="<?php echo esc_attr($card['image']['alt'] ?? ''); ?>"></figure>
