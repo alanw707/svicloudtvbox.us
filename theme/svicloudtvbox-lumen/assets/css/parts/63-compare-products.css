@@ -130,7 +130,7 @@
 
   .compare-product-card .shop-product-card__media {
     aspect-ratio: 16 / 10;
-    height: auto;
+    height: clamp(176px, 52vw, 230px);
     margin-inline: 0;
   }
 

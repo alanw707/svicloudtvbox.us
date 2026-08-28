@@ -64,6 +64,7 @@
 .lumen-pricing .shop-product-card__media {
   width: 100%;
   aspect-ratio: 16 / 10;
+  height: clamp(220px, 20vw, 280px);
   margin-inline: 0;
   overflow: hidden;
 }

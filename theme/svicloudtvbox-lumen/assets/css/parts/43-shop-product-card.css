@@ -57,7 +57,7 @@
   border-radius: 0;
   overflow: hidden;
   aspect-ratio: 16 / 10;
-  height: auto;
+  height: clamp(220px, 28vw, 300px);
 }
 
 .shop-product-card--highlight .shop-product-card__media {
@@ -413,6 +413,6 @@
 @media (max-width: 600px) {
   .shop-product-card__media {
     aspect-ratio: 16 / 10;
-    height: auto;
+    height: clamp(200px, 52vw, 280px);
   }
 }
