@@ -4,7 +4,7 @@ test.describe('Compare product card media sizing', () => {
   test('desktop: images fill most of media well', async ({ page, baseURL }) => {
     const url = new URL('/compare/', baseURL);
     url.searchParams.set('cb', Date.now().toString());
-    const resp = await page.goto(url.toString(), { waitUntil: 'networkidle' });
+    const resp = await page.goto(url.toString(), { waitUntil: 'domcontentloaded' });
     expect(resp?.ok()).toBeTruthy();
 
     const media = page.locator('.compare-product-card__media').first();
@@ -23,7 +23,7 @@ test.describe('Compare product card media sizing', () => {
   test('desktop: every product image stays centered inside its media well', async ({ page, baseURL }) => {
     const url = new URL('/compare/', baseURL);
     url.searchParams.set('cb', Date.now().toString());
-    const resp = await page.goto(url.toString(), { waitUntil: 'networkidle' });
+    const resp = await page.goto(url.toString(), { waitUntil: 'domcontentloaded' });
     expect(resp?.ok()).toBeTruthy();
 
     const measurements = await page.locator('.compare-product-card__media').evaluateAll((nodes) => nodes.map((media) => {
@@ -60,7 +60,7 @@ test.describe('Compare product card media sizing', () => {
     await page.setViewportSize({ width: 375, height: 812 });
     const url = new URL('/compare/', baseURL);
     url.searchParams.set('cb', Date.now().toString());
-    const resp = await page.goto(url.toString(), { waitUntil: 'networkidle' });
+    const resp = await page.goto(url.toString(), { waitUntil: 'domcontentloaded' });
     expect(resp?.ok()).toBeTruthy();
 
     const media = page.locator('.compare-product-card__media').first();

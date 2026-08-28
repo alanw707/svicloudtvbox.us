@@ -9,7 +9,7 @@ async function productCardSources(page: Page) {
       const explicitKey = card.getAttribute('data-svic-card');
       const title = card.querySelector('.shop-product-card__title')?.textContent?.trim() || '';
       const key = explicitKey
-        || (title.includes('10P+') ? '10p' : '')
+        || (title.includes('10P+') && !title.toLowerCase().includes('remote') ? '10p' : '')
         || (title.includes('10S') ? '10s' : '')
         || (title.includes('15P') ? '15p' : '');
       const image = card.querySelector('.shop-product-card__media img') as HTMLImageElement | null;
