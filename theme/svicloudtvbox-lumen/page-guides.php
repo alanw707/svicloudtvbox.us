@@ -98,6 +98,8 @@ $guides_hero_10p_image = function_exists('svic_get_product_image_meta')
             $detail_link = svic_guides_get_section_link($section_key);
             if ($detail_link) {
                 $detail_link = svic_url_with_lang($detail_link);
+            } elseif (!empty($item['slug'])) {
+                $detail_link = svic_url_with_lang(home_url('/' . trim($item['slug'], '/') . '/'));
             } else {
                 $detail_link = $guides_url;
             }

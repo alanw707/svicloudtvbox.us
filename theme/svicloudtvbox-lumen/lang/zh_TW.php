@@ -2008,6 +2008,7 @@ return [
             'overview'        => '指南亮點',
             'setup'           => '安裝流程',
             'apps'            => 'App 安裝教學',
+            'yogurt_mo'       => 'Yogurt Mo 教學',
             'post_setup'      => '安裝後設定',
             'troubleshooting' => '疑難排解',
             'resources'       => '延伸資源',
@@ -2018,6 +2019,7 @@ return [
             'overview'        => '快速了解重點與禮賓支援。',
             'setup'           => '完成接線、語言選擇與語音遙控配對。',
             'apps'            => '學會從可信來源安裝 App，並完成首次開啟。',
+            'yogurt_mo'       => '在 Android 設備安裝 15P Yogurt Mo，並設定同一網路最多兩台設備使用。',
             'post_setup'      => '個人化設定，讓小雲長期穩定運作。',
             'troubleshooting' => '修復遙控、緩衝與網路等常見問題。',
             'resources'       => '收藏頻道指南、選購建議與最新 10 系列亮點。',
@@ -2090,6 +2092,43 @@ return [
                     'copy'  => '安裝完成後開啟 Yogurt TV。如果仍要求 VIP 會員、無法開啟或出現錯誤，請傳清楚的電視畫面照片與訂單編號給我們，以便確認是否安裝到正確 App。',
                 ],
             ],
+        ],
+        'yogurt_mo' => [
+            'badge' => '15P App 設定',
+            'title' => '如何在 Android 設備安裝 15P Yogurt Mo',
+            'lead'  => 'Yogurt Mo 是 15P 較新的 Android App 選項。公開的 15P 官方文件有限，因此本頁以實用安裝流程為主；若你的啟動畫面不同，請聯絡客服確認。',
+            'items' => [
+                'compatibility' => [
+                    'title' => '使用 Android 設備',
+                    'copy'  => 'Yogurt Mo 可安裝在 Android 手機、Android 平板、Android TV 或安卓電視盒。iPhone、iPad、Roku、Fire TV 與非 Android 智慧電視系統不一定適用同一套 APK 安裝方式。',
+                ],
+                'download' => [
+                    'title' => '從 Yogurt TV 選擇 Bind 並掃描 QR code',
+                    'copy'  => '在 SVICLOUD 15P 上打開 Yogurt TV，找到 Bind 綁定選項，使用要安裝 Yogurt Mo 的 Android 手機或平板掃描畫面上的 QR code。依照 15P 來源頁面下載或啟用 Yogurt Mo。避免從隨機 APK 網站下載名稱相似的 App，以免裝到錯誤版本或被要求不相關的 VIP 會員。',
+                ],
+                'permission' => [
+                    'title' => '允許 APK 安裝',
+                    'copy'  => '如果 Android 阻擋安裝，請到設定中允許目前使用的瀏覽器或檔案管理器「安裝未知 App」。Yogurt Mo 安裝完成後，可再把該權限關閉。',
+                ],
+                'install' => [
+                    'title' => '開啟 APK 並完成安裝',
+                    'copy'  => '打開下載好的 APK，選擇 Install / 安裝，等待確認畫面出現。安裝期間請保持 Wi-Fi 連線，不要強制關閉安裝程式。',
+                ],
+                'same_network' => [
+                    'title' => '同一網路最多設定兩台設備',
+                    'copy'  => '若使用 15P 的兩台設備方案，請讓兩台 Android 設備連到同一台家用路由器或同一個 Wi-Fi。設定時先關閉 VPN，App 如要求登入或授權，請使用同一組 15P 授權資訊。',
+                ],
+                'verify' => [
+                    'title' => '分別測試兩台設備播放',
+                    'copy'  => '先在第一台設備開啟 Yogurt Mo 並確認可播放，再保持同一網路，在第二台設備開啟測試。若第二台失敗，請先重啟兩台設備與路由器，再請客服協助重置設備綁定。',
+                ],
+                'support' => [
+                    'title' => '將錯誤畫面傳給客服',
+                    'copy'  => '若啟用、登入或播放失敗，請提供訂單編號、設備型號、Android 版本、網路設定，以及清楚的 Yogurt Mo 錯誤畫面照片。',
+                ],
+            ],
+            'note_title' => '發布前的重要提醒',
+            'note_copy'  => '目前公開的 15P 專屬文件有限。若你的畫面出現不同的啟用或登入流程，請先把畫面拍照傳給客服，不要急著重置 App。',
         ],
         'post_setup' => [
             'badge' => '安裝完成後',

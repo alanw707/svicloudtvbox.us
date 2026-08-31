@@ -1891,6 +1891,7 @@ return [
             'overview'        => 'Highlights',
             'setup'           => 'Setup guide',
             'apps'            => 'App install guide',
+            'yogurt_mo'       => 'Yogurt Mo guide',
             'post_setup'      => 'After setup',
             'troubleshooting' => 'Troubleshooting',
             'resources'       => 'Resources',
@@ -1901,6 +1902,7 @@ return [
             'overview'        => 'See the concierge overview and why these guides matter.',
             'setup'           => 'Connect hardware, choose language, and pair the voice remote.',
             'apps'            => 'Install apps from trusted sources and open them for the first time.',
+            'yogurt_mo'       => 'Install 15P Yogurt Mo on Android devices and configure the same-network two-device setup.',
             'post_setup'      => 'Personalize settings and keep your SVICLOUD running smoothly.',
             'troubleshooting' => 'Fix remote pairing, buffering, and network hiccups.',
             'resources'       => 'Bookmark channel guides, buying advice, and the latest 10-series highlights.',
@@ -1973,6 +1975,43 @@ return [
                     'copy'  => 'Open Yogurt TV after installation. If it still asks for VIP membership, will not open, or shows an error, send us a clear photo of the TV screen and your order number so we can confirm whether the correct app was installed.',
                 ],
             ],
+        ],
+        'yogurt_mo' => [
+            'badge' => '15P app setup',
+            'title' => 'How to install 15P Yogurt Mo on Android devices',
+            'lead'  => 'Yogurt Mo is a newer 15P app option for Android devices. Public 15P documentation is limited, so use this as a practical setup checklist and contact support if your activation screen looks different.',
+            'items' => [
+                'compatibility' => [
+                    'title' => 'Use an Android device',
+                    'copy'  => 'Install Yogurt Mo on an Android phone, Android tablet, Android TV, or Android TV box. iPhone, iPad, Roku, Fire TV, and non-Android smart TV systems may not use the same APK install flow.',
+                ],
+                'download' => [
+                    'title' => 'Bind from Yogurt TV and scan the QR code',
+                    'copy'  => 'Open Yogurt TV on the SVICLOUD 15P, find the Bind option, and scan the QR code with the Android phone or tablet you want to use. Follow the linked 15P source to download or activate Yogurt Mo. Avoid random APK mirrors with similar names because they may install the wrong app or ask for unrelated VIP membership.',
+                ],
+                'permission' => [
+                    'title' => 'Allow APK installation',
+                    'copy'  => 'If Android blocks the install, open Settings and allow “Install unknown apps” for the browser or file manager you are using. After Yogurt Mo is installed, you can turn that permission back off.',
+                ],
+                'install' => [
+                    'title' => 'Open the APK and finish installation',
+                    'copy'  => 'Open the downloaded APK, choose Install, and wait for the confirmation screen. Keep the device connected to Wi-Fi and do not force-close the installer while Android is finishing the setup.',
+                ],
+                'same_network' => [
+                    'title' => 'Configure up to two devices on the same network',
+                    'copy'  => 'For the 15P two-device use case, connect both Android devices to the same home router or Wi-Fi network. Turn VPN off during setup, then sign in or enter the same 15P authorization details if the app asks.',
+                ],
+                'verify' => [
+                    'title' => 'Test playback on both devices',
+                    'copy'  => 'Open Yogurt Mo on device one first, confirm playback, then open it on device two while both stay on the same network. If the second device fails, restart both devices and the router before requesting a device-binding reset.',
+                ],
+                'support' => [
+                    'title' => 'Send support the exact error',
+                    'copy'  => 'If activation, login, or playback fails, send support your order number, device model, Android version, network setup, and a clear photo of the Yogurt Mo error screen.',
+                ],
+            ],
+            'note_title' => 'Important before publishing',
+            'note_copy'  => '15P-specific public documentation is limited. If your screen shows a different activation or login flow, contact support with a photo before resetting the app.',
         ],
         'post_setup' => [
             'badge' => 'After setup',

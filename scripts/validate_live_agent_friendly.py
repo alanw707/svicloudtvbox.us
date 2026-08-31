@@ -17,7 +17,8 @@ AGENT_PATHS = [
 AGENT_MARKDOWN_PATHS = [path for path in AGENT_PATHS if path.startswith("/agent/")]
 GUIDE_PATHS = [
     "/guides-apps/", "/zh/guides-apps/", "/guides-troubleshooting/", "/zh/guides-troubleshooting/",
-    "/guides-setup/", "/zh/guides-setup/", "/zh/svicloud遙控器配對失敗-故障碼排查一次搞定/",
+    "/guides-setup/", "/zh/guides-setup/", "/guides-yogurt-mo/", "/zh/guides-yogurt-mo/",
+    "/zh-cn/guides-yogurt-mo/", "/zh/svicloud遙控器配對失敗-故障碼排查一次搞定/",
 ]
 DECISION_PATHS = [
     "/svicloud-10p-vs-10s/", "/best-svicloud-box-for-chinese-tv-usa/",

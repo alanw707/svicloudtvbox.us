@@ -171,6 +171,17 @@ $answer_hubs = [
             [strpos(svic_current_locale(), 'zh') === 0 ? 'App 啟動失敗是否代表盒子壞了？' : 'Does an app launch failure mean the box is broken?', strpos(svic_current_locale(), 'zh') === 0 ? '不一定。常見原因包含網路、App 版本、安裝來源或暫時服務異常；先排除後再考慮升級。' : 'Not always. Network, app version, installer source, or temporary service issues are common; troubleshoot before considering an upgrade.'],
         ],
     ],
+    'yogurt_mo' => [
+        'quick' => [
+            'title' => strpos(svic_current_locale(), 'zh') === 0 ? '快速答案：Yogurt Mo 可在安卓設備安裝' : 'Quick answer: Yogurt Mo installs on Android devices',
+            'copy'  => strpos(svic_current_locale(), 'zh') === 0 ? '15P 的 Yogurt Mo 方案可在 Android 手機、平板、Android TV 或安卓盒子上安裝；若使用兩台設備，請讓兩台連到同一個家庭網路，並用同一組 15P 授權資訊測試。' : 'The 15P Yogurt Mo option can be installed on Android phones, tablets, Android TV, or Android TV boxes. For two devices, keep both on the same home network and test with the same 15P authorization details.',
+        ],
+        'faqs' => [
+            [strpos(svic_current_locale(), 'zh') === 0 ? 'Yogurt Mo 可以裝在哪些設備？' : 'Which devices can install Yogurt Mo?', strpos(svic_current_locale(), 'zh') === 0 ? '一般 Android 手機、平板、Android TV 與安卓電視盒都可以嘗試安裝；iPhone、iPad、Roku 與一般智慧電視系統不屬於此安裝方式。' : 'Android phones, tablets, Android TV, and Android TV boxes are the intended install targets; iPhone, iPad, Roku, and non-Android smart TV systems are outside this install path.'],
+            [strpos(svic_current_locale(), 'zh') === 0 ? '兩台設備需要同一個 Wi-Fi 嗎？' : 'Do both devices need the same Wi-Fi?', strpos(svic_current_locale(), 'zh') === 0 ? '是。若使用最多兩台設備，請讓兩台連到同一個路由器或家庭 Wi-Fi，並先關閉 VPN 測試。' : 'Yes. For up to two devices, keep both on the same router or home Wi-Fi and turn VPN off while testing.'],
+            [strpos(svic_current_locale(), 'zh') === 0 ? '如果 Android 擋住安裝怎麼辦？' : 'What if Android blocks installation?', strpos(svic_current_locale(), 'zh') === 0 ? '到設定中允許目前瀏覽器或檔案管理器安裝未知來源 App，完成安裝後可再關閉該權限。' : 'Allow unknown-app installation for the browser or file manager you are using, then turn that permission off again after installation if preferred.'],
+        ],
+    ],
     'troubleshooting' => [
         'quick' => [
             'title' => strpos(svic_current_locale(), 'zh') === 0 ? '快速答案：先症狀、再修復、最後客服' : 'Quick answer: symptom first, fix second, support last',
@@ -362,7 +373,7 @@ $render_inline_cro_cta = static function () use ($product_10p_url, $product_10s_
   <div class="guides-detail__layout">
     <article class="guides-detail__content">
       <?php $render_answer_hub(); ?>
-      <?php if ($section_key === 'setup') : ?>
+      <?php if ($section_key === 'setup' || $section_key === 'yogurt_mo') : ?>
         <ol class="guides-steps guides-detail__steps surface--light">
           <?php foreach ($content_items as $index => $step) :
             $title_key = $step['title_key'] ?? '';
@@ -382,8 +393,9 @@ $render_inline_cro_cta = static function () use ($product_10p_url, $product_10s_
           <?php endforeach; ?>
         </ol>
         <?php
-          $setup_note_title = $translate_html('guides.setup.note_title');
-          $setup_note_copy  = $translate_html('guides.setup.note_copy');
+          $note_root = $section_key === 'yogurt_mo' ? 'guides.yogurt_mo' : 'guides.setup';
+          $setup_note_title = $translate_html($note_root . '.note_title');
+          $setup_note_copy  = $translate_html($note_root . '.note_copy');
           if ($setup_note_title || $setup_note_copy) :
         ?>
           <aside class="guides-note guides-detail__note surface--light">

@@ -86,7 +86,7 @@ def main() -> None:
         if "get_page_by_path" not in route_source or "post_status === 'publish'" not in route_source:
             fail(f"{route_name} fallback route can hijack published pages")
 
-    for slug in ["guides-apps", "guides-troubleshooting", "guides-setup", "svicloud遙控器配對失敗-故障碼排查一次搞定"]:
+    for slug in ["guides-apps", "guides-yogurt-mo", "guides-troubleshooting", "guides-setup", "svicloud遙控器配對失敗-故障碼排查一次搞定"]:
         if slug not in guide_routes:
             fail(f"missing guide fallback route {slug}")
 
@@ -136,6 +136,8 @@ def main() -> None:
 
     if not re.search(r"Yogurt TV|8989c", guide):
         fail("app intent answers missing")
+    if "Yogurt Mo" not in guide or "same home network" not in guide:
+        fail("Yogurt Mo same-network guidance missing")
 
     if "guides-answer-hub" not in css:
         fail("answer hub CSS missing from generated guides.css")

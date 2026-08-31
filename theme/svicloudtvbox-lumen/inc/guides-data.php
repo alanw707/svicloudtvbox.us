@@ -83,6 +83,36 @@ if (!function_exists('svic_guides_get_content')) {
                     'copy_key'  => 'guides.apps.items.support.copy',
                 ],
             ],
+            'yogurt_mo_cards' => [
+                [
+                    'title_key' => 'guides.yogurt_mo.items.compatibility.title',
+                    'copy_key'  => 'guides.yogurt_mo.items.compatibility.copy',
+                ],
+                [
+                    'title_key' => 'guides.yogurt_mo.items.download.title',
+                    'copy_key'  => 'guides.yogurt_mo.items.download.copy',
+                ],
+                [
+                    'title_key' => 'guides.yogurt_mo.items.permission.title',
+                    'copy_key'  => 'guides.yogurt_mo.items.permission.copy',
+                ],
+                [
+                    'title_key' => 'guides.yogurt_mo.items.install.title',
+                    'copy_key'  => 'guides.yogurt_mo.items.install.copy',
+                ],
+                [
+                    'title_key' => 'guides.yogurt_mo.items.same_network.title',
+                    'copy_key'  => 'guides.yogurt_mo.items.same_network.copy',
+                ],
+                [
+                    'title_key' => 'guides.yogurt_mo.items.verify.title',
+                    'copy_key'  => 'guides.yogurt_mo.items.verify.copy',
+                ],
+                [
+                    'title_key' => 'guides.yogurt_mo.items.support.title',
+                    'copy_key'  => 'guides.yogurt_mo.items.support.copy',
+                ],
+            ],
             'post_setup_cards' => [
                 [
                     'title_key' => 'guides.post_setup.items.explore.title',
@@ -172,6 +202,15 @@ if (!function_exists('svic_guides_get_content')) {
                     'summary_key'      => 'guides.nav_summaries.apps',
                     'translation_root' => 'guides.apps',
                     'content_key'      => 'app_cards',
+                ],
+                [
+                    'key'              => 'yogurt_mo',
+                    'id'               => 'guides-yogurt-mo',
+                    'slug'             => 'guides-yogurt-mo',
+                    'label_key'        => 'guides.nav.yogurt_mo',
+                    'summary_key'      => 'guides.nav_summaries.yogurt_mo',
+                    'translation_root' => 'guides.yogurt_mo',
+                    'content_key'      => 'yogurt_mo_cards',
                 ],
                 [
                     'key'              => 'post_setup',
@@ -557,6 +596,7 @@ if (!function_exists('svic_guides_resolve_section_key')) {
             'guides-setup'           => 'setup',
             'setup-guide'            => 'setup',
             'guides-apps'            => 'apps',
+            'guides-yogurt-mo'       => 'yogurt_mo',
             'guides-after-setup'     => 'post_setup',
             'guides-post-setup'      => 'post_setup',
             'guides-troubleshooting' => 'troubleshooting',
