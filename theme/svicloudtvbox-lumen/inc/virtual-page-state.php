@@ -74,6 +74,18 @@ add_action('parse_request', 'svic_prepare_virtual_route_request', 0);
 add_action('wp', 'svic_prepare_virtual_route_request', 0);
 add_action('template_redirect', 'svic_prepare_virtual_route_request', -1000000);
 
+add_filter('pre_handle_404', function ($preempt, $wp_query) {
+    if (!svic_is_virtual_route_request()) {
+        return $preempt;
+    }
+
+    if (function_exists('svic_prepare_virtual_route_request')) {
+        svic_prepare_virtual_route_request();
+    }
+
+    return true;
+}, 0, 2);
+
 add_filter('redirect_canonical', function ($redirect_url) {
     return svic_is_virtual_route_request() ? false : $redirect_url;
 }, 5);
