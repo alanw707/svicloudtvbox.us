@@ -29,6 +29,7 @@ if (!function_exists('svic_virtual_route_slugs')) {
             'contact',
             'guides-setup',
             'guides-apps',
+            'guides-yogurt-mo',
             'guides-troubleshooting',
             'guides-after-setup',
             'guides-resources',

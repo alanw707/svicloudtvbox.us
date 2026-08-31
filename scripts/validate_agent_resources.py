@@ -10,6 +10,7 @@ GUIDE = ROOT / "theme/svicloudtvbox-lumen/page-guide-section.php"
 CSS = ROOT / "theme/svicloudtvbox-lumen/assets/css/guides.css"
 DECISION = ROOT / "theme/svicloudtvbox-lumen/inc/decision-pages.php"
 GUIDE_ROUTES = ROOT / "theme/svicloudtvbox-lumen/inc/guide-routes.php"
+VIRTUAL_PAGE_STATE = ROOT / "theme/svicloudtvbox-lumen/inc/virtual-page-state.php"
 SITEMAP = ROOT / "theme/svicloudtvbox-lumen/inc/agent-sitemap.php"
 WORKFLOW = ROOT / ".github/workflows/deploy-theme.yml"
 
@@ -57,6 +58,7 @@ def main() -> None:
     css = CSS.read_text(encoding="utf-8")
     decision = DECISION.read_text(encoding="utf-8")
     guide_routes = GUIDE_ROUTES.read_text(encoding="utf-8")
+    virtual_page_state = VIRTUAL_PAGE_STATE.read_text(encoding="utf-8")
     sitemap = SITEMAP.read_text(encoding="utf-8")
 
     for endpoint in REQUIRED_ENDPOINTS:
@@ -92,6 +94,8 @@ def main() -> None:
 
     if "svic_render_guide_route" not in guide_routes or "template_redirect" not in guide_routes:
         fail("guide fallback route hook missing")
+    if "guides-yogurt-mo" not in virtual_page_state:
+        fail("Yogurt Mo guide missing from virtual route allowlist")
 
     for slug in REQUIRED_DECISION_SLUGS:
         if slug not in guide:
