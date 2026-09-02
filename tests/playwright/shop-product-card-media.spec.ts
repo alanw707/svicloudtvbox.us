@@ -22,8 +22,12 @@ test.describe('Shop product card media framing', () => {
 
       return {
         title,
+        cardLeft: card.getBoundingClientRect().left,
+        cardRight: card.getBoundingClientRect().right,
         mediaWidth: mediaRect?.width || 0,
         mediaHeight: mediaRect?.height || 0,
+        mediaLeft: mediaRect?.left || 0,
+        mediaRight: mediaRect?.right || 0,
         imageWidth: imageRect?.width || 0,
         imageHeight: imageRect?.height || 0,
         centerOffsetX: mediaRect && imageRect
@@ -36,6 +40,8 @@ test.describe('Shop product card media framing', () => {
     }));
 
     for (const measurement of measurements) {
+      expect(measurement.mediaLeft, `${measurement.title} media stays inside card left edge`).toBeGreaterThanOrEqual(measurement.cardLeft - 1);
+      expect(measurement.mediaRight, `${measurement.title} media stays inside card right edge`).toBeLessThanOrEqual(measurement.cardRight + 1);
       expect(measurement.imageWidth, `${measurement.title} image width`).toBeLessThanOrEqual(measurement.mediaWidth + 1);
       expect(measurement.imageHeight, `${measurement.title} image height`).toBeLessThanOrEqual(measurement.mediaHeight + 1);
       expect(measurement.centerOffsetX, `${measurement.title} horizontal centering`).toBeLessThanOrEqual(1);

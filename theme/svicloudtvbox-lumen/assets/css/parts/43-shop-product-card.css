@@ -52,6 +52,10 @@
   place-items: center;
   margin: -6px clamp(18px, 4vw, 26px) -4px;
   padding: 0;
+  width: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  justify-self: stretch;
   background: none;
   border: 0;
   border-radius: 0;
