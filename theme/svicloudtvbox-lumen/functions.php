@@ -485,7 +485,7 @@ add_filter('woocommerce_add_to_cart_redirect', function (string $url): string {
     return wc_get_checkout_url();
 });
 
-const SVIC_LITESPEED_PURGE_MARK = 'svic-yogurt-guide-route-404-fix-20260831';
+const SVIC_LITESPEED_PURGE_MARK = 'svic-15p-ui-refresh-cache-purge-20260902';
 const SVIC_REWRITE_FLUSH_MARK   = 'svic-rewrite-flush-20260407';
 
 add_action('init', function () {
@@ -498,7 +498,7 @@ add_action('init', function () {
     }
 
     update_option('svic_litespeed_last_purge', SVIC_LITESPEED_PURGE_MARK, false);
-    \LiteSpeed\Purge::purge_all('SVIC disable Google promo and refresh Yogurt Mo guide');
+    \LiteSpeed\Purge::purge_all('SVIC 15P UI refresh deploy');
 }, 1);
 
 // One-time rewrite flush to ensure alias rewrites (e.g., /compare/) take effect.
