@@ -5796,13 +5796,18 @@ add_action('wp_enqueue_scripts', function () {
 
     $currentLocale = svic_current_locale();
 
+    $translations = SVIC_Translator::instance()->registry($currentLocale);
+    if (function_exists('svic_is_promotion_visible') && !svic_is_promotion_visible()) {
+        unset($translations['promotion']);
+    }
+
     wp_localize_script('svicloudtvbox-script', 'svicTheme', [
         'ajaxUrl'  => admin_url('admin-ajax.php'),
         'homeUrl'  => svic_url_with_lang(home_url('/')),
         'isWoo'    => class_exists('WooCommerce'),
         'themeUrl' => get_template_directory_uri(),
         'locale'   => $currentLocale,
-        'translations' => SVIC_Translator::instance()->registry($currentLocale),
+        'translations' => $translations,
         'i18n'     => [
             'addingToCart'      => svic_translate_html('core.cart.adding'),
             'addedToCart'       => svic_translate_html('core.cart.added'),
@@ -8162,7 +8167,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             return;
         }
 
-        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v13');
+        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v17');
         $mtime        = (int) filemtime($feed_path);
         if ($last_checked >= $mtime) {
             return;
@@ -8206,10 +8211,10 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/remote-control-white-600x600.png',
             ],
             '1204' => [
-                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp',
-                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-angle-studio-v4-bilingual-remote-watermarked.webp',
-                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-lifestyle-studio-v3-remote-watermarked.webp',
-                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-detail-studio-v3-remote-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-home-lifestyle-v1-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-ports-detail-v1-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-box-accessories-v1-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp',
             ],
         ];
 
@@ -8218,6 +8223,9 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-primary-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-angle-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-marketing-v6-remote-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-angle-studio-v4-bilingual-remote-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-lifestyle-studio-v3-remote-watermarked.webp',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/08/svicloud-15p-detail-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-primary-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-angle-studio-v3-remote-watermarked.webp',
                 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v6-remote-watermarked.webp',
@@ -8246,7 +8254,15 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             ],
         ];
 
-        $patched = preg_replace_callback('/<item>(.*?)<\/item>/s', function ($matches) use ($shipping_block, $offer_images, $obsolete_offer_images, $image_link_overrides, $title_overrides, $description_overrides, $availability_overrides) {
+        $price_overrides = [
+            '12' => [
+                'price'                     => 'USD 269.00',
+                'sale_price'                => 'USD 255.55',
+                'sale_price_effective_date' => '2026-08-31T01:00:00Z/2027-04-30T07:00:00Z',
+            ],
+        ];
+
+        $patched = preg_replace_callback('/<item>(.*?)<\/item>/s', function ($matches) use ($shipping_block, $offer_images, $obsolete_offer_images, $image_link_overrides, $title_overrides, $description_overrides, $availability_overrides, $price_overrides) {
             $item     = $matches[0];
             $offer_id = '';
             if (preg_match('/<g:id>(.*?)<\/g:id>/', $item, $id_matches)) {
@@ -8314,6 +8330,35 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                     $patched_item = str_replace('      <g:condition>', $availability_tag . "\n" . '      <g:condition>', $patched_item);
                 } else {
                     $patched_item = str_replace('    </item>', $availability_tag . "\n" . '    </item>', $patched_item);
+                }
+            }
+
+            if (preg_match('/<g:link>(https:\/\/svicloudtvbox\.us\/product\/[^?<]+\/?)\?[^<]*<\/g:link>/', $patched_item, $link_matches)) {
+                $clean_link = '      <g:link>' . esc_url($link_matches[1]) . '</g:link>';
+                $patched_item = preg_replace('/\s*<g:link>.*?<\/g:link>\s*/s', "\n" . $clean_link . "\n", $patched_item, 1) ?: $patched_item;
+            }
+
+            $patched_item = preg_replace('/\s*<g:checkout_link_template>.*?<\/g:checkout_link_template>\s*/s', "\n", $patched_item) ?: $patched_item;
+
+            if ($offer_key !== '' && isset($price_overrides[$offer_key])) {
+                $price      = sanitize_text_field($price_overrides[$offer_key]['price']);
+                $sale_price = sanitize_text_field($price_overrides[$offer_key]['sale_price']);
+                $sale_date  = sanitize_text_field($price_overrides[$offer_key]['sale_price_effective_date']);
+
+                if (strpos($patched_item, '<g:price>') !== false) {
+                    $patched_item = preg_replace('/\s*<g:price>.*?<\/g:price>\s*/s', "\n      <g:price>" . $price . "</g:price>\n", $patched_item, 1) ?: $patched_item;
+                }
+
+                if (strpos($patched_item, '<g:sale_price>') !== false) {
+                    $patched_item = preg_replace('/\s*<g:sale_price>.*?<\/g:sale_price>\s*/s', "\n      <g:sale_price>" . $sale_price . "</g:sale_price>\n", $patched_item, 1) ?: $patched_item;
+                } else {
+                    $patched_item = preg_replace('/\s*(<g:availability>)/', "\n      <g:sale_price>" . $sale_price . "</g:sale_price>\n      $1", $patched_item, 1) ?: $patched_item;
+                }
+
+                if (strpos($patched_item, '<g:sale_price_effective_date>') !== false) {
+                    $patched_item = preg_replace('/\s*<g:sale_price_effective_date>.*?<\/g:sale_price_effective_date>\s*/s', "\n      <g:sale_price_effective_date>" . $sale_date . "</g:sale_price_effective_date>\n", $patched_item, 1) ?: $patched_item;
+                } else {
+                    $patched_item = preg_replace('/\s*(<g:availability>)/', "\n      <g:sale_price_effective_date>" . $sale_date . "</g:sale_price_effective_date>\n      $1", $patched_item, 1) ?: $patched_item;
                 }
             }
 
@@ -8385,7 +8430,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             file_put_contents($feed_path, $patched, LOCK_EX);
         }
 
-        set_transient('svic_google_feed_rich_offer_checked_v13', max($mtime, time()), HOUR_IN_SECONDS);
+        set_transient('svic_google_feed_rich_offer_checked_v17', max($mtime, time()), HOUR_IN_SECONDS);
     }
 }
 

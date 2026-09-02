@@ -1205,16 +1205,16 @@ if (!function_exists('svic_15p_remote_product_images')) {
                 'alt'  => 'SVICLOUD 小雲盒子 15P TV Box front studio view with Bluetooth voice remote',
             ],
             [
-                'path' => '/assets/images/products/svicloud-15p-angle-studio-v4-bilingual-remote-watermarked.webp',
-                'alt'  => 'SVICLOUD 15P 小雲盒子 TV box angled view with Bluetooth voice remote',
+                'path' => '/assets/images/products/svicloud-15p-home-lifestyle-v1-watermarked.webp',
+                'alt'  => 'SVICLOUD 15P TV box and Bluetooth voice remote on a living room media console',
             ],
             [
-                'path' => '/assets/images/products/svicloud-15p-lifestyle-studio-v3-remote-watermarked.webp',
-                'alt'  => 'SVICLOUD 15P TV Box on media console with Bluetooth voice remote',
+                'path' => '/assets/images/products/svicloud-15p-ports-detail-v1-watermarked.webp',
+                'alt'  => 'SVICLOUD 15P rear ports close-up with Bluetooth voice remote',
             ],
             [
-                'path' => '/assets/images/products/svicloud-15p-detail-studio-v3-remote-watermarked.webp',
-                'alt'  => 'SVICLOUD 15P TV Box front detail view with Bluetooth voice remote',
+                'path' => '/assets/images/products/svicloud-15p-box-accessories-v1-watermarked.webp',
+                'alt'  => 'SVICLOUD 15P retail box, TV box, Bluetooth voice remote, HDMI cable, and power adapter',
             ],
             [
                 'path' => '/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp',

@@ -208,6 +208,10 @@ if (!function_exists('svic_sync_active_promotion_coupon')) {
             return;
         }
 
+        if (!(bool) svic_promotion_config_value('enabled', false)) {
+            return;
+        }
+
         $code = svic_promotion_code();
         if ($code === '') {
             return;
