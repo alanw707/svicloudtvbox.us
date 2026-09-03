@@ -1216,14 +1216,14 @@ $overrides = [
             ],
         ],
         'svicloud-15p' => [
-            'title' => '小云盒子 15P 电视盒',
+            'title' => '小云电视盒 15P',
             'meta' => [
-                'title'       => '小云盒子 15P 现货 US$288｜SVICLOUD 15P 电视盒',
-                'description' => '小云盒子 15P / 小云电视盒 15P / SVICLOUD 15P 现以 US$288 现货供应（原价 US$379），搭载 Android 14、Amlogic S905Y5、Wi-Fi 6 与蓝牙 5.4。',
+                'title'       => '小云电视盒 15P 美国现货｜SVICLOUD 15P US$288',
+                'description' => '小云电视盒 15P / 小云盒子 15P 美国现货供应，SVICLOUD 15P 现售 US$288（原价 US$379）。Android 14、Wi-Fi 6、蓝牙 5.4，内华达发货，中英客服。',
                 'image_alt'   => '小云盒子 15P 电视盒正面',
             ],
-            'short_description' => '具备 10P+ 的全部功能，并支持下载手机 App。',
-            'description' => '<p>全新小云盒子 15P（SVICLOUD 15P，小云电视盒 15P）搭载 Android 14 与 Amlogic S905Y5 四核心 ARM Cortex-A55 处理器。</p><h2>核心规格</h2><ul><li>4 GB DDR3 内存与 64 GB eMMC 存储空间。</li><li>2.4/5 GHz 双频 Wi-Fi 6（2T2R）与蓝牙 5.4。</li><li>HDR10+、HDR10 与 HLG 画面处理。</li><li>支持 AV1、VP9、H.265/HEVC 与 H.264 硬件解码；AV1、VP9、H.265/HEVC 最高支持 4K × 2K 60 fps。</li><li>HDMI 2.1、两个 USB 2.0、RJ45 有线网络、光纤音频与 Type-C 5V/2A 电源。</li></ul><h2>盒内配件</h2><p>礼盒、AC 适配器、HDMI 线、蓝牙语音飞鼠遥控器与用户手册。</p><p><strong>现以 US$288 现货供应（原价 US$379）。</strong>现货供应。</p>',
+            'short_description' => '美国现货供应，搭载 Android 14、Wi-Fi 6、蓝牙 5.4，并支持下载手机 App。',
+            'description' => '<p>全新小云电视盒 15P（小云盒子 15P / SVICLOUD 15P）现由美国供应，搭载 Android 14 与 Amlogic S905Y5 四核心 ARM Cortex-A55 处理器。</p><h2>小云电视盒 15P 美国现货：价格、发货与保修</h2><ul><li>现售 US$288（原价 US$379），商品页显示现货供应。</li><li>由内华达州发货，结账后提供可追踪物流信息。</li><li>提供中英双语客服，首次安装、Wi-Fi 与遥控器设置都可协助。</li><li>依全站政策享 1 年美国硬件保修与 14 天退换货。</li></ul><h2>核心规格</h2><ul><li>4 GB DDR3 内存与 64 GB eMMC 存储空间。</li><li>2.4/5 GHz 双频 Wi-Fi 6（2T2R）与蓝牙 5.4。</li><li>HDR10+、HDR10 与 HLG 画面处理。</li><li>支持 AV1、VP9、H.265/HEVC 与 H.264 硬件解码；AV1、VP9、H.265/HEVC 最高支持 4K × 2K 60 fps。</li><li>HDMI 2.1、两个 USB 2.0、RJ45 有线网络、光纤音频与 Type-C 5V/2A 电源。</li></ul><h2>盒内配件</h2><p>礼盒、AC 适配器、HDMI 线、蓝牙语音飞鼠遥控器与用户手册。</p>',
             'footer' => [
                 'tagline' => '小云盒子 15P 产品信息',
                 'summary' => '根据供应商来源整理的小云盒子 15P 硬件资料；特价 US$288（原价 US$379），现货供应。',
@@ -1257,12 +1257,12 @@ $overrides = [
                 ],
             ],
             'prelaunch' => [
-                'subtitle' => '现货供应，搭载 Android 14、Amlogic S905Y5、Wi-Fi 6、蓝牙 5.4 与 4K HDR。',
-                'detail'   => '特价 US$288 · 原价 US$379 · 现货供应',
+                'subtitle' => '小云电视盒 15P 美国现货供应，搭载 Android 14、Amlogic S905Y5、Wi-Fi 6、蓝牙 5.4 与 4K HDR。',
+                'detail'   => '特价 US$288 · 原价 US$379 · 内华达州发货 · 中英客服',
                 'image_placeholder' => '小云 15P 电视盒正面',
                 'badges' => [
                     'specs'        => 'Android 14',
-                    'availability' => '现货供应',
+                    'availability' => '美国现货',
                     'policy'       => '4 GB + 64 GB',
                 ],
                 'highlights' => [
@@ -1271,19 +1271,19 @@ $overrides = [
                     'policy'       => 'HDR10+/HDR10/HLG + AV1 硬件解码',
                 ],
                 'reassurance' => [
-                    'badge' => '已确认产品资料',
-                    'title' => '小云 15P 已确认硬件重点',
-                    'copy'  => '下单前可查看已确认的硬件与盒内配件；特价 US$288，现货供应。',
+                    'badge' => '美国现货与正版支持',
+                    'title' => '小云电视盒 15P 美国购买更安心',
+                    'copy'  => '下单前可查看已确认硬件、盒内配件与美国发货支持；特价 US$288，现货供应。',
                     'bullets' => [
-                        'shipping'  => 'Android 14 + Amlogic S905Y5',
-                        'warranty'  => '4 GB DDR3 + 64 GB eMMC',
-                        'concierge' => 'Wi-Fi 6、蓝牙 5.4、4K HDR 与 AV1',
+                        'shipping'  => '内华达州现货发货，提供可追踪物流信息',
+                        'warranty'  => '1 年美国硬件保修 + 14 天退换货',
+                        'concierge' => '中英双语客服协助安装、Wi-Fi 与遥控器设置',
                     ],
                 ],
                 'faq_header' => [
                     'badge' => '15P 产品信息',
-                    'title' => '已确认规格与订购详情',
-                    'lead'  => '供应商资料确认所列硬件与盒内配件；特价 US$288（原价 US$379），现货供应。',
+                    'title' => '小云电视盒 15P 美国购买常见问题',
+                    'lead'  => '美国现货、发货、规格、中文客服与官方通路差异。',
                 ],
                 'faq' => [
                     'specs' => [
@@ -1291,12 +1291,28 @@ $overrides = [
                         'a' => '15P 搭载 Android 14、Amlogic S905Y5 四核心 ARM Cortex-A55、4 GB DDR3、64 GB eMMC、双频 Wi-Fi 6、蓝牙 5.4，并支持 AV1 等主要格式硬件解码。',
                     ],
                     'availability' => [
-                        'q' => '现在可以订购小云 15P 吗？',
-                        'a' => '可以。15P 现以 US$288 现货供应（原价 US$379）。',
+                        'q' => '小云电视盒 15P 在美国有现货吗？',
+                        'a' => '有。小云电视盒 15P 目前在 SVICLOUDTVBOX.US 以 US$288 现货供应（原价 US$379），下单后由美国库存安排发货。',
                     ],
                     'policy' => [
-                        'q' => '小云 15P 盒内有哪些配件？',
-                        'a' => '来源包装清单包含电视盒、AC 适配器、HDMI 线、蓝牙语音遥控器、用户手册与礼盒；不承诺特定插头版本。',
+                        'q' => '小云 15P 从美国哪里发货？',
+                        'a' => '订单由内华达州库存安排，发货后提供可追踪物流信息。实际送达时间会依目的地、周末与节假日而变动。',
+                    ],
+                    'comparison' => [
+                        'q' => '小云 15P 和 10P+ 差在哪里？',
+                        'a' => '15P 已确认采用 Android 14、Amlogic S905Y5、Wi-Fi 6 与蓝牙 5.4；10P+ 仍是现有成熟机型。页面只依已确认规格比较，不宣称未实测的速度排名。',
+                    ],
+                    'support' => [
+                        'q' => '购买小云盒子 15P 有中文客服吗？',
+                        'a' => '有。SVICLOUDTVBOX.US 提供中英双语客服，可协助首次安装、Wi-Fi 调优、遥控器配对与基本使用问题。',
+                    ],
+                    'display_limits' => [
+                        'q' => '小云 15P 支持 8K 或 Dolby Vision 吗？',
+                        'a' => '目前已确认规格列出 4K、HDR10+、HDR10、HLG 与 AV1 等解码支持，未列出 8K 或 Dolby Vision；购买页不承诺未列入规格表的功能。',
+                    ],
+                    'marketplace' => [
+                        'q' => '和 eBay 或非官方卖家购买有什么不同？',
+                        'a' => '在 SVICLOUDTVBOX.US 购买可取得美国库存、可追踪发货、中英双语客服、1 年美国硬件保修与 14 天退换货流程；非官方卖家的保修、配件与售后条款需自行向卖家确认。',
                     ],
                 ],
             ],

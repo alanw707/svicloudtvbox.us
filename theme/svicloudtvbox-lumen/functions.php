@@ -3302,6 +3302,22 @@ if (!function_exists('svic_product_faq_schema_items')) {
                     'question_key' => 'products.svicloud-15p.prelaunch.faq.policy.q',
                     'answer_key'   => 'products.svicloud-15p.prelaunch.faq.policy.a',
                 ],
+                [
+                    'question_key' => 'products.svicloud-15p.prelaunch.faq.comparison.q',
+                    'answer_key'   => 'products.svicloud-15p.prelaunch.faq.comparison.a',
+                ],
+                [
+                    'question_key' => 'products.svicloud-15p.prelaunch.faq.support.q',
+                    'answer_key'   => 'products.svicloud-15p.prelaunch.faq.support.a',
+                ],
+                [
+                    'question_key' => 'products.svicloud-15p.prelaunch.faq.display_limits.q',
+                    'answer_key'   => 'products.svicloud-15p.prelaunch.faq.display_limits.a',
+                ],
+                [
+                    'question_key' => 'products.svicloud-15p.prelaunch.faq.marketplace.q',
+                    'answer_key'   => 'products.svicloud-15p.prelaunch.faq.marketplace.a',
+                ],
             ];
         }
 

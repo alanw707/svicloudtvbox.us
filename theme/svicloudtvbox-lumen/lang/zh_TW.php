@@ -130,10 +130,10 @@ return [
                 'title' => '小雲電視盒 10P+ vs EVPAD 10 Pro 功能對比',
             ],
             'svicloud-tv-box-us-guide' => [
-                'title' => '小雲電視盒美國選購清單',
+                'title' => '小雲電視盒 15P 美國購買指南',
             ],
             'svicloud-tv-box-us-guide-zh' => [
-                'title' => '小雲電視盒美國選購清單',
+                'title' => '小雲電視盒 15P 美國購買指南',
             ],
             'svicloud-stb%e7%be%8e%e5%9c%8b%e6%a9%9f%e9%a0%82%e7%9b%92-4k-hdr%e5%bd%b1%e9%99%a2' => [
                 'title' => 'SviCloud STB美國機頂盒｜4K HDR影院',
@@ -1486,14 +1486,14 @@ return [
             ],
         ],
         'svicloud-15p' => [
-            'title' => '小雲盒子 15P 電視盒',
+            'title' => '小雲電視盒 15P',
             'meta' => [
-                'title'       => '小雲盒子 15P 現貨 US$288｜SVICLOUD 15P 電視盒',
-                'description' => '小雲盒子 15P / 小雲電視盒 15P / SVICLOUD 15P 現以 US$288 現貨供應（原價 US$379），搭載 Android 14、Amlogic S905Y5、Wi-Fi 6 與藍牙 5.4。',
+                'title'       => '小雲電視盒 15P 美國現貨｜SVICLOUD 15P US$288',
+                'description' => '小雲電視盒 15P / 小雲盒子 15P 美國現貨供應，SVICLOUD 15P 現售 US$288（原價 US$379）。Android 14、Wi-Fi 6、藍牙 5.4，內華達出貨，中英客服。',
                 'image_alt'   => '小雲盒子 15P 電視盒正面',
             ],
-            'short_description' => '具備 10P+ 的全部功能，並支援下載手機 App。',
-            'description' => '<p>全新小雲盒子 15P（SVICLOUD 15P，小雲電視盒 15P）搭載 Android 14 與 Amlogic S905Y5 四核心 ARM Cortex-A55 處理器。</p><h2>核心規格</h2><ul><li>4 GB DDR3 記憶體與 64 GB eMMC 儲存空間。</li><li>2.4/5 GHz 雙頻 Wi-Fi 6（2T2R）與藍牙 5.4。</li><li>HDR10+、HDR10 與 HLG 畫面處理。</li><li>支援 AV1、VP9、H.265/HEVC 與 H.264 硬體解碼；AV1、VP9、H.265/HEVC 最高支援 4K × 2K 60 fps。</li><li>HDMI 2.1、兩個 USB 2.0、RJ45 有線網路、光纖音訊與 Type-C 5V/2A 電源。</li></ul><h2>盒內配件</h2><p>禮盒、AC 變壓器、HDMI 線、藍牙語音飛鼠遙控器與使用手冊。</p><p><strong>現以 US$288 現貨供應（原價 US$379）。</strong>現貨供應。</p>',
+            'short_description' => '美國現貨供應，搭載 Android 14、Wi-Fi 6、藍牙 5.4，並支援下載手機 App。',
+            'description' => '<p>全新小雲電視盒 15P（小雲盒子 15P / SVICLOUD 15P）現由美國供應，搭載 Android 14 與 Amlogic S905Y5 四核心 ARM Cortex-A55 處理器。</p><h2>小雲電視盒 15P 美國現貨：價格、出貨與保固</h2><ul><li>現售 US$288（原價 US$379），商品頁顯示現貨供應。</li><li>由內華達州出貨，結帳後提供可追蹤物流資訊。</li><li>提供中英雙語客服，首次安裝、Wi-Fi 與遙控器設定皆可協助。</li><li>依全站政策享 1 年美國硬體保固與 14 天退換貨。</li></ul><h2>核心規格</h2><ul><li>4 GB DDR3 記憶體與 64 GB eMMC 儲存空間。</li><li>2.4/5 GHz 雙頻 Wi-Fi 6（2T2R）與藍牙 5.4。</li><li>HDR10+、HDR10 與 HLG 畫面處理。</li><li>支援 AV1、VP9、H.265/HEVC 與 H.264 硬體解碼；AV1、VP9、H.265/HEVC 最高支援 4K × 2K 60 fps。</li><li>HDMI 2.1、兩個 USB 2.0、RJ45 有線網路、光纖音訊與 Type-C 5V/2A 電源。</li></ul><h2>盒內配件</h2><p>禮盒、AC 變壓器、HDMI 線、藍牙語音飛鼠遙控器與使用手冊。</p>',
             'footer' => [
                 'tagline' => '小雲盒子 15P 產品資訊',
                 'summary' => '依供應商來源整理的小雲盒子 15P 硬體資料；特價 US$288（原價 US$379），現貨供應。',
@@ -1527,12 +1527,12 @@ return [
                 ],
             ],
             'prelaunch' => [
-                'subtitle' => '現貨供應，搭載 Android 14、Amlogic S905Y5、Wi-Fi 6、藍牙 5.4 與 4K HDR。',
-                'detail'   => '特價 US$288 · 原價 US$379 · 現貨供應',
+                'subtitle' => '小雲電視盒 15P 美國現貨供應，搭載 Android 14、Amlogic S905Y5、Wi-Fi 6、藍牙 5.4 與 4K HDR。',
+                'detail'   => '特價 US$288 · 原價 US$379 · 內華達州出貨 · 中英客服',
                 'image_placeholder' => '小雲 15P 電視盒正面',
                 'badges' => [
                     'specs'        => 'Android 14',
-                    'availability' => '現貨供應',
+                    'availability' => '美國現貨',
                     'policy'       => '4 GB + 64 GB',
                 ],
                 'highlights' => [
@@ -1541,19 +1541,19 @@ return [
                     'policy'       => 'HDR10+/HDR10/HLG + AV1 硬體解碼',
                 ],
                 'reassurance' => [
-                    'badge' => '已確認產品資料',
-                    'title' => '小雲 15P 已確認硬體重點',
-                    'copy'  => '下單前可查看已確認的硬體與盒內配件；特價 US$288，現貨供應。',
+                    'badge' => '美國現貨與正版支援',
+                    'title' => '小雲電視盒 15P 美國購買更安心',
+                    'copy'  => '下單前可查看已確認硬體、盒內配件與美國出貨支援；特價 US$288，現貨供應。',
                     'bullets' => [
-                        'shipping'  => 'Android 14 + Amlogic S905Y5',
-                        'warranty'  => '4 GB DDR3 + 64 GB eMMC',
-                        'concierge' => 'Wi-Fi 6、藍牙 5.4、4K HDR 與 AV1',
+                        'shipping'  => '內華達州現貨出貨，提供可追蹤物流資訊',
+                        'warranty'  => '1 年美國硬體保固 + 14 天退換貨',
+                        'concierge' => '中英雙語客服協助安裝、Wi-Fi 與遙控器設定',
                     ],
                 ],
                 'faq_header' => [
                     'badge' => '15P 產品資訊',
-                    'title' => '已確認規格與訂購詳情',
-                    'lead'  => '供應商資料確認所列硬體與盒內配件；特價 US$288（原價 US$379），現貨供應。',
+                    'title' => '小雲電視盒 15P 美國購買常見問題',
+                    'lead'  => '美國現貨、出貨、規格、中文客服與官方通路差異。',
                 ],
                 'faq' => [
                     'specs' => [
@@ -1561,12 +1561,28 @@ return [
                         'a' => '15P 搭載 Android 14、Amlogic S905Y5 四核心 ARM Cortex-A55、4 GB DDR3、64 GB eMMC、雙頻 Wi-Fi 6、藍牙 5.4，並支援 AV1 等主要格式硬體解碼。',
                     ],
                     'availability' => [
-                        'q' => '現在可以訂購小雲 15P 嗎？',
-                        'a' => '可以。15P 現以 US$288 現貨供應（原價 US$379）；現貨供應。',
+                        'q' => '小雲電視盒 15P 在美國有現貨嗎？',
+                        'a' => '有。小雲電視盒 15P 目前在 SVICLOUDTVBOX.US 以 US$288 現貨供應（原價 US$379），下單後由美國庫存安排出貨。',
                     ],
                     'policy' => [
-                        'q' => '小雲 15P 盒內有哪些配件？',
-                        'a' => '來源包裝清單包含電視盒、AC 變壓器、HDMI 線、藍牙語音遙控器、使用手冊與禮盒；不承諾特定插頭版本。',
+                        'q' => '小雲 15P 從美國哪裡出貨？',
+                        'a' => '訂單由內華達州庫存安排，出貨後提供可追蹤物流資訊。實際送達時間會依目的地、週末與節假日而變動。',
+                    ],
+                    'comparison' => [
+                        'q' => '小雲 15P 和 10P+ 差在哪裡？',
+                        'a' => '15P 已確認採用 Android 14、Amlogic S905Y5、Wi-Fi 6 與藍牙 5.4；10P+ 仍是現有成熟機型。頁面只依已確認規格比較，不宣稱未實測的速度排名。',
+                    ],
+                    'support' => [
+                        'q' => '購買小雲盒子 15P 有中文客服嗎？',
+                        'a' => '有。SVICLOUDTVBOX.US 提供中英雙語客服，可協助首次安裝、Wi-Fi 調校、遙控器配對與基本使用問題。',
+                    ],
+                    'display_limits' => [
+                        'q' => '小雲 15P 支援 8K 或 Dolby Vision 嗎？',
+                        'a' => '目前已確認規格列出 4K、HDR10+、HDR10、HLG 與 AV1 等解碼支援，未列出 8K 或 Dolby Vision；購買頁不承諾未列入規格表的功能。',
+                    ],
+                    'marketplace' => [
+                        'q' => '和 eBay 或非官方賣家購買有什麼不同？',
+                        'a' => '在 SVICLOUDTVBOX.US 購買可取得美國庫存、可追蹤出貨、中英雙語客服、1 年美國硬體保固與 14 天退換貨流程；非官方賣家的保固、配件與售後條款需自行向賣家確認。',
                     ],
                 ],
             ],
