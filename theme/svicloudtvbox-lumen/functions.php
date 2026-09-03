@@ -5496,6 +5496,42 @@ if (!function_exists('svic_filter_rank_math_singular_description')) {
     add_filter('rank_math/opengraph/twitter/twitter_description', 'svic_filter_rank_math_singular_description', 40);
 }
 
+if (!function_exists('svic_filter_singular_post_document_title')) {
+    function svic_filter_singular_post_document_title(array $parts): array
+    {
+        if (is_admin() || !function_exists('is_singular') || !is_singular('post')) {
+            return $parts;
+        }
+
+        $post_id = get_queried_object_id();
+        $title = $post_id && function_exists('svic_post_title') ? svic_post_title((int) $post_id) : '';
+        if ($title !== '') {
+            $parts['title'] = $title;
+        }
+
+        return $parts;
+    }
+
+    add_filter('document_title_parts', 'svic_filter_singular_post_document_title', 45);
+}
+
+if (!function_exists('svic_filter_rank_math_singular_title')) {
+    function svic_filter_rank_math_singular_title($title)
+    {
+        if (is_admin() || !function_exists('is_singular') || !is_singular('post')) {
+            return $title;
+        }
+
+        $post_id = get_queried_object_id();
+        $localized = $post_id && function_exists('svic_post_title') ? svic_post_title((int) $post_id) : '';
+        return $localized !== '' ? $localized : $title;
+    }
+
+    add_filter('rank_math/frontend/title', 'svic_filter_rank_math_singular_title', 40);
+    add_filter('rank_math/opengraph/facebook/og_title', 'svic_filter_rank_math_singular_title', 40);
+    add_filter('rank_math/opengraph/twitter/twitter_title', 'svic_filter_rank_math_singular_title', 40);
+}
+
 if (!function_exists('svic_filter_rank_math_serp_title_length')) {
     function svic_filter_rank_math_serp_title_length($title)
     {
