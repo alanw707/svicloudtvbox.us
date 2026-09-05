@@ -1508,11 +1508,11 @@ return [
                     ],
                 ],
                 'assurance' => [
-                    'title' => 'What is confirmed and what still waits',
+                    'title' => 'Product information and store policies',
                     'items' => [
                         'shipping' => 'Confirmed: hardware, ports, wireless specifications, supported codecs, and package contents',
                         'support'  => 'In-stock price: $288 sale, $379 regular; in stock now',
-                        'warranty' => 'Not announced: 15P-specific warranty and return terms',
+                        'warranty' => 'See our store return policy for the 14-day request window and eligibility. Contact support for model-specific warranty questions.',
                     ],
                 ],
             ],

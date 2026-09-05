@@ -1,3 +1,5 @@
+> Current-state correction (2026-09-04): 15P is in stock and normally purchasable per the owner stock decision recorded in `../15p-source-traceability.md`. Preorder language below is historical and must not be republished. Store return eligibility applies; contact support for model-specific warranty questions. No new model-specific delivery or warranty promise was approved by this cleanup.
+
 # SVICLOUD 15P warranty, return, and fulfillment wording
 
 Normal checkout, payment, shipping-rate, cancellation, and return behavior applies to 15P pre-orders. No 15P-specific shipping speed, dispatch date, delivery date, or warranty promise has been approved.

@@ -524,6 +524,7 @@ require_once get_template_directory() . '/inc/guides-data.php';
 require_once get_template_directory() . '/inc/theme-maintenance.php';
 require_once get_template_directory() . '/inc/helpers-svic.php';
 require_once get_template_directory() . '/inc/active-promotion.php';
+require_once get_template_directory() . '/inc/ga4-commerce.php';
 require_once get_template_directory() . '/inc/virtual-page-state.php';
 require_once get_template_directory() . '/inc/agent-resources.php';
 require_once get_template_directory() . '/inc/guide-routes.php';

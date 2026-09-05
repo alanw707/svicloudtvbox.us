@@ -353,6 +353,7 @@ foreach ($card_data as $key => $card) {
 $shop_schema_products = [];
 $shop_item_list       = [];
 $shop_position        = 1;
+$shop_seen_ids        = [];
 
 foreach ($card_data as $card) {
     if (empty($card['product']) || !$card['product'] instanceof WC_Product) {
@@ -360,9 +361,10 @@ foreach ($card_data as $card) {
     }
 
     $product_node = svic_build_product_schema_from_wc_product($card['product']);
-    if (empty($product_node)) {
+    if (empty($product_node) || isset($shop_seen_ids[$product_node['@id']])) {
         continue;
     }
+    $shop_seen_ids[$product_node['@id']] = true;
 
     $shop_schema_products[] = $product_node;
     $shop_item_list[]       = [
@@ -381,9 +383,10 @@ foreach ($accessory_products as $accessory_product) {
     }
 
     $product_node = svic_build_product_schema_from_wc_product($accessory_product);
-    if (empty($product_node)) {
+    if (empty($product_node) || isset($shop_seen_ids[$product_node['@id']])) {
         continue;
     }
+    $shop_seen_ids[$product_node['@id']] = true;
 
     $shop_schema_products[] = $product_node;
     $shop_item_list[]       = [

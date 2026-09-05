@@ -15,6 +15,7 @@ $decision_compare_url = home_url('/svicloud-10p-vs-10s/');
 $decision_best_url = home_url('/best-svicloud-box-for-chinese-tv-usa/');
 $decision_yogurt_url = home_url('/yogurt-tv-not-working-upgrade-guide/');
 $decision_authenticity_url = home_url('/svicloud-box-authenticity-guide/');
+$product_15p_url = svic_url_with_lang(home_url('/product/svicloud-15p/'));
 $product_10p = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
 $product_10s = class_exists('WooCommerce') ? svic_get_product_by_slug('svicloud-10s') : null;
 $product_10p_url = $product_10p ? svic_url_with_lang(get_permalink($product_10p->get_id())) : svic_url_with_lang(home_url('/product/svicloud-10p-plus/'));
@@ -269,13 +270,14 @@ $render_answer_hub = static function () use ($section_key, $answer_hubs, $compar
     <?php
 };
 
-$render_inline_cro_cta = static function () use ($product_10p_url, $product_10s_url, $compare_url, $contact_url) {
+$render_inline_cro_cta = static function () use ($product_15p_url, $product_10p_url, $product_10s_url, $compare_url, $contact_url) {
     ?>
     <section class="guides-inline-cta" aria-label="<?php echo esc_attr(svic_translate('compare.final_cta.badge')); ?>">
       <span class="guides-inline-cta__badge"><?php echo svic_translate_html('compare.final_cta.badge'); ?></span>
       <h2 class="guides-inline-cta__title"><?php echo svic_translate_html('compare.final_cta.title'); ?></h2>
       <p class="guides-inline-cta__copy"><?php echo svic_translate_html('compare.final_cta.copy'); ?></p>
       <div class="guides-inline-cta__actions lumen-action-group">
+        <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($product_15p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="guide_upgrade" data-svic-model="svicloud-15p">SVICLOUD 15P</a>
         <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($product_10p_url); ?>"><?php echo svic_translate_html('compare.final_cta.cta_10p'); ?></a>
         <a class="lumen-pill lumen-pill--ghost" href="<?php echo esc_url($product_10s_url); ?>"><?php echo svic_translate_html('compare.final_cta.cta_10s'); ?></a>
         <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($compare_url); ?>"><?php echo svic_translate_html('product.traffic.links.compare'); ?></a>
