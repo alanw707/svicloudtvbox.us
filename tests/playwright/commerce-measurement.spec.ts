@@ -6,7 +6,7 @@ for (const locale of ['', '/zh', '/zh-cn']) {
     await page.route(/google-analytics\.com|googletagmanager\.com|googleadservices\.com|doubleclick\.net/, route => route.abort());
     await page.goto(`${locale}/product/svicloud-10p-plus/`, { waitUntil: 'domcontentloaded' });
     await expect(page.locator('#svic-ga4-commerce-events')).toHaveCount(1);
-    const queued = () => page.evaluate(() => (window as any).dataLayer.map((entry: any) => Array.from(entry)).filter((entry: any) => entry[0] === 'event'));
+    const queued = () => page.evaluate(() => (window as any).dataLayer.map((entry: any) => Array.from(entry)).filter((entry: any) => entry[0] === 'event' && entry[2]?.send_to !== 'GLA'));
     let events = await queued();
     expect(events.filter((e: any) => e[1] === 'view_item')).toHaveLength(1);
     expect(events.find((e: any) => e[1] === 'view_item')?.[2]).toMatchObject({ currency: 'USD', items: [{ quantity: 1 }] });

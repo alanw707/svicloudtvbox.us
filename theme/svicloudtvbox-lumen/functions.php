@@ -485,11 +485,14 @@ add_filter('woocommerce_add_to_cart_redirect', function (string $url): string {
     return wc_get_checkout_url();
 });
 
-const SVIC_LITESPEED_PURGE_MARK = 'svic-15p-ui-refresh-cache-purge-20260902';
+const SVIC_LITESPEED_PURGE_MARK = 'svic-storefront-commerce-20260904';
 const SVIC_REWRITE_FLUSH_MARK   = 'svic-rewrite-flush-20260407';
 
 add_action('init', function () {
-    if (get_option('svic_litespeed_last_purge') === SVIC_LITESPEED_PURGE_MARK) {
+    $deploy_file = get_template_directory() . '/.deploy-version';
+    $deploy_version = is_readable($deploy_file) ? trim((string) file_get_contents($deploy_file)) : '';
+    $purge_mark = SVIC_LITESPEED_PURGE_MARK . ':' . (ctype_digit($deploy_version) ? $deploy_version : 'source');
+    if (get_option('svic_litespeed_last_purge') === $purge_mark) {
         return;
     }
 
@@ -497,8 +500,8 @@ add_action('init', function () {
         return;
     }
 
-    update_option('svic_litespeed_last_purge', SVIC_LITESPEED_PURGE_MARK, false);
-    \LiteSpeed\Purge::purge_all('SVIC 15P UI refresh deploy');
+    \LiteSpeed\Purge::purge_all('SVIC storefront deployment');
+    update_option('svic_litespeed_last_purge', $purge_mark, false);
 }, 1);
 
 // One-time rewrite flush to ensure alias rewrites (e.g., /compare/) take effect.

@@ -46,6 +46,18 @@ runs:
           fi
         fi
 
+    - name: Refresh origin deployment marker
+      shell: bash
+      env:
+        SITE_URL: ${{ inputs.site_url }}
+      run: |
+        if [[ -n "${SITE_URL}" ]]; then
+          # A unique public request reaches WordPress even when normal HTML is cached.
+          # The theme purges LiteSpeed once for the new .deploy-version marker.
+          curl --fail --silent --show-error --retry 2 --max-time 30 \
+            --output /dev/null "${SITE_URL%/}/?svic_deploy_verify=$(date +%s)"
+        fi
+
     - name: 🧹 Purge Cloudflare Cache
       shell: bash
       env:
