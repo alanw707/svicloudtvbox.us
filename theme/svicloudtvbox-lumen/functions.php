@@ -465,25 +465,7 @@ add_filter('woocommerce_price_format', function ($format, $currency_pos) {
     return $format;
 }, 10, 2);
 
-// Buy-Now flow: when ?svic_buynow=1 is present, isolate the cart to just the
-// newly added item and redirect straight to checkout, bypassing the cart page.
-add_action('woocommerce_add_to_cart', function (string $cart_item_key): void {
-    if (empty($_GET['svic_buynow'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        return;
-    }
-    foreach (array_keys(WC()->cart->get_cart()) as $key) {
-        if ($key !== $cart_item_key) {
-            WC()->cart->remove_cart_item($key);
-        }
-    }
-}, 10, 1);
-
-add_filter('woocommerce_add_to_cart_redirect', function (string $url): string {
-    if (empty($_GET['svic_buynow'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-        return $url;
-    }
-    return wc_get_checkout_url();
-});
+require_once get_template_directory() . '/inc/cart-request-safety.php';
 
 const SVIC_LITESPEED_PURGE_MARK = 'svic-storefront-commerce-20260904';
 const SVIC_REWRITE_FLUSH_MARK   = 'svic-rewrite-flush-20260407';

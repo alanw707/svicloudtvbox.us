@@ -579,6 +579,8 @@ return [
         ],
     ],
     'cart_page' => [
+        'save_failed' => '尚未確認數量更新成功。請更新購物車後再試一次。',
+        'save_before_checkout' => '數量已變更。快速付款前請先更新購物車；前往結帳時會先儲存您的變更。',
         'title'             => '購物車',
         'continue_shopping' => '繼續選購',
         'empty'             => '您的購物車目前是空的。',

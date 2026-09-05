@@ -156,6 +156,8 @@ $overrides = [
         ],
     ],
     'cart_page' => [
+        'save_failed' => '尚未确认数量更新成功。请更新购物车后重试。',
+        'save_before_checkout' => '数量已更改。快捷付款前请先更新购物车；前往结账时会先保存您的更改。',
         'quantity' => [
             'decrease' => '减少数量',
             'increase' => '增加数量',

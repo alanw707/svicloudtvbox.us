@@ -573,3 +573,7 @@ body .select2-container--default .select2-results__option--highlighted[aria-sele
     animation: none;
   }
 }
+
+/* Express checkout must not charge stale quantities while the cart is dirty. */
+.svic-cart-unsaved .wc-proceed-to-checkout > :not(.checkout-button):not(.svic-cart-save-notice) { display: none !important; }
+.svic-cart-save-notice { margin: 0 0 1rem; font-size: .95rem; }

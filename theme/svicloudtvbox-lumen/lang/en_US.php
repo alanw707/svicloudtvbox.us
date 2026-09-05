@@ -378,6 +378,8 @@ return [
         ],
     ],
     'cart_page' => [
+        'save_failed' => 'Could not confirm the quantity update. Please update your cart and try again.',
+        'save_before_checkout' => 'Quantity changed. Update cart before express payment; checkout will save your changes first.',
         'title'             => 'Your cart',
         'continue_shopping' => 'Continue shopping',
         'empty'             => 'Your cart is currently empty.',

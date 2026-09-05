@@ -35,6 +35,7 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         initProductHeroGallery();
         initStripeSavedCardPills();
         initCartQuantityControls();
+        initCartCheckoutSafety();
         $(document.body).on('updated_wc_div cart_page_refreshed updated_cart_totals', initCartQuantityControls);
         relocateCheckoutCoupon();
         enhanceCheckoutAccessibility();
@@ -565,6 +566,62 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
 
             $wrapper.data('qtyBound', true);
         });
+    }
+
+    /** Save visible quantities before checkout; never pay against stale cart totals. */
+    function initCartCheckoutSafety() {
+        if (!$('[data-cart-page]').length) return;
+        let pending = null;
+        let saveTimer = null;
+        const fields = () => $('.woocommerce-cart-form input.qty');
+        const dirty = () => fields().toArray().some(input => input.value !== input.defaultValue);
+        const copy = (window.svicTheme && window.svicTheme.translations && window.svicTheme.translations.cart_page) || {};
+        const refresh = () => {
+            const unsaved = dirty() || pending !== null;
+            $('[data-cart-page]').toggleClass('svic-cart-unsaved', unsaved);
+            $('.svic-cart-save-notice').remove();
+            if (unsaved) {
+                $('<p class="svic-cart-save-notice" role="status"></p>')
+                    .text(copy.save_before_checkout || 'Quantity changed. Update cart before express payment; checkout will save your changes first.')
+                    .prependTo('.wc-proceed-to-checkout');
+            }
+        };
+        $(document).on('input change', '.woocommerce-cart-form input.qty', refresh);
+        $(document).on('click', '.wc-proceed-to-checkout .checkout-button', function(event) {
+            if (!dirty() && pending === null) return;
+            event.preventDefault();
+            if (pending !== null) return;
+            const form = $('.woocommerce-cart-form').get(0);
+            if (!form || !form.reportValidity()) return;
+            pending = { url: this.href, quantities: fields().toArray().map(input => [input.name, input.value]) };
+            refresh();
+            saveTimer = window.setTimeout(function() {
+                pending = null;
+                refresh();
+                $('.svic-cart-save-notice').text(copy.save_failed || 'Could not confirm the quantity update. Please update your cart and try again.');
+            }, 20000);
+            // Use Woo's existing nonce, validation and AJAX cart-update lifecycle.
+            $('button[name="update_cart"]').prop('disabled', false).trigger('click');
+        });
+        $(document.body).on('updated_wc_div', function() {
+            const destination = pending;
+            window.clearTimeout(saveTimer);
+            pending = null;
+            refresh();
+            if (!destination || $('.woocommerce-error').length) return;
+            const saved = new Map(fields().toArray().map(input => [input.name, input.defaultValue]));
+            const matches = destination.quantities.every(([name, value]) =>
+                value === '0' ? !saved.has(name) : saved.get(name) === value);
+            if (matches && fields().length) window.location.assign(destination.url);
+        });
+        $(document).on('ajaxError', function(event, xhr, settings) {
+            if (!pending || !settings || !settings.data || !String(settings.data).includes('update_cart')) return;
+            window.clearTimeout(saveTimer);
+            pending = null;
+            refresh();
+            $('.svic-cart-save-notice').text(copy.save_failed || 'Could not confirm the quantity update. Please update your cart and try again.');
+        });
+        refresh();
     }
 
     function initProductHeroGallery() {
