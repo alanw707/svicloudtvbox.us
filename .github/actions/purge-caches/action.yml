@@ -54,8 +54,10 @@ runs:
         if [[ -n "${SITE_URL}" ]]; then
           # A unique public request reaches WordPress even when normal HTML is cached.
           # The theme purges LiteSpeed once for the new .deploy-version marker.
-          curl --fail --silent --show-error --retry 2 --max-time 30 \
-            --output /dev/null "${SITE_URL%/}/?svic_deploy_verify=$(date +%s)"
+          if ! curl --fail --silent --show-error --retry 2 --max-time 30 \
+            --output /dev/null "${SITE_URL%/}/?svic_deploy_verify=$(date +%s)"; then
+            echo "::warning::Origin refresh unavailable from this runner; verify the deployment marker on the live site. Continuing CDN purge."
+          fi
         fi
 
     - name: 🧹 Purge Cloudflare Cache
