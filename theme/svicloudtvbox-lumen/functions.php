@@ -1964,13 +1964,13 @@ if (!function_exists('svic_homepage_meta_definitions')) {
 
         $definitions = [
             'zh_tw' => [
-                'title'       => '小雲盒子 15P 與 10P+｜SVICLOUD 美國授權經銷',
-                'description' => '選購現貨小雲盒子 15P／小雲電視盒 15P（US$288，原價 US$379）、10P+、10S 與藍牙遙控器。SVICLOUD 15P 美國現貨，可比較 15P、10P+ 與 10S。',
+                'title'       => '小雲盒子美國代理｜SVICLOUD 授權經銷・美國出貨',
+                'description' => '尋找小雲盒子美國代理？SVICLOUDTVBOX.US 提供原廠授權證明、內華達出貨與中英雙語協助。比較 15P、10P+、10S，查看現貨、配送與退換貨條件。',
                 'image_alt'   => '小雲盒子 15P Android 14 電視盒產品圖',
             ],
             'zh_cn' => [
-                'title'       => '小云盒子 15P 与 10P+｜SVICLOUD 美国授权经销',
-                'description' => '选购现货小云盒子 15P／小云电视盒 15P（US$288，原价 US$379）、10P+、10S 与蓝牙遥控器。SVICLOUD 15P 美国现货，可比较 15P、10P+ 与 10S。',
+                'title'       => '小云盒子美国代理｜SVICLOUD 授权经销・美国发货',
+                'description' => '寻找小云盒子美国代理？SVICLOUDTVBOX.US 提供原厂授权证明、内华达发货与中英双语协助。比较 15P、10P+、10S，查看现货、配送与退换货条件。',
                 'image_alt'   => '小云盒子 15P Android 14 电视盒产品图',
             ],
             'en_us' => [

@@ -917,11 +917,11 @@ return [
     'frontpage' => [
         'hero' => [
             'badge'   => '美國授權經銷 · 內華達',
-            'title'   => '小雲 15P 開放訂購。亞洲娛樂，重新想像。',
-            'title_lead' => '小雲 15P 開放訂購',
+            'title'   => '小雲盒子美國授權經銷商。',
+            'title_lead' => '小雲盒子美國授權經銷商',
             'title_separator' => '。',
-            'title_tail' => '亞洲娛樂，重新想像。',
-            'copy'    => '小雲 15P 現以 US$288 現貨供應（原價 US$379），搭載 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、藍牙 5.4 與 4K HDR。',
+            'title_tail' => '',
+            'copy'    => 'SVICLOUDTVBOX.US 由 168 Media Group LLC 經營，提供原廠授權證明、內華達出貨與中英雙語協助。小雲 15P 現以 US$288 現貨供應（原價 US$379），搭載 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、藍牙 5.4 與 4K HDR。',
             'launch'  => [
                 'badge' => '新品',
                 'text'  => '小雲 15P 現貨供應中',
