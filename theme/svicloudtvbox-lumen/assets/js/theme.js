@@ -14,6 +14,22 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
 (function($) {
     'use strict';
 
+    // Hide an expired notice even when a CDN serves an older homepage.
+    $(function() {
+        document.querySelectorAll('[data-sale-expires]').forEach(function(banner) {
+            const expires = Number(banner.dataset.saleExpires) * 1000;
+            function checkExpiry() {
+                const remaining = expires - Date.now();
+                if (!Number.isFinite(remaining) || remaining <= 0) {
+                    banner.hidden = true;
+                    return;
+                }
+                window.setTimeout(checkExpiry, Math.min(remaining, 2147483647));
+            }
+            checkExpiry();
+        });
+    });
+
     // DOM Ready
     $(document).ready(function() {
         initTheme();

@@ -430,6 +430,7 @@ if (!$blog_posts_query instanceof WP_Query) {
 }
 ?>
 <main id="main-content" class="main-content" tabindex="-1">
+  <?php svic_render_home_sale_banner($hero_product_10p); ?>
   <!-- Hero Section: store rating above headline -->
   <section class="hero-dashboard" id="hero">
     <div class="hero-dashboard__background" aria-hidden="true">

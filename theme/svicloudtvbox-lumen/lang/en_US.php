@@ -12,6 +12,12 @@ return [
     ],
 
     'promotion' => [
+        'home_sale' => [
+            'label' => 'SVICLOUD 10P+ sale',
+            'offer' => 'SVICLOUD 10P+ — {{price}}',
+            'detail' => 'Save {{savings}} · No code needed',
+            'cta' => 'Shop 10P+ sale',
+        ],
         'july_4' => [
             'aria_label'          => 'July 4th promotion',
             'eyebrow'             => 'July 4th Holiday Sale',

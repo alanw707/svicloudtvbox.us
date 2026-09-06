@@ -140,3 +140,13 @@
     min-height: 2rem;
   }
 }
+
+/* Homepage price sale: ordinary document flow, never over the navigation. */
+.svic-promo-bar--home-sale {
+  z-index: auto;
+  box-shadow: none;
+  padding-block: 0.75rem;
+}
+.svic-promo-bar--home-sale[hidden] { display: none; }
+.svic-promo-bar--home-sale .svic-promo-bar__cta { min-height: 44px; }
+.svic-promo-bar--home-sale .svic-promo-bar__code { white-space: normal; }

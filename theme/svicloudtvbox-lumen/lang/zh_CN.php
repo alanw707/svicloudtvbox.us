@@ -19,6 +19,12 @@ $overrides = [
     ],
 
     'promotion' => [
+        'home_sale' => [
+            'label' => 'SVICLOUD 10P+ 限时优惠',
+            'offer' => 'SVICLOUD 10P+ 限时 {{price}}',
+            'detail' => '立省 {{savings}} · 无需优惠码',
+            'cta' => '选购 10P+',
+        ],
         'july_4' => [
             'aria_label'          => '美国国庆优惠',
             'eyebrow'             => '7 月 4 日假期优惠',

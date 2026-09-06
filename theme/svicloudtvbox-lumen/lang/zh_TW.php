@@ -12,6 +12,12 @@ return [
     ],
 
     'promotion' => [
+        'home_sale' => [
+            'label' => 'SVICLOUD 10P+ 限時優惠',
+            'offer' => 'SVICLOUD 10P+ 限時 {{price}}',
+            'detail' => '現省 {{savings}} · 無需優惠碼',
+            'cta' => '選購 10P+',
+        ],
         'july_4' => [
             'aria_label'          => '美國國慶優惠',
             'eyebrow'             => '7 月 4 日假期優惠',
