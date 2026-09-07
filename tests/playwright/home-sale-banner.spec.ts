@@ -26,7 +26,7 @@ for (const locale of ['', '/zh', '/zh-cn']) {
     const banner = page.locator('.svic-promo-bar--home-sale');
     await expect(banner).toBeVisible();
     await expect(banner).toContainText('$234.99');
-    await expect(banner).toContainText('$34.01');
+    await expect(banner).not.toContainText('$34.01');
     await expect(banner).not.toContainText('GOOGLE5');
     const link = banner.locator('a');
     await expect(link).toHaveAttribute('href', new RegExp(`${locale}/product/svicloud-10p-plus/$`));

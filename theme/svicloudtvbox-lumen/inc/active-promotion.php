@@ -324,13 +324,12 @@ if (!function_exists('svic_render_home_sale_banner')) {
             return;
         }
         $price = html_entity_decode(wp_strip_all_tags(wc_price((float) $product->get_price())), ENT_QUOTES, 'UTF-8');
-        $savings = html_entity_decode(wp_strip_all_tags(wc_price((float) $product->get_regular_price() - (float) $product->get_price())), ENT_QUOTES, 'UTF-8');
         $url = svic_url_with_lang(get_permalink($product->get_id()));
         ?>
         <aside class="svic-promo-bar svic-promo-bar--home-sale" data-sale-expires="<?php echo esc_attr((string) $expires->getTimestamp()); ?>" aria-label="<?php echo esc_attr(svic_translate('promotion.home_sale.label')); ?>">
             <div class="svic-promo-bar__inner">
                 <strong class="svic-promo-bar__offer"><?php echo esc_html(svic_translate('promotion.home_sale.offer', ['price' => $price])); ?></strong>
-                <span class="svic-promo-bar__code"><?php echo esc_html(svic_translate('promotion.home_sale.detail', ['savings' => $savings])); ?></span>
+                <span class="svic-promo-bar__code"><?php echo esc_html(svic_translate('promotion.home_sale.detail')); ?></span>
                 <a class="svic-promo-bar__cta" href="<?php echo esc_url($url); ?>"><?php echo esc_html(svic_translate('promotion.home_sale.cta')); ?></a>
             </div>
         </aside>

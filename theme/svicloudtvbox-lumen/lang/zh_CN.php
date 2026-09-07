@@ -22,7 +22,7 @@ $overrides = [
         'home_sale' => [
             'label' => 'SVICLOUD 10P+ 限时优惠',
             'offer' => 'SVICLOUD 10P+ 限时 {{price}}',
-            'detail' => '立省 {{savings}} · 无需优惠码',
+            'detail' => '无需优惠码',
             'cta' => '选购 10P+',
         ],
         'july_4' => [

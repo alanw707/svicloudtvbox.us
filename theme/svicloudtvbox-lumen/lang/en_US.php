@@ -15,7 +15,7 @@ return [
         'home_sale' => [
             'label' => 'SVICLOUD 10P+ sale',
             'offer' => 'SVICLOUD 10P+ — {{price}}',
-            'detail' => 'Save {{savings}} · No code needed',
+            'detail' => 'No code needed',
             'cta' => 'Shop 10P+ sale',
         ],
         'july_4' => [

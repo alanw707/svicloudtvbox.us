@@ -37,7 +37,7 @@ foreach (['en_US' => '', 'zh_TW' => '/zh', 'zh_CN' => '/zh-cn'] as $locale => $p
     $translations = require __DIR__ . '/../theme/svicloudtvbox-lumen/lang/' . $locale . '.php';
     $p = new WC_Product();
     $html = render($p);
-    if (!str_contains($html, '$234.99') || !str_contains($html, '$34.01') || !str_contains($html, 'href="' . $prefix . '/product/')) { throw new RuntimeException('Localized price/link failed'); }
+    if (!str_contains($html, '$234.99') || str_contains($html, '$34.01') || !str_contains($html, 'href="' . $prefix . '/product/')) { throw new RuntimeException('Localized price/link failed'); }
     $fixtures[$prefix] = $html;
     foreach (['stock' => false, 'sale' => false, 'price' => 255.55, 'expires' => time() - 1] as $key => $value) {
         $invalid = clone $p; $invalid->$key = $value;
@@ -45,4 +45,4 @@ foreach (['en_US' => '', 'zh_TW' => '/zh', 'zh_CN' => '/zh-cn'] as $locale => $p
     }
 }
 if (in_array('--fixtures', $argv, true)) { echo json_encode($fixtures, JSON_UNESCAPED_UNICODE); }
-else { echo "PASS: localized price/savings/link and expired/out-of-stock/changed-price guards\n"; }
+else { echo "PASS: localized price/link and expired/out-of-stock/changed-price guards\n"; }
