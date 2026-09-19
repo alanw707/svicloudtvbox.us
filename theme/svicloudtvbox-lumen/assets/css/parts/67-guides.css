@@ -409,3 +409,14 @@
   .guides-answer-hub__links { flex-direction: column; }
   .guides-answer-hub__links a { justify-content: center; }
 }
+
+/* Symptom-first support: readable steps, native keyboard-operable disclosure. */
+.guides-troubleshooting { background-image: none; box-shadow: none; border-radius: 16px; }
+.guides-troubleshooting .guides-answer-hub__faq details { box-shadow: none; border-radius: 12px; background: #fff; }
+.guides-troubleshooting summary { min-height: 44px; align-content: center; line-height: 1.5; }
+.guides-troubleshooting summary:focus-visible { outline: 2px solid #0b57d0; outline-offset: 5px; }
+.guides-troubleshooting__steps { color: #334155; font-size: 1rem; line-height: 1.75; max-width: 72ch; }
+.guides-troubleshooting__steps ol { margin: 0.75rem 0 0; padding-inline-start: 1.5rem; }
+.guides-troubleshooting__steps li + li { margin-top: 0.75rem; }
+.guides-troubleshooting .guides-answer-hub__quick { max-width: 72ch; }
+.guides-troubleshooting .guides-answer-hub__links a { min-height: 44px; overflow-wrap: anywhere; }

@@ -284,6 +284,15 @@
 @media(max-width:540px){.guides-answer-hub__links{flex-direction:column}
 .guides-answer-hub__links a{justify-content:center}
 }
+.guides-troubleshooting{background-image:none;box-shadow:none;border-radius:16px}
+.guides-troubleshooting .guides-answer-hub__faq details{box-shadow:none;border-radius:12px;background:#fff}
+.guides-troubleshooting summary{min-height:44px;align-content:center;line-height:1.5}
+.guides-troubleshooting summary:focus-visible{outline:2px solid #0b57d0;outline-offset:5px}
+.guides-troubleshooting__steps{color:#334155;font-size:1rem;line-height:1.75;max-width:72ch}
+.guides-troubleshooting__steps ol{margin:0.75rem 0 0;padding-inline-start:1.5rem}
+.guides-troubleshooting__steps li + li{margin-top:0.75rem}
+.guides-troubleshooting .guides-answer-hub__quick{max-width:72ch}
+.guides-troubleshooting .guides-answer-hub__links a{min-height:44px;overflow-wrap:anywhere}
 .fifteenp-promo{background:linear-gradient(180deg,#041026 0%,#07172f 34%,#eef5fb 34%,#f5f8fc 100%);color:var(--surface-text);overflow-x:hidden}
 .svic-15p-promo-page #svic-google-customer-reviews-badge{display:none !important}
 .fifteenp-hero{position:relative;padding:clamp(3.2rem,7vw,5.5rem) 0 clamp(2.4rem,5vw,4rem);color:#f8fbff;background:linear-gradient(115deg,rgba(9,55,78,0.52),transparent 38%),linear-gradient(250deg,rgba(31,86,146,0.38),transparent 44%),linear-gradient(145deg,rgba(5,19,43,0.98),rgba(3,9,24,0.96))}

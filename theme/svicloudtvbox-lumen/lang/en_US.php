@@ -2041,53 +2041,60 @@ return [
             ],
         ],
         'troubleshooting' => [
-            'badge' => 'Troubleshooting',
-            'title' => 'Quick fixes for common issues',
-            'lead'  => 'Try these step-by-step remedies before contacting concierge. They resolve the vast majority of setup and streaming issues.',
+            'badge' => '',
+            'title' => 'SVICLOUD 15P troubleshooting',
+            'lead' => 'Start with your 15P symptom below. Try one check at a time and test again before continuing. Do not factory-reset the box as a first step.',
+            'intro_title' => 'Start here: choose your symptom',
+            'intro_copy' => 'These checks prioritize 15P. Menu names can vary by firmware and app version. For pairing, recovery or power-adapter instructions, use the guide supplied with your exact model or contact support.',
+            'older_title' => 'Using 10P+, 10S or an older model?',
+            'older_copy' => 'The basic network, HDMI and app checks above may also help. Pairing buttons, recovery steps, adapters and app availability differ by model—do not apply a 15P-specific procedure to an older box. Send us your model for the correct instructions.',
+            'support_title' => 'Still not working?',
+            'support_copy' => 'Email support@svicloudtvbox.us with your model, order number, a photo of the error, when it happens, and the checks you tried. For network issues, include whether Ethernet or a hotspot changed the result. Never send passwords or payment details.',
+            'email_label' => 'Email support',
             'items' => [
                 'remote' => [
-                    'title' => 'Remote not pairing',
-                    'copy'  => 'Remove the batteries, wait 10 seconds, reinsert them, then hold the box within 1 meter and press <kbd>VOL-</kbd> + <kbd>VOL+</kbd> simultaneously for 3 seconds until the LED flashes and the pairing banner appears. If it still fails, try fresh AAA batteries.',
+                    'title' => 'Remote buttons or voice control do not respond',
+                    'copy' => '<ol><li>Check battery orientation and try fresh batteries. Point the remote toward the box with a clear line of sight.</li><li>Power working by infrared does not prove Bluetooth is paired. If navigation or voice fails, check the remote connection using the instructions supplied with your 15P; do not guess a button combination.</li><li>If pairing repeatedly drops or a replacement remote behaves the same way, stop repeating resets and contact support with the model and a short video.</li></ol>',
                 ],
                 'streaming' => [
-                    'title' => 'Stream buffering or low quality',
-                    'copy'  => 'Switch to a wired Ethernet connection for the most reliable performance. If using Wi-Fi, connect to the 5 GHz band, move the box closer to your router, and avoid placing it behind the TV. Restart your router if buffering persists. A minimum of 15 Mbps is recommended for smooth 4K playback.',
+                    'title' => 'Playback buffers or the picture quality drops',
+                    'copy' => '<ol><li>Compare another channel or video, then another app. A problem on only one source suggests a source-specific issue, not proof that the box or network is fault-free.</li><li>Try Ethernet if available, or move the box closer to the router. Pause other large downloads and test again.</li><li>Connection stability, the service and video quality all matter; no single speed guarantees smooth 4K. If it persists, send the app, affected titles/channels and time of the problem.</li></ol>',
                 ],
                 'no_signal' => [
-                    'title' => 'TV shows “No Signal”',
-                    'copy'  => 'Confirm the TV is set to the correct HDMI input. Unplug the HDMI cable from both ends, wait 10 seconds, and reconnect firmly. Try a different HDMI port on your TV. If using an AV receiver or soundbar pass-through, connect the box directly to the TV first to isolate the issue.',
+                    'title' => 'The TV shows No Signal or a black screen',
+                    'copy' => '<ol><li>Check that the box has power and the TV is on the matching HDMI input.</li><li>With the equipment powered off, reseat the HDMI cable. Try another known-working cable or TV HDMI port.</li><li>If you use a receiver or soundbar, test the box directly on the TV. If there is still no picture, contact support before attempting recovery or a reset.</li></ol>',
                 ],
                 'wifi_disconnect' => [
-                    'title' => 'Wi-Fi keeps disconnecting',
-                    'copy'  => 'Go to <strong>Settings &gt; Network</strong> and forget the current Wi-Fi network, then reconnect. Use the 5 GHz band for less interference. If your router supports Wi-Fi 6, make sure it is enabled. Avoid placing the box near microwaves, baby monitors, or other 2.4 GHz devices. As a last resort, use the included Ethernet port.',
+                    'title' => 'Wi-Fi disconnects or says connected without internet',
+                    'copy' => '<ol><li>Check whether another device can access the internet on the same network. Restart the router if other devices also fail.</li><li>Confirm the Wi-Fi password before forgetting and reconnecting the network. Try closer to the router or use Ethernet.</li><li>If available, briefly compare a phone hotspot within your mobile data allowance. A different result points to a network-dependent issue; it does not prove ISP blocking or a DNS fault. Do not change static-IP settings blindly.</li></ol>',
                 ],
                 'audio_sync' => [
-                    'title' => 'Audio out of sync or no sound',
-                    'copy'  => 'Go to <strong>Settings &gt; Display &amp; Sound</strong> and set audio output to PCM if using TV speakers, or Auto/Passthrough if using a soundbar or AV receiver. Toggle HDMI CEC off and on. If audio is delayed, try switching the HDMI cable or port. Restarting the box often resolves temporary sync issues.',
+                    'title' => 'No sound or audio is out of sync',
+                    'copy' => '<ol><li>Check mute, the TV/soundbar input and volume at a comfortable level. Compare another app or video.</li><li>Test HDMI directly to the TV to isolate the soundbar or receiver. If an audio-format option is available, try PCM as a compatibility test and note the original setting.</li><li>For delay, check the TV or soundbar audio-sync setting. If the issue persists, send your connection diagram and affected app to support.</li></ol>',
                 ],
-                'frozen' => [
-                    'title' => 'Box frozen or unresponsive',
-                    'copy'  => 'Hold the power button on the box for 8 seconds to force a restart. If the remote is also unresponsive, unplug the power adapter, wait 30 seconds, then plug it back in. Frequent freezes may indicate a firmware update is needed or the box is overheating — ensure proper ventilation around the device.',
+                'app_cache' => [
+                    'title' => 'An app crashes: clear cache or clear data?',
+                    'copy' => '<ol><li>Close and reopen the affected app. If the box is responsive, restart it normally.</li><li>In the app settings, clear cache if available, then retry. Cache is temporary files; clearing data/storage can remove logins and app settings.</li><li>Do not clear data, uninstall or factory-reset until you know how to restore the app and account. If crashes continue, send the app version and error to support.</li></ol>',
                 ],
                 'stuck_loading' => [
-                    'title' => 'Stuck on loading or SVICloud logo',
-                    'copy'  => 'Unplug power for 2-3 minutes, remove USB drives or accessories, then reconnect only power and HDMI. As soon as the box powers on, point the remote at the box and press the red power button repeatedly about 5-20 times until the recovery menu appears. Choose <strong>Reboot system now</strong> first. If it still gets stuck, enter recovery again and choose <strong>Factory reset</strong> or <strong>Wipe data/factory data reset</strong>. Factory reset erases settings and installed apps, and the first boot may take 5-10 minutes.',
+                    'title' => 'The box freezes, stays on the logo or opens Recovery',
+                    'copy' => '<ol><li>If an update is in progress, do not interrupt power. Otherwise, power off, unplug for 2–3 minutes and remove external USB accessories before reconnecting the original adapter and HDMI.</li><li>Keep ventilation clear. A stationary logo and repeated restarting are different symptoms; record which you see.</li><li>If it returns to Recovery or remains stuck, send a screen photo to support. Do not insert objects into ports or use another model’s recovery sequence. Factory reset erases apps, accounts and settings; wait for model-specific guidance.</li></ol>',
                 ],
                 'firmware' => [
-                    'title' => 'How to update firmware',
-                    'copy'  => 'Navigate to <strong>Settings &gt; About &gt; System Update</strong> and tap “Check for updates.” The box must be connected to the internet. Updates typically take 3–5 minutes. Do <strong>not</strong> unplug the box during an update. If no update appears, your firmware is already current. Contact concierge if you see an error.',
+                    'title' => 'Firmware update is missing or fails',
+                    'copy' => '<ol><li>Use the system update option available on your box with a working internet connection. Menu names vary by firmware.</li><li>Keep power connected while an update runs. Do not install firmware downloaded for another model.</li><li>No offered update does not prove you have the newest firmware. Send the 15P model, current build/version and error photo to support if unsure; do not keep retrying a failed update.</li></ol>',
                 ],
-                'voice_remote' => [
-                    'title' => 'Voice search not working',
-                    'copy'  => 'Make sure the remote is Bluetooth-paired (not just IR). Hold the microphone button and speak clearly within arm’s length. If nothing happens, re-pair the remote via <strong>Settings &gt; Remotes &amp; Accessories</strong>. Voice search requires an active internet connection and may not work during firmware updates.',
+                'download_ssl' => [
+                    'title' => 'Yogurt TV download fails or shows an SSL error',
+                    'copy' => '<ol><li>Check internet access and the box date/time. Use the app-installation guide or ask support to confirm the current installer address; avoid unknown APK links.</li><li>If the page loads but the download fails, try a phone hotspot once if your data plan allows it. This helped an older-model support case, but is not a guaranteed 15P fix.</li><li>If hotspot succeeds while home Wi-Fi fails, check router/provider security alerts with their support. This does not isolate the cause. Do not repeatedly factory-reset for a download error; send the exact error and network test result.</li></ol>',
                 ],
-                'hdmi_resolution' => [
-                    'title' => 'Picture looks stretched or cropped',
-                    'copy'  => 'Go to <strong>Settings &gt; Display &amp; Sound &gt; Resolution</strong> and set it to Auto or match your TV’s native resolution (usually 4K/2160p). If the picture overscans, check your TV’s aspect ratio setting — set it to “Just Scan,” “Dot by Dot,” or “1:1” depending on your TV brand. Disable any zoom modes on the TV.',
+                'optical_fit' => [
+                    'title' => 'Optical cable will not stay seated',
+                    'copy' => '<ol><li>TOSLINK is an optical audio connection. Check the connector orientation and remove any protective cap before gently inserting it; never force the plug.</li><li>If you already have another standard TOSLINK cable, gently try it only on an intact port. There is no need to buy a cable just to troubleshoot.</li><li>If the flap is loose, the connector will not stay seated or the port looks damaged, stop. Send photos of the port and cable connector. Do not reinstall the flap yourself or assume a replacement box will solve the fit issue.</li></ol>',
                 ],
-                'orz' => [
-                    'title' => 'Cannot access a streaming app',
-                    'copy'  => 'Confirm the app is from a legitimate, licensed provider. Clear the app cache via <strong>Settings &gt; Apps</strong>, then reopen it. If the app crashes repeatedly, uninstall and reinstall it. Third-party or unauthorized app issues are outside our support scope — contact that app’s provider directly.',
+                'yogurt_mo' => [
+                    'title' => 'Yogurt Mo on an Android phone or tablet',
+                    'copy' => '<ol><li>Yogurt Mo mobile viewing is a 15P feature, not an 8P/10-series setup. It is for compatible Android phones/tablets, not iPhone or iPad.</li><li>On the 15P, open Yogurt TV and select Bind, then scan the QR code with the Android phone/tablet you will use. Keep the devices on the same home network.</li><li>If binding fails, send the Android version and error to support. Do not share authorization details or QR codes publicly.</li></ol>',
                 ],
             ],
         ],

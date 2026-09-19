@@ -183,17 +183,6 @@ $answer_hubs = [
             [strpos(svic_current_locale(), 'zh') === 0 ? '如果 Android 擋住安裝怎麼辦？' : 'What if Android blocks installation?', strpos(svic_current_locale(), 'zh') === 0 ? '到設定中允許目前瀏覽器或檔案管理器安裝未知來源 App，完成安裝後可再關閉該權限。' : 'Allow unknown-app installation for the browser or file manager you are using, then turn that permission off again after installation if preferred.'],
         ],
     ],
-    'troubleshooting' => [
-        'quick' => [
-            'title' => strpos(svic_current_locale(), 'zh') === 0 ? '快速答案：先症狀、再修復、最後客服' : 'Quick answer: symptom first, fix second, support last',
-            'copy'  => strpos(svic_current_locale(), 'zh') === 0 ? '遙控器沒反應、Yogurt TV 不能看、無訊號、Wi-Fi 斷線或畫面卡住時，請先比對下方症狀並逐步排除。不要立刻恢復出廠設定；不確定時請撥 +1 (520) 641-7021 或使用聯絡頁。' : 'For remote, Yogurt TV, no signal, Wi-Fi, or frozen-screen issues, match the symptom below and follow the visible fixes. Do not jump to factory reset; call +1 (520) 641-7021 or use contact if unsure.',
-        ],
-        'faqs' => [
-            [strpos(svic_current_locale(), 'zh') === 0 ? '小雲遙控器沒反應怎麼辦？' : 'What if the SVICLOUD remote does not respond?', strpos(svic_current_locale(), 'zh') === 0 ? '先換電池、靠近盒子、重新配對，再檢查是否有遮擋或干擾。' : 'Replace batteries, move closer, re-pair, and check for obstruction or interference.'],
-            [strpos(svic_current_locale(), 'zh') === 0 ? 'Yogurt TV 不能看 2026 怎麼處理？' : 'How should Yogurt TV not working be handled?', strpos(svic_current_locale(), 'zh') === 0 ? '先檢查網路、重開 App、確認安裝來源；仍失敗時聯絡客服，不要相信非官方保證。' : 'Check network, restart the app, verify installer source, then contact support; avoid unofficial guarantees.'],
-            [strpos(svic_current_locale(), 'zh') === 0 ? '什麼時候該考慮升級？' : 'When should I consider upgrading?', strpos(svic_current_locale(), 'zh') === 0 ? '只有在網路、App、遙控器與設定都排除後，或舊機效能明顯不足時，再比較 10P+ 與 10S。' : 'Compare 10P+ and 10S only after network, app, remote, and setup causes are ruled out or an old box is clearly too slow.'],
-        ],
-    ],
     'setup' => [
         'quick' => [
             'title' => strpos(svic_current_locale(), 'zh') === 0 ? '快速答案：首次安裝順序' : 'Quick answer: first setup order',
@@ -309,7 +298,7 @@ $render_inline_cro_cta = static function () use ($product_15p_url, $product_10p_
           <?php endif; ?>
         </div>
 
-        <?php if ($hero_pill_headline || $hero_pill_copy) : ?>
+        <?php if ($section_key !== 'troubleshooting' && ($hero_pill_headline || $hero_pill_copy)) : ?>
           <div class="guides-detail__hero-pill">
             <?php if ($hero_callouts_headline) : ?>
               <span class="guides-detail__hero-pill-badge"><?php echo $hero_callouts_headline; ?></span>
@@ -325,7 +314,7 @@ $render_inline_cro_cta = static function () use ($product_15p_url, $product_10p_
           </div>
         <?php endif; ?>
 
-        <?php if ($hero_callouts) : ?>
+        <?php if ($section_key !== 'troubleshooting' && $hero_callouts) : ?>
           <div class="guides-detail__hero-callouts">
             <?php if ($hero_callouts_headline && !$hero_pill_headline && !$hero_pill_copy) : ?>
               <span class="guides-detail__hero-callouts-label"><?php echo $hero_callouts_headline; ?></span>
@@ -425,20 +414,32 @@ $render_inline_cro_cta = static function () use ($product_15p_url, $product_10p_
           <?php endforeach; ?>
         </div>
       <?php elseif ($section_key === 'troubleshooting') : ?>
-        <div class="guides-grid guides-grid--troubleshooting surface--light">
-          <?php foreach ($content_items as $index => $card) :
-            $title_key = $card['title_key'] ?? '';
-            $copy_key  = $card['copy_key'] ?? '';
-          ?>
-            <article class="guides-card guides-card--troubleshoot">
-              <h2 class="guides-card__title"><?php echo $translate_html($title_key); ?></h2>
-              <p class="guides-card__copy"><?php echo $translate_rich($copy_key); ?></p>
-            </article>
-            <?php if ($index === 0) : ?>
-              <?php $render_inline_cro_cta(); ?>
-            <?php endif; ?>
-          <?php endforeach; ?>
-        </div>
+        <section class="guides-answer-hub guides-troubleshooting surface--light" aria-labelledby="troubleshooting-start">
+          <div class="guides-answer-hub__quick">
+            <h2 id="troubleshooting-start"><?php echo $translate_html('guides.troubleshooting.intro_title'); ?></h2>
+            <p><?php echo $translate_html('guides.troubleshooting.intro_copy'); ?></p>
+          </div>
+          <div class="guides-answer-hub__faq">
+            <?php foreach ($content_items as $card) : ?>
+              <details>
+                <summary><?php echo $translate_html($card['title_key'] ?? ''); ?></summary>
+                <div class="guides-troubleshooting__steps"><?php echo $translate_rich($card['copy_key'] ?? ''); ?></div>
+              </details>
+            <?php endforeach; ?>
+          </div>
+          <div class="guides-answer-hub__quick">
+            <h2><?php echo $translate_html('guides.troubleshooting.older_title'); ?></h2>
+            <p><?php echo $translate_html('guides.troubleshooting.older_copy'); ?></p>
+          </div>
+          <div class="guides-answer-hub__quick">
+            <h2><?php echo $translate_html('guides.troubleshooting.support_title'); ?></h2>
+            <p><?php echo $translate_html('guides.troubleshooting.support_copy'); ?></p>
+          </div>
+          <div class="guides-answer-hub__links">
+            <a href="mailto:support@svicloudtvbox.us"><?php echo $translate_html('guides.troubleshooting.email_label'); ?></a>
+            <a href="<?php echo esc_url($contact_url); ?>"><?php echo $translate_html('product.traffic.links.contact'); ?></a>
+          </div>
+        </section>
       <?php elseif ($section_key === 'resources') : ?>
         <ul class="guides-resource-list surface--light">
           <?php foreach ($content_items as $index => $resource) :
@@ -524,7 +525,7 @@ $render_inline_cro_cta = static function () use ($product_15p_url, $product_10p_
     <?php endif; ?>
   </div>
 
-  <?php if ($section_key !== 'support') : ?>
+  <?php if ($section_key !== 'support' && $section_key !== 'troubleshooting') : ?>
     <section class="guides-support guides-support--detail-cta">
       <div class="guides-support__inner">
         <span class="guides-badge guides-badge--on-dark"><?php echo svic_translate_html('compare.final_cta.badge'); ?></span>

@@ -149,8 +149,8 @@ if (!function_exists('svic_guides_get_content')) {
                     'copy_key'  => 'guides.troubleshooting.items.audio_sync.copy',
                 ],
                 [
-                    'title_key' => 'guides.troubleshooting.items.frozen.title',
-                    'copy_key'  => 'guides.troubleshooting.items.frozen.copy',
+                    'title_key' => 'guides.troubleshooting.items.app_cache.title',
+                    'copy_key'  => 'guides.troubleshooting.items.app_cache.copy',
                 ],
                 [
                     'title_key' => 'guides.troubleshooting.items.stuck_loading.title',
@@ -161,16 +161,16 @@ if (!function_exists('svic_guides_get_content')) {
                     'copy_key'  => 'guides.troubleshooting.items.firmware.copy',
                 ],
                 [
-                    'title_key' => 'guides.troubleshooting.items.voice_remote.title',
-                    'copy_key'  => 'guides.troubleshooting.items.voice_remote.copy',
+                    'title_key' => 'guides.troubleshooting.items.download_ssl.title',
+                    'copy_key'  => 'guides.troubleshooting.items.download_ssl.copy',
                 ],
                 [
-                    'title_key' => 'guides.troubleshooting.items.hdmi_resolution.title',
-                    'copy_key'  => 'guides.troubleshooting.items.hdmi_resolution.copy',
+                    'title_key' => 'guides.troubleshooting.items.optical_fit.title',
+                    'copy_key'  => 'guides.troubleshooting.items.optical_fit.copy',
                 ],
                 [
-                    'title_key' => 'guides.troubleshooting.items.orz.title',
-                    'copy_key'  => 'guides.troubleshooting.items.orz.copy',
+                    'title_key' => 'guides.troubleshooting.items.yogurt_mo.title',
+                    'copy_key'  => 'guides.troubleshooting.items.yogurt_mo.copy',
                 ],
             ],
             'resource_articles' => [],
