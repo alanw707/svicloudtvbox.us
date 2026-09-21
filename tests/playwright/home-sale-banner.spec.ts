@@ -11,7 +11,7 @@ test.beforeEach(async ({ page }) => {
       const locale = url.pathname.replace(/\/$/, '');
       if (route.request().resourceType() === 'document' && Object.hasOwn(fixtures, locale)) {
         const response = await route.fetch();
-        const html = (await response.text()).replace(/(<main\b[^>]*>)/, '$1' + fixtures[locale]);
+        const html = (await response.text()).replace(/<aside\b[^>]*class="[^"]*svic-promo-bar--home-sale[^"]*"[\s\S]*?<\/aside>/g, '').replace(/(<main\b[^>]*>)/, '$1' + fixtures[locale]);
         await route.fulfill({ response, body: html });
       } else { await route.fallback(); }
     });
@@ -25,7 +25,7 @@ for (const locale of ['', '/zh', '/zh-cn']) {
     await page.goto(`${locale}/`, { waitUntil: 'domcontentloaded' });
     const banner = page.locator('.svic-promo-bar--home-sale');
     await expect(banner).toBeVisible();
-    await expect(banner).toContainText('$234.99');
+    await expect(banner).toContainText('$239.00');
     await expect(banner).not.toContainText('$34.01');
     await expect(banner).not.toContainText('GOOGLE5');
     await expect(banner).not.toHaveAttribute('data-sale-expires');

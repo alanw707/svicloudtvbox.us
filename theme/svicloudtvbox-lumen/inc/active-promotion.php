@@ -320,7 +320,7 @@ if (!function_exists('svic_render_home_sale_banner')) {
             return;
         }
         $expires = $product->get_date_on_sale_to();
-        if (($expires && $expires->getTimestamp() <= time()) || (float) $product->get_price() !== 234.99) {
+        if (($expires && $expires->getTimestamp() <= time()) || (float) $product->get_price() !== 239.00) {
             return;
         }
         $price = html_entity_decode(wp_strip_all_tags(wc_price((float) $product->get_price())), ENT_QUOTES, 'UTF-8');

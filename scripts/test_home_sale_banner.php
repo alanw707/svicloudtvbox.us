@@ -20,7 +20,7 @@ function svic_translate($key, $replace = []) {
 class WC_Product {
     public bool $stock = true;
     public bool $sale = true;
-    public float $price = 234.99;
+    public float $price = 239.00;
     public ?int $expires;
     function __construct() { $this->expires = null; }
     function is_in_stock() { return $this->stock; }
@@ -37,7 +37,7 @@ foreach (['en_US' => '', 'zh_TW' => '/zh', 'zh_CN' => '/zh-cn'] as $locale => $p
     $translations = require __DIR__ . '/../theme/svicloudtvbox-lumen/lang/' . $locale . '.php';
     $p = new WC_Product();
     $html = render($p);
-    if (!str_contains($html, '$234.99') || str_contains($html, '$34.01') || !str_contains($html, 'href="' . $prefix . '/product/')) { throw new RuntimeException('Localized price/link failed'); }
+    if (!str_contains($html, '$239.00') || str_contains($html, '$34.01') || !str_contains($html, 'href="' . $prefix . '/product/')) { throw new RuntimeException('Localized price/link failed'); }
     if (str_contains($html, 'data-sale-expires')) { throw new RuntimeException('Open-ended sale must not expire'); }
     $scheduled = clone $p; $scheduled->expires = time() + 1209600;
     if (!str_contains(render($scheduled), 'data-sale-expires')) { throw new RuntimeException('Scheduled sale lost expiry'); }
