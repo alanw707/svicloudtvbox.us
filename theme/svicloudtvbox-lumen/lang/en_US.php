@@ -289,7 +289,6 @@ return [
                     'coverage' => 'Our 1-year U.S. hardware warranty covers manufacturing defects under normal use.',
                     'eligibility' => 'Customer-caused damage is not covered by the warranty and is not eligible for a refund, free repair, or replacement, except where required by law.',
                     'assessment' => 'We assess damage claims before determining coverage and explain the findings and available options.',
-                    'existing' => 'Existing purchases remain subject to the terms provided at purchase and applicable law.',
                 ],
             ],
             'eligibility' => [

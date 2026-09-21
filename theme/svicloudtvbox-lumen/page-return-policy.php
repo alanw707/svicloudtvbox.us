@@ -32,7 +32,6 @@ $policy_sections = [
             svic_translate_html('return_policy.sections.damage.items.coverage'),
             svic_translate_html('return_policy.sections.damage.items.eligibility'),
             svic_translate_html('return_policy.sections.damage.items.assessment'),
-            svic_translate_html('return_policy.sections.damage.items.existing'),
         ],
     ],
     [
