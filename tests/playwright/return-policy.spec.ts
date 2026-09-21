@@ -19,15 +19,16 @@ for (const [locale, prefix, title, preserved] of [
     await page.goto(`${prefix}/return-policy/`, { waitUntil: 'domcontentloaded' });
     const section = page.locator('#policy-section-damage');
     await expect(section.locator('h2')).toHaveText(title);
-    await expect(section.locator('li')).toHaveCount(6);
+    await expect(section.locator('li')).toHaveCount(4);
     await expect(section).toContainText(preserved);
     await expect(page.locator('#policy-section-eligibility')).toContainText('14');
     await expect(page.locator('#policy-section-shipping')).toContainText('10%');
     await expect(page.locator('main')).not.toContainText('return_policy.sections');
     if (locale === 'en_US') {
       await expect(section).toContainText('manufacturing defects under normal use');
-      await expect(section).toContainText('alone does not establish customer-caused damage');
-      await expect(section).toContainText('for your approval before proceeding');
+      await expect(section).toContainText('not eligible for a refund, free repair, or replacement');
+      await expect(section).toContainText('except where required by law');
+      await expect(section).not.toContainText('flaps');
     }
     await section.scrollIntoViewIfNeeded();
     const bounds = await section.evaluate(el => { const b = el.getBoundingClientRect(); return {left:b.left,right:b.right,width:innerWidth}; });
