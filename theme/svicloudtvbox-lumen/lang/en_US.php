@@ -283,6 +283,17 @@ return [
             ],
         ],
         'sections' => [
+            'damage' => [
+                'title' => 'Hardware warranty & customer-caused damage',
+                'items' => [
+                    'coverage' => 'Our 1-year U.S. hardware warranty covers manufacturing defects under normal use. Damage caused by misuse, accidents, liquid exposure, improper connections, excessive force, or unauthorized repairs or modifications is excluded to the extent permitted by law. An unrelated defect is not excluded merely because a device has been modified.',
+                    'examples' => 'Examples include broken ports, connector housings, pins, or internal flaps caused by forcing a connector, inserting it in the wrong orientation, or inserting it with a protective cap still fitted. A loose or broken part alone does not establish customer-caused damage.',
+                    'eligibility' => 'Customer-caused damage is not eligible for a free warranty repair or replacement, or a refund under our standard change-of-mind return policy. Manufacturing defects and damage caused by us are assessed separately; applicable consumer rights remain unchanged.',
+                    'assessment' => 'We review the reported symptoms, photos, manufacturer findings, and physical inspection where needed before determining coverage. We explain the finding and available options. Do not send a device back until you receive return instructions.',
+                    'costs' => 'If a paid repair or other paid service is available, we disclose the cost, any inspection fee, and shipping responsibilities for your approval before proceeding. The up-to-10% restocking fee for non-defective returns is not a damage-assessment fee.',
+                    'existing' => 'Existing purchases remain subject to the terms provided at purchase and applicable law. This update does not retroactively change those terms.',
+                ],
+            ],
             'eligibility' => [
                 'title' => 'Check eligibility before you start',
                 'items' => [

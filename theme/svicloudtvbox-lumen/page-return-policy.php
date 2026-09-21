@@ -25,6 +25,19 @@ $policy_sections = [
         ],
     ],
     [
+        'title' => svic_translate_html('return_policy.sections.damage.title'),
+        'anchor' => 'damage',
+        'type' => 'list',
+        'items' => [
+            svic_translate_html('return_policy.sections.damage.items.coverage'),
+            svic_translate_html('return_policy.sections.damage.items.examples'),
+            svic_translate_html('return_policy.sections.damage.items.eligibility'),
+            svic_translate_html('return_policy.sections.damage.items.assessment'),
+            svic_translate_html('return_policy.sections.damage.items.costs'),
+            svic_translate_html('return_policy.sections.damage.items.existing'),
+        ],
+    ],
+    [
         'title' => svic_translate_html('return_policy.sections.start.title'),
         'anchor' => 'start',
         'type'  => 'steps',
