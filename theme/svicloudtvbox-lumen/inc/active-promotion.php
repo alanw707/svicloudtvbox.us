@@ -320,13 +320,13 @@ if (!function_exists('svic_render_home_sale_banner')) {
             return;
         }
         $expires = $product->get_date_on_sale_to();
-        if (!$expires || $expires->getTimestamp() <= time() || (float) $product->get_price() !== 234.99) {
+        if (($expires && $expires->getTimestamp() <= time()) || (float) $product->get_price() !== 234.99) {
             return;
         }
         $price = html_entity_decode(wp_strip_all_tags(wc_price((float) $product->get_price())), ENT_QUOTES, 'UTF-8');
         $url = svic_url_with_lang(get_permalink($product->get_id()));
         ?>
-        <aside class="svic-promo-bar svic-promo-bar--home-sale" data-sale-expires="<?php echo esc_attr((string) $expires->getTimestamp()); ?>" aria-label="<?php echo esc_attr(svic_translate('promotion.home_sale.label')); ?>">
+        <aside class="svic-promo-bar svic-promo-bar--home-sale" <?php if ($expires) : ?>data-sale-expires="<?php echo esc_attr((string) $expires->getTimestamp()); ?>"<?php endif; ?> aria-label="<?php echo esc_attr(svic_translate('promotion.home_sale.label')); ?>">
             <div class="svic-promo-bar__inner">
                 <strong class="svic-promo-bar__offer"><?php echo esc_html(svic_translate('promotion.home_sale.offer', ['price' => $price])); ?></strong>
                 <span class="svic-promo-bar__code"><?php echo esc_html(svic_translate('promotion.home_sale.detail')); ?></span>

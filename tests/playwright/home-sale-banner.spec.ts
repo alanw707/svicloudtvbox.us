@@ -28,6 +28,7 @@ for (const locale of ['', '/zh', '/zh-cn']) {
     await expect(banner).toContainText('$234.99');
     await expect(banner).not.toContainText('$34.01');
     await expect(banner).not.toContainText('GOOGLE5');
+    await expect(banner).not.toHaveAttribute('data-sale-expires');
     const link = banner.locator('a');
     await expect(link).toHaveAttribute('href', new RegExp(`${locale}/product/svicloud-10p-plus/$`));
     const box = await banner.boundingBox();
@@ -45,6 +46,13 @@ for (const locale of ['', '/zh', '/zh-cn']) {
 
 test('cached homepage banner disappears at its expiry', async ({ page }) => {
   await page.clock.install();
+  await page.route('https://svicloudtvbox.us/', async route => {
+    const response = await route.fetch();
+    const expires = Math.floor(Date.now() / 1000) + 60;
+    const source = process.env.SVIC_LOCAL_ASSETS === '1' ? (await response.text()).replace(/(<main\b[^>]*>)/, '$1' + JSON.parse(fs.readFileSync('/tmp/svic-banner-fixtures.json', 'utf8'))['']) : await response.text();
+    const body = source.replace('class="svic-promo-bar svic-promo-bar--home-sale"', `data-sale-expires="${expires}" class="svic-promo-bar svic-promo-bar--home-sale"`);
+    await route.fulfill({ response, body });
+  });
   await page.goto('/', { waitUntil: 'load' });
   const banner = page.locator('.svic-promo-bar--home-sale');
   await expect(banner).toBeVisible();
