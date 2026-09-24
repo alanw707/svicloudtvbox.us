@@ -466,6 +466,7 @@ add_filter('woocommerce_price_format', function ($format, $currency_pos) {
 }, 10, 2);
 
 require_once get_template_directory() . '/inc/cart-request-safety.php';
+require_once get_template_directory() . '/inc/apk-media-mimes.php';
 
 const SVIC_LITESPEED_PURGE_MARK = 'svic-storefront-commerce-20260904';
 const SVIC_REWRITE_FLUSH_MARK   = 'svic-rewrite-flush-20260407';
