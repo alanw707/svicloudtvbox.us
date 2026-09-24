@@ -1,0 +1,142 @@
+/* TV-focused APK download page: clear remote focus and a single vertical path. */
+.app-downloads-page {
+  width: min(100% - 48px, 1080px);
+  margin: 0 auto;
+  padding: clamp(32px, 5vw, 72px) 0 clamp(48px, 6vw, 88px);
+  color: var(--lumen-text-primary, #f5f8ff);
+}
+.app-downloads__hero {
+  max-width: 900px;
+  margin: 0 auto clamp(28px, 4vw, 48px);
+  text-align: center;
+}
+.app-downloads__eyebrow {
+  margin: 0 0 12px;
+  color: var(--lumen-accent-teal, #5ee6d0);
+  font-size: clamp(16px, 1.4vw, 20px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.app-downloads__title {
+  margin: 0;
+  color: var(--lumen-text-primary, #f5f8ff);
+  font-size: clamp(36px, 5vw, 62px);
+  line-height: 1.12;
+}
+.app-downloads__intro {
+  max-width: 760px;
+  margin: 18px auto 0;
+  color: var(--lumen-text-secondary, #e6edf8);
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.5;
+}
+.app-downloads__remote-hint {
+  max-width: 800px;
+  margin: 20px auto 0;
+  padding: 14px 20px;
+  border: 1px solid rgba(94, 230, 208, 0.42);
+  border-radius: 14px;
+  background: rgba(94, 230, 208, 0.1);
+  color: #f5f8ff;
+  font-size: clamp(18px, 1.8vw, 23px);
+  font-weight: 600;
+  line-height: 1.45;
+}
+.app-downloads__section,
+.app-downloads__install {
+  margin-top: clamp(30px, 4vw, 48px);
+}
+.app-downloads__section-title {
+  margin: 0 0 18px;
+  color: var(--lumen-text-primary, #f5f8ff);
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.2;
+}
+.app-downloads__list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+.app-downloads__card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  min-height: 112px;
+  padding: 22px 26px;
+  border: 1px solid var(--lumen-border-glass, rgba(255, 255, 255, 0.18));
+  border-radius: 18px;
+  background: var(--lumen-surface-card, rgba(10, 22, 48, 0.96));
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+.app-downloads__copy { min-width: 0; }
+.app-downloads__name {
+  margin: 0;
+  color: var(--lumen-text-primary, #f5f8ff);
+  font-size: clamp(24px, 2.4vw, 32px);
+  line-height: 1.2;
+}
+.app-downloads__description {
+  margin: 8px 0 0;
+  color: var(--lumen-text-muted, rgba(226, 235, 255, 0.9));
+  font-size: clamp(17px, 1.7vw, 22px);
+  line-height: 1.4;
+}
+.app-downloads__button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  min-height: 68px;
+  padding: 14px 24px;
+  border: 2px solid var(--lumen-accent-teal, #5ee6d0);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #65ecdc, #42c2ff);
+  color: #041226;
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  scroll-margin-block: 28px;
+  transition: box-shadow 140ms ease, transform 140ms ease, background-color 140ms ease;
+}
+.app-downloads__button:hover,
+.app-downloads__button:focus {
+  background: #a1fff1;
+  color: #041226;
+  transform: scale(1.025);
+  box-shadow: 0 0 0 5px rgba(94, 230, 208, 0.22);
+}
+.app-downloads-page .app-downloads__button:focus {
+  outline: 5px solid #fff;
+  outline-offset: 5px;
+  box-shadow: 0 0 0 10px rgba(94, 230, 208, 0.62);
+}
+.app-downloads__steps {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding-left: 34px;
+  color: var(--lumen-text-secondary, #e6edf8);
+  font-size: clamp(17px, 1.7vw, 21px);
+  line-height: 1.5;
+}
+.app-downloads__steps li { padding-left: 6px; }
+@media (max-width: 760px) {
+  .app-downloads-page { width: min(100% - 32px, 1080px); }
+  .app-downloads__card {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px;
+  }
+  .app-downloads__button { width: 100%; min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .app-downloads__button { transition: none; }
+  .app-downloads__button:hover,
+  .app-downloads__button:focus { transform: none; }
+}

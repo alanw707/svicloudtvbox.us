@@ -6,6 +6,31 @@
 $base = include __DIR__ . '/zh_TW.php';
 
 $overrides = [
+    'app_downloads' => [
+        'hero' => [
+            'eyebrow' => 'SVICLOUD 应用下载',
+            'title' => '选择电视盒应用',
+            'intro' => '使用下方按钮下载适用于电视盒的 Android 应用。',
+            'remote_hint' => '使用电视遥控器的方向键选中下载按钮，再按 OK 或选择。',
+        ],
+        'list_title' => '可下载的应用',
+        'button' => '下载 APK',
+        'button_accessible' => '下载 {{app}} APK',
+        'apps' => [
+            'yogurt_tv' => ['description' => '适用于 Android 电视盒的 Yogurt TV。'],
+            'cherry_tv' => ['description' => '适用于 Android 电视盒的 Cherry TV。'],
+            'yogurt_kids' => ['description' => '适用于 Android 电视盒的 Yogurt Kids。'],
+        ],
+        'install' => [
+            'title' => '在电视盒上安装',
+            'steps' => [
+                'download' => '选择应用的“下载 APK”按钮。Orz 浏览器可能会开始下载，或显示保存或打开提示。',
+                'open' => '下载完成后，从 Orz 浏览器的下载列表打开 APK。如果 Android 询问，请允许 Orz 浏览器安装应用，然后返回安装界面。',
+                'confirm' => '查看 Android 安装提示并选择“安装”。Android 会在安装前要求您确认。',
+                'cleanup' => '安装完成后，打开 Orz 浏览器的下载列表或“文件 > 下载”，即可删除 APK 安装文件并释放空间。',
+            ],
+        ],
+    ],
     'return_policy' => [
         'sections' => [
             'damage' => [
