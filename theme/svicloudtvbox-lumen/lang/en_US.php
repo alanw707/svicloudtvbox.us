@@ -947,7 +947,7 @@ return [
         'certification' => [
             'badge' => 'Manufacturer Certified',
             'title' => 'SVI.STUDIO Authorized Dealer Certification',
-            'lead' => 'SVI.STUDIO authorizes 168 Media Group LLC (SVICLOUDTVBOX.US) to distribute SVICLOUD devices across the Americas with full warranty support.',
+            'lead' => 'SVI.STUDIO authorizes 168 Media Group LLC (SVICLOUDTVBOX.US) as the regional wholesale and sales distributor for SVI.STUDIO series products.',
             'meta' => [
                 'number' => [
                     'label' => 'Authorization No.',

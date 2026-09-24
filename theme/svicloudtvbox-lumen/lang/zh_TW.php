@@ -1064,7 +1064,7 @@ return [
         'certification' => [
             'badge' => '原廠授權',
             'title' => 'SVI.STUDIO 官方授權證書',
-            'lead' => 'SVI.STUDIO 正式授權 168 Media Group LLC（SVICLOUDTVBOX.US）於美洲地區銷售並提供原廠保固。',
+            'lead' => 'SVI.STUDIO 正式授權 168 Media Group LLC（SVICLOUDTVBOX.US）作為 SVI.STUDIO 系列產品的區域批發及銷售經銷商。',
             'meta' => [
                 'number' => [
                     'label' => '授權編號',

@@ -518,7 +518,7 @@ if (!$blog_posts_query instanceof WP_Query) {
   <?php
 $certificate_asset_relative = '/assets/images/certification-authorized-dealer.webp';
   $certificate_asset_path     = get_template_directory() . $certificate_asset_relative;
-  $certificate_asset_url      = file_exists($certificate_asset_path) ? svic_theme_image_uri($certificate_asset_relative) : '';
+  $certificate_asset_url      = file_exists($certificate_asset_path) ? add_query_arg('v', 'US20260924101610', svic_theme_image_uri($certificate_asset_relative)) : '';
   ?>
   <!-- What's in the Box -->
   <section class="lumen-inbox" id="whats-in-the-box" aria-labelledby="inbox-heading">
