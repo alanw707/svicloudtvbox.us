@@ -140,5 +140,12 @@
       "74-woocommerce-order-tracking-responsive.css",
       "75-woocommerce-order-received.css"
     ]
+  },
+  "app-downloads": {
+    "label": "TV app downloads",
+    "output": "app-downloads.css",
+    "parts": [
+      "68-app-downloads.css"
+    ]
   }
 }

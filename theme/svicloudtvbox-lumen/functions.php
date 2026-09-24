@@ -5651,6 +5651,7 @@ add_action('wp_enqueue_scripts', function () {
         'front-page'       => 'assets/css/front-page.css',
         'about'            => 'assets/css/about.css',
         'guides'           => 'assets/css/guides.css',
+        'app-downloads'    => 'assets/css/app-downloads.css',
         'contact'          => 'assets/css/contact.css',
         'return-policy'    => 'assets/css/return-policy.css',
         'faq'              => 'assets/css/faq.css',
@@ -5703,6 +5704,7 @@ add_action('wp_enqueue_scripts', function () {
     $is_front_page = is_front_page() || is_page_template('front-page.php');
     $is_about_page = is_page_template('page-about.php') || is_page('about');
     $is_guides_page = (function_exists('svic_is_guides_hub_page') && svic_is_guides_hub_page()) || is_page_template('page-guides.php');
+    $is_app_downloads_page = is_page_template('page-app-downloads.php') || is_page('apps');
     if (! $is_guides_page) {
         $guide_section_slugs = array_map(static function ($item) {
             return isset($item['slug']) ? sanitize_title($item['slug']) : null;
@@ -5762,6 +5764,11 @@ add_action('wp_enqueue_scripts', function () {
         'svicloudtvbox-guides' => [
             'key'       => 'guides',
             'condition' => $is_guides_page,
+            'deps'      => ['svicloudtvbox-style'],
+        ],
+        'svicloudtvbox-app-downloads' => [
+            'key'       => 'app-downloads',
+            'condition' => $is_app_downloads_page,
             'deps'      => ['svicloudtvbox-style'],
         ],
         'svicloudtvbox-contact' => [

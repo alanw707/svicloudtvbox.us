@@ -5,6 +5,32 @@
  */
 
 return [
+    'app_downloads' => [
+        'hero' => [
+            'eyebrow' => 'SVICLOUD 應用程式下載',
+            'title' => '選擇電視盒應用程式',
+            'intro' => '使用下方按鈕下載適用於電視盒的 Android 應用程式。',
+            'remote_hint' => '使用電視遙控器的方向鍵選擇下載按鈕，再按 OK 或選擇。',
+        ],
+        'list_title' => '可下載的應用程式',
+        'button' => '下載 APK',
+        'button_accessible' => '下載 {{app}} APK',
+        'apps' => [
+            'yogurt_tv' => ['description' => '適用於 Android 電視盒的 Yogurt TV。'],
+            'cherry_tv' => ['description' => '適用於 Android 電視盒的 Cherry TV。'],
+            'yogurt_kids' => ['description' => '適用於 Android 電視盒的 Yogurt Kids。'],
+        ],
+        'install' => [
+            'title' => '在電視盒上安裝',
+            'steps' => [
+                'download' => '選擇應用程式的「下載 APK」按鈕。Orz 瀏覽器可能會開始下載，或顯示儲存或開啟提示。',
+                'open' => '下載完成後，從 Orz 瀏覽器的下載清單開啟 APK。如果 Android 詢問，請允許 Orz 瀏覽器安裝應用程式，然後返回安裝畫面。',
+                'confirm' => '查看 Android 安裝提示並選擇「安裝」。Android 會在安裝前要求您確認。',
+                'cleanup' => '安裝完成後，開啟 Orz 瀏覽器的下載清單或「檔案 > 下載」，即可刪除 APK 安裝檔並釋放空間。',
+            ],
+        ],
+    ],
+
     'announcement' => [
         'message' => '目前商品暫時缺貨，新庫存即將到來！',
         'cta'     => '',

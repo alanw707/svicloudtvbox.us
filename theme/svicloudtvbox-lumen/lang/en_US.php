@@ -5,6 +5,32 @@
  */
 
 return [
+    'app_downloads' => [
+        'hero' => [
+            'eyebrow' => 'SVICLOUD app downloads',
+            'title' => 'Choose an app for your TV',
+            'intro' => 'Download an Android app for your TV box using the buttons below.',
+            'remote_hint' => 'On your TV remote, use the arrow buttons to highlight a download, then press OK or Select.',
+        ],
+        'list_title' => 'Available downloads',
+        'button' => 'Download APK',
+        'button_accessible' => 'Download {{app}} APK',
+        'apps' => [
+            'yogurt_tv' => ['description' => 'Yogurt TV for your Android TV box.'],
+            'cherry_tv' => ['description' => 'Cherry TV for your Android TV box.'],
+            'yogurt_kids' => ['description' => 'Yogurt Kids for your Android TV box.'],
+        ],
+        'install' => [
+            'title' => 'Install on your TV',
+            'steps' => [
+                'download' => 'Choose an app’s Download APK button. Orz Browser may start the download or show a save or open prompt.',
+                'open' => 'When it finishes, open the APK from Orz Browser’s Downloads list. If Android asks, allow Orz Browser to install apps, then return to the installer.',
+                'confirm' => 'Review Android’s installation prompt and choose Install. Android will ask you to confirm before it installs the app.',
+                'cleanup' => 'After installation, open Orz Browser Downloads or Files > Downloads and delete the APK if you want to remove the installer file.',
+            ],
+        ],
+    ],
+
     'announcement' => [
         'message' => 'We are currently out of stock. New inventory is on the way!',
         'cta'     => '',

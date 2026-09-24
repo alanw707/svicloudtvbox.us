@@ -262,4 +262,60 @@ if (!function_exists('svic_theme_ensure_guides_pages')) {
     }
 }
 
+if (!function_exists('svic_theme_ensure_app_download_page')) {
+    /**
+     * Creates the public TV app download page and assigns its theme template.
+     */
+    function svic_theme_ensure_app_download_page() {
+        if (!is_admin() || !current_user_can('publish_pages')) {
+            return;
+        }
+        $slug     = 'apps';
+        $template = 'page-app-downloads.php';
+        $title    = __('TV App Downloads', 'svicloudtvbox-lumen');
+        $existing = get_page_by_path($slug, OBJECT, 'page');
+        if (!$existing instanceof WP_Post) {
+            $candidates = get_posts([
+                'post_type' => 'page',
+                'name' => $slug,
+                'post_status' => 'any',
+                'posts_per_page' => 1,
+                'fields' => 'all',
+            ]);
+            if (!empty($candidates)) {
+                $existing = $candidates[0];
+            }
+        }
+        if ($existing instanceof WP_Post) {
+            if ('trash' === $existing->post_status) {
+                wp_untrash_post($existing->ID);
+            }
+            if ('publish' !== $existing->post_status || $existing->post_title !== $title) {
+                wp_update_post([
+                    'ID'          => $existing->ID,
+                    'post_title'  => $title,
+                    'post_status' => 'publish',
+                ]);
+            }
+            if (get_page_template_slug($existing->ID) !== $template) {
+                update_post_meta($existing->ID, '_wp_page_template', $template);
+            }
+            return;
+        }
+        $page_id = wp_insert_post([
+            'post_type' => 'page',
+            'post_name' => $slug,
+            'post_title'   => $title,
+            'post_status' => 'publish',
+            'post_content' => '',
+        ], true);
+        if (is_wp_error($page_id) || !$page_id) {
+            return;
+        }
+        update_post_meta($page_id, '_wp_page_template', $template);
+    }
+}
+
+add_action('admin_init', 'svic_theme_ensure_app_download_page', 10);
+
 add_action('admin_init', 'svic_theme_ensure_guides_pages', 9);
