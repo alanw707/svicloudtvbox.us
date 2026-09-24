@@ -9,6 +9,7 @@ $apps = [
     ['key' => 'yogurt_tv', 'name' => 'Yogurt TV', 'url' => 'https://svicloudtvbox.us/wp-content/uploads/2026/09/Yogurt-TV.apk'],
     ['key' => 'cherry_tv', 'name' => 'Cherry TV', 'url' => 'https://svicloudtvbox.us/wp-content/uploads/2026/09/Cherry-TV.apk'],
     ['key' => 'yogurt_kids', 'name' => 'Yogurt Kids', 'url' => 'https://svicloudtvbox.us/wp-content/uploads/2026/09/Yogurt-Kids.apk'],
+    ['key' => 'yogurt_mobile', 'name' => 'YogMo (Yogurt Mobile)', 'url' => 'https://svicloudtvbox.us/wp-content/uploads/2026/09/YogurtMo.apk'],
 ];
 
 get_header();

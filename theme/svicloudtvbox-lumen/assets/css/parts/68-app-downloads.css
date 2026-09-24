@@ -39,7 +39,7 @@ body.page-template-page-app-downloads .vue-app {
 }
 .app-downloads__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(18px, 2vw, 32px);
 }
 .app-downloads__tile {
@@ -96,9 +96,6 @@ body.page-template-page-app-downloads .vue-app {
 .app-downloads__tile:focus .app-downloads__action,
 .app-downloads__tile:focus-visible .app-downloads__action {
   background: #a1fff1;
-}
-@media (max-width: 900px) {
-  .app-downloads__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 600px) {
   .app-downloads-page { width: min(90vw, 520px); }
