@@ -951,15 +951,15 @@ return [
             'meta' => [
                 'number' => [
                     'label' => 'Authorization No.',
-                    'value' => 'US2025092609217',
+                    'value' => 'US20260924101610',
                 ],
                 'territory' => [
                     'label' => 'Territory',
-                    'value' => 'Americas',
+                    'value' => 'America',
                 ],
                 'term' => [
                     'label' => 'Effective dates',
-                    'value' => 'September 26, 2025 - September 26, 2026',
+                    'value' => 'September 24, 2026 - September 24, 2027',
                 ],
             ],
             'footnote' => 'Presented exactly as issued by SVI.STUDIO to 168 Media Group LLC / SVICLOUDTVBOX.US.',

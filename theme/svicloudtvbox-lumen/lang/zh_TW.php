@@ -1068,15 +1068,15 @@ return [
             'meta' => [
                 'number' => [
                     'label' => '授權編號',
-                    'value' => 'US2025092609217',
+                    'value' => 'US20260924101610',
                 ],
                 'territory' => [
                     'label' => '授權區域',
-                    'value' => '美洲（Americas）',
+                    'value' => 'America（美洲）',
                 ],
                 'term' => [
                     'label' => '有效期間',
-                    'value' => '2025 年 9 月 26 日 - 2026 年 9 月 26 日',
+                    'value' => '2026 年 9 月 24 日 - 2027 年 9 月 24 日',
                 ],
             ],
             'footnote' => '此證書由 SVI.STUDIO 核發，內容與原件完全一致。',

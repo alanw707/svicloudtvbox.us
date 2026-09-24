@@ -831,15 +831,15 @@ $overrides = [
             'meta' => [
                 'number' => [
                     'label' => '授权编号',
-                    'value' => 'US2025092609217',
+                    'value' => 'US20260924101610',
                 ],
                 'territory' => [
                     'label' => '授权区域',
-                    'value' => '美洲（Americas）',
+                    'value' => 'America（美洲）',
                 ],
                 'term' => [
                     'label' => '有效期间',
-                    'value' => '2025 年 9 月 26 日 - 2026 年 9 月 26 日',
+                    'value' => '2026 年 9 月 24 日 - 2027 年 9 月 24 日',
                 ],
             ],
             'footnote' => '此证书由 SVI.STUDIO 核发，内容与原件完全一致。',
