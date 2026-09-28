@@ -7215,36 +7215,6 @@ add_action('template_redirect', function (): void {
     ob_start('svic_filter_duplicate_google_tag_output');
 }, 0);
 
-if (!function_exists('svic_render_google_consent_stabilizer')) {
-    /**
-     * Reassert analytics consent after ad plugins add their own default state.
-     *
-     * Google for WooCommerce and consent plugins can load after Site Kit and push a
-     * broad denied default. We only touch analytics-related storage; ad consent stays
-     * controlled by the ad/consent plugins.
-     */
-    function svic_render_google_consent_stabilizer(): void
-    {
-        if (is_admin() || !defined('GOOGLESITEKIT_VERSION')) {
-            return;
-        }
-        ?>
-        <script id="svic-google-consent-stabilizer">
-        window.dataLayer = window.dataLayer || [];
-        if (typeof window.gtag !== 'function') {
-            window.gtag = function(){ window.dataLayer.push(arguments); };
-        }
-        window.gtag('consent', 'update', {
-            analytics_storage: 'granted',
-            functionality_storage: 'granted',
-            security_storage: 'granted'
-        });
-        </script>
-        <?php
-    }
-}
-add_action('wp_footer', 'svic_render_google_consent_stabilizer', 999);
-
 /**
  * Drop jQuery Migrate to reduce legacy JS on modern browsers.
  */
