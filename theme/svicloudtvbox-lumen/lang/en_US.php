@@ -914,8 +914,8 @@ return [
             ],
         ],
         'sticky_buy' => [
-            'label' => 'SVICLOUD 10P+',
-            'cta'   => 'Buy Now',
+            'label' => 'SVICLOUD 15P',
+            'cta'   => 'Shop 15P',
         ],
         'inbox' => [
             'title' => "What's in the Box",

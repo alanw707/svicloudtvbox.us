@@ -811,8 +811,8 @@ $overrides = [
             ],
         ],
         'sticky_buy' => [
-            'label' => '小云电视盒 10P+',
-            'cta'   => '立即购买',
+            'label' => '小云电视盒 15P',
+            'cta'   => '购买 15P',
         ],
         'inbox' => [
             'title' => '包装盒内容物',

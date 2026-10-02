@@ -832,17 +832,13 @@ foreach ($pricing_cards as $_svic_card) {
       ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
   }
   ?>
-
-<?php
-$sticky_10p_url = $hero_10p_url; // already computed earlier in the file
-?>
 </main>
 
 <!-- Mobile sticky buy bar — outside <main> to preserve landmark semantics -->
 <div class="lumen-sticky-buy" id="lumen-sticky-buy" aria-hidden="true">
   <div class="lumen-sticky-buy__inner">
     <span class="lumen-sticky-buy__label"><?php echo svic_translate_html('frontpage.sticky_buy.label'); ?></span>
-    <a class="lumen-sticky-buy__cta lumen-pill lumen-pill--primary" href="<?php echo esc_url($sticky_10p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="homepage_sticky_buy" data-svic-label="sticky_buy_10p" data-svic-model="svicloud-10p-plus">
+    <a class="lumen-sticky-buy__cta lumen-pill lumen-pill--primary" href="<?php echo esc_url($hero_15p_url); ?>" rel="nofollow" data-svic-event="svic_cta_click" data-svic-location="homepage_sticky_buy" data-svic-label="sticky_buy_15p" data-svic-model="svicloud-15p">
       <?php echo svic_translate_html('frontpage.sticky_buy.cta'); ?>
     </a>
   </div>
