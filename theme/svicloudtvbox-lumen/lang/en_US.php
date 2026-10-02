@@ -937,7 +937,7 @@ return [
                 'warranty'  => '1-year U.S. warranty + 14-day returns handled by the concierge team',
             ],
             'links' => [
-                'pdp'     => 'Shop 10P+',
+                'pdp'     => 'Shop 15P',
                 'compare' => 'Compare 10P+ vs 10S',
                 'faq'     => 'Read FAQ',
                 'contact' => 'Talk to concierge',
