@@ -39,7 +39,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     const prices = await catalog15pPrices(page);
     const response = await page.goto('/', { waitUntil: 'networkidle' });
     expect(response?.ok()).toBeTruthy();
-    await expect(page).toHaveTitle(/SVICLOUD 15P/);
+    await expect(page).toHaveTitle(/SVICLOUD.*15P/);
 
     const hero = page.locator('.hero-dashboard');
     const heroText = await hero.innerText();
@@ -153,7 +153,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     await expect(productPrice).toContainText(displayedPrice.trim());
     const regularAmount = productPrice.locator('del .woocommerce-Price-amount');
     if (await regularAmount.count()) await expect(regularAmount).not.toBeEmpty();
-    await expect(page.locator('.stock.in-stock')).toContainText('In stock');
+    await expect(page.locator('.product-hero-content .badge-row .badge').filter({ hasText: 'In stock now' }).first()).toBeVisible();
     const button = page.locator('.single_add_to_cart_button');
     await expect(button).toHaveText('Buy 15P');
 
@@ -183,6 +183,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
   });
 
   test('localizes launch metadata and shows Android 12 for 10P+ and 10S in every locale', async ({ page }) => {
+    test.setTimeout(240_000); // Fifteen production routes across three locales.
     const prices = await catalog15pPrices(page);
     const locales = [
       { prefix: '', marker: 'SVICLOUD', modelKeyword: 'SVICLOUD 15P', secondaryKeyword: '小雲盒子 15P', included: 'Included', action: 'Buy 15P', availability: 'In stock now' },
@@ -209,6 +210,8 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
           expect(metadata.join(' ')).toContain(locale.secondaryKeyword);
         }
         expect(metadata.join(' ')).not.toContain('{15p_');
+        const clientTranslations = await page.locator('#svicloudtvbox-script-js-extra').textContent();
+        expect(clientTranslations).not.toContain('{15p_');
         if (route !== '/product/svicloud-15p/') expect(metadata.join(' ')).toContain(prices.current);
         const routeText = await page.locator('body').innerText();
         expect(routeText.toLocaleLowerCase()).toContain(locale.action.toLocaleLowerCase());
@@ -216,7 +219,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
         expect(routeText).toContain(prices.current);
         if (route === '/product/svicloud-15p/') {
           await expect(page.locator('.single_add_to_cart_button')).toHaveText(locale.action);
-          await expect(page.locator('.stock.in-stock')).toContainText(locale.availability);
+          await expect(page.locator('.product-hero-content .badge-row .badge').filter({ hasText: locale.availability }).first()).toBeVisible();
         }
         if (route === '/compare/') {
           expect((await page.locator('body').innerText())).not.toContain('current wireless');

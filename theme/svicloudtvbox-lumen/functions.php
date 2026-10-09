@@ -5852,6 +5852,8 @@ add_action('wp_enqueue_scripts', function () {
     $currentLocale = svic_current_locale();
 
     $translations = SVIC_Translator::instance()->registry($currentLocale);
+    // The full client-side registry bypasses svic_translate()/svic_translate_array().
+    $translations = svic_15p_price_tokens_recursive($translations, $currentLocale);
     if (function_exists('svic_is_promotion_visible') && !svic_is_promotion_visible()) {
         unset($translations['promotion']);
     }

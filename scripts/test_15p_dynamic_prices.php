@@ -79,6 +79,11 @@ foreach (['en_US', 'zh_TW', 'zh_CN'] as $code) {
     foreach (['products', 'frontpage', 'compare', 'shop'] as $section) {
         check_no_stale("$code $section translations", json_encode(svic_translate_array($section, $code), JSON_UNESCAPED_UNICODE));
     }
+    // wp_localize_script receives the full registry, not the scalar/array translation wrappers.
+    $client_registry = svic_15p_price_tokens_recursive(SVIC_Translator::instance()->registry($code), $code);
+    $client_json = json_encode($client_registry, JSON_UNESCAPED_UNICODE);
+    check_price("$code client-side registry", $client_json, $current, $regular);
+    check_no_stale("$code client-side registry", $client_json);
     $promo = svic_15p_promo_content();
     if (!str_contains($promo['meta_description'], $current)) { throw new RuntimeException("$code promo SEO price missing"); }
     $promo_text = json_encode($promo, JSON_UNESCAPED_UNICODE);
