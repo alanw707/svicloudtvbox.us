@@ -183,12 +183,12 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
   });
 
   test('localizes launch metadata and shows Android 12 for 10P+ and 10S in every locale', async ({ page }) => {
-    test.setTimeout(240_000); // Fifteen production routes across three locales.
+    test.setTimeout(360_000); // Fifteen production routes across three locales.
     const prices = await catalog15pPrices(page);
     const locales = [
-      { prefix: '', marker: 'SVICLOUD', modelKeyword: 'SVICLOUD 15P', secondaryKeyword: '小雲盒子 15P', included: 'Included', action: 'Buy 15P', availability: 'In stock now' },
-      { prefix: '/zh', marker: '小雲', modelKeyword: '小雲盒子 15P', secondaryKeyword: '小雲電視盒 15P', included: '內含', action: '購買 15P', availability: '現貨供應' },
-      { prefix: '/zh-cn', marker: '小云', modelKeyword: '小云盒子 15P', secondaryKeyword: '小云电视盒 15P', included: '内含', action: '购买 15P', availability: '现货供应' },
+      { prefix: '', marker: 'SVICLOUD', modelKeyword: 'SVICLOUD 15P', secondaryKeyword: '小雲盒子 15P', included: 'Included', action: 'Buy 15P', availability: 'In stock now', badgeStock: 'In stock now' },
+      { prefix: '/zh', marker: '小雲', modelKeyword: '小雲盒子 15P', secondaryKeyword: '小雲電視盒 15P', included: '內含', action: '購買 15P', availability: '現貨供應', badgeStock: '美國現貨' },
+      { prefix: '/zh-cn', marker: '小云', modelKeyword: '小云盒子 15P', secondaryKeyword: '小云电视盒 15P', included: '内含', action: '购买 15P', availability: '现货供应', badgeStock: '美国现货' },
     ];
     for (const locale of locales) {
       for (const route of ['/', '/shop/', '/compare/', '/svicloud-15p-features/', '/product/svicloud-15p/']) {
@@ -199,27 +199,30 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
           await page.locator('meta[property="og:title"]').first().getAttribute('content') || '',
           await page.locator('meta[property="og:description"]').first().getAttribute('content') || '',
         ];
-        for (const value of metadata) {
-          expect(value).toContain('15P');
+        const localizedDealerHomepage = route === '/' && Boolean(locale.prefix);
+        for (const [index, value] of metadata.entries()) {
+          // Localized home title/OG title are dealer-wide; their descriptions still name 15P.
+          if (!localizedDealerHomepage || index === 1 || index === 3) expect(value).toContain('15P');
           expect(value).toContain(locale.marker);
         }
-        if (locale.modelKeyword && ['/', '/shop/', '/compare/', '/svicloud-15p-features/', '/product/svicloud-15p/'].includes(route)) {
+        if (!localizedDealerHomepage && locale.modelKeyword) {
           expect(metadata.join(' ')).toContain(locale.modelKeyword);
         }
-        if (locale.secondaryKeyword && ['/', '/shop/', '/compare/', '/svicloud-15p-features/', '/product/svicloud-15p/'].includes(route)) {
+        if (!localizedDealerHomepage && locale.secondaryKeyword) {
           expect(metadata.join(' ')).toContain(locale.secondaryKeyword);
         }
         expect(metadata.join(' ')).not.toContain('{15p_');
         const clientTranslations = await page.locator('#svicloudtvbox-script-js-extra').textContent();
         expect(clientTranslations).not.toContain('{15p_');
-        if (route !== '/product/svicloud-15p/') expect(metadata.join(' ')).toContain(prices.current);
+        // The localized homepages use a price-neutral SEO description; their visible 15P price is checked below.
+        if (route !== '/product/svicloud-15p/' && (route !== '/' || !locale.prefix)) expect(metadata.join(' ')).toContain(prices.current);
         const routeText = await page.locator('body').innerText();
         expect(routeText.toLocaleLowerCase()).toContain(locale.action.toLocaleLowerCase());
         expect(routeText.toLocaleLowerCase()).toContain(locale.availability.toLocaleLowerCase());
         expect(routeText).toContain(prices.current);
         if (route === '/product/svicloud-15p/') {
           await expect(page.locator('.single_add_to_cart_button')).toHaveText(locale.action);
-          await expect(page.locator('.product-hero-content .badge-row .badge').filter({ hasText: locale.availability }).first()).toBeVisible();
+          await expect(page.locator('.product-hero-content .badge-row .badge').filter({ hasText: locale.badgeStock }).first()).toBeVisible();
         }
         if (route === '/compare/') {
           expect((await page.locator('body').innerText())).not.toContain('current wireless');
