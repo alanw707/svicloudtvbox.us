@@ -43,7 +43,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     const pricingCard = page.locator('.lumen-pricing .shop-product-card--new');
     const pricingCardText = await pricingCard.innerText();
     expect(pricingCardText.toLowerCase()).toContain('in stock now');
-    expect(pricingCardText).toContain('$288.00');
+    expect(pricingCardText).toContain('$287.99');
     expect(pricingCardText).toContain('$379.00');
     expect(pricingCardText).not.toContain('Coming Soon');
     expect(pricingCardText).not.toContain('warranty');
@@ -58,7 +58,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
 
     const card = page.locator('.shop-product-card--backorder');
     const cardText = await card.innerText();
-    for (const claim of ['In stock now', '$288.00', '$379.00', 'Amlogic S905Y5', 'Android 14', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'AV1']) {
+    for (const claim of ['In stock now', '$287.99', '$379.00', 'Amlogic S905Y5', 'Android 14', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'AV1']) {
       expect(cardText.toLowerCase()).toContain(claim.toLowerCase());
     }
     expect(cardText).not.toContain('Coming Soon');
@@ -135,7 +135,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     expect((offer as Record<string, unknown>).availabilityStarts).toBeUndefined();
 
     await expectLoadedImage(page.locator('.product-hero-image'));
-    await expect(page.locator('.product-hero-price')).toContainText('$288.00');
+    await expect(page.locator('.product-hero-price')).toContainText('$287.99');
     await expect(page.locator('.product-hero-price')).toContainText('$379.00');
     await expect(page.locator('.stock.in-stock')).toContainText('In stock');
     const button = page.locator('.single_add_to_cart_button');
