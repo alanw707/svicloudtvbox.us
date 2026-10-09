@@ -140,7 +140,7 @@ $overrides = [
         'hero' => [
             'badge'    => '选购',
             'title'    => '小云电视盒',
-            'subtitle' => '以 US$287.99 订购规格已确认的小云 15P（原价 US$379），或选购现售 10P+、10S 与配件。',
+            'subtitle' => '以 US{15p_price} 订购规格已确认的小云 15P（原价 US{15p_regular}），或选购现售 10P+、10S 与配件。',
         ],
         'cards' => [
             '15p' => [
@@ -164,7 +164,7 @@ $overrides = [
                 ],
                 'assurance' => [
                     'shipping' => '现货供应',
-                    'warranty' => '特价 US$287.99 · 原价 US$379',
+                    'warranty' => '特价 US{15p_price} · 原价 US{15p_regular}',
                     'support'  => '现货供应',
                 ],
             ],
@@ -748,7 +748,7 @@ $overrides = [
             'title_lead' => '小云盒子美国授权经销商',
             'title_separator' => '。',
             'title_tail' => '',
-            'copy'    => 'SVICLOUDTVBOX.US 由 168 Media Group LLC 经营，提供原厂授权证明、内华达发货与中英双语协助。小云 15P 现以 US$287.99 现货供应（原价 US$379），搭载 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、蓝牙 5.4 与 4K HDR。',
+            'copy'    => 'SVICLOUDTVBOX.US 由 168 Media Group LLC 经营，提供原厂授权证明、内华达发货与中英双语协助。小云 15P 现以 US{15p_price} 现货供应（原价 US{15p_regular}），搭载 Android 14、Amlogic S905Y5、4 GB DDR3、64 GB eMMC、Wi-Fi 6、蓝牙 5.4 与 4K HDR。',
             'launch'  => [
                 'badge' => '新品',
                 'text'  => '小云 15P 现货供应中',
@@ -1212,7 +1212,7 @@ $overrides = [
             'crosslink' => [
                 'badge'  => '新机登场',
                 'title'  => '小云 15P 现货供应中',
-                'lead'   => '小云 15P 现以 US$287.99 现货供应（原价 US$379）。',
+                'lead'   => '小云 15P 现以 US{15p_price} 现货供应（原价 US{15p_regular}）。',
                 'cta'    => '购买小云 15P',
                 'target' => 'svicloud-15p',
             ],
@@ -1243,18 +1243,18 @@ $overrides = [
             'crosslink' => [
                 'badge'  => '新机登场',
                 'title'  => '购买小云 15P',
-                'lead'   => 'Android 14、Wi-Fi 6 与蓝牙 5.4 小云 15P 现以 US$287.99 现货供应（原价 US$379）。',
+                'lead'   => 'Android 14、Wi-Fi 6 与蓝牙 5.4 小云 15P 现以 US{15p_price} 现货供应（原价 US{15p_regular}）。',
                 'cta'    => '购买小云 15P',
                 'target' => 'svicloud-15p',
             ],
         ],
         'svicloud-9p' => [
             'short_description' => '保留给现有用户的旧款小云 9P 页面，方便查找支持信息与比较后续机型。',
-            'description' => '<p>小云 9P 是上一代机型。本页持续保留，不删除也不隐藏，供现有用户查找与比较。</p><ul><li>9P 若仍符合需求，无需急着更换。</li><li>15P 硬件规格已公布，可按实际差异比较。</li><li>15P 现以 US$287.99 现货供应（原价 US$379）。</li></ul>',
+            'description' => '<p>小云 9P 是上一代机型。本页持续保留，不删除也不隐藏，供现有用户查找与比较。</p><ul><li>9P 若仍符合需求，无需急着更换。</li><li>15P 硬件规格已公布，可按实际差异比较。</li><li>15P 现以 US{15p_price} 现货供应（原价 US{15p_regular}）。</li></ul>',
             'best_for' => [
                 'badge' => '旧款机型',
                 'title' => '正在评估下一台盒子的 9P 用户',
-                'copy'  => '如果 9P 仍正常使用，请继续保留。可比较 15P 已确认的硬件与目前 US$287.99 特价后再决定。',
+                'copy'  => '如果 9P 仍正常使用，请继续保留。可比较 15P 已确认的硬件与目前 US{15p_price} 特价后再决定。',
                 'bullets' => [
                     'primary'   => '保留旧款页面与搜索排名',
                     'secondary' => '不催促更换正常运行的盒子',
@@ -1264,7 +1264,7 @@ $overrides = [
             'crosslink' => [
                 'badge'  => '现货供应',
                 'title'  => '考虑从 9P 升级？',
-                'lead'   => '比较小云 15P 已确认的规格，并以 US$287.99 订购（原价 US$379）。',
+                'lead'   => '比较小云 15P 已确认的规格，并以 US{15p_price} 订购（原价 US{15p_regular}）。',
                 'cta'    => '购买小云 15P',
                 'target' => 'svicloud-15p',
             ],
@@ -1272,19 +1272,19 @@ $overrides = [
         'svicloud-15p' => [
             'title' => '小云电视盒 15P',
             'meta' => [
-                'title'       => '小云电视盒 15P 美国现货｜SVICLOUD 15P US$287.99',
-                'description' => '小云电视盒 15P / 小云盒子 15P 美国现货供应，SVICLOUD 15P 现售 US$287.99（原价 US$379）。Android 14、Wi-Fi 6、蓝牙 5.4，内华达发货，中英客服。',
+                'title'       => '小云电视盒 15P 美国现货｜SVICLOUD 15P US{15p_price}',
+                'description' => '小云电视盒 15P / 小云盒子 15P 美国现货供应，SVICLOUD 15P 现售 US{15p_price}（原价 US{15p_regular}）。Android 14、Wi-Fi 6、蓝牙 5.4，内华达发货，中英客服。',
                 'image_alt'   => '小云盒子 15P 电视盒正面',
             ],
             'short_description' => '美国现货供应，搭载 Android 14、Wi-Fi 6、蓝牙 5.4，并支持下载手机 App。',
-            'description' => '<p>全新小云电视盒 15P（小云盒子 15P / SVICLOUD 15P）现由美国供应，搭载 Android 14 与 Amlogic S905Y5 四核心 ARM Cortex-A55 处理器。</p><h2>小云电视盒 15P 美国现货：价格、发货与保修</h2><ul><li>现售 US$287.99（原价 US$379），商品页显示现货供应。</li><li>由内华达州发货，结账后提供可追踪物流信息。</li><li>提供中英双语客服，首次安装、Wi-Fi 与遥控器设置都可协助。</li><li>依全站政策享 1 年美国硬件保修与 14 天退换货。</li></ul><h2>核心规格</h2><ul><li>4 GB DDR3 内存与 64 GB eMMC 存储空间。</li><li>2.4/5 GHz 双频 Wi-Fi 6（2T2R）与蓝牙 5.4。</li><li>HDR10+、HDR10 与 HLG 画面处理。</li><li>支持 AV1、VP9、H.265/HEVC 与 H.264 硬件解码；AV1、VP9、H.265/HEVC 最高支持 4K × 2K 60 fps。</li><li>HDMI 2.1、两个 USB 2.0、RJ45 有线网络、光纤音频与 Type-C 5V/2A 电源。</li></ul><h2>盒内配件</h2><p>礼盒、AC 适配器、HDMI 线、蓝牙语音飞鼠遥控器与用户手册。</p>',
+            'description' => '<p>全新小云电视盒 15P（小云盒子 15P / SVICLOUD 15P）现由美国供应，搭载 Android 14 与 Amlogic S905Y5 四核心 ARM Cortex-A55 处理器。</p><h2>小云电视盒 15P 美国现货：价格、发货与保修</h2><ul><li>现售 US{15p_price}（原价 US{15p_regular}），商品页显示现货供应。</li><li>由内华达州发货，结账后提供可追踪物流信息。</li><li>提供中英双语客服，首次安装、Wi-Fi 与遥控器设置都可协助。</li><li>依全站政策享 1 年美国硬件保修与 14 天退换货。</li></ul><h2>核心规格</h2><ul><li>4 GB DDR3 内存与 64 GB eMMC 存储空间。</li><li>2.4/5 GHz 双频 Wi-Fi 6（2T2R）与蓝牙 5.4。</li><li>HDR10+、HDR10 与 HLG 画面处理。</li><li>支持 AV1、VP9、H.265/HEVC 与 H.264 硬件解码；AV1、VP9、H.265/HEVC 最高支持 4K × 2K 60 fps。</li><li>HDMI 2.1、两个 USB 2.0、RJ45 有线网络、光纤音频与 Type-C 5V/2A 电源。</li></ul><h2>盒内配件</h2><p>礼盒、AC 适配器、HDMI 线、蓝牙语音飞鼠遥控器与用户手册。</p>',
             'footer' => [
                 'tagline' => '小云盒子 15P 产品信息',
-                'summary' => '根据供应商来源整理的小云盒子 15P 硬件资料；特价 US$287.99（原价 US$379），现货供应。',
+                'summary' => '根据供应商来源整理的小云盒子 15P 硬件资料；特价 US{15p_price}（原价 US{15p_regular}），现货供应。',
                 'badges' => [
                     'coming_soon'   => '现货供应',
                     'specifications'=> '硬件规格已公布',
-                    'commerce'      => '特价 US$287.99 · 原价 US$379',
+                    'commerce'      => '特价 US{15p_price} · 原价 US{15p_regular}',
                 ],
                 'benefits' => [
                     'platform' => [
@@ -1297,7 +1297,7 @@ $overrides = [
                     ],
                     'availability' => [
                         'label'       => '订购状态',
-                        'description' => '现以 US$287.99 现货供应。'
+                        'description' => '现以 US{15p_price} 现货供应。'
                     ],
                 ],
             ],
@@ -1312,7 +1312,7 @@ $overrides = [
             ],
             'prelaunch' => [
                 'subtitle' => '小云电视盒 15P 美国现货供应，搭载 Android 14、Amlogic S905Y5、Wi-Fi 6、蓝牙 5.4 与 4K HDR。',
-                'detail'   => '特价 US$287.99 · 原价 US$379 · 内华达州发货 · 中英客服',
+                'detail'   => '特价 US{15p_price} · 原价 US{15p_regular} · 内华达州发货 · 中英客服',
                 'image_placeholder' => '小云 15P 电视盒正面',
                 'badges' => [
                     'specs'        => 'Android 14',
@@ -1327,7 +1327,7 @@ $overrides = [
                 'reassurance' => [
                     'badge' => '美国现货与正版支持',
                     'title' => '小云电视盒 15P 美国购买更安心',
-                    'copy'  => '下单前可查看已确认硬件、盒内配件与美国发货支持；特价 US$287.99，现货供应。',
+                    'copy'  => '下单前可查看已确认硬件、盒内配件与美国发货支持；特价 US{15p_price}，现货供应。',
                     'bullets' => [
                         'shipping'  => '内华达州现货发货，提供可追踪物流信息',
                         'warranty'  => '1 年美国硬件保修 + 14 天退换货',
@@ -1346,7 +1346,7 @@ $overrides = [
                     ],
                     'availability' => [
                         'q' => '小云电视盒 15P 在美国有现货吗？',
-                        'a' => '有。小云电视盒 15P 目前在 SVICLOUDTVBOX.US 以 US$287.99 现货供应（原价 US$379），下单后由美国库存安排发货。',
+                        'a' => '有。小云电视盒 15P 目前在 SVICLOUDTVBOX.US 以 US{15p_price} 现货供应（原价 US{15p_regular}），下单后由美国库存安排发货。',
                     ],
                     'policy' => [
                         'q' => '小云 15P 从美国哪里发货？',
@@ -1401,7 +1401,7 @@ $overrides = [
                         'bullets' => [
                             'one'   => '15P：Amlogic S905Y5、Android 14、4 GB DDR3 与 64 GB eMMC',
                             'two'   => '15P：双频 Wi-Fi 6、蓝牙 5.4、HDMI 2.1 与光纤音频',
-                            'three' => '15P 现以 US$287.99 现货供应（原价 US$379）；现货供应'
+                            'three' => '15P 现以 US{15p_price} 现货供应（原价 US{15p_regular}）；现货供应'
                         ],
                         'link_label' => '查看小云 10P+',
                     ],
@@ -1411,7 +1411,7 @@ $overrides = [
                         'bullets' => [
                             'one'   => '15P：Android 14、Amlogic S905Y5、4 GB DDR3 与 64 GB eMMC',
                             'two'   => '15P：Wi-Fi 6、蓝牙 5.4、4K HDR 与 AV1 解码',
-                            'three' => '升级前请比较目前 US$287.99 订购方案与您的 9P',
+                            'three' => '升级前请比较目前 US{15p_price} 订购方案与您的 9P',
                         ],
                         'link_label' => '查看旧款小云 9P 页面',
                     ],
@@ -1421,14 +1421,14 @@ $overrides = [
                     'items' => [
                         'from_9p'   => '15P 来源确认 Android 14、Wi-Fi 6、蓝牙 5.4 与所列解码格式；未提供与 9P 的实测比较。',
                         'from_10p'  => '15P 来源未提供与 10P 或 10P+ 的实测性能比较。',
-                        'new_buyer' => '15P 现以 US$287.99 现货供应（原价 US$379）；现有机型维持各自销售状态。',
+                        'new_buyer' => '15P 现以 US{15p_price} 现货供应（原价 US{15p_regular}）；现有机型维持各自销售状态。',
                     ],
                 ],
                 'assurance' => [
                     'title' => '商品信息与本店政策',
                     'items' => [
                         'shipping' => '已确认：硬件、接口、无线规格、解码格式与盒内配件',
-                        'support'  => '特价 US$287.99、原价 US$379；现货供应',
+                        'support'  => '特价 US{15p_price}、原价 US{15p_regular}；现货供应',
                         'warranty' => '退货申请期限为送达后 14 天，资格与条件请见本店退货政策；特定机型保修问题请联系客服。',
                     ],
                 ],
@@ -1438,18 +1438,18 @@ $overrides = [
     'compare' => [
         'meta' => [
             'title'       => '小云盒子 15P vs 10P+ vs 10S｜机型规格比较',
-            'description' => '比较 US$287.99 现货小云盒子 15P／小云电视盒 15P（原价 US$379）与 10P+、10S，包括硬件、存储、连接、影音支持、价格与销售状态。',
+            'description' => '比较 US{15p_price} 现货小云盒子 15P／小云电视盒 15P（原价 US{15p_regular}）与 10P+、10S，包括硬件、存储、连接、影音支持、价格与销售状态。',
             'image_alt'   => '小云盒子 15P、10P+ 与 10S 电视盒',
         ],
         'hero' => [
             'badge'    => '机型比较',
             'title'    => '小云 15P vs 10P+ vs 10S',
-            'subtitle' => '比较 US$287.99 订购的 15P 与现售 10P+、10S 的价格、规格及销售状态。',
+            'subtitle' => '比较 US{15p_price} 订购的 15P 与现售 10P+、10S 的价格、规格及销售状态。',
         ],
         'traffic' => [
             'badge' => '美国购买更安心',
             'title' => '比较 15P 订购与美国现货机型',
-            'lead'  => '15P 现以 US$287.99 现货供应（原价 US$379），现货供应；10P+ 与 10S 维持各自现售条款。',
+            'lead'  => '15P 现以 US{15p_price} 现货供应（原价 US{15p_regular}），现货供应；10P+ 与 10S 维持各自现售条款。',
             'bullets' => [
                 'shipping'  => '48 小时美国发货，附本地电源/HDMI 与追踪号',
                 'concierge' => '双语礼宾协助安装、Wi-Fi 调优、K 歌麦克风、Kids Mode',
@@ -1466,7 +1466,7 @@ $overrides = [
         'differences' => [
             'next_generation' => [
                 'title'       => 'Android 14 + 蓝牙 5.4',
-                'description' => '15P 结合 Android 14、Amlogic S905Y5、双频 Wi-Fi 6 与蓝牙 5.4，特价 US$287.99。',
+                'description' => '15P 结合 Android 14、Amlogic S905Y5、双频 Wi-Fi 6 与蓝牙 5.4，特价 US{15p_price}。',
             ],
             'premium_performance' => [
                 'title'       => '顶级效能',
@@ -1485,7 +1485,7 @@ $overrides = [
             '15p' => [
                 'lead'     => '现货供应的 Android 14 硬件，规格列有 Wi-Fi 6、蓝牙 5.4 与 4K 解码。',
                 'fit_label'=> '现货供应',
-                'fit_copy' => 'Android 14、Amlogic S905Y5、双频 Wi-Fi 6、蓝牙 5.4 与所列 4K 解码支持；特价 US$287.99（原价 US$379）。',
+                'fit_copy' => 'Android 14、Amlogic S905Y5、双频 Wi-Fi 6、蓝牙 5.4 与所列 4K 解码支持；特价 US{15p_price}（原价 US{15p_regular}）。',
                 'bullets' => [
                     'processor_os'        => 'Amlogic S905Y5 四核心 Cortex-A55 + Android 14',
                     'memory_connectivity' => '4 GB DDR3 / 64 GB eMMC + Wi-Fi 6 / 蓝牙 5.4',
@@ -1536,7 +1536,7 @@ $overrides = [
         'confidence' => [
             'badge' => '下单更清楚',
             'title' => '挑好机型后，后续流程也有本地支援',
-            'lead'  => '以已确认规格与价格比较三款机型；15P 现以 US$287.99 现货供应。',
+            'lead'  => '以已确认规格与价格比较三款机型；15P 现以 US{15p_price} 现货供应。',
             'cards' => [
                 'official' => [
                     'title' => '美国官方销售通路',
@@ -1632,7 +1632,7 @@ $overrides = [
                 ],
                 'best_for' => [
                     'label' => '机型定位',
-                    'p15p'  => 'Android 14、Wi-Fi 6、蓝牙 5.4；订购 US$287.99',
+                    'p15p'  => 'Android 14、Wi-Fi 6、蓝牙 5.4；订购 US{15p_price}',
                     'p10p'  => '家庭、运动迷、4K 家庭剧院',
                     'p10s'  => '精省用户 / 次要房间',
                 ],

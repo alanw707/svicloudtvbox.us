@@ -674,7 +674,7 @@ if (!function_exists('svic_locale_to_hreflang')) {
 
 if (!function_exists('svic_translate')) {
     function svic_translate(string $key, array $replacements = [], ?string $locale = null): string {
-        return SVIC_Translator::instance()->translate($key, $replacements, $locale);
+        return svic_15p_price_tokens(SVIC_Translator::instance()->translate($key, $replacements, $locale), $locale);
     }
 }
 
@@ -710,7 +710,7 @@ if (!function_exists('svic_translate_array')) {
             $value    = $walk($fallback, $key);
         }
 
-        return is_array($value) ? $value : [];
+        return is_array($value) ? svic_15p_price_tokens_recursive($value, $locale) : [];
     }
 }
 
@@ -1069,6 +1069,59 @@ if (!function_exists('svic_get_product_by_slug')) {
 
         $product = wc_get_product($post->ID);
         return $product ?: null;
+    }
+}
+
+if (!function_exists('svic_15p_price_tokens')) {
+    /** Resolve explicit 15P price placeholders from the live WooCommerce catalog. */
+    function svic_15p_price_tokens(string $text, ?string $locale = null): string {
+        if (strpos($text, '{15p_') === false) {
+            return $text;
+        }
+
+        static $product = null;
+        static $loaded = false;
+        if (!$loaded) {
+            $product = svic_get_product_by_slug('svicloud-15p');
+            $loaded = true;
+        }
+
+        $locale = str_replace('-', '_', strtolower($locale ?? (function_exists('svic_current_locale') ? svic_current_locale() : 'en_US')));
+        $unknown = strpos($locale, 'zh_cn') === 0 ? '请查看商品页当前价格' : (strpos($locale, 'zh') === 0 ? '請見商品頁目前價格' : 'see current price on product page');
+        $regular_unknown = strpos($locale, 'zh_cn') === 0 ? '请查看商品页原价' : (strpos($locale, 'zh') === 0 ? '請見商品頁原價' : 'see regular price on product page');
+        if (!$product || !method_exists($product, 'is_on_sale') || !$product->is_on_sale()) {
+            $text = str_replace(['sale price', ' sale', '特價', '特价'], ['current price', ' current', '現價', '现价'], $text);
+        }
+        $current = $product && is_numeric($product->get_price()) ? (float) $product->get_price() : null;
+        $regular = $product && is_numeric($product->get_regular_price()) ? (float) $product->get_regular_price() : null;
+        $current_text = $current !== null ? '$' . number_format($current, 2, '.', ',') : $unknown;
+        $regular_two = $regular !== null ? '$' . number_format($regular, 2, '.', ',') : $regular_unknown;
+        $regular_text = $regular !== null ? ($regular === floor($regular) ? '$' . number_format($regular, 0, '.', ',') : $regular_two) : $regular_unknown;
+
+        return strtr($text, [
+            'US{15p_price}' => $current !== null ? 'US' . $current_text : $unknown,
+            'US{15p_regular_2dp}' => $regular !== null ? 'US' . $regular_two : $regular_unknown,
+            'US{15p_regular}' => $regular !== null ? 'US' . $regular_text : $regular_unknown,
+            '{15p_us_price}' => $current !== null ? 'US' . $current_text : $unknown,
+            '{15p_us_regular_2dp}' => $regular !== null ? 'US' . $regular_two : $regular_unknown,
+            '{15p_us_regular}' => $regular !== null ? 'US' . $regular_text : $regular_unknown,
+            '{15p_price}' => $current_text,
+            '{15p_regular_2dp}' => $regular_two,
+            '{15p_regular}' => $regular_text,
+        ]);
+    }
+}
+
+if (!function_exists('svic_15p_price_tokens_recursive')) {
+    function svic_15p_price_tokens_recursive(array $values, ?string $locale = null): array {
+        foreach ($values as $key => $value) {
+            if (is_string($value)) {
+                $values[$key] = svic_15p_price_tokens($value, $locale);
+            } elseif (is_array($value)) {
+                $values[$key] = svic_15p_price_tokens_recursive($value, $locale);
+            }
+        }
+        return $values;
     }
 }
 

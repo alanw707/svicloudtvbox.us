@@ -1,4 +1,4 @@
-import { test, expect, type Locator } from '@playwright/test';
+import { test, expect, type Locator, type Page } from '@playwright/test';
 
 function collectProductNodes(jsonLdBlocks: string[]): Array<Record<string, unknown>> {
   const products: Array<Record<string, unknown>> = [];
@@ -24,8 +24,19 @@ async function expectLoadedImage(locator: Locator) {
   ).toBeGreaterThan(0);
 }
 
+async function catalog15pPrices(page: Page) {
+  await page.goto('/product/svicloud-15p/', { waitUntil: 'domcontentloaded' });
+  const price = page.locator('.product-hero-price');
+  const sale = price.locator('ins .woocommerce-Price-amount');
+  const current = (await (await sale.count() ? sale : price.locator('.woocommerce-Price-amount').last()).innerText()).trim();
+  const original = price.locator('del .woocommerce-Price-amount');
+  const regular = await original.count() ? (await original.innerText()).trim() : null;
+  return { current, regular };
+}
+
 test.describe('SVICLOUD 15P launch safeguards', () => {
   test('homepage renders source-confirmed 15P in-stock pricing without unsupported policies', async ({ page }) => {
+    const prices = await catalog15pPrices(page);
     const response = await page.goto('/', { waitUntil: 'networkidle' });
     expect(response?.ok()).toBeTruthy();
     await expect(page).toHaveTitle(/SVICLOUD 15P/);
@@ -43,8 +54,8 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     const pricingCard = page.locator('.lumen-pricing .shop-product-card--new');
     const pricingCardText = await pricingCard.innerText();
     expect(pricingCardText.toLowerCase()).toContain('in stock now');
-    expect(pricingCardText).toContain('$287.99');
-    expect(pricingCardText).toContain('$379.00');
+    expect(pricingCardText).toContain(prices.current);
+    if (prices.regular) expect(pricingCardText).toContain(prices.regular);
     expect(pricingCardText).not.toContain('Coming Soon');
     expect(pricingCardText).not.toContain('warranty');
     expect(pricingCardText).not.toContain('Android 14 performance');
@@ -53,12 +64,13 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
   });
 
   test('shop 15P card shows aligned in-stock pricing and action', async ({ page }) => {
+    const prices = await catalog15pPrices(page);
     const response = await page.goto('/shop/', { waitUntil: 'networkidle' });
     expect(response?.ok()).toBeTruthy();
 
     const card = page.locator('.shop-product-card--backorder');
     const cardText = await card.innerText();
-    for (const claim of ['In stock now', '$287.99', '$379.00', 'Amlogic S905Y5', 'Android 14', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'AV1']) {
+    for (const claim of ['In stock now', prices.current, ...(prices.regular ? [prices.regular] : []), 'Amlogic S905Y5', 'Android 14', '4 GB DDR3', '64 GB eMMC', 'Wi-Fi 6', 'Bluetooth 5.4', 'AV1']) {
       expect(cardText.toLowerCase()).toContain(claim.toLowerCase());
     }
     expect(cardText).not.toContain('Coming Soon');
@@ -129,14 +141,18 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
     expect(offer).toMatchObject({
       '@type': 'Offer',
       priceCurrency: 'USD',
-      price: '288.00',
       availability: 'https://schema.org/InStock',
     });
+    const productPrice = page.locator('.product-hero-price');
+    const saleAmount = productPrice.locator('ins .woocommerce-Price-amount');
+    const displayedPrice = await (await saleAmount.count() ? saleAmount : productPrice.locator('.woocommerce-Price-amount').last()).innerText();
+    expect(Number(offer.price)).toBeCloseTo(Number(displayedPrice.replace(/[^\d.]/g, '')), 2);
     expect((offer as Record<string, unknown>).availabilityStarts).toBeUndefined();
 
     await expectLoadedImage(page.locator('.product-hero-image'));
-    await expect(page.locator('.product-hero-price')).toContainText('$287.99');
-    await expect(page.locator('.product-hero-price')).toContainText('$379.00');
+    await expect(productPrice).toContainText(displayedPrice.trim());
+    const regularAmount = productPrice.locator('del .woocommerce-Price-amount');
+    if (await regularAmount.count()) await expect(regularAmount).not.toBeEmpty();
     await expect(page.locator('.stock.in-stock')).toContainText('In stock');
     const button = page.locator('.single_add_to_cart_button');
     await expect(button).toHaveText('Buy 15P');
@@ -167,6 +183,7 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
   });
 
   test('localizes launch metadata and shows Android 12 for 10P+ and 10S in every locale', async ({ page }) => {
+    const prices = await catalog15pPrices(page);
     const locales = [
       { prefix: '', marker: 'SVICLOUD', modelKeyword: 'SVICLOUD 15P', secondaryKeyword: '小雲盒子 15P', included: 'Included', action: 'Buy 15P', availability: 'In stock now' },
       { prefix: '/zh', marker: '小雲', modelKeyword: '小雲盒子 15P', secondaryKeyword: '小雲電視盒 15P', included: '內含', action: '購買 15P', availability: '現貨供應' },
@@ -191,12 +208,12 @@ test.describe('SVICLOUD 15P launch safeguards', () => {
         if (locale.secondaryKeyword && ['/', '/shop/', '/compare/', '/svicloud-15p-features/', '/product/svicloud-15p/'].includes(route)) {
           expect(metadata.join(' ')).toContain(locale.secondaryKeyword);
         }
-        expect(metadata.join(' ')).toContain('288');
+        expect(metadata.join(' ')).not.toContain('{15p_');
+        if (route !== '/product/svicloud-15p/') expect(metadata.join(' ')).toContain(prices.current);
         const routeText = await page.locator('body').innerText();
         expect(routeText.toLocaleLowerCase()).toContain(locale.action.toLocaleLowerCase());
         expect(routeText.toLocaleLowerCase()).toContain(locale.availability.toLocaleLowerCase());
-        expect(routeText).toMatch(/288/);
-        expect(routeText).toMatch(/379/);
+        expect(routeText).toContain(prices.current);
         if (route === '/product/svicloud-15p/') {
           await expect(page.locator('.single_add_to_cart_button')).toHaveText(locale.action);
           await expect(page.locator('.stock.in-stock')).toContainText(locale.availability);

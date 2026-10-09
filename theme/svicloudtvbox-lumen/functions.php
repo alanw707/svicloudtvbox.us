@@ -936,9 +936,9 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh-cn' => '小云盒子 15P vs 10P+ vs 10S｜机型规格比较',
                 ],
                 'description' => [
-                    'en' => 'Compare the in-stock $287.99 SVICLOUD 15P / 小雲盒子 15P TV box ($379 regular) with 10P+, 10S, hardware, pricing, and availability.',
-                    'zh' => '比較現貨 US$287.99 小雲盒子 15P／小雲電視盒 15P（原價 US$379）與 10P+、10S 的硬體、影音支援、價格及銷售狀態。',
-                    'zh-cn' => '比较现货 US$287.99 小云盒子 15P／小云电视盒 15P（原价 US$379）与 10P+、10S 的硬件、影音支持、价格及销售状态。',
+                    'en' => 'Compare the in-stock {15p_price} SVICLOUD 15P / 小雲盒子 15P TV box ({15p_regular} regular) with 10P+, 10S, hardware, pricing, and availability.',
+                    'zh' => '比較現貨 US{15p_price} 小雲盒子 15P／小雲電視盒 15P（原價 US{15p_regular}）與 10P+、10S 的硬體、影音支援、價格及銷售狀態。',
+                    'zh-cn' => '比较现货 US{15p_price} 小云盒子 15P／小云电视盒 15P（原价 US{15p_regular}）与 10P+、10S 的硬件、影音支持、价格及销售状态。',
                 ],
                 'image'       => '/assets/images/products/svicloud-15p-primary-studio-v4-bilingual-remote-watermarked.webp',
                 'image_alt'   => [
@@ -954,9 +954,9 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh-cn' => '选购小云盒子 15P、10P+ 与 10S 电视盒',
                 ],
                 'description' => [
-                    'en' => 'Buy in-stock SVICLOUD 15P / 小雲盒子 15P TV box for $287.99 (regular $379), or shop current 10P+, 10S, and Bluetooth remote products.',
-                    'zh' => '以 US$287.99 購買現貨小雲盒子 15P／小雲電視盒 15P（原價 US$379），或選購現售 10P+、10S 與藍牙遙控器。',
-                    'zh-cn' => '以 US$287.99 购买现货小云盒子 15P／小云电视盒 15P（原价 US$379），或选购现售 10P+、10S 与蓝牙遥控器。',
+                    'en' => 'Buy in-stock SVICLOUD 15P / 小雲盒子 15P TV box for {15p_price} (regular {15p_regular}), or shop current 10P+, 10S, and Bluetooth remote products.',
+                    'zh' => '以 US{15p_price} 購買現貨小雲盒子 15P／小雲電視盒 15P（原價 US{15p_regular}），或選購現售 10P+、10S 與藍牙遙控器。',
+                    'zh-cn' => '以 US{15p_price} 购买现货小云盒子 15P／小云电视盒 15P（原价 US{15p_regular}），或选购现售 10P+、10S 与蓝牙遥控器。',
                 ],
                 'image'       => '/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp',
                 'image_alt'   => [
@@ -1020,6 +1020,12 @@ if (!function_exists('svic_static_page_meta_registry')) {
                 ],
             ],
         ];
+
+        foreach (['compare', 'shop'] as $slug) {
+            foreach ($registry[$slug]['description'] as $language => $description) {
+                $registry[$slug]['description'][$language] = svic_15p_price_tokens($description, $language);
+            }
+        }
 
         return $registry;
     }
@@ -1976,11 +1982,14 @@ if (!function_exists('svic_homepage_meta_definitions')) {
             ],
             'en_us' => [
                 'title'       => 'SVICLOUD 10P+ & 15P | 小雲盒子 U.S. Authorized Dealer',
-                'description' => 'Shop in-stock SVICLOUD 15P / 小雲盒子 15P TV box for $287.99 (regular $379), plus 10P+, 10S, and Bluetooth remote products. Compare 15P, 10P+, and 10S.',
+                'description' => 'Shop in-stock SVICLOUD 15P / 小雲盒子 15P TV box for {15p_price} (regular {15p_regular}), plus 10P+, 10S, and Bluetooth remote products. Compare 15P, 10P+, and 10S.',
                 'image_alt'   => 'SVICLOUD 15P Android 14 TV box product graphic',
             ],
         ];
 
+        foreach ($definitions as $language => $entry) {
+            $definitions[$language] = svic_15p_price_tokens_recursive($entry, $language);
+        }
         if ($locale === 'zh_cn' || $locale === 'zh-cn') {
             return $definitions['zh_cn'];
         }
@@ -8261,8 +8270,10 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
         ];
 
         $description_overrides = [
-            '1204' => 'SVICLOUD 15P TV Box 小雲盒子 15P is in stock now at $287.99 (regular $379.00). It runs Android 14 on an Amlogic S905Y5 quad-core Cortex-A55 processor with 4 GB DDR3 memory, 64 GB eMMC storage, dual-band Wi-Fi 6, Bluetooth 5.4, 4K HDR, and AV1 support.',
+            '1204' => 'SVICLOUD 15P TV Box 小雲盒子 15P is in stock now at {15p_price} (regular {15p_regular_2dp}). It runs Android 14 on an Amlogic S905Y5 quad-core Cortex-A55 processor with 4 GB DDR3 memory, 64 GB eMMC storage, dual-band Wi-Fi 6, Bluetooth 5.4, 4K HDR, and AV1 support.',
         ];
+
+        $description_overrides['1204'] = svic_15p_price_tokens($description_overrides['1204']);
 
         $availability_overrides = [
             '1204' => [
