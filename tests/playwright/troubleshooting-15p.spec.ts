@@ -31,6 +31,8 @@ for (const [locale, prefix, heading] of [
     await expect(hub).toContainText('10P+');
     await expect(hub.locator('a[href="mailto:support@svicloudtvbox.us"]')).toBeVisible();
     await expect(hub.locator(`a[href="https://svicloudtvbox.us${prefix}/contact/"]`)).toBeVisible();
+    await expect(hub.locator(`a[href="https://svicloudtvbox.us${prefix}/product/svicloud-15p/"]`)).toBeVisible();
+    await expect(hub).toContainText(locale === 'en_US' ? 'A working older box does not need replacing.' : locale === 'zh_TW' ? '運作正常的舊機不必更換。' : '正常使用的旧机不必更换。');
     await details.first().locator('summary').focus();
     await page.keyboard.press('Enter');
     await expect(details.first()).toHaveAttribute('open', '');

@@ -41,7 +41,7 @@ if (!function_exists('svic_15p_promo_content')) {
         $content = [
             'en' => [
                 'meta_title' => 'SVICLOUD 15P Features, Specs & Price | 小雲盒子 15P TV Box',
-                'meta_description' => 'Explore SVICLOUD 15P / 小雲盒子 15P TV box features, Android 14 specs, $288 price, Wi-Fi 6, app downloads, Yogurt TV Go guidance, and 10P+ comparison.',
+                'meta_description' => 'Explore SVICLOUD 15P / 小雲盒子 15P TV box features, Android 14 specs, {15p_price} price, Wi-Fi 6, app downloads, Yogurt TV Go guidance, and 10P+ comparison.',
                 'badge' => 'SVICLOUD 15P guide',
                 'title' => 'SVICLOUD 15P features, specs, and app-download upgrade',
                 'lead' => 'A focused product page for buyers comparing 15P against 10P+: Android 14, Wi-Fi 6, Bluetooth 5.4, air-mouse control, Filmax local playback, and support for downloading mobile apps including Yogurt TV Go guidance.',
@@ -50,7 +50,7 @@ if (!function_exists('svic_15p_promo_content')) {
                 'tertiary_cta' => 'Yogurt TV app guide',
                 'shop_cta' => 'Shop lineup',
                 'features_link' => 'Explore 15P features, specs, and Yogurt TV Go guidance',
-                'hero_notes' => ['In stock now', '$288 sale price', '$379 regular price', 'Android 14 + Wi-Fi 6', '10P+ remains the in-stock premium model'],
+                'hero_notes' => ['In stock now', '{15p_price} sale price', '{15p_regular} regular price', 'Android 14 + Wi-Fi 6', '10P+ remains the in-stock premium model'],
                 'feature_title' => 'What 15P adds',
                 'feature_lead' => 'The useful upgrade story is not one giant spec. It is a newer platform, stronger wireless baseline, and a better app/local-playback path for buyers who want the newest model.',
                 'features' => [
@@ -83,7 +83,7 @@ if (!function_exists('svic_15p_promo_content')) {
                 'app_copy' => 'The safe claim is app flexibility: 15P is the model to promote when buyers ask about downloading mobile apps or Yogurt TV Go. For setup, app search terms, Cherry TV password questions, or regional content sections, route shoppers to the app guide and keep the answer support-first.',
                 'faq_title' => '15P product questions',
                 'faqs' => [
-                    ['Is SVICLOUD 15P available now?', 'Yes. It is in stock now at $288, with a regular price of $379.'],
+                    ['Is SVICLOUD 15P available now?', 'Yes. It is in stock now at {15p_price}, with a regular price of {15p_regular}.'],
                     ['What is the biggest practical difference?', '15P is the newest model for shoppers who care about mobile app downloads, Yogurt TV Go guidance, Android 14, Wi-Fi 6, and Bluetooth 5.4.'],
                     ['Should I choose 15P or 10P+?', 'Choose 15P if you want the newest SVICLOUD box. Choose 10P+ if you want the proven premium model that is already in stock.'],
                     ['Can you promise specific Yogurt TV content?', 'No. App menus and availability can change. The page should route setup and content-section questions to the Yogurt TV app guide and support.'],
@@ -91,7 +91,7 @@ if (!function_exists('svic_15p_promo_content')) {
             ],
             'zh_tw' => [
                 'meta_title' => '小雲盒子 15P 功能、規格與價格｜SVICLOUD 15P 電視盒',
-                'meta_description' => '查看小雲盒子 15P / 小雲電視盒 15P / SVICLOUD 15P 功能、規格、US$288 現貨價格、Android 14、App 下載與 10P+ 比較。',
+                'meta_description' => '查看小雲盒子 15P / 小雲電視盒 15P / SVICLOUD 15P 功能、規格、US{15p_price} 現貨價格、Android 14、App 下載與 10P+ 比較。',
                 'badge' => '小雲盒子 15P 指南',
                 'title' => '小雲盒子 15P 功能、規格與 App 下載升級',
                 'lead' => '這是小雲盒子 15P / 小雲電視盒 15P 的重點頁：Android 14、Wi-Fi 6、藍牙 5.4、飛鼠操作、Filmax 本機播放，以及支援下載手機 App，包括 Yogurt TV Go 相關指引。',
@@ -100,7 +100,7 @@ if (!function_exists('svic_15p_promo_content')) {
                 'tertiary_cta' => 'Yogurt TV App 指南',
                 'shop_cta' => '查看產品系列',
                 'features_link' => '查看 15P 功能、規格與 Yogurt TV Go 指引',
-                'hero_notes' => ['現貨供應', '特價 US$288', '原價 US$379', 'Android 14 + Wi-Fi 6', '10P+ 仍是現貨高階主力'],
+                'hero_notes' => ['現貨供應', '特價 US{15p_price}', '原價 US{15p_regular}', 'Android 14 + Wi-Fi 6', '10P+ 仍是現貨高階主力'],
                 'feature_title' => '15P 新增什麼',
                 'feature_lead' => '15P 的銷售重點不是單一規格，而是更新的平台、更新的無線規格，以及更適合 App 下載與本機播放的使用情境。',
                 'features' => [
@@ -133,7 +133,7 @@ if (!function_exists('svic_15p_promo_content')) {
                 'app_copy' => '安全的說法是 App 彈性：當買家問手機 App 下載或 Yogurt TV Go 時，15P 是要主推的機型。安裝、搜尋詞、Cherry TV 密碼或內容分類問題，仍導向 App 指南與客服。',
                 'faq_title' => '15P 上市常見問題',
                 'faqs' => [
-                    ['小雲盒子 15P 現在能買嗎？', '可以。小雲盒子 15P / SVICLOUD 15P 現貨供應，特價 US$288，原價 US$379。'],
+                    ['小雲盒子 15P 現在能買嗎？', '可以。小雲盒子 15P / SVICLOUD 15P 現貨供應，特價 US{15p_price}，原價 US{15p_regular}。'],
                     ['最大的實用差異是什麼？', '15P 是較新的機型，適合重視手機 App 下載、Yogurt TV Go 指引、Android 14、Wi-Fi 6 與藍牙 5.4 的買家。'],
                     ['應該選 15P 還是 10P+？', '想要最新小雲盒子 15P，選 15P。想要已經現貨供應、成熟穩定的高階機型，選 10P+。'],
                     ['可以保證 Yogurt TV 內容嗎？', '不可以。App 選單與可用性可能變動，內容分類與安裝問題應導向 Yogurt TV App 指南與客服。'],
@@ -141,7 +141,7 @@ if (!function_exists('svic_15p_promo_content')) {
             ],
             'zh_cn' => [
                 'meta_title' => '小云盒子 15P 功能、规格与价格｜SVICLOUD 15P 电视盒',
-                'meta_description' => '查看小云盒子 15P / 小云电视盒 15P / SVICLOUD 15P 功能、规格、US$288 现货价格、Android 14、App 下载与 10P+ 比较。',
+                'meta_description' => '查看小云盒子 15P / 小云电视盒 15P / SVICLOUD 15P 功能、规格、US{15p_price} 现货价格、Android 14、App 下载与 10P+ 比较。',
                 'badge' => '小云盒子 15P 指南',
                 'title' => '小云盒子 15P 功能、规格与 App 下载升级',
                 'lead' => '这是小云盒子 15P / 小云电视盒 15P 的重点页：Android 14、Wi-Fi 6、蓝牙 5.4、飞鼠操作、Filmax 本地播放，以及支持下载手机 App，包括 Yogurt TV Go 相关指引。',
@@ -150,7 +150,7 @@ if (!function_exists('svic_15p_promo_content')) {
                 'tertiary_cta' => 'Yogurt TV App 指南',
                 'shop_cta' => '查看产品系列',
                 'features_link' => '查看 15P 功能、规格与 Yogurt TV Go 指引',
-                'hero_notes' => ['现货供应', '特价 US$288', '原价 US$379', 'Android 14 + Wi-Fi 6', '10P+ 仍是现货高端主力'],
+                'hero_notes' => ['现货供应', '特价 US{15p_price}', '原价 US{15p_regular}', 'Android 14 + Wi-Fi 6', '10P+ 仍是现货高端主力'],
                 'feature_title' => '15P 新增什么',
                 'feature_lead' => '15P 的销售重点不是单一规格，而是更新的平台、更新的无线规格，以及更适合 App 下载与本地播放的使用场景。',
                 'features' => [
@@ -183,7 +183,7 @@ if (!function_exists('svic_15p_promo_content')) {
                 'app_copy' => '安全的说法是 App 灵活性：当买家问手机 App 下载或 Yogurt TV Go 时，15P 是要主推的机型。安装、搜索词、Cherry TV 密码或内容分类问题，仍导向 App 指南与客服。',
                 'faq_title' => '15P 上市常见问题',
                 'faqs' => [
-                    ['小云盒子 15P 现在能买吗？', '可以。小云盒子 15P / SVICLOUD 15P 现货供应，特价 US$288，原价 US$379。'],
+                    ['小云盒子 15P 现在能买吗？', '可以。小云盒子 15P / SVICLOUD 15P 现货供应，特价 US{15p_price}，原价 US{15p_regular}。'],
                     ['最大的实用差异是什么？', '15P 是更新的机型，适合重视手机 App 下载、Yogurt TV Go 指引、Android 14、Wi-Fi 6 与蓝牙 5.4 的买家。'],
                     ['应该选 15P 还是 10P+？', '想要最新小云盒子 15P，选 15P。想要已经现货供应、成熟稳定的高端机型，选 10P+。'],
                     ['可以保证 Yogurt TV 内容吗？', '不可以。App 菜单与可用性可能变动，内容分类与安装问题应导向 Yogurt TV App 指南与客服。'],
@@ -192,7 +192,7 @@ if (!function_exists('svic_15p_promo_content')) {
         ];
 
         $key = svic_15p_promo_locale_key();
-        return $content[$key] ?? $content['en'];
+        return svic_15p_price_tokens_recursive($content[$key] ?? $content['en']);
     }
 }
 

@@ -15,14 +15,19 @@ const config: PlaywrightTestConfig = {
     baseURL: process.env.PLAYWRIGHT_BASE_URL || 'http://svicloud10p.svic.local',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure',
+    video: process.env.SVIC_NO_VIDEO ? 'off' : 'retain-on-failure',
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
   },
   projects: [
     {
       name: 'chromium-desktop',
-      use: { browserName: 'chromium' },
+      use: {
+        browserName: 'chromium',
+        ...(process.env.SVIC_CHROMIUM_PATH
+          ? { launchOptions: { executablePath: process.env.SVIC_CHROMIUM_PATH } }
+          : {}),
+      },
     },
     {
       name: 'webkit-mobile',

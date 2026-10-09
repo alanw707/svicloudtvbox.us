@@ -430,6 +430,7 @@ $render_inline_cro_cta = static function () use ($product_15p_url, $product_10p_
           <div class="guides-answer-hub__quick">
             <h2><?php echo $translate_html('guides.troubleshooting.older_title'); ?></h2>
             <p><?php echo $translate_html('guides.troubleshooting.older_copy'); ?></p>
+            <p><?php echo $translate_html('guides.troubleshooting.upgrade_note'); ?></p>
           </div>
           <div class="guides-answer-hub__quick">
             <h2><?php echo $translate_html('guides.troubleshooting.support_title'); ?></h2>
@@ -438,6 +439,7 @@ $render_inline_cro_cta = static function () use ($product_15p_url, $product_10p_
           <div class="guides-answer-hub__links">
             <a href="mailto:support@svicloudtvbox.us"><?php echo $translate_html('guides.troubleshooting.email_label'); ?></a>
             <a href="<?php echo esc_url($contact_url); ?>"><?php echo $translate_html('product.traffic.links.contact'); ?></a>
+            <a href="<?php echo esc_url($product_15p_url); ?>" data-svic-event="svic_cta_click" data-svic-location="guide_troubleshooting_compare" data-svic-model="svicloud-15p"><?php echo $translate_html('guides.troubleshooting.compare_15p'); ?></a>
           </div>
         </section>
       <?php elseif ($section_key === 'resources') : ?>
