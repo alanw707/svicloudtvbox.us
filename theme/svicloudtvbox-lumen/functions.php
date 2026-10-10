@@ -5472,12 +5472,28 @@ if (!function_exists('svic_filter_rank_math_singular_description')) {
             return $description;
         }
 
+        $post_id = get_queried_object_id();
+        if (is_singular('post')
+            && $post_id
+            && get_post_field('post_name', (int) $post_id) === 'best-chinese-tv-box-north-america'
+            && function_exists('svic_post_locale_meta')
+        ) {
+            $locale = function_exists('svic_current_locale') ? svic_current_locale() : get_locale();
+            if (is_string($locale) && preg_match('/^zh(?:[_-]|$)/i', $locale)) {
+                // The guide has authored locale meta. Rank Math's English excerpt can be
+                // useful but must not override it on the translated article routes.
+                $localized = svic_clean_seo_description_text(svic_post_locale_meta((int) $post_id, 'description'));
+                if ($localized !== '') {
+                    return $localized;
+                }
+            }
+        }
+
         $current_description = svic_clean_seo_description_text($description);
         if (svic_is_seo_description_useful($current_description)) {
             return $current_description;
         }
 
-        $post_id = get_queried_object_id();
         if (!$post_id) {
             return $description;
         }
