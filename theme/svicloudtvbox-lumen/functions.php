@@ -4534,6 +4534,21 @@ if (!function_exists('svic_finish_head_meta_description_buffer')) {
             return;
         }
 
+        // Rank Math may leave a useful English description in the final head
+        // even when its social-description filters receive the localized copy.
+        $guide_description = function_exists('svic_get_guide_locale_seo_description')
+            ? svic_get_guide_locale_seo_description()
+            : '';
+        if ($guide_description !== '') {
+            $without_description = preg_replace('/<meta\s+name=["\']description["\'][^>]*>\s*/i', '', $head);
+            if (is_string($without_description)) {
+                $head = $without_description;
+            }
+            echo $head; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            echo '<meta name="description" content="' . esc_attr(svic_seo_trim_text($guide_description, 160)) . "\" />\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+            return;
+        }
+
         $has_useful_description = false;
         if (preg_match_all('/<meta\s+name=["\']description["\'][^>]*>/i', $head, $matches)) {
             foreach ($matches[0] as $tag) {
@@ -5461,6 +5476,27 @@ if (!function_exists('svic_build_singular_seo_description')) {
     }
 }
 
+if (!function_exists('svic_get_guide_locale_seo_description')) {
+    function svic_get_guide_locale_seo_description(): string
+    {
+        if (is_admin() || !is_singular('post') || !function_exists('svic_post_locale_meta')) {
+            return '';
+        }
+
+        $post_id = get_queried_object_id();
+        if (!$post_id || get_post_field('post_name', (int) $post_id) !== 'best-chinese-tv-box-north-america') {
+            return '';
+        }
+
+        $locale = function_exists('svic_current_locale') ? svic_current_locale() : get_locale();
+        if (!is_string($locale) || !preg_match('/^zh(?:[_-]|$)/i', $locale)) {
+            return '';
+        }
+
+        return svic_clean_seo_description_text(svic_post_locale_meta((int) $post_id, 'description'));
+    }
+}
+
 if (!function_exists('svic_filter_rank_math_singular_description')) {
     function svic_filter_rank_math_singular_description($description)
     {
@@ -5472,21 +5508,9 @@ if (!function_exists('svic_filter_rank_math_singular_description')) {
             return $description;
         }
 
-        $post_id = get_queried_object_id();
-        if (is_singular('post')
-            && $post_id
-            && get_post_field('post_name', (int) $post_id) === 'best-chinese-tv-box-north-america'
-            && function_exists('svic_post_locale_meta')
-        ) {
-            $locale = function_exists('svic_current_locale') ? svic_current_locale() : get_locale();
-            if (is_string($locale) && preg_match('/^zh(?:[_-]|$)/i', $locale)) {
-                // The guide has authored locale meta. Rank Math's English excerpt can be
-                // useful but must not override it on the translated article routes.
-                $localized = svic_clean_seo_description_text(svic_post_locale_meta((int) $post_id, 'description'));
-                if ($localized !== '') {
-                    return $localized;
-                }
-            }
+        $localized = svic_get_guide_locale_seo_description();
+        if ($localized !== '') {
+            return $localized;
         }
 
         $current_description = svic_clean_seo_description_text($description);
@@ -5494,6 +5518,7 @@ if (!function_exists('svic_filter_rank_math_singular_description')) {
             return $current_description;
         }
 
+        $post_id = get_queried_object_id();
         if (!$post_id) {
             return $description;
         }

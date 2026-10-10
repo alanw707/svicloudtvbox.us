@@ -12,6 +12,7 @@ $GLOBALS['meta'] = [
 $GLOBALS['hooks'] = [];
 function is_admin(): bool { return $GLOBALS['ctx']['admin']; }
 function is_front_page(): bool { return $GLOBALS['ctx']['front']; }
+function is_feed(): bool { return false; }
 function is_singular($type = null): bool { return $type === null ? in_array($GLOBALS['ctx']['type'], ['post', 'product'], true) : $GLOBALS['ctx']['type'] === $type; }
 function get_queried_object_id(): int { return $GLOBALS['ctx']['id']; }
 function get_post_field(string $field, int $id): string { return $field === 'post_name' && $id === 325 ? $GLOBALS['ctx']['slug'] : ''; }
@@ -20,6 +21,7 @@ function get_locale(): string { return 'en_US'; }
 function get_post_meta(int $id, string $key, bool $single = true): string { return $id === 325 ? ($GLOBALS['meta'][$key] ?? '') : ''; }
 function wp_strip_all_tags(string $text): string { return strip_tags($text); }
 function strip_shortcodes(string $text): string { return $text; }
+function esc_attr(string $text): string { return htmlspecialchars($text, ENT_QUOTES, 'UTF-8'); }
 function add_filter(string $hook, string $callback, int $priority): void { $GLOBALS['hooks'][] = [$hook, $callback, $priority]; }
 function svic_build_singular_seo_description(int $id): string { return 'generated fallback'; }
 function load_block(string $file, string $start, string $end): void {
@@ -32,9 +34,12 @@ function load_block(string $file, string $start, string $end): void {
 $helper = $root . '/theme/svicloudtvbox-lumen/inc/helpers-svic.php';
 $theme = $root . '/theme/svicloudtvbox-lumen/functions.php';
 load_block($helper, "if (!function_exists('svic_post_locale_meta'))", "if (!function_exists('svic_post_localized_content'))");
+load_block($theme, "if (!function_exists('svic_seo_trim_text'))", "if (!function_exists('svic_clean_seo_description_text'))");
 load_block($theme, "if (!function_exists('svic_clean_seo_description_text'))", "if (!function_exists('svic_is_seo_description_useful'))");
 load_block($theme, "if (!function_exists('svic_is_seo_description_useful'))", "if (!function_exists('svic_build_singular_seo_description'))");
+load_block($theme, "if (!function_exists('svic_get_guide_locale_seo_description'))", "if (!function_exists('svic_filter_rank_math_singular_description'))");
 load_block($theme, "if (!function_exists('svic_filter_rank_math_singular_description'))", "if (!function_exists('svic_filter_singular_post_document_title'))");
+load_block($theme, "if (!function_exists('svic_finish_head_meta_description_buffer'))", "add_action('wp_head', 'svic_start_head_meta_description_buffer'");
 $english = 'Compare Chinese TV boxes for a US home: third-party app compatibility, TV setup, total cost, shipping, returns and seller support. Check current models.';
 $tested = 0;
 function check_case(string $name, string $want, string $english): void {
@@ -68,4 +73,36 @@ $expectedHooks = ['rank_math/frontend/description', 'rank_math/frontend/snippet_
 foreach ($expectedHooks as $hook) {
     if (!in_array([$hook, 'svic_filter_rank_math_singular_description', 40], $GLOBALS['hooks'], true)) { fwrite(STDERR, "Missing hook: $hook\n"); exit(1); }
 }
+function render_head(string $head): string {
+    ob_start();
+    ob_start();
+    $GLOBALS['svic_head_meta_description_buffer_level'] = ob_get_level();
+    echo $head;
+    svic_finish_head_meta_description_buffer();
+    return ob_get_clean();
+}
+function check_head(string $name, string $wanted, string $english, int $sourceCount = 1): void {
+    global $tested;
+    $head = str_repeat('<meta name="description" content="' . esc_attr($english) . '" />' . "\n", $sourceCount)
+        . '<meta property="og:description" content="Social left alone" />' . "\n";
+    $out = render_head($head);
+    preg_match_all('/<meta\s+name="description"[^>]*>/i', $out, $found);
+    if (count($found[0]) !== 1
+        || !str_contains($found[0][0], 'content="' . esc_attr($wanted) . '"')
+        || !str_contains($out, 'content="Social left alone"')) {
+        fwrite(STDERR, "$name failed: " . json_encode($out, JSON_UNESCAPED_UNICODE) . "\n"); exit(1);
+    }
+    $tested++;
+}
+$GLOBALS['ctx']['admin'] = false;
+$GLOBALS['ctx']['type'] = 'post';
+$GLOBALS['ctx']['slug'] = 'best-chinese-tv-box-north-america';
+$GLOBALS['ctx']['locale'] = 'en_US';
+check_head('English head unchanged', $english, $english);
+$GLOBALS['ctx']['locale'] = 'zh_TW';
+check_head('Traditional head replaces English and dedupes', $GLOBALS['meta']['_svic_description_zh_tw'], $english, 2);
+$GLOBALS['ctx']['locale'] = 'zh_CN';
+check_head('Simplified head replaces English', $GLOBALS['meta']['_svic_description_zh_cn'], $english);
+$GLOBALS['ctx']['slug'] = 'unrelated-post';
+check_head('unrelated head unchanged', $english, $english);
 echo "PASS $tested cases and " . count($expectedHooks) . " description hooks\n";
