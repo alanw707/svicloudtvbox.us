@@ -144,6 +144,7 @@ return [
             'title'           => 'Compare Your Options',
             'copy'            => 'Ready to pick the right SVICLOUD model? Explore our side-by-side comparison or chat with our concierge team for personalized advice.',
             'primary_label'   => 'Compare 10P+ vs 10S',
+            'guide_compare_label' => 'Compare current models',
             'secondary_label' => 'Talk to Concierge',
         ],
         'index' => [

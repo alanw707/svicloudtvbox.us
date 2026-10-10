@@ -136,6 +136,11 @@ $overrides = [
             ],
         ],
     ],
+    'blog' => [
+        'cta' => [
+            'guide_compare_label' => '比较目前机型',
+        ],
+    ],
     'shop' => [
         'hero' => [
             'badge'    => '选购',

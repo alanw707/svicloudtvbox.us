@@ -105,6 +105,7 @@ return [
             'title'           => '比較你的選擇',
             'copy'            => '想選對小雲機型嗎？前往官方比一比或與禮賓客服聊聊，獲得專屬建議。',
             'primary_label'   => '查看 10P+ vs 10S 比較',
+            'guide_compare_label' => '比較目前機型',
             'secondary_label' => '聯絡禮賓客服',
         ],
         'index' => [
