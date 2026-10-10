@@ -13,6 +13,7 @@ get_header();
   <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     <?php
       $post_id        = get_the_ID();
+      $is_15p_buying_guide = get_post_field('post_name', $post_id) === 'best-chinese-tv-box-north-america';
       $categories     = get_the_category($post_id);
       $primary_cat    = $categories ? $categories[0] : null;
       $published_time = get_the_date('', $post_id);
@@ -106,8 +107,10 @@ get_header();
       <footer class="blog-article__footer">
         <div class="blog-article__cta">
           <?php
+            $cta_product_15p = $is_15p_buying_guide && class_exists('WooCommerce') && function_exists('svic_get_product_by_slug') ? svic_get_product_by_slug('svicloud-15p') : null;
             $cta_product_10p = class_exists('WooCommerce') && function_exists('svic_get_product_by_slug') ? svic_get_product_by_slug('svicloud-10p-plus') : null;
             $cta_product_10s = class_exists('WooCommerce') && function_exists('svic_get_product_by_slug') ? svic_get_product_by_slug('svicloud-10s') : null;
+            $cta_product_15p_url = $cta_product_15p ? get_permalink($cta_product_15p->get_id()) : home_url('/product/svicloud-15p/');
             $cta_product_10p_url = $cta_product_10p ? get_permalink($cta_product_10p->get_id()) : home_url('/product/svicloud-10p-plus/');
             $cta_product_10s_url = $cta_product_10s ? get_permalink($cta_product_10s->get_id()) : home_url('/product/svicloud-10s/');
           ?>
@@ -116,14 +119,20 @@ get_header();
             <?php echo svic_translate_html('blog.cta.copy'); ?>
           </p>
           <div class="blog-article__cta-actions">
+            <?php if ($is_15p_buying_guide) : ?>
+            <a class="btn btn-primary" href="<?php echo esc_url(svic_url_with_lang($cta_product_15p_url)); ?>">
+              <?php echo svic_translate_html('compare.final_cta.cta_15p'); ?>
+            </a>
+            <?php else : ?>
             <a class="btn btn-primary" href="<?php echo esc_url(svic_url_with_lang($cta_product_10p_url)); ?>">
               <?php echo svic_translate_html('compare.final_cta.cta_10p'); ?>
             </a>
             <a class="btn btn-outline" href="<?php echo esc_url(svic_url_with_lang($cta_product_10s_url)); ?>">
               <?php echo svic_translate_html('compare.final_cta.cta_10s'); ?>
             </a>
-            <a class="btn btn-primary" href="<?php echo esc_url(svic_url_with_lang(home_url('/compare/'))); ?>">
-              <?php echo svic_translate_html('blog.cta.primary_label'); ?>
+            <?php endif; ?>
+            <a class="<?php echo esc_attr($is_15p_buying_guide ? 'btn btn-outline' : 'btn btn-primary'); ?>" href="<?php echo esc_url(svic_url_with_lang(home_url('/compare/'))); ?>">
+              <?php echo svic_translate_html($is_15p_buying_guide ? 'blog.cta.guide_compare_label' : 'blog.cta.primary_label'); ?>
             </a>
             <a class="btn btn-outline" href="<?php echo esc_url(svic_url_with_lang(home_url('/support/'))); ?>">
               <?php echo svic_translate_html('blog.cta.secondary_label'); ?>
