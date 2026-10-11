@@ -44,6 +44,15 @@ return [
             'detail' => 'No code needed',
             'cta' => 'Shop 10P+ sale',
         ],
+        'flash_15p' => [
+            'aria_label' => 'SVICLOUD 15P limited-time coupon',
+            'eyebrow' => '15P flash offer · Ends Oct 18',
+            'offer_15p' => 'Extra 5% off SVICLOUD 15P',
+            'code_label' => 'Use code {{code}} at checkout',
+            'cta' => 'Shop 15P',
+            'coupon_not_active' => 'This 15P offer is valid October 11–18, 2026 (Pacific time).',
+            'coupon_not_eligible' => 'This coupon applies to SVICLOUD 15P only.',
+        ],
         'july_4' => [
             'aria_label'          => 'July 4th promotion',
             'eyebrow'             => 'July 4th Holiday Sale',

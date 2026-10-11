@@ -52,7 +52,10 @@ if (!defined('SVIC_RECENT_SHIPMENTS_ENABLED')) {
  */
 function svic_render_announcement_bar(): void {
     if (function_exists('svic_render_promotion_bar') && svic_is_promotion_visible()) {
-        svic_render_promotion_bar();
+        // On the homepage the flash coupon replaces the existing 10P+ sale bar.
+        if (!is_front_page()) {
+            svic_render_promotion_bar();
+        }
         return;
     }
 
