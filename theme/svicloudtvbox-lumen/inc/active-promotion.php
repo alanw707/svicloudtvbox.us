@@ -14,23 +14,27 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('SVIC_PROMOTION_ENABLED')) {
-    define('SVIC_PROMOTION_ENABLED', false);
+    define('SVIC_PROMOTION_ENABLED', true);
 }
 
 if (!defined('SVIC_PROMOTION_KEY')) {
-    define('SVIC_PROMOTION_KEY', 'google_10p');
+    define('SVIC_PROMOTION_KEY', 'flash_15p');
 }
 
 if (!defined('SVIC_PROMOTION_CODE')) {
-    define('SVIC_PROMOTION_CODE', 'GOOGLE5');
+    define('SVIC_PROMOTION_CODE', '15PFLASH5');
 }
 
 if (!defined('SVIC_PROMOTION_START')) {
-    define('SVIC_PROMOTION_START', '2026-08-19 13:45:00');
+    define('SVIC_PROMOTION_START', '2026-10-11 00:00:00');
 }
 
 if (!defined('SVIC_PROMOTION_END')) {
-    define('SVIC_PROMOTION_END', '2026-09-19 23:59:59');
+    define('SVIC_PROMOTION_END', '2026-10-18 23:59:59');
+}
+
+if (!defined('SVIC_PROMOTION_TIMEZONE')) {
+    define('SVIC_PROMOTION_TIMEZONE', 'America/Los_Angeles');
 }
 
 if (!defined('SVIC_PROMOTION_RATE')) {
@@ -38,15 +42,15 @@ if (!defined('SVIC_PROMOTION_RATE')) {
 }
 
 if (!defined('SVIC_PROMOTION_PRODUCT_IDS')) {
-    define('SVIC_PROMOTION_PRODUCT_IDS', [12]);
+    define('SVIC_PROMOTION_PRODUCT_IDS', [1204]);
 }
 
 if (!defined('SVIC_PROMOTION_DESCRIPTION')) {
-    define('SVIC_PROMOTION_DESCRIPTION', 'Google traffic: 5% off SVICLOUD 10P+ with code GOOGLE5.');
+    define('SVIC_PROMOTION_DESCRIPTION', 'Extra 5% off the current SVICLOUD 15P price with code 15PFLASH5; October 11–18, 2026 Pacific time.');
 }
 
 if (!defined('SVIC_PROMOTION_SYNC_MARK')) {
-    define('SVIC_PROMOTION_SYNC_MARK', '20260819-google5-10p-01');
+    define('SVIC_PROMOTION_SYNC_MARK', '20261011-15pflash5-01');
 }
 
 if (!function_exists('svic_active_promotion_config')) {
@@ -62,6 +66,8 @@ if (!function_exists('svic_active_promotion_config')) {
             'description'     => (string) SVIC_PROMOTION_DESCRIPTION,
             'product_ids'     => SVIC_PROMOTION_PRODUCT_IDS,
             'sync_mark'       => (string) SVIC_PROMOTION_SYNC_MARK,
+            'product_url'     => '/product/svicloud-15p/',
+            'offer_key'       => 'offer_15p',
         ];
 
         return apply_filters('svic_active_promotion_config', $config);
@@ -94,6 +100,9 @@ if (!function_exists('svic_promotion_products')) {
 
 if (!function_exists('svic_promotion_timezone')) {
     function svic_promotion_timezone(): DateTimeZone {
+        if (defined('SVIC_PROMOTION_TIMEZONE') && SVIC_PROMOTION_TIMEZONE !== '') {
+            return new DateTimeZone((string) SVIC_PROMOTION_TIMEZONE);
+        }
         if (function_exists('wp_timezone')) {
             return wp_timezone();
         }
@@ -150,7 +159,23 @@ if (!function_exists('svic_is_promotion_preview')) {
 
 if (!function_exists('svic_is_promotion_visible')) {
     function svic_is_promotion_visible(): bool {
-        return svic_is_promotion_active() || svic_is_promotion_preview();
+        if (!svic_is_promotion_active() && !svic_is_promotion_preview()) {
+            return false;
+        }
+        if (!function_exists('wc_get_product')) {
+            return false;
+        }
+        $eligible_ids = svic_promotion_product_ids();
+        if ($eligible_ids === []) {
+            return false;
+        }
+        foreach ($eligible_ids as $product_id) {
+            $product = wc_get_product($product_id);
+            if ($product instanceof WC_Product && $product->is_in_stock() && $product->is_purchasable()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
@@ -316,6 +341,10 @@ if (!function_exists('svic_promotion_translate_attr')) {
 /** Homepage-only sale notice; WooCommerce remains the price/date source of truth. */
 if (!function_exists('svic_render_home_sale_banner')) {
     function svic_render_home_sale_banner($product): void {
+        if (svic_is_promotion_visible()) {
+            svic_render_promotion_bar();
+            return;
+        }
         if (!$product instanceof WC_Product || !$product->is_in_stock() || !$product->is_on_sale()) {
             return;
         }
@@ -345,13 +374,16 @@ if (!function_exists('svic_render_promotion_bar')) {
 
         $code      = svic_promotion_code();
         $promo_key = sanitize_html_class((string) svic_promotion_config_value('key', 'active'));
-        $shopUrl   = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url('/product/svicloud-10p-plus/')) : home_url('/product/svicloud-10p-plus/');
+        $product_path = (string) svic_promotion_config_value('product_url', '/product/svicloud-10p-plus/');
+        $offer_key = (string) svic_promotion_config_value('offer_key', 'offer_10p');
+        $shopUrl   = function_exists('svic_url_with_lang') ? svic_url_with_lang(home_url($product_path)) : home_url($product_path);
+        $expires   = svic_promotion_window()['end']->getTimestamp();
         ?>
-        <div class="svic-promo-bar svic-promo-bar--<?php echo esc_attr($promo_key); ?>" role="region" aria-label="<?php echo svic_promotion_translate_attr('aria_label'); ?>">
+        <div class="svic-promo-bar svic-promo-bar--<?php echo esc_attr($promo_key); ?>" data-sale-expires="<?php echo esc_attr((string) $expires); ?>" role="region" aria-label="<?php echo svic_promotion_translate_attr('aria_label'); ?>">
             <div class="svic-promo-bar__inner">
                 <span class="svic-promo-bar__eyebrow"><?php echo svic_promotion_translate_html('eyebrow'); ?></span>
                 <span class="svic-promo-bar__message">
-                    <span class="svic-promo-bar__offer"><?php echo svic_promotion_translate_html('offer_10p'); ?></span>
+                    <span class="svic-promo-bar__offer"><?php echo svic_promotion_translate_html($offer_key); ?></span>
                     <span class="svic-promo-bar__code"><?php echo svic_promotion_translate_html('code_label', ['code' => $code]); ?></span>
                 </span>
                 <a class="svic-promo-bar__cta" href="<?php echo esc_url($shopUrl); ?>"><?php echo svic_promotion_translate_html('cta'); ?></a>

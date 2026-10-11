@@ -44,6 +44,15 @@ return [
             'detail' => '無需優惠碼',
             'cta' => '選購 10P+',
         ],
+        'flash_15p' => [
+            'aria_label' => 'SVICLOUD 15P 限時優惠碼',
+            'eyebrow' => '15P 限時優惠 · 10 月 18 日截止',
+            'offer_15p' => 'SVICLOUD 15P 現價再享 95 折',
+            'code_label' => '結帳時輸入優惠碼 {{code}}',
+            'cta' => '選購 15P',
+            'coupon_not_active' => '此 15P 優惠適用於 2026 年 10 月 11 日至 18 日（美西時間）。',
+            'coupon_not_eligible' => '此優惠碼僅適用於 SVICLOUD 15P。',
+        ],
         'july_4' => [
             'aria_label'          => '美國國慶優惠',
             'eyebrow'             => '7 月 4 日假期優惠',

@@ -62,6 +62,15 @@ $overrides = [
             'detail' => '无需优惠码',
             'cta' => '选购 10P+',
         ],
+        'flash_15p' => [
+            'aria_label' => 'SVICLOUD 15P 限时优惠码',
+            'eyebrow' => '15P 限时优惠 · 10 月 18 日截止',
+            'offer_15p' => 'SVICLOUD 15P 现价再享 95 折',
+            'code_label' => '结账时输入优惠码 {{code}}',
+            'cta' => '选购 15P',
+            'coupon_not_active' => '此 15P 优惠适用于 2026 年 10 月 11 日至 18 日（美西时间）。',
+            'coupon_not_eligible' => '此优惠码仅适用于 SVICLOUD 15P。',
+        ],
         'july_4' => [
             'aria_label'          => '美国国庆优惠',
             'eyebrow'             => '7 月 4 日假期优惠',
