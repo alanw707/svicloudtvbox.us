@@ -40,7 +40,8 @@ select option{color:#1a1a2e;background:#fff}
 @media(max-width:480px){.svic-announcement-bar{padding:8px 1rem}
 .svic-announcement-bar__inner{gap:0.35rem}
 }
-.svic-promo-bar{position:relative;z-index:220;width:100%;padding:0.56rem clamp(1rem,4vw,2.5rem);color:var(--lumen-text-primary);background:linear-gradient(90deg,rgba(7,21,45,0.98) 0%,rgba(12,49,79,0.98) 100%);border-bottom:1px solid rgba(126,246,227,0.14);box-shadow:0 12px 26px rgba(3,10,24,0.18);font-family:var(--font-primary)}
+.svic-promo-bar{position:relative;z-index:110;width:100%;padding:0.56rem clamp(1rem,4vw,2.5rem);color:var(--lumen-text-primary);background:linear-gradient(90deg,rgba(7,21,45,0.98) 0%,rgba(12,49,79,0.98) 100%);border-bottom:1px solid rgba(126,246,227,0.14);box-shadow:0 12px 26px rgba(3,10,24,0.18);font-family:var(--font-primary)}
+body.lumen-nav-open .svic-promo-bar{visibility:hidden;pointer-events:none}
 .svic-promo-bar__inner{display:flex;align-items:center;justify-content:center;gap:clamp(0.58rem,1.5vw,0.95rem);width:min(1180px,100%);margin:0 auto;line-height:1.35;text-align:center;flex-wrap:wrap}
 .svic-promo-bar__eyebrow{display:inline-flex;align-items:center;min-height:1.52rem;padding:0.18rem 0.58rem;border:1px solid rgba(255,225,173,0.28);border-radius:999px;background:rgba(255,255,255,0.06);color:rgba(255,225,173,0.92);font-size:0.72rem;font-weight:740;letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap}
 .svic-promo-bar__message{display:inline-flex;align-items:center;justify-content:center;gap:0.52rem;flex-wrap:wrap;color:rgba(246,250,255,0.96);font-size:0.95rem;font-weight:680}
