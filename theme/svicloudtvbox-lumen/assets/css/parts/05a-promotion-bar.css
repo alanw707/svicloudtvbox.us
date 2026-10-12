@@ -5,7 +5,8 @@
 
 .svic-promo-bar {
   position: relative;
-  z-index: 220;
+  /* Keep campaign content below the sticky header and its mobile menu. */
+  z-index: 110;
   width: 100%;
   padding: 0.56rem clamp(1rem, 4vw, 2.5rem);
   color: var(--lumen-text-primary);
@@ -14,6 +15,13 @@
   border-bottom: 1px solid rgba(126, 246, 227, 0.14);
   box-shadow: 0 12px 26px rgba(3, 10, 24, 0.18);
   font-family: var(--font-primary);
+}
+
+/* Preserve the banner's space, but never paint it over modal navigation.
+   Background inertness alone does not remove an overlapping visual layer. */
+body.lumen-nav-open .svic-promo-bar {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .svic-promo-bar__inner {
