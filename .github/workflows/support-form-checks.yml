@@ -1,0 +1,33 @@
+name: Support form checks
+on:
+  pull_request:
+    paths:
+      - 'theme/svicloudtvbox-lumen/**'
+      - 'tests/fixtures/assert-support-form.php'
+      - '.github/workflows/support-form-checks.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  support-form:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.2
+      - name: Install PHP CLI
+        run: sudo apt-get update -qq && sudo apt-get install -y --quiet php-cli
+      - name: Lint support code
+        run: |
+          set -e
+          php -l theme/svicloudtvbox-lumen/functions.php
+          php -l theme/svicloudtvbox-lumen/page-support.php
+          php -l theme/svicloudtvbox-lumen/inc/support-form.php
+          for locale in en_US zh_TW zh_CN; do
+            php -l "theme/svicloudtvbox-lumen/lang/$locale.php"
+          done
+          node --check theme/svicloudtvbox-lumen/assets/js/support-form.js
+      - name: Check acceptance, rejection, deduplication and mail isolation
+        run: php tests/fixtures/assert-support-form.php
+      - name: Verify built support CSS
+        run: |
+          python3 scripts/build_css.py --theme svicloudtvbox-lumen --bundle support
+          git diff --exit-code -- theme/svicloudtvbox-lumen/assets/css/support.css

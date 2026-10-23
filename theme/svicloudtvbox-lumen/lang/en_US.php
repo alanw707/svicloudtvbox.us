@@ -710,6 +710,28 @@ return [
     ],
 
     'support' => [
+        'guard' => [
+            'policy' => 'After-sales technical and warranty support is for purchases from SVICLOUDTVBOX.US. Choose the appropriate route below; presales questions do not require an order.',
+            'kind' => 'What do you need? *',
+            'aftersales' => 'After-sales (purchased here)',
+            'presales' => 'Before buying (presales)',
+            'order-help' => 'Find or verify my order',
+            'other-seller' => 'Purchased from another seller',
+            'order_note' => 'After-sales: enter your order number and use the exact checkout email above. This also works for guest orders; no login is required.',
+            'order_help' => 'Search your email for the SVICLOUDTVBOX.US order confirmation, or check My Account → Orders if you used an account. If you cannot find it, used a different email, or need help with an unpaid order, email support@svicloudtvbox.us with your receipt or order details for manual verification. Do not include payment-card numbers or passwords.',
+            'other_seller' => 'For a device purchased elsewhere, please contact your original seller for technical or warranty support. If you believe you bought from us, use the order-help option above.',
+            'presales_note' => 'This route is for product, compatibility, shipping and payment questions before purchase—not troubleshooting a device bought elsewhere.',
+            'order_label' => 'Order number (required for after-sales)',
+            'trap' => 'Leave this field empty',
+            'verification' => 'We could not verify that order and checkout email. Check both details or use the order-help instructions below. No support request was sent.',
+            'limited' => 'Too many attempts or a request is already being processed. Please wait and try again later. If the problem persists, email support@svicloudtvbox.us.',
+            'duplicate' => 'We already received this message recently. No duplicate email was sent; please wait for our reply.',
+            'presales_issues' => [
+                'purchase' => 'Product or payment question before purchase',
+                'shipping' => 'Shipping question before purchase',
+                'compatibility' => 'Compatibility question before purchase',
+            ],
+        ],
         'hero' => [
             'badge'    => 'Support form',
             'title'    => 'Submit a concierge support request',
@@ -756,6 +778,7 @@ return [
                 ],
             ],
             'device_options' => [
+                '15p'   => 'SVICLOUD 15P',
                 '10p'   => 'SVICLOUD 10P+',
                 '10s'   => 'SVICLOUD 10S',
                 'other' => 'Other / Not sure',
