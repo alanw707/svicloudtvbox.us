@@ -39,6 +39,12 @@
 .support-form{background:rgba(8,12,22,0.78);border:1px solid rgba(70,96,138,0.2);border-radius:24px;padding:clamp(1.5rem,2.5vw,2rem);box-shadow:0 20px 50px rgba(4,15,40,0.36);backdrop-filter:blur(22px)}
 .support-form__title{font-size:1.35rem;font-weight:600;margin-bottom:0.5rem}
 .support-form__description{color:rgba(226,232,255,0.8);margin-bottom:1.5rem}
+.support-form,.support-form__row{min-width:0}
+.support-form__row summary{color:rgba(226,232,255,0.95);cursor:pointer}
+.support-form__row p{color:rgba(226,232,255,0.85);line-height:1.6;margin:0.35rem 0 0;overflow-wrap:anywhere}
+.support-form__row select{min-width:0;max-width:100%;width:100%}
+.support-form__fields [hidden]{display:none !important}
+.support-form__trap{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .support-form__fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.1rem 1.25rem}
 .support-form__row{display:flex;flex-direction:column;gap:0.45rem}
 .support-form__row--wide{grid-column:1 / -1}
