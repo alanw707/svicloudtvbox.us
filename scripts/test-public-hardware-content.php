@@ -34,6 +34,11 @@ function scan($data, $where) {
         check(!preg_match('/channels?|頻道|频道|live\\s*tv|free\\s*channels|\\bBBC\\b|\\bNHK\\b|\\bbeIN\\b|直播|Yogurt|WeFun|8989c|\\.apk|sideload|App[- ]download|app installation|install (?:the |an? )?(?:app|software)|軟體安裝|软件安装|應用安裝|应用安装/iu', $value), "$where.$key: $value");
     }
 }
+$app_disclaimer_phrases = [
+    'en_US' => ['do not provide or endorse third-party streaming software', 'do not guarantee its availability or performance', 'uptime of external servers'],
+    'zh_TW' => ['不提供或背書任何第三方串流軟體', '不保證其可用性、效能', '外部伺服器的持續運作'],
+    'zh_CN' => ['不提供或认可任何第三方流媒体软件', '不保证其可用性、性能', '外部服务器的持续运行'],
+];
 foreach (['en_US', 'zh_TW', 'zh_CN'] as $locale) {
     $GLOBALS['test_locale'] = $locale;
     $registry = SVIC_Translator::instance()->registry($locale);
@@ -44,6 +49,10 @@ foreach (['en_US', 'zh_TW', 'zh_CN'] as $locale) {
     scan($notice, "notice.$locale");
     ob_start(); svic_render_hardware_notice(); $rendered = ob_get_clean();
     check(str_contains($rendered, esc_html($notice['body'])), "$locale notice renders buyer responsibility");
+    foreach ($app_disclaimer_phrases[$locale] as $phrase) {
+        check(str_contains($notice['body'], $phrase), "$locale notice includes $phrase");
+        check(str_contains($rendered, esc_html($phrase)), "$locale notice visibly renders $phrase");
+    }
     check(str_contains($rendered, esc_html($notice['rights'])), "$locale notice preserves consumer rights");
     check(str_contains($rendered, '/legal-disclaimer/'), "$locale notice links terms");
 }
