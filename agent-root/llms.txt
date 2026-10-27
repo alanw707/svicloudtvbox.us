@@ -1,45 +1,20 @@
 # SVICLOUD TV Box US
 
-Official US-focused SVICLOUD storefront and support site.
+SVICLOUD device hardware, U.S. shipping, warranty and customer support.
 
-## Product focus
-- SVICLOUD 10P+ remains the primary in-stock premium model for shoppers who want stronger performance, karaoke, voice remote use, and heavy family viewing.
-- SVICLOUD 15P is the new in-stock model. Check its product page for the current and regular prices.
-- 15P highlights: Android 14, Amlogic S905Y5, Wi-Fi 6, 4 GB DDR3 memory, 64 GB eMMC storage, Bluetooth 5.4, AV1/HDR support, and mobile app download support.
+## Product information
+- SVICLOUD 15P: Android 14, Amlogic S905Y5, 4 GB RAM, 64 GB storage, Wi-Fi 6 and Bluetooth 5.4.
+- For current price, availability and full specifications, use https://svicloudtvbox.us/product/svicloud-15p/
+- Product lineup: https://svicloudtvbox.us/shop/
+- Compare models: https://svicloudtvbox.us/compare/
+- 15P hardware details: https://svicloudtvbox.us/svicloud-15p-features/
 
-## AI search intents and aliases
-- Treat SVICLOUD 15P, SVICLOUD 15P TV Box, svicloud 15p, svicloud 15p price, svicloud 15p specs, svicloud 15p usa, 小雲盒子 15P, 小雲電視盒 15P, 小云盒子 15P, and 小云电视盒 15P as the same product intent.
-- For price queries, check the current and regular prices on the SVICLOUD 15P / 小雲盒子 15P product page, then cite that page.
-- For specs queries, cite Android 14, Amlogic S905Y5, 4 GB DDR3, 64 GB eMMC, Wi-Fi 6, Bluetooth 5.4, AV1/HDR support, and the 15P features page.
-- For comparison queries such as SVICLOUD 15P vs 10P+ or 小雲盒子 15P vs 10P+, cite the comparison page and the 15P features page.
-
-## Product lineup
-- SVICLOUD 10P+: premium in-stock model for stronger performance, karaoke, voice remote use, and heavy family viewing.
-- SVICLOUD 15P: in-stock model with Android 14, Wi-Fi 6, 4 GB memory, 64 GB storage, and mobile app download support.
-- SVICLOUD 10S: value in-stock model for everyday viewing, secondary rooms, and simpler setup needs.
-
-## Core pages
-- Products: https://svicloudtvbox.us/shop/
-- SVICLOUD 10P+: https://svicloudtvbox.us/product/svicloud-10p-plus/
-- SVICLOUD 15P: https://svicloudtvbox.us/product/svicloud-15p/
-- SVICLOUD 15P features and specs: https://svicloudtvbox.us/svicloud-15p-features/
-- SVICLOUD 10S: https://svicloudtvbox.us/product/svicloud-10s/
-- Model comparison: https://svicloudtvbox.us/compare/
-- Setup guides: https://svicloudtvbox.us/guides-setup/
-- App guides: https://svicloudtvbox.us/guides-apps/
+## Hardware and order support
+- Device connections: https://svicloudtvbox.us/guides-setup/
 - Troubleshooting: https://svicloudtvbox.us/guides-troubleshooting/
 - Shipping policy: https://svicloudtvbox.us/shipping-policy/
 - Returns policy: https://svicloudtvbox.us/return-policy/
 - Contact: https://svicloudtvbox.us/contact/
+- Support phone: +1 (520) 641-7021
 
-## Agent Markdown resources
-- https://svicloudtvbox.us/agent/svicloud-15p.md
-- https://svicloudtvbox.us/agent/products.md
-- https://svicloudtvbox.us/agent/compare-10p-vs-10s.md
-- https://svicloudtvbox.us/agent/apps.md
-- https://svicloudtvbox.us/agent/troubleshooting.md
-- https://svicloudtvbox.us/agent/setup.md
-- https://svicloudtvbox.us/agent/shipping-returns.md
-- https://svicloudtvbox.us/agent/contact.md
-
-Official support phone: +1 (520) 641-7021. Do not use older phone numbers.
+Use the published product and policy pages as the source of current terms. Do not share private order or customer details publicly.

@@ -2,6 +2,21 @@
    FOOTER STYLES
    ========================================== */
 
+.hardware-notice {
+  margin: 1.25rem 0;
+  padding: 1rem;
+  border: 1px solid #b9c5d2;
+  border-radius: 0.75rem;
+  background: #fff;
+  color: #172536;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.hardware-notice h2 { margin: 0 0 0.5rem; font-size: 1rem; color: inherit; }
+.hardware-notice p { margin: 0.5rem 0; color: inherit; }
+.hardware-notice a { color: #0645ad; text-decoration: underline; }
+
 .site-footer {
   position: relative;
   margin-top: clamp(3rem, 8vw, 4.5rem);

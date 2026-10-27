@@ -192,7 +192,7 @@ if (!function_exists('svic_15p_promo_content')) {
         ];
 
         $key = svic_15p_promo_locale_key();
-        return svic_15p_price_tokens_recursive($content[$key] ?? $content['en']);
+        return svic_15p_price_tokens_recursive(svic_public_hardware_promo($content[$key] ?? $content['en'], $key));
     }
 }
 

@@ -36,6 +36,9 @@ jobs:
           sudo apt-get install -y --quiet php-cli
           find theme/svicloudtvbox-lumen -name '*.php' -exec php -l {} \;
 
+      - name: Hardware-only content regression checks
+        run: php scripts/test-public-hardware-content.php
+
       - name: Deploy theme to Hostinger
         env:
           FTP_CONNECT_RETRIES: "3"

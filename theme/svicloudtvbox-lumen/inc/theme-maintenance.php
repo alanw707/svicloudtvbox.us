@@ -175,11 +175,6 @@ if (!function_exists('svic_theme_ensure_guides_pages')) {
                 'template' => 'page-guides-setup.php',
             ],
             [
-                'slug'     => 'guides-apps',
-                'title'    => __('Apps & Channels Guide', 'svicloudtvbox-lumen'),
-                'template' => 'page-guides-apps.php',
-            ],
-            [
                 'slug'     => 'guides-after-setup',
                 'title'    => __('After Setup Guide', 'svicloudtvbox-lumen'),
                 'template' => 'page-guides-after-setup.php',
@@ -316,6 +311,6 @@ if (!function_exists('svic_theme_ensure_app_download_page')) {
     }
 }
 
-add_action('admin_init', 'svic_theme_ensure_app_download_page', 10);
+// Public download page retired; do not automatically republish its archived record.
 
 add_action('admin_init', 'svic_theme_ensure_guides_pages', 9);

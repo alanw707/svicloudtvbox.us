@@ -8,13 +8,14 @@ defined('ABSPATH') || exit;
 global $post;
 
 get_header();
+$hardware_notice = svic_hardware_notice_copy();
 
 $sections = [
     [
         'title' => svic_translate_html('legal_disclaimer.sections.hardware.title'),
-        'copy'  => svic_translate_html('legal_disclaimer.sections.hardware.copy'),
+        'copy'  => esc_html($hardware_notice['body']),
         'items' => [
-            svic_translate_html('legal_disclaimer.sections.hardware.items.line1'),
+            esc_html($hardware_notice['rights']),
             svic_translate_html('legal_disclaimer.sections.hardware.items.line2'),
             svic_translate_html('legal_disclaimer.sections.hardware.items.line3'),
         ],

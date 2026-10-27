@@ -141,7 +141,7 @@ $fifteenp_features_url = function_exists('svic_15p_promo_url')
     ? svic_15p_promo_url()
     : svic_url_with_lang(home_url('/svicloud-15p-features/'));
 $fifteenp_promo_content = function_exists('svic_15p_promo_content') ? svic_15p_promo_content() : [];
-$fifteenp_features_label = $fifteenp_promo_content['features_link'] ?? 'Explore 15P features, specs, and Yogurt TV Go guidance';
+$fifteenp_features_label = $fifteenp_promo_content['features_link'] ?? 'Explore 15P hardware features and specifications';
 
     $product_box_item_keys = $is_15p_product
         ? [
@@ -310,6 +310,7 @@ $fifteenp_features_label = $fifteenp_promo_content['features_link'] ?? 'Explore 
               </section>
             <?php endif; ?>
             <div class="product-hero-price"><?php echo $product->get_price_html(); ?></div>
+            <?php svic_render_hardware_notice(); ?>
             <div class="product-hero-cta">
               <?php woocommerce_template_single_add_to_cart(); ?>
             </div>

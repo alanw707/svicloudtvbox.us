@@ -25,7 +25,6 @@ get_header();
         <div class="fifteenp-hero__actions lumen-action-group">
           <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($product_url); ?>"><?php echo esc_html($content['primary_cta'] ?? 'Buy 15P'); ?></a>
           <a class="lumen-pill lumen-pill--outline" href="<?php echo esc_url($compare_url); ?>"><?php echo esc_html($content['secondary_cta'] ?? 'Compare models'); ?></a>
-          <a class="fifteenp-hero__textlink" href="<?php echo esc_url($apps_url); ?>"><?php echo esc_html($content['tertiary_cta'] ?? 'App guide'); ?></a>
         </div>
         <ul class="fifteenp-hero__notes" role="list">
           <?php foreach ((array) ($content['hero_notes'] ?? []) as $note) : ?>
@@ -78,15 +77,6 @@ get_header();
     </div>
   </section>
 
-  <section class="fifteenp-section fifteenp-section--apps" aria-labelledby="fifteenp-apps-title">
-    <div class="fifteenp-container fifteenp-app-callout">
-      <div>
-        <h2 id="fifteenp-apps-title" class="fifteenp-section__title"><?php echo esc_html($content['app_title'] ?? 'Yogurt TV Go and app downloads'); ?></h2>
-        <p class="fifteenp-section__lead"><?php echo esc_html($content['app_copy'] ?? ''); ?></p>
-      </div>
-      <a class="lumen-pill lumen-pill--primary" href="<?php echo esc_url($apps_url); ?>"><?php echo esc_html($content['tertiary_cta'] ?? 'App guide'); ?></a>
-    </div>
-  </section>
 
   <section class="fifteenp-section fifteenp-section--specs" aria-labelledby="fifteenp-specs-title">
     <div class="fifteenp-container">

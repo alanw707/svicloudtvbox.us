@@ -108,6 +108,7 @@
         </div>
       </div>
 
+      <?php svic_render_hardware_notice(); ?>
       <div class="footer-bottom">
         <?php if ( has_nav_menu( 'footer' ) ) : ?>
           <?php

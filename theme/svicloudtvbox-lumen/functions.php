@@ -7,6 +7,8 @@
 
 if (!defined('ABSPATH')) { exit; }
 
+require_once __DIR__ . '/inc/public-hardware-content.php';
+
 if (!defined('SVIC_THEME_TEXT_DOMAIN')) {
     define('SVIC_THEME_TEXT_DOMAIN', 'svicloudtvbox-lumen');
 }
@@ -469,7 +471,7 @@ add_filter('woocommerce_price_format', function ($format, $currency_pos) {
 }, 10, 2);
 
 require_once get_template_directory() . '/inc/cart-request-safety.php';
-require_once get_template_directory() . '/inc/apk-media-mimes.php';
+require_once get_template_directory() . '/inc/hardware-disclaimer.php';
 
 const SVIC_LITESPEED_PURGE_MARK = 'svic-storefront-commerce-20260904';
 const SVIC_REWRITE_FLUSH_MARK   = 'svic-rewrite-flush-20260407';
@@ -638,7 +640,7 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh' => 'Get help with setup, warranty, and troubleshooting from the SVICLOUD concierge team. 小雲盒子 客服與技術支援。',
                     'zh-cn' => 'Get help with setup, warranty, and troubleshooting from the SVICLOUD concierge team. 小雲盒子 客服與技術支援。',
                 ],
-                'image'       => '/assets/images/hero-voice-assistant.webp',
+                'image'       => '/assets/images/svicloud-hero-product.webp',
                 'image_alt'   => [
                     'en' => 'SVICLOUD concierge helping customers in Las Vegas',
                     'zh' => '小雲電視盒禮賓客服提供拉斯維加斯支援',
@@ -656,7 +658,7 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh' => 'Reach the SVICLOUD U.S. team for orders, setup, and warranty support. 小雲盒子 聯絡方式與服務時間。',
                     'zh-cn' => 'Reach the SVICLOUD U.S. team for orders, setup, and warranty support. 小雲盒子 聯絡方式與服務時間。',
                 ],
-                'image'       => '/assets/images/hero-voice-assistant.webp',
+                'image'       => '/assets/images/svicloud-hero-product.webp',
                 'image_alt'   => [
                     'en' => 'Concierge specialist answering SVICLOUD questions',
                     'zh' => '小雲禮賓客服回覆客戶問題',
@@ -908,7 +910,7 @@ if (!function_exists('svic_static_page_meta_registry')) {
                     'zh' => '閱讀小雲盒子購買指南、安裝技巧、App 教學、疑難排解、型號比較與美國客服支援最新文章。',
                     'zh-cn' => '阅读小云盒子购买指南、安装技巧、App 教学、疑难排解、型号比较与美国客服支持最新文章。',
                 ],
-                'image'       => '/assets/images/hero-voice-assistant.webp',
+                'image'       => '/assets/images/svicloud-hero-product.webp',
                 'image_alt'   => [
                     'en' => 'SVICLOUD blog hero image',
                     'zh' => '小雲部落格主圖',
@@ -1031,6 +1033,7 @@ if (!function_exists('svic_static_page_meta_registry')) {
             }
         }
 
+        $registry = svic_public_hardware_static_meta($registry);
         return $registry;
     }
 }
@@ -3694,7 +3697,7 @@ if (!function_exists('svic_output_singular_social_meta')) {
                 }
             }
             if (!$image_meta) {
-                $image_meta = svic_get_theme_image_meta('/assets/images/hero-voice-assistant.webp');
+                $image_meta = svic_get_theme_image_meta('/assets/images/svicloud-hero-product.webp');
             }
         }
 
@@ -4453,7 +4456,7 @@ if (!function_exists('svic_resolve_current_meta_description')) {
         }
 
         $post_fallbacks = [
-            'svicloud' => 'Learn how SVICLOUD parental controls, channel locks, U.S. fulfillment, warranty support, and bilingual setup help families stream more safely.',
+            'svicloud' => 'Learn about SVICLOUD hardware, U.S. fulfillment, warranty support and bilingual customer assistance.',
             '電視盒大對決' => 'Compare SVICLOUD vs EVPAD for U.S. Chinese families by shipping speed, support, warranty, setup experience, reliability, and model fit.',
         ];
 

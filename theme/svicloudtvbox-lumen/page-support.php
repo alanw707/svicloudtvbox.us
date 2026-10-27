@@ -17,7 +17,7 @@ $issue_options  = $registry['support']['form']['issue_options'] ?? ($fallbackReg
 
 $contact_url = svic_url_with_lang(home_url('/contact/'));
 $faq_url     = svic_url_with_lang(home_url('/faq/'));
-$apps_url    = svic_url_with_lang(home_url('/guides-apps/'));
+$apps_url    = svic_url_with_lang(home_url('/guides-setup/'));
 $pdp_url     = svic_url_with_lang(home_url('/product/svicloud-10p-plus/'));
 $compare_url = svic_url_with_lang(home_url('/compare/'));
 $google_business_review_url = function_exists('svic_google_business_review_url') ? svic_google_business_review_url() : '';
