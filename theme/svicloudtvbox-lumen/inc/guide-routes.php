@@ -6,8 +6,6 @@ if (!function_exists('svic_guide_route_map')) {
     function svic_guide_route_map(): array {
         return [
             'guides-setup' => 'setup',
-            'guides-apps' => 'apps',
-            'guides-yogurt-mo' => 'yogurt_mo',
             'guides-troubleshooting' => 'troubleshooting',
             'guides-after-setup' => 'post_setup',
             'guides-resources' => 'resources',

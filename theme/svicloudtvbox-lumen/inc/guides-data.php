@@ -468,6 +468,16 @@ if (!function_exists('svic_guides_get_content')) {
             ],
         ];
 
+        // Retired public topics are not navigation, cards, resource lookups or routes.
+        unset($resource_articles['channel-guide']);
+        $content['app_cards'] = [];
+        $content['yogurt_mo_cards'] = [];
+        $content['anchor_items'] = array_values(array_filter($content['anchor_items'], static function ($item) {
+            return !in_array($item['key'], ['apps', 'yogurt_mo'], true);
+        }));
+        $content['troubleshooting_cards'] = array_values(array_filter($content['troubleshooting_cards'], static function ($item) {
+            return !preg_match('/(?:download_ssl|yogurt_mo)/', $item['title_key'] ?? '');
+        }));
         $content['resource_articles'] = $resource_articles;
         $content['resource_links'] = [];
 

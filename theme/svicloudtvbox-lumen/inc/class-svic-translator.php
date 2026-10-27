@@ -162,7 +162,10 @@ final class SVIC_Translator
             $version = (int) filemtime($file);
         }
 
-        $cacheKey = 'registry_' . $locale;
+        $hardwareCopyFile = __DIR__ . '/public-hardware-copy-data.php';
+        $hardwareVersion = is_file($hardwareCopyFile) ? (int) filemtime($hardwareCopyFile) : 0;
+        $version = max($version, $hardwareVersion);
+        $cacheKey = 'hardware_registry_' . $locale;
         if ($version > 0) {
             $cacheKey .= '_' . $version;
         }
@@ -194,6 +197,25 @@ final class SVIC_Translator
          * Allow plugins or child themes to mutate the registry for a locale.
          */
         $data = apply_filters('svic_locale_registry', $data, $locale);
+
+        // Explicit editorial overrides at the translation source, before caching.
+        // These are locale/key-specific, not a regex or output-buffer scrubber.
+        if (is_file($hardwareCopyFile)) {
+            $hardwareCopy = include $hardwareCopyFile;
+            foreach (($hardwareCopy[$locale] ?? []) as $key => $value) {
+                $cursor =& $data;
+                $parts = explode('.', $key);
+                $last = array_pop($parts);
+                foreach ($parts as $part) {
+                    if (!isset($cursor[$part]) || !is_array($cursor[$part])) {
+                        $cursor[$part] = [];
+                    }
+                    $cursor =& $cursor[$part];
+                }
+                $cursor[$last] = $value;
+                unset($cursor);
+            }
+        }
 
         wp_cache_set($cacheKey, $data, self::CACHE_GROUP);
         $this->registryCache[$locale] = [

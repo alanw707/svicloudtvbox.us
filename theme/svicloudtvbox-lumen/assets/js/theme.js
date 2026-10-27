@@ -421,7 +421,7 @@ jQuery.easing.easeInOutCubic = function(x, t, b, c, d) {
         };
 
         const criticalImages = [
-            assetFromTheme('assets/images/hero-voice-assistant.webp'),
+
             assetFromTheme('assets/images/svicloud-hero-product.webp'),
             assetFromTheme('assets/images/svicloud-10p-plus.png'),
             assetFromTheme('assets/images/svicloud-tvbox-10s.jpg')
