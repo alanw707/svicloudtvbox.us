@@ -208,6 +208,8 @@ def _connect(cfg: DeployConfig):
                     # FTP_TLS wraps the control socket during login and uses ftp.host as SNI.
                     ftp.host = cfg.tls_server_name
                 ftp.login(cfg.user, cfg.password)
+                if cfg.verify_tls and cfg.tls_server_name:
+                    print(f"Verified FTPS CA chain and hostname: {cfg.tls_server_name}")
                 if cfg.verify_tls and cfg.tls_cert_sha256:
                     print(f"Verified FTPS certificate pin on control channel: {cfg.tls_cert_sha256}")
                 ftp.prot_p()  # Secure data connection

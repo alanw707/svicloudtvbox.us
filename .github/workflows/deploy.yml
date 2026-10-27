@@ -29,13 +29,18 @@ jobs:
       - name: 🏗️ Build CSS bundles
         run: python3 scripts/build_css.py --theme svicloudtvbox-lumen
 
+      - name: FTPS identity and renewal regression checks
+        run: python3 scripts/test_deploy_tls.py
+
       - name: 🚀 Deploy theme to Hostinger
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASS: ${{ secrets.FTP_PASS }}
           FTP_PROTOCOL: ftps
-          FTP_TLS_CERT_SHA256: 79a7c9aeaad8855c82f58598597b931b10429afec6234b621588f4e937b36dee
+          # Same CA/hostname policy as the automatic deployment workflow.
+          FTP_VERIFY_TLS: "1"
+          FTP_TLS_SERVER_NAME: hstgr.io
           FTP_SKIP_SAME_SIZE: "0"
           FTP_CONNECT_RETRIES: "6"
           FTP_CONNECT_TIMEOUT: "60"
