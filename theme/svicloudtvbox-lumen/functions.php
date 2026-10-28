@@ -8242,7 +8242,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             return;
         }
 
-        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v17');
+        $last_checked = (int) get_transient('svic_google_feed_rich_offer_checked_v18');
         $mtime        = (int) filemtime($feed_path);
         if ($last_checked >= $mtime) {
             return;
@@ -8469,8 +8469,16 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 }
             }
 
+            // A policy's display name is not an exception label. Google requires
+            // 'default' (or no label) for the account's standard return policy.
+            // Repair our legacy value without overwriting genuine exceptions.
+            $patched_item = preg_replace(
+                '/<g:return_policy_label>\s*Standard for United States\s*<\/g:return_policy_label>/',
+                '<g:return_policy_label>default</g:return_policy_label>',
+                $patched_item
+            ) ?? $patched_item;
             if (strpos($patched_item, '<g:return_policy_label>') === false) {
-                $return_policy_block = "      <g:return_policy_label>Standard for United States</g:return_policy_label>\n";
+                $return_policy_block = "      <g:return_policy_label>default</g:return_policy_label>\n";
                 if (strpos($patched_item, '<g:condition>') !== false) {
                     $patched_item = str_replace('      <g:condition>', $return_policy_block . '      <g:condition>', $patched_item);
                 } else {
@@ -8507,7 +8515,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
             file_put_contents($feed_path, $patched, LOCK_EX);
         }
 
-        set_transient('svic_google_feed_rich_offer_checked_v17', max($mtime, time()), HOUR_IN_SECONDS);
+        set_transient('svic_google_feed_rich_offer_checked_v18', max($mtime, time()), HOUR_IN_SECONDS);
     }
 }
 

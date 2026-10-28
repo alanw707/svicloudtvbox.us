@@ -66,8 +66,11 @@ def validate_item(item: ET.Element, min_additional_images: int) -> None:
 
     if not text_for(item, "min_handling_time") or not text_for(item, "max_handling_time"):
         fail(f"{offer_id}: missing handling time")
-    if not text_for(item, "return_policy_label"):
-        fail(f"{offer_id}: missing return_policy_label")
+    # This account has one verified standard policy and no exception policies.
+    # Google accepts an omitted label or "default", not the policy's UI name.
+    return_label = text_for(item, "return_policy_label")
+    if return_label not in ("", "default"):
+        fail(f"{offer_id}: unmatched return_policy_label {return_label!r}; expected default or omitted")
     image_link = text_for(item, "image_link")
     if not image_link:
         fail(f"{offer_id}: missing image_link")
