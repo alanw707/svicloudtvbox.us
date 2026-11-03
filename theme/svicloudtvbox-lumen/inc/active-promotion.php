@@ -18,19 +18,19 @@ if (!defined('SVIC_PROMOTION_ENABLED')) {
 }
 
 if (!defined('SVIC_PROMOTION_KEY')) {
-    define('SVIC_PROMOTION_KEY', 'flash_15p');
+    define('SVIC_PROMOTION_KEY', 'black_november');
 }
 
 if (!defined('SVIC_PROMOTION_CODE')) {
-    define('SVIC_PROMOTION_CODE', '15PFLASH5');
+    define('SVIC_PROMOTION_CODE', 'blacknov');
 }
 
 if (!defined('SVIC_PROMOTION_START')) {
-    define('SVIC_PROMOTION_START', '2026-10-11 00:00:00');
+    define('SVIC_PROMOTION_START', '2026-11-01 00:00:00');
 }
 
 if (!defined('SVIC_PROMOTION_END')) {
-    define('SVIC_PROMOTION_END', '2026-10-18 23:59:59');
+    define('SVIC_PROMOTION_END', '2026-11-30 23:59:59');
 }
 
 if (!defined('SVIC_PROMOTION_TIMEZONE')) {
@@ -42,15 +42,15 @@ if (!defined('SVIC_PROMOTION_RATE')) {
 }
 
 if (!defined('SVIC_PROMOTION_PRODUCT_IDS')) {
-    define('SVIC_PROMOTION_PRODUCT_IDS', [1204]);
+    define('SVIC_PROMOTION_PRODUCT_IDS', [1204, 12, 14, 840]);
 }
 
 if (!defined('SVIC_PROMOTION_DESCRIPTION')) {
-    define('SVIC_PROMOTION_DESCRIPTION', 'Extra 5% off the current SVICLOUD 15P price with code 15PFLASH5; October 11–18, 2026 Pacific time.');
+    define('SVIC_PROMOTION_DESCRIPTION', 'Black November: extra 5% off SVICLOUD 10P+, 10S, 15P and the 10P+ remote with code BLACKNOV; November 1–30, 2026 Pacific time.');
 }
 
 if (!defined('SVIC_PROMOTION_SYNC_MARK')) {
-    define('SVIC_PROMOTION_SYNC_MARK', '20261011-15pflash5-01');
+    define('SVIC_PROMOTION_SYNC_MARK', '20261101-blacknov-01');
 }
 
 if (!function_exists('svic_active_promotion_config')) {
@@ -66,8 +66,8 @@ if (!function_exists('svic_active_promotion_config')) {
             'description'     => (string) SVIC_PROMOTION_DESCRIPTION,
             'product_ids'     => SVIC_PROMOTION_PRODUCT_IDS,
             'sync_mark'       => (string) SVIC_PROMOTION_SYNC_MARK,
-            'product_url'     => '/product/svicloud-15p/',
-            'offer_key'       => 'offer_15p',
+            'product_url'     => '/shop/',
+            'offer_key'       => 'offer_all',
         ];
 
         return apply_filters('svic_active_promotion_config', $config);

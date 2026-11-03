@@ -53,6 +53,15 @@ return [
             'coupon_not_active' => '此 15P 優惠適用於 2026 年 10 月 11 日至 18 日（美西時間）。',
             'coupon_not_eligible' => '此優惠碼僅適用於 SVICLOUD 15P。',
         ],
+        'black_november' => [
+            'aria_label' => 'Black November 優惠碼',
+            'eyebrow' => 'Black November · 11 月 30 日截止',
+            'offer_all' => 'SVICLOUD 電視盒現價再享 95 折',
+            'code_label' => '結帳時輸入優惠碼 {{code}}',
+            'cta' => '前往選購',
+            'coupon_not_active' => 'BLACKNOV 優惠適用於 2026 年 11 月 1 日至 30 日（美西時間）。',
+            'coupon_not_eligible' => '此優惠碼僅適用於 SVICLOUD 電視盒與 10P+ 遙控器。',
+        ],
         'july_4' => [
             'aria_label'          => '美國國慶優惠',
             'eyebrow'             => '7 月 4 日假期優惠',
