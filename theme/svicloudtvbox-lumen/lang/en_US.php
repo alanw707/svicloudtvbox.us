@@ -53,6 +53,15 @@ return [
             'coupon_not_active' => 'This 15P offer is valid October 11–18, 2026 (Pacific time).',
             'coupon_not_eligible' => 'This coupon applies to SVICLOUD 15P only.',
         ],
+        'black_november' => [
+            'aria_label' => 'Black November coupon',
+            'eyebrow' => 'Black November · Ends Nov 30',
+            'offer_all' => 'Extra 5% off SVICLOUD TV boxes',
+            'code_label' => 'Use code {{code}} at checkout',
+            'cta' => 'Shop the sale',
+            'coupon_not_active' => 'BLACKNOV is valid November 1-30, 2026 (Pacific time).',
+            'coupon_not_eligible' => 'BLACKNOV applies to SVICLOUD TV boxes and the 10P+ remote only.',
+        ],
         'july_4' => [
             'aria_label'          => 'July 4th promotion',
             'eyebrow'             => 'July 4th Holiday Sale',

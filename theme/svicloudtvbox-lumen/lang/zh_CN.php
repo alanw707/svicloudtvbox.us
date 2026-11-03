@@ -71,6 +71,15 @@ $overrides = [
             'coupon_not_active' => '此 15P 优惠适用于 2026 年 10 月 11 日至 18 日（美西时间）。',
             'coupon_not_eligible' => '此优惠码仅适用于 SVICLOUD 15P。',
         ],
+        'black_november' => [
+            'aria_label' => 'Black November 优惠码',
+            'eyebrow' => 'Black November · 11 月 30 日截止',
+            'offer_all' => 'SVICLOUD 电视盒现价再享 95 折',
+            'code_label' => '结账时输入优惠码 {{code}}',
+            'cta' => '前往选购',
+            'coupon_not_active' => 'BLACKNOV 优惠适用于 2026 年 11 月 1 日至 30 日（美西时间）。',
+            'coupon_not_eligible' => '此优惠码仅适用于 SVICLOUD 电视盒与 10P+ 遥控器。',
+        ],
         'july_4' => [
             'aria_label'          => '美国国庆优惠',
             'eyebrow'             => '7 月 4 日假期优惠',
