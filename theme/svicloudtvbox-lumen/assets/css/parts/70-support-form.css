@@ -243,6 +243,42 @@
   margin-bottom: 1.5rem;
 }
 
+.support-form,
+.support-form__row {
+  min-width: 0;
+}
+
+.support-form__row summary {
+  color: rgba(226, 232, 255, 0.95);
+  cursor: pointer;
+}
+
+.support-form__row p {
+  color: rgba(226, 232, 255, 0.85);
+  line-height: 1.6;
+  margin: 0.35rem 0 0;
+  overflow-wrap: anywhere;
+}
+
+.support-form__row select {
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
+}
+
+.support-form__fields [hidden] {
+  display: none !important;
+}
+
+.support-form__trap {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 .support-form__fields {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
