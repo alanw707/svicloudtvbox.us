@@ -8334,7 +8334,7 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
         $price_overrides = [
             '12' => [
                 'price'                     => 'USD 269.00',
-                'sale_price'                => 'USD 255.55',
+                'sale_price'                => 'USD 239.00',
                 'sale_price_effective_date' => '2026-08-31T01:00:00Z/2027-04-30T07:00:00Z',
             ],
         ];
