@@ -5,7 +5,7 @@
  * Template Name: Support Form
  */
 
-$status = isset($_GET['support_status']) ? sanitize_text_field(wp_unslash($_GET['support_status'])) : '';
+$status = isset($_GET['support_status']) && is_string($_GET['support_status']) ? sanitize_text_field(wp_unslash($_GET['support_status'])) : '';
 $current_locale = svic_current_locale();
 $translator     = SVIC_Translator::instance();
 
@@ -14,6 +14,9 @@ $fallbackRegistry = $translator->registry('en_US');
 
 $device_options = $registry['support']['form']['device_options'] ?? ($fallbackRegistry['support']['form']['device_options'] ?? []);
 $issue_options  = $registry['support']['form']['issue_options'] ?? ($fallbackRegistry['support']['form']['issue_options'] ?? []);
+$presales_options = $registry['support']['guard']['presales_issues'] ?? ($fallbackRegistry['support']['guard']['presales_issues'] ?? []);
+$support_script = '/assets/js/support-form.js';
+wp_enqueue_script('svic-support-form', get_template_directory_uri() . $support_script, [], (string) filemtime(get_template_directory() . $support_script), true);
 
 $contact_url = svic_url_with_lang(home_url('/contact/'));
 $faq_url     = svic_url_with_lang(home_url('/faq/'));
@@ -58,7 +61,7 @@ get_header();
     </div>
   </section>
 
-  <section class="support-body">
+  <section class="support-body" id="support-response">
     <?php if ($status === 'success') : ?>
       <div class="support-status support-status--success">
         <h2 class="support-status__title"><?php echo svic_translate_html('support.success.title'); ?></h2>
@@ -68,16 +71,45 @@ get_header();
       <div class="support-status support-status--error">
         <p class="support-status__body"><?php echo svic_translate_html('support.error'); ?></p>
       </div>
+    <?php elseif (in_array($status, ['verification', 'limited', 'duplicate'], true)) : ?>
+      <div class="support-status support-status--error" role="status">
+        <p class="support-status__body"><?php echo svic_translate_html('support.guard.' . $status); ?></p>
+      </div>
     <?php endif; ?>
 
     <div class="support-grid">
-      <section class="support-form">
+      <section class="support-form" id="support-form">
         <h2 class="support-form__title"><?php echo svic_translate_html('support.form.title'); ?></h2>
-        <p class="support-form__description"><?php echo svic_translate_html('support.form.description'); ?></p>
+        <p class="support-form__description"><?php echo svic_translate_html('support.guard.policy'); ?></p>
         <form class="support-form__fields" method="post" action="<?php echo $form_action; ?>" novalidate>
           <input type="hidden" name="action" value="svic_support_form" />
           <input type="hidden" name="svic_locale" value="<?php echo esc_attr($current_locale); ?>" />
           <?php wp_nonce_field('svic_support_form', 'svic_support_nonce'); ?>
+
+          <div class="support-form__row support-form__row--wide" data-support-route>
+            <label for="support-kind"><?php echo svic_translate_html('support.guard.kind'); ?></label>
+            <select id="support-kind" name="support_kind" required>
+              <?php foreach (['aftersales', 'presales', 'order-help', 'other-seller'] as $kind) : ?>
+                <option value="<?php echo esc_attr($kind); ?>" <?php selected($status, $kind); ?>><?php echo svic_translate_html('support.guard.' . $kind); ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="support-form__row support-form__row--wide" data-support-help="order-help">
+            <details <?php echo in_array($status, ['verification', 'order-help'], true) ? 'open' : ''; ?>>
+              <summary><?php echo svic_translate_html('support.guard.order-help'); ?></summary>
+              <p><?php echo svic_translate_html('support.guard.order_help'); ?></p>
+            </details>
+          </div>
+          <div class="support-form__row support-form__row--wide" data-support-help="other-seller">
+            <p><?php echo svic_translate_html('support.guard.other_seller'); ?></p>
+          </div>
+          <div class="support-form__row support-form__row--wide" data-support-help="presales">
+            <p><?php echo svic_translate_html('support.guard.presales_note'); ?></p>
+          </div>
+          <div class="support-form__trap" aria-hidden="true">
+            <label for="support-website"><?php echo svic_translate_html('support.guard.trap'); ?></label>
+            <input type="text" id="support-website" name="support_website" tabindex="-1" autocomplete="off" />
+          </div>
 
           <div class="support-form__row">
             <label for="support-name"><?php echo svic_translate_html('support.form.fields.name.label'); ?></label>
@@ -95,8 +127,9 @@ get_header();
           </div>
 
           <div class="support-form__row">
-            <label for="support-order"><?php echo svic_translate_html('support.form.fields.order.label'); ?></label>
-            <input type="text" id="support-order" name="support_order" placeholder="<?php echo esc_attr(svic_translate('support.form.fields.order.placeholder')); ?>" />
+            <label for="support-order"><?php echo svic_translate_html('support.guard.order_label'); ?></label>
+            <input type="text" id="support-order" name="support_order" maxlength="40" aria-describedby="support-order-note" placeholder="<?php echo esc_attr(svic_translate('support.form.fields.order.placeholder')); ?>" />
+            <p id="support-order-note"><?php echo svic_translate_html('support.guard.order_note'); ?></p>
           </div>
 
           <div class="support-form__row">
@@ -118,14 +151,17 @@ get_header();
                 <?php echo esc_html(svic_translate('support.form.fields.issue.placeholder')); ?>
               </option>
               <?php foreach ($issue_options as $value => $label) : ?>
-                <option value="<?php echo esc_attr($value); ?>"><?php echo esc_html($label); ?></option>
+                <option data-support-kind="aftersales" value="<?php echo esc_attr($value); ?>"><?php echo esc_html($label); ?></option>
+              <?php endforeach; ?>
+              <?php foreach ($presales_options as $value => $label) : ?>
+                <option data-support-kind="presales" value="<?php echo esc_attr($value); ?>"><?php echo esc_html($label); ?></option>
               <?php endforeach; ?>
             </select>
           </div>
 
           <div class="support-form__row support-form__row--wide">
             <label for="support-message"><?php echo svic_translate_html('support.form.fields.message.label'); ?></label>
-            <textarea id="support-message" name="support_message" rows="6" required aria-required="true" placeholder="<?php echo esc_attr(svic_translate('support.form.fields.message.placeholder')); ?>"></textarea>
+            <textarea id="support-message" name="support_message" rows="6" maxlength="4000" required aria-required="true" placeholder="<?php echo esc_attr(svic_translate('support.form.fields.message.placeholder')); ?>"></textarea>
           </div>
 
           <p class="support-form__required-note"><?php echo svic_translate_html('support.form.required_note'); ?></p>
