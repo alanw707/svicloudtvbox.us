@@ -58,9 +58,10 @@ if (!function_exists('svic_redirect_retired_guide_urls')) {
         exit;
     }
 
-    // parse_request fires before template_redirect, and the retirement handler
-    // runs there at -1000010, so this must hook earlier still.
-    add_action('parse_request', 'svic_redirect_retired_guide_urls', -1000020);
+    // Runs on init: parse_request rewrites the /zh prefix away before the 410
+    // handler (parse_request, -1000010) fires, which made the locale mapping
+    // collapse to the English target.
+    add_action('init', 'svic_redirect_retired_guide_urls', 1);
 }
 
 /**
