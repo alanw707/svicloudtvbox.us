@@ -58,9 +58,9 @@ if (!function_exists('svic_redirect_retired_guide_urls')) {
         exit;
     }
 
-    // Must run before svic_render_retired_public_resource (-1000010), which
-    // answers 410 for these paths and exits.
-    add_action('template_redirect', 'svic_redirect_retired_guide_urls', -1000020);
+    // parse_request fires before template_redirect, and the retirement handler
+    // runs there at -1000010, so this must hook earlier still.
+    add_action('parse_request', 'svic_redirect_retired_guide_urls', -1000020);
 }
 
 /**
