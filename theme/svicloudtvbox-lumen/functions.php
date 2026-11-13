@@ -44,23 +44,33 @@ if (!function_exists('svic_redirect_retired_guide_urls')) {
             return;
         }
 
-        $targets = [
-            '/guides-apps'    => '/guides/',
-            '/zh/guides-apps' => '/zh/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/',
-        ];
+        // The locale resolver strips the prefix from REQUEST_URI and records it
+        // separately, so match the bare path and take the locale from there.
+        $locale = null;
+        if (class_exists('SVIC_Locale_Resolver') && method_exists('SVIC_Locale_Resolver', 'pathLocale')) {
+            $locale = SVIC_Locale_Resolver::pathLocale();
+        }
+
+        $is_zh = is_string($locale) && stripos($locale, 'zh') === 0;
+        if (!$is_zh && preg_match('#^/zh(?:-cn|-tw)?/#i', $request_path) === 1) {
+            $is_zh = true;
+        }
 
         $path = untrailingslashit($request_path);
-        if (!isset($targets[$path])) {
+        $path = preg_replace('#^/(?:en|zh|zh-cn|zh-tw)/#i', '/', $path);
+
+        if ($path !== '/guides-apps') {
             return;
         }
 
-        wp_safe_redirect(home_url($targets[$path]), 301, 'SVIC retired guide-apps redirect');
+        $target = $is_zh ? '/zh/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/' : '/guides/';
+
+        wp_safe_redirect(home_url($target), 301, 'SVIC retired guide-apps redirect');
         exit;
     }
 
-    // The locale resolver rewrites $_SERVER['REQUEST_URI'] on init:0, so this
-    // must run earlier to still see the /zh prefix.
-    add_action('init', 'svic_redirect_retired_guide_urls', -1);
+    // Must beat the retirement handler, which answers 410 on parse_request.
+    add_action('parse_request', 'svic_redirect_retired_guide_urls', -1000020);
 }
 
 /**
