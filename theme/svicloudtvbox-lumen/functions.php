@@ -58,7 +58,9 @@ if (!function_exists('svic_redirect_retired_guide_urls')) {
         exit;
     }
 
-    add_action('template_redirect', 'svic_redirect_retired_guide_urls', 1);
+    // Must run before svic_render_retired_public_resource (-1000010), which
+    // answers 410 for these paths and exits.
+    add_action('template_redirect', 'svic_redirect_retired_guide_urls', -1000020);
 }
 
 /**
