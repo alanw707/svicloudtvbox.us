@@ -31,6 +31,36 @@ if (!function_exists('svic_redirect_legacy_wp_sitemap')) {
     add_action('template_redirect', 'svic_redirect_legacy_wp_sitemap', 1);
 }
 
+if (!function_exists('svic_redirect_retired_guide_urls')) {
+    /**
+     * 301 retired /guides-apps/ URLs to their replacements.
+     *
+     * Those pages were merged into /guides/ and /zh/使用指南/ but still answer
+     * 410 Gone, which drops the accumulated ranking instead of transferring it.
+     */
+    function svic_redirect_retired_guide_urls(): void {
+        $request_path = wp_parse_url((string) ($_SERVER['REQUEST_URI'] ?? ''), PHP_URL_PATH);
+        if (!is_string($request_path) || $request_path === '') {
+            return;
+        }
+
+        $targets = [
+            '/guides-apps'    => '/guides/',
+            '/zh/guides-apps' => '/zh/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/',
+        ];
+
+        $path = untrailingslashit($request_path);
+        if (!isset($targets[$path])) {
+            return;
+        }
+
+        wp_safe_redirect(home_url($targets[$path]), 301, 'SVIC retired guide-apps redirect');
+        exit;
+    }
+
+    add_action('template_redirect', 'svic_redirect_retired_guide_urls', 1);
+}
+
 /**
  * Announcement bar toggle.
  * Set to true to show the out-of-stock (or any) banner across all pages.
