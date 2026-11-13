@@ -58,10 +58,9 @@ if (!function_exists('svic_redirect_retired_guide_urls')) {
         exit;
     }
 
-    // Runs on init: parse_request rewrites the /zh prefix away before the 410
-    // handler (parse_request, -1000010) fires, which made the locale mapping
-    // collapse to the English target.
-    add_action('init', 'svic_redirect_retired_guide_urls', 1);
+    // The locale resolver rewrites $_SERVER['REQUEST_URI'] on init:0, so this
+    // must run earlier to still see the /zh prefix.
+    add_action('init', 'svic_redirect_retired_guide_urls', -1);
 }
 
 /**
