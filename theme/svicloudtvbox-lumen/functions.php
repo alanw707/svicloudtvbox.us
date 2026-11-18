@@ -8314,11 +8314,12 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10p-plus-lifestyle-3.png',
             ],
             '14' => [
-                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-2.webp',
-                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-3.webp',
-                'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-2.jpg',
-                'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-3.jpg',
+                // lifestyle-1: clean product render.
+                // lifestyle-3: Type-C port feature graphic.
+                // lifestyle-2 carries a 2025 badge and NEW ARRIVAL ribbon, so it
+                // is excluded: the 10S is a current model, not a 2025 launch.
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-1.jpg',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-3.jpg',
             ],
             '840' => [
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/remote-control-white-1536x1536.png',
