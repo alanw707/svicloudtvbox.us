@@ -8,8 +8,9 @@ on:
     types:
       - completed
   schedule:
-    # Backstop check every 15 minutes in case a workflow_run event is missed.
-    - cron: '*/15 * * * *'
+    # Backstop check hourly in case a workflow_run event is missed. The
+    # workflow_run trigger still fires immediately after every deploy.
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -28,8 +29,42 @@ jobs:
           script: |
             const workflows = ['deploy-theme.yml', 'deploy.yml'];
             const failures = [];
+            const unknown = [];
             const now = Date.now();
-            const maxAgeMs = context.eventName === 'schedule' ? 20 * 60 * 1000 : 7 * 24 * 60 * 60 * 1000;
+            const maxAgeMs = context.eventName === 'schedule' ? 75 * 60 * 1000 : 7 * 24 * 60 * 60 * 1000;
+
+            const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+            // A GitHub API outage is not a deploy failure. Retry transient
+            // errors, then report "unknown" and stay green instead of paging.
+            async function listRunsWithRetry(workflow_id) {
+              let lastError;
+              for (let attempt = 1; attempt <= 3; attempt += 1) {
+                try {
+                  const { data } = await github.rest.actions.listWorkflowRuns({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    workflow_id,
+                    per_page: 5,
+                    status: 'completed',
+                  });
+                  return data.workflow_runs;
+                } catch (error) {
+                  lastError = error;
+                  const status = error.status || 0;
+                  const transient = status === 0 || status >= 500 || status === 429;
+                  if (!transient) throw error;
+                  if (attempt === 3) break;
+                  core.info(`GitHub API ${status || 'network'} error on ${workflow_id} (attempt ${attempt}/3); retrying`);
+                  await sleep(2000 * attempt);
+                }
+              }
+              core.warning(
+                `Could not read deploy status for ${workflow_id} after 3 attempts ` +
+                `(${lastError && (lastError.status || lastError.message) || 'unknown'}); treating as unknown.`
+              );
+              return null;
+            }
 
             if (context.eventName === 'workflow_run') {
               const run = context.payload.workflow_run;
@@ -47,14 +82,12 @@ jobs:
               }
             } else {
               for (const workflow_id of workflows) {
-                const { data } = await github.rest.actions.listWorkflowRuns({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  workflow_id,
-                  per_page: 5,
-                  status: 'completed',
-                });
-                for (const run of data.workflow_runs) {
+                const runs = await listRunsWithRetry(workflow_id);
+                if (runs === null) {
+                  unknown.push(workflow_id);
+                  continue;
+                }
+                for (const run of runs) {
                   const updated = new Date(run.updated_at).getTime();
                   if (now - updated > maxAgeMs) continue;
                   if (run.conclusion && run.conclusion !== 'success' && run.conclusion !== 'skipped') {
@@ -82,6 +115,9 @@ jobs:
 
             core.setOutput('has_failure', unique.length ? 'true' : 'false');
             core.setOutput('failures', JSON.stringify(unique));
+            if (unknown.length) {
+              core.info(`Deploy status unknown for: ${unknown.join(', ')} (GitHub API unavailable) — not treated as a failure.`);
+            }
             if (unique.length) core.setFailed(`Deploy failure detected: ${unique.map(r => `${r.name} #${r.id}`).join(', ')}`);
 
       - name: Create/update GitHub issue
