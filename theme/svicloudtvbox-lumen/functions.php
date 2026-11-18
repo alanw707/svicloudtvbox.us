@@ -8314,13 +8314,12 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10p-plus-lifestyle-3.png',
             ],
             '14' => [
-                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-tvbox-10s.jpg',
-                'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-1.webp',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/11/svicloud-10s-primary-2026.jpg',
                 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-2.webp',
                 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-3.webp',
-                'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-1.jpg',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-2.jpg',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-3.jpg',
+                'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-1.jpg',
             ],
             '840' => [
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/remote-control-white-1536x1536.png',
@@ -8351,9 +8350,10 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
         ];
 
         $image_link_overrides = [
-            // The original 10S packshot is 750x470; Merchant Center warns when a
-            // dimension is under 500px. Use the high-resolution lifestyle image.
-            '14' => 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-1.jpg',
+            // 10S: use the clean 900x900 primary. The old 750x470 packshot and
+            // the 2025 promo composite both fell below Merchant's quality bar or
+            // advertised a free gift we do not offer.
+            '14' => 'https://svicloudtvbox.us/wp-content/uploads/2026/11/svicloud-10s-primary-2026.jpg',
             '1204' => 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/products/svicloud-15p-marketing-v7-bilingual-remote-watermarked.webp',
         ];
 
