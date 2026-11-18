@@ -8314,7 +8314,6 @@ if (!function_exists('svic_ensure_google_feed_shipping')) {
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10p-plus-lifestyle-3.png',
             ],
             '14' => [
-                'https://svicloudtvbox.us/wp-content/uploads/2026/11/svicloud-10s-primary-2026.jpg',
                 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-2.webp',
                 'https://svicloudtvbox.us/wp-content/themes/svicloudtvbox-lumen/assets/images/svicloud-10s-lifestyle-3.webp',
                 'https://svicloudtvbox.us/wp-content/uploads/2026/04/svicloud-10s-lifestyle-2.jpg',
