@@ -8016,6 +8016,108 @@ if (!function_exists('svic_render_customer_setup_email_block')) {
 
 add_action('woocommerce_email_after_order_table', 'svic_render_customer_setup_email_block', 20, 4);
 
+if (!function_exists('svic_get_order_tracking_details')) {
+    /**
+     * Resolve tracking for an order.
+     *
+     * Meta wins. When shipping is recorded only as an order note ("Order shipped
+     * via USPS with tracking number ..."), fall back to the most recent note that
+     * carries a tracking number, so every purchase flow can surface the same
+     * details without staff having to enter them twice.
+     *
+     * @return array{number:string,carrier:string,url:string}|null
+     */
+    function svic_get_order_tracking_details($order) {
+        if (!($order instanceof WC_Order)) {
+            return null;
+        }
+
+        $number  = trim((string) $order->get_meta('_svic_tracking_number', true));
+        $carrier = trim((string) $order->get_meta('_svic_tracking_carrier', true));
+        $url     = trim((string) $order->get_meta('_svic_tracking_url', true));
+
+        if ($number === '') {
+            $notes = wc_get_order_notes(['order_id' => $order->get_id(), 'limit' => 20, 'orderby' => 'date_created', 'order' => 'DESC']);
+            foreach ((array) $notes as $note) {
+                if (preg_match('/tracking(?:\s*(?:number|#|no\.?))?\s*[:#]?\s*([A-Z0-9]{10,40})/i', (string) $note->content, $m)) {
+                    $number = strtoupper($m[1]);
+                    if ($carrier === '' && preg_match('/\b(USPS|UPS|FedEx|DHL)\b/i', (string) $note->content, $c)) {
+                        $carrier = strtoupper($c[1]);
+                    }
+                    break;
+                }
+            }
+        }
+
+        if ($number === '') {
+            return null;
+        }
+
+        if ($carrier === '' && function_exists('svic_is_usps_tracking_number') && svic_is_usps_tracking_number($number)) {
+            $carrier = 'USPS';
+        }
+
+        if ($url === '') {
+            if ($carrier === 'USPS') {
+                $url = 'https://tools.usps.com/go/TrackConfirmAction?tLabels=' . rawurlencode($number);
+            } elseif (function_exists('svic_normalize_fulfillment_tracking_url')) {
+                $url = svic_normalize_fulfillment_tracking_url('', $number, $carrier);
+            }
+        }
+
+        return ['number' => $number, 'carrier' => $carrier, 'url' => $url];
+    }
+}
+
+if (!function_exists('svic_render_customer_tracking_email_block')) {
+    /**
+     * Append tracking details to customer emails once the order has a tracking
+     * number. Runs for every purchase flow (self-checkout and support-created
+     * pending orders), because it keys off the order rather than the checkout path.
+     */
+    function svic_render_customer_tracking_email_block($order, $sent_to_admin = false, $plain_text = false, $email = null) {
+        if ($sent_to_admin || !($order instanceof WC_Order) || $order->has_status(['cancelled', 'failed', 'refunded'])) {
+            return;
+        }
+
+        $tracking = svic_get_order_tracking_details($order);
+        if ($tracking === null) {
+            return;
+        }
+
+        $heading = 'Your tracking number';
+        $label   = $tracking['carrier'] !== '' ? $tracking['carrier'] . ' tracking number' : 'Tracking number';
+        $note    = 'Use this number to follow your delivery. It can take a few hours after dispatch before the carrier shows movement.';
+
+        if ($plain_text) {
+            echo "\n" . $heading . "\n";
+            echo $label . ': ' . $tracking['number'] . "\n";
+            if ($tracking['url'] !== '') {
+                echo 'Track: ' . esc_url_raw($tracking['url']) . "\n";
+            }
+            echo $note . "\n";
+            return;
+        }
+        ?>
+        <div style="margin:24px 0;padding:20px;border:1px solid #dbe7f3;border-radius:12px;background:#f8fbff;">
+            <h2 style="margin:0 0 8px;color:#111827;font-size:20px;line-height:1.3;"><?php echo esc_html($heading); ?></h2>
+            <p style="margin:0 0 10px;color:#374151;">
+                <?php echo esc_html($label); ?>:
+                <strong style="font-size:16px;letter-spacing:0.4px;color:#111827;"><?php echo esc_html($tracking['number']); ?></strong>
+            </p>
+            <?php if ($tracking['url'] !== '') : ?>
+                <p style="margin:0 0 10px;">
+                    <a href="<?php echo esc_url($tracking['url']); ?>" style="color:#0f766e;font-weight:700;">Track this package</a>
+                </p>
+            <?php endif; ?>
+            <p style="margin:0;color:#6b7280;font-size:13px;line-height:1.5;"><?php echo esc_html($note); ?></p>
+        </div>
+        <?php
+    }
+}
+
+add_action('woocommerce_email_after_order_table', 'svic_render_customer_tracking_email_block', 25, 4);
+
 if (!function_exists('svic_customer_followup_email_copy')) {
     /**
      * Private follow-up copy sent a few days after delivery/setup begins.
