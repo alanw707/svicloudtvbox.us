@@ -2760,6 +2760,7 @@ if (!function_exists('svic_build_product_schema_from_wc_product')) {
                     'merchantReturnDays' => 14,
                     'returnMethod' => 'https://schema.org/ReturnByMail',
                     'returnFees' => 'https://schema.org/ReturnShippingFees',
+                    'returnShippingFeesAmount' => svic_google_return_shipping_fee_amount(),
                     'url' => esc_url_raw($return_policy_url),
                 ],
             ];
@@ -2810,6 +2811,23 @@ if (!function_exists('svic_google_merchant_shipping_details_schema')) {
     }
 }
 
+if (!function_exists('svic_google_return_shipping_fee_amount')) {
+    /**
+     * Return shipping is paid by the customer. USPS Ground Advantage on a TV box
+     * typically lands between $7 and $10 depending on zone and season; Google's
+     * MerchantReturnPolicy wants a single figure, so publish the low end and keep
+     * the range documented on the return-policy page.
+     */
+    function svic_google_return_shipping_fee_amount(): array
+    {
+        return [
+            '@type' => 'MonetaryAmount',
+            'value' => '7.00',
+            'currency' => strtoupper(get_option('woocommerce_currency', 'USD')),
+        ];
+    }
+}
+
 if (!function_exists('svic_google_merchant_return_policy_schema')) {
     function svic_google_merchant_return_policy_schema(): array
     {
@@ -2822,9 +2840,12 @@ if (!function_exists('svic_google_merchant_return_policy_schema')) {
             'merchantReturnDays' => 14,
             'returnMethod' => 'https://schema.org/ReturnByMail',
             'returnFees' => 'https://schema.org/ReturnShippingFees',
+            'returnShippingFeesAmount' => svic_google_return_shipping_fee_amount(),
             'customerRemorseReturnFees' => 'https://schema.org/ReturnShippingFees',
+            'customerRemorseReturnShippingFeesAmount' => svic_google_return_shipping_fee_amount(),
             'customerRemorseReturnLabelSource' => 'https://schema.org/ReturnLabelCustomerResponsibility',
             'itemDefectReturnFees' => 'https://schema.org/ReturnShippingFees',
+            'itemDefectReturnShippingFeesAmount' => svic_google_return_shipping_fee_amount(),
             'itemDefectReturnLabelSource' => 'https://schema.org/ReturnLabelCustomerResponsibility',
             'url' => esc_url_raw($return_policy_url),
         ];
