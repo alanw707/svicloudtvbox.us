@@ -356,7 +356,7 @@ return [
             'shipping' => [
                 'title' => 'Return shipping & restocking',
                 'items' => [
-                    'responsibility' => 'Customers are responsible for all return shipping costs.',
+                    'responsibility' => 'Customers are responsible for all return shipping costs. USPS Ground Advantage typically costs $7–10 depending on destination and season.',
                     'restock'        => 'Opened or used non-defective returns, and returns missing accessories, may incur a restocking fee up to 10% of the device price.',
                     'tracking'       => 'Keep the carrier tracking number until your refund is confirmed.',
                 ],

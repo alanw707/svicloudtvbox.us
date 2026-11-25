@@ -442,7 +442,7 @@ return [
             'shipping' => [
                 'title' => '運費與整新費用',
                 'items' => [
-                    'responsibility' => '退貨運費一律由客戶自行負擔。',
+                    'responsibility' => '退貨運費一律由客戶自行負擔。以 USPS Ground Advantage 寄回，依地區與季節不同，通常約 US$7–10。',
                     'restock'        => '已開封或已使用且非瑕疵商品的退貨，以及缺少配件的退貨，可能需支付最高商品價格 10% 的整新費。',
                     'tracking'       => '請保留運送追蹤編號，直到收到退款確認。',
                 ],
