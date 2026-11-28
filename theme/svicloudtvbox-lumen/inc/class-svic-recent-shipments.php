@@ -322,30 +322,69 @@ if (!class_exists('SVIC_Recent_Shipments')) {
             }
 
             $selected_rates = self::normalize_meta_value($order->get_meta('_wcshipping_selected_rates', true));
-            if (!is_array($selected_rates) || $selected_rates === []) {
-                return null;
-            }
-
-            $estimated_days = self::extract_estimated_days($selected_rates);
-            if ($estimated_days === null || $estimated_days < 1 || $estimated_days > 10) {
-                return null;
-            }
-
             $labels         = self::normalize_meta_value($order->get_meta('wcshipping_labels', true));
             $shipment_dates = self::normalize_meta_value($order->get_meta('_wcshipping_shipment_dates', true));
-            $shipped_at_ts  = self::extract_shipped_at_timestamp($shipment_dates, $labels, $order);
 
-            if ($shipped_at_ts === null) {
+            $estimated_days = null;
+            $service_name   = '';
+
+            if (is_array($selected_rates) && $selected_rates !== []) {
+                $estimated_days = self::extract_estimated_days($selected_rates);
+                if ($estimated_days !== null && ($estimated_days < 1 || $estimated_days > 10)) {
+                    $estimated_days = null;
+                }
+                $service_name = self::extract_service_name($labels, $selected_rates);
+            }
+
+            $shipped_at_ts = self::extract_shipped_at_timestamp($shipment_dates, $labels, $order);
+
+            if ($estimated_days === null) {
+                // Shipping labels are no longer created through WooCommerce Shipping,
+                // so orders carry no selected-rate meta. Fall back to the delivery
+                // estimate already quoted to the customer at checkout.
+                $estimated_days = self::fallback_estimated_days($order, $shipped_at_ts);
+            }
+
+            if ($estimated_days === null || $shipped_at_ts === null) {
                 return null;
+            }
+
+            if ($service_name === '') {
+                $service_name = 'USPS Ground Advantage';
             }
 
             return [
                 'city'           => $city,
                 'state'          => $state,
                 'estimated_days' => $estimated_days,
-                'service_name'   => self::extract_service_name($labels, $selected_rates),
+                'service_name'   => $service_name,
                 'shipped_at_ts'  => $shipped_at_ts,
             ];
+        }
+
+        /**
+         * Derive the transit window from the estimated delivery date stored at checkout.
+         */
+        private static function fallback_estimated_days(WC_Order $order, ?int $shipped_at_ts): ?int
+        {
+            $estimated_ts = self::parse_timestamp($order->get_meta('_svic_gcr_optin_estimated_delivery_date', true));
+            if ($estimated_ts === null) {
+                return null;
+            }
+
+            $base_ts = $shipped_at_ts;
+            if ($base_ts === null) {
+                $completed_at = $order->get_date_completed();
+                $base_ts = $completed_at instanceof WC_DateTime ? $completed_at->getTimestamp() : null;
+            }
+
+            if ($base_ts === null) {
+                return null;
+            }
+
+            $days = (int) ceil(max(0, $estimated_ts - $base_ts) / DAY_IN_SECONDS);
+
+            return ($days >= 1 && $days <= 10) ? $days : null;
         }
 
         /**
