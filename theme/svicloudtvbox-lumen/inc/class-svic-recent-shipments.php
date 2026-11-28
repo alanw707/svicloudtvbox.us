@@ -382,9 +382,33 @@ if (!class_exists('SVIC_Recent_Shipments')) {
                 return null;
             }
 
-            $days = (int) ceil(max(0, $estimated_ts - $base_ts) / DAY_IN_SECONDS);
+            $days = self::count_business_days($base_ts, $estimated_ts);
 
             return ($days >= 1 && $days <= 10) ? $days : null;
+        }
+
+        /**
+         * Count Mon-Fri transit days between two timestamps, inclusive of the end date.
+         */
+        private static function count_business_days(int $from_ts, int $to_ts): int
+        {
+            if ($to_ts <= $from_ts) {
+                return 0;
+            }
+
+            $timezone = function_exists('wp_timezone') ? wp_timezone() : new DateTimeZone('America/Los_Angeles');
+            $cursor   = (new DateTimeImmutable('@' . $from_ts))->setTimezone($timezone)->setTime(0, 0);
+            $end      = (new DateTimeImmutable('@' . $to_ts))->setTimezone($timezone)->setTime(0, 0);
+            $days     = 0;
+
+            while ($cursor < $end) {
+                $cursor = $cursor->modify('+1 day');
+                if ((int) $cursor->format('N') <= 5) {
+                    $days++;
+                }
+            }
+
+            return $days;
         }
 
         /**
